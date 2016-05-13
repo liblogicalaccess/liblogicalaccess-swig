@@ -48,6 +48,7 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte);
 
 %{
 #include "msliblogicalaccessswigwin32.h"
+#include <algorithm>
 %}
 
 %include <std_string.i>
