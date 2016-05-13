@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9C4E76D4-1623-4994-B54F-3B1343F5F4AD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LibLogicalAccess</RootNamespace>
+    <AssemblyName>LibLogicalAccessNET</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="gencs\Card\AccessInfo.cs" />
+    <Compile Include="gencs\Card\CardService.cs" />
+    <Compile Include="gencs\Card\CardServiceType.cs" />
+    <Compile Include="gencs\Card\CardsFormatComposite.cs" />
+    <Compile Include="gencs\Card\Chip.cs" />
+    <Compile Include="gencs\Card\ChipCollection.cs" />
+    <Compile Include="gencs\Card\ChipPowerStatus.cs" />
+    <Compile Include="gencs\Card\FormatInfos.cs" />
+    <Compile Include="gencs\Card\Key.cs" />
+    <Compile Include="gencs\Card\KeyDiversification.cs" />
+    <Compile Include="gencs\Card\KeyStorage.cs" />
+    <Compile Include="gencs\Card\KeyStorageType.cs" />
+    <Compile Include="gencs\Card\liblogicalaccess_card.cs" />
+    <Compile Include="gencs\Card\liblogicalaccess_cardPINVOKE.cs" />
+    <Compile Include="gencs\Card\Location.cs" />
+    <Compile Include="gencs\Card\LocationNode.cs" />
+    <Compile Include="gencs\Card\Profile.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_boost__property_tree__ptree.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_logicalaccess__Commands.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_std__shared_ptrT_Format_t.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_std__shared_ptrT_ReaderUnit_t.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_std__vectorT_std__shared_ptrT_Format_t_t.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_std__vectorT_std__shared_ptrT_logicalaccess__LocationNode_t_t.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_std__weak_ptrT_logicalaccess__LocationNode_t.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_std__weak_ptrT_ReaderUnit_t.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_unsigned_char.cs" />
+    <Compile Include="gencs\DataTransport.cs" />
+    <Compile Include="gencs\IDynLibrary.cs" />
+    <Compile Include="gencs\liblogicalaccess_data.cs" />
+    <Compile Include="gencs\liblogicalaccess_dataPINVOKE.cs" />
+    <Compile Include="gencs\liblogicalaccess_library.cs" />
+    <Compile Include="gencs\liblogicalaccess_libraryPINVOKE.cs" />
+    <Compile Include="gencs\LibraryManager.cs" />
+    <Compile Include="gencs\ReaderCardAdapter.cs" />
+    <Compile Include="gencs\Reader\LCDDisplay.cs" />
+    <Compile Include="gencs\Reader\LEDBuzzerDisplay.cs" />
+    <Compile Include="gencs\Reader\liblogicalaccess_reader.cs" />
+    <Compile Include="gencs\Reader\liblogicalaccess_readerPINVOKE.cs" />
+    <Compile Include="gencs\Reader\ReaderConfiguration.cs" />
+    <Compile Include="gencs\Reader\ReaderProvider.cs" />
+    <Compile Include="gencs\Reader\ReaderService.cs" />
+    <Compile Include="gencs\Reader\ReaderServiceType.cs" />
+    <Compile Include="gencs\Reader\ReaderUnit.cs" />
+    <Compile Include="gencs\Reader\ReaderUnitCollection.cs" />
+    <Compile Include="gencs\Reader\ReaderUnitConfiguration.cs" />
+    <Compile Include="gencs\Reader\SWIGTYPE_p_boost__property_tree__ptree.cs" />
+    <Compile Include="gencs\Reader\SWIGTYPE_p_ReaderServiceType.cs" />
+    <Compile Include="gencs\Reader\SWIGTYPE_p_std__weak_ptrT_logicalaccess__ReaderProvider_t.cs" />
+    <Compile Include="gencs\Reader\SWIGTYPE_p_TechnoBitset.cs" />
+    <Compile Include="gencs\Reader\SWIGTYPE_p_uint64_t.cs" />
+    <Compile Include="gencs\ResultChecker.cs" />
+    <Compile Include="gencs\StringCollection.cs" />
+    <Compile Include="gencs\SWIGTYPE_p_void.cs" />
+    <Compile Include="gencs\UCharCollection.cs" />
+    <Compile Include="gencs\UCharCollectionCollection.cs" />
+    <Compile Include="gencs\UShortCollection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

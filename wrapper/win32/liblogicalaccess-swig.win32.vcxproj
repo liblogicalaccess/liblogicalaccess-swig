@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{21CDAB77-B8E5-416B-A2FD-AD60AD0FEF27}</ProjectGuid>
+    <RootNamespace>polluxcardswin32</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120_xp</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SolutionDir)packages\include;$(SolutionDir)packages\include\baseclasses;$(WindowsSDK_IncludePath);$(UniversalCRT_IncludePath);$(VCInstallDir)include;$(VCInstallDir)atlmfc\include</IncludePath>
+    <LibraryPath>$(SolutionDir)packages\lib\Win32;$(SolutionDir)packages\lib\Win32\$(Configuration);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(UniversalCRT_LibraryPath_x86);..\..\vc++\polluxcards\Release\Win32</LibraryPath>
+    <OutDir>$(ProjectDir)$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)packages\include;$(SolutionDir)packages\include\baseclasses;$(WindowsSDK_IncludePath);$(UniversalCRT_IncludePath);$(VCInstallDir)include;$(VCInstallDir)atlmfc\include</IncludePath>
+    <LibraryPath>$(SolutionDir)packages\lib\x64;$(SolutionDir)packages\lib\x64\$(Configuration);$(VCInstallDir)lib\amd64;$(VCInstallDir)atlmfc\lib\amd64;$(WindowsSDK_LibraryPath_x64);$(UniversalCRT_LibraryPath_x64);..\..\vc++\polluxcards\Release\x64</LibraryPath>
+    <OutDir>$(ProjectDir)$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>$(SolutionDir)packages\lib\Win32;$(SolutionDir)packages\lib\Win32\$(Configuration);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(UniversalCRT_LibraryPath_x86);..\..\vc++\polluxcards\Debug\Win32</LibraryPath>
+    <IncludePath>$(SolutionDir)packages\include;$(SolutionDir)packages\include\baseclasses;$(WindowsSDK_IncludePath);$(UniversalCRT_IncludePath);$(VCInstallDir)include;$(VCInstallDir)atlmfc\include</IncludePath>
+    <OutDir>$(ProjectDir)$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>$(SolutionDir)packages\lib\x64;$(SolutionDir)packages\lib\x64\$(Configuration);$(VCInstallDir)lib\amd64;$(VCInstallDir)atlmfc\lib\amd64;$(WindowsSDK_LibraryPath_x64);$(UniversalCRT_LibraryPath_x64);..\vc++\polluxcards\Debug\x64</LibraryPath>
+    <IncludePath>$(SolutionDir)packages\include;$(SolutionDir)packages\include\baseclasses;$(WindowsSDK_IncludePath);$(UniversalCRT_IncludePath);$(VCInstallDir)include;$(VCInstallDir)atlmfc\include</IncludePath>
+    <OutDir>$(ProjectDir)$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32;LOGS;_DEBUG;DEBUG;_WINDOWS;_USRDLL;LIBLOGICALACCESSSWIGWIN32_EXPORTS;_WINDLL;S_WNT;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>liblogicalaccess.lib;logicalaccess-cryptolib.lib;libeay32.lib;ssleay32.lib</AdditionalDependencies>
+      <DelayLoadDLLs>libeay32.dll</DelayLoadDLLs>
+      <SubSystem>
+      </SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN64;_WIN64;LOGS;_DEBUG;DEBUG;_WINDOWS;_USRDLL;LIBLOGICALACCESSSWIGWIN32_EXPORTS;_WINDLL;S_WNT;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>liblogicalaccess.lib;logicalaccess-cryptolib.lib;libeay32.lib;ssleay32.lib</AdditionalDependencies>
+      <DelayLoadDLLs>libeay32.dll</DelayLoadDLLs>
+      <SubSystem>
+      </SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32;LOGS;NDEBUG;_WINDOWS;_USRDLL;POLLUXCARDSWIN32_EXPORTS;_WINDLL;S_WNT;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>liblogicalaccess.lib;logicalaccess-cryptolib.lib;libeay32.lib;ssleay32.lib</AdditionalDependencies>
+      <DelayLoadDLLs>libeay32.dll</DelayLoadDLLs>
+      <SubSystem>
+      </SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN64;_WIN64;LOGS;NDEBUG;_WINDOWS;_USRDLL;LIBLOGICALACCESSSWIGWIN32_EXPORTS;_WINDLL;S_WNT;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>liblogicalaccess.lib;logicalaccess-cryptolib.lib;libeay32.lib;ssleay32.lib</AdditionalDependencies>
+      <DelayLoadDLLs>libeay32.dll</DelayLoadDLLs>
+      <SubSystem>
+      </SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="liblogicalaccess_card_wrap.cxx" />
+    <ClCompile Include="liblogicalaccess_library_wrap.cxx" />
+    <ClCompile Include="liblogicalaccess_reader_wrap.cxx" />
+    <ClCompile Include="liblogicalaccess_data_wrap.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="msliblogicalaccessswigwin32.h" />
+    <ClInclude Include="liblogicalaccess_reader_wrap.h" />
+    <ClInclude Include="liblogicalaccess_data_wrap.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="liblogicalaccess.i" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="liblogicalaccess_card.i">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Card -namespace LibLogicalAccess.Card -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Card -namespace LibLogicalAccess.Card -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Card -namespace LibLogicalAccess.Card -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Card -namespace LibLogicalAccess.Card -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="liblogicalaccess_data.i">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="liblogicalaccess_library.i">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="liblogicalaccess_reader.i">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+        echo Invoking SWIG...
+        echo on
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        echo off
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

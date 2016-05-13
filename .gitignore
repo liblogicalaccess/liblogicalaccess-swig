@@ -1,0 +1,12 @@
+*.opendb
+/liblogicalaccess-swig.VC.db
+packages
+obj
+bin
+target
+Debug
+Release
+*.user
+*.suo
+*_wrap.h
+*_wrap.cxx
