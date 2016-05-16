@@ -18,12 +18,9 @@ using LibLogicalAccess.Card;
 %shared_ptr(logicalaccess::ReaderUnitConfiguration);
 %shared_ptr(logicalaccess::LCDDisplay);
 %shared_ptr(logicalaccess::LEDBuzzerDisplay);
-%shared_ptr(logicalaccess::ReaderService);
 
 typedef std::shared_ptr<logicalaccess::ReaderProvider> ReaderProviderPtr;
 typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
-typedef std::shared_ptr<logicalaccess::ReaderService> ReaderServicePtr;
-typedef std::shared_ptr<logicalaccess::ReaderService> ReaderServicePtr;
 
 %{
 #include <logicalaccess/readerproviders/readerconfiguration.hpp>
@@ -31,7 +28,6 @@ typedef std::shared_ptr<logicalaccess::ReaderService> ReaderServicePtr;
 #include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
 #include <logicalaccess/readerproviders/lcddisplay.hpp>
 #include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
-#include <logicalaccess/services/reader_service.hpp>
 
 using namespace logicalaccess;
 
@@ -41,9 +37,11 @@ using namespace logicalaccess;
 %include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
 %include <logicalaccess/readerproviders/lcddisplay.hpp>
 %include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
+
+%include "liblogicalaccess_readerservice.i"
+
 %include <logicalaccess/readerproviders/readerunit.hpp>
 %include <logicalaccess/readerproviders/readerprovider.hpp>
 %include <logicalaccess/readerproviders/readerconfiguration.hpp>
-%include <logicalaccess/services/reader_service.hpp>
 
 %template(ReaderUnitCollection) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;

@@ -1,6 +1,4 @@
 /* File : liblogicalaccess.i */
-%module(directors="1") liblogicalaccess
-
 %include <windows.i>
 
 %typemap(csimports) SWIGTYPE
@@ -40,11 +38,25 @@ using System.Runtime.InteropServices;
 
 CSHARP_MEMBER_ARRAYS(unsigned char, byte);
 
+
 %include <std_shared_ptr.i>
 #define LIBLOGICALACCESS_API
 
 %ignore newDynLibrary;
 %ignore hasEnding;
+%ignore logicalaccess::LibraryManager::getCardService;
+%ignore logicalaccess::LibraryManager::getReaderService;
+%ignore logicalaccess::ReaderCardAdapter::getResultChecker;
+%ignore logicalaccess::ReaderCardAdapter::setResultChecker;
+%ignore logicalaccess::XmlSerializable::unSerialize(std::istream& is, const std::string& rootNode);
+%ignore logicalaccess::XmlSerializable::unSerialize(boost::property_tree::ptree& node);
+%ignore logicalaccess::XmlSerializable::unSerialize(boost::property_tree::ptree& node, const std::string& rootNode);
+%ignore logicalaccess::XmlSerializable::serialize(boost::property_tree::ptree& parentNode);
+
+%ignore *::operator==;
+%ignore *::operator!=;
+%ignore *::operator<<;
+%ignore *::operator>>;
 
 %{
 #include "msliblogicalaccessswigwin32.h"

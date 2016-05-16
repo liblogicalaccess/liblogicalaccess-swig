@@ -174,6 +174,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="liblogicalaccess.i" />
+    <None Include="liblogicalaccess_cardservice.i" />
+    <None Include="liblogicalaccess_readerservice.i" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="liblogicalaccess_card.i">

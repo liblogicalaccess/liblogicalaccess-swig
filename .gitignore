@@ -1,5 +1,5 @@
 *.opendb
-/liblogicalaccess-swig.VC.db
+*.VC.db
 packages
 obj
 bin
@@ -10,3 +10,4 @@ Release
 *.suo
 *_wrap.h
 *_wrap.cxx
+*.nupkg

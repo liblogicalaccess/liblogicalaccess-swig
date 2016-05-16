@@ -49,12 +49,28 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="liblogicalaccess.i" />
+    <None Include="liblogicalaccess.i">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="liblogicalaccess_readerservice.i">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="liblogicalaccess_cardservice.i">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="liblogicalaccess_reader.i" />
-    <CustomBuild Include="liblogicalaccess_card.i" />
-    <CustomBuild Include="liblogicalaccess_library.i" />
-    <CustomBuild Include="liblogicalaccess_data.i" />
+    <CustomBuild Include="liblogicalaccess_card.i">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="liblogicalaccess_data.i">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="liblogicalaccess_library.i">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="liblogicalaccess_reader.i">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LibLogicalAccess</RootNamespace>
     <AssemblyName>LibLogicalAccessNET</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,32 +41,91 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="gencs\Card\AccessControlCardService.cs" />
     <Compile Include="gencs\Card\AccessInfo.cs" />
+    <Compile Include="gencs\Card\ASCIIFormat.cs" />
+    <Compile Include="gencs\Card\BariumFerritePCSCFormat.cs" />
+    <Compile Include="gencs\Card\BCDByteDataType.cs" />
+    <Compile Include="gencs\Card\BCDNibbleDataType.cs" />
+    <Compile Include="gencs\Card\BigEndianDataRepresentation.cs" />
+    <Compile Include="gencs\Card\BinaryDataField.cs" />
+    <Compile Include="gencs\Card\BinaryDataType.cs" />
+    <Compile Include="gencs\Card\BinaryFieldValue.cs" />
+    <Compile Include="gencs\Card\CardBehavior.cs" />
     <Compile Include="gencs\Card\CardService.cs" />
     <Compile Include="gencs\Card\CardServiceType.cs" />
     <Compile Include="gencs\Card\CardsFormatComposite.cs" />
     <Compile Include="gencs\Card\Chip.cs" />
     <Compile Include="gencs\Card\ChipCollection.cs" />
     <Compile Include="gencs\Card\ChipPowerStatus.cs" />
+    <Compile Include="gencs\Card\CustomFormat.cs" />
+    <Compile Include="gencs\Card\DataClockFormat.cs" />
+    <Compile Include="gencs\Card\DataField.cs" />
+    <Compile Include="gencs\Card\DataRepresentation.cs" />
+    <Compile Include="gencs\Card\DataType.cs" />
+    <Compile Include="gencs\Card\Encoding.cs" />
+    <Compile Include="gencs\Card\EncodingType.cs" />
+    <Compile Include="gencs\Card\FASCN200BitFormat.cs" />
+    <Compile Include="gencs\Card\FASCNOrganizationalCategory.cs" />
+    <Compile Include="gencs\Card\FASCNPOAssociationCategory.cs" />
+    <Compile Include="gencs\Card\Format.cs" />
     <Compile Include="gencs\Card\FormatInfos.cs" />
+    <Compile Include="gencs\Card\FormatType.cs" />
+    <Compile Include="gencs\Card\Getronik40BitFormat.cs" />
+    <Compile Include="gencs\Card\HIDHoneywellFormat.cs" />
+    <Compile Include="gencs\Card\IdentityCardService.cs" />
     <Compile Include="gencs\Card\Key.cs" />
     <Compile Include="gencs\Card\KeyDiversification.cs" />
     <Compile Include="gencs\Card\KeyStorage.cs" />
     <Compile Include="gencs\Card\KeyStorageType.cs" />
     <Compile Include="gencs\Card\liblogicalaccess_card.cs" />
     <Compile Include="gencs\Card\liblogicalaccess_cardPINVOKE.cs" />
+    <Compile Include="gencs\Card\LittleEndianDataRepresentation.cs" />
     <Compile Include="gencs\Card\Location.cs" />
     <Compile Include="gencs\Card\LocationNode.cs" />
+    <Compile Include="gencs\Card\LocationNodeCollection.cs" />
+    <Compile Include="gencs\Card\NdefMessage.cs" />
+    <Compile Include="gencs\Card\NdefRecord.cs" />
+    <Compile Include="gencs\Card\NdefRecordCollection.cs" />
+    <Compile Include="gencs\Card\NdefType.cs" />
+    <Compile Include="gencs\Card\NFCTagCardService.cs" />
+    <Compile Include="gencs\Card\NoDataRepresentation.cs" />
+    <Compile Include="gencs\Card\NumberDataField.cs" />
+    <Compile Include="gencs\Card\ParityDataField.cs" />
+    <Compile Include="gencs\Card\ParityType.cs" />
     <Compile Include="gencs\Card\Profile.cs" />
+    <Compile Include="gencs\Card\RawFormat.cs" />
+    <Compile Include="gencs\Card\StaticFormat.cs" />
+    <Compile Include="gencs\Card\StorageCardService.cs" />
+    <Compile Include="gencs\Card\StringDataField.cs" />
     <Compile Include="gencs\Card\SWIGTYPE_p_boost__property_tree__ptree.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_ByteVector.cs" />
     <Compile Include="gencs\Card\SWIGTYPE_p_logicalaccess__Commands.cs" />
-    <Compile Include="gencs\Card\SWIGTYPE_p_std__shared_ptrT_Format_t.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_size_t.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_std__chrono__system_clock__time_point.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_std__listT_std__shared_ptrT_DataField_t_t.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_std__shared_ptrT_DataField_t.cs" />
     <Compile Include="gencs\Card\SWIGTYPE_p_std__shared_ptrT_ReaderUnit_t.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_std__string.cs" />
     <Compile Include="gencs\Card\SWIGTYPE_p_std__vectorT_std__shared_ptrT_Format_t_t.cs" />
-    <Compile Include="gencs\Card\SWIGTYPE_p_std__vectorT_std__shared_ptrT_logicalaccess__LocationNode_t_t.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_std__vectorT_uint8_t_t.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_std__vectorT_unsigned_int_t.cs" />
     <Compile Include="gencs\Card\SWIGTYPE_p_std__weak_ptrT_logicalaccess__LocationNode_t.cs" />
     <Compile Include="gencs\Card\SWIGTYPE_p_std__weak_ptrT_ReaderUnit_t.cs" />
     <Compile Include="gencs\Card\SWIGTYPE_p_unsigned_char.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_unsigned_int.cs" />
+    <Compile Include="gencs\Card\SWIGTYPE_p_void.cs" />
+    <Compile Include="gencs\Card\TNF.cs" />
+    <Compile Include="gencs\Card\UIDChangerService.cs" />
+    <Compile Include="gencs\Card\UriType.cs" />
+    <Compile Include="gencs\Card\ValueDataField.cs" />
+    <Compile Include="gencs\Card\Wiegand26Format.cs" />
+    <Compile Include="gencs\Card\Wiegand34Format.cs" />
+    <Compile Include="gencs\Card\Wiegand34WithFacilityFormat.cs" />
+    <Compile Include="gencs\Card\Wiegand37Format.cs" />
+    <Compile Include="gencs\Card\Wiegand37WithFacilityFormat.cs" />
+    <Compile Include="gencs\Card\Wiegand37WithFacilityRightParity2Format.cs" />
+    <Compile Include="gencs\Card\WiegandFormat.cs" />
     <Compile Include="gencs\DataTransport.cs" />
     <Compile Include="gencs\IDynLibrary.cs" />
     <Compile Include="gencs\liblogicalaccess_data.cs" />
@@ -85,17 +145,19 @@
     <Compile Include="gencs\Reader\ReaderUnit.cs" />
     <Compile Include="gencs\Reader\ReaderUnitCollection.cs" />
     <Compile Include="gencs\Reader\ReaderUnitConfiguration.cs" />
-    <Compile Include="gencs\Reader\SWIGTYPE_p_boost__property_tree__ptree.cs" />
+    <Compile Include="gencs\Reader\SWIGTYPE_p_ReaderServicePtr.cs" />
     <Compile Include="gencs\Reader\SWIGTYPE_p_ReaderServiceType.cs" />
     <Compile Include="gencs\Reader\SWIGTYPE_p_std__weak_ptrT_logicalaccess__ReaderProvider_t.cs" />
     <Compile Include="gencs\Reader\SWIGTYPE_p_TechnoBitset.cs" />
     <Compile Include="gencs\Reader\SWIGTYPE_p_uint64_t.cs" />
     <Compile Include="gencs\ResultChecker.cs" />
     <Compile Include="gencs\StringCollection.cs" />
+    <Compile Include="gencs\SWIGTYPE_p_logicalaccess__Commands.cs" />
     <Compile Include="gencs\SWIGTYPE_p_void.cs" />
     <Compile Include="gencs\UCharCollection.cs" />
     <Compile Include="gencs\UCharCollectionCollection.cs" />
     <Compile Include="gencs\UShortCollection.cs" />
+    <Compile Include="gencs\XmlSerializable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
