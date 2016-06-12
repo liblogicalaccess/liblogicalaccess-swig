@@ -47,6 +47,9 @@
     <ClInclude Include="liblogicalaccess_data_wrap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="liblogicalaccess_card_wrap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="liblogicalaccess.i">

@@ -10,37 +10,261 @@
 using LibLogicalAccess;
 %}
 
-%shared_ptr(logicalaccess::Chip);
-%shared_ptr(logicalaccess::Commands);
-%shared_ptr(logicalaccess::Key);
+
+/* Core */
+
 %shared_ptr(logicalaccess::KeyDiversification);
 %shared_ptr(logicalaccess::KeyStorage);
+%shared_ptr(logicalaccess::Key);
+%shared_ptr(logicalaccess::Commands);
+%shared_ptr(logicalaccess::Chip);
 %shared_ptr(logicalaccess::LocationNode);
 %shared_ptr(logicalaccess::Location);
 %shared_ptr(logicalaccess::AccessInfo);
-%shared_ptr(logicalaccess::Profile);
+
+/* Plugins */
+
+%shared_ptr(logicalaccess::CPS3Location);
+%shared_ptr(logicalaccess::CPS3Commands);
+%shared_ptr(logicalaccess::CPS3Chip);
+
+%shared_ptr(logicalaccess::DESFireLocation);
+%shared_ptr(logicalaccess::DESFireEV1Location);
+%shared_ptr(logicalaccess::NXPAV1KeyDiversification);
+%shared_ptr(logicalaccess::NXPAV2KeyDiversification);
+%shared_ptr(logicalaccess::OmnitechKeyDiversification);
+%shared_ptr(logicalaccess::SagemKeyDiversification);
+%shared_ptr(logicalaccess::DESFireKey);
+%shared_ptr(logicalaccess::DESFireAccessInfo);
+%shared_ptr(logicalaccess::DESFireCommands);
+%shared_ptr(logicalaccess::DESFireEV1Commands);
+%shared_ptr(logicalaccess::DESFireChip);
+%shared_ptr(logicalaccess::DESFireEV1Chip);
+
+%shared_ptr(logicalaccess::EM4102Chip);
+
+%shared_ptr(logicalaccess::EM4135Chip);
+
+%shared_ptr(logicalaccess::EPassAccessInfo);
+%shared_ptr(logicalaccess::EPassCommand);
+%shared_ptr(logicalaccess::EPassChip);
+
+%shared_ptr(logicalaccess::FeliCaLocation);
+%shared_ptr(logicalaccess::FeliCaCommands);
+%shared_ptr(logicalaccess::FeliCaChip);
+
+%shared_ptr(logicalaccess::GenericTagChip);
+
+%shared_ptr(logicalaccess::ICode1Chip);
+
+%shared_ptr(logicalaccess::ICode2Chip);
+
+%shared_ptr(logicalaccess::IndalaChip);
+
+%shared_ptr(logicalaccess::InfineonMYDChip);
+
+%shared_ptr(logicalaccess::ISO7816Location);
+%shared_ptr(logicalaccess::ISO7816Commands);
+%shared_ptr(logicalaccess::ISO7816Chip);
+
+%shared_ptr(logicalaccess::ISO15693Location);
+%shared_ptr(logicalaccess::ISO15693Commands);
+%shared_ptr(logicalaccess::ISO15693Chip);
+
+%shared_ptr(logicalaccess::LegicPrimeChip);
+
+%shared_ptr(logicalaccess::MifareLocation);
+%shared_ptr(logicalaccess::MifareKey);
+%shared_ptr(logicalaccess::MifareAccessInfo);
+%shared_ptr(logicalaccess::MifareCommands);
+%shared_ptr(logicalaccess::MifareChip);
+%shared_ptr(logicalaccess::Mifare1KChip);
+%shared_ptr(logicalaccess::Mifare4KChip);
+
+%shared_ptr(logicalaccess::MifarePlusLocation);
+%shared_ptr(logicalaccess::MifarePlusSL1AccessInfo);
+%shared_ptr(logicalaccess::MifarePlusSL3AccessInfo);
+%shared_ptr(logicalaccess::MifarePlusSL0Commands);
+%shared_ptr(logicalaccess::MifarePlusSL1Commands);
+//%shared_ptr(logicalaccess::MifarePlusSL3Commands);
+%shared_ptr(logicalaccess::MifarePlusChip);
+%shared_ptr(logicalaccess::MifarePlusSL0Chip);
+%shared_ptr(logicalaccess::MifarePlusSL0_2kChip);
+%shared_ptr(logicalaccess::MifarePlusSL0_4kChip);
+%shared_ptr(logicalaccess::MifarePlusSL1Chip);
+%shared_ptr(logicalaccess::MifarePlusSL1_2kChip);
+%shared_ptr(logicalaccess::MifarePlusSL1_4kChip);
+%shared_ptr(logicalaccess::MifarePlusSL3Chip);
+
+%shared_ptr(logicalaccess::MifareUltralightLocation);
+%shared_ptr(logicalaccess::MifareUltralightAccessInfo);
+%shared_ptr(logicalaccess::MifareUltralightCAccessInfo);
+%shared_ptr(logicalaccess::MifareUltralightCommands);
+%shared_ptr(logicalaccess::MifareUltralightCCommands);
+%shared_ptr(logicalaccess::MifareUltralightChip);
+%shared_ptr(logicalaccess::MifareUltralightCChip);
+
+%shared_ptr(logicalaccess::ProxLocation);
+%shared_ptr(logicalaccess::ProxChip);
+
+%shared_ptr(logicalaccess::ProxLiteChip);
+
+%shared_ptr(logicalaccess::SAMKeyEntry);
+%shared_ptr(logicalaccess::SAMBasicKeyEntry);
+%shared_ptr(logicalaccess::SAMKucEntry);
+%shared_ptr(logicalaccess::SAMCommands);
+%shared_ptr(logicalaccess::SAMAV2Commands);
+%shared_ptr(logicalaccess::SAMChip);
+%shared_ptr(logicalaccess::SAMAV1Chip);
+%shared_ptr(logicalaccess::SAMAV2Chip);
+
+%shared_ptr(logicalaccess::SmartFrameChip);
+
+%shared_ptr(logicalaccess::StmLri512Chip);
+
+%shared_ptr(logicalaccess::TagItCommands);
+%shared_ptr(logicalaccess::TagItChip);
+
+%shared_ptr(logicalaccess::TopazLocation);
+%shared_ptr(logicalaccess::TopazAccessInfo);
+%shared_ptr(logicalaccess::TopazCommands);
+%shared_ptr(logicalaccess::TopazChip);
+
+%shared_ptr(logicalaccess::TwicLocation);
+%shared_ptr(logicalaccess::TwicCommands);
+%shared_ptr(logicalaccess::TwicChip);
 
 typedef std::shared_ptr<logicalaccess::Chip> ChipPtr;
 typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 %{
+/* Core */
+
+#include <logicalaccess/cards/commands.hpp>
 #include <logicalaccess/cards/chip.hpp>
 #include <logicalaccess/cards/accessinfo.hpp>
 #include <logicalaccess/cards/locationnode.hpp>
-#include <logicalaccess/cards/commands.hpp>
+
+/* Plugins */
+
+#include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
+#include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
+#include <logicalaccess/plugins/cards/iso7816/iso7816chip.hpp>
+
+#include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
+#include <logicalaccess/plugins/cards/iso15693/iso15693commands.hpp>
+#include <logicalaccess/plugins/cards/iso15693/iso15693chip.hpp>
+
+#include <logicalaccess/plugins/cards/cps3/cps3location.hpp>
+#include <logicalaccess/plugins/cards/cps3/cps3commands.hpp>
+#include <logicalaccess/plugins/cards/cps3/cps3chip.hpp>
+
+#include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
+#include <logicalaccess/plugins/cards/desfire/nxpav1keydiversification.hpp>
+#include <logicalaccess/plugins/cards/desfire/nxpav2keydiversification.hpp>
+#include <logicalaccess/plugins/cards/desfire/omnitechkeydiversification.hpp>
+#include <logicalaccess/plugins/cards/desfire/sagemkeydiversification.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>
+
+#include <logicalaccess/plugins/cards/em4102/em4102chip.hpp>
+
+#include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
+
+#include <logicalaccess/plugins/cards/epass/epass_access_info.hpp>
+#include <logicalaccess/plugins/cards/epass/epass_command.hpp>
+#include <logicalaccess/plugins/cards/epass/epass_chip.hpp>
+
+#include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
+#include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
+#include <logicalaccess/plugins/cards/felica/felicachip.hpp>
+
+#include <logicalaccess/plugins/cards/generictag/generictagchip.hpp>
+
+#include <logicalaccess/plugins/cards/icode1/icode1chip.hpp>
+
+#include <logicalaccess/plugins/cards/icode2/icode2chip.hpp>
+
+#include <logicalaccess/plugins/cards/indala/indalachip.hpp>
+
+#include <logicalaccess/plugins/cards/infineonmyd/infineonmydchip.hpp>
+
+#include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
+
+#include <logicalaccess/plugins/cards/mifare/mifarelocation.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifarekey.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifare1kchip.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifare4kchip.hpp>
+
+#include <logicalaccess/plugins/cards/mifareplus/mifarepluslocation.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplusaccessinfo_sl1.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplussl0commands.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplussl1commands.hpp>
+//#include <logicalaccess/plugins/cards/mifareplus/mifareplussl3commands.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifarepluschip.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplussl0chip.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplussl1chip.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplussl3chip.hpp>
+
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightlocation.hpp>
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcommands.hpp>
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightccommands.hpp>
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightchip.hpp>
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcchip.hpp>
+
+#include <logicalaccess/plugins/cards/prox/proxlocation.hpp>
+#include <logicalaccess/plugins/cards/prox/proxchip.hpp>
+
+#include <logicalaccess/plugins/cards/proxlite/proxlitechip.hpp>
+
+#include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
+#include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
+#include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
+#include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
+#include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
+#include <logicalaccess/plugins/cards/samav2/samchip.hpp>
+#include <logicalaccess/plugins/cards/samav2/samav1chip.hpp>
+#include <logicalaccess/plugins/cards/samav2/samav2chip.hpp>
+
+#include <logicalaccess/plugins/cards/smartframe/smartframechip.hpp>
+
+#include <logicalaccess/plugins/cards/stmlri512/stmlri512chip.hpp>
+
+#include <logicalaccess/plugins/cards/tagit/tagitcommands.hpp>
+#include <logicalaccess/plugins/cards/tagit/tagitchip.hpp>
+
+#include <logicalaccess/plugins/cards/topaz/topazlocation.hpp>
+#include <logicalaccess/plugins/cards/topaz/topazaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/topaz/topazcommands.hpp>
+#include <logicalaccess/plugins/cards/topaz/topazchip.hpp>
+
+#include <logicalaccess/plugins/cards/twic/twiclocation.hpp>
+#include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
+#include <logicalaccess/plugins/cards/twic/twicchip.hpp>
 
 using namespace logicalaccess;
 
 %}
 
 %ignore logicalaccess::Commands;
+%ignore pcsc_share_mode_to_string;
+%ignore pcsc_protocol_to_string;
 
 /* original header files */
+%include <logicalaccess/cards/commands.hpp>
 %include <logicalaccess/cards/location.hpp>
 %include <logicalaccess/cards/accessinfo.hpp>
 %include <logicalaccess/cards/locationnode.hpp>
-%include <logicalaccess/cards/profile.hpp>
-%include <logicalaccess/cards/commands.hpp>
 
 %include "liblogicalaccess_cardservice.i"
 
@@ -49,5 +273,348 @@ using namespace logicalaccess;
 %include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/key.hpp>
 
+/* Plugins */
+
+%include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
+%include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
+%include <logicalaccess/plugins/cards/iso7816/iso7816chip.hpp>
+
+%include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
+%include <logicalaccess/plugins/cards/iso15693/iso15693commands.hpp>
+%include <logicalaccess/plugins/cards/iso15693/iso15693chip.hpp>
+
+%include <logicalaccess/plugins/cards/cps3/cps3location.hpp>
+%include <logicalaccess/plugins/cards/cps3/cps3commands.hpp>
+%include <logicalaccess/plugins/cards/cps3/cps3chip.hpp>
+
+%include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
+%include <logicalaccess/plugins/cards/desfire/nxpav1keydiversification.hpp>
+%include <logicalaccess/plugins/cards/desfire/nxpav2keydiversification.hpp>
+%include <logicalaccess/plugins/cards/desfire/omnitechkeydiversification.hpp>
+%include <logicalaccess/plugins/cards/desfire/sagemkeydiversification.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>
+
+%include <logicalaccess/plugins/cards/em4102/em4102chip.hpp>
+
+%include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
+
+%include <logicalaccess/plugins/cards/epass/epass_access_info.hpp>
+%include <logicalaccess/plugins/cards/epass/epass_command.hpp>
+%include <logicalaccess/plugins/cards/epass/epass_chip.hpp>
+
+%include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
+%include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
+%include <logicalaccess/plugins/cards/felica/felicachip.hpp>
+
+%include <logicalaccess/plugins/cards/generictag/generictagchip.hpp>
+
+%include <logicalaccess/plugins/cards/icode1/icode1chip.hpp>
+
+%include <logicalaccess/plugins/cards/icode2/icode2chip.hpp>
+
+%include <logicalaccess/plugins/cards/indala/indalachip.hpp>
+
+%include <logicalaccess/plugins/cards/infineonmyd/infineonmydchip.hpp>
+
+%include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
+
+%include <logicalaccess/plugins/cards/mifare/mifarelocation.hpp>
+%include <logicalaccess/plugins/cards/mifare/mifarekey.hpp>
+%include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
+%include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
+%include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
+%include <logicalaccess/plugins/cards/mifare/mifare1kchip.hpp>
+%include <logicalaccess/plugins/cards/mifare/mifare4kchip.hpp>
+
+%include <logicalaccess/plugins/cards/mifareplus/mifarepluslocation.hpp>
+%include <logicalaccess/plugins/cards/mifareplus/mifareplusaccessinfo_sl1.hpp>
+%include <logicalaccess/plugins/cards/mifareplus/mifareplussl0commands.hpp>
+%include <logicalaccess/plugins/cards/mifareplus/mifareplussl1commands.hpp>
+//%include <logicalaccess/plugins/cards/mifareplus/mifareplussl3commands.hpp>
+%include <logicalaccess/plugins/cards/mifareplus/mifarepluschip.hpp>
+%include <logicalaccess/plugins/cards/mifareplus/mifareplussl0chip.hpp>
+%include <logicalaccess/plugins/cards/mifareplus/mifareplussl1chip.hpp>
+%include <logicalaccess/plugins/cards/mifareplus/mifareplussl3chip.hpp>
+
+%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightlocation.hpp>
+%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightaccessinfo.hpp>
+%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcaccessinfo.hpp>
+%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcommands.hpp>
+%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightccommands.hpp>
+%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightchip.hpp>
+%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcchip.hpp>
+
+%include <logicalaccess/plugins/cards/prox/proxlocation.hpp>
+%include <logicalaccess/plugins/cards/prox/proxchip.hpp>
+
+%include <logicalaccess/plugins/cards/proxlite/proxlitechip.hpp>
+
+%include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
+%include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
+%include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
+%include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
+%include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
+%include <logicalaccess/plugins/cards/samav2/samchip.hpp>
+%include <logicalaccess/plugins/cards/samav2/samav1chip.hpp>
+%include <logicalaccess/plugins/cards/samav2/samav2chip.hpp>
+
+%include <logicalaccess/plugins/cards/smartframe/smartframechip.hpp>
+
+%include <logicalaccess/plugins/cards/stmlri512/stmlri512chip.hpp>
+
+%include <logicalaccess/plugins/cards/tagit/tagitcommands.hpp>
+%include <logicalaccess/plugins/cards/tagit/tagitchip.hpp>
+
+%include <logicalaccess/plugins/cards/topaz/topazlocation.hpp>
+%include <logicalaccess/plugins/cards/topaz/topazaccessinfo.hpp>
+%include <logicalaccess/plugins/cards/topaz/topazcommands.hpp>
+%include <logicalaccess/plugins/cards/topaz/topazchip.hpp>
+
+%include <logicalaccess/plugins/cards/twic/twiclocation.hpp>
+%include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
+%include <logicalaccess/plugins/cards/twic/twicchip.hpp>
+
 %template(ChipCollection) std::vector<std::shared_ptr<logicalaccess::Chip> >;
 %template(LocationNodeCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;
+
+%pragma(csharp) imclasscode=%{
+  public static Chip createChip(System.IntPtr cPtr, bool owner)
+  {
+    Chip ret = null;
+    if (cPtr == System.IntPtr.Zero) {
+      return ret;
+    }
+	string ct = ($modulePINVOKE.Chip_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+    switch (ct) {
+       case "CPS3":
+	     ret = new CPS3Chip(cPtr, owner);
+	     break;
+	   case "DESFire":
+	     ret = new DESFireChip(cPtr, owner);
+	     break;
+	   case "DESFireEV1":
+	     ret = new DESFireEV1Chip(cPtr, owner);
+		 break;
+	   case "EM4102":
+	     ret = new EM4102Chip(cPtr, owner);
+		 break;
+	   case "EM4135":
+	     ret = new EM4135Chip(cPtr, owner);
+		 break;
+	   case "EPass":
+	     ret = new EPassChip(cPtr, owner);
+		 break;
+	   case "FeliCa":
+	     ret = new FeliCaChip(cPtr, owner);
+		 break;
+	   case "GenericTag":
+	     ret = new GenericTagChip(cPtr, owner);
+		 break;
+	   case "iCode1":
+	     ret = new ICode1Chip(cPtr, owner);
+		 break;
+	   case "iCode2":
+	     ret = new ICode2Chip(cPtr, owner);
+		 break;
+	   case "Indala":
+	     ret = new IndalaChip(cPtr, owner);
+		 break;
+	   case "InfineonMYD":
+	     ret = new InfineonMYDChip(cPtr, owner);
+		 break;
+	   case "ISO7816":
+	     ret = new ISO7816Chip(cPtr, owner);
+		 break;
+	   case "ISO15693":
+	     ret = new ISO15693Chip(cPtr, owner);
+		 break;
+	   case "LegicPrime":
+	     ret = new LegicPrimeChip(cPtr, owner);
+		 break;
+	   case "Mifare":
+	     ret = new MifareChip(cPtr, owner);
+		 break;
+	   case "Mifare1K":
+	     ret = new Mifare1KChip(cPtr, owner);
+		 break;
+	   case "Mifare4K":
+	     ret = new Mifare4KChip(cPtr, owner);
+		 break;
+	   case "MifarePlus":
+	   case "MifarePlus2K":
+	   case "MifarePlus4K":
+	     ret = new MifarePlusChip(cPtr, owner);
+		 break;
+	   case "MifarePlus_SL0_2K":
+	     ret = new MifarePlusSL0_2kChip(cPtr, owner);
+		 break;
+	   case "MifarePlus_SL0_4K":
+	     ret = new MifarePlusSL0_4kChip(cPtr, owner);
+		 break;
+	   case "MifarePlusSL3":
+	   case "MifarePlus_SL3_2K":
+	   case "MifarePlus_SL3_4K":
+	     ret = new MifarePlusSL3Chip(cPtr, owner);
+		 break;
+	   case "MifareUltralight":
+	     ret = new MifareUltralightChip(cPtr, owner);
+		 break;
+	   case "MifareUltralightC":
+	     ret = new MifareUltralightCChip(cPtr, owner);
+		 break;
+	   case "Prox":
+	     ret = new ProxChip(cPtr, owner);
+		 break;
+	   case "ProxLite":
+	     ret = new ProxLiteChip(cPtr, owner);
+		 break;
+	   case "SAM":
+	     ret = new SAMChip(cPtr, owner);
+		 break;
+	   case "SAM_AV1":
+	     ret = new SAMAV1Chip(cPtr, owner);
+		 break;
+	   case "SAM_AV2":
+	     ret = new SAMAV2Chip(cPtr, owner);
+		 break;
+	   case "SmartFrame":
+	     ret = new SmartFrameChip(cPtr, owner);
+		 break;
+	   case "StmLri512":
+	     ret = new StmLri512Chip(cPtr, owner);
+		 break;
+	   case "TagIt":
+	     ret = new TagItChip(cPtr, owner);
+		 break;
+	   case "Topaz":
+	     ret = new TopazChip(cPtr, owner);
+		 break;
+	   case "Twic":
+	     ret = new TwicChip(cPtr, owner);
+		 break;
+      }
+      return ret;
+    }
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::Chip*, std::shared_ptr<logicalaccess::Chip> {
+    System.IntPtr cPtr = $imcall;
+    Chip ret = liblogicalaccess_cardPINVOKE.createChip(cPtr, $owner);$excode
+    return ret;
+}
+
+%pragma(csharp) imclasscode=%{
+  public static Location createLocation(System.IntPtr cPtr, bool owner)
+  {
+    Location ret = null;
+    if (cPtr == System.IntPtr.Zero) {
+      return ret;
+    }
+	string ct = ($modulePINVOKE.Location_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+    switch (ct) {
+       case "CPS3":
+	     ret = new CPS3Location(cPtr, owner);
+	     break;
+	   case "DESFire":
+	     ret = new DESFireLocation(cPtr, owner);
+	     break;
+	   case "DESFireEV1":
+	     ret = new DESFireEV1Location(cPtr, owner);
+		 break;
+	   case "FeliCa":
+	     ret = new FeliCaLocation(cPtr, owner);
+		 break;
+	   case "ISO7816":
+	     ret = new ISO7816Location(cPtr, owner);
+		 break;
+	   case "ISO15693":
+	     ret = new ISO15693Location(cPtr, owner);
+		 break;
+	   case "Mifare":
+	   case "Mifare1K":
+	   case "Mifare4K":
+	     ret = new MifareLocation(cPtr, owner);
+		 break;
+	   case "MifarePlus":
+	   case "MifarePlus2K":
+	   case "MifarePlus4K":
+	   case "MifarePlus_SL0_2K":
+	   case "MifarePlus_SL0_4K":
+	   case "MifarePlusSL3":
+	   case "MifarePlus_SL3_2K":
+	   case "MifarePlus_SL3_4K":
+	     ret = new MifarePlusLocation(cPtr, owner);
+		 break;
+	   case "MifareUltralight":
+	   case "MifareUltralightC":
+	     ret = new MifareUltralightLocation(cPtr, owner);
+		 break;
+	   case "Prox":
+	     ret = new ProxLocation(cPtr, owner);
+		 break;
+	   case "Topaz":
+	     ret = new TopazLocation(cPtr, owner);
+		 break;
+	   case "Twic":
+	     ret = new TwicLocation(cPtr, owner);
+		 break;
+      }
+      return ret;
+    }
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::Location*, std::shared_ptr<logicalaccess::Location> {
+    System.IntPtr cPtr = $imcall;
+    Location ret = liblogicalaccess_cardPINVOKE.createLocation(cPtr, $owner);$excode
+    return ret;
+}
+
+%pragma(csharp) imclasscode=%{
+  public static AccessInfo createAccessInfo(System.IntPtr cPtr, bool owner)
+  {
+    AccessInfo ret = null;
+    if (cPtr == System.IntPtr.Zero) {
+      return ret;
+    }
+	string ct = ($modulePINVOKE.AccessInfo_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+    switch (ct) {
+	   case "DESFire":
+	   case "DESFireEV1":
+	     ret = new DESFireAccessInfo(cPtr, owner);
+	     break;
+	   case "EPass":
+	     ret = new EPassAccessInfo(cPtr, owner);
+		 break;
+	   case "Mifare":
+	   case "Mifare1K":
+	   case "Mifare4K":
+	     ret = new MifareAccessInfo(cPtr, owner);
+		 break;
+	   case "MifareUltralight":
+	     ret = new MifareUltralightAccessInfo(cPtr, owner);
+		 break;
+	   case "MifareUltralightC":
+	     ret = new MifareUltralightCAccessInfo(cPtr, owner);
+		 break;
+	   case "Topaz":
+	     ret = new TopazAccessInfo(cPtr, owner);
+		 break;
+      }
+      return ret;
+    }
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::AccessInfo*, std::shared_ptr<logicalaccess::AccessInfo> {
+    System.IntPtr cPtr = $imcall;
+    AccessInfo ret = liblogicalaccess_cardPINVOKE.createAccessInfo(cPtr, $owner);$excode
+    return ret;
+}
