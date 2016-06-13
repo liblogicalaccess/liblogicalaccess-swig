@@ -396,3 +396,165 @@ using namespace logicalaccess;
     ReaderProvider ret = liblogicalaccess_readerPINVOKE.createReaderProvider(cPtr, $owner);$excode
     return ret;
 }
+
+%pragma(csharp) imclasscode=%{
+  public static ReaderUnit createReaderUnit(System.IntPtr cPtr, bool owner)
+  {
+    ReaderUnit ret = null;
+    if (cPtr == System.IntPtr.Zero) {
+      return ret;
+    }
+	string rt = ($modulePINVOKE.ReaderUnit_getRPType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+    switch (rt) {
+       case "A3MLGM5600":
+	     ret = new A3MLGM5600ReaderUnit(cPtr, owner);
+	     break;
+	   case "Admitto":
+	     ret = new AdmittoReaderUnit(cPtr, owner);
+	     break;
+	   case "AxessTMC13":
+	     ret = new AxessTMC13ReaderUnit(cPtr, owner);
+		 break;
+	   case "AxessTMCLegic":
+	     ret = new AxessTMCLegicReaderUnit(cPtr, owner);
+		 break;
+	   case "Deister":
+	     ret = new DeisterReaderUnit(cPtr, owner);
+		 break;
+	   case "Elatec":
+	     ret = new ElatecReaderUnit(cPtr, owner);
+		 break;
+	   case "GigaTMS":
+	     ret = new GigaTMSReaderUnit(cPtr, owner);
+		 break;
+	   case "Gunnebo":
+	     ret = new GunneboReaderUnit(cPtr, owner);
+		 break;
+	   case "IdOnDemand":
+	     ret = new IdOnDemandReaderUnit(cPtr, owner);
+		 break;
+	   case "Keyboard":
+	     ret = new KeyboardReaderUnit(cPtr, owner);
+		 break;
+	   case "OK5553":
+	     ret = new OK5553ReaderUnit(cPtr, owner);
+		 break;
+	   case "OSDP":
+	     ret = new OSDPReaderUnit(cPtr, owner);
+		 break;
+	   case "PCSC":
+	     ret = new PCSCReaderUnit(cPtr, owner);
+		 break;
+	   case "Promag":
+	     ret = new PromagReaderUnit(cPtr, owner);
+		 break;
+	   case "RFIDeas":
+	     ret = new RFIDeasReaderUnit(cPtr, owner);
+		 break;
+	   case "Rpleth":
+	     ret = new RplethReaderUnit(cPtr, owner);
+		 break;
+	   case "SCIEL":
+	     ret = new SCIELReaderUnit(cPtr, owner);
+		 break;
+	   case "SmartID":
+	     ret = new SmartIDReaderUnit(cPtr, owner);
+		 break;
+	   case "STidPRG":
+	     ret = new STidPRGReaderUnit(cPtr, owner);
+		 break;
+	   case "STidSTR":
+	     ret = new STidSTRReaderUnit(cPtr, owner);
+		 break;
+      }
+      return ret;
+    }
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::ReaderUnit*, std::shared_ptr<logicalaccess::ReaderUnit> {
+    System.IntPtr cPtr = $imcall;
+    ReaderUnit ret = liblogicalaccess_readerPINVOKE.createReaderUnit(cPtr, $owner);$excode
+    return ret;
+}
+
+%pragma(csharp) imclasscode=%{
+  public static ReaderUnitConfiguration createReaderUnitConfiguration(System.IntPtr cPtr, bool owner)
+  {
+    ReaderUnitConfiguration ret = null;
+    if (cPtr == System.IntPtr.Zero) {
+      return ret;
+    }
+	string rt = ($modulePINVOKE.ReaderUnitConfiguration_getRPType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+    switch (rt) {
+       case "A3MLGM5600":
+	     ret = new A3MLGM5600ReaderUnitConfiguration(cPtr, owner);
+	     break;
+	   case "Admitto":
+	     ret = new AdmittoReaderUnitConfiguration(cPtr, owner);
+	     break;
+	   case "AxessTMC13":
+	     ret = new AxessTMC13ReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "AxessTMCLegic":
+	     ret = new AxessTMCLegicReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "Deister":
+	     ret = new DeisterReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "Elatec":
+	     ret = new ElatecReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "GigaTMS":
+	     ret = new GigaTMSReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "Gunnebo":
+	     ret = new GunneboReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "IdOnDemand":
+	     ret = new IdOnDemandReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "Keyboard":
+	     ret = new KeyboardReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "OK5553":
+	     ret = new OK5553ReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "OSDP":
+	     ret = new OSDPReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "PCSC":
+	     ret = new PCSCReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "Promag":
+	     ret = new PromagReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "RFIDeas":
+	     ret = new RFIDeasReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "Rpleth":
+	     ret = new RplethReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "SCIEL":
+	     ret = new SCIELReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "SmartID":
+	     ret = new SmartIDReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "STidPRG":
+	     ret = new STidPRGReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "STidSTR":
+	     ret = new STidSTRReaderUnitConfiguration(cPtr, owner);
+		 break;
+      }
+      return ret;
+    }
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::ReaderUnitConfiguration*, std::shared_ptr<logicalaccess::ReaderUnitConfiguration> {
+    System.IntPtr cPtr = $imcall;
+    ReaderUnitConfiguration ret = liblogicalaccess_readerPINVOKE.createReaderUnitConfiguration(cPtr, $owner);$excode
+    return ret;
+}

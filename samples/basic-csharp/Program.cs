@@ -50,12 +50,6 @@ namespace basic
                             Chip chip = readerUnit.getSingleChip();
                             Console.WriteLine("\tCSN: {0}", UCharCollectionToHexString(chip.getChipIdentifier()));
 
-                            PCSCReaderUnit pcscru = readerUnit as PCSCReaderUnit;
-                            if (pcscru != null)
-                            {
-                                pcscru.getPCSCType();
-                            }
-
 
                             readerUnit.disconnect();
                         }
