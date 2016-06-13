@@ -134,6 +134,19 @@ using LibLogicalAccess;
 %shared_ptr(logicalaccess::TwicCommands);
 %shared_ptr(logicalaccess::TwicChip);
 
+%shared_ptr(logicalaccess::HIDiClassLocation);
+%shared_ptr(logicalaccess::HIDiClassKey);
+%shared_ptr(logicalaccess::HIDiClassAccessInfo);
+%shared_ptr(logicalaccess::PicoPassCommands);
+%shared_ptr(logicalaccess::HIDiClassChip);
+%shared_ptr(logicalaccess::HIDiClass2KSChip);
+%shared_ptr(logicalaccess::HIDiClass8x2KSChip);
+%shared_ptr(logicalaccess::HIDiClass16KSChip);
+%shared_ptr(logicalaccess::HIDiClass32KS_8x2_8x2Chip);
+%shared_ptr(logicalaccess::HIDiClass32KS_8x2_16Chip);
+%shared_ptr(logicalaccess::HIDiClass32KS_16_8x2Chip);
+%shared_ptr(logicalaccess::HIDiClass32KS_16_16Chip);
+
 typedef std::shared_ptr<logicalaccess::Chip> ChipPtr;
 typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
@@ -251,6 +264,19 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 #include <logicalaccess/plugins/cards/twic/twiclocation.hpp>
 #include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 #include <logicalaccess/plugins/cards/twic/twicchip.hpp>
+
+#include <logicalaccess/plugins/cards/iclass/hidiclasslocation.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclasskey.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclassaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclasschip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass2kschip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass8x2kschip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass16kschip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_8x2chip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_16chip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_8x2chip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_16chip.hpp>
 
 using namespace logicalaccess;
 
@@ -379,6 +405,19 @@ using namespace logicalaccess;
 %include <logicalaccess/plugins/cards/twic/twiclocation.hpp>
 %include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 %include <logicalaccess/plugins/cards/twic/twicchip.hpp>
+
+%include <logicalaccess/plugins/cards/iclass/hidiclasslocation.hpp>
+%include <logicalaccess/plugins/cards/iclass/hidiclasskey.hpp>
+%include <logicalaccess/plugins/cards/iclass/hidiclassaccessinfo.hpp>
+%include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
+%include <logicalaccess/plugins/cards/iclass/hidiclasschip.hpp>
+%include <logicalaccess/plugins/cards/iclass/hidiclass2kschip.hpp>
+%include <logicalaccess/plugins/cards/iclass/hidiclass8x2kschip.hpp>
+%include <logicalaccess/plugins/cards/iclass/hidiclass16kschip.hpp>
+%include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_8x2chip.hpp>
+%include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_16chip.hpp>
+%include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_8x2chip.hpp>
+%include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_16chip.hpp>
 
 %template(ChipCollection) std::vector<std::shared_ptr<logicalaccess::Chip> >;
 %template(LocationNodeCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;

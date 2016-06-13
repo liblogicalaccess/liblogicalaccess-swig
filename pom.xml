@@ -108,6 +108,20 @@
 			<scope>compile</scope>
 			<type>zip</type>
 		</dependency>
+		<dependency>
+			<groupId>eu.islog.lib.readers</groupId>
+			<artifactId>liblogicalaccess-libnfc</artifactId>
+			<version>1.83.0-SNAPSHOT</version>
+			<scope>compile</scope>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>eu.islog.lib.readers</groupId>
+			<artifactId>liblogicalaccess-private</artifactId>
+			<version>1.83.0-SNAPSHOT</version>
+			<scope>compile</scope>
+			<type>zip</type>
+		</dependency>
 	</dependencies>
 	
 </project>

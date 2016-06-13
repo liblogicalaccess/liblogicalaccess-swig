@@ -110,6 +110,11 @@ using LibLogicalAccess.Card;
 %shared_ptr(logicalaccess::STidSTRReaderUnit);
 %shared_ptr(logicalaccess::STidSTRReaderUnitConfiguration);
 
+%shared_ptr(logicalaccess::NFCReaderProvider);
+%shared_ptr(logicalaccess::NFCReaderUnit);
+%shared_ptr(logicalaccess::NFCReaderUnitConfiguration);
+%shared_ptr(logicalaccess::NFCDataTransport);
+
 typedef std::shared_ptr<logicalaccess::ReaderProvider> ReaderProviderPtr;
 typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
 
@@ -210,6 +215,11 @@ typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
 #include <logicalaccess/plugins/readers/stidstr/stidstrreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/stidstr/stidstrreaderunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/stidstr/stidstrreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/nfc/nfcreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/nfc/nfcreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/nfc/nfcdatatransport.hpp>
+#include <logicalaccess/plugins/readers/nfc/nfcreaderunit.hpp>
 
 using namespace logicalaccess;
 
@@ -314,6 +324,11 @@ using namespace logicalaccess;
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderunit.hpp>
 
+%include <logicalaccess/plugins/readers/nfc/nfcreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/nfc/nfcreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/nfc/nfcdatatransport.hpp>
+%include <logicalaccess/plugins/readers/nfc/nfcreaderunit.hpp>
+
 %template(ReaderUnitCollection) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
 
 %pragma(csharp) imclasscode=%{
@@ -384,6 +399,9 @@ using namespace logicalaccess;
 		 break;
 	   case "STidSTR":
 	     ret = new STidSTRReaderProvider(cPtr, owner);
+		 break;
+	   case "NFC":
+	     ret = new NFCReaderProvider(cPtr, owner);
 		 break;
       }
       return ret;
@@ -466,6 +484,9 @@ using namespace logicalaccess;
 	   case "STidSTR":
 	     ret = new STidSTRReaderUnit(cPtr, owner);
 		 break;
+	   case "NFC":
+	     ret = new NFCReaderUnit(cPtr, owner);
+		 break;
       }
       return ret;
     }
@@ -546,6 +567,9 @@ using namespace logicalaccess;
 		 break;
 	   case "STidSTR":
 	     ret = new STidSTRReaderUnitConfiguration(cPtr, owner);
+		 break;
+	   case "NFC":
+	     ret = new NFCReaderUnitConfiguration(cPtr, owner);
 		 break;
       }
       return ret;
