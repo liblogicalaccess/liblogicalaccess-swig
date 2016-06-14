@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9C4E76D4-1623-4994-B54F-3B1343F5F4AD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LibLogicalAccess</RootNamespace>
+    <AssemblyName>LibLogicalAccessNET</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Card\AccessControlCardService.cs" />
+    <Compile Include="Card\AccessInfo.cs" />
+    <Compile Include="Card\AES128Key.cs" />
+    <Compile Include="Card\ASCIIFormat.cs" />
+    <Compile Include="Card\BariumFerritePCSCFormat.cs" />
+    <Compile Include="Card\BCDByteDataType.cs" />
+    <Compile Include="Card\BCDNibbleDataType.cs" />
+    <Compile Include="Card\BigEndianDataRepresentation.cs" />
+    <Compile Include="Card\BinaryDataField.cs" />
+    <Compile Include="Card\BinaryDataType.cs" />
+    <Compile Include="Card\BinaryFieldValue.cs" />
+    <Compile Include="Card\CardBehavior.cs" />
+    <Compile Include="Card\CardService.cs" />
+    <Compile Include="Card\CardServiceType.cs" />
+    <Compile Include="Card\CardsFormatComposite.cs" />
+    <Compile Include="Card\ChangeKeyDiversification.cs" />
+    <Compile Include="Card\ChangeKeyInfo.cs" />
+    <Compile Include="Card\Chip.cs" />
+    <Compile Include="Card\ChipCollection.cs" />
+    <Compile Include="Card\ChipPowerStatus.cs" />
+    <Compile Include="Card\ComputerMemoryKeyStorage.cs" />
+    <Compile Include="Card\CPS3Chip.cs" />
+    <Compile Include="Card\CPS3Commands.cs" />
+    <Compile Include="Card\CPS3Location.cs" />
+    <Compile Include="Card\CustomFormat.cs" />
+    <Compile Include="Card\DataClockFormat.cs" />
+    <Compile Include="Card\DataField.cs" />
+    <Compile Include="Card\DataRepresentation.cs" />
+    <Compile Include="Card\DataType.cs" />
+    <Compile Include="Card\DESFireAccessInfo.cs" />
+    <Compile Include="Card\DESFireAccessRights.cs" />
+    <Compile Include="Card\DESFireChip.cs" />
+    <Compile Include="Card\DESFireCommands.cs" />
+    <Compile Include="Card\DESFireEV1Chip.cs" />
+    <Compile Include="Card\DESFireEV1Commands.cs" />
+    <Compile Include="Card\DESFireEV1Location.cs" />
+    <Compile Include="Card\DESFireEV1TransmissionMode.cs" />
+    <Compile Include="Card\DESFireISOAlgorithm.cs" />
+    <Compile Include="Card\DESFireKey.cs" />
+    <Compile Include="Card\DESFireKeySettings.cs" />
+    <Compile Include="Card\DESFireKeyType.cs" />
+    <Compile Include="Card\DESFireLocation.cs" />
+    <Compile Include="Card\DESFireRecords.cs" />
+    <Compile Include="Card\DFName.cs" />
+    <Compile Include="Card\EM4102Chip.cs" />
+    <Compile Include="Card\EM4135Chip.cs" />
+    <Compile Include="Card\Encoding.cs" />
+    <Compile Include="Card\EncodingType.cs" />
+    <Compile Include="Card\EncryptionMode.cs" />
+    <Compile Include="Card\EPassAccessInfo.cs" />
+    <Compile Include="Card\EPassChip.cs" />
+    <Compile Include="Card\EPassCommand.cs" />
+    <Compile Include="Card\ExtSETStruct.cs" />
+    <Compile Include="Card\FASCN200BitFormat.cs" />
+    <Compile Include="Card\FASCNOrganizationalCategory.cs" />
+    <Compile Include="Card\FASCNPOAssociationCategory.cs" />
+    <Compile Include="Card\FeliCaChip.cs" />
+    <Compile Include="Card\FeliCaCommands.cs" />
+    <Compile Include="Card\FeliCaLocation.cs" />
+    <Compile Include="Card\FidSupport.cs" />
+    <Compile Include="Card\Format.cs" />
+    <Compile Include="Card\FormatInfos.cs" />
+    <Compile Include="Card\FormatType.cs" />
+    <Compile Include="Card\GenericTagChip.cs" />
+    <Compile Include="Card\Getronik40BitFormat.cs" />
+    <Compile Include="Card\HIDHoneywellFormat.cs" />
+    <Compile Include="Card\HIDiClass16KSChip.cs" />
+    <Compile Include="Card\HIDiClass2KSChip.cs" />
+    <Compile Include="Card\HIDiClass32KS_16_16Chip.cs" />
+    <Compile Include="Card\HIDiClass32KS_16_8x2Chip.cs" />
+    <Compile Include="Card\HIDiClass32KS_8x2_16Chip.cs" />
+    <Compile Include="Card\HIDiClass32KS_8x2_8x2Chip.cs" />
+    <Compile Include="Card\HIDiClass8x2KSChip.cs" />
+    <Compile Include="Card\HIDiClassAccessInfo.cs" />
+    <Compile Include="Card\HIDiClassChip.cs" />
+    <Compile Include="Card\HIDiClassKey.cs" />
+    <Compile Include="Card\HIDiClassKeyType.cs" />
+    <Compile Include="Card\HIDiClassLocation.cs" />
+    <Compile Include="Card\HMAC1Key.cs" />
+    <Compile Include="Card\ICode1Chip.cs" />
+    <Compile Include="Card\ICode2Chip.cs" />
+    <Compile Include="Card\IdentityCardService.cs" />
+    <Compile Include="Card\IKSStorage.cs" />
+    <Compile Include="Card\IndalaChip.cs" />
+    <Compile Include="Card\InfineonMYDChip.cs" />
+    <Compile Include="Card\ISO15693Chip.cs" />
+    <Compile Include="Card\ISO15693Commands.cs" />
+    <Compile Include="Card\ISO15693Location.cs" />
+    <Compile Include="Card\ISO7816Chip.cs" />
+    <Compile Include="Card\ISO7816Commands.cs" />
+    <Compile Include="Card\ISO7816FileType.cs" />
+    <Compile Include="Card\ISO7816Location.cs" />
+    <Compile Include="Card\Key.cs" />
+    <Compile Include="Card\KeyDiversification.cs" />
+    <Compile Include="Card\KeyEntryAV1Information.cs" />
+    <Compile Include="Card\KeyEntryAV2Information.cs" />
+    <Compile Include="Card\KeyEntryUpdateSettings.cs" />
+    <Compile Include="Card\KeyStorage.cs" />
+    <Compile Include="Card\KeyStorageType.cs" />
+    <Compile Include="Card\KucEntryUpdateSettings.cs" />
+    <Compile Include="Card\LegicPrimeChip.cs" />
+    <Compile Include="Card\liblogicalaccess_card.cs" />
+    <Compile Include="Card\liblogicalaccess_cardPINVOKE.cs" />
+    <Compile Include="Card\LittleEndianDataRepresentation.cs" />
+    <Compile Include="Card\Location.cs" />
+    <Compile Include="Card\LocationNode.cs" />
+    <Compile Include="Card\LocationNodeCollection.cs" />
+    <Compile Include="Card\Mifare1KChip.cs" />
+    <Compile Include="Card\Mifare4KChip.cs" />
+    <Compile Include="Card\MifareAccessInfo.cs" />
+    <Compile Include="Card\MifareChip.cs" />
+    <Compile Include="Card\MifareCommands.cs" />
+    <Compile Include="Card\MifareKey.cs" />
+    <Compile Include="Card\MifareKeyType.cs" />
+    <Compile Include="Card\MifareLocation.cs" />
+    <Compile Include="Card\MifarePlusBlockKeyLocation.cs" />
+    <Compile Include="Card\MifarePlusChip.cs" />
+    <Compile Include="Card\MifarePlusLocation.cs" />
+    <Compile Include="Card\MifarePlusSL0Chip.cs" />
+    <Compile Include="Card\MifarePlusSL0Commands.cs" />
+    <Compile Include="Card\MifarePlusSL0_2kChip.cs" />
+    <Compile Include="Card\MifarePlusSL0_4kChip.cs" />
+    <Compile Include="Card\MifarePlusSL1AccessInfo.cs" />
+    <Compile Include="Card\MifarePlusSL1Chip.cs" />
+    <Compile Include="Card\MifarePlusSL1Commands.cs" />
+    <Compile Include="Card\MifarePlusSL1_2kChip.cs" />
+    <Compile Include="Card\MifarePlusSL1_4kChip.cs" />
+    <Compile Include="Card\MifarePlusSL3Chip.cs" />
+    <Compile Include="Card\MifareUltralightAccessInfo.cs" />
+    <Compile Include="Card\MifareUltralightCAccessInfo.cs" />
+    <Compile Include="Card\MifareUltralightCChip.cs" />
+    <Compile Include="Card\MifareUltralightCCommands.cs" />
+    <Compile Include="Card\MifareUltralightChip.cs" />
+    <Compile Include="Card\MifareUltralightCommands.cs" />
+    <Compile Include="Card\MifareUltralightLocation.cs" />
+    <Compile Include="Card\NdefMessage.cs" />
+    <Compile Include="Card\NdefRecord.cs" />
+    <Compile Include="Card\NdefRecordCollection.cs" />
+    <Compile Include="Card\NdefType.cs" />
+    <Compile Include="Card\NFCTagCardService.cs" />
+    <Compile Include="Card\NoDataRepresentation.cs" />
+    <Compile Include="Card\NumberDataField.cs" />
+    <Compile Include="Card\NXPAV1KeyDiversification.cs" />
+    <Compile Include="Card\NXPAV2KeyDiversification.cs" />
+    <Compile Include="Card\NXPKeyDiversification.cs" />
+    <Compile Include="Card\NXPKeyDiversificationType.cs" />
+    <Compile Include="Card\OmnitechKeyDiversification.cs" />
+    <Compile Include="Card\ParityDataField.cs" />
+    <Compile Include="Card\ParityType.cs" />
+    <Compile Include="Card\PicoPassCommands.cs" />
+    <Compile Include="Card\ProxChip.cs" />
+    <Compile Include="Card\ProxLiteChip.cs" />
+    <Compile Include="Card\ProxLocation.cs" />
+    <Compile Include="Card\RawFormat.cs" />
+    <Compile Include="Card\ReaderMemoryKeyStorage.cs" />
+    <Compile Include="Card\SagemKeyDiversification.cs" />
+    <Compile Include="Card\SAMAV1Chip.cs" />
+    <Compile Include="Card\SAMAV2Chip.cs" />
+    <Compile Include="Card\SAMBasicKeyEntry.cs" />
+    <Compile Include="Card\SAMChip.cs" />
+    <Compile Include="Card\SAMKeyStorage.cs" />
+    <Compile Include="Card\SAMKeyType.cs" />
+    <Compile Include="Card\SAMKucEntry.cs" />
+    <Compile Include="Card\SAMKUCEntryStruct.cs" />
+    <Compile Include="Card\SAMLockUnlock.cs" />
+    <Compile Include="Card\SAMManufactureInformation.cs" />
+    <Compile Include="Card\SAMVersion.cs" />
+    <Compile Include="Card\SAMVersionInformation.cs" />
+    <Compile Include="Card\SETAV1.cs" />
+    <Compile Include="Card\SETAV2.cs" />
+    <Compile Include="Card\SmartFrameChip.cs" />
+    <Compile Include="Card\StaticFormat.cs" />
+    <Compile Include="Card\StmLri512Chip.cs" />
+    <Compile Include="Card\StorageCardService.cs" />
+    <Compile Include="Card\StringDataField.cs" />
+    <Compile Include="Card\SWIGTYPE_p_bool.cs" />
+    <Compile Include="Card\SWIGTYPE_p_boost__property_tree__ptree.cs" />
+    <Compile Include="Card\SWIGTYPE_p_ByteVector.cs" />
+    <Compile Include="Card\SWIGTYPE_p_DESFireKeyType.cs" />
+    <Compile Include="Card\SWIGTYPE_p_EPassDG1.cs" />
+    <Compile Include="Card\SWIGTYPE_p_EPassDG2.cs" />
+    <Compile Include="Card\SWIGTYPE_p_EPassEFCOM.cs" />
+    <Compile Include="Card\SWIGTYPE_p_HIDiClassKeyType.cs" />
+    <Compile Include="Card\SWIGTYPE_p_iks__IslogKeyServer__IKSConfig.cs" />
+    <Compile Include="Card\SWIGTYPE_p_int32_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_int64_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_logicalaccess__Commands.cs" />
+    <Compile Include="Card\SWIGTYPE_p_logicalaccess__DESFireKeySettings.cs" />
+    <Compile Include="Card\SWIGTYPE_p_logicalaccess__DESFireKeyType.cs" />
+    <Compile Include="Card\SWIGTYPE_p_size_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__arrayT_uint8_t_16_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__chrono__system_clock__time_point.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__listT_std__shared_ptrT_DataField_t_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__shared_ptrT_DataField_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__shared_ptrT_DESFireCrypto_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__shared_ptrT_logicalaccess__SAMCommandsT_logicalaccess__s_KeyEntryAV1Information_logicalaccess__s_SETAV1_t_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__shared_ptrT_logicalaccess__SAMCommandsT_logicalaccess__s_KeyEntryAV2Information_logicalaccess__s_SETAV2_t_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__shared_ptrT_logicalaccess__TripleDESKey_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__shared_ptrT_ReaderUnit_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__string.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__vectorT_logicalaccess__DFName_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__vectorT_std__shared_ptrT_logicalaccess__Format_t_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__vectorT_uint8_t_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__vectorT_unsigned_int_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__weak_ptrT_logicalaccess__LocationNode_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_std__weak_ptrT_ReaderUnit_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_uint16_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_uint32_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_uint64_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_uint8_t.cs" />
+    <Compile Include="Card\SWIGTYPE_p_unsigned_char.cs" />
+    <Compile Include="Card\SWIGTYPE_p_unsigned_int.cs" />
+    <Compile Include="Card\SWIGTYPE_p_void.cs" />
+    <Compile Include="Card\TagItChip.cs" />
+    <Compile Include="Card\TagItCommands.cs" />
+    <Compile Include="Card\TaskAccessRights.cs" />
+    <Compile Include="Card\TNF.cs" />
+    <Compile Include="Card\TopazAccessInfo.cs" />
+    <Compile Include="Card\TopazChip.cs" />
+    <Compile Include="Card\TopazCommands.cs" />
+    <Compile Include="Card\TopazLocation.cs" />
+    <Compile Include="Card\TripleDESKey.cs" />
+    <Compile Include="Card\TwicChip.cs" />
+    <Compile Include="Card\TwicCommands.cs" />
+    <Compile Include="Card\TwicLocation.cs" />
+    <Compile Include="Card\UIDChangerService.cs" />
+    <Compile Include="Card\UriType.cs" />
+    <Compile Include="Card\ValueDataField.cs" />
+    <Compile Include="Card\Wiegand26Format.cs" />
+    <Compile Include="Card\Wiegand34Format.cs" />
+    <Compile Include="Card\Wiegand34WithFacilityFormat.cs" />
+    <Compile Include="Card\Wiegand37Format.cs" />
+    <Compile Include="Card\Wiegand37WithFacilityFormat.cs" />
+    <Compile Include="Card\Wiegand37WithFacilityRightParity2Format.cs" />
+    <Compile Include="Card\WiegandFormat.cs" />
+    <Compile Include="DataTransport.cs" />
+    <Compile Include="IDynLibrary.cs" />
+    <Compile Include="liblogicalaccess_data.cs" />
+    <Compile Include="liblogicalaccess_dataPINVOKE.cs" />
+    <Compile Include="liblogicalaccess_library.cs" />
+    <Compile Include="liblogicalaccess_libraryPINVOKE.cs" />
+    <Compile Include="LibraryManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReaderCardAdapter.cs" />
+    <Compile Include="Reader\A3MLGM5600ReaderProvider.cs" />
+    <Compile Include="Reader\A3MLGM5600ReaderUnit.cs" />
+    <Compile Include="Reader\A3MLGM5600ReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\ACSACR1222LReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\AdmittoReaderProvider.cs" />
+    <Compile Include="Reader\AdmittoReaderUnit.cs" />
+    <Compile Include="Reader\AdmittoReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\AxessTMC13ReaderProvider.cs" />
+    <Compile Include="Reader\AxessTMC13ReaderUnit.cs" />
+    <Compile Include="Reader\AxessTMC13ReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\AxessTMCLegicReaderProvider.cs" />
+    <Compile Include="Reader\AxessTMCLegicReaderUnit.cs" />
+    <Compile Include="Reader\AxessTMCLegicReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\ChipType.cs" />
+    <Compile Include="Reader\DeisterCardType.cs" />
+    <Compile Include="Reader\DeisterReaderProvider.cs" />
+    <Compile Include="Reader\DeisterReaderUnit.cs" />
+    <Compile Include="Reader\DeisterReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\ElatecReaderProvider.cs" />
+    <Compile Include="Reader\ElatecReaderUnit.cs" />
+    <Compile Include="Reader\ElatecReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\GigaTMSReaderProvider.cs" />
+    <Compile Include="Reader\GigaTMSReaderUnit.cs" />
+    <Compile Include="Reader\GigaTMSReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\GunneboReaderProvider.cs" />
+    <Compile Include="Reader\GunneboReaderUnit.cs" />
+    <Compile Include="Reader\GunneboReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\HIDEncryptionMode.cs" />
+    <Compile Include="Reader\IdOnDemandReaderProvider.cs" />
+    <Compile Include="Reader\IdOnDemandReaderUnit.cs" />
+    <Compile Include="Reader\IdOnDemandReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\ISO7816ReaderProvider.cs" />
+    <Compile Include="Reader\ISO7816ReaderUnit.cs" />
+    <Compile Include="Reader\ISO7816ReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\KeyboardReaderProvider.cs" />
+    <Compile Include="Reader\KeyboardReaderUnit.cs" />
+    <Compile Include="Reader\KeyboardReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\LCDDisplay.cs" />
+    <Compile Include="Reader\LEDBuzzerDisplay.cs" />
+    <Compile Include="Reader\liblogicalaccess_reader.cs" />
+    <Compile Include="Reader\liblogicalaccess_readerPINVOKE.cs" />
+    <Compile Include="Reader\LicenseCheckerService.cs" />
+    <Compile Include="Reader\NFCDataTransport.cs" />
+    <Compile Include="Reader\NFCReaderProvider.cs" />
+    <Compile Include="Reader\NFCReaderUnit.cs" />
+    <Compile Include="Reader\NFCReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\OK5553ReaderProvider.cs" />
+    <Compile Include="Reader\OK5553ReaderUnit.cs" />
+    <Compile Include="Reader\OK5553ReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\Omnikey5427ReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\OmnikeyXX21ReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\OSDPReaderProvider.cs" />
+    <Compile Include="Reader\OSDPReaderUnit.cs" />
+    <Compile Include="Reader\OSDPReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\PCSCDataTransport.cs" />
+    <Compile Include="Reader\PCSCReaderProvider.cs" />
+    <Compile Include="Reader\PCSCReaderUnit.cs" />
+    <Compile Include="Reader\PCSCReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\PCSCReaderUnitType.cs" />
+    <Compile Include="Reader\PCSCShareMode.cs" />
+    <Compile Include="Reader\PromagReaderProvider.cs" />
+    <Compile Include="Reader\PromagReaderUnit.cs" />
+    <Compile Include="Reader\PromagReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\ReaderConfiguration.cs" />
+    <Compile Include="Reader\ReaderFormatComposite.cs" />
+    <Compile Include="Reader\ReaderProvider.cs" />
+    <Compile Include="Reader\ReaderService.cs" />
+    <Compile Include="Reader\ReaderServiceType.cs" />
+    <Compile Include="Reader\ReaderUnit.cs" />
+    <Compile Include="Reader\ReaderUnitCollection.cs" />
+    <Compile Include="Reader\ReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\RFIDeasReaderProvider.cs" />
+    <Compile Include="Reader\RFIDeasReaderUnit.cs" />
+    <Compile Include="Reader\RFIDeasReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\RplethDataTransport.cs" />
+    <Compile Include="Reader\RplethMode.cs" />
+    <Compile Include="Reader\RplethReaderProvider.cs" />
+    <Compile Include="Reader\RplethReaderUnit.cs" />
+    <Compile Include="Reader\RplethReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\SCIELReaderProvider.cs" />
+    <Compile Include="Reader\SCIELReaderUnit.cs" />
+    <Compile Include="Reader\SCIELReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\SmartIDReaderProvider.cs" />
+    <Compile Include="Reader\SmartIDReaderUnit.cs" />
+    <Compile Include="Reader\SmartIDReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\STidBaudrate.cs" />
+    <Compile Include="Reader\STidCommunicationMode.cs" />
+    <Compile Include="Reader\STidCommunicationType.cs" />
+    <Compile Include="Reader\STidPRGReaderProvider.cs" />
+    <Compile Include="Reader\STidPRGReaderUnit.cs" />
+    <Compile Include="Reader\STidPRGReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\STidSTRReaderProvider.cs" />
+    <Compile Include="Reader\STidSTRReaderUnit.cs" />
+    <Compile Include="Reader\STidSTRReaderUnitConfiguration.cs" />
+    <Compile Include="Reader\STidTamperSwitchBehavior.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_bool.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_char.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_KeyStoragePtr.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_logicalaccess__STidTamperSwitchBehavior.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_nfc_context.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_nfc_device.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_SCARDCONTEXT.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_SCARDHANDLE.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__listT_std__shared_ptrT_logicalaccess__Chip_t_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__listT_std__vectorT_unsigned_char_t_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_ISO7816ReaderUnit_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__A3MLGM5600ReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__AdmittoReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__AxessTMC13ReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__AxessTMCLegicReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__DeisterReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__ElatecReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__GigaTMSReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__GunneboReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__IdOnDemandReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__NFCReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__OK5553ReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__PromagReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__ReaderCommunication_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__SCIELReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__SmartIDReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__TripleDESKey_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_NFCReaderUnit_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_OSDPChannel_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_OSDPCommands_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_PCSCReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_PCSCReaderUnit_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_ReaderConfiguration_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_RplethReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_STidSTRReaderCardAdapter_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__vectorT_uint8_t_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_std__weak_ptrT_logicalaccess__ReaderProvider_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_TechnoBitset.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_uint64_t.cs" />
+    <Compile Include="Reader\SWIGTYPE_p_uint8_t.cs" />
+    <Compile Include="ResultChecker.cs" />
+    <Compile Include="StringCollection.cs" />
+    <Compile Include="SWIGTYPE_p_logicalaccess__Commands.cs" />
+    <Compile Include="SWIGTYPE_p_void.cs" />
+    <Compile Include="UCharCollection.cs" />
+    <Compile Include="UCharCollectionCollection.cs" />
+    <Compile Include="UShortCollection.cs" />
+    <Compile Include="XmlSerializable.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

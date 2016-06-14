@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "liblogicalaccess-swig.win32", "wrapper\win32\liblogicalaccess-swig.win32.vcxproj", "{21CDAB77-B8E5-416B-A2FD-AD60AD0FEF27}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "liblogicalaccess-swig.win32", "wrapper\liblogicalaccess-swig.win32.vcxproj", "{21CDAB77-B8E5-416B-A2FD-AD60AD0FEF27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLogicalAccess", "wrapper\win32\LibLogicalAccess.csproj", "{9C4E76D4-1623-4994-B54F-3B1343F5F4AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLogicalAccess", "wrapper\csharp\LibLogicalAccess.csproj", "{9C4E76D4-1623-4994-B54F-3B1343F5F4AD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{21CDAB77-B8E5-416B-A2FD-AD60AD0FEF27} = {21CDAB77-B8E5-416B-A2FD-AD60AD0FEF27}
 	EndProjectSection

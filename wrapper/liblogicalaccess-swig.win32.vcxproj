@@ -183,28 +183,28 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Card -namespace LibLogicalAccess.Card -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp\Card -namespace LibLogicalAccess.Card -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Card -namespace LibLogicalAccess.Card -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp\Card -namespace LibLogicalAccess.Card -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Card -namespace LibLogicalAccess.Card -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp\Card -namespace LibLogicalAccess.Card -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Card -namespace LibLogicalAccess.Card -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp\Card -namespace LibLogicalAccess.Card -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
@@ -213,28 +213,28 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
@@ -243,28 +243,28 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
@@ -273,28 +273,28 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
         echo Invoking SWIG...
         echo on
-        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)gencs\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
+        swig.exe -v -c++ -csharp -I$(SolutionDir)packages\include -outdir $(ProjectDir)csharp\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"
         echo off
       </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>

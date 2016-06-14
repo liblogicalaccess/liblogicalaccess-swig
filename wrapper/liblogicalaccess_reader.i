@@ -61,6 +61,7 @@ using LibLogicalAccess.Card;
 %shared_ptr(logicalaccess::IdOnDemandReaderUnit);
 %shared_ptr(logicalaccess::IdOnDemandReaderUnitConfiguration);
 
+%shared_ptr(logicalaccess::ISO7816ReaderProvider);
 %shared_ptr(logicalaccess::ISO7816ReaderUnit);
 %shared_ptr(logicalaccess::ISO7816ReaderUnitConfiguration);
 
@@ -80,6 +81,9 @@ using LibLogicalAccess.Card;
 %shared_ptr(logicalaccess::PCSCReaderUnit);
 %shared_ptr(logicalaccess::PCSCReaderUnitConfiguration);
 %shared_ptr(logicalaccess::PCSCDataTransport);
+%shared_ptr(logicalaccess::ACSACR1222LReaderUnitConfiguration);
+%shared_ptr(logicalaccess::Omnikey5427ReaderUnitConfiguration);
+%shared_ptr(logicalaccess::OmnikeyXX21ReaderUnitConfiguration);
 
 %shared_ptr(logicalaccess::PromagReaderProvider);
 %shared_ptr(logicalaccess::PromagReaderUnit);
@@ -167,6 +171,7 @@ typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
 #include <logicalaccess/plugins/readers/idondemand/idondemandreaderunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/idondemand/idondemandreaderunit.hpp>
 
+#include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
 
@@ -186,6 +191,9 @@ typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
 #include <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
 #include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222lreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikey5427readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
 
 #include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/promag/promagreaderunitconfiguration.hpp>
@@ -275,6 +283,7 @@ using namespace logicalaccess;
 %include <logicalaccess/plugins/readers/idondemand/idondemandreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/idondemand/idondemandreaderunit.hpp>
 
+%include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
 
@@ -294,6 +303,9 @@ using namespace logicalaccess;
 %include <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
 %include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222lreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikey5427readerunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
 
 %include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/promag/promagreaderunitconfiguration.hpp>
@@ -545,7 +557,21 @@ using namespace logicalaccess;
 	     ret = new OSDPReaderUnitConfiguration(cPtr, owner);
 		 break;
 	   case "PCSC":
-	     ret = new PCSCReaderUnitConfiguration(cPtr, owner);
+	     PCSCReaderUnitType pcsct = (PCSCReaderUnitType)($modulePINVOKE.PCSCReaderUnitConfiguration_getPCSCType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		 switch (pcsct) {
+			case PCSCReaderUnitType.PCSC_RUT_ACS_ACR_1222L:
+				ret = new ACSACR1222LReaderUnitConfiguration(cPtr, owner);
+				break;
+			case PCSCReaderUnitType.PCSC_RUT_OMNIKEY_XX27:
+				ret = new Omnikey5427ReaderUnitConfiguration(cPtr, owner);
+				break;
+			case PCSCReaderUnitType.PCSC_RUT_OMNIKEY_XX21:
+				ret = new OmnikeyXX21ReaderUnitConfiguration(cPtr, owner);
+				break;
+			default:
+				ret = new PCSCReaderUnitConfiguration(cPtr, owner);
+				break;
+		 }
 		 break;
 	   case "Promag":
 	     ret = new PromagReaderUnitConfiguration(cPtr, owner);

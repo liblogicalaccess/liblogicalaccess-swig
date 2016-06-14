@@ -5,53 +5,47 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <directory>/vc++/polluxcards/Release/Win32</directory>
+            <directory>/wrapper/Release/Win32</directory>
             <outputDirectory>/lib/Win32/</outputDirectory>
             <includes>
                 <include>*.pdb</include>
 				<include>*.lib</include>
             </includes>
             <excludes>
-				<exclude>vc100.pdb</exclude>
+				<exclude>vc120.pdb</exclude>
             </excludes>
         </fileSet>
 		<fileSet>
-            <directory>/vc++</directory>
-            <outputDirectory>/lib/Win32/</outputDirectory>
-            <includes>
-                <include>*.tlb</include>
-            </includes>
-        </fileSet>
-		<fileSet>
-            <directory>/vc++/polluxcards/Release/Win32</directory>
+            <directory>/wrapper/Release/Win32</directory>
             <outputDirectory>/dll/Win32/</outputDirectory>
             <includes>
                 <include>*.dll</include>
             </includes>
-			<!--<excludes>
-				<exclude>Interop.*.dll</exclude>
-			</excludes>-->
-        </fileSet>		
-		<fileSet>
-            <directory>/include</directory>
-            <outputDirectory>/include/polluxcards</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>/wrapper/Release/x64</directory>
+            <outputDirectory>/lib/x64/</outputDirectory>
             <includes>
-                <include>*.h</include>
+                <include>*.pdb</include>
+				<include>*.lib</include>
             </includes>
             <excludes>
-				<exclude>/.svn/*</exclude>
+				<exclude>vc120.pdb</exclude>
             </excludes>
         </fileSet>
 		<fileSet>
-            <directory>/vc++</directory>
-            <outputDirectory>/include/polluxcards</outputDirectory>
+            <directory>/wrapper/Release/x64</directory>
+            <outputDirectory>/dll/x64/</outputDirectory>
+            <includes>
+                <include>*.dll</include>
+            </includes>
+        </fileSet>
+		<fileSet>
+            <directory>/wrapper</directory>
+            <outputDirectory>/include/liblogicalaccess-swig</outputDirectory>
             <includes>
                 <include>*.h</include>
-				<include>*.idl</include>
             </includes>
-            <excludes>
-				<exclude>/.svn/*</exclude>
-            </excludes>
         </fileSet>
     </fileSets>
 </assembly>

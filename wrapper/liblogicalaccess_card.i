@@ -15,12 +15,19 @@ using LibLogicalAccess;
 
 %shared_ptr(logicalaccess::KeyDiversification);
 %shared_ptr(logicalaccess::KeyStorage);
+%shared_ptr(logicalaccess::ComputerMemoryKeyStorage);
+%shared_ptr(logicalaccess::IKSStorage);
+%shared_ptr(logicalaccess::ReaderMemoryKeyStorage);
+%shared_ptr(logicalaccess::SAMKeyStorage);
 %shared_ptr(logicalaccess::Key);
 %shared_ptr(logicalaccess::Commands);
 %shared_ptr(logicalaccess::Chip);
 %shared_ptr(logicalaccess::LocationNode);
 %shared_ptr(logicalaccess::Location);
 %shared_ptr(logicalaccess::AccessInfo);
+%shared_ptr(logicalaccess::TripleDESKey);
+%shared_ptr(logicalaccess::AES128Key);
+%shared_ptr(logicalaccess::HMAC1Key);
 
 /* Plugins */
 
@@ -30,6 +37,7 @@ using LibLogicalAccess;
 
 %shared_ptr(logicalaccess::DESFireLocation);
 %shared_ptr(logicalaccess::DESFireEV1Location);
+%shared_ptr(logicalaccess::NXPKeyDiversification);
 %shared_ptr(logicalaccess::NXPAV1KeyDiversification);
 %shared_ptr(logicalaccess::NXPAV2KeyDiversification);
 %shared_ptr(logicalaccess::OmnitechKeyDiversification);
@@ -155,6 +163,13 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 #include <logicalaccess/cards/commands.hpp>
 #include <logicalaccess/cards/chip.hpp>
+#include <logicalaccess/cards/computermemorykeystorage.hpp>
+#include <logicalaccess/cards/iksstorage.hpp>
+#include <logicalaccess/cards/readermemorykeystorage.hpp>
+#include <logicalaccess/cards/samkeystorage.hpp>
+#include <logicalaccess/cards/tripledeskey.hpp>
+#include <logicalaccess/cards/aes128key.hpp>
+#include <logicalaccess/cards/hmac1key.hpp>
 #include <logicalaccess/cards/accessinfo.hpp>
 #include <logicalaccess/cards/locationnode.hpp>
 
@@ -174,6 +189,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 #include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
+#include <logicalaccess/plugins/cards/desfire/nxpkeydiversification.hpp>
 #include <logicalaccess/plugins/cards/desfire/nxpav1keydiversification.hpp>
 #include <logicalaccess/plugins/cards/desfire/nxpav2keydiversification.hpp>
 #include <logicalaccess/plugins/cards/desfire/omnitechkeydiversification.hpp>
@@ -297,7 +313,14 @@ using namespace logicalaccess;
 %include <logicalaccess/cards/chip.hpp>
 %include <logicalaccess/cards/keydiversification.hpp>
 %include <logicalaccess/cards/keystorage.hpp>
+%include <logicalaccess/cards/computermemorykeystorage.hpp>
+%include <logicalaccess/cards/iksstorage.hpp>
+%include <logicalaccess/cards/readermemorykeystorage.hpp>
+%include <logicalaccess/cards/samkeystorage.hpp>
 %include <logicalaccess/key.hpp>
+%include <logicalaccess/cards/tripledeskey.hpp>
+%include <logicalaccess/cards/aes128key.hpp>
+%include <logicalaccess/cards/hmac1key.hpp>
 
 /* Plugins */
 
@@ -315,6 +338,7 @@ using namespace logicalaccess;
 
 %include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
+%include <logicalaccess/plugins/cards/desfire/nxpkeydiversification.hpp>
 %include <logicalaccess/plugins/cards/desfire/nxpav1keydiversification.hpp>
 %include <logicalaccess/plugins/cards/desfire/nxpav2keydiversification.hpp>
 %include <logicalaccess/plugins/cards/desfire/omnitechkeydiversification.hpp>
@@ -655,5 +679,38 @@ using namespace logicalaccess;
   logicalaccess::AccessInfo*, std::shared_ptr<logicalaccess::AccessInfo> {
     System.IntPtr cPtr = $imcall;
     AccessInfo ret = liblogicalaccess_cardPINVOKE.createAccessInfo(cPtr, $owner);$excode
+    return ret;
+}
+
+%pragma(csharp) imclasscode=%{
+  public static KeyStorage createKeyStorage(System.IntPtr cPtr, bool owner)
+  {
+    KeyStorage ret = null;
+    if (cPtr == System.IntPtr.Zero) {
+      return ret;
+    }
+	KeyStorageType ks = (KeyStorageType)($modulePINVOKE.KeyStorage_getType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+    switch (ks) {
+	   case KeyStorageType.KST_COMPUTER_MEMORY:
+	     ret = new ComputerMemoryKeyStorage(cPtr, owner);
+	     break;
+	   case KeyStorageType.KST_READER_MEMORY:
+	     ret = new ReaderMemoryKeyStorage(cPtr, owner);
+		 break;
+	   case KeyStorageType.KST_SAM:
+	     ret = new SAMKeyStorage(cPtr, owner);
+		 break;
+	   case KeyStorageType.KST_SERVER:
+	     ret = new IKSStorage(cPtr, owner);
+		 break;
+      }
+      return ret;
+    }
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::KeyStorage*, std::shared_ptr<logicalaccess::KeyStorage> {
+    System.IntPtr cPtr = $imcall;
+    KeyStorage ret = liblogicalaccess_cardPINVOKE.createKeyStorage(cPtr, $owner);$excode
     return ret;
 }

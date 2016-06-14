@@ -64,6 +64,7 @@
 
 
 %{
+#include <logicalaccess/services/cardservice.hpp>
 #include <logicalaccess/services/storage/storagecardservice.hpp>
 #include <logicalaccess/services/accesscontrol/encodings/binarydatatype.hpp>
 #include <logicalaccess/services/accesscontrol/encodings/bcdbytedatatype.hpp>
@@ -71,6 +72,7 @@
 #include <logicalaccess/services/accesscontrol/encodings/bigendiandatarepresentation.hpp>
 #include <logicalaccess/services/accesscontrol/encodings/littleendiandatarepresentation.hpp>
 #include <logicalaccess/services/accesscontrol/encodings/nodatarepresentation.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/datafield.hpp>
 #include <logicalaccess/services/accesscontrol/formats/customformat/binarydatafield.hpp>
 #include <logicalaccess/services/accesscontrol/formats/customformat/numberdatafield.hpp>
 #include <logicalaccess/services/accesscontrol/formats/customformat/paritydatafield.hpp>
