@@ -39,7 +39,10 @@ using System.Runtime.InteropServices;
 CSHARP_MEMBER_ARRAYS(unsigned char, byte);
 
 
+%include <typemaps.i>
+%include <std_string.i>
 %include <std_shared_ptr.i>
+
 #define LIBLOGICALACCESS_API
 
 %ignore newDynLibrary;
@@ -62,5 +65,3 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte);
 #include "msliblogicalaccessswigwin32.h"
 #include <algorithm>
 %}
-
-%include <std_string.i>

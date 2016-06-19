@@ -34,6 +34,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -214,7 +216,6 @@
     <Compile Include="Card\StringDataField.cs" />
     <Compile Include="Card\SWIGTYPE_p_bool.cs" />
     <Compile Include="Card\SWIGTYPE_p_boost__property_tree__ptree.cs" />
-    <Compile Include="Card\SWIGTYPE_p_ByteVector.cs" />
     <Compile Include="Card\SWIGTYPE_p_DESFireKeyType.cs" />
     <Compile Include="Card\SWIGTYPE_p_EPassDG1.cs" />
     <Compile Include="Card\SWIGTYPE_p_EPassDG2.cs" />
@@ -222,7 +223,6 @@
     <Compile Include="Card\SWIGTYPE_p_HIDiClassKeyType.cs" />
     <Compile Include="Card\SWIGTYPE_p_iks__IslogKeyServer__IKSConfig.cs" />
     <Compile Include="Card\SWIGTYPE_p_int32_t.cs" />
-    <Compile Include="Card\SWIGTYPE_p_int64_t.cs" />
     <Compile Include="Card\SWIGTYPE_p_logicalaccess__Commands.cs" />
     <Compile Include="Card\SWIGTYPE_p_logicalaccess__DESFireKeySettings.cs" />
     <Compile Include="Card\SWIGTYPE_p_logicalaccess__DESFireKeyType.cs" />
@@ -234,7 +234,6 @@
     <Compile Include="Card\SWIGTYPE_p_std__shared_ptrT_DESFireCrypto_t.cs" />
     <Compile Include="Card\SWIGTYPE_p_std__shared_ptrT_logicalaccess__SAMCommandsT_logicalaccess__s_KeyEntryAV1Information_logicalaccess__s_SETAV1_t_t.cs" />
     <Compile Include="Card\SWIGTYPE_p_std__shared_ptrT_logicalaccess__SAMCommandsT_logicalaccess__s_KeyEntryAV2Information_logicalaccess__s_SETAV2_t_t.cs" />
-    <Compile Include="Card\SWIGTYPE_p_std__shared_ptrT_logicalaccess__TripleDESKey_t.cs" />
     <Compile Include="Card\SWIGTYPE_p_std__shared_ptrT_ReaderUnit_t.cs" />
     <Compile Include="Card\SWIGTYPE_p_std__string.cs" />
     <Compile Include="Card\SWIGTYPE_p_std__vectorT_logicalaccess__DFName_t.cs" />
@@ -244,8 +243,6 @@
     <Compile Include="Card\SWIGTYPE_p_std__weak_ptrT_logicalaccess__LocationNode_t.cs" />
     <Compile Include="Card\SWIGTYPE_p_std__weak_ptrT_ReaderUnit_t.cs" />
     <Compile Include="Card\SWIGTYPE_p_uint16_t.cs" />
-    <Compile Include="Card\SWIGTYPE_p_uint32_t.cs" />
-    <Compile Include="Card\SWIGTYPE_p_uint64_t.cs" />
     <Compile Include="Card\SWIGTYPE_p_uint8_t.cs" />
     <Compile Include="Card\SWIGTYPE_p_unsigned_char.cs" />
     <Compile Include="Card\SWIGTYPE_p_unsigned_int.cs" />
@@ -402,7 +399,6 @@
     <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__ReaderCommunication_t.cs" />
     <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__SCIELReaderCardAdapter_t.cs" />
     <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__SmartIDReaderCardAdapter_t.cs" />
-    <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_logicalaccess__TripleDESKey_t.cs" />
     <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_NFCReaderUnit_t.cs" />
     <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_OSDPChannel_t.cs" />
     <Compile Include="Reader\SWIGTYPE_p_std__shared_ptrT_OSDPCommands_t.cs" />
@@ -414,18 +410,26 @@
     <Compile Include="Reader\SWIGTYPE_p_std__vectorT_uint8_t_t.cs" />
     <Compile Include="Reader\SWIGTYPE_p_std__weak_ptrT_logicalaccess__ReaderProvider_t.cs" />
     <Compile Include="Reader\SWIGTYPE_p_TechnoBitset.cs" />
-    <Compile Include="Reader\SWIGTYPE_p_uint64_t.cs" />
-    <Compile Include="Reader\SWIGTYPE_p_uint8_t.cs" />
     <Compile Include="ResultChecker.cs" />
     <Compile Include="StringCollection.cs" />
     <Compile Include="SWIGTYPE_p_logicalaccess__Commands.cs" />
     <Compile Include="SWIGTYPE_p_void.cs" />
     <Compile Include="UCharCollection.cs" />
     <Compile Include="UCharCollectionCollection.cs" />
+    <Compile Include="UI\BasicReaderConfigurationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\BasicReaderConfigurationControl.Designer.cs">
+      <DependentUpon>BasicReaderConfigurationControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UShortCollection.cs" />
     <Compile Include="XmlSerializable.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="UI\BasicReaderConfigurationControl.resx">
+      <DependentUpon>BasicReaderConfigurationControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

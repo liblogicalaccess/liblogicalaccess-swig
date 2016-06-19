@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>LibLogicalAccessNET</id>
+        <version>1.83.0-pre061902</version>
+        <authors>ISLOG</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>LibLogicalAccess .NET Library, SWIG generated</description>
+        <language>en-US</language>
+        <dependencies />
+    </metadata>
+    <files>
+        <file src="bin\Release\LibLogicalAccessNET.dll" target="lib\net40\LibLogicalAccessNET.dll" />
+    </files>
+</package>

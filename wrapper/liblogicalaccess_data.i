@@ -3,13 +3,33 @@
 
 %include "liblogicalaccess.i"
 
+%{
+#include <logicalaccess/cards/readercardadapter.hpp>
+#include <stdint.h>
+%}
+
+%apply char { int8_t }
+%apply unsigned char { uint8_t }
+%apply short { int16_t }
+%apply unsigned short { uint16_t }
+%apply int { int32_t }
+%apply unsigned int { uint32_t }
+%apply unsigned int { size_t }
+%apply long { int64_t }
+%apply unsigned long { uint64_t }
+
 %include <std_vector.i>
 namespace std {
    %template(UCharCollection) vector<unsigned char>;
    %template(UShortCollection) vector<unsigned short>;
    %template(UCharCollectionCollection) vector<vector<unsigned char> >;
    %template(StringCollection) vector<string>;
+   %apply vector<unsigned char> {const vector<unsigned char> &};
+   %apply vector<unsigned char> {vector<uint8_t>};
+   %apply vector<unsigned char> {const vector<uint8_t> &};
 };
+
+typedef std::vector<unsigned char> ByteVector;
 
 %shared_ptr(logicalaccess::XmlSerializable);
 %shared_ptr(logicalaccess::DataTransport);
@@ -32,10 +52,6 @@ namespace std {
         enable_shared_from_this(const enable_shared_from_this &);
     };
 }
-
-%{
-#include <logicalaccess/cards/readercardadapter.hpp>
-%}
 
 %include <logicalaccess/xmlserializable.hpp>
 %include <logicalaccess/readerproviders/datatransport.hpp>
