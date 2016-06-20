@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>LibLogicalAccessNET</id>
-        <version>1.83.0-pre061902</version>
+        <version>1.83.0-pre062001</version>
         <authors>ISLOG</authors>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>LibLogicalAccess .NET Library, SWIG generated</description>

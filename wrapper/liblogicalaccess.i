@@ -42,6 +42,15 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte);
 %include <typemaps.i>
 %include <std_string.i>
 %include <std_shared_ptr.i>
+%include <exception.i>
+
+%except {
+	try {
+		$function
+	} catch(std::exception& ex) {
+		SWIG_exception(SWIG_UnknownError, ex.what());
+	}
+}
 
 #define LIBLOGICALACCESS_API
 

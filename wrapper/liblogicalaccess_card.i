@@ -205,9 +205,9 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 #include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
 
-#include <logicalaccess/plugins/cards/epass/epass_access_info.hpp>
-#include <logicalaccess/plugins/cards/epass/epass_command.hpp>
-#include <logicalaccess/plugins/cards/epass/epass_chip.hpp>
+#include <logicalaccess/plugins/cards/epass/epassaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
+#include <logicalaccess/plugins/cards/epass/epasschip.hpp>
 
 #include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 #include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
@@ -354,9 +354,9 @@ using namespace logicalaccess;
 
 %include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
 
-%include <logicalaccess/plugins/cards/epass/epass_access_info.hpp>
-%include <logicalaccess/plugins/cards/epass/epass_command.hpp>
-%include <logicalaccess/plugins/cards/epass/epass_chip.hpp>
+%include <logicalaccess/plugins/cards/epass/epassaccessinfo.hpp>
+%include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
+%include <logicalaccess/plugins/cards/epass/epasschip.hpp>
 
 %include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 %include <logicalaccess/plugins/cards/felica/felicacommands.hpp>

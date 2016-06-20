@@ -39,6 +39,11 @@ namespace LibLogicalAccess.UI
             {
                 cbReaderProvider.Items.Add(reader);
             }
+
+            if (cbReaderProvider.Items.Contains("PCSC"))
+            {
+                cbReaderProvider.SelectedItem = "PCSC";
+            }
         }
 
         private void RefreshReaderUnitList()
