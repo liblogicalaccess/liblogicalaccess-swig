@@ -1,20 +1,11 @@
-﻿using System;
-using System.Text;
-using LibLogicalAccess;
-using LibLogicalAccess.Reader;
+﻿using LibLogicalAccess;
 using LibLogicalAccess.Card;
+using LibLogicalAccess.Reader;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-/*
- ************************************************************************
- *                                                                      *
- *  LibLogicalAccess RFID library basic sample in DotNet (C#).          *
- *  It's the same code design in Delphi and Visual Basic.               *
- *  The C++ native version is compliant with Windows and Linux          *
- *                                                                      *
- ************************************************************************
-*/
-
-namespace basic
+namespace liblogicalaccess_swig2._0
 {
     class Program
     {
@@ -26,7 +17,7 @@ namespace basic
 
                 // Explicitly use the PC/SC Reader Provider.
                 ReaderProvider readerProvider = manager.getReaderProvider("PCSC");
-                
+
                 // Create the default reader unit. On PC/SC, we will listen on all readers.
                 ReaderUnit readerUnit = readerProvider.createReaderUnit();
 
@@ -42,15 +33,16 @@ namespace basic
                 {
                     Console.WriteLine("Waiting 15 seconds for a card insertion...");
                     if (readerUnit.waitInsertion(15000))
-                    {                       
+                    {
                         if (readerUnit.connect())
                         {
                             Console.WriteLine("Card inserted on reader '{0}.'", readerUnit.getConnectedName());
 
                             Chip chip = readerUnit.getSingleChip();
                             Console.WriteLine("\tCSN: {0}", UCharCollectionToHexString(chip.getChipIdentifier()));
+                            Console.WriteLine("\tChip Name: {0}", chip.getCardType());
 
-                            
+
 
                             readerUnit.disconnect();
                         }
@@ -58,7 +50,7 @@ namespace basic
                         Console.WriteLine("Logical automatic card removal in 15 seconds...");
                         if (!readerUnit.waitRemoval(15000))
                         {
-                            Console.WriteLine("Card removal forced."); 
+                            Console.WriteLine("Card removal forced.");
                         }
 
                         Console.WriteLine("Card removed.");

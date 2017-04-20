@@ -7,9 +7,8 @@
 
 %typemap(csimports) SWIGTYPE
 %{
-using LibLogicalAccess;
+	using LibLogicalAccess;
 %}
-
 
 /* Core */
 
@@ -298,7 +297,7 @@ using namespace logicalaccess;
 
 %}
 
-%ignore logicalaccess::Commands;
+//%ignore logicalaccess::Commands;
 %ignore pcsc_share_mode_to_string;
 %ignore pcsc_protocol_to_string;
 
@@ -447,123 +446,39 @@ using namespace logicalaccess;
 %template(LocationNodeCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;
 
 %pragma(csharp) imclasscode=%{
-  public static Chip createChip(System.IntPtr cPtr, bool owner)
-  {
-    Chip ret = null;
-    if (cPtr == System.IntPtr.Zero) {
-      return ret;
-    }
-	string ct = ($modulePINVOKE.Chip_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
-    switch (ct) {
-       case "CPS3":
-	     ret = new CPS3Chip(cPtr, owner);
-	     break;
-	   case "DESFire":
-	     ret = new DESFireChip(cPtr, owner);
-	     break;
-	   case "DESFireEV1":
-	     ret = new DESFireEV1Chip(cPtr, owner);
-		 break;
-	   case "EM4102":
-	     ret = new EM4102Chip(cPtr, owner);
-		 break;
-	   case "EM4135":
-	     ret = new EM4135Chip(cPtr, owner);
-		 break;
-	   case "EPass":
-	     ret = new EPassChip(cPtr, owner);
-		 break;
-	   case "FeliCa":
-	     ret = new FeliCaChip(cPtr, owner);
-		 break;
-	   case "GenericTag":
-	     ret = new GenericTagChip(cPtr, owner);
-		 break;
-	   case "iCode1":
-	     ret = new ICode1Chip(cPtr, owner);
-		 break;
-	   case "iCode2":
-	     ret = new ICode2Chip(cPtr, owner);
-		 break;
-	   case "Indala":
-	     ret = new IndalaChip(cPtr, owner);
-		 break;
-	   case "InfineonMYD":
-	     ret = new InfineonMYDChip(cPtr, owner);
-		 break;
-	   case "ISO7816":
-	     ret = new ISO7816Chip(cPtr, owner);
-		 break;
-	   case "ISO15693":
-	     ret = new ISO15693Chip(cPtr, owner);
-		 break;
-	   case "LegicPrime":
-	     ret = new LegicPrimeChip(cPtr, owner);
-		 break;
-	   case "Mifare":
-	     ret = new MifareChip(cPtr, owner);
-		 break;
-	   case "Mifare1K":
-	     ret = new Mifare1KChip(cPtr, owner);
-		 break;
-	   case "Mifare4K":
-	     ret = new Mifare4KChip(cPtr, owner);
-		 break;
-	   case "MifarePlus":
-	   case "MifarePlus2K":
-	   case "MifarePlus4K":
-	     ret = new MifarePlusChip(cPtr, owner);
-		 break;
-	   case "MifarePlus_SL0_2K":
-	     ret = new MifarePlusSL0_2kChip(cPtr, owner);
-		 break;
-	   case "MifarePlus_SL0_4K":
-	     ret = new MifarePlusSL0_4kChip(cPtr, owner);
-		 break;
-	   case "MifarePlusSL3":
-	   case "MifarePlus_SL3_2K":
-	   case "MifarePlus_SL3_4K":
-	     ret = new MifarePlusSL3Chip(cPtr, owner);
-		 break;
-	   case "MifareUltralight":
-	     ret = new MifareUltralightChip(cPtr, owner);
-		 break;
-	   case "MifareUltralightC":
-	     ret = new MifareUltralightCChip(cPtr, owner);
-		 break;
-	   case "Prox":
-	     ret = new ProxChip(cPtr, owner);
-		 break;
-	   case "ProxLite":
-	     ret = new ProxLiteChip(cPtr, owner);
-		 break;
-	   case "SAM":
-	     ret = new SAMChip(cPtr, owner);
-		 break;
-	   case "SAM_AV1":
-	     ret = new SAMAV1Chip(cPtr, owner);
-		 break;
-	   case "SAM_AV2":
-	     ret = new SAMAV2Chip(cPtr, owner);
-		 break;
-	   case "SmartFrame":
-	     ret = new SmartFrameChip(cPtr, owner);
-		 break;
-	   case "StmLri512":
-	     ret = new StmLri512Chip(cPtr, owner);
-		 break;
-	   case "TagIt":
-	     ret = new TagItChip(cPtr, owner);
-		 break;
-	   case "Topaz":
-	     ret = new TopazChip(cPtr, owner);
-		 break;
-	   case "Twic":
-	     ret = new TwicChip(cPtr, owner);
-		 break;
-      }
-      return ret;
-    }
+	public static System.Collections.Generic.Dictionary<string, System.Type> chipDictionary;
+
+	public static System.Collections.Generic.Dictionary<string, System.Type> createDictionary<T>() where T : class
+	{
+        System.Collections.Generic.Dictionary<string, System.Type> dictionary = new System.Collections.Generic.Dictionary<string, System.Type>();
+        foreach (System.Type type in
+            System.Reflection.Assembly.GetAssembly(typeof(T)).GetTypes())
+        {
+            if (type.IsClass && !type.IsAbstract && type.IsSubclassOf(typeof(T)))
+            {
+                string tmp = type.ToString().Split('.')[type.ToString().Split('.').Length - 1].Substring(0, type.ToString().Split('.')[type.ToString().Split('.').Length - 1].IndexOf(typeof(T).Name));
+                dictionary.Add(tmp, type);
+            }
+        }
+        return dictionary;
+	}
+
+	public static Chip	createChip(System.IntPtr cPtr, bool owner)
+	{
+		Chip ret = null;
+		if (cPtr == System.IntPtr.Zero) {
+		  return ret;
+		}
+		string ct = (liblogicalaccess_cardPINVOKE.Chip_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (chipDictionary == null)
+			chipDictionary = createDictionary<Chip>();
+        if (chipDictionary.ContainsKey(ct))
+        {
+            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            ret = (Chip)System.Activator.CreateInstance(chipDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
+        }
+		return ret;
+	}
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
@@ -574,63 +489,82 @@ using namespace logicalaccess;
 }
 
 %pragma(csharp) imclasscode=%{
-  public static Location createLocation(System.IntPtr cPtr, bool owner)
-  {
-    Location ret = null;
-    if (cPtr == System.IntPtr.Zero) {
-      return ret;
-    }
-	string ct = ($modulePINVOKE.Location_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
-    switch (ct) {
-       case "CPS3":
-	     ret = new CPS3Location(cPtr, owner);
-	     break;
-	   case "DESFire":
-	     ret = new DESFireLocation(cPtr, owner);
-	     break;
-	   case "DESFireEV1":
-	     ret = new DESFireEV1Location(cPtr, owner);
-		 break;
-	   case "FeliCa":
-	     ret = new FeliCaLocation(cPtr, owner);
-		 break;
-	   case "ISO7816":
-	     ret = new ISO7816Location(cPtr, owner);
-		 break;
-	   case "ISO15693":
-	     ret = new ISO15693Location(cPtr, owner);
-		 break;
-	   case "Mifare":
-	   case "Mifare1K":
-	   case "Mifare4K":
-	     ret = new MifareLocation(cPtr, owner);
-		 break;
-	   case "MifarePlus":
-	   case "MifarePlus2K":
-	   case "MifarePlus4K":
-	   case "MifarePlus_SL0_2K":
-	   case "MifarePlus_SL0_4K":
-	   case "MifarePlusSL3":
-	   case "MifarePlus_SL3_2K":
-	   case "MifarePlus_SL3_4K":
-	     ret = new MifarePlusLocation(cPtr, owner);
-		 break;
-	   case "MifareUltralight":
-	   case "MifareUltralightC":
-	     ret = new MifareUltralightLocation(cPtr, owner);
-		 break;
-	   case "Prox":
-	     ret = new ProxLocation(cPtr, owner);
-		 break;
-	   case "Topaz":
-	     ret = new TopazLocation(cPtr, owner);
-		 break;
-	   case "Twic":
-	     ret = new TwicLocation(cPtr, owner);
-		 break;
-      }
-      return ret;
-    }
+//  public static Location createLocation(System.IntPtr cPtr, bool owner)
+//  {
+//    Location ret = null;
+//    if (cPtr == System.IntPtr.Zero) {
+//      return ret;
+//    }
+//	string ct = ($modulePINVOKE.Location_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+//    switch (ct) {
+//       case "CPS3":
+//	     ret = new CPS3Location(cPtr, owner);
+//	     break;
+//	   case "DESFire":
+//	     ret = new DESFireLocation(cPtr, owner);
+//	     break;
+//	   case "DESFireEV1":
+//	     ret = new DESFireEV1Location(cPtr, owner);
+//		 break;
+//	   case "FeliCa":
+//	     ret = new FeliCaLocation(cPtr, owner);
+//		 break;
+//	   case "ISO7816":
+//	     ret = new ISO7816Location(cPtr, owner);
+//		 break;
+//	   case "ISO15693":
+//	     ret = new ISO15693Location(cPtr, owner);
+//		 break;
+//	   case "Mifare":
+//	   case "Mifare1K":
+//	   case "Mifare4K":
+//	     ret = new MifareLocation(cPtr, owner);
+//		 break;
+//	   case "MifarePlus":
+//	   case "MifarePlus2K":
+//	   case "MifarePlus4K":
+//	   case "MifarePlus_SL0_2K":
+//	   case "MifarePlus_SL0_4K":
+//	   case "MifarePlusSL3":
+//	   case "MifarePlus_SL3_2K":
+//	   case "MifarePlus_SL3_4K":
+//	     ret = new MifarePlusLocation(cPtr, owner);
+//		 break;
+//	   case "MifareUltralight":
+//	   case "MifareUltralightC":
+//	     ret = new MifareUltralightLocation(cPtr, owner);
+//		 break;
+//	   case "Prox":
+//	     ret = new ProxLocation(cPtr, owner);
+//		 break;
+//	   case "Topaz":
+//	     ret = new TopazLocation(cPtr, owner);
+//		 break;
+//	   case "Twic":
+//	     ret = new TwicLocation(cPtr, owner);
+//		 break;
+//      }
+//      return ret;
+//    }
+	
+	public static System.Collections.Generic.Dictionary<string, System.Type> locationDictionary;
+
+	public static Location	createLocation(System.IntPtr cPtr, bool owner)
+	{
+		Location ret = null;
+		if (cPtr == System.IntPtr.Zero) {
+		  return ret;
+		}
+		string ct = ($modulePINVOKE.Location_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (locationDictionary == null)
+			locationDictionary = createDictionary<Location>();
+        if (locationDictionary.ContainsKey(ct))
+        {
+            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            ret = (Location)System.Activator.CreateInstance(locationDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
+        }
+		return ret;
+	}
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
@@ -641,38 +575,57 @@ using namespace logicalaccess;
 }
 
 %pragma(csharp) imclasscode=%{
-  public static AccessInfo createAccessInfo(System.IntPtr cPtr, bool owner)
-  {
-    AccessInfo ret = null;
-    if (cPtr == System.IntPtr.Zero) {
-      return ret;
-    }
-	string ct = ($modulePINVOKE.AccessInfo_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
-    switch (ct) {
-	   case "DESFire":
-	   case "DESFireEV1":
-	     ret = new DESFireAccessInfo(cPtr, owner);
-	     break;
-	   case "EPass":
-	     ret = new EPassAccessInfo(cPtr, owner);
-		 break;
-	   case "Mifare":
-	   case "Mifare1K":
-	   case "Mifare4K":
-	     ret = new MifareAccessInfo(cPtr, owner);
-		 break;
-	   case "MifareUltralight":
-	     ret = new MifareUltralightAccessInfo(cPtr, owner);
-		 break;
-	   case "MifareUltralightC":
-	     ret = new MifareUltralightCAccessInfo(cPtr, owner);
-		 break;
-	   case "Topaz":
-	     ret = new TopazAccessInfo(cPtr, owner);
-		 break;
-      }
-      return ret;
-    }
+//  public static AccessInfo createAccessInfo(System.IntPtr cPtr, bool owner)
+//  {
+//    AccessInfo ret = null;
+//    if (cPtr == System.IntPtr.Zero) {
+//      return ret;
+//    }
+//	string ct = ($modulePINVOKE.AccessInfo_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+//    switch (ct) {
+//	   case "DESFire":
+//	   case "DESFireEV1":
+//	     ret = new DESFireAccessInfo(cPtr, owner);
+//	     break;
+//	   case "EPass":
+//	     ret = new EPassAccessInfo(cPtr, owner);
+//		 break;
+//	   case "Mifare":
+//	   case "Mifare1K":
+//	   case "Mifare4K":
+//	     ret = new MifareAccessInfo(cPtr, owner);
+//		 break;
+//	   case "MifareUltralight":
+//	     ret = new MifareUltralightAccessInfo(cPtr, owner);
+//		 break;
+//	   case "MifareUltralightC":
+//	     ret = new MifareUltralightCAccessInfo(cPtr, owner);
+//		 break;
+//	   case "Topaz":
+//	     ret = new TopazAccessInfo(cPtr, owner);
+//		 break;
+//      }
+//      return ret;
+//    }
+
+	public static System.Collections.Generic.Dictionary<string, System.Type> accessInfoDictionary;
+
+	public static AccessInfo	createAccessInfo(System.IntPtr cPtr, bool owner)
+	{
+		AccessInfo ret = null;
+		if (cPtr == System.IntPtr.Zero) {
+		  return ret;
+		}
+		string ct = ($modulePINVOKE.AccessInfo_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (accessInfoDictionary == null)
+			accessInfoDictionary = createDictionary<AccessInfo>();
+        if (accessInfoDictionary.ContainsKey(ct))
+        {
+            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            ret = (AccessInfo)System.Activator.CreateInstance(accessInfoDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
+        }
+		return ret;
+	}
 %}
 
 %typemap(csout, excode=SWIGEXCODE)

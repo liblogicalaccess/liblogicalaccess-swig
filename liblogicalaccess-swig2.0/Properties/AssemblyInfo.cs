@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LibLogicalAccess")]
+[assembly: AssemblyTitle("liblogicalaccess-swig2.0")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ISLOG")]
-[assembly: AssemblyProduct("LibLogicalAccess")]
-[assembly: AssemblyCopyright("Copyright © ISLOG 2016")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("liblogicalaccess-swig2.0")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5fd8d968-9d61-4602-810d-a1f867907793")]
+[assembly: Guid("a2691c31-30ca-47ba-b773-b110eb357653")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.83.0.0")]
-[assembly: AssemblyFileVersion("1.83.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
