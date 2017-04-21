@@ -17,12 +17,12 @@ def	parsesharedptr(category, content):
 		while nbr > 0:
 			strmatch += str('>')
 			nbr -= 1
-		strmatch = "logicalaccess::" + strmatch	
+		strmatch = "logicalaccess::" + strmatch
 		if not (category, strmatch) in shared_ptr:
 			shared_ptr.append((category, strmatch))
 	
 
-def processing(path, category):
+def	processing(path, category):
 	if len(glob.glob(path, recursive=True)) == 0:
 		print ("[ERROR]: nothing found in " + path)
 	for filename in glob.glob(path, recursive=True):
@@ -32,7 +32,7 @@ def processing(path, category):
 			filename = filename.replace("\\", "/").split("logicalaccess")[-1]
 			include.append((category, includebase.replace("{0}", filename)))
 
-def lookdata(curcat, path):
+def	lookdata(curcat, path):
 	with open(path, "r") as f:
 		lines = f.readlines()
 		# Shared_ptr

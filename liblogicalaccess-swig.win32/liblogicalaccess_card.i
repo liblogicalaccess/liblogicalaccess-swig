@@ -304,6 +304,16 @@ using namespace logicalaccess;
 %ignore pcsc_share_mode_to_string;
 %ignore pcsc_protocol_to_string;
 
+%import <logicalaccess/key.hpp>
+%import <logicalaccess/cards/location.hpp>
+%import <logicalaccess/cards/keystorage.hpp>
+%import <logicalaccess/cards/keydiversification.hpp>
+
+%rename(IsEqual) operator==;
+%rename(IsDifferent) operator!=;
+%rename(CompareTo) operator<;
+%ignore operator<<;
+
 %include "liblogicalaccess_cardservice.i"
 
 %include <logicalaccess/key.hpp>

@@ -15,4 +15,4 @@ liblogicalaccess-swig2.0/Generated/*.cs
 liblogicalaccess-swig2.0/Generated/Card/*.cs
 liblogicalaccess-swig2.0/Generated/Reader/*.cs
 *.sdf
-*.vcxproj
+*opensdf

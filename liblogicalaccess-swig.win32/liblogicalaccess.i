@@ -17,6 +17,15 @@
 %include <std_shared_ptr.i>
 %include <exception.i>
 
+/*****WARNING SECTION*****/
+
+#pragma SWIG nowarn=516,401,833
+
+//Ignored Warning:
+// - 516: Overloaded method ignored 
+// - 401: Nothing known about class 'name'. Ignored. 
+// - 833: Warning for classname: Base baseclass ignored. Multiple inheritance is not supported in C#. (C#). 
+
 /*****IGNORE SECTION*****/
 
 %ignore newDynLibrary;
