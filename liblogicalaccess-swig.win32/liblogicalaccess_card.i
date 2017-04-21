@@ -10,7 +10,7 @@
 	using LibLogicalAccess;
 %}
 
-/* Core */
+/* Shared_ptr */
 
 %shared_ptr(logicalaccess::KeyDiversification);
 %shared_ptr(logicalaccess::KeyStorage);
@@ -27,8 +27,6 @@
 %shared_ptr(logicalaccess::TripleDESKey);
 %shared_ptr(logicalaccess::AES128Key);
 %shared_ptr(logicalaccess::HMAC1Key);
-
-/* Plugins */
 
 %shared_ptr(logicalaccess::CPS3Location);
 %shared_ptr(logicalaccess::CPS3Commands);
@@ -154,11 +152,15 @@
 %shared_ptr(logicalaccess::HIDiClass32KS_16_8x2Chip);
 %shared_ptr(logicalaccess::HIDiClass32KS_16_16Chip);
 
+/* END_Shared_ptr */
+
 typedef std::shared_ptr<logicalaccess::Chip> ChipPtr;
 typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
+
 %{
-/* Core */
+
+/* Additional_include */
 
 #include <logicalaccess/cards/commands.hpp>
 #include <logicalaccess/cards/chip.hpp>
@@ -172,7 +174,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 #include <logicalaccess/cards/accessinfo.hpp>
 #include <logicalaccess/cards/locationnode.hpp>
 
-/* Plugins */
 
 #include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
 #include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
@@ -293,6 +294,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 #include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_8x2chip.hpp>
 #include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_16chip.hpp>
 
+/* END_Additional_include */
+
 using namespace logicalaccess;
 
 %}
@@ -301,27 +304,24 @@ using namespace logicalaccess;
 %ignore pcsc_share_mode_to_string;
 %ignore pcsc_protocol_to_string;
 
-/* original header files */
-%include <logicalaccess/cards/commands.hpp>
-%include <logicalaccess/cards/location.hpp>
-%include <logicalaccess/cards/accessinfo.hpp>
-%include <logicalaccess/cards/locationnode.hpp>
-
 %include "liblogicalaccess_cardservice.i"
 
+%include <logicalaccess/key.hpp>
+
+/* Include_section */
+
+%include <logicalaccess/cards/commands.hpp>
 %include <logicalaccess/cards/chip.hpp>
-%include <logicalaccess/cards/keydiversification.hpp>
-%include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/computermemorykeystorage.hpp>
 %include <logicalaccess/cards/iksstorage.hpp>
 %include <logicalaccess/cards/readermemorykeystorage.hpp>
 %include <logicalaccess/cards/samkeystorage.hpp>
-%include <logicalaccess/key.hpp>
 %include <logicalaccess/cards/tripledeskey.hpp>
 %include <logicalaccess/cards/aes128key.hpp>
 %include <logicalaccess/cards/hmac1key.hpp>
+%include <logicalaccess/cards/accessinfo.hpp>
+%include <logicalaccess/cards/locationnode.hpp>
 
-/* Plugins */
 
 %include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
 %include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
@@ -441,6 +441,8 @@ using namespace logicalaccess;
 %include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_16chip.hpp>
 %include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_8x2chip.hpp>
 %include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_16chip.hpp>
+
+/* END_Include_section */
 
 %template(ChipCollection) std::vector<std::shared_ptr<logicalaccess::Chip> >;
 %template(LocationNodeCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;

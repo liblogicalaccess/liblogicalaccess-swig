@@ -11,7 +11,7 @@
 	using LibLogicalAccess.Card;
 %}
 
-/* Core */
+/* Shared_ptr */
 
 %shared_ptr(logicalaccess::ReaderConfiguration);
 %shared_ptr(logicalaccess::ReaderProvider);
@@ -20,8 +20,6 @@
 %shared_ptr(logicalaccess::LCDDisplay);
 %shared_ptr(logicalaccess::LEDBuzzerDisplay);
 %shared_ptr(logicalaccess::DataTransport);
-
-/* Plugins */
 
 %shared_ptr(logicalaccess::A3MLGM5600ReaderProvider);
 %shared_ptr(logicalaccess::A3MLGM5600ReaderUnit);
@@ -117,12 +115,14 @@
 %shared_ptr(logicalaccess::NFCReaderUnitConfiguration);
 %shared_ptr(logicalaccess::NFCDataTransport);
 
+/* END_Shared_ptr */
+
 typedef std::shared_ptr<logicalaccess::ReaderProvider> ReaderProviderPtr;
 typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
 
-
 %{
-/* Core */
+
+/* Additional_include */
 
 #include <logicalaccess/readerproviders/readerconfiguration.hpp>
 #include <logicalaccess/readerproviders/readerprovider.hpp>
@@ -130,8 +130,6 @@ typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
 #include <logicalaccess/readerproviders/lcddisplay.hpp>
 #include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
 #include <logicalaccess/readerproviders/datatransport.hpp>
-
-/* Plugins */
 
 #include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerprovider.hpp>
 #include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunitconfiguration.hpp>
@@ -227,6 +225,8 @@ typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
 #include <logicalaccess/plugins/readers/nfc/nfcdatatransport.hpp>
 #include <logicalaccess/plugins/readers/nfc/nfcreaderunit.hpp>
 
+/* END_Additional_include */
+
 using namespace logicalaccess;
 
 %}
@@ -234,16 +234,17 @@ using namespace logicalaccess;
 %ignore logicalaccess::ReaderCardAdapter;
 %ignore logicalaccess::PCSCReaderCardAdapter;
 
-/* original header files */
+%include "liblogicalaccess_readerservice.i"
+
+
+/* Include_section */
+
+%include <logicalaccess/readerproviders/readerconfiguration.hpp>
+%include <logicalaccess/readerproviders/readerprovider.hpp>
 %include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
 %include <logicalaccess/readerproviders/lcddisplay.hpp>
 %include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
-
-%include "liblogicalaccess_readerservice.i"
-
-%include <logicalaccess/readerproviders/readerunit.hpp>
-%include <logicalaccess/readerproviders/readerprovider.hpp>
-%include <logicalaccess/readerproviders/readerconfiguration.hpp>
+%include <logicalaccess/readerproviders/datatransport.hpp>
 
 %include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerprovider.hpp>
 %include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunitconfiguration.hpp>
@@ -333,6 +334,13 @@ using namespace logicalaccess;
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderunit.hpp>
+
+%include <logicalaccess/plugins/readers/nfc/nfcreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/nfc/nfcreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/nfc/nfcdatatransport.hpp>
+%include <logicalaccess/plugins/readers/nfc/nfcreaderunit.hpp>
+
+/* END_Include_section */
 
 
 %template(ReaderUnitCollection) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
