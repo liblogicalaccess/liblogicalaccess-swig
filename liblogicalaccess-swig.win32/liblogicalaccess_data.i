@@ -5,6 +5,8 @@
 
 %{
 #include <logicalaccess/cards/readercardadapter.hpp>
+#include <logicalaccess/lla_fwd.hpp>
+#include <logicalaccess/techno.hpp>
 #include <stdint.h>
 %}
 
@@ -17,19 +19,37 @@
 %apply unsigned int { size_t }
 %apply long { int64_t }
 %apply unsigned long { uint64_t }
+%apply void *VOID_INT_PTR { SCARDHANDLE, const SCARDHANDLE &, SCARDCONTEXT, const SCARDCONTEXT & }
+%apply void *VOID_INT_PTR { void * }
+%apply bool &OUTPUT { bool & }
+
+%typemap(cstype) size_t* "ref uint"
+%typemap(csin) size_t* %{out $csinput%}  
+%typemap(imtype) size_t* "out uint"
+
+%typemap(cstype) char & "out char"
+%typemap(csin) char & %{out $csinput%}  
+%typemap(imtype) char & "out char"
+
+%typemap(cstype) logicalaccess::STidTamperSwitchBehavior& "out STidTamperSwitchBehavior"
+%typemap(csin) logicalaccess::STidTamperSwitchBehavior& %{out $csinput%}  
+%typemap(imtype) logicalaccess::STidTamperSwitchBehavior& "out STidTamperSwitchBehavior"
 
 %include <std_vector.i>
-namespace std {
-   %template(UCharCollection) vector<unsigned char>;
-   %template(UShortCollection) vector<unsigned short>;
-   %template(UCharCollectionCollection) vector<vector<unsigned char> >;
-   %template(StringCollection) vector<string>;
-   %apply vector<unsigned char> {const vector<unsigned char> &};
-   %apply vector<unsigned char> {vector<uint8_t>};
-   %apply vector<unsigned char> {const vector<uint8_t> &};
-};
 
-typedef std::vector<unsigned char> ByteVector;
+namespace std {
+	%template(UCharCollection) vector<unsigned char>;
+	%template(UShortCollection) vector<unsigned short>;
+	%template(UCharCollectionCollection) vector<vector<unsigned char> >;
+	%template(StringCollection) vector<string>;
+	//%template(UCharCollectionList) list<vector<unsigned char> >;
+	%apply vector<unsigned char> { const vector<unsigned char> & };
+	%apply vector<unsigned char> { vector<uint8_t> };
+	%apply vector<unsigned char> { const vector<uint8_t> & };
+	%apply vector<unsigned char> { ByteVector };
+	%apply vector<unsigned char> { const ByteVector & }
+	//%apply list<vector<unsigned char> > {list<vector<unsigned char> > &}
+};
 
 %shared_ptr(logicalaccess::XmlSerializable);
 %shared_ptr(logicalaccess::DataTransport);
@@ -38,8 +58,6 @@ typedef std::vector<unsigned char> ByteVector;
 
 %ignore logicalaccess::DataTransport::getReaderUnit;
 %ignore logicalaccess::DataTransport::setReaderUnit;
-
-typedef std::shared_ptr<logicalaccess::DataTransport> DataTransportPtr;
 
 namespace std {
     template <class T> class enable_shared_from_this {
@@ -53,6 +71,32 @@ namespace std {
     };
 }
 
+namespace std {
+	template<class Ty> class weak_ptr {
+	public:
+	    typedef Ty element_type;
+	
+	    weak_ptr();
+	    weak_ptr(const weak_ptr&);
+	    template<class Other>
+	        weak_ptr(const weak_ptr<Other>&);
+	    template<class Other>
+	        weak_ptr(const shared_ptr<Other>&);
+	
+	    weak_ptr(const shared_ptr<Ty>&);
+	
+	
+	    void swap(weak_ptr&);
+	    void reset();
+	
+	    long use_count() const;
+	    bool expired() const;
+	    shared_ptr<Ty> lock() const;
+	};
+}
+
+%include <logicalaccess/lla_fwd.hpp>
+%include <logicalaccess/techno.hpp>
 %include <logicalaccess/xmlserializable.hpp>
 %include <logicalaccess/readerproviders/datatransport.hpp>
 %include <logicalaccess/resultchecker.hpp>

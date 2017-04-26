@@ -5,6 +5,118 @@
 
 %import "liblogicalaccess_card.i"
 
+%{
+/* Additional_include */
+
+#include <logicalaccess/readerproviders/readerconfiguration.hpp>
+#include <logicalaccess/readerproviders/readerprovider.hpp>
+#include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
+#include <logicalaccess/readerproviders/lcddisplay.hpp>
+#include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
+#include <logicalaccess/readerproviders/datatransport.hpp>
+
+#include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerprovider.hpp>
+#include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunit.hpp>
+
+#include <logicalaccess/plugins/readers/admitto/admittoreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/admitto/admittoreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/admitto/admittoreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerprovider.hpp>
+#include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerunit.hpp>
+
+#include <logicalaccess/plugins/readers/axesstmclegic/axesstmclegicreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/axesstmclegic/axesstmclegicreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/axesstmclegic/axesstmclegicreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/deister/deisterreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/deister/deisterreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/deister/deisterreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/elatec/elatecreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/elatec/elatecreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/elatec/elatecreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/gigatms/gigatmsreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/gigatms/gigatmsreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/gigatms/gigatmsreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/gunnebo/gunneboreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/gunnebo/gunneboreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/gunnebo/gunneboreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/idondemand/idondemandreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/idondemand/idondemandreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/idondemand/idondemandreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
+#include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
+#include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
+
+#include <logicalaccess/plugins/readers/keyboard/keyboardreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/keyboard/keyboardreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/ok5553/ok5553readerprovider.hpp>
+#include <logicalaccess/plugins/readers/ok5553/ok5553readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/ok5553/ok5553readerunit.hpp>
+
+#include <logicalaccess/plugins/readers/osdp/osdpreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/osdp/osdpreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/osdp/osdpreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/pcsc/pcscreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222lreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikey5427readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
+
+#include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/promag/promagreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/promag/promagreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/rfideas/rfideasreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/rfideas/rfideasreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/rfideas/rfideasreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/rpleth/rplethreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/rpleth/rplethreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/rpleth/rplethdatatransport.hpp>
+#include <logicalaccess/plugins/readers/rpleth/rplethreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/sciel/scielreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/sciel/scielreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/sciel/scielreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/smartid/smartidreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/smartid/smartidreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/smartid/smartidreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/stidprg/stidprgreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/stidprg/stidprgreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/stidprg/stidprgreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/stidstr/stidstrreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/stidstr/stidstrreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/stidstr/stidstrreaderunit.hpp>
+
+#include <logicalaccess/plugins/readers/nfc/nfcreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/nfc/nfcreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/nfc/nfcdatatransport.hpp>
+#include <logicalaccess/plugins/readers/nfc/nfcreaderunit.hpp>
+
+/* END_Additional_include */
+
+using namespace logicalaccess;
+
+%}
+
 %typemap(csimports) SWIGTYPE
 %{
 	using LibLogicalAccess;
@@ -57,8 +169,9 @@
 %shared_ptr(logicalaccess::IdOnDemandReaderUnit);
 %shared_ptr(logicalaccess::IdOnDemandReaderUnitConfiguration);
 
-%shared_ptr(logicalaccess::ISO7816ReaderProvider);
 %shared_ptr(logicalaccess::ISO7816ReaderUnit);
+%shared_ptr(ISO7816ReaderUnit);
+%shared_ptr(logicalaccess::ISO7816ReaderProvider);
 %shared_ptr(logicalaccess::ISO7816ReaderUnitConfiguration);
 
 %shared_ptr(logicalaccess::KeyboardReaderProvider);
@@ -80,6 +193,7 @@
 %shared_ptr(logicalaccess::ACSACR1222LReaderUnitConfiguration);
 %shared_ptr(logicalaccess::Omnikey5427ReaderUnitConfiguration);
 %shared_ptr(logicalaccess::OmnikeyXX21ReaderUnitConfiguration);
+%shared_ptr(logicalaccess::PCSCReaderCardAdapter);
 
 %shared_ptr(logicalaccess::PromagReaderProvider);
 %shared_ptr(logicalaccess::PromagReaderUnit);
@@ -117,134 +231,20 @@
 
 /* END_Shared_ptr */
 
-typedef std::shared_ptr<logicalaccess::ReaderProvider> ReaderProviderPtr;
-typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
-
-%{
-
-/* Additional_include */
-
-#include <logicalaccess/readerproviders/readerconfiguration.hpp>
-#include <logicalaccess/readerproviders/readerprovider.hpp>
-#include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
-#include <logicalaccess/readerproviders/lcddisplay.hpp>
-#include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
-#include <logicalaccess/readerproviders/datatransport.hpp>
-
-#include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerprovider.hpp>
-#include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunit.hpp>
-
-#include <logicalaccess/plugins/readers/admitto/admittoreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/admitto/admittoreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/admitto/admittoreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerprovider.hpp>
-#include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerunit.hpp>
-
-#include <logicalaccess/plugins/readers/axesstmclegic/axesstmclegicreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/axesstmclegic/axesstmclegicreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/axesstmclegic/axesstmclegicreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/deister/deisterreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/deister/deisterreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/deister/deisterreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/elatec/elatecreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/elatec/elatecreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/elatec/elatecreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/gigatms/gigatmsreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/gigatms/gigatmsreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/gigatms/gigatmsreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/gunnebo/gunneboreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/gunnebo/gunneboreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/gunnebo/gunneboreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/idondemand/idondemandreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/idondemand/idondemandreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/idondemand/idondemandreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
-#include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
-
-#include <logicalaccess/plugins/readers/keyboard/keyboardreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/keyboard/keyboardreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/ok5553/ok5553readerprovider.hpp>
-#include <logicalaccess/plugins/readers/ok5553/ok5553readerunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/ok5553/ok5553readerunit.hpp>
-
-#include <logicalaccess/plugins/readers/osdp/osdpreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/osdp/osdpreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/osdp/osdpreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/pcsc/pcscreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
-#include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
-#include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222lreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/pcsc/readers/omnikey5427readerunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
-
-#include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/promag/promagreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/promag/promagreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/rfideas/rfideasreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/rfideas/rfideasreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/rfideas/rfideasreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/rpleth/rplethreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/rpleth/rplethreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/rpleth/rplethdatatransport.hpp>
-#include <logicalaccess/plugins/readers/rpleth/rplethreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/sciel/scielreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/sciel/scielreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/sciel/scielreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/smartid/smartidreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/smartid/smartidreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/smartid/smartidreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/stidprg/stidprgreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/stidprg/stidprgreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/stidprg/stidprgreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/stidstr/stidstrreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/stidstr/stidstrreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/stidstr/stidstrreaderunit.hpp>
-
-#include <logicalaccess/plugins/readers/nfc/nfcreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/nfc/nfcreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/nfc/nfcdatatransport.hpp>
-#include <logicalaccess/plugins/readers/nfc/nfcreaderunit.hpp>
-
-/* END_Additional_include */
-
-using namespace logicalaccess;
-
-%}
-
-%ignore logicalaccess::ReaderCardAdapter;
-%ignore logicalaccess::PCSCReaderCardAdapter;
+//typedef std::shared_ptr<logicalaccess::ReaderProvider> ReaderProviderPtr;
+//typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
 
 %include "liblogicalaccess_readerservice.i"
 
-
 /* Include_section */
 
-%include <logicalaccess/readerproviders/readerconfiguration.hpp>
-%include <logicalaccess/readerproviders/readerprovider.hpp>
 %include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
 %include <logicalaccess/readerproviders/lcddisplay.hpp>
 %include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
-%include <logicalaccess/readerproviders/datatransport.hpp>
+
+%include <logicalaccess/readerproviders/readerunit.hpp>
+%include <logicalaccess/readerproviders/readerprovider.hpp>
+%include <logicalaccess/readerproviders/readerconfiguration.hpp>
 
 %include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerprovider.hpp>
 %include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunitconfiguration.hpp>
@@ -285,6 +285,7 @@ using namespace logicalaccess;
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
+%include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 
 %include <logicalaccess/plugins/readers/keyboard/keyboardreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
@@ -305,6 +306,7 @@ using namespace logicalaccess;
 %include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222lreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikey5427readerunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
 
 %include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/promag/promagreaderunitconfiguration.hpp>
@@ -335,12 +337,8 @@ using namespace logicalaccess;
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderunit.hpp>
 
-%include <logicalaccess/plugins/readers/nfc/nfcreaderprovider.hpp>
-%include <logicalaccess/plugins/readers/nfc/nfcreaderunitconfiguration.hpp>
-%include <logicalaccess/plugins/readers/nfc/nfcdatatransport.hpp>
-%include <logicalaccess/plugins/readers/nfc/nfcreaderunit.hpp>
-
 /* END_Include_section */
 
-
 %template(ReaderUnitCollection) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
+//%template(ChipPtrCollection) std::list<std::shared_ptr<Chip> >;
+%template(ReaderUnitWeakPtr) std::weak_ptr<ReaderUnit>;

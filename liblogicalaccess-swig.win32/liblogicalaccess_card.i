@@ -10,7 +10,150 @@
 	using LibLogicalAccess;
 %}
 
+%{
+
+/* Additional_include */
+
+#include <logicalaccess/cards/commands.hpp>
+#include <logicalaccess/cards/chip.hpp>
+#include <logicalaccess/cards/computermemorykeystorage.hpp>
+#include <logicalaccess/cards/iksstorage.hpp>
+#include <logicalaccess/cards/readermemorykeystorage.hpp>
+#include <logicalaccess/cards/samkeystorage.hpp>
+#include <logicalaccess/cards/tripledeskey.hpp>
+#include <logicalaccess/cards/aes128key.hpp>
+#include <logicalaccess/cards/hmac1key.hpp>
+#include <logicalaccess/cards/accessinfo.hpp>
+#include <logicalaccess/cards/locationnode.hpp>
+
+#include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
+#include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
+#include <logicalaccess/plugins/cards/iso7816/iso7816chip.hpp>
+
+#include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
+#include <logicalaccess/plugins/cards/iso15693/iso15693commands.hpp>
+#include <logicalaccess/plugins/cards/iso15693/iso15693chip.hpp>
+
+#include <logicalaccess/plugins/cards/cps3/cps3location.hpp>
+#include <logicalaccess/plugins/cards/cps3/cps3commands.hpp>
+#include <logicalaccess/plugins/cards/cps3/cps3chip.hpp>
+
+#include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
+#include <logicalaccess/plugins/cards/desfire/nxpkeydiversification.hpp>
+#include <logicalaccess/plugins/cards/desfire/nxpav1keydiversification.hpp>
+#include <logicalaccess/plugins/cards/desfire/nxpav2keydiversification.hpp>
+#include <logicalaccess/plugins/cards/desfire/omnitechkeydiversification.hpp>
+#include <logicalaccess/plugins/cards/desfire/sagemkeydiversification.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>
+
+#include <logicalaccess/plugins/cards/em4102/em4102chip.hpp>
+
+#include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
+
+#include <logicalaccess/plugins/cards/epass/epassaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
+#include <logicalaccess/plugins/cards/epass/epasschip.hpp>
+
+#include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
+#include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
+#include <logicalaccess/plugins/cards/felica/felicachip.hpp>
+
+#include <logicalaccess/plugins/cards/generictag/generictagchip.hpp>
+
+#include <logicalaccess/plugins/cards/icode1/icode1chip.hpp>
+
+#include <logicalaccess/plugins/cards/icode2/icode2chip.hpp>
+
+#include <logicalaccess/plugins/cards/indala/indalachip.hpp>
+
+#include <logicalaccess/plugins/cards/infineonmyd/infineonmydchip.hpp>
+
+#include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
+
+#include <logicalaccess/plugins/cards/mifare/mifarelocation.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifarekey.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifare1kchip.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifare4kchip.hpp>
+
+#include <logicalaccess/plugins/cards/mifareplus/mifarepluslocation.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplusaccessinfo_sl1.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplussl0commands.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplussl1commands.hpp>
+//#include <logicalaccess/plugins/cards/mifareplus/mifareplussl3commands.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifarepluschip.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplussl0chip.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplussl1chip.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplussl3chip.hpp>
+
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightlocation.hpp>
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcommands.hpp>
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightccommands.hpp>
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightchip.hpp>
+#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcchip.hpp>
+
+#include <logicalaccess/plugins/cards/prox/proxlocation.hpp>
+#include <logicalaccess/plugins/cards/prox/proxchip.hpp>
+
+#include <logicalaccess/plugins/cards/proxlite/proxlitechip.hpp>
+
+#include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
+#include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
+#include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
+#include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
+#include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
+#include <logicalaccess/plugins/cards/samav2/samchip.hpp>
+#include <logicalaccess/plugins/cards/samav2/samav1chip.hpp>
+#include <logicalaccess/plugins/cards/samav2/samav2chip.hpp>
+
+#include <logicalaccess/plugins/cards/smartframe/smartframechip.hpp>
+
+#include <logicalaccess/plugins/cards/stmlri512/stmlri512chip.hpp>
+
+#include <logicalaccess/plugins/cards/tagit/tagitcommands.hpp>
+#include <logicalaccess/plugins/cards/tagit/tagitchip.hpp>
+
+#include <logicalaccess/plugins/cards/topaz/topazlocation.hpp>
+#include <logicalaccess/plugins/cards/topaz/topazaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/topaz/topazcommands.hpp>
+#include <logicalaccess/plugins/cards/topaz/topazchip.hpp>
+
+#include <logicalaccess/plugins/cards/twic/twiclocation.hpp>
+#include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
+#include <logicalaccess/plugins/cards/twic/twicchip.hpp>
+
+#include <logicalaccess/plugins/cards/iclass/hidiclasslocation.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclasskey.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclassaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclasschip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass2kschip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass8x2kschip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass16kschip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_8x2chip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_16chip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_8x2chip.hpp>
+#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_16chip.hpp>
+
+/* END_Additional_include */
+
+using namespace logicalaccess;
+
+%}
+
 /* Shared_ptr */
+
+%shared_ptr(logicalaccess::AccessInfo);
 
 %shared_ptr(logicalaccess::KeyDiversification);
 %shared_ptr(logicalaccess::KeyStorage);
@@ -23,7 +166,6 @@
 %shared_ptr(logicalaccess::Chip);
 %shared_ptr(logicalaccess::LocationNode);
 %shared_ptr(logicalaccess::Location);
-%shared_ptr(logicalaccess::AccessInfo);
 %shared_ptr(logicalaccess::TripleDESKey);
 %shared_ptr(logicalaccess::AES128Key);
 %shared_ptr(logicalaccess::HMAC1Key);
@@ -157,157 +299,9 @@
 typedef std::shared_ptr<logicalaccess::Chip> ChipPtr;
 typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
-
-%{
-
-/* Additional_include */
-
-#include <logicalaccess/cards/commands.hpp>
-#include <logicalaccess/cards/chip.hpp>
-#include <logicalaccess/cards/computermemorykeystorage.hpp>
-#include <logicalaccess/cards/iksstorage.hpp>
-#include <logicalaccess/cards/readermemorykeystorage.hpp>
-#include <logicalaccess/cards/samkeystorage.hpp>
-#include <logicalaccess/cards/tripledeskey.hpp>
-#include <logicalaccess/cards/aes128key.hpp>
-#include <logicalaccess/cards/hmac1key.hpp>
-#include <logicalaccess/cards/accessinfo.hpp>
-#include <logicalaccess/cards/locationnode.hpp>
-
-
-#include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
-#include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
-#include <logicalaccess/plugins/cards/iso7816/iso7816chip.hpp>
-
-#include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
-#include <logicalaccess/plugins/cards/iso15693/iso15693commands.hpp>
-#include <logicalaccess/plugins/cards/iso15693/iso15693chip.hpp>
-
-#include <logicalaccess/plugins/cards/cps3/cps3location.hpp>
-#include <logicalaccess/plugins/cards/cps3/cps3commands.hpp>
-#include <logicalaccess/plugins/cards/cps3/cps3chip.hpp>
-
-#include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
-#include <logicalaccess/plugins/cards/desfire/nxpkeydiversification.hpp>
-#include <logicalaccess/plugins/cards/desfire/nxpav1keydiversification.hpp>
-#include <logicalaccess/plugins/cards/desfire/nxpav2keydiversification.hpp>
-#include <logicalaccess/plugins/cards/desfire/omnitechkeydiversification.hpp>
-#include <logicalaccess/plugins/cards/desfire/sagemkeydiversification.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>
-
-#include <logicalaccess/plugins/cards/em4102/em4102chip.hpp>
-
-#include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
-
-#include <logicalaccess/plugins/cards/epass/epassaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
-#include <logicalaccess/plugins/cards/epass/epasschip.hpp>
-
-#include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
-#include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
-#include <logicalaccess/plugins/cards/felica/felicachip.hpp>
-
-#include <logicalaccess/plugins/cards/generictag/generictagchip.hpp>
-
-#include <logicalaccess/plugins/cards/icode1/icode1chip.hpp>
-
-#include <logicalaccess/plugins/cards/icode2/icode2chip.hpp>
-
-#include <logicalaccess/plugins/cards/indala/indalachip.hpp>
-
-#include <logicalaccess/plugins/cards/infineonmyd/infineonmydchip.hpp>
-
-#include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
-
-#include <logicalaccess/plugins/cards/mifare/mifarelocation.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifarekey.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifare1kchip.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifare4kchip.hpp>
-
-#include <logicalaccess/plugins/cards/mifareplus/mifarepluslocation.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifareplusaccessinfo_sl1.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifareplussl0commands.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifareplussl1commands.hpp>
-//#include <logicalaccess/plugins/cards/mifareplus/mifareplussl3commands.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifarepluschip.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifareplussl0chip.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifareplussl1chip.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifareplussl3chip.hpp>
-
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightlocation.hpp>
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcommands.hpp>
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightccommands.hpp>
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightchip.hpp>
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcchip.hpp>
-
-#include <logicalaccess/plugins/cards/prox/proxlocation.hpp>
-#include <logicalaccess/plugins/cards/prox/proxchip.hpp>
-
-#include <logicalaccess/plugins/cards/proxlite/proxlitechip.hpp>
-
-#include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
-#include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
-#include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
-#include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
-#include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
-#include <logicalaccess/plugins/cards/samav2/samchip.hpp>
-#include <logicalaccess/plugins/cards/samav2/samav1chip.hpp>
-#include <logicalaccess/plugins/cards/samav2/samav2chip.hpp>
-
-#include <logicalaccess/plugins/cards/smartframe/smartframechip.hpp>
-
-#include <logicalaccess/plugins/cards/stmlri512/stmlri512chip.hpp>
-
-#include <logicalaccess/plugins/cards/tagit/tagitcommands.hpp>
-#include <logicalaccess/plugins/cards/tagit/tagitchip.hpp>
-
-#include <logicalaccess/plugins/cards/topaz/topazlocation.hpp>
-#include <logicalaccess/plugins/cards/topaz/topazaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/topaz/topazcommands.hpp>
-#include <logicalaccess/plugins/cards/topaz/topazchip.hpp>
-
-#include <logicalaccess/plugins/cards/twic/twiclocation.hpp>
-#include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
-#include <logicalaccess/plugins/cards/twic/twicchip.hpp>
-
-#include <logicalaccess/plugins/cards/iclass/hidiclasslocation.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclasskey.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclassaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclasschip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass2kschip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass8x2kschip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass16kschip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_8x2chip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_16chip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_8x2chip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_16chip.hpp>
-
-/* END_Additional_include */
-
-using namespace logicalaccess;
-
-%}
-
 //%ignore logicalaccess::Commands;
 %ignore pcsc_share_mode_to_string;
 %ignore pcsc_protocol_to_string;
-
-%import <logicalaccess/key.hpp>
-%import <logicalaccess/cards/location.hpp>
-%import <logicalaccess/cards/keystorage.hpp>
-%import <logicalaccess/cards/keydiversification.hpp>
 
 %rename(IsEqual) operator==;
 %rename(IsDifferent) operator!=;
@@ -316,22 +310,26 @@ using namespace logicalaccess;
 
 %include "liblogicalaccess_cardservice.i"
 
-%include <logicalaccess/key.hpp>
-
 /* Include_section */
 
 %include <logicalaccess/cards/commands.hpp>
+%include <logicalaccess/cards/location.hpp>
+%include <logicalaccess/cards/accessinfo.hpp>
+%include <logicalaccess/cards/locationnode.hpp>
+
 %include <logicalaccess/cards/chip.hpp>
+%include <logicalaccess/cards/keydiversification.hpp>
+%include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/computermemorykeystorage.hpp>
 %include <logicalaccess/cards/iksstorage.hpp>
 %include <logicalaccess/cards/readermemorykeystorage.hpp>
 %include <logicalaccess/cards/samkeystorage.hpp>
+%include <logicalaccess/key.hpp>
 %include <logicalaccess/cards/tripledeskey.hpp>
 %include <logicalaccess/cards/aes128key.hpp>
 %include <logicalaccess/cards/hmac1key.hpp>
-%include <logicalaccess/cards/accessinfo.hpp>
-%include <logicalaccess/cards/locationnode.hpp>
 
+/* Plugins */
 
 %include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
 %include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>

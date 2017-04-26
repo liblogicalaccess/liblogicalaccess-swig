@@ -74,11 +74,11 @@ def	lookdata(curcat, path):
 def cleandoc(path):
 	with open(path, "r") as f:
 		lines = f.readlines()
-		a = lines.index("/* Shared_ptr */\n") + 1
-		while a != lines.index("/* END_Shared_ptr */\n") - 1:
-			del lines[a]
 		a = lines.index("/* Additional_include */\n") + 1
 		while a != lines.index("/* END_Additional_include */\n") - 1:
+			del lines[a]
+		a = lines.index("/* Shared_ptr */\n") + 1
+		while a != lines.index("/* END_Shared_ptr */\n") - 1:
 			del lines[a]
 		a = lines.index("/* Include_section */\n") + 1
 		while a != lines.index("/* END_Include_section */\n") - 1:
