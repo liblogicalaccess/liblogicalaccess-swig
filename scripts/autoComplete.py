@@ -3,8 +3,7 @@ import os
 import glob
 import re
 
-regexsharedptr = r"(?<=std::shared_ptr<)(.*?)(?=>)"
-regextemplate = r"(([a-zA-Z0-9]*::)+)*[a-zA-Z]*<.*?>"
+regexsharedptr = r"(?<=class )(.+?)(?= :)"
 includebase = "<logicalaccess{0}>"
 include = []
 shared_ptr = []
@@ -13,14 +12,10 @@ def	parsesharedptr(category, content):
 	matches = re.finditer(regexsharedptr, content)
 	for match in matches:
 		strmatch = str(match[0])
-		nbr = strmatch.count('<')
-		while nbr > 0:
-			strmatch += str('>')
-			nbr -= 1
-		strmatch = "logicalaccess::" + strmatch
+		strmatch = "logicalaccess::" + strmatch.split(" ")[-1]
+		print (strmatch)
 		if not (category, strmatch) in shared_ptr:
 			shared_ptr.append((category, strmatch))
-	
 
 def	processing(path, category):
 	if len(glob.glob(path, recursive=True)) == 0:
@@ -31,45 +26,6 @@ def	processing(path, category):
 			parsesharedptr(category,content)
 			filename = filename.replace("\\", "/").split("logicalaccess")[-1]
 			include.append((category, includebase.replace("{0}", filename)))
-
-def	lookdata(curcat, path):
-	with open(path, "r") as f:
-		lines = f.readlines()
-		# Shared_ptr
-		a = lines.index("/* Shared_ptr */\n")
-		c = a + 1
-		while lines[c] is "\n":
-			c += 1
-		i = 0
-		datas = lines[c:]
-		while "/* END_Shared_ptr */" not in datas[i]:
-			i += 1
-		datas = datas[:i]
-		# Includes
-		a = lines.index("/* Additional_include */\n")
-		c = a + 1
-		while lines[c] is "\n":
-			c += 1
-		i = 0
-		includes = lines[c:]
-		while "/* END_Additional_include */\n" not in includes[i]:
-			i += 1
-		includes = includes[:i]
-	for category, ptr in shared_ptr:
-		for data in datas:
-			if ptr in data:
-				break
-		if datas.index(data) is len(datas) - 1:
-			datas.append("%shared_ptr({0});\n".format(ptr));
-	for category, ptr in include:
-		for inc in includes:
-			if ptr in inc:
-				break
-		if includes.index(inc) is len(includes) - 1:
-			includes.append(ptr);
-	for el in datas:
-		print (el, end='')
-	return (datas, includes)
 
 def cleandoc(path):
 	with open(path, "r") as f:
@@ -85,57 +41,116 @@ def cleandoc(path):
 			del lines[a]
 	return lines
 
-
+def	lookdata(curcat):
+	retinclude = []
+	retsptr = []
+	for cat, inc in include:
+		if curcat == cat:
+			retinclude.append(inc)
+	for cat, sptr in shared_ptr:
+		if curcat == cat:
+			retsptr.append(sptr)
+	return retsptr, retinclude
+	
 def docprocess():
 	path = "../liblogicalaccess-swig.win32/liblogicalaccess{0}.i"
 	
 	cardpath = path.replace("{0}", "_card")
-	cards, cardinc = lookdata("CARD", cardpath)
+	cardsptr, cardinc = lookdata("CARD")
 	lines = cleandoc(cardpath)
 	i = 0
+	prevtype = ""
+	curtype = ""
 	while i < len(lines):
-		if "/* Shared_ptr */\n" in lines[i]:
-			i += 2
-			for cc in cards:
-				lines.insert(i, cc)
-				i += 1
 		if "/* Additional_include */\n" in lines[i]:
 			i += 2
-			for cinc in cardinc:
-				lines.insert(i, "{0}".format(cinc))
+			for cinc in cardinc:			
+				if len(cinc.split("plugins/cards/")[-1].split("/")) == 1:
+					curtype = ""
+				else:
+					curtype = cinc.split("plugins/cards/")[-1].split("/")[0]
+				if curtype != prevtype:
+					lines.insert(i, "\n")
+					i += 1
+				prevtype = curtype
+				lines.insert(i, "#include {0}\n".format(cinc))
 				i += 1
+			lines.insert(i, "\n")
+			i += 1
+		if "/* Shared_ptr */\n" in lines[i]:
+			i += 2
+			for cc in cardsptr:
+				lines.insert(i, cc + "\n")
+				i += 1
+			lines.insert(i, "\n")
+			i += 1
 		if "/* Include_section */\n" in lines[i]:
 			i += 2
-			for cinc in cardinc:
-				lines.insert(i, "{0}".format(cinc.replace("#", "%")))
+			for cinc in cardinc:			
+				if len(cinc.split("plugins/cards/")[-1].split("/")) == 1:
+					curtype = ""
+				else:
+					curtype = cinc.split("plugins/cards/")[-1].split("/")[0]
+				if curtype != prevtype:
+					lines.insert(i, "\n")
+					i += 1
+				prevtype = curtype
+				lines.insert(i, "%include {0}\n".format(cinc))
 				i += 1
+			lines.insert(i, "\n")
+			i += 1
 		i += 1	
 	with open(cardpath, "w") as f:
 		f.write(''.join(lines))
+	
 	readerpath = path.replace("{0}", "_reader")
-	readers, readerinc = lookdata("READER", readerpath)
+	readersptr, readerinc = lookdata("READER")
 	lines = cleandoc(readerpath)
 	i = 0
+	prevtype = ""
+	curtype = ""
 	while i < len(lines):
-		if "/* Shared_ptr */\n" in lines[i]:
-			i += 2
-			for rd in readers:
-				lines.insert(i, rd)
-				i += 1
 		if "/* Additional_include */\n" in lines[i]:
 			i += 2
 			for rinc in readerinc:
-				lines.insert(i, "{0}".format(rinc))
+				if "/readerproviders/" in rinc:
+					curtype = ""
+				else:
+					curtype = rinc.split("plugins/readers/")[-1].split("/")[0]
+				if curtype != prevtype:
+					lines.insert(i, "\n")
+					i += 1
+				prevtype = curtype
+				lines.insert(i, "#include {0}\n".format(rinc))
 				i += 1
+			lines.insert(i, "\n")
+			i += 1
+		if "/* Shared_ptr */\n" in lines[i]:
+			i += 2
+			for rc in readersptr:
+				lines.insert(i, "%shared_ptr(" + rc + ");" + "\n")
+				i += 1
+			lines.insert(i, "\n")
+			i += 1
 		if "/* Include_section */\n" in lines[i]:
 			i += 2
 			for rinc in readerinc:
-				lines.insert(i, "{0}".format(rinc.replace("#", "%")))
+				if "/readerproviders/" in rinc:
+					curtype = ""
+				else:
+					curtype = rinc.split("plugins/readers/")[-1].split("/")[0]
+				if curtype != prevtype:
+					lines.insert(i, "\n")
+					i += 1
+				prevtype = curtype
+				lines.insert(i, "%include {0}\n".format(rinc))
 				i += 1
+			lines.insert(i, "\n")
+			i += 1
 		i += 1	
 	with open(readerpath, "w") as f:
 		f.write(''.join(lines))
-				
+	
 def main():
 	processing("../packages/include/logicalaccess/cards/**/*.hpp", "CARD")
 	processing("../packages/include/logicalaccess/plugins/cards/**/*.hpp", "CARD")

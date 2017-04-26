@@ -11,17 +11,27 @@
 %}
 
 %apply char { int8_t }
+%apply char { const int8_t & }
 %apply unsigned char { uint8_t }
+%apply unsigned char { const uint8_t & }
 %apply short { int16_t }
+%apply short { const int16_t &}
 %apply unsigned short { uint16_t }
+%apply unsigned short { const uint16_t & }
 %apply int { int32_t }
+%apply int { const int32_t & }
 %apply unsigned int { uint32_t }
+%apply unsigned int { const uint32_t & }
 %apply unsigned int { size_t }
+%apply unsigned int { const size_t & }
 %apply long { int64_t }
+%apply long { const int64_t & }
 %apply unsigned long { uint64_t }
+%apply unsigned long { const uint64_t & }
 %apply void *VOID_INT_PTR { SCARDHANDLE, const SCARDHANDLE &, SCARDCONTEXT, const SCARDCONTEXT & }
 %apply void *VOID_INT_PTR { void * }
 %apply bool &OUTPUT { bool & }
+%apply unsigned char*INOUT { unsigned char* }
 
 %typemap(cstype) size_t* "ref uint"
 %typemap(csin) size_t* %{out $csinput%}  

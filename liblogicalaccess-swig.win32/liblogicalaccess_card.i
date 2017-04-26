@@ -14,136 +14,266 @@
 
 /* Additional_include */
 
-#include <logicalaccess/cards/commands.hpp>
-#include <logicalaccess/cards/chip.hpp>
-#include <logicalaccess/cards/computermemorykeystorage.hpp>
-#include <logicalaccess/cards/iksstorage.hpp>
-#include <logicalaccess/cards/readermemorykeystorage.hpp>
-#include <logicalaccess/cards/samkeystorage.hpp>
-#include <logicalaccess/cards/tripledeskey.hpp>
-#include <logicalaccess/cards/aes128key.hpp>
-#include <logicalaccess/cards/hmac1key.hpp>
-#include <logicalaccess/cards/accessinfo.hpp>
-#include <logicalaccess/cards/locationnode.hpp>
+#include <logicalaccess/readerproviders/circularbufferparser.hpp>
+#include <logicalaccess/readerproviders/datatransport.hpp>
+#include <logicalaccess/readerproviders/iso14443areadercommunication.hpp>
+#include <logicalaccess/readerproviders/iso14443breadercommunication.hpp>
+#include <logicalaccess/readerproviders/iso14443readercommunication.hpp>
+#include <logicalaccess/readerproviders/iso15693readercommunication.hpp>
+#include <logicalaccess/readerproviders/lcddisplay.hpp>
+#include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
+#include <logicalaccess/readerproviders/readercommunication.hpp>
+#include <logicalaccess/readerproviders/readerconfiguration.hpp>
+#include <logicalaccess/readerproviders/readerprovider.hpp>
+#include <logicalaccess/readerproviders/readerunit.hpp>
+#include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
+#include <logicalaccess/readerproviders/serialport.hpp>
+#include <logicalaccess/readerproviders/serialportdatatransport.hpp>
+#include <logicalaccess/readerproviders/serialportxml.hpp>
+#include <logicalaccess/readerproviders/tcpdatatransport.hpp>
+#include <logicalaccess/readerproviders/udpdatatransport.hpp>
 
-#include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
-#include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
-#include <logicalaccess/plugins/cards/iso7816/iso7816chip.hpp>
+#include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600lcddisplay.hpp>
+#include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600ledbuzzerdisplay.hpp>
+#include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerprovider.hpp>
+#include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunit.hpp>
+#include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600_fwd.hpp>
+#include <logicalaccess/plugins/readers/a3mlgm5600/readercardadapters/a3mlgm5600readercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
-#include <logicalaccess/plugins/cards/iso15693/iso15693commands.hpp>
-#include <logicalaccess/plugins/cards/iso15693/iso15693chip.hpp>
+#include <logicalaccess/plugins/readers/admitto/admittoreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/admitto/admittoreaderunit.hpp>
+#include <logicalaccess/plugins/readers/admitto/admittoreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/admitto/readercardadapters/admittobufferparser.hpp>
+#include <logicalaccess/plugins/readers/admitto/readercardadapters/admittodatatransport.hpp>
+#include <logicalaccess/plugins/readers/admitto/readercardadapters/admittoreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/cps3/cps3location.hpp>
-#include <logicalaccess/plugins/cards/cps3/cps3commands.hpp>
-#include <logicalaccess/plugins/cards/cps3/cps3chip.hpp>
+#include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerprovider.hpp>
+#include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerunit.hpp>
+#include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/axesstmc13/readercardadapters/axesstmc13bufferparser.hpp>
+#include <logicalaccess/plugins/readers/axesstmc13/readercardadapters/axesstmc13datatransport.hpp>
+#include <logicalaccess/plugins/readers/axesstmc13/readercardadapters/axesstmc13readercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
-#include <logicalaccess/plugins/cards/desfire/nxpkeydiversification.hpp>
-#include <logicalaccess/plugins/cards/desfire/nxpav1keydiversification.hpp>
-#include <logicalaccess/plugins/cards/desfire/nxpav2keydiversification.hpp>
-#include <logicalaccess/plugins/cards/desfire/omnitechkeydiversification.hpp>
-#include <logicalaccess/plugins/cards/desfire/sagemkeydiversification.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>
+#include <logicalaccess/plugins/readers/axesstmclegic/axesstmclegicreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/axesstmclegic/axesstmclegicreaderunit.hpp>
+#include <logicalaccess/plugins/readers/axesstmclegic/axesstmclegicreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/axesstmclegic/readercardadapters/axesstmclegicbufferparser.hpp>
+#include <logicalaccess/plugins/readers/axesstmclegic/readercardadapters/axesstmclegicdatatransport.hpp>
+#include <logicalaccess/plugins/readers/axesstmclegic/readercardadapters/axesstmclegicreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/em4102/em4102chip.hpp>
+#include <logicalaccess/plugins/readers/deister/deisterreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/deister/deisterreaderunit.hpp>
+#include <logicalaccess/plugins/readers/deister/deisterreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/deister/readercardadapters/deisterbufferparser.hpp>
+#include <logicalaccess/plugins/readers/deister/readercardadapters/deisterdatatransport.hpp>
+#include <logicalaccess/plugins/readers/deister/readercardadapters/deisterreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
+#include <logicalaccess/plugins/readers/elatec/elatecreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/elatec/elatecreaderunit.hpp>
+#include <logicalaccess/plugins/readers/elatec/elatecreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/elatec/readercardadapters/elatecbufferparser.hpp>
+#include <logicalaccess/plugins/readers/elatec/readercardadapters/elatecdatatransport.hpp>
+#include <logicalaccess/plugins/readers/elatec/readercardadapters/elatecreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/epass/epassaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
-#include <logicalaccess/plugins/cards/epass/epasschip.hpp>
+#include <logicalaccess/plugins/readers/gigatms/gigatmsreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/gigatms/gigatmsreaderunit.hpp>
+#include <logicalaccess/plugins/readers/gigatms/gigatmsreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/gigatms/readercardadapters/gigatmsbufferparser.hpp>
+#include <logicalaccess/plugins/readers/gigatms/readercardadapters/gigatmsdatatransport.hpp>
+#include <logicalaccess/plugins/readers/gigatms/readercardadapters/gigatmsreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
-#include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
-#include <logicalaccess/plugins/cards/felica/felicachip.hpp>
+#include <logicalaccess/plugins/readers/gunnebo/gunneboreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/gunnebo/gunneboreaderunit.hpp>
+#include <logicalaccess/plugins/readers/gunnebo/gunneboreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/gunnebo/readercardadapters/gunnebobufferparser.hpp>
+#include <logicalaccess/plugins/readers/gunnebo/readercardadapters/gunnebodatatransport.hpp>
+#include <logicalaccess/plugins/readers/gunnebo/readercardadapters/gunneboreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/generictag/generictagchip.hpp>
+#include <logicalaccess/plugins/readers/idondemand/generictagidondemandchip.hpp>
+#include <logicalaccess/plugins/readers/idondemand/idondemandreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/idondemand/idondemandreaderunit.hpp>
+#include <logicalaccess/plugins/readers/idondemand/idondemandreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/idondemand/commands/generictagidondemandaccesscontrolcardservice.hpp>
+#include <logicalaccess/plugins/readers/idondemand/commands/generictagidondemandcommands.hpp>
+#include <logicalaccess/plugins/readers/idondemand/readercardadapters/idondemandreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/icode1/icode1chip.hpp>
+#include <logicalaccess/plugins/readers/idp/idpdatatransport.hpp>
+#include <logicalaccess/plugins/readers/idp/idpreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/idp/idpreaderunit.hpp>
+#include <logicalaccess/plugins/readers/idp/idpreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/idp/readercardadapters/idpreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/icode2/icode2chip.hpp>
+#include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
+#include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
+#include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/iso7816/iso7816resultchecker.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/desfireev1iso7816commands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816commands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816resultchecker.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/iso7816iso7816commands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/mifareplusiso7816resultchecker.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/samiso7816commands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/samiso7816resultchecker.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
+#include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/indala/indalachip.hpp>
+#include <logicalaccess/plugins/readers/keyboard/keyboardreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/keyboard/keyboardreaderunit.hpp>
+#include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/keyboard/keyboardsharedstruct.hpp>
 
-#include <logicalaccess/plugins/cards/infineonmyd/infineonmydchip.hpp>
+#include <logicalaccess/plugins/readers/nfc/nfcdatatransport.hpp>
+#include <logicalaccess/plugins/readers/nfc/nfcreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/nfc/nfcreaderunit.hpp>
+#include <logicalaccess/plugins/readers/nfc/nfcreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/nfc/commands/mifareclassicuidchangerservice.hpp>
+#include <logicalaccess/plugins/readers/nfc/commands/mifarenfccommands.hpp>
+#include <logicalaccess/plugins/readers/nfc/readercardadapters/nfcreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
+#include <logicalaccess/plugins/readers/ok5553/ok5553readerprovider.hpp>
+#include <logicalaccess/plugins/readers/ok5553/ok5553readerunit.hpp>
+#include <logicalaccess/plugins/readers/ok5553/ok5553readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/ok5553/commands/mifareok5553commands.hpp>
+#include <logicalaccess/plugins/readers/ok5553/commands/mifareultralightok5553commands.hpp>
+#include <logicalaccess/plugins/readers/ok5553/readercardadapters/iso7816ok5553readercardadapter.hpp>
+#include <logicalaccess/plugins/readers/ok5553/readercardadapters/ok5553readercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/mifare/mifarelocation.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifarekey.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifare1kchip.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifare4kchip.hpp>
+#include <logicalaccess/plugins/readers/osdp/osdpchannel.hpp>
+#include <logicalaccess/plugins/readers/osdp/osdpcommands.hpp>
+#include <logicalaccess/plugins/readers/osdp/osdpreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/osdp/osdpreaderunit.hpp>
+#include <logicalaccess/plugins/readers/osdp/osdpreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/osdp/osdpsecurechannel.hpp>
+#include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpbufferparser.hpp>
+#include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpdatatransport.hpp>
+#include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/mifareplus/mifarepluslocation.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifareplusaccessinfo_sl1.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifareplussl0commands.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifareplussl1commands.hpp>
-//#include <logicalaccess/plugins/cards/mifareplus/mifareplussl3commands.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifarepluschip.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifareplussl0chip.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifareplussl1chip.hpp>
-#include <logicalaccess/plugins/cards/mifareplus/mifareplussl3chip.hpp>
+#include <logicalaccess/plugins/readers/pcsc/atrparser.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcscreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcsc_connection.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcsc_ctl_datatransport.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcsc_fwd.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/acsacrresultchecker.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/felicascmcommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/felicaspringcardcommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/id3resultchecker.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/iso15693pcsccommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifarecherrycommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareomnikeyxx21commands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareomnikeyxx27commands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareomnikeyxx27resultchecker.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifarepcsccommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_acsacr1222l_sl1.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_omnikeyxx21_sl1.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_pcsc_sl1.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_pcsc_sl3.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_sprincard_sl1.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifarescmcommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifarespringcardcommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcacsacrcommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcomnikeyxx21commands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcomnikeyxx22commands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcpcsccommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcspringcardcommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightpcsccommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifare_acr1222L_commands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/mifare_cl1356_commands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/proxcommand.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/springcardresultchecker.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/topazacsacrcommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/topazomnikeyxx27commands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/topazpcsccommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/topazscmcommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222llcddisplay.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222lledbuzzerdisplay.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222lreaderunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222lreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/acsacrreaderunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/cherryreaderunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/CL1356PlusUtils.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/id3readerunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikey5427readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeylanxx21readerunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx22readerunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx25readerunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/scmreaderunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/springcardllcpinitiator.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/springcardnfcp2preaderservice.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/springcardreaderunit.hpp>
 
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightlocation.hpp>
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcommands.hpp>
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightccommands.hpp>
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightchip.hpp>
-#include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcchip.hpp>
+#include <logicalaccess/plugins/readers/pcsc-private/OmnikeyXX27SecureMode.hpp>
+#include <logicalaccess/plugins/readers/pcsc-private/TLV.hpp>
+#include <logicalaccess/plugins/readers/pcsc-private/type_fwd.hpp>
+#include <logicalaccess/plugins/readers/pcsc-private/commands/HIDiClassOmnikeyXX27Commands.hpp>
+#include <logicalaccess/plugins/readers/pcsc-private/readers/omnikeyXX27readerunit.hpp>
 
-#include <logicalaccess/plugins/cards/prox/proxlocation.hpp>
-#include <logicalaccess/plugins/cards/prox/proxchip.hpp>
+#include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/promag/promagreaderunit.hpp>
+#include <logicalaccess/plugins/readers/promag/promagreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/promag/readercardadapters/promagbufferparser.hpp>
+#include <logicalaccess/plugins/readers/promag/readercardadapters/promagdatatransport.hpp>
+#include <logicalaccess/plugins/readers/promag/readercardadapters/promagreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/proxlite/proxlitechip.hpp>
+#include <logicalaccess/plugins/readers/rfideas/rfideasreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/rfideas/rfideasreaderunit.hpp>
+#include <logicalaccess/plugins/readers/rfideas/rfideasreaderunitconfiguration.hpp>
 
-#include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
-#include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
-#include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
-#include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
-#include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
-#include <logicalaccess/plugins/cards/samav2/samchip.hpp>
-#include <logicalaccess/plugins/cards/samav2/samav1chip.hpp>
-#include <logicalaccess/plugins/cards/samav2/samav2chip.hpp>
+#include <logicalaccess/plugins/readers/rpleth/rplethdatatransport.hpp>
+#include <logicalaccess/plugins/readers/rpleth/rplethlcddisplay.hpp>
+#include <logicalaccess/plugins/readers/rpleth/rplethledbuzzerdisplay.hpp>
+#include <logicalaccess/plugins/readers/rpleth/rplethreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/rpleth/rplethreaderunit.hpp>
+#include <logicalaccess/plugins/readers/rpleth/rplethreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/rpleth/rpleth_fwd.hpp>
+#include <logicalaccess/plugins/readers/rpleth/readercardadapters/rplethreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/smartframe/smartframechip.hpp>
+#include <logicalaccess/plugins/readers/sciel/scielreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/sciel/scielreaderunit.hpp>
+#include <logicalaccess/plugins/readers/sciel/scielreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/sciel/readercardadapters/scielbufferparser.hpp>
+#include <logicalaccess/plugins/readers/sciel/readercardadapters/scieldatatransport.hpp>
+#include <logicalaccess/plugins/readers/sciel/readercardadapters/scielreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/stmlri512/stmlri512chip.hpp>
+#include <logicalaccess/plugins/readers/smartid/smartidledbuzzerdisplay.hpp>
+#include <logicalaccess/plugins/readers/smartid/smartidreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/smartid/smartidreaderunit.hpp>
+#include <logicalaccess/plugins/readers/smartid/smartidreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/smartid/smartid_fwd.hpp>
+#include <logicalaccess/plugins/readers/smartid/readercardadapters/mifaresmartidcommands.hpp>
+#include <logicalaccess/plugins/readers/smartid/readercardadapters/mifaresmartidreadercardadapter.hpp>
+#include <logicalaccess/plugins/readers/smartid/readercardadapters/smartidreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/tagit/tagitcommands.hpp>
-#include <logicalaccess/plugins/cards/tagit/tagitchip.hpp>
+#include <logicalaccess/plugins/readers/stidprg/stidprgreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/stidprg/stidprgreaderunit.hpp>
+#include <logicalaccess/plugins/readers/stidprg/stidprgreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/stidprg/stidprgresultchecker.hpp>
+#include <logicalaccess/plugins/readers/stidprg/STidPRG_Prox_AccessControl.hpp>
+#include <logicalaccess/plugins/readers/stidprg/stid_prg_utils.hpp>
+#include <logicalaccess/plugins/readers/stidprg/readercardadapters/stidprgbufferparser.hpp>
+#include <logicalaccess/plugins/readers/stidprg/readercardadapters/stidprgdatatransport.hpp>
+#include <logicalaccess/plugins/readers/stidprg/readercardadapters/stidprgreadercardadapter.hpp>
 
-#include <logicalaccess/plugins/cards/topaz/topazlocation.hpp>
-#include <logicalaccess/plugins/cards/topaz/topazaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/topaz/topazcommands.hpp>
-#include <logicalaccess/plugins/cards/topaz/topazchip.hpp>
-
-#include <logicalaccess/plugins/cards/twic/twiclocation.hpp>
-#include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
-#include <logicalaccess/plugins/cards/twic/twicchip.hpp>
-
-#include <logicalaccess/plugins/cards/iclass/hidiclasslocation.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclasskey.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclassaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclasschip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass2kschip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass8x2kschip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass16kschip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_8x2chip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_16chip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_8x2chip.hpp>
-#include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_16chip.hpp>
+#include <logicalaccess/plugins/readers/stidstr/stidstrledbuzzerdisplay.hpp>
+#include <logicalaccess/plugins/readers/stidstr/stidstrreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/stidstr/stidstrreaderunit.hpp>
+#include <logicalaccess/plugins/readers/stidstr/stidstrreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/stidstr/stidstr_fwd.hpp>
+#include <logicalaccess/plugins/readers/stidstr/commands/desfireev1stidstrcommands.hpp>
+#include <logicalaccess/plugins/readers/stidstr/commands/mifarestidstrcommands.hpp>
+#include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreaderbufferparser.hpp>
+#include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreadercardadapter.hpp>
+#include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreaderdatatransport.hpp>
 
 /* END_Additional_include */
 
@@ -153,146 +283,225 @@ using namespace logicalaccess;
 
 /* Shared_ptr */
 
-%shared_ptr(logicalaccess::AccessInfo);
-
-%shared_ptr(logicalaccess::KeyDiversification);
-%shared_ptr(logicalaccess::KeyStorage);
-%shared_ptr(logicalaccess::ComputerMemoryKeyStorage);
-%shared_ptr(logicalaccess::IKSStorage);
-%shared_ptr(logicalaccess::ReaderMemoryKeyStorage);
-%shared_ptr(logicalaccess::SAMKeyStorage);
-%shared_ptr(logicalaccess::Key);
-%shared_ptr(logicalaccess::Commands);
-%shared_ptr(logicalaccess::Chip);
-%shared_ptr(logicalaccess::LocationNode);
-%shared_ptr(logicalaccess::Location);
-%shared_ptr(logicalaccess::TripleDESKey);
-%shared_ptr(logicalaccess::AES128Key);
-%shared_ptr(logicalaccess::HMAC1Key);
-
-%shared_ptr(logicalaccess::CPS3Location);
-%shared_ptr(logicalaccess::CPS3Commands);
-%shared_ptr(logicalaccess::CPS3Chip);
-
-%shared_ptr(logicalaccess::DESFireLocation);
-%shared_ptr(logicalaccess::DESFireEV1Location);
-%shared_ptr(logicalaccess::NXPKeyDiversification);
-%shared_ptr(logicalaccess::NXPAV1KeyDiversification);
-%shared_ptr(logicalaccess::NXPAV2KeyDiversification);
-%shared_ptr(logicalaccess::OmnitechKeyDiversification);
-%shared_ptr(logicalaccess::SagemKeyDiversification);
-%shared_ptr(logicalaccess::DESFireKey);
-%shared_ptr(logicalaccess::DESFireAccessInfo);
-%shared_ptr(logicalaccess::DESFireCommands);
-%shared_ptr(logicalaccess::DESFireEV1Commands);
-%shared_ptr(logicalaccess::DESFireChip);
-%shared_ptr(logicalaccess::DESFireEV1Chip);
-
-%shared_ptr(logicalaccess::EM4102Chip);
-
-%shared_ptr(logicalaccess::EM4135Chip);
-
-%shared_ptr(logicalaccess::EPassAccessInfo);
-%shared_ptr(logicalaccess::EPassCommand);
-%shared_ptr(logicalaccess::EPassChip);
-
-%shared_ptr(logicalaccess::FeliCaLocation);
-%shared_ptr(logicalaccess::FeliCaCommands);
-%shared_ptr(logicalaccess::FeliCaChip);
-
-%shared_ptr(logicalaccess::GenericTagChip);
-
-%shared_ptr(logicalaccess::ICode1Chip);
-
-%shared_ptr(logicalaccess::ICode2Chip);
-
-%shared_ptr(logicalaccess::IndalaChip);
-
-%shared_ptr(logicalaccess::InfineonMYDChip);
-
-%shared_ptr(logicalaccess::ISO7816Location);
-%shared_ptr(logicalaccess::ISO7816Commands);
-%shared_ptr(logicalaccess::ISO7816Chip);
-
-%shared_ptr(logicalaccess::ISO15693Location);
-%shared_ptr(logicalaccess::ISO15693Commands);
-%shared_ptr(logicalaccess::ISO15693Chip);
-
-%shared_ptr(logicalaccess::LegicPrimeChip);
-
-%shared_ptr(logicalaccess::MifareLocation);
-%shared_ptr(logicalaccess::MifareKey);
-%shared_ptr(logicalaccess::MifareAccessInfo);
-%shared_ptr(logicalaccess::MifareCommands);
-%shared_ptr(logicalaccess::MifareChip);
-%shared_ptr(logicalaccess::Mifare1KChip);
-%shared_ptr(logicalaccess::Mifare4KChip);
-
-%shared_ptr(logicalaccess::MifarePlusLocation);
-%shared_ptr(logicalaccess::MifarePlusSL1AccessInfo);
-%shared_ptr(logicalaccess::MifarePlusSL3AccessInfo);
-%shared_ptr(logicalaccess::MifarePlusSL0Commands);
-%shared_ptr(logicalaccess::MifarePlusSL1Commands);
-//%shared_ptr(logicalaccess::MifarePlusSL3Commands);
-%shared_ptr(logicalaccess::MifarePlusChip);
-%shared_ptr(logicalaccess::MifarePlusSL0Chip);
-%shared_ptr(logicalaccess::MifarePlusSL0_2kChip);
-%shared_ptr(logicalaccess::MifarePlusSL0_4kChip);
-%shared_ptr(logicalaccess::MifarePlusSL1Chip);
-%shared_ptr(logicalaccess::MifarePlusSL1_2kChip);
-%shared_ptr(logicalaccess::MifarePlusSL1_4kChip);
-%shared_ptr(logicalaccess::MifarePlusSL3Chip);
-
-%shared_ptr(logicalaccess::MifareUltralightLocation);
-%shared_ptr(logicalaccess::MifareUltralightAccessInfo);
-%shared_ptr(logicalaccess::MifareUltralightCAccessInfo);
-%shared_ptr(logicalaccess::MifareUltralightCommands);
-%shared_ptr(logicalaccess::MifareUltralightCCommands);
-%shared_ptr(logicalaccess::MifareUltralightChip);
-%shared_ptr(logicalaccess::MifareUltralightCChip);
-
-%shared_ptr(logicalaccess::ProxLocation);
-%shared_ptr(logicalaccess::ProxChip);
-
-%shared_ptr(logicalaccess::ProxLiteChip);
-
-%shared_ptr(logicalaccess::SAMKeyEntry);
-%shared_ptr(logicalaccess::SAMBasicKeyEntry);
-%shared_ptr(logicalaccess::SAMKucEntry);
-%shared_ptr(logicalaccess::SAMCommands);
-%shared_ptr(logicalaccess::SAMAV2Commands);
-%shared_ptr(logicalaccess::SAMChip);
-%shared_ptr(logicalaccess::SAMAV1Chip);
-%shared_ptr(logicalaccess::SAMAV2Chip);
-
-%shared_ptr(logicalaccess::SmartFrameChip);
-
-%shared_ptr(logicalaccess::StmLri512Chip);
-
-%shared_ptr(logicalaccess::TagItCommands);
-%shared_ptr(logicalaccess::TagItChip);
-
-%shared_ptr(logicalaccess::TopazLocation);
-%shared_ptr(logicalaccess::TopazAccessInfo);
-%shared_ptr(logicalaccess::TopazCommands);
-%shared_ptr(logicalaccess::TopazChip);
-
-%shared_ptr(logicalaccess::TwicLocation);
-%shared_ptr(logicalaccess::TwicCommands);
-%shared_ptr(logicalaccess::TwicChip);
-
-%shared_ptr(logicalaccess::HIDiClassLocation);
-%shared_ptr(logicalaccess::HIDiClassKey);
-%shared_ptr(logicalaccess::HIDiClassAccessInfo);
-%shared_ptr(logicalaccess::PicoPassCommands);
-%shared_ptr(logicalaccess::HIDiClassChip);
-%shared_ptr(logicalaccess::HIDiClass2KSChip);
-%shared_ptr(logicalaccess::HIDiClass8x2KSChip);
-%shared_ptr(logicalaccess::HIDiClass16KSChip);
-%shared_ptr(logicalaccess::HIDiClass32KS_8x2_8x2Chip);
-%shared_ptr(logicalaccess::HIDiClass32KS_8x2_16Chip);
-%shared_ptr(logicalaccess::HIDiClass32KS_16_8x2Chip);
-%shared_ptr(logicalaccess::HIDiClass32KS_16_16Chip);
+%shared_ptr(logicalaccess::DataTransport);
+%shared_ptr(logicalaccess::ISO14443AReaderCommunication);
+%shared_ptr(logicalaccess::ISO14443BReaderCommunication);
+%shared_ptr(logicalaccess::ISO14443ReaderCommunication);
+%shared_ptr(logicalaccess::ISO15693ReaderCommunication);
+%shared_ptr(logicalaccess::ReaderConfiguration);
+%shared_ptr(logicalaccess::ReaderProvider);
+%shared_ptr(logicalaccess::ReaderUnit);
+%shared_ptr(logicalaccess::ReaderUnitConfiguration);
+%shared_ptr(logicalaccess::SerialPortDataTransport);
+%shared_ptr(logicalaccess::SerialPortXml);
+%shared_ptr(logicalaccess::TcpDataTransport);
+%shared_ptr(logicalaccess::UdpDataTransport);
+%shared_ptr(logicalaccess::A3MLGM5600LCDDisplay);
+%shared_ptr(logicalaccess::A3MLGM5600LEDBuzzerDisplay);
+%shared_ptr(logicalaccess::A3MLGM5600ReaderProvider);
+%shared_ptr(logicalaccess::A3MLGM5600ReaderUnit);
+%shared_ptr(logicalaccess::A3MLGM5600ReaderUnitConfiguration);
+%shared_ptr(logicalaccess::A3MLGM5600ReaderCardAdapter);
+%shared_ptr(logicalaccess::AdmittoReaderProvider);
+%shared_ptr(logicalaccess::AdmittoReaderUnit);
+%shared_ptr(logicalaccess::AdmittoReaderUnitConfiguration);
+%shared_ptr(logicalaccess::AdmittoBufferParser);
+%shared_ptr(logicalaccess::AdmittoDataTransport);
+%shared_ptr(logicalaccess::AdmittoReaderCardAdapter);
+%shared_ptr(logicalaccess::AxessTMC13ReaderProvider);
+%shared_ptr(logicalaccess::AxessTMC13ReaderUnit);
+%shared_ptr(logicalaccess::AxessTMC13ReaderUnitConfiguration);
+%shared_ptr(logicalaccess::AxessTMC13BufferParser);
+%shared_ptr(logicalaccess::AxessTMC13DataTransport);
+%shared_ptr(logicalaccess::AxessTMC13ReaderCardAdapter);
+%shared_ptr(logicalaccess::AxessTMCLegicReaderProvider);
+%shared_ptr(logicalaccess::AxessTMCLegicReaderUnit);
+%shared_ptr(logicalaccess::AxessTMCLegicReaderUnitConfiguration);
+%shared_ptr(logicalaccess::AxessTMCLegicBufferParser);
+%shared_ptr(logicalaccess::AxessTMCLegicDataTransport);
+%shared_ptr(logicalaccess::AxessTMCLegicReaderCardAdapter);
+%shared_ptr(logicalaccess::DeisterReaderProvider);
+%shared_ptr(logicalaccess::DeisterReaderUnit);
+%shared_ptr(logicalaccess::DeisterReaderUnitConfiguration);
+%shared_ptr(logicalaccess::DeisterBufferParser);
+%shared_ptr(logicalaccess::DeisterDataTransport);
+%shared_ptr(logicalaccess::DeisterReaderCardAdapter);
+%shared_ptr(logicalaccess::ElatecReaderProvider);
+%shared_ptr(logicalaccess::ElatecReaderUnit);
+%shared_ptr(logicalaccess::ElatecReaderUnitConfiguration);
+%shared_ptr(logicalaccess::ElatecBufferParser);
+%shared_ptr(logicalaccess::ElatecDataTransport);
+%shared_ptr(logicalaccess::ElatecReaderCardAdapter);
+%shared_ptr(logicalaccess::GigaTMSReaderProvider);
+%shared_ptr(logicalaccess::GigaTMSReaderUnit);
+%shared_ptr(logicalaccess::GigaTMSReaderUnitConfiguration);
+%shared_ptr(logicalaccess::GigaTMSBufferParser);
+%shared_ptr(logicalaccess::GigaTMSDataTransport);
+%shared_ptr(logicalaccess::GigaTMSReaderCardAdapter);
+%shared_ptr(logicalaccess::GunneboReaderProvider);
+%shared_ptr(logicalaccess::GunneboReaderUnit);
+%shared_ptr(logicalaccess::GunneboReaderUnitConfiguration);
+%shared_ptr(logicalaccess::GunneboBufferParser);
+%shared_ptr(logicalaccess::GunneboDataTransport);
+%shared_ptr(logicalaccess::GunneboReaderCardAdapter);
+%shared_ptr(logicalaccess::GenericTagIdOnDemandChip);
+%shared_ptr(logicalaccess::IdOnDemandReaderProvider);
+%shared_ptr(logicalaccess::IdOnDemandReaderUnit);
+%shared_ptr(logicalaccess::IdOnDemandReaderUnitConfiguration);
+%shared_ptr(logicalaccess::GenericTagIdOnDemandAccessControlCardService);
+%shared_ptr(logicalaccess::GenericTagIdOnDemandCommands);
+%shared_ptr(logicalaccess::IdOnDemandReaderCardAdapter);
+%shared_ptr(logicalaccess::IDPDataTransport);
+%shared_ptr(logicalaccess::IDPReaderProvider);
+%shared_ptr(logicalaccess::IDPReaderUnit);
+%shared_ptr(logicalaccess::IDPReaderUnitConfiguration);
+%shared_ptr(logicalaccess::IDPReaderCardAdapter);
+%shared_ptr(logicalaccess::ISO7816ReaderProvider);
+%shared_ptr(logicalaccess::ISO7816ReaderUnit);
+%shared_ptr(logicalaccess::ISO7816ReaderUnitConfiguration);
+%shared_ptr(logicalaccess::ISO7816ResultChecker);
+%shared_ptr(logicalaccess::DESFireEV1ISO7816Commands);
+%shared_ptr(logicalaccess::DESFireISO7816Commands);
+%shared_ptr(logicalaccess::DESFireISO7816ResultChecker);
+%shared_ptr(logicalaccess::ISO7816ISO7816Commands);
+%shared_ptr(logicalaccess::MifarePlusISO7816ResultChecker);
+%shared_ptr(logicalaccess::SAMAV1ISO7816Commands);
+%shared_ptr(logicalaccess::SAMAV2ISO7816Commands);
+%shared_ptr(logicalaccess::SAMISO7816Commands);
+%shared_ptr(logicalaccess::SAMISO7816ResultChecker);
+%shared_ptr(logicalaccess::TwicISO7816Commands);
+%shared_ptr(logicalaccess::ISO7816FuzzingReaderCardAdapter);
+%shared_ptr(logicalaccess::ISO7816ReaderCardAdapter);
+%shared_ptr(logicalaccess::KeyboardReaderProvider);
+%shared_ptr(logicalaccess::KeyboardReaderUnit);
+%shared_ptr(logicalaccess::KeyboardReaderUnitConfiguration);
+%shared_ptr(logicalaccess::NFCDataTransport);
+%shared_ptr(logicalaccess::NFCReaderProvider);
+%shared_ptr(logicalaccess::NFCReaderUnit);
+%shared_ptr(logicalaccess::NFCReaderUnitConfiguration);
+%shared_ptr(logicalaccess::MifareClassicUIDChangerService);
+%shared_ptr(logicalaccess::MifareNFCCommands);
+%shared_ptr(logicalaccess::NFCReaderCardAdapter);
+%shared_ptr(logicalaccess::OK5553ReaderProvider);
+%shared_ptr(logicalaccess::OK5553ReaderUnit);
+%shared_ptr(logicalaccess::OK5553ReaderUnitConfiguration);
+%shared_ptr(logicalaccess::MifareOK5553Commands);
+%shared_ptr(logicalaccess::MifareUltralightOK5553Commands);
+%shared_ptr(logicalaccess::ISO7816OK5553ReaderCardAdapter);
+%shared_ptr(logicalaccess::OK5553ReaderCardAdapter);
+%shared_ptr(logicalaccess::TemporaryControleCode);
+%shared_ptr(logicalaccess::PermanentControlCode);
+%shared_ptr(logicalaccess::OSDPColor);
+%shared_ptr(logicalaccess::OSDPCommands);
+%shared_ptr(logicalaccess::OSDPReaderProvider);
+%shared_ptr(logicalaccess::OSDPReaderUnit);
+%shared_ptr(logicalaccess::OSDPReaderUnitConfiguration);
+%shared_ptr(logicalaccess::OSDPBufferParser);
+%shared_ptr(logicalaccess::OSDPDataTransport);
+%shared_ptr(logicalaccess::OSDPReaderCardAdapter);
+%shared_ptr(logicalaccess::PCSCDataTransport);
+%shared_ptr(logicalaccess::PCSCReaderProvider);
+%shared_ptr(logicalaccess::PCSCReaderUnit);
+%shared_ptr(logicalaccess::PCSCReaderUnitConfiguration);
+%shared_ptr(logicalaccess::PCSCControlDataTransport);
+%shared_ptr(logicalaccess::ACSACRResultChecker);
+%shared_ptr(logicalaccess::FeliCaSCMCommands);
+%shared_ptr(logicalaccess::FeliCaSpringCardCommands);
+%shared_ptr(logicalaccess::ID3ResultChecker);
+%shared_ptr(logicalaccess::ISO15693PCSCCommands);
+%shared_ptr(logicalaccess::MifareCherryCommands);
+%shared_ptr(logicalaccess::MifareOmnikeyXX21Commands);
+%shared_ptr(logicalaccess::MifareOmnikeyXX27Commands);
+%shared_ptr(logicalaccess::MifareOmnikeyXX27ResultChecker);
+%shared_ptr(logicalaccess::MifarePCSCCommands);
+%shared_ptr(logicalaccess::MifarePlusACSACR1222L_SL1Commands);
+%shared_ptr(logicalaccess::Adapter);
+%shared_ptr(logicalaccess::MifarePlusOmnikeyXX21SL1Commands);
+%shared_ptr(logicalaccess::MifarePlusSL3PCSCCommands);
+%shared_ptr(logicalaccess::MifarePlusSpringcardAES_SL1_Auth);
+%shared_ptr(logicalaccess::MifareSCMCommands);
+%shared_ptr(logicalaccess::MifareSpringCardCommands);
+%shared_ptr(logicalaccess::MifareUltralightCACSACRCommands);
+%shared_ptr(logicalaccess::MifareUltralightCOmnikeyXX21Commands);
+%shared_ptr(logicalaccess::MifareUltralightCOmnikeyXX22Commands);
+%shared_ptr(logicalaccess::MifareUltralightCPCSCCommands);
+%shared_ptr(logicalaccess::MifareUltralightCSpringCardCommands);
+%shared_ptr(logicalaccess::MifareUltralightPCSCCommands);
+%shared_ptr(logicalaccess::MifareACR1222LCommands);
+%shared_ptr(logicalaccess::MifareCL1356Commands);
+%shared_ptr(logicalaccess::ProxCommand);
+%shared_ptr(logicalaccess::SpringCardResultChecker);
+%shared_ptr(logicalaccess::TopazACSACRCommands);
+%shared_ptr(logicalaccess::TopazOmnikeyXX27Commands);
+%shared_ptr(logicalaccess::TopazPCSCCommands);
+%shared_ptr(logicalaccess::TopazSCMCommands);
+%shared_ptr(logicalaccess::PCSCReaderCardAdapter);
+%shared_ptr(logicalaccess::ACSACR1222LLCDDisplay);
+%shared_ptr(logicalaccess::ACSACR1222LLEDBuzzerDisplay);
+%shared_ptr(logicalaccess::ACSACR1222LReaderUnit);
+%shared_ptr(logicalaccess::ACSACRReaderUnit);
+%shared_ptr(logicalaccess::CherryReaderUnit);
+%shared_ptr(logicalaccess::State);
+%shared_ptr(logicalaccess::ID3ReaderUnit);
+%shared_ptr(logicalaccess::OmnikeyLANXX21ReaderUnit);
+%shared_ptr(logicalaccess::OmnikeyReaderUnit);
+%shared_ptr(logicalaccess::OmnikeyXX21ReaderUnit);
+%shared_ptr(logicalaccess::OmnikeyXX21ReaderUnitConfiguration);
+%shared_ptr(logicalaccess::OmnikeyXX22ReaderUnit);
+%shared_ptr(logicalaccess::OmnikeyXX25ReaderUnit);
+%shared_ptr(logicalaccess::SCMReaderUnit);
+%shared_ptr(logicalaccess::SpringCardLLCPInitiator);
+%shared_ptr(logicalaccess::SpringCardNFCP2PReaderService);
+%shared_ptr(logicalaccess::SpringCardReaderUnit);
+%shared_ptr(logicalaccess::OmnikeyXX27SecureMode);
+%shared_ptr(logicalaccess::HIDiClassOmnikeyXX27Commands);
+%shared_ptr(logicalaccess::OmnikeyXX27ReaderUnit);
+%shared_ptr(logicalaccess::PromagReaderProvider);
+%shared_ptr(logicalaccess::PromagReaderUnit);
+%shared_ptr(logicalaccess::PromagReaderUnitConfiguration);
+%shared_ptr(logicalaccess::PromagBufferParser);
+%shared_ptr(logicalaccess::PromagDataTransport);
+%shared_ptr(logicalaccess::PromagReaderCardAdapter);
+%shared_ptr(logicalaccess::RFIDeasReaderProvider);
+%shared_ptr(logicalaccess::RFIDeasReaderUnit);
+%shared_ptr(logicalaccess::RFIDeasReaderUnitConfiguration);
+%shared_ptr(logicalaccess::RplethDataTransport);
+%shared_ptr(logicalaccess::RplethLCDDisplay);
+%shared_ptr(logicalaccess::RplethLEDBuzzerDisplay);
+%shared_ptr(logicalaccess::RplethReaderProvider);
+%shared_ptr(logicalaccess::RplethReaderUnit);
+%shared_ptr(logicalaccess::RplethReaderUnitConfiguration);
+%shared_ptr(logicalaccess::RplethReaderCardAdapter);
+%shared_ptr(logicalaccess::SCIELReaderProvider);
+%shared_ptr(logicalaccess::SCIELReaderUnit);
+%shared_ptr(logicalaccess::SCIELReaderUnitConfiguration);
+%shared_ptr(logicalaccess::ScielBufferParser);
+%shared_ptr(logicalaccess::ScielDataTransport);
+%shared_ptr(logicalaccess::SCIELReaderCardAdapter);
+%shared_ptr(logicalaccess::SmartIDLEDBuzzerDisplay);
+%shared_ptr(logicalaccess::SmartIDReaderProvider);
+%shared_ptr(logicalaccess::SmartIDReaderUnit);
+%shared_ptr(logicalaccess::SmartIDReaderUnitConfiguration);
+%shared_ptr(logicalaccess::MifareSmartIDCommands);
+%shared_ptr(logicalaccess::MifareSmartIDReaderCardAdapter);
+%shared_ptr(logicalaccess::SmartIDReaderCardAdapter);
+%shared_ptr(logicalaccess::STidPRGReaderProvider);
+%shared_ptr(logicalaccess::STidPRGReaderUnit);
+%shared_ptr(logicalaccess::STidPRGReaderUnitConfiguration);
+%shared_ptr(logicalaccess::STidPRGResultChecker);
+%shared_ptr(logicalaccess::STidPRGProxAccessControl);
+%shared_ptr(logicalaccess::STidPRGBufferParser);
+%shared_ptr(logicalaccess::STidPRGDataTransport);
+%shared_ptr(logicalaccess::STidPRGReaderCardAdapter);
+%shared_ptr(logicalaccess::STidSTRLEDBuzzerDisplay);
+%shared_ptr(logicalaccess::STidSTRReaderProvider);
+%shared_ptr(logicalaccess::STidSTRReaderUnit);
+%shared_ptr(logicalaccess::STidSTRReaderUnitConfiguration);
+%shared_ptr(logicalaccess::DESFireEV1STidSTRCommands);
+%shared_ptr(logicalaccess::MifareSTidSTRCommands);
+%shared_ptr(logicalaccess::STidSTRBufferParser);
+%shared_ptr(logicalaccess::STidSTRReaderCardAdapter);
+%shared_ptr(logicalaccess::STidSTRDataTransport);
 
 /* END_Shared_ptr */
 
@@ -312,143 +521,267 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 /* Include_section */
 
-%include <logicalaccess/cards/commands.hpp>
-%include <logicalaccess/cards/location.hpp>
-%include <logicalaccess/cards/accessinfo.hpp>
-%include <logicalaccess/cards/locationnode.hpp>
 
-%include <logicalaccess/cards/chip.hpp>
-%include <logicalaccess/cards/keydiversification.hpp>
-%include <logicalaccess/cards/keystorage.hpp>
-%include <logicalaccess/cards/computermemorykeystorage.hpp>
-%include <logicalaccess/cards/iksstorage.hpp>
-%include <logicalaccess/cards/readermemorykeystorage.hpp>
-%include <logicalaccess/cards/samkeystorage.hpp>
-%include <logicalaccess/key.hpp>
-%include <logicalaccess/cards/tripledeskey.hpp>
-%include <logicalaccess/cards/aes128key.hpp>
-%include <logicalaccess/cards/hmac1key.hpp>
+%include <logicalaccess/readerproviders/circularbufferparser.hpp>
+%include <logicalaccess/readerproviders/datatransport.hpp>
+%include <logicalaccess/readerproviders/iso14443areadercommunication.hpp>
+%include <logicalaccess/readerproviders/iso14443breadercommunication.hpp>
+%include <logicalaccess/readerproviders/iso14443readercommunication.hpp>
+%include <logicalaccess/readerproviders/iso15693readercommunication.hpp>
+%include <logicalaccess/readerproviders/lcddisplay.hpp>
+%include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
+%include <logicalaccess/readerproviders/readercommunication.hpp>
+%include <logicalaccess/readerproviders/readerconfiguration.hpp>
+%include <logicalaccess/readerproviders/readerprovider.hpp>
+%include <logicalaccess/readerproviders/readerunit.hpp>
+%include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
+%include <logicalaccess/readerproviders/serialport.hpp>
+%include <logicalaccess/readerproviders/serialportdatatransport.hpp>
+%include <logicalaccess/readerproviders/serialportxml.hpp>
+%include <logicalaccess/readerproviders/tcpdatatransport.hpp>
+%include <logicalaccess/readerproviders/udpdatatransport.hpp>
 
-/* Plugins */
+%include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600lcddisplay.hpp>
+%include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600ledbuzzerdisplay.hpp>
+%include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerprovider.hpp>
+%include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunit.hpp>
+%include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600_fwd.hpp>
+%include <logicalaccess/plugins/readers/a3mlgm5600/readercardadapters/a3mlgm5600readercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
-%include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
-%include <logicalaccess/plugins/cards/iso7816/iso7816chip.hpp>
+%include <logicalaccess/plugins/readers/admitto/admittoreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/admitto/admittoreaderunit.hpp>
+%include <logicalaccess/plugins/readers/admitto/admittoreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/admitto/readercardadapters/admittobufferparser.hpp>
+%include <logicalaccess/plugins/readers/admitto/readercardadapters/admittodatatransport.hpp>
+%include <logicalaccess/plugins/readers/admitto/readercardadapters/admittoreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
-%include <logicalaccess/plugins/cards/iso15693/iso15693commands.hpp>
-%include <logicalaccess/plugins/cards/iso15693/iso15693chip.hpp>
+%include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerprovider.hpp>
+%include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerunit.hpp>
+%include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/axesstmc13/readercardadapters/axesstmc13bufferparser.hpp>
+%include <logicalaccess/plugins/readers/axesstmc13/readercardadapters/axesstmc13datatransport.hpp>
+%include <logicalaccess/plugins/readers/axesstmc13/readercardadapters/axesstmc13readercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/cps3/cps3location.hpp>
-%include <logicalaccess/plugins/cards/cps3/cps3commands.hpp>
-%include <logicalaccess/plugins/cards/cps3/cps3chip.hpp>
+%include <logicalaccess/plugins/readers/axesstmclegic/axesstmclegicreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/axesstmclegic/axesstmclegicreaderunit.hpp>
+%include <logicalaccess/plugins/readers/axesstmclegic/axesstmclegicreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/axesstmclegic/readercardadapters/axesstmclegicbufferparser.hpp>
+%include <logicalaccess/plugins/readers/axesstmclegic/readercardadapters/axesstmclegicdatatransport.hpp>
+%include <logicalaccess/plugins/readers/axesstmclegic/readercardadapters/axesstmclegicreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
-%include <logicalaccess/plugins/cards/desfire/nxpkeydiversification.hpp>
-%include <logicalaccess/plugins/cards/desfire/nxpav1keydiversification.hpp>
-%include <logicalaccess/plugins/cards/desfire/nxpav2keydiversification.hpp>
-%include <logicalaccess/plugins/cards/desfire/omnitechkeydiversification.hpp>
-%include <logicalaccess/plugins/cards/desfire/sagemkeydiversification.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>
+%include <logicalaccess/plugins/readers/deister/deisterreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/deister/deisterreaderunit.hpp>
+%include <logicalaccess/plugins/readers/deister/deisterreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/deister/readercardadapters/deisterbufferparser.hpp>
+%include <logicalaccess/plugins/readers/deister/readercardadapters/deisterdatatransport.hpp>
+%include <logicalaccess/plugins/readers/deister/readercardadapters/deisterreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/em4102/em4102chip.hpp>
+%include <logicalaccess/plugins/readers/elatec/elatecreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/elatec/elatecreaderunit.hpp>
+%include <logicalaccess/plugins/readers/elatec/elatecreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/elatec/readercardadapters/elatecbufferparser.hpp>
+%include <logicalaccess/plugins/readers/elatec/readercardadapters/elatecdatatransport.hpp>
+%include <logicalaccess/plugins/readers/elatec/readercardadapters/elatecreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
+%include <logicalaccess/plugins/readers/gigatms/gigatmsreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/gigatms/gigatmsreaderunit.hpp>
+%include <logicalaccess/plugins/readers/gigatms/gigatmsreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/gigatms/readercardadapters/gigatmsbufferparser.hpp>
+%include <logicalaccess/plugins/readers/gigatms/readercardadapters/gigatmsdatatransport.hpp>
+%include <logicalaccess/plugins/readers/gigatms/readercardadapters/gigatmsreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/epass/epassaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
-%include <logicalaccess/plugins/cards/epass/epasschip.hpp>
+%include <logicalaccess/plugins/readers/gunnebo/gunneboreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/gunnebo/gunneboreaderunit.hpp>
+%include <logicalaccess/plugins/readers/gunnebo/gunneboreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/gunnebo/readercardadapters/gunnebobufferparser.hpp>
+%include <logicalaccess/plugins/readers/gunnebo/readercardadapters/gunnebodatatransport.hpp>
+%include <logicalaccess/plugins/readers/gunnebo/readercardadapters/gunneboreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
-%include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
-%include <logicalaccess/plugins/cards/felica/felicachip.hpp>
+%include <logicalaccess/plugins/readers/idondemand/generictagidondemandchip.hpp>
+%include <logicalaccess/plugins/readers/idondemand/idondemandreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/idondemand/idondemandreaderunit.hpp>
+%include <logicalaccess/plugins/readers/idondemand/idondemandreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/idondemand/commands/generictagidondemandaccesscontrolcardservice.hpp>
+%include <logicalaccess/plugins/readers/idondemand/commands/generictagidondemandcommands.hpp>
+%include <logicalaccess/plugins/readers/idondemand/readercardadapters/idondemandreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/generictag/generictagchip.hpp>
+%include <logicalaccess/plugins/readers/idp/idpdatatransport.hpp>
+%include <logicalaccess/plugins/readers/idp/idpreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/idp/idpreaderunit.hpp>
+%include <logicalaccess/plugins/readers/idp/idpreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/idp/readercardadapters/idpreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/icode1/icode1chip.hpp>
+%include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
+%include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
+%include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/iso7816/iso7816resultchecker.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/desfireev1iso7816commands.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816commands.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816resultchecker.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/iso7816iso7816commands.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/mifareplusiso7816resultchecker.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/samiso7816commands.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/samiso7816resultchecker.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
+%include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
+%include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/icode2/icode2chip.hpp>
+%include <logicalaccess/plugins/readers/keyboard/keyboardreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/keyboard/keyboardreaderunit.hpp>
+%include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/keyboard/keyboardsharedstruct.hpp>
 
-%include <logicalaccess/plugins/cards/indala/indalachip.hpp>
+%include <logicalaccess/plugins/readers/nfc/nfcdatatransport.hpp>
+%include <logicalaccess/plugins/readers/nfc/nfcreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/nfc/nfcreaderunit.hpp>
+%include <logicalaccess/plugins/readers/nfc/nfcreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/nfc/commands/mifareclassicuidchangerservice.hpp>
+%include <logicalaccess/plugins/readers/nfc/commands/mifarenfccommands.hpp>
+%include <logicalaccess/plugins/readers/nfc/readercardadapters/nfcreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/infineonmyd/infineonmydchip.hpp>
+%include <logicalaccess/plugins/readers/ok5553/ok5553readerprovider.hpp>
+%include <logicalaccess/plugins/readers/ok5553/ok5553readerunit.hpp>
+%include <logicalaccess/plugins/readers/ok5553/ok5553readerunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/ok5553/commands/mifareok5553commands.hpp>
+%include <logicalaccess/plugins/readers/ok5553/commands/mifareultralightok5553commands.hpp>
+%include <logicalaccess/plugins/readers/ok5553/readercardadapters/iso7816ok5553readercardadapter.hpp>
+%include <logicalaccess/plugins/readers/ok5553/readercardadapters/ok5553readercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
+%include <logicalaccess/plugins/readers/osdp/osdpchannel.hpp>
+%include <logicalaccess/plugins/readers/osdp/osdpcommands.hpp>
+%include <logicalaccess/plugins/readers/osdp/osdpreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/osdp/osdpreaderunit.hpp>
+%include <logicalaccess/plugins/readers/osdp/osdpreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/osdp/osdpsecurechannel.hpp>
+%include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpbufferparser.hpp>
+%include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpdatatransport.hpp>
+%include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/mifare/mifarelocation.hpp>
-%include <logicalaccess/plugins/cards/mifare/mifarekey.hpp>
-%include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
-%include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
-%include <logicalaccess/plugins/cards/mifare/mifare1kchip.hpp>
-%include <logicalaccess/plugins/cards/mifare/mifare4kchip.hpp>
+%include <logicalaccess/plugins/readers/pcsc/atrparser.hpp>
+%include <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
+%include <logicalaccess/plugins/readers/pcsc/pcscreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/pcsc/pcsc_connection.hpp>
+%include <logicalaccess/plugins/readers/pcsc/pcsc_ctl_datatransport.hpp>
+%include <logicalaccess/plugins/readers/pcsc/pcsc_fwd.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/acsacrresultchecker.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/felicascmcommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/felicaspringcardcommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/id3resultchecker.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/iso15693pcsccommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifarecherrycommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareomnikeyxx21commands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareomnikeyxx27commands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareomnikeyxx27resultchecker.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifarepcsccommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_acsacr1222l_sl1.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_omnikeyxx21_sl1.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_pcsc_sl1.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_pcsc_sl3.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_sprincard_sl1.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifarescmcommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifarespringcardcommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcacsacrcommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcomnikeyxx21commands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcomnikeyxx22commands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcpcsccommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcspringcardcommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightpcsccommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifare_acr1222L_commands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/mifare_cl1356_commands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/proxcommand.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/springcardresultchecker.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/topazacsacrcommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/topazomnikeyxx27commands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/topazpcsccommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/topazscmcommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222llcddisplay.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222lledbuzzerdisplay.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222lreaderunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/acsacr1222lreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/acsacrreaderunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/cherryreaderunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/CL1356PlusUtils.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/id3readerunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikey5427readerunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeylanxx21readerunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx22readerunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx25readerunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/scmreaderunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/springcardllcpinitiator.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/springcardnfcp2preaderservice.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/springcardreaderunit.hpp>
 
-%include <logicalaccess/plugins/cards/mifareplus/mifarepluslocation.hpp>
-%include <logicalaccess/plugins/cards/mifareplus/mifareplusaccessinfo_sl1.hpp>
-%include <logicalaccess/plugins/cards/mifareplus/mifareplussl0commands.hpp>
-%include <logicalaccess/plugins/cards/mifareplus/mifareplussl1commands.hpp>
-//%include <logicalaccess/plugins/cards/mifareplus/mifareplussl3commands.hpp>
-%include <logicalaccess/plugins/cards/mifareplus/mifarepluschip.hpp>
-%include <logicalaccess/plugins/cards/mifareplus/mifareplussl0chip.hpp>
-%include <logicalaccess/plugins/cards/mifareplus/mifareplussl1chip.hpp>
-%include <logicalaccess/plugins/cards/mifareplus/mifareplussl3chip.hpp>
+%include <logicalaccess/plugins/readers/pcsc-private/OmnikeyXX27SecureMode.hpp>
+%include <logicalaccess/plugins/readers/pcsc-private/TLV.hpp>
+%include <logicalaccess/plugins/readers/pcsc-private/type_fwd.hpp>
+%include <logicalaccess/plugins/readers/pcsc-private/commands/HIDiClassOmnikeyXX27Commands.hpp>
+%include <logicalaccess/plugins/readers/pcsc-private/readers/omnikeyXX27readerunit.hpp>
 
-%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightlocation.hpp>
-%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcommands.hpp>
-%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightccommands.hpp>
-%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightchip.hpp>
-%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcchip.hpp>
+%include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/promag/promagreaderunit.hpp>
+%include <logicalaccess/plugins/readers/promag/promagreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/promag/readercardadapters/promagbufferparser.hpp>
+%include <logicalaccess/plugins/readers/promag/readercardadapters/promagdatatransport.hpp>
+%include <logicalaccess/plugins/readers/promag/readercardadapters/promagreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/prox/proxlocation.hpp>
-%include <logicalaccess/plugins/cards/prox/proxchip.hpp>
+%include <logicalaccess/plugins/readers/rfideas/rfideasreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/rfideas/rfideasreaderunit.hpp>
+%include <logicalaccess/plugins/readers/rfideas/rfideasreaderunitconfiguration.hpp>
 
-%include <logicalaccess/plugins/cards/proxlite/proxlitechip.hpp>
+%include <logicalaccess/plugins/readers/rpleth/rplethdatatransport.hpp>
+%include <logicalaccess/plugins/readers/rpleth/rplethlcddisplay.hpp>
+%include <logicalaccess/plugins/readers/rpleth/rplethledbuzzerdisplay.hpp>
+%include <logicalaccess/plugins/readers/rpleth/rplethreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/rpleth/rplethreaderunit.hpp>
+%include <logicalaccess/plugins/readers/rpleth/rplethreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/rpleth/rpleth_fwd.hpp>
+%include <logicalaccess/plugins/readers/rpleth/readercardadapters/rplethreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
-%include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
-%include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
-%include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
-%include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
-%include <logicalaccess/plugins/cards/samav2/samchip.hpp>
-%include <logicalaccess/plugins/cards/samav2/samav1chip.hpp>
-%include <logicalaccess/plugins/cards/samav2/samav2chip.hpp>
+%include <logicalaccess/plugins/readers/sciel/scielreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/sciel/scielreaderunit.hpp>
+%include <logicalaccess/plugins/readers/sciel/scielreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/sciel/readercardadapters/scielbufferparser.hpp>
+%include <logicalaccess/plugins/readers/sciel/readercardadapters/scieldatatransport.hpp>
+%include <logicalaccess/plugins/readers/sciel/readercardadapters/scielreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/smartframe/smartframechip.hpp>
+%include <logicalaccess/plugins/readers/smartid/smartidledbuzzerdisplay.hpp>
+%include <logicalaccess/plugins/readers/smartid/smartidreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/smartid/smartidreaderunit.hpp>
+%include <logicalaccess/plugins/readers/smartid/smartidreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/smartid/smartid_fwd.hpp>
+%include <logicalaccess/plugins/readers/smartid/readercardadapters/mifaresmartidcommands.hpp>
+%include <logicalaccess/plugins/readers/smartid/readercardadapters/mifaresmartidreadercardadapter.hpp>
+%include <logicalaccess/plugins/readers/smartid/readercardadapters/smartidreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/stmlri512/stmlri512chip.hpp>
+%include <logicalaccess/plugins/readers/stidprg/stidprgreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/stidprg/stidprgreaderunit.hpp>
+%include <logicalaccess/plugins/readers/stidprg/stidprgreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/stidprg/stidprgresultchecker.hpp>
+%include <logicalaccess/plugins/readers/stidprg/STidPRG_Prox_AccessControl.hpp>
+%include <logicalaccess/plugins/readers/stidprg/stid_prg_utils.hpp>
+%include <logicalaccess/plugins/readers/stidprg/readercardadapters/stidprgbufferparser.hpp>
+%include <logicalaccess/plugins/readers/stidprg/readercardadapters/stidprgdatatransport.hpp>
+%include <logicalaccess/plugins/readers/stidprg/readercardadapters/stidprgreadercardadapter.hpp>
 
-%include <logicalaccess/plugins/cards/tagit/tagitcommands.hpp>
-%include <logicalaccess/plugins/cards/tagit/tagitchip.hpp>
-
-%include <logicalaccess/plugins/cards/topaz/topazlocation.hpp>
-%include <logicalaccess/plugins/cards/topaz/topazaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/topaz/topazcommands.hpp>
-%include <logicalaccess/plugins/cards/topaz/topazchip.hpp>
-
-%include <logicalaccess/plugins/cards/twic/twiclocation.hpp>
-%include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
-%include <logicalaccess/plugins/cards/twic/twicchip.hpp>
-
-%include <logicalaccess/plugins/cards/iclass/hidiclasslocation.hpp>
-%include <logicalaccess/plugins/cards/iclass/hidiclasskey.hpp>
-%include <logicalaccess/plugins/cards/iclass/hidiclassaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
-%include <logicalaccess/plugins/cards/iclass/hidiclasschip.hpp>
-%include <logicalaccess/plugins/cards/iclass/hidiclass2kschip.hpp>
-%include <logicalaccess/plugins/cards/iclass/hidiclass8x2kschip.hpp>
-%include <logicalaccess/plugins/cards/iclass/hidiclass16kschip.hpp>
-%include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_8x2chip.hpp>
-%include <logicalaccess/plugins/cards/iclass/hidiclass32ks_8x2_16chip.hpp>
-%include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_8x2chip.hpp>
-%include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_16chip.hpp>
+%include <logicalaccess/plugins/readers/stidstr/stidstrledbuzzerdisplay.hpp>
+%include <logicalaccess/plugins/readers/stidstr/stidstrreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/stidstr/stidstrreaderunit.hpp>
+%include <logicalaccess/plugins/readers/stidstr/stidstrreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/stidstr/stidstr_fwd.hpp>
+%include <logicalaccess/plugins/readers/stidstr/commands/desfireev1stidstrcommands.hpp>
+%include <logicalaccess/plugins/readers/stidstr/commands/mifarestidstrcommands.hpp>
+%include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreaderbufferparser.hpp>
+%include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreadercardadapter.hpp>
+%include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreaderdatatransport.hpp>
 
 /* END_Include_section */
 
