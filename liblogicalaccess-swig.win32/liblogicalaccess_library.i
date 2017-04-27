@@ -14,6 +14,7 @@
 %}
 
 %shared_ptr(logicalaccess::Key);
+%shared_ptr(logicalaccess::Chip);
 
 /* original header files */
 %include <logicalaccess/dynlibrary/idynlibrary.hpp>

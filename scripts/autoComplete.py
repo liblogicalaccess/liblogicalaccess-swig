@@ -3,7 +3,7 @@ import os
 import glob
 import re
 
-regexsharedptr = r"(?<=class )(.+?)(?= :)"
+regexsharedptr = r"(?<=std::shared_ptr<)(.*?)(?=>)"
 includebase = "<logicalaccess{0}>"
 include = []
 shared_ptr = []
@@ -12,8 +12,11 @@ def	parsesharedptr(category, content):
 	matches = re.finditer(regexsharedptr, content)
 	for match in matches:
 		strmatch = str(match[0])
-		strmatch = "logicalaccess::" + strmatch.split(" ")[-1]
-		print (strmatch)
+		nbr = strmatch.count('<')
+		while nbr > 0:
+			strmatch += str('>')
+			nbr -= 1
+		strmatch = "logicalaccess::" + strmatch
 		if not (category, strmatch) in shared_ptr:
 			shared_ptr.append((category, strmatch))
 
@@ -80,7 +83,7 @@ def docprocess():
 		if "/* Shared_ptr */\n" in lines[i]:
 			i += 2
 			for cc in cardsptr:
-				lines.insert(i, cc + "\n")
+				lines.insert(i, "%shared_ptr(" + cc + ");" + "\n")
 				i += 1
 			lines.insert(i, "\n")
 			i += 1

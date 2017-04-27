@@ -10,6 +10,8 @@
 #include <stdint.h>
 %}
 
+%include "arrays_csharp.i"
+
 %apply char { int8_t }
 %apply char { const int8_t & }
 %apply unsigned char { uint8_t }
@@ -31,15 +33,48 @@
 %apply void *VOID_INT_PTR { SCARDHANDLE, const SCARDHANDLE &, SCARDCONTEXT, const SCARDCONTEXT & }
 %apply void *VOID_INT_PTR { void * }
 %apply bool &OUTPUT { bool & }
-%apply unsigned char*INOUT { unsigned char* }
+%apply unsigned char INPUT[] { unsigned char* }
+%apply unsigned int &OUTPUT { unsigned int & }
 
-%typemap(cstype) size_t* "ref uint"
-%typemap(csin) size_t* %{out $csinput%}  
-%typemap(imtype) size_t* "out uint"
+//%typemap(cstype) size_t* "ref uint"
+//%typemap(csin) size_t* %{ref $csinput%}  
+//%typemap(imtype) size_t* "ref uint"
+
+%typemap(cstype) size_t& "out uint"
+%typemap(csin) size_t& %{out $csinput%}  
+%typemap(imtype) size_t& "out uint"
 
 %typemap(cstype) char & "out char"
 %typemap(csin) char & %{out $csinput%}  
 %typemap(imtype) char & "out char"
+
+//%typemap(cstype) unsigned char* "byte[]"
+//%typemap(csin) unsigned char* %{$csinput%}  
+//%typemap(imtype) unsigned char* "byte[]"
+
+//%typemap(cstype) unsigned int* "uint[]"
+//%typemap(csin) unsigned int* %{$csinput%}  
+//%typemap(imtype) unsigned int* "uint[]"
+
+%typemap(cstype) std::string & "out string"
+%typemap(csin) std::string & %{out $csinput%}  
+%typemap(imtype) std::string & "out string"
+
+%typemap(cstype) uint8_t & "out byte"
+%typemap(csin) uint8_t & %{out $csinput%}  
+%typemap(imtype) uint8_t & "out byte"
+
+%typemap(cstype) uint16_t & "out ushort"
+%typemap(csin) uint16_t & %{out $csinput%}  
+%typemap(imtype) uint16_t & "out ushort"
+
+%typemap(cstype) int32_t & "out int"
+%typemap(csin) int32_t & %{out $csinput%}  
+%typemap(imtype) int32_t & "out int"
+
+%typemap(cstype) const std::array<uint8_t, 16> & "out byte[]"
+%typemap(csin) const std::array<uint8_t, 16> & %{out $csinput%}  
+%typemap(imtype) const std::array<uint8_t, 16> & "out byte[]"
 
 %typemap(cstype) logicalaccess::STidTamperSwitchBehavior& "out STidTamperSwitchBehavior"
 %typemap(csin) logicalaccess::STidTamperSwitchBehavior& %{out $csinput%}  
@@ -52,13 +87,19 @@ namespace std {
 	%template(UShortCollection) vector<unsigned short>;
 	%template(UCharCollectionCollection) vector<vector<unsigned char> >;
 	%template(StringCollection) vector<string>;
+	%template(BoolCollection) vector<bool>;
+	%template(UIntCollection) vector<unsigned int>;
 	//%template(UCharCollectionList) list<vector<unsigned char> >;
 	%apply vector<unsigned char> { const vector<unsigned char> & };
 	%apply vector<unsigned char> { vector<uint8_t> };
 	%apply vector<unsigned char> { const vector<uint8_t> & };
 	%apply vector<unsigned char> { ByteVector };
-	%apply vector<unsigned char> { const ByteVector & }
+	%apply vector<unsigned char> { const ByteVector & };
 	//%apply list<vector<unsigned char> > {list<vector<unsigned char> > &}
+
+	%typemap(cstype) vector<bool> & "out BoolCollection"
+	%typemap(csin) vector<bool> & %{out $csinput%}  
+	%typemap(imtype) vector<bool> & "out BoolCollection"
 };
 
 %shared_ptr(logicalaccess::XmlSerializable);
