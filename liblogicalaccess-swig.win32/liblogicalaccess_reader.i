@@ -342,9 +342,7 @@ using namespace logicalaccess;
 %shared_ptr(logicalaccess::ISO7816ReaderUnitConfiguration);
 %shared_ptr(logicalaccess::DESFireKey);
 %shared_ptr(logicalaccess::ISO7816ReaderCardAdapter);
-%shared_ptr(logicalaccess::SAMKeyEntry<KeyEntryAV1Information, SETAV1>);
 %shared_ptr(logicalaccess::SAMKucEntry);
-%shared_ptr(logicalaccess::SAMKeyEntry<KeyEntryAV2Information, SETAV2>);
 %shared_ptr(logicalaccess::SAMDESfireCrypto);
 %shared_ptr(logicalaccess::openssl::OpenSSLSymmetricCipher);
 %shared_ptr(logicalaccess::openssl::SymmetricKey);
@@ -408,7 +406,6 @@ using namespace logicalaccess;
 %shared_ptr(logicalaccess::STidSTRReaderProvider);
 %shared_ptr(logicalaccess::STidSTRReaderUnitConfiguration);
 %shared_ptr(logicalaccess::HMAC1Key);
-%shared_ptr(logicalaccess::DESFireProfile);
 %shared_ptr(logicalaccess::STidSTRReaderUnit);
 
 /* END_Shared_ptr */
@@ -418,6 +415,8 @@ using namespace logicalaccess;
 %shared_ptr(boost::asio::ip::udp::socket);
 %shared_ptr(boost::interprocess::mapped_region);
 %shared_ptr(boost::interprocess::named_mutex);
+%shared_ptr(logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
+%shared_ptr(logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
 
 //typedef std::shared_ptr<logicalaccess::ReaderProvider> ReaderProviderPtr;
 //typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
@@ -437,6 +436,23 @@ using namespace logicalaccess;
 %apply unsigned char INPUT[] { unsigned char* pInBuf }
 %apply unsigned char INPUT[] { uint8_t *atr }
 %apply unsigned char OUTPUT[] { unsigned char* pstate }
+%apply unsigned char OUTPUT[] { unsigned char* result }
+%apply unsigned int *INOUT { size_t* resultlen }
+
+%typemap(ctype) __int64 "long"
+%typemap(cstype) __int64 "long"
+%typemap(csin) __int64 %{$csinput%}  
+%typemap(imtype) __int64 "long"
+
+%typemap(ctype) __int64* "long*"
+%typemap(cstype) __int64* "ref long"
+%typemap(csin) __int64* %{ref $csinput%}  
+%typemap(imtype) __int64* "ref long"
+
+%typemap(ctype) WCHAR "wchar_t"
+%typemap(cstype) WCHAR* "byte[]"
+%typemap(csin) WCHAR* %{$csinput%}  
+%typemap(imtype) WCHAR* "byte[]"
 
 %typemap(cstype) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& "out SerialPortXmlPtrVector"
 %typemap(csin) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& %{out $csinput%}  

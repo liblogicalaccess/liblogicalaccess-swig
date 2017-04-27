@@ -4,8 +4,10 @@
 %include "liblogicalaccess.i"
 
 %{
+#include <logicalaccess/plugins/readers/pcsc-private/type_fwd.hpp>
 #include <logicalaccess/lla_fwd.hpp>
 #include <logicalaccess/techno.hpp>
+#include <logicalaccess/key.hpp>
 #include <logicalaccess/xmlserializable.hpp>
 #include <logicalaccess/readerproviders/datatransport.hpp>
 #include <logicalaccess/resultchecker.hpp>
@@ -201,3 +203,4 @@ namespace std {
 %include <logicalaccess/readerproviders/datatransport.hpp>
 %include <logicalaccess/resultchecker.hpp>
 %include <logicalaccess/cards/readercardadapter.hpp>
+%include <logicalaccess/key.hpp>

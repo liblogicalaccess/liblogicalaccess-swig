@@ -16,6 +16,8 @@
 %include <std_string.i>
 %include <std_shared_ptr.i>
 %include <std_array.i>
+%include <wchar.i>
+%include <swigtype_inout.i>
 %include <exception.i>
 
 /*****WARNING SECTION*****/
@@ -44,3 +46,4 @@
 	#include "msliblogicalaccessswigwin32.h"
 	#include <algorithm>
 %}
+

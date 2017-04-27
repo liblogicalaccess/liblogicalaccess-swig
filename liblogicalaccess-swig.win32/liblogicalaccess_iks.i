@@ -35,7 +35,7 @@
 
 /* Shared_ptr */
 
-%shared_ptr(BaseResponse);
+%shared_ptr(logicalaccess::BaseResponse);
 %shared_ptr(logicalaccess::Key);
 
 /* END_Shared_ptr */

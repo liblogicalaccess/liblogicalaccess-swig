@@ -326,6 +326,7 @@
     <Compile Include="Generated\GenRandomResponse.cs" />
     <Compile Include="Generated\IDynLibrary.cs" />
     <Compile Include="Generated\IslogKeyServer.cs" />
+    <Compile Include="Generated\Key.cs" />
     <Compile Include="Generated\KeyDivInfo.cs" />
     <Compile Include="Generated\liblogicalaccess_data.cs" />
     <Compile Include="Generated\liblogicalaccess_dataPINVOKE.cs" />
@@ -605,10 +606,9 @@
     <Compile Include="Generated\Reader\SWIGTYPE_p_HidCommand.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_HJOBD.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_JOBINFO.cs" />
-    <Compile Include="Generated\Reader\SWIGTYPE_p_logicalaccess__DESFireProfile.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_logicalaccess__Key.cs" />
-    <Compile Include="Generated\Reader\SWIGTYPE_p_logicalaccess__SAMKeyEntryT_logicalaccess__KeyEntryAV1Information_logicalaccess__SETAV1_t.cs" />
-    <Compile Include="Generated\Reader\SWIGTYPE_p_logicalaccess__SAMKeyEntryT_logicalaccess__KeyEntryAV2Information_logicalaccess__SETAV2_t.cs" />
+    <Compile Include="Generated\Reader\SWIGTYPE_p_logicalaccess__SAMKeyEntryT_logicalaccess__s_KeyEntryAV1Information_logicalaccess__s_SETAV1_t.cs" />
+    <Compile Include="Generated\Reader\SWIGTYPE_p_logicalaccess__SAMKeyEntryT_logicalaccess__s_KeyEntryAV2Information_logicalaccess__s_SETAV2_t.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_MifareKeyType.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_nfc_context.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_nfc_device.cs" />
@@ -623,7 +623,6 @@
     <Compile Include="Generated\Reader\SWIGTYPE_p_RECT.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_S70CBPROC.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_S70UNITINFO.cs" />
-    <Compile Include="Generated\Reader\SWIGTYPE_p_size_t.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_SM70CB_CONTACT.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_SM70CB_CONTACTLESS.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_SM70CB_ERROR.cs" />
@@ -644,8 +643,6 @@
     <Compile Include="Generated\Reader\SWIGTYPE_p_TLVPtr.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_UNITINFO2.cs" />
     <Compile Include="Generated\Reader\SWIGTYPE_p_unsigned_char.cs" />
-    <Compile Include="Generated\Reader\SWIGTYPE_p_WCHAR.cs" />
-    <Compile Include="Generated\Reader\SWIGTYPE_p___int64.cs" />
     <Compile Include="Generated\Reader\s_buz_cmd.cs" />
     <Compile Include="Generated\Reader\s_led_cmd.cs" />
     <Compile Include="Generated\Reader\TcpDataTransport.cs" />
@@ -661,7 +658,6 @@
     <Compile Include="Generated\ResultChecker.cs" />
     <Compile Include="Generated\StringCollection.cs" />
     <Compile Include="Generated\SWIGTYPE_p_BaseResponse.cs" />
-    <Compile Include="Generated\SWIGTYPE_p_logicalaccess__Key.cs" />
     <Compile Include="Generated\UByteArray16.cs" />
     <Compile Include="Generated\UByteArray32.cs" />
     <Compile Include="Generated\UByteArray8.cs" />
