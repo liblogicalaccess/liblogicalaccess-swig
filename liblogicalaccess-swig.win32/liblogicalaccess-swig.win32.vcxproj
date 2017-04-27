@@ -114,11 +114,17 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\liblogicalaccess-swig2.0\Generated\Reader -namespace LibLogicalAccess.Reader -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
     </CustomBuild>
+    <CustomBuild Include="liblogicalaccess_iks.i">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\liblogicalaccess-swig2.0\Generated -namespace LibLogicalAccess -dllimport liblogicalaccess-swig.win32.dll "%(FullPath)"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
+    </CustomBuild>
     <None Include="liblogicalaccess_readerservice.i" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="liblogicalaccess_card_wrap.cxx" />
     <ClCompile Include="liblogicalaccess_data_wrap.cxx" />
+    <ClCompile Include="liblogicalaccess_iks_wrap.cxx" />
     <ClCompile Include="liblogicalaccess_library_wrap.cxx" />
     <ClCompile Include="liblogicalaccess_reader_wrap.cxx" />
   </ItemGroup>

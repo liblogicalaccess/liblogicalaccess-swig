@@ -95,6 +95,8 @@
 #include <logicalaccess/plugins/cards/iclass/picopasssimple.hpp>
 
 #include <logicalaccess/plugins/cards/iclass_5321/omnikeyhidiclassdatatransportimpl.hpp>
+#include <logicalaccess/plugins/cards/iclass_5321/omnikeylib/sm5x21.h>
+#include <logicalaccess/plugins/cards/iclass_5321/omnikeylib/sm5x21i.h>
 
 #include <logicalaccess/plugins/cards/icode1/icode1chip.hpp>
 
@@ -361,6 +363,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/plugins/cards/iclass/picopasssimple.hpp>
 
 %include <logicalaccess/plugins/cards/iclass_5321/omnikeyhidiclassdatatransportimpl.hpp>
+%include <logicalaccess/plugins/cards/iclass_5321/omnikeylib/sm5x21.h>
+%include <logicalaccess/plugins/cards/iclass_5321/omnikeylib/sm5x21i.h>
 
 %include <logicalaccess/plugins/cards/icode1/icode1chip.hpp>
 

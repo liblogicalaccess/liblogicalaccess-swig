@@ -4,6 +4,7 @@
 %include "liblogicalaccess.i"
 
 %import "liblogicalaccess_card.i"
+%import "liblogicalaccess_data.i"
 
 %{
 /* Additional_include */
@@ -298,7 +299,6 @@ using namespace logicalaccess;
 %shared_ptr(logicalaccess::std::thread);
 %shared_ptr(logicalaccess::SerialPortXml);
 %shared_ptr(logicalaccess::SerialPort);
-%shared_ptr(logicalaccess::boost::asio::ip::udp::socket);
 %shared_ptr(logicalaccess::A3MLGM5600ReaderCardAdapter);
 %shared_ptr(logicalaccess::A3MLGM5600ReaderProvider);
 %shared_ptr(logicalaccess::A3MLGM5600ReaderUnitConfiguration);
@@ -349,8 +349,6 @@ using namespace logicalaccess;
 %shared_ptr(logicalaccess::openssl::OpenSSLSymmetricCipher);
 %shared_ptr(logicalaccess::openssl::SymmetricKey);
 %shared_ptr(logicalaccess::openssl::InitializationVector);
-%shared_ptr(logicalaccess::boost::interprocess::mapped_region);
-%shared_ptr(logicalaccess::boost::interprocess::named_mutex);
 %shared_ptr(logicalaccess::KeyboardReaderProvider);
 %shared_ptr(logicalaccess::KeyboardReaderUnitConfiguration);
 %shared_ptr(logicalaccess::NFCReaderUnit);
@@ -415,10 +413,34 @@ using namespace logicalaccess;
 
 /* END_Shared_ptr */
 
+%shared_ptr(logicalaccess::ReaderConfiguration);
+%shared_ptr(CSMARTCommon);
+%shared_ptr(boost::asio::ip::udp::socket);
+%shared_ptr(boost::interprocess::mapped_region);
+%shared_ptr(boost::interprocess::named_mutex);
+
 //typedef std::shared_ptr<logicalaccess::ReaderProvider> ReaderProviderPtr;
 //typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
 
 %include "liblogicalaccess_readerservice.i"
+
+%template(ReaderUnitCollection) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
+//%template(ChipPtrCollection) std::list<std::shared_ptr<Chip> >;
+%template(ReaderUnitWeakPtr) std::weak_ptr<logicalaccess::ReaderUnit>;
+%template(SerialPortXmlPtrVector) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >;
+
+
+%apply unsigned short *INOUT { unsigned short * }
+%apply int *INOUT { int * }
+%apply unsigned long *OUTPUT { unsigned long* pdwOutLen}
+%apply unsigned char OUTPUT[] { unsigned char* pOutBuf }
+%apply unsigned char INPUT[] { unsigned char* pInBuf }
+%apply unsigned char INPUT[] { uint8_t *atr }
+%apply unsigned char OUTPUT[] { unsigned char* pstate }
+
+%typemap(cstype) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& "out SerialPortXmlPtrVector"
+%typemap(csin) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& %{out $csinput%}  
+%typemap(imtype) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& "out SerialPortXmlPtrVector"
 
 /* Include_section */
 
@@ -686,6 +708,4 @@ using namespace logicalaccess;
 
 /* END_Include_section */
 
-%template(ReaderUnitCollection) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
-//%template(ChipPtrCollection) std::list<std::shared_ptr<Chip> >;
-%template(ReaderUnitWeakPtr) std::weak_ptr<ReaderUnit>;
+%include <logicalaccess/plugins/readers/idp/SMART-DLL/SMARTComm70.h>

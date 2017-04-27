@@ -4,13 +4,44 @@
 %include "liblogicalaccess.i"
 
 %{
-#include <logicalaccess/cards/readercardadapter.hpp>
 #include <logicalaccess/lla_fwd.hpp>
 #include <logicalaccess/techno.hpp>
+#include <logicalaccess/xmlserializable.hpp>
+#include <logicalaccess/readerproviders/datatransport.hpp>
+#include <logicalaccess/resultchecker.hpp>
+#include <logicalaccess/cards/readercardadapter.hpp>
 #include <stdint.h>
 %}
 
-%include "arrays_csharp.i"
+%include <arrays_csharp.i>
+
+%define CSHARP_MEMBER_ARRAYS( CTYPE, CSTYPE )
+
+%typemap(csvarout, excode=SWIGEXCODE2) CTYPE MBINOUT[] %{ 
+  get { 
+    CSTYPE[] ret = new CSTYPE[$1_dim0]; 
+        IntPtr data = $imcall; 
+        System.Runtime.InteropServices.Marshal.Copy(data, ret, 0, $1_dim0);
+ 	$excode 
+    return ret; 
+  }
+%}
+
+%typemap(csvarin, excode=SWIGEXCODE2) CTYPE MBINOUT[] %{ 
+  set { 
+		if ($csinput.Length < $1_dim0)
+		{
+			throw new Exception("The array value must be $1_dim0 long !");
+		}
+		$imcall;$excode
+  }
+%}
+
+%typemap(imtype, out="IntPtr") CTYPE MBINOUT[] "CSTYPE[]"
+
+%enddef // CSHARP_MEMBER_ARRAYS
+
+CSHARP_ARRAYS(unsigned char, byte);
 
 %apply char { int8_t }
 %apply char { const int8_t & }
@@ -33,8 +64,9 @@
 %apply void *VOID_INT_PTR { SCARDHANDLE, const SCARDHANDLE &, SCARDCONTEXT, const SCARDCONTEXT & }
 %apply void *VOID_INT_PTR { void * }
 %apply bool &OUTPUT { bool & }
-%apply unsigned char INPUT[] { unsigned char* }
+//%apply unsigned char INPUT[] { unsigned char* }
 %apply unsigned int &OUTPUT { unsigned int & }
+%apply bool *INOUT { bool * }
 
 //%typemap(cstype) size_t* "ref uint"
 //%typemap(csin) size_t* %{ref $csinput%}  
@@ -80,9 +112,34 @@
 %typemap(csin) logicalaccess::STidTamperSwitchBehavior& %{out $csinput%}  
 %typemap(imtype) logicalaccess::STidTamperSwitchBehavior& "out STidTamperSwitchBehavior"
 
+%typemap(cstype) logicalaccess::DESFireKeySettings& "out DESFireKeySettings"
+%typemap(csin) logicalaccess::DESFireKeySettings& %{out $csinput%}  
+%typemap(imtype) logicalaccess::DESFireKeySettings& "out DESFireKeySettings"
+
+%typemap(cstype) logicalaccess::DESFireKeyType& "out DESFireKeyType"
+%typemap(csin) logicalaccess::DESFireKeyType& %{out $csinput%}  
+%typemap(imtype) logicalaccess::DESFireKeyType& "out DESFireKeyType"
+
 %include <std_vector.i>
 
 namespace std {
+	
+	%typemap(cstype) vector<bool> & "out BoolCollection"
+	%typemap(csin) vector<bool> & %{out $csinput%}  
+	%typemap(imtype) vector<bool> & "out BoolCollection"
+
+	%typemap(cstype) vector<uint8_t> "UCharCollection"
+	%typemap(csin) vector<uint8_t> %{$csinput%}  
+	%typemap(imtype) vector<uint8_t> "UCharCollection"
+
+	%typemap(cstype) const vector<uint8_t> &"UCharCollection"
+	%typemap(csin) const vector<uint8_t> & %{$csinput%}  
+	%typemap(imtype) const vector<uint8_t> & "UCharCollection"
+
+	%typemap(cstype) const vector<unsigned char> &"UCharCollection"
+	%typemap(csin) const vector<unsigned char> & %{$csinput%}  
+	%typemap(imtype) const vector<unsigned char> & "UCharCollection"
+
 	%template(UCharCollection) vector<unsigned char>;
 	%template(UShortCollection) vector<unsigned short>;
 	%template(UCharCollectionCollection) vector<vector<unsigned char> >;
@@ -90,16 +147,8 @@ namespace std {
 	%template(BoolCollection) vector<bool>;
 	%template(UIntCollection) vector<unsigned int>;
 	//%template(UCharCollectionList) list<vector<unsigned char> >;
-	%apply vector<unsigned char> { const vector<unsigned char> & };
-	%apply vector<unsigned char> { vector<uint8_t> };
-	%apply vector<unsigned char> { const vector<uint8_t> & };
-	%apply vector<unsigned char> { ByteVector };
-	%apply vector<unsigned char> { const ByteVector & };
 	//%apply list<vector<unsigned char> > {list<vector<unsigned char> > &}
 
-	%typemap(cstype) vector<bool> & "out BoolCollection"
-	%typemap(csin) vector<bool> & %{out $csinput%}  
-	%typemap(imtype) vector<bool> & "out BoolCollection"
 };
 
 %shared_ptr(logicalaccess::XmlSerializable);

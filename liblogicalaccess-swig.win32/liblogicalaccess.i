@@ -15,6 +15,7 @@
 %include <typemaps.i>
 %include <std_string.i>
 %include <std_shared_ptr.i>
+%include <std_array.i>
 %include <exception.i>
 
 /*****WARNING SECTION*****/

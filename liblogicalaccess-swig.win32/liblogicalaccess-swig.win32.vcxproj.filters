@@ -23,6 +23,9 @@
     <CustomBuild Include="liblogicalaccess_reader.i">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="liblogicalaccess_iks.i">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="msliblogicalaccessswigwin32.h">
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="liblogicalaccess_library_wrap.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="liblogicalaccess_iks_wrap.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
