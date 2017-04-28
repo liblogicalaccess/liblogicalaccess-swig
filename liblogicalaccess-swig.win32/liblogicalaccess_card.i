@@ -14,7 +14,6 @@
 
 /* Additional_include */
 
-
 #include <logicalaccess/cards/accessinfo.hpp>
 #include <logicalaccess/cards/aes128key.hpp>
 #include <logicalaccess/cards/chip.hpp>
@@ -269,6 +268,9 @@ using namespace logicalaccess;
 typedef std::shared_ptr<logicalaccess::Chip> ChipPtr;
 typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
+%apply unsigned int *INOUT { unsigned int* pos };
+%apply unsigned int INOUT[] { unsigned int* locations, unsigned int* positions };
+
 //%ignore logicalaccess::Commands;
 %ignore pcsc_share_mode_to_string;
 %ignore pcsc_protocol_to_string;
@@ -281,7 +283,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include "liblogicalaccess_cardservice.i"
 
 /* Include_section */
-
 
 %include <logicalaccess/cards/accessinfo.hpp>
 %include <logicalaccess/cards/aes128key.hpp>

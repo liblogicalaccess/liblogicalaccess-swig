@@ -458,6 +458,44 @@ using namespace logicalaccess;
 %typemap(csin) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& %{out $csinput%}  
 %typemap(imtype) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& "out SerialPortXmlPtrVector"
 
+%typemap(ctype) PCSCReaderUnitType "enum PCSCReaderUnitType"
+%typemap(cstype) PCSCReaderUnitType "PCSCReaderUnitType"
+%typemap(csin) PCSCReaderUnitType %{$csinput%}  
+%typemap(imtype) PCSCReaderUnitType "PCSCReaderUnitType"
+%typemap(csout, excode=SWIGEXCODE) PCSCReaderUnitType %{
+	PCSCReaderUnitType cPtr = $imcall;
+	var ret = $imclassname.male(cPtr, $owner);$excode
+	return ret;
+%}
+
+%typemap(ctype) PCSCShareMode "PCSCShareMode"
+%typemap(cstype) PCSCShareMode "PCSCShareMode"
+%typemap(csin) PCSCShareMode %{$csinput%}  
+%typemap(imtype) PCSCShareMode "PCSCShareMode"
+%typemap(csout, excode=SWIGEXCODE) PCSCShareMode {
+	PCSCShareMode ret = $imcall;$excode
+	return ret;
+}
+
+%template(UByteVector) std::vector<uint8_t>;
+
+%typemap(cstype) const std::vector<uint8_t> & "UByteVector"
+%typemap(csin) const std::vector<uint8_t> & %{ref $csinput%}  
+%typemap(imtype) const std::vector<uint8_t> & "UByteVector"
+%typemap(csout, excode=SWIGEXCODE) const std::vector<uint8_t> & {
+	UByteVector ret = $imcall;$excode
+	return ret;
+}
+
+%typemap(ctype) TLVPtr "TLV*"
+%typemap(cstype) TLVPtr "TLV"
+%typemap(csin) TLVPtr %{$csinput%}  
+%typemap(imtype) TLVPtr "TLV"
+%typemap(csout, excode=SWIGEXCODE) TLV {
+	TLV ret = $imcall;$excode
+	return ret;
+}
+
 /* Include_section */
 
 

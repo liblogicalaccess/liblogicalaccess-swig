@@ -19,6 +19,8 @@
 %include <wchar.i>
 %include <swigtype_inout.i>
 %include <exception.i>
+%include <arrays_csharp.i>
+%include <stdint.i>
 
 /*****WARNING SECTION*****/
 
