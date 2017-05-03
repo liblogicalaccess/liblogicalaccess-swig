@@ -1,3 +1,7 @@
+/* File : liblogicalaccess_readerservice.i */
+
+%import "liblogicalaccess_data.i"
+
 %shared_ptr(logicalaccess::ReaderService);
 //%feature("director") ReaderService;
 %shared_ptr(logicalaccess::ReaderFormatComposite);
@@ -8,7 +12,7 @@
 	#include <logicalaccess/services/reader_service.hpp>
 	#include <logicalaccess/services/accesscontrol/readerformatcomposite.hpp>
 	#include <logicalaccess/services/licensechecker/license_checker_service.hpp>
-	#include <C:\islog\dev\liblogicalaccess-swig\packages\include\logicalaccess\services\nfc\p2p\llcpinitiator.hpp>
+	#include <logicalaccess/services/nfc/p2p/llcpinitiator.hpp>
 %}
 
 %shared_ptr(logicalaccess::LLCPInitiator);
@@ -16,4 +20,3 @@
 %include <logicalaccess/services/reader_service.hpp>
 %include <logicalaccess/services/accesscontrol/readerformatcomposite.hpp>
 %include <logicalaccess/services/licensechecker/license_checker_service.hpp>
-%include <C:\islog\dev\liblogicalaccess-swig\packages\include\logicalaccess\services\nfc\p2p\llcpinitiator.hpp>

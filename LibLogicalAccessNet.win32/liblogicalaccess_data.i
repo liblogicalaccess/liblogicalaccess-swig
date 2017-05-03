@@ -12,36 +12,75 @@
 #include <logicalaccess/readerproviders/datatransport.hpp>
 #include <logicalaccess/resultchecker.hpp>
 #include <logicalaccess/cards/readercardadapter.hpp>
+#include <logicalaccess/cards/keystorage.hpp">
+#include <logicalaccess/cards/keydiversification.hpp">
 #include <stdint.h>
 %}
 
-//%define CSHARP_MEMBER_ARRAYS( CTYPE, CSTYPE )
-//
-//%typemap(csvarout, excode=SWIGEXCODE2) CTYPE MBINOUT[] %{ 
-//  get { 
-//    CSTYPE[] ret = new CSTYPE[$1_dim0]; 
-//        IntPtr data = $imcall; 
-//        System.Runtime.InteropServices.Marshal.Copy(data, ret, 0, $1_dim0);
-// 	$excode 
-//    return ret; 
-//  }
-//%}
-//
-//%typemap(csvarin, excode=SWIGEXCODE2) CTYPE MBINOUT[] %{ 
-//  set { 
-//		if ($csinput.Length < $1_dim0)
-//		{
-//			throw new Exception("The array value must be $1_dim0 long !");
-//		}
-//		$imcall;$excode
-//  }
-//%}
-//
-//%typemap(imtype, out="IntPtr") CTYPE MBINOUT[] "CSTYPE[]"
-//
-//%enddef // CSHARP_MEMBER_ARRAYS
-//
-//CSHARP_ARRAYS(unsigned char, byte);
+%define CSHARP_MEMBER_ARRAYS( CTYPE, CSTYPE )
+
+%typemap(ctype) CTYPE "CTYPE[]"
+%typemap(cstype) CTYPE "CSTYPE[]"
+%typemap(imtype, out="System.IntPtr") CTYPE "CSTYPE[]"
+%typemap(csin) CTYPE "$csinput"
+%typemap(csvarout, excode=SWIGEXCODE2) CTYPE %{ 
+		get { 
+			CSTYPE[] ret = new CSTYPE[$1_dim0]; 
+			System.IntPtr data = $imcall; 
+			System.Runtime.InteropServices.Marshal.Copy(data, ret, 0, $1_dim0);$excode 
+		    return ret; 
+		}
+%}
+%typemap(csvarin, excode=SWIGEXCODE2) CTYPE %{ 
+		set { 
+			if ($csinput.Length > $1_dim0)
+			{
+                throw new System.IndexOutOfRangeException();
+			}
+			$imcall;$excode
+		}
+%}
+%typemap(freearg) CTYPE ""
+%typemap(argout)  CTYPE ""
+
+%enddef // CSHARP_MEMBER_ARRAYS
+
+%typemap(ctype) unsigned char * "unsigned char *"
+%typemap(cstype) unsigned char * "string"
+%typemap(imtype, out="System.IntPtr") unsigned char * "string"
+%typemap(in) unsigned char * %{ $1 = ($1_ltype)$input; %}
+%typemap(out) unsigned char * %{ $result = SWIG_csharp_string_callback((const unsigned char *)$1); %}
+%typemap(directorout, warning=SWIGWARN_TYPEMAP_DIRECTOROUT_PTR_MSG) unsigned char * %{ $result = ($1_ltype)$input; %}
+%typemap(directorin) unsigned char * %{ $input = SWIG_csharp_string_callback((const unsigned char *)$1); %}
+%typemap(csdirectorin) unsigned char * "$iminput"
+%typemap(csdirectorout) unsigned char * "$cscall"
+%typemap(csin) unsigned char * "$csinput"
+%typemap(csout, excode=SWIGEXCODE) unsigned char * {
+    string ret = $imcall;$excode
+    return ret;
+}
+%typemap(csvarin, excode=SWIGEXCODE2) unsigned char * %{
+    set {
+      $imcall;$excode
+} %}
+%typemap(csvarout, excode=SWIGEXCODE2) unsigned char * %{
+    get {
+      string ret = $imcall;$excode
+      return ret;
+} %}
+
+%typemap(ctype) void**, const void** "void**"
+%typemap(cstype) void**, const void** "global::System.IntPtr[]"
+%typemap(imtype) void**, const void** "global::System.IntPtr[]"
+%typemap(in) void**, const void** %{ $1 = ($1_ltype)$input; %}
+%typemap(out) void**, const void** %{ $result = (void **)$1; %} 
+%typemap(csin) void**, const void** "$csinput"
+%typemap(csout, excode=SWIGEXCODE) void**, const void** {
+	global::System.IntPtr[] ret = $imcall;$excode
+	return ret;
+}
+%typemap(csdirectorin) void**, const void** "$iminput"
+%typemap(csdirectorout) void**, const void** "$cscall"
 
 %apply char { int8_t }
 %apply char { const int8_t & }
@@ -66,6 +105,17 @@
 %apply bool &OUTPUT { bool & }
 %apply unsigned int &OUTPUT { unsigned int & }
 %apply bool *INOUT { bool * }
+%apply unsigned char *OUTPUT { unsigned char & }
+%apply unsigned char INPUT[] { const unsigned char *data }
+
+%typemap(ctype) const unsigned char * "const unsigned char *"
+%typemap(cstype) const unsigned char * "byte[]"
+%typemap(imtype, out="System.IntPtr") const unsigned char * "byte[]"
+%typemap(csin) const unsigned char * "$csinput"
+%typemap(csout, excode=SWIGEXCODE) const unsigned char * {
+	byte[] ret = $imcall;$excode
+	return ret;
+}
 
 %apply unsigned char OUTPUT[] { unsigned char* getData() }
 %typemap(csout, excode=SWIGEXCODE) unsigned char* getData() {
@@ -73,10 +123,9 @@
 	return ret;
 }
 
-
-//%typemap(cstype) size_t* "ref uint"
-//%typemap(csin) size_t* %{ref $csinput%}  
-//%typemap(imtype) size_t* "ref uint"
+%typemap(cstype) size_t* "ref uint"
+%typemap(csin) size_t* %{ref $csinput%}  
+%typemap(imtype) size_t* "ref uint"
 
 %typemap(cstype) size_t& "out uint"
 %typemap(csin) size_t& %{out $csinput%}  
@@ -85,14 +134,6 @@
 %typemap(cstype) char & "out char"
 %typemap(csin) char & %{out $csinput%}  
 %typemap(imtype) char & "out char"
-
-//%typemap(cstype) unsigned char* "byte[]"
-//%typemap(csin) unsigned char* %{$csinput%}  
-//%typemap(imtype) unsigned char* "byte[]"
-
-//%typemap(cstype) unsigned int* "uint[]"
-//%typemap(csin) unsigned int* %{$csinput%}  
-//%typemap(imtype) unsigned int* "uint[]"
 
 %typemap(ctype) std::string & "char **"
 %typemap(cstype) std::string & "out string"
@@ -126,9 +167,37 @@
 %typemap(csin) logicalaccess::DESFireKeySettings& %{out $csinput%}  
 %typemap(imtype) logicalaccess::DESFireKeySettings& "out DESFireKeySettings"
 
-%typemap(cstype) logicalaccess::DESFireKeyType& "out DESFireKeyType"
-%typemap(csin) logicalaccess::DESFireKeyType& %{out $csinput%}  
-%typemap(imtype) logicalaccess::DESFireKeyType& "out DESFireKeyType"
+%typemap(ctype) DESFireKeyType& "DESFireKeyType*"
+%typemap(cstype) DESFireKeyType& "out DESFireKeyType"
+%typemap(csin) DESFireKeyType& %{out $csinput%}  
+%typemap(imtype) DESFireKeyType& "out DESFireKeyType"
+%typemap(csvarin, excode=SWIGEXCODE2) DESFireKeyType %{
+    set {
+      $imcall;$excode
+    } %}
+%typemap(csvarout, excode=SWIGEXCODE2) DESFireKeyType %{
+    get {
+      DESFireKeyType ret = $imcall;$excode
+      return ret;
+} %}
+
+%typemap(ctype) DESFireKeyType "DESFireKeyType"
+%typemap(cstype) DESFireKeyType "DESFireKeyType"
+%typemap(csin) DESFireKeyType %{$csinput%}  
+%typemap(imtype) DESFireKeyType "DESFireKeyType"
+%typemap(csout, excode=SWIGEXCODE) DESFireKeyType {
+	DESFireKeyType ret = $imcall;$excode
+	return ret;
+}
+
+%typemap(ctype) DESFireKeyType "DESFireKeyType"
+%typemap(cstype) DESFireKeyType "DESFireKeyType"
+%typemap(csin) DESFireKeyType %{$csinput%}  
+%typemap(imtype) DESFireKeyType "DESFireKeyType"
+%typemap(csout, excode=SWIGEXCODE) DESFireKeyType {
+	DESFireKeyType ret = $imcall;$excode
+	return ret;
+}
 
 %include <std_vector.i>
 
@@ -157,7 +226,10 @@ namespace std {
 	%typemap(cstype) const vector<unsigned char> &"UByteVector"
 	%typemap(csin) const vector<unsigned char> & %{$csinput%}  
 	%typemap(imtype) const vector<unsigned char> & "UByteVector"
-
+	%typemap(csout, excode=SWIGEXCODE) const vector<unsigned char> & {
+		UByteVector ret = $imcall;$excode
+		return ret;
+}
 };
 
 %shared_ptr(logicalaccess::XmlSerializable);
@@ -213,3 +285,5 @@ namespace std {
 %include <logicalaccess/resultchecker.hpp>
 %include <logicalaccess/cards/readercardadapter.hpp>
 %include <logicalaccess/key.hpp>
+%include <logicalaccess/cards/keystorage.hpp>
+%include <logicalaccess/cards/keydiversification.hpp>

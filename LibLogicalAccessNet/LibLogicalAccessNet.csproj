@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<TargetFrameworks>net4.6;net4.0;net2.0</TargetFrameworks>
+    <AssemblyName>LibLogicalAccessNet</AssemblyName>
+    <RootNamespace>LibLogicalAccess</RootNamespace>
+    <Description>
+      ISLOG RFID library layer for C#
+    </Description>
+    <Copyright>Copyright (C) 2017</Copyright>
+    <Version>2.0.0.0</Version>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Company>AdrienJ</Company>
+    <Authors>AdrienJ</Authors>
+    <PackageProjectUrl>http://liblogicalaccess.islog.com/</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/islog/liblogicalaccess/blob/master/LICENSE.LibLogicalAccess.txt</PackageLicenseUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/dokan-dev/dokan-dotnet/master/dokan_logo.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/islog/liblogicalaccess</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>liblogicalaccess nfc rfid</PackageTags>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(ISLOGRepository)keys/islog_sign.pfx</AssemblyOriginatorKeyFile>
+    <CLSCompliant>True</CLSCompliant>
+  </PropertyGroup>
+</Project>

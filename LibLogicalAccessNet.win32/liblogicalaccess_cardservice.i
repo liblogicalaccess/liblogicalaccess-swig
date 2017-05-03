@@ -1,5 +1,43 @@
 /* File : liblogicalaccess_cardservice.i */
 
+%import "liblogicalaccess_data.i"
+
+%{
+#include <logicalaccess/services/cardservice.hpp>
+#include <logicalaccess/services/storage/storagecardservice.hpp>
+#include <logicalaccess/services/accesscontrol/encodings/binarydatatype.hpp>
+#include <logicalaccess/services/accesscontrol/encodings/bcdbytedatatype.hpp>
+#include <logicalaccess/services/accesscontrol/encodings/bcdnibbledatatype.hpp>
+#include <logicalaccess/services/accesscontrol/encodings/bigendiandatarepresentation.hpp>
+#include <logicalaccess/services/accesscontrol/encodings/littleendiandatarepresentation.hpp>
+#include <logicalaccess/services/accesscontrol/encodings/nodatarepresentation.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/datafield.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/binarydatafield.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/numberdatafield.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/paritydatafield.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/stringdatafield.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/customformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/rawformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand26format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand34format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand34withfacilityformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand37format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityrightparity2format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/hidhoneywellformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/getronik40bitformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/fascn200bitformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/bariumferritepcscformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
+#include <logicalaccess/services/accesscontrol/cardsformatcomposite.hpp>
+#include <logicalaccess/services/accesscontrol/accesscontrolcardservice.hpp>
+#include <logicalaccess/services/identity/identity_service.hpp>
+#include <logicalaccess/services/nfctag/nfctagcardservice.hpp>
+#include <logicalaccess/services/uidchanger/uidchangerservice.hpp>
+%}
+
 %shared_ptr(logicalaccess::CardService);
 %feature("director") CardService;
 
@@ -42,6 +80,7 @@
 %shared_ptr(logicalaccess::DataClockFormat);
 %shared_ptr(logicalaccess::BariumFerritePCSCFormat);
 %shared_ptr(logicalaccess::ASCIIFormat);
+%shared_ptr(logicalaccess::ReaderUnit);
 
 %shared_ptr(logicalaccess::IdentityCardService);
 %feature("director") IdentityCardService;
@@ -61,42 +100,6 @@
 
 %ignore FieldSortPredicate;
 %ignore logicalaccess::Getronik40BitFormat::calcChecksum;
-
-
-%{
-#include <logicalaccess/services/cardservice.hpp>
-#include <logicalaccess/services/storage/storagecardservice.hpp>
-#include <logicalaccess/services/accesscontrol/encodings/binarydatatype.hpp>
-#include <logicalaccess/services/accesscontrol/encodings/bcdbytedatatype.hpp>
-#include <logicalaccess/services/accesscontrol/encodings/bcdnibbledatatype.hpp>
-#include <logicalaccess/services/accesscontrol/encodings/bigendiandatarepresentation.hpp>
-#include <logicalaccess/services/accesscontrol/encodings/littleendiandatarepresentation.hpp>
-#include <logicalaccess/services/accesscontrol/encodings/nodatarepresentation.hpp>
-#include <logicalaccess/services/accesscontrol/formats/customformat/datafield.hpp>
-#include <logicalaccess/services/accesscontrol/formats/customformat/binarydatafield.hpp>
-#include <logicalaccess/services/accesscontrol/formats/customformat/numberdatafield.hpp>
-#include <logicalaccess/services/accesscontrol/formats/customformat/paritydatafield.hpp>
-#include <logicalaccess/services/accesscontrol/formats/customformat/stringdatafield.hpp>
-#include <logicalaccess/services/accesscontrol/formats/customformat/customformat.hpp>
-#include <logicalaccess/services/accesscontrol/formats/rawformat.hpp>
-#include <logicalaccess/services/accesscontrol/formats/wiegand26format.hpp>
-#include <logicalaccess/services/accesscontrol/formats/wiegand34format.hpp>
-#include <logicalaccess/services/accesscontrol/formats/wiegand34withfacilityformat.hpp>
-#include <logicalaccess/services/accesscontrol/formats/wiegand37format.hpp>
-#include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityformat.hpp>
-#include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityrightparity2format.hpp>
-#include <logicalaccess/services/accesscontrol/formats/hidhoneywellformat.hpp>
-#include <logicalaccess/services/accesscontrol/formats/getronik40bitformat.hpp>
-#include <logicalaccess/services/accesscontrol/formats/fascn200bitformat.hpp>
-#include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
-#include <logicalaccess/services/accesscontrol/formats/bariumferritepcscformat.hpp>
-#include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
-#include <logicalaccess/services/accesscontrol/cardsformatcomposite.hpp>
-#include <logicalaccess/services/accesscontrol/accesscontrolcardservice.hpp>
-#include <logicalaccess/services/identity/identity_service.hpp>
-#include <logicalaccess/services/nfctag/nfctagcardservice.hpp>
-#include <logicalaccess/services/uidchanger/uidchangerservice.hpp>
-%}
 
 
 /* original header files */

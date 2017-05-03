@@ -18,7 +18,7 @@ try:
 		namespace = "swig";
 
 	curLoc = os.path.dirname(os.path.realpath(__file__))
-	exceptPath = curLoc + "/../liblogicalaccess-swig2.0/Exception/"
+	exceptPath = curLoc + "/../LibLogicalAccessNet/Exception/"
 	if not (os.path.exists(exceptPath)):
 		os.makedirs(exceptPath)
 
@@ -35,18 +35,6 @@ try:
 			os.remove(exceptPath + sys.argv[1] + ".cs")
 	if (os.path.exists(tmpException)):
 		os.rename(tmpException, exceptPath + sys.argv[1] + ".cs")
-		
-	path = curLoc + "/../liblogicalaccess-swig2.0/liblogicalaccess-swig2.0.csproj"
-	tree = objectify.parse(path)
-	root = tree.getroot()
-	existing = False;
-	for elem in root.ItemGroup[1].iterchildren():
-		if (elem.attrib['Include'] == "Exception\\" + sys.argv[1] + ".cs"):
-			existing = True
-			break
-	if (existing == False):
-		newElem = objectify.SubElement(root.ItemGroup[1], "Compile", Include="Exception\\" + sys.argv[1] + ".cs")
-		tree.write(path, encoding='utf-8', method='xml', pretty_print=True, xml_declaration=True)
 	
 except Exception as e:
 		print("Error: {0}. End of script.").format(str(e))

@@ -4,37 +4,17 @@
 %include "liblogicalaccess.i"
 
 %import "liblogicalaccess_data.i"
-
-%typemap(csimports) SWIGTYPE
-%{
-	using LibLogicalAccess;
-%}
+%import "liblogicalaccess_core.i"
+%import "liblogicalaccess_iks.i"
 
 %{
 
 /* Additional_include */
 
-#include <logicalaccess/cards/accessinfo.hpp>
-#include <logicalaccess/cards/aes128key.hpp>
-#include <logicalaccess/cards/chip.hpp>
-#include <logicalaccess/cards/commands.hpp>
-#include <logicalaccess/cards/computermemorykeystorage.hpp>
-#include <logicalaccess/cards/hmac1key.hpp>
-#include <logicalaccess/cards/IKSStorage.hpp>
-#include <logicalaccess/cards/keydiversification.hpp>
-#include <logicalaccess/cards/keystorage.hpp>
-#include <logicalaccess/cards/location.hpp>
-#include <logicalaccess/cards/locationnode.hpp>
-#include <logicalaccess/cards/readercardadapter.hpp>
-#include <logicalaccess/cards/readermemorykeystorage.hpp>
-#include <logicalaccess/cards/samkeystorage.hpp>
-#include <logicalaccess/cards/tripledeskey.hpp>
-
 #include <logicalaccess/plugins/cards/cps3/cps3chip.hpp>
 #include <logicalaccess/plugins/cards/cps3/cps3commands.hpp>
 #include <logicalaccess/plugins/cards/cps3/cps3location.hpp>
 #include <logicalaccess/plugins/cards/cps3/cps3storagecardservice.hpp>
-
 #include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
@@ -51,11 +31,8 @@
 #include <logicalaccess/plugins/cards/desfire/nxpkeydiversification.hpp>
 #include <logicalaccess/plugins/cards/desfire/omnitechkeydiversification.hpp>
 #include <logicalaccess/plugins/cards/desfire/sagemkeydiversification.hpp>
-
 #include <logicalaccess/plugins/cards/em4102/em4102chip.hpp>
-
 #include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
-
 #include <logicalaccess/plugins/cards/epass/epassaccessinfo.hpp>
 #include <logicalaccess/plugins/cards/epass/epasschip.hpp>
 #include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
@@ -63,16 +40,13 @@
 #include <logicalaccess/plugins/cards/epass/epassidentityservice.hpp>
 #include <logicalaccess/plugins/cards/epass/epassreadercardadapter.hpp>
 #include <logicalaccess/plugins/cards/epass/utils.hpp>
-
 #include <logicalaccess/plugins/cards/felica/felicachip.hpp>
 #include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
 #include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 #include <logicalaccess/plugins/cards/felica/felicastoragecardservice.hpp>
 #include <logicalaccess/plugins/cards/felica/nfctag3cardservice.hpp>
-
 #include <logicalaccess/plugins/cards/generictag/generictagaccesscontrolcardservice.hpp>
 #include <logicalaccess/plugins/cards/generictag/generictagchip.hpp>
-
 #include <logicalaccess/plugins/cards/iclass/hidiclass16kschip.hpp>
 #include <logicalaccess/plugins/cards/iclass/hidiclass2kschip.hpp>
 #include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_16chip.hpp>
@@ -92,32 +66,21 @@
 #include <logicalaccess/plugins/cards/iclass/pcschidiclassdatatransport.hpp>
 #include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
 #include <logicalaccess/plugins/cards/iclass/picopasssimple.hpp>
-
 #include <logicalaccess/plugins/cards/iclass_5321/omnikeyhidiclassdatatransportimpl.hpp>
-#include <logicalaccess/plugins/cards/iclass_5321/omnikeylib/sm5x21.h>
-#include <logicalaccess/plugins/cards/iclass_5321/omnikeylib/sm5x21i.h>
-
 #include <logicalaccess/plugins/cards/icode1/icode1chip.hpp>
-
 #include <logicalaccess/plugins/cards/icode2/icode2chip.hpp>
-
 #include <logicalaccess/plugins/cards/indala/indalachip.hpp>
-
 #include <logicalaccess/plugins/cards/infineonmyd/infineonmydchip.hpp>
-
 #include <logicalaccess/plugins/cards/iso15693/iso15693chip.hpp>
 #include <logicalaccess/plugins/cards/iso15693/iso15693commands.hpp>
 #include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
 #include <logicalaccess/plugins/cards/iso15693/iso15693storagecardservice.hpp>
-
 #include <logicalaccess/plugins/cards/iso7816/iso7816chip.hpp>
 #include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
 #include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
 #include <logicalaccess/plugins/cards/iso7816/iso7816nfctag4cardservice.hpp>
 #include <logicalaccess/plugins/cards/iso7816/iso7816storagecardservice.hpp>
-
 #include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
-
 #include <logicalaccess/plugins/cards/mifare/mifare1kchip.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifare4kchip.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
@@ -127,7 +90,6 @@
 #include <logicalaccess/plugins/cards/mifare/mifarelocation.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifarenfctagcardservice.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifarestoragecardservice.hpp>
-
 #include <logicalaccess/plugins/cards/mifareplus/mifareplusaccessinfo_sl1.hpp>
 #include <logicalaccess/plugins/cards/mifareplus/MifarePlusAESAuth.hpp>
 #include <logicalaccess/plugins/cards/mifareplus/mifarepluschip.hpp>
@@ -140,7 +102,6 @@
 #include <logicalaccess/plugins/cards/mifareplus/MifarePlusSL3Chip.hpp>
 #include <logicalaccess/plugins/cards/mifareplus/mifareplussl3commands.hpp>
 #include <logicalaccess/plugins/cards/mifareplus/mifareplusstoragecardservice_sl1.hpp>
-
 #include <logicalaccess/plugins/cards/mifareultralight/mifareultralightaccessinfo.hpp>
 #include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcaccessinfo.hpp>
 #include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcchip.hpp>
@@ -152,13 +113,10 @@
 #include <logicalaccess/plugins/cards/mifareultralight/mifareultralightstoragecardservice.hpp>
 #include <logicalaccess/plugins/cards/mifareultralight/mifareultralightuidchangerservice.hpp>
 #include <logicalaccess/plugins/cards/mifareultralight/nfctag2cardservice.hpp>
-
 #include <logicalaccess/plugins/cards/prox/proxaccesscontrolcardservice.hpp>
 #include <logicalaccess/plugins/cards/prox/proxchip.hpp>
 #include <logicalaccess/plugins/cards/prox/proxlocation.hpp>
-
 #include <logicalaccess/plugins/cards/proxlite/proxlitechip.hpp>
-
 #include <logicalaccess/plugins/cards/samav2/samav1chip.hpp>
 #include <logicalaccess/plugins/cards/samav2/samav2chip.hpp>
 #include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
@@ -168,23 +126,17 @@
 #include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
 #include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
 #include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
-
 #include <logicalaccess/plugins/cards/seos/seoschip.hpp>
-
 #include <logicalaccess/plugins/cards/smartframe/smartframechip.hpp>
-
 #include <logicalaccess/plugins/cards/stmlri512/stmlri512chip.hpp>
-
 #include <logicalaccess/plugins/cards/tagit/tagitchip.hpp>
 #include <logicalaccess/plugins/cards/tagit/tagitcommands.hpp>
-
 #include <logicalaccess/plugins/cards/topaz/nfctag1cardservice.hpp>
 #include <logicalaccess/plugins/cards/topaz/topazaccessinfo.hpp>
 #include <logicalaccess/plugins/cards/topaz/topazchip.hpp>
 #include <logicalaccess/plugins/cards/topaz/topazcommands.hpp>
 #include <logicalaccess/plugins/cards/topaz/topazlocation.hpp>
 #include <logicalaccess/plugins/cards/topaz/topazstoragecardservice.hpp>
-
 #include <logicalaccess/plugins/cards/twic/twicaccesscontrolcardservice.hpp>
 #include <logicalaccess/plugins/cards/twic/twicchip.hpp>
 #include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
@@ -193,118 +145,110 @@
 
 /* END_Additional_include */
 
+#include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
+
 using namespace logicalaccess;
 
 %}
 
-/* Shared_ptr */
+%typemap(csimports) SWIGTYPE
+%{
+using LibLogicalAccess;
+using LibLogicalAccess.Reader;
+%}
 
-%shared_ptr(logicalaccess::LocationNode);
-%shared_ptr(logicalaccess::Commands);
-%shared_ptr(logicalaccess::AccessInfo);
-%shared_ptr(logicalaccess::Location);
-%shared_ptr(logicalaccess::CardService);
-%shared_ptr(logicalaccess::Chip);
-%shared_ptr(logicalaccess::ReaderCardAdapter);
-%shared_ptr(logicalaccess::Key);
-%shared_ptr(logicalaccess::KeyDiversification);
-%shared_ptr(logicalaccess::KeyStorage);
-%shared_ptr(logicalaccess::DataTransport);
-%shared_ptr(logicalaccess::ResultChecker);
-%shared_ptr(logicalaccess::CPS3Commands);
-%shared_ptr(logicalaccess::CPS3Chip);
-%shared_ptr(logicalaccess::DESFireKey);
-%shared_ptr(logicalaccess::DESFireLocation);
-%shared_ptr(logicalaccess::DESFireCommands);
-%shared_ptr(logicalaccess::DESFireCrypto);
-%shared_ptr(logicalaccess::DESFireChip);
-%shared_ptr(logicalaccess::openssl::OpenSSLSymmetricCipher);
-%shared_ptr(logicalaccess::DESFireEV1Commands);
-%shared_ptr(logicalaccess::DESFireEV1Chip);
-%shared_ptr(logicalaccess::logicalaccess::DESFireKey);
-%shared_ptr(logicalaccess::logicalaccess::NdefMessage);
-%shared_ptr(logicalaccess::EPassCommand);
-%shared_ptr(logicalaccess::EPassCrypto);
-%shared_ptr(logicalaccess::EPassChip);
-%shared_ptr(logicalaccess::EPassAccessInfo);
-%shared_ptr(logicalaccess::FeliCaCommands);
-%shared_ptr(logicalaccess::FeliCaChip);
-%shared_ptr(logicalaccess::Format);
-%shared_ptr(logicalaccess::GenericTagChip);
-%shared_ptr(logicalaccess::HIDiClassChip);
-%shared_ptr(logicalaccess::HIDiClassKey);
-%shared_ptr(logicalaccess::PicoPassCommands);
-%shared_ptr(logicalaccess::PCSCReaderCardAdapter);
-%shared_ptr(logicalaccess::PCSCHIDiClassDataTransport);
-%shared_ptr(logicalaccess::OmnikeyHIDiClassDataTransport);
-%shared_ptr(logicalaccess::TripleDESKey);
-%shared_ptr(logicalaccess::OmnikeyXX21ReaderUnit);
-%shared_ptr(logicalaccess::OmnikeyReaderUnit);
-%shared_ptr(logicalaccess::ISO15693Commands);
-%shared_ptr(logicalaccess::ISO15693Chip);
-%shared_ptr(logicalaccess::ISO7816Commands);
-%shared_ptr(logicalaccess::ISO7816Chip);
-%shared_ptr(logicalaccess::MifareKey);
-%shared_ptr(logicalaccess::MifareCommands);
-%shared_ptr(logicalaccess::MifareChip);
-%shared_ptr(logicalaccess::AES128Key);
-%shared_ptr(logicalaccess::MifareUltralightCCommands);
-%shared_ptr(logicalaccess::MifareUltralightCChip);
-%shared_ptr(logicalaccess::MifareUltralightCommands);
-%shared_ptr(logicalaccess::MifareUltralightChip);
-%shared_ptr(logicalaccess::StorageCardService);
-%shared_ptr(logicalaccess::SAMCommands<KeyEntryAV1Information, SETAV1>);
-%shared_ptr(logicalaccess::SAMCommands<KeyEntryAV2Information, SETAV2>);
-%shared_ptr(logicalaccess::SAMKeyEntry<T, S>);
-%shared_ptr(logicalaccess::SAMKucEntry);
-%shared_ptr(logicalaccess::TopazChip);
-%shared_ptr(logicalaccess::TopazCommands);
-%shared_ptr(logicalaccess::TwicChip);
-%shared_ptr(logicalaccess::TwicCommands);
-%shared_ptr(logicalaccess::TwicLocation);
+%shared_ptr(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
+%shared_ptr(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
+%shared_ptr(logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
+%shared_ptr(logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
 
-/* END_Shared_ptr */
+%typemap(ctype) size_t* indexByte "size_t*"
+%typemap(cstype) size_t* indexByte "out uint"
+%typemap(csin) size_t* indexByte %{out $csinput%}  
+%typemap(imtype) size_t* indexByte "out uint"
 
-typedef std::shared_ptr<logicalaccess::Chip> ChipPtr;
-typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
+%typemap(ctype) EncryptionMode "EncryptionMode"
+%typemap(cstype) EncryptionMode "EncryptionMode"
+%typemap(csin) EncryptionMode %{$csinput%}  
+%typemap(imtype) EncryptionMode "EncryptionMode"
+%typemap(csout, excode=SWIGEXCODE) EncryptionMode {
+	EncryptionMode ret = $imcall;$excode
+	return ret;
+}
 
-%apply unsigned int *INOUT { unsigned int* pos };
-%apply unsigned int INOUT[] { unsigned int* locations, unsigned int* positions };
+%typemap(ctype) HIDEncryptionMode "HIDEncryptionMode"
+%typemap(cstype) HIDEncryptionMode "HIDEncryptionMode"
+%typemap(csin) HIDEncryptionMode %{$csinput%}  
+%typemap(imtype) HIDEncryptionMode "LibLogicalAccess.Reader.HIDEncryptionMode"
+%typemap(csout, excode=SWIGEXCODE) HIDEncryptionMode {
+	HIDEncryptionMode ret = $imcall;$excode
+	return ret;
+}
+
+%typemap(ctype) OmnikeyXX21ReaderUnit::SecureModeStatus "OmnikeyXX21ReaderUnit::SecureModeStatus"
+%typemap(cstype) OmnikeyXX21ReaderUnit::SecureModeStatus "OmnikeyXX21ReaderUnit.SecureModeStatus"
+%typemap(csin) OmnikeyXX21ReaderUnit::SecureModeStatus %{$csinput%}  
+%typemap(imtype) OmnikeyXX21ReaderUnit::SecureModeStatus "LibLogicalAccess.Reader.OmnikeyXX21ReaderUnit.SecureModeStatus"
+%typemap(csout, excode=SWIGEXCODE) OmnikeyXX21ReaderUnit::SecureModeStatus {
+	OmnikeyXX21ReaderUnit.SecureModeStatus ret = $imcall;$excode
+	return ret;
+}
+
+%typemap(ctype) logicalaccess::OmnikeyReaderUnit "logicalaccess::OmnikeyReaderUnit"
+%typemap(cstype) logicalaccess::OmnikeyReaderUnit "OmnikeyReaderUnit"
+%typemap(csin) logicalaccess::OmnikeyReaderUnit %{$csinput%}  
+%typemap(imtype) logicalaccess::OmnikeyReaderUnit "LibLogicalAccess.Reader.OmnikeyReaderUnit"
+%typemap(csout, excode=SWIGEXCODE) logicalaccess::OmnikeyReaderUnit {
+	OmnikeyReaderUnit ret = $imcall;$excode
+	return ret;
+}
+
+%typemap(ctype) logicalaccess::OmnikeyXX21ReaderUnit "logicalaccess::OmnikeyXX21ReaderUnit"
+%typemap(cstype) logicalaccess::OmnikeyXX21ReaderUnit "OmnikeyXX21ReaderUnit"
+%typemap(csin) logicalaccess::OmnikeyXX21ReaderUnit %{$csinput%}  
+%typemap(imtype) logicalaccess::OmnikeyXX21ReaderUnit "LibLogicalAccess.Reader.OmnikeyXX21ReaderUnit"
+%typemap(csout, excode=SWIGEXCODE) logicalaccess::OmnikeyXX21ReaderUnit {
+	OmnikeyXX21ReaderUnit ret = $imcall;$excode
+	return ret;
+}
+
+%typemap(ctype) logicalaccess::PCSCReaderCardAdapter "logicalaccess::PCSCReaderCardAdapter"
+%typemap(cstype) logicalaccess::PCSCReaderCardAdapter "PCSCReaderCardAdapter"
+%typemap(csin) logicalaccess::PCSCReaderCardAdapter %{$csinput%}  
+%typemap(imtype) logicalaccess::PCSCReaderCardAdapter "LibLogicalAccess.Reader.PCSCReaderCardAdapter"
+%typemap(csout, excode=SWIGEXCODE) logicalaccess::PCSCReaderCardAdapter {
+	PCSCReaderCardAdapter ret = $imcall;$excode
+	return ret;
+}
+
+CSHARP_MEMBER_ARRAYS(unsigned char recordSize[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char maxNumberRecords[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char currentNumberRecords[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char accessRights[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char uid[ANY], byte )
+CSHARP_MEMBER_ARRAYS(unsigned char batchNo[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char fileSize[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char keytype[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char rfu[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char desfireAid[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char set[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char keyclass[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char dfname[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char limit[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char curval[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char productionbatchnumber[ANY], byte)
+CSHARP_MEMBER_ARRAYS(unsigned char uniqueserialnumber[ANY], byte)
 
 //%ignore logicalaccess::Commands;
 %ignore pcsc_share_mode_to_string;
 %ignore pcsc_protocol_to_string;
 
-%rename(IsEqual) operator==;
-%rename(IsDifferent) operator!=;
-%rename(CompareTo) operator<;
-%ignore operator<<;
-
-%include "liblogicalaccess_cardservice.i"
-
 /* Include_section */
-
-%include <logicalaccess/cards/accessinfo.hpp>
-%include <logicalaccess/cards/aes128key.hpp>
-%include <logicalaccess/cards/chip.hpp>
-%include <logicalaccess/cards/commands.hpp>
-%include <logicalaccess/cards/computermemorykeystorage.hpp>
-%include <logicalaccess/cards/hmac1key.hpp>
-%include <logicalaccess/cards/IKSStorage.hpp>
-%include <logicalaccess/cards/keydiversification.hpp>
-%include <logicalaccess/cards/keystorage.hpp>
-%include <logicalaccess/cards/location.hpp>
-%include <logicalaccess/cards/locationnode.hpp>
-%include <logicalaccess/cards/readercardadapter.hpp>
-%include <logicalaccess/cards/readermemorykeystorage.hpp>
-%include <logicalaccess/cards/samkeystorage.hpp>
-%include <logicalaccess/cards/tripledeskey.hpp>
 
 %include <logicalaccess/plugins/cards/cps3/cps3chip.hpp>
 %include <logicalaccess/plugins/cards/cps3/cps3commands.hpp>
 %include <logicalaccess/plugins/cards/cps3/cps3location.hpp>
 %include <logicalaccess/plugins/cards/cps3/cps3storagecardservice.hpp>
-
 %include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
@@ -321,11 +265,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/plugins/cards/desfire/nxpkeydiversification.hpp>
 %include <logicalaccess/plugins/cards/desfire/omnitechkeydiversification.hpp>
 %include <logicalaccess/plugins/cards/desfire/sagemkeydiversification.hpp>
-
 %include <logicalaccess/plugins/cards/em4102/em4102chip.hpp>
-
 %include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
-
 %include <logicalaccess/plugins/cards/epass/epassaccessinfo.hpp>
 %include <logicalaccess/plugins/cards/epass/epasschip.hpp>
 %include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
@@ -333,16 +274,13 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/plugins/cards/epass/epassidentityservice.hpp>
 %include <logicalaccess/plugins/cards/epass/epassreadercardadapter.hpp>
 %include <logicalaccess/plugins/cards/epass/utils.hpp>
-
 %include <logicalaccess/plugins/cards/felica/felicachip.hpp>
 %include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
 %include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 %include <logicalaccess/plugins/cards/felica/felicastoragecardservice.hpp>
 %include <logicalaccess/plugins/cards/felica/nfctag3cardservice.hpp>
-
 %include <logicalaccess/plugins/cards/generictag/generictagaccesscontrolcardservice.hpp>
 %include <logicalaccess/plugins/cards/generictag/generictagchip.hpp>
-
 %include <logicalaccess/plugins/cards/iclass/hidiclass16kschip.hpp>
 %include <logicalaccess/plugins/cards/iclass/hidiclass2kschip.hpp>
 %include <logicalaccess/plugins/cards/iclass/hidiclass32ks_16_16chip.hpp>
@@ -362,32 +300,21 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/plugins/cards/iclass/pcschidiclassdatatransport.hpp>
 %include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
 %include <logicalaccess/plugins/cards/iclass/picopasssimple.hpp>
-
 %include <logicalaccess/plugins/cards/iclass_5321/omnikeyhidiclassdatatransportimpl.hpp>
-%include <logicalaccess/plugins/cards/iclass_5321/omnikeylib/sm5x21.h>
-%include <logicalaccess/plugins/cards/iclass_5321/omnikeylib/sm5x21i.h>
-
 %include <logicalaccess/plugins/cards/icode1/icode1chip.hpp>
-
 %include <logicalaccess/plugins/cards/icode2/icode2chip.hpp>
-
 %include <logicalaccess/plugins/cards/indala/indalachip.hpp>
-
 %include <logicalaccess/plugins/cards/infineonmyd/infineonmydchip.hpp>
-
 %include <logicalaccess/plugins/cards/iso15693/iso15693chip.hpp>
 %include <logicalaccess/plugins/cards/iso15693/iso15693commands.hpp>
 %include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
 %include <logicalaccess/plugins/cards/iso15693/iso15693storagecardservice.hpp>
-
 %include <logicalaccess/plugins/cards/iso7816/iso7816chip.hpp>
 %include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
 %include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
 %include <logicalaccess/plugins/cards/iso7816/iso7816nfctag4cardservice.hpp>
 %include <logicalaccess/plugins/cards/iso7816/iso7816storagecardservice.hpp>
-
 %include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
-
 %include <logicalaccess/plugins/cards/mifare/mifare1kchip.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifare4kchip.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
@@ -397,7 +324,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/plugins/cards/mifare/mifarelocation.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifarenfctagcardservice.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifarestoragecardservice.hpp>
-
 %include <logicalaccess/plugins/cards/mifareplus/mifareplusaccessinfo_sl1.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/MifarePlusAESAuth.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/mifarepluschip.hpp>
@@ -410,7 +336,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/plugins/cards/mifareplus/MifarePlusSL3Chip.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/mifareplussl3commands.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/mifareplusstoragecardservice_sl1.hpp>
-
 %include <logicalaccess/plugins/cards/mifareultralight/mifareultralightaccessinfo.hpp>
 %include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcaccessinfo.hpp>
 %include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcchip.hpp>
@@ -422,13 +347,10 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/plugins/cards/mifareultralight/mifareultralightstoragecardservice.hpp>
 %include <logicalaccess/plugins/cards/mifareultralight/mifareultralightuidchangerservice.hpp>
 %include <logicalaccess/plugins/cards/mifareultralight/nfctag2cardservice.hpp>
-
 %include <logicalaccess/plugins/cards/prox/proxaccesscontrolcardservice.hpp>
 %include <logicalaccess/plugins/cards/prox/proxchip.hpp>
 %include <logicalaccess/plugins/cards/prox/proxlocation.hpp>
-
 %include <logicalaccess/plugins/cards/proxlite/proxlitechip.hpp>
-
 %include <logicalaccess/plugins/cards/samav2/samav1chip.hpp>
 %include <logicalaccess/plugins/cards/samav2/samav2chip.hpp>
 %include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
@@ -438,23 +360,17 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
 %include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
 %include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
-
 %include <logicalaccess/plugins/cards/seos/seoschip.hpp>
-
 %include <logicalaccess/plugins/cards/smartframe/smartframechip.hpp>
-
 %include <logicalaccess/plugins/cards/stmlri512/stmlri512chip.hpp>
-
 %include <logicalaccess/plugins/cards/tagit/tagitchip.hpp>
 %include <logicalaccess/plugins/cards/tagit/tagitcommands.hpp>
-
 %include <logicalaccess/plugins/cards/topaz/nfctag1cardservice.hpp>
 %include <logicalaccess/plugins/cards/topaz/topazaccessinfo.hpp>
 %include <logicalaccess/plugins/cards/topaz/topazchip.hpp>
 %include <logicalaccess/plugins/cards/topaz/topazcommands.hpp>
 %include <logicalaccess/plugins/cards/topaz/topazlocation.hpp>
 %include <logicalaccess/plugins/cards/topaz/topazstoragecardservice.hpp>
-
 %include <logicalaccess/plugins/cards/twic/twicaccesscontrolcardservice.hpp>
 %include <logicalaccess/plugins/cards/twic/twicchip.hpp>
 %include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
@@ -463,138 +379,16 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 /* END_Include_section */
 
-%template(ChipCollection) std::vector<std::shared_ptr<logicalaccess::Chip> >;
-%template(LocationNodeCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;
+//%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
+//%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
+//%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
+//%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
+
+%feature("flatnested") EPassDG2::BioInfo; 
+
 %template(DFNameCollection) std::vector<logicalaccess::DFName>;
-
-%pragma(csharp) imclasscode=%{
-	public static System.Collections.Generic.Dictionary<string, System.Type> chipDictionary;
-
-	public static System.Collections.Generic.Dictionary<string, System.Type> createDictionary<T>() where T : class
-	{
-        System.Collections.Generic.Dictionary<string, System.Type> dictionary = new System.Collections.Generic.Dictionary<string, System.Type>();
-        foreach (System.Type type in
-            System.Reflection.Assembly.GetAssembly(typeof(T)).GetTypes())
-        {
-            if (type.IsClass && !type.IsAbstract && type.IsSubclassOf(typeof(T)))
-            {
-                string tmp = type.ToString().Split('.')[type.ToString().Split('.').Length - 1].Substring(0, type.ToString().Split('.')[type.ToString().Split('.').Length - 1].IndexOf(typeof(T).Name));
-                dictionary.Add(tmp, type);
-            }
-        }
-        return dictionary;
-	}
-
-	public static Chip	createChip(System.IntPtr cPtr, bool owner)
-	{
-		Chip ret = null;
-		if (cPtr == System.IntPtr.Zero) {
-		  return ret;
-		}
-		string ct = (liblogicalaccess_cardPINVOKE.Chip_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
-		if (chipDictionary == null)
-			chipDictionary = createDictionary<Chip>();
-        if (chipDictionary.ContainsKey(ct))
-        {
-            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
-            ret = (Chip)System.Activator.CreateInstance(chipDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
-        }
-		return ret;
-	}
-%}
-
-%typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::Chip*, std::shared_ptr<logicalaccess::Chip> {
-    System.IntPtr cPtr = $imcall;
-    Chip ret = liblogicalaccess_cardPINVOKE.createChip(cPtr, $owner);$excode
-    return ret;
-}
-
-%pragma(csharp) imclasscode=%{
-	public static System.Collections.Generic.Dictionary<string, System.Type> locationDictionary;
-
-	public static Location	createLocation(System.IntPtr cPtr, bool owner)
-	{
-		Location ret = null;
-		if (cPtr == System.IntPtr.Zero) {
-		  return ret;
-		}
-		string ct = ($modulePINVOKE.Location_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
-		if (locationDictionary == null)
-			locationDictionary = createDictionary<Location>();
-        if (locationDictionary.ContainsKey(ct))
-        {
-            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
-            ret = (Location)System.Activator.CreateInstance(locationDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
-        }
-		return ret;
-	}
-%}
-
-%typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::Location*, std::shared_ptr<logicalaccess::Location> {
-    System.IntPtr cPtr = $imcall;
-    Location ret = liblogicalaccess_cardPINVOKE.createLocation(cPtr, $owner);$excode
-    return ret;
-}
-
-%pragma(csharp) imclasscode=%{
-	public static System.Collections.Generic.Dictionary<string, System.Type> accessInfoDictionary;
-
-	public static AccessInfo	createAccessInfo(System.IntPtr cPtr, bool owner)
-	{
-		AccessInfo ret = null;
-		if (cPtr == System.IntPtr.Zero) {
-		  return ret;
-		}
-		string ct = ($modulePINVOKE.AccessInfo_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
-		if (accessInfoDictionary == null)
-			accessInfoDictionary = createDictionary<AccessInfo>();
-        if (accessInfoDictionary.ContainsKey(ct))
-        {
-            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
-            ret = (AccessInfo)System.Activator.CreateInstance(accessInfoDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
-        }
-		return ret;
-	}
-%}
-
-%typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::AccessInfo*, std::shared_ptr<logicalaccess::AccessInfo> {
-    System.IntPtr cPtr = $imcall;
-    AccessInfo ret = liblogicalaccess_cardPINVOKE.createAccessInfo(cPtr, $owner);$excode
-    return ret;
-}
-
-%pragma(csharp) imclasscode=%{
-  public static KeyStorage createKeyStorage(System.IntPtr cPtr, bool owner)
-  {
-    KeyStorage ret = null;
-    if (cPtr == System.IntPtr.Zero) {
-      return ret;
-    }
-	KeyStorageType ks = (KeyStorageType)($modulePINVOKE.KeyStorage_getType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
-    switch (ks) {
-	   case KeyStorageType.KST_COMPUTER_MEMORY:
-	     ret = new ComputerMemoryKeyStorage(cPtr, owner);
-	     break;
-	   case KeyStorageType.KST_READER_MEMORY:
-	     ret = new ReaderMemoryKeyStorage(cPtr, owner);
-		 break;
-	   case KeyStorageType.KST_SAM:
-	     ret = new SAMKeyStorage(cPtr, owner);
-		 break;
-	   case KeyStorageType.KST_SERVER:
-	     ret = new IKSStorage(cPtr, owner);
-		 break;
-      }
-      return ret;
-    }
-%}
-
-%typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::KeyStorage*, std::shared_ptr<logicalaccess::KeyStorage> {
-    System.IntPtr cPtr = $imcall;
-    KeyStorage ret = liblogicalaccess_cardPINVOKE.createKeyStorage(cPtr, $owner);$excode
-    return ret;
-}
+%template(BioInfosVector) std::vector<logicalaccess::EPassDG2::BioInfo>;
+%template(AV1SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
+%template(AV2SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
+%template(AV1SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
+%template(AV2SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;

@@ -11,8 +11,9 @@ Release
 *_wrap.h
 *_wrap.cxx
 *.nupkg
-liblogicalaccess-swig2.0/Generated/*.cs
-liblogicalaccess-swig2.0/Generated/Card/*.cs
-liblogicalaccess-swig2.0/Generated/Reader/*.cs
+LibLogicalAccessNet/Generated/*.cs
+LibLogicalAccessNet/Generated/*/*.cs
 *.sdf
 *opensdf
+.vs
+/LibLogicalAccessNet.win32/*.filters
