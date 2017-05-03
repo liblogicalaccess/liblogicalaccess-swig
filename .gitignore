@@ -13,6 +13,10 @@ Release
 *.nupkg
 LibLogicalAccessNet/Generated/*.cs
 LibLogicalAccessNet/Generated/*/*.cs
+!LibLogicalAccessNet/Generated/.gitkeep
+!LibLogicalAccessNet/Generated/Card/.gitkeep
+!LibLogicalAccessNet/Generated/Core/.gitkeep
+!LibLogicalAccessNet/Generated/Reader/.gitkeep
 *.sdf
 *opensdf
 .vs
