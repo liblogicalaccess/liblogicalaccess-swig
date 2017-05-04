@@ -1,12 +1,16 @@
+#!/usr/bin/env python
+
 import sys
 import os
 import glob
 import re
+import clang.cindex
 
 regexsharedptr = r"(?<=std::shared_ptr<)(.*?)(?=>)"
 includebase = "<logicalaccess{0}>"
 include = []
-shared_ptr = []
+nest = []
+classlist = []
 
 def	parsesharedptr(content):
 	matches = re.finditer(regexsharedptr, content)
@@ -18,18 +22,9 @@ def	parsesharedptr(content):
 			nbr -= 1
 		if not strmatch.startswith("logicalaccess::") and not strmatch.startswith("openssl::") and not strmatch.startswith("boost::") and not strmatch.startswith("std::"):
 			strmatch = "logicalaccess::" + strmatch
-		if "std::" not in strmatch and strmatch not in shared_ptr:
-			shared_ptr.append(strmatch)
-	shared_ptr.sort()
+		if "std::" not in strmatch and strmatch not in classlist:
+			classlist.append(strmatch)
 
-def	sharedptrprocess(path):
-	if len(glob.glob(path, recursive=True)) == 0:
-		print ("[ERROR]: nothing found in " + path)
-	for filename in glob.glob(path, recursive=True):
-		with open(filename, "r") as f:
-			content = f.read()
-			parsesharedptr(content)
-	
 def	includeprocess(path, category):
 	if len(glob.glob(path, recursive=True)) == 0:
 		print ("[ERROR]: nothing found in " + path)
@@ -38,6 +33,8 @@ def	includeprocess(path, category):
 			content = f.read()
 			filename = filename.replace("\\", "/").split("logicalaccess")[-1]
 			include.append((category, includebase.replace("{0}", filename)))
+			parsesharedptr(content)
+
 
 def cleandoc(path):
 	with open(path, "r") as f:
@@ -129,6 +126,32 @@ def includewrite():
 	with open(readerpath, "w") as f:
 		f.write(''.join(lines))
 	
+def find_classdecl(node, filename):
+	global curnamespace
+	for c in node.get_children():
+		if c.kind == clang.cindex.CursorKind.CLASS_DECL and c.location.file.name == filename:
+			if c.spelling not in classlist:
+				if len(nest) == 0:
+					classlist.append(c.spelling)
+				else:
+					classlist.append("::".join(nest) + "::" + c.spelling)
+			find_classdecl(c, filename)		
+		elif c.kind == clang.cindex.CursorKind.NAMESPACE and c.location.file.name == filename:
+			nest.append(c.spelling)
+			find_classdecl(c, filename)
+		if len(nest) > 0 and nest[-1] == c.spelling:
+			nest.pop()
+	
+def	sharedptrprocess():
+	clang.cindex.Config.set_library_file('C:/Program Files/LLVM/bin/libclang.dll')
+	index = clang.cindex.Index.create()
+	options = clang.cindex.TranslationUnit.PARSE_SKIP_FUNCTION_BODIES | clang.cindex.TranslationUnit.PARSE_INCOMPLETE
+	for filename in glob.glob("../packages/include/logicalaccess/**/*.hpp", recursive=True):
+		tu = index.parse(filename, ['-x', 'c++', '-std=c++11', '-DLIBLOGICALACCESS_API='], unsaved_files=None, options=options)
+		print ('Translation unit:', tu.spelling)
+		find_classdecl(tu.cursor, filename)
+	classlist.sort()
+	
 def	sharedptrwrite():
 	path = "../LibLogicalAccessNet.win32/liblogicalaccess.i"
 	with open(path, "r") as f:
@@ -139,18 +162,18 @@ def	sharedptrwrite():
 	i = lines.index("/*****SHARED PTR SECTION*****/\n") + 1
 	lines.insert(i, "\n")
 	i += 1
-	for sptr in shared_ptr:
+	for sptr in classlist:
 		lines.insert(i, "%shared_ptr(" + sptr + ");" + "\n")
 		i += 1
 	with open(path, "w") as f:
 		f.write(''.join(lines))
 		
 def main():
-	sharedptrprocess("../packages/include/logicalaccess/**/*.hpp")
 	includeprocess("../packages/include/logicalaccess/cards/**/*.hpp", "CORE")
 	includeprocess("../packages/include/logicalaccess/plugins/cards/**/*.hpp", "CARD")
 	includeprocess("../packages/include/logicalaccess/readerproviders/**/*.hpp", "CORE")
 	includeprocess("../packages/include/logicalaccess/plugins/readers/**/*.hpp", "READER")
+	sharedptrprocess()
 	sharedptrwrite()
 	includewrite()
 main()
