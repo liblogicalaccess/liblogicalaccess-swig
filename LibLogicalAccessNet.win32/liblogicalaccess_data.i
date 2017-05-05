@@ -9,21 +9,57 @@
 #include <logicalaccess/techno.hpp>
 #include <logicalaccess/key.hpp>
 #include <logicalaccess/xmlserializable.hpp>
+#include <logicalaccess/cards/readercardadapter.hpp>
 #include <logicalaccess/readerproviders/datatransport.hpp>
 #include <logicalaccess/resultchecker.hpp>
-#include <logicalaccess/cards/readercardadapter.hpp>
-#include <logicalaccess/cards/keystorage.hpp">
-#include <logicalaccess/cards/keydiversification.hpp">
+#include <logicalaccess/services/accesscontrol/formats/customformat/datafield.hpp>
+#include <logicalaccess/services/accesscontrol/encodings/binarydatatype.hpp>
+#include <logicalaccess/services/accesscontrol/encodings/bcdbytedatatype.hpp>
+#include <logicalaccess/services/accesscontrol/encodings/bcdnibbledatatype.hpp>
+#include <logicalaccess/services/accesscontrol/encodings/bigendiandatarepresentation.hpp>
+#include <logicalaccess/services/accesscontrol/encodings/littleendiandatarepresentation.hpp>
+#include <logicalaccess/services/accesscontrol/encodings/nodatarepresentation.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/binarydatafield.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/numberdatafield.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/paritydatafield.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/stringdatafield.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/customformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/rawformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand26format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand34format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand34withfacilityformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand37format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityrightparity2format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/hidhoneywellformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/getronik40bitformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/fascn200bitformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/bariumferritepcscformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
 #include <stdint.h>
+
+using namespace logicalaccess;
 %}
 
 %define CSHARP_MEMBER_ARRAYS( CTYPE, CSTYPE )
 
-%typemap(ctype) CTYPE "CTYPE[]"
-%typemap(cstype) CTYPE "CSTYPE[]"
-%typemap(imtype, out="System.IntPtr") CTYPE "CSTYPE[]"
-%typemap(csin) CTYPE "$csinput"
-%typemap(csvarout, excode=SWIGEXCODE2) CTYPE %{ 
+%typemap(ctype)		CTYPE MBINOUT[] "CTYPE*"
+%typemap(cstype)	CTYPE MBINOUT[] "CSTYPE[]"
+%typemap(imtype, out="System.IntPtr")
+					CTYPE MBINOUT[] "CSTYPE[]"
+%typemap(csin)		CTYPE "$csinput"
+%typemap(in)		CTYPE MBINOUT[] "$1 = $input;"
+%typemap(csout, excode=SWIGEXCODE)
+					CTYPE MBINOUT[] {
+	CSTYPE[] ret = new CSTYPE[$1_dim0]; 
+	System.IntPtr data = $imcall; 
+	System.Runtime.InteropServices.Marshal.Copy(data, ret, 0, $1_dim0);$excode 
+	return ret; 
+}
+%typemap(csvarout, excode=SWIGEXCODE2) 
+					CTYPE MBINOUT[] %{ 
 		get { 
 			CSTYPE[] ret = new CSTYPE[$1_dim0]; 
 			System.IntPtr data = $imcall; 
@@ -31,7 +67,8 @@
 		    return ret; 
 		}
 %}
-%typemap(csvarin, excode=SWIGEXCODE2) CTYPE %{ 
+%typemap(csvarin, excode=SWIGEXCODE2) 
+					CTYPE MBINOUT[] %{ 
 		set { 
 			if ($csinput.Length > $1_dim0)
 			{
@@ -40,25 +77,23 @@
 			$imcall;$excode
 		}
 %}
-%typemap(freearg) CTYPE ""
-%typemap(argout)  CTYPE ""
+%typemap(freearg)	CTYPE MBINOUT[] ""
+%typemap(argout)	CTYPE MBINOUT[] ""
 
 %enddef // CSHARP_MEMBER_ARRAYS
+
+CSHARP_MEMBER_ARRAYS(unsigned char, byte)
 
 %typemap(ctype) unsigned char * "unsigned char *"
 %typemap(cstype) unsigned char * "string"
 %typemap(imtype, out="System.IntPtr") unsigned char * "string"
 %typemap(in) unsigned char * %{ $1 = ($1_ltype)$input; %}
-%typemap(out) unsigned char * %{ $result = SWIG_csharp_string_callback((const unsigned char *)$1); %}
+%typemap(out) unsigned char * %{ $result = (unsigned char *)SWIG_csharp_string_callback((const char *)$1); %}
 %typemap(directorout, warning=SWIGWARN_TYPEMAP_DIRECTOROUT_PTR_MSG) unsigned char * %{ $result = ($1_ltype)$input; %}
-%typemap(directorin) unsigned char * %{ $input = SWIG_csharp_string_callback((const unsigned char *)$1); %}
+%typemap(directorin) unsigned char * %{ $input = (unsigned char *)SWIG_csharp_string_callback((const char *)$1); %}
 %typemap(csdirectorin) unsigned char * "$iminput"
 %typemap(csdirectorout) unsigned char * "$cscall"
 %typemap(csin) unsigned char * "$csinput"
-%typemap(csout, excode=SWIGEXCODE) unsigned char * {
-    string ret = $imcall;$excode
-    return ret;
-}
 %typemap(csvarin, excode=SWIGEXCODE2) unsigned char * %{
     set {
       $imcall;$excode
@@ -107,6 +142,7 @@
 %apply bool *INOUT { bool * }
 %apply unsigned char *OUTPUT { unsigned char & }
 %apply unsigned char INPUT[] { const unsigned char *data }
+%apply unsigned int *INOUT { unsigned int *pos }
 
 %typemap(ctype) const unsigned char * "const unsigned char *"
 %typemap(cstype) const unsigned char * "byte[]"
@@ -116,6 +152,8 @@
 	byte[] ret = $imcall;$excode
 	return ret;
 }
+
+%rename(getConstData) *::getData() const;
 
 %apply unsigned char OUTPUT[] { unsigned char* getData() }
 %typemap(csout, excode=SWIGEXCODE) unsigned char* getData() {
@@ -163,42 +201,6 @@
 %typemap(csin) logicalaccess::STidTamperSwitchBehavior& %{out $csinput%}  
 %typemap(imtype) logicalaccess::STidTamperSwitchBehavior& "out STidTamperSwitchBehavior"
 
-%typemap(cstype) logicalaccess::DESFireKeySettings& "out DESFireKeySettings"
-%typemap(csin) logicalaccess::DESFireKeySettings& %{out $csinput%}  
-%typemap(imtype) logicalaccess::DESFireKeySettings& "out DESFireKeySettings"
-
-%typemap(ctype) DESFireKeyType& "DESFireKeyType*"
-%typemap(cstype) DESFireKeyType& "out DESFireKeyType"
-%typemap(csin) DESFireKeyType& %{out $csinput%}  
-%typemap(imtype) DESFireKeyType& "out DESFireKeyType"
-%typemap(csvarin, excode=SWIGEXCODE2) DESFireKeyType %{
-    set {
-      $imcall;$excode
-    } %}
-%typemap(csvarout, excode=SWIGEXCODE2) DESFireKeyType %{
-    get {
-      DESFireKeyType ret = $imcall;$excode
-      return ret;
-} %}
-
-%typemap(ctype) DESFireKeyType "DESFireKeyType"
-%typemap(cstype) DESFireKeyType "DESFireKeyType"
-%typemap(csin) DESFireKeyType %{$csinput%}  
-%typemap(imtype) DESFireKeyType "DESFireKeyType"
-%typemap(csout, excode=SWIGEXCODE) DESFireKeyType {
-	DESFireKeyType ret = $imcall;$excode
-	return ret;
-}
-
-%typemap(ctype) DESFireKeyType "DESFireKeyType"
-%typemap(cstype) DESFireKeyType "DESFireKeyType"
-%typemap(csin) DESFireKeyType %{$csinput%}  
-%typemap(imtype) DESFireKeyType "DESFireKeyType"
-%typemap(csout, excode=SWIGEXCODE) DESFireKeyType {
-	DESFireKeyType ret = $imcall;$excode
-	return ret;
-}
-
 %include <std_vector.i>
 
 namespace std {
@@ -208,28 +210,38 @@ namespace std {
 	%template(StringCollection) vector<string>;
 	%template(BoolCollection) vector<bool>;
 	%template(UIntCollection) vector<unsigned int>;
-	//%template(UCharCollectionList) list<vector<unsigned char> >;
-	//%apply list<vector<unsigned char> > {list<vector<unsigned char> > &}
 
 	%typemap(cstype) vector<bool> & "out BoolCollection"
 	%typemap(csin) vector<bool> & %{out $csinput%}  
 	%typemap(imtype) vector<bool> & "out BoolCollection"
+	%typemap(csout, excode=SWIGEXCODE) vector<bool> & {
+		BoolCollection ret = $imcall;$excode
+		return ret;
+	}
 
 	%typemap(cstype) vector<uint8_t> "UByteVector"
 	%typemap(csin) vector<uint8_t> %{$csinput%}  
 	%typemap(imtype) vector<uint8_t> "UByteVector"
+	%typemap(csout, excode=SWIGEXCODE) vector<uint8_t> {
+		UByteVector ret = $imcall;$excode
+		return ret;
+	}
 	
 	%typemap(cstype) const vector<uint8_t> &"UByteVector"
 	%typemap(csin) const vector<uint8_t> & %{$csinput%}  
 	%typemap(imtype) const vector<uint8_t> & "UByteVector"
-	
-	%typemap(cstype) const vector<unsigned char> &"UByteVector"
+		%typemap(csout, excode=SWIGEXCODE) const vector<uint8_t> & {
+		UByteVector ret = $imcall;$excode
+		return ret;
+	}
+
+	%typemap(cstype) const vector<unsigned char> & "UByteVector"
 	%typemap(csin) const vector<unsigned char> & %{$csinput%}  
 	%typemap(imtype) const vector<unsigned char> & "UByteVector"
 	%typemap(csout, excode=SWIGEXCODE) const vector<unsigned char> & {
 		UByteVector ret = $imcall;$excode
 		return ret;
-}
+	}
 };
 
 %shared_ptr(logicalaccess::XmlSerializable);
@@ -242,17 +254,17 @@ namespace std {
 %ignore logicalaccess::DataTransport::getReaderUnit;
 %ignore logicalaccess::DataTransport::setReaderUnit;
 
-namespace std {
-    template <class T> class enable_shared_from_this {
-    public:
-        ~enable_shared_from_this();
-        shared_ptr<T> shared_from_this();
-        shared_ptr<const T> shared_from_this() const;
-    protected:
-        enable_shared_from_this();
-        enable_shared_from_this(const enable_shared_from_this &);
-    };
-}
+//namespace std {
+//    template <class T> class enable_shared_from_this {
+//    public:
+//        ~enable_shared_from_this();
+//        shared_ptr<T> shared_from_this();
+//        shared_ptr<const T> shared_from_this() const;
+//	protected:
+//		enable_shared_from_this();
+//        enable_shared_from_this(const enable_shared_from_this &);
+//    };
+//}
 
 namespace std {
 	template<class Ty> class weak_ptr {
@@ -278,6 +290,10 @@ namespace std {
 	};
 }
 
+//%template(KeyEnableShared) std::enable_shared_from_this<logicalaccess::Key>;
+//%template(DataFieldEnableShared) std::enable_shared_from_this<logicalaccess::DataField>;
+//%template(KeyStorageEnableShared) std::enable_shared_from_this<logicalaccess::KeyStorage>;
+
 %include <logicalaccess/lla_fwd.hpp>
 %include <logicalaccess/techno.hpp>
 %include <logicalaccess/xmlserializable.hpp>
@@ -285,5 +301,37 @@ namespace std {
 %include <logicalaccess/resultchecker.hpp>
 %include <logicalaccess/cards/readercardadapter.hpp>
 %include <logicalaccess/key.hpp>
+%include <logicalaccess/services/accesscontrol/formats/customformat/datafield.hpp>
+%include <logicalaccess/services/accesscontrol/encodings/encoding.hpp>
+%include <logicalaccess/services/accesscontrol/encodings/datarepresentation.hpp>
+%include <logicalaccess/services/accesscontrol/encodings/datatype.hpp>
+%include <logicalaccess/services/accesscontrol/encodings/binarydatatype.hpp>
+%include <logicalaccess/services/accesscontrol/encodings/bcdbytedatatype.hpp>
+%include <logicalaccess/services/accesscontrol/encodings/bcdnibbledatatype.hpp>
+%include <logicalaccess/services/accesscontrol/encodings/bigendiandatarepresentation.hpp>
+%include <logicalaccess/services/accesscontrol/encodings/littleendiandatarepresentation.hpp>
+%include <logicalaccess/services/accesscontrol/encodings/nodatarepresentation.hpp>
+%include <logicalaccess/services/accesscontrol/formats/format.hpp>
+%include <logicalaccess/services/accesscontrol/formats/staticformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/wiegandformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/customformat/valuedatafield.hpp>
+%include <logicalaccess/services/accesscontrol/formats/customformat/binarydatafield.hpp>
+%include <logicalaccess/services/accesscontrol/formats/customformat/numberdatafield.hpp>
+%include <logicalaccess/services/accesscontrol/formats/customformat/paritydatafield.hpp>
+%include <logicalaccess/services/accesscontrol/formats/customformat/stringdatafield.hpp>
+%include <logicalaccess/services/accesscontrol/formats/customformat/customformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/rawformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/wiegand26format.hpp>
+%include <logicalaccess/services/accesscontrol/formats/wiegand34format.hpp>
+%include <logicalaccess/services/accesscontrol/formats/wiegand34withfacilityformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/wiegand37format.hpp>
+%include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityrightparity2format.hpp>
+%include <logicalaccess/services/accesscontrol/formats/hidhoneywellformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/getronik40bitformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/fascn200bitformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/bariumferritepcscformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
 %include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/keydiversification.hpp>

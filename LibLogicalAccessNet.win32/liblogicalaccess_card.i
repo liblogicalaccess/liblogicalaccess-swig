@@ -81,10 +81,10 @@
 #include <logicalaccess/plugins/cards/iso7816/iso7816nfctag4cardservice.hpp>
 #include <logicalaccess/plugins/cards/iso7816/iso7816storagecardservice.hpp>
 #include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifare1kchip.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifare4kchip.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifarekey.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifarelocation.hpp>
@@ -146,6 +146,9 @@
 /* END_Additional_include */
 
 #include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
 
 using namespace logicalaccess;
 
@@ -161,38 +164,22 @@ using LibLogicalAccess.Reader;
 %shared_ptr(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
 %shared_ptr(logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
 %shared_ptr(logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
+%shared_ptr(CPS3Commands);
+
 
 %typemap(ctype) size_t* indexByte "size_t*"
 %typemap(cstype) size_t* indexByte "out uint"
 %typemap(csin) size_t* indexByte %{out $csinput%}  
 %typemap(imtype) size_t* indexByte "out uint"
 
-%typemap(ctype) EncryptionMode "EncryptionMode"
-%typemap(cstype) EncryptionMode "EncryptionMode"
-%typemap(csin) EncryptionMode %{$csinput%}  
-%typemap(imtype) EncryptionMode "EncryptionMode"
-%typemap(csout, excode=SWIGEXCODE) EncryptionMode {
-	EncryptionMode ret = $imcall;$excode
-	return ret;
-}
-
-%typemap(ctype) HIDEncryptionMode "HIDEncryptionMode"
-%typemap(cstype) HIDEncryptionMode "HIDEncryptionMode"
-%typemap(csin) HIDEncryptionMode %{$csinput%}  
-%typemap(imtype) HIDEncryptionMode "LibLogicalAccess.Reader.HIDEncryptionMode"
-%typemap(csout, excode=SWIGEXCODE) HIDEncryptionMode {
-	HIDEncryptionMode ret = $imcall;$excode
-	return ret;
-}
-
-%typemap(ctype) OmnikeyXX21ReaderUnit::SecureModeStatus "OmnikeyXX21ReaderUnit::SecureModeStatus"
-%typemap(cstype) OmnikeyXX21ReaderUnit::SecureModeStatus "OmnikeyXX21ReaderUnit.SecureModeStatus"
-%typemap(csin) OmnikeyXX21ReaderUnit::SecureModeStatus %{$csinput%}  
-%typemap(imtype) OmnikeyXX21ReaderUnit::SecureModeStatus "LibLogicalAccess.Reader.OmnikeyXX21ReaderUnit.SecureModeStatus"
-%typemap(csout, excode=SWIGEXCODE) OmnikeyXX21ReaderUnit::SecureModeStatus {
-	OmnikeyXX21ReaderUnit.SecureModeStatus ret = $imcall;$excode
-	return ret;
-}
+//%typemap(ctype) OmnikeyXX21ReaderUnit::SecureModeStatus "OmnikeyXX21ReaderUnit::SecureModeStatus"
+//%typemap(cstype) OmnikeyXX21ReaderUnit::SecureModeStatus "OmnikeyXX21ReaderUnit.SecureModeStatus"
+//%typemap(csin) OmnikeyXX21ReaderUnit::SecureModeStatus %{$csinput%}  
+//%typemap(imtype) OmnikeyXX21ReaderUnit::SecureModeStatus "LibLogicalAccess.Reader.OmnikeyXX21ReaderUnit.SecureModeStatus"
+//%typemap(csout, excode=SWIGEXCODE) OmnikeyXX21ReaderUnit::SecureModeStatus {
+//	OmnikeyXX21ReaderUnit.SecureModeStatus ret = $imcall;$excode
+//	return ret;
+//}
 
 %typemap(ctype) logicalaccess::OmnikeyReaderUnit "logicalaccess::OmnikeyReaderUnit"
 %typemap(cstype) logicalaccess::OmnikeyReaderUnit "OmnikeyReaderUnit"
@@ -221,27 +208,67 @@ using LibLogicalAccess.Reader;
 	return ret;
 }
 
-CSHARP_MEMBER_ARRAYS(unsigned char recordSize[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char maxNumberRecords[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char currentNumberRecords[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char accessRights[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char uid[ANY], byte )
-CSHARP_MEMBER_ARRAYS(unsigned char batchNo[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char fileSize[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char keytype[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char rfu[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char desfireAid[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char set[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char keyclass[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char dfname[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char limit[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char curval[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char productionbatchnumber[ANY], byte)
-CSHARP_MEMBER_ARRAYS(unsigned char uniqueserialnumber[ANY], byte)
+//%typemap(ctype) DESFireKeyType "DESFireKeyType"
+//%typemap(cstype) DESFireKeyType "DESFireKeyType"
+//%typemap(csin) DESFireKeyType %{$csinput%}  
+//%typemap(imtype) DESFireKeyType "LibLogicalAccess.Card.DESFireKeyType"
+//%typemap(csout, excode=SWIGEXCODE) DESFireKeyType {
+//	LibLogicalAccess.Card.DESFireKeyType ret = $imcall;$excode
+//	return ret;
+//}
+%typemap(csvarin, excode=SWIGEXCODE2) DESFireKeyType %{
+    set {
+      $imcall;$excode
+    } %}
+%typemap(csvarout, excode=SWIGEXCODE2) DESFireKeyType %{
+    get {
+      DESFireKeyType ret = $imcall;$excode
+      return ret;
+} %}
 
-//%ignore logicalaccess::Commands;
+%typemap(ctype) DESFireKeyType& "DESFireKeyType*"
+%typemap(cstype) DESFireKeyType& "out LibLogicalAccess.Card.DESFireKeyType"
+%typemap(csin) DESFireKeyType& %{out $csinput%}  
+%typemap(imtype) DESFireKeyType& "out LibLogicalAccess.Card.DESFireKeyType"
+
+%typemap(ctype) DESFireKeySettings "DESFireKeySettings"
+%typemap(cstype) DESFireKeySettings "DESFireKeySettings"
+%typemap(csin) DESFireKeySettings %{$csinput%}  
+%typemap(imtype) DESFireKeySettings "LibLogicalAccess.Card.DESFireKeySettings"
+%typemap(csout, excode=SWIGEXCODE) DESFireKeySettings {
+	DESFireKeySettings ret = $imcall;$excode
+	return ret;
+}
+
+%typemap(ctype) logicalaccess::DESFireKeySettings & "logicalaccess::DESFireKeySettings*"
+%typemap(cstype) logicalaccess::DESFireKeySettings & "out DESFireKeySettings"
+%typemap(csin) logicalaccess::DESFireKeySettings & %{out $csinput%}  
+%typemap(imtype) logicalaccess::DESFireKeySettings & "out LibLogicalAccess.Card.DESFireKeySettings"
+
+
+%apply unsigned char MBINOUT[] { unsigned char recordSize[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char maxNumberRecords[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char currentNumberRecords[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char accessRights[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char uid[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char batchNo[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char fileSize[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char keytype[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char rfu[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char desfireAid[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char set[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char keyclass[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char dfname[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char limit[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char curval[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char productionbatchnumber[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char uniqueserialnumber[ANY] }
+
+%ignore logicalaccess::Commands;
 %ignore pcsc_share_mode_to_string;
 %ignore pcsc_protocol_to_string;
+
+%nodefautlctor logicalaccess::OmnikeyXX21ReaderUnit::SecureModeStatus;
 
 /* Include_section */
 
@@ -315,10 +342,10 @@ CSHARP_MEMBER_ARRAYS(unsigned char uniqueserialnumber[ANY], byte)
 %include <logicalaccess/plugins/cards/iso7816/iso7816nfctag4cardservice.hpp>
 %include <logicalaccess/plugins/cards/iso7816/iso7816storagecardservice.hpp>
 %include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
+%include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifare1kchip.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifare4kchip.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifarekey.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifarelocation.hpp>
@@ -379,12 +406,18 @@ CSHARP_MEMBER_ARRAYS(unsigned char uniqueserialnumber[ANY], byte)
 
 /* END_Include_section */
 
-//%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
-//%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
-//%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
-//%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
 
-%feature("flatnested") EPassDG2::BioInfo; 
+%feature("flatnested") EPassDG2::BioInfo;
+%feature("flatnested") DESFireCommands::DataFileSetting;
+%feature("flatnested") DESFireCommands::ValueFileSetting;
+%feature("flatnested") DESFireCommands::RecordFileSetting;
+%feature("flatnested") DESFireCommands::FileSetting;
+%feature("flatnested") DESFireCommands::DESFireCardVersion;
+%feature("flatnested") logicalaccess::OmnikeyXX21ReaderUnit::SecureModeStatus;
 
 %template(DFNameCollection) std::vector<logicalaccess::DFName>;
 %template(BioInfosVector) std::vector<logicalaccess::EPassDG2::BioInfo>;

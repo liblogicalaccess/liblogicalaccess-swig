@@ -7,12 +7,14 @@ import re
 import clang.cindex
 
 regexsharedptr = r"(?<=std::shared_ptr<)(.*?)(?=>)"
+regexns = r"(?<=namespace )(.*?)(?=\n)"
 includebase = "<logicalaccess{0}>"
 include = []
 nest = []
 classlist = []
 
 def	parsesharedptr(content):
+	ns = re.findall(regexns, content)
 	matches = re.finditer(regexsharedptr, content)
 	for match in matches:
 		strmatch = str(match[0])
@@ -20,8 +22,8 @@ def	parsesharedptr(content):
 		while nbr > 0:
 			strmatch += str('>')
 			nbr -= 1
-		if not strmatch.startswith("logicalaccess::") and not strmatch.startswith("openssl::") and not strmatch.startswith("boost::") and not strmatch.startswith("std::"):
-			strmatch = "logicalaccess::" + strmatch
+		if "::" not in strmatch:
+			strmatch = "::".join(ns) + "::" + strmatch
 		if "std::" not in strmatch and strmatch not in classlist:
 			classlist.append(strmatch)
 
@@ -130,10 +132,11 @@ def find_classdecl(node, filename):
 	global curnamespace
 	for c in node.get_children():
 		if c.kind == clang.cindex.CursorKind.CLASS_DECL and c.location.file.name == filename:
-			if c.spelling not in classlist:
-				if len(nest) == 0:
+			if len(nest) == 0:
+				if c.spelling not in classlist:
 					classlist.append(c.spelling)
-				else:
+			else:
+				if "::".join(nest) + "::" + c.spelling not in classlist:
 					classlist.append("::".join(nest) + "::" + c.spelling)
 			find_classdecl(c, filename)		
 		elif c.kind == clang.cindex.CursorKind.NAMESPACE and c.location.file.name == filename:
@@ -164,6 +167,9 @@ def	sharedptrwrite():
 	i += 1
 	for sptr in classlist:
 		lines.insert(i, "%shared_ptr(" + sptr + ");" + "\n")
+		i += 1
+	for sptr in classlist:
+		lines.insert(i, "%shared_ptr(" + sptr.split("::")[-1] + ");" + "\n")
 		i += 1
 	with open(path, "w") as f:
 		f.write(''.join(lines))

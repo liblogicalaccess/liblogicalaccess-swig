@@ -6,9 +6,11 @@
 %import "liblogicalaccess_data.i"
 %import "liblogicalaccess_core.i"
 %import "liblogicalaccess_iks.i"
-//%import "liblogicalaccess_card.i"
 
 %{
+#include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
+
 /* Additional_include */
 
 #include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600lcddisplay.hpp>
@@ -231,7 +233,6 @@
 
 #include <logicalaccess/cards/accessinfo.hpp>
 
-
 using namespace logicalaccess;
 
 %}
@@ -257,13 +258,7 @@ using LibLogicalAccess.Card;
 %shared_ptr(openssl::SymmetricKey);
 %shared_ptr(openssl::InitializationVector);
 
-//typedef std::shared_ptr<logicalaccess::ReaderProvider> ReaderProviderPtr;
-//typedef std::shared_ptr<logicalaccess::ReaderUnit> ReaderUnitPtr;
-
 %template(ReaderUnitCollection) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
-//%template(ChipPtrCollection) std::list<std::shared_ptr<Chip> >;
-%template(ReaderUnitWeakPtr) std::weak_ptr<logicalaccess::ReaderUnit>;
-%template(SerialPortXmlPtrVector) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >;
 
 %apply unsigned short *INOUT { unsigned short * }
 %apply int *INOUT { int * }
@@ -294,7 +289,7 @@ using LibLogicalAccess.Card;
 %typemap(csin) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& %{out $csinput%}  
 %typemap(imtype) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& "out SerialPortXmlPtrVector"
 
-%typemap(ctype) PCSCReaderUnitType "enum PCSCReaderUnitType"
+%typemap(ctype) PCSCReaderUnitType "PCSCReaderUnitType"
 %typemap(cstype) PCSCReaderUnitType "PCSCReaderUnitType"
 %typemap(csin) PCSCReaderUnitType %{$csinput%}  
 %typemap(imtype) PCSCReaderUnitType "PCSCReaderUnitType"
@@ -309,16 +304,6 @@ using LibLogicalAccess.Card;
 %typemap(imtype) PCSCShareMode "PCSCShareMode"
 %typemap(csout, excode=SWIGEXCODE) PCSCShareMode {
 	PCSCShareMode ret = $imcall;$excode
-	return ret;
-}
-
-%template(UByteVector) std::vector<uint8_t>;
-
-%typemap(cstype) const std::vector<uint8_t> & "UByteVector"
-%typemap(csin) const std::vector<uint8_t> & %{ref $csinput%}  
-%typemap(imtype) const std::vector<uint8_t> & "UByteVector"
-%typemap(csout, excode=SWIGEXCODE) const std::vector<uint8_t> & {
-	UByteVector ret = $imcall;$excode
 	return ret;
 }
 
@@ -348,6 +333,45 @@ using LibLogicalAccess.Card;
 	CardServiceType ret = $imcall;$excode
 	return ret;
 }
+
+%typemap(ctype) DESFireCommands::FileSettings "DESFireCommands::FileSettings"
+%typemap(cstype) DESFireCommands::FileSettings "DESFireCommands.FileSettings"
+%typemap(csin) DESFireCommands::FileSettings %{$csinput%}  
+%typemap(imtype) DESFireCommands::FileSettings "LibLogicalAccess.Card.DESFireCommands.FileSettings"
+%typemap(csout, excode=SWIGEXCODE) DESFireCommands::FileSettingss {
+	DESFireCommands.FileSettings ret = $imcall;$excode
+	return ret;
+}
+
+%typemap(ctype) DESFireCommands::DESFireCardVersion "DESFireCommands::DESFireCardVersion"
+%typemap(cstype) DESFireCommands::DESFireCardVersion "DESFireCommands.DESFireCardVersion"
+%typemap(csin) DESFireCommands::DESFireCardVersion %{$csinput%}  
+%typemap(imtype) DESFireCommands::DESFireCardVersion "LibLogicalAccess.Card.DESFireCommands.DESFireCardVersion"
+%typemap(csout, excode=SWIGEXCODE) DESFireCommands::DESFireCardVersion {
+	DESFireCommands.DESFireCardVersion ret = $imcall;$excode
+	return ret;
+}
+
+//%typemap(ctype) EncryptionMode "EncryptionMode"
+//%typemap(cstype) EncryptionMode "LibLogicalAccess.Card.EncryptionMode"
+//%typemap(csin) EncryptionMode %{$csinput%}  
+//%typemap(imtype) EncryptionMode "LibLogicalAccess.Card.EncryptionMode"
+//%typemap(csout, excode=SWIGEXCODE) EncryptionMode {
+//	EncryptionMode ret = $imcall;$excode
+//	return ret;
+//}
+
+%typemap(ctype) HIDEncryptionMode "HIDEncryptionMode"
+%typemap(cstype) HIDEncryptionMode "HIDEncryptionMode"
+%typemap(csin) HIDEncryptionMode %{$csinput%}  
+%typemap(imtype) HIDEncryptionMode "LibLogicalAccess.Reader.HIDEncryptionMode"
+%typemap(csout, excode=SWIGEXCODE) HIDEncryptionMode {
+	HIDEncryptionMode ret = $imcall;$excode
+	return ret;
+}
+
+%include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
 
 /* Include_section */
 
@@ -570,3 +594,9 @@ using LibLogicalAccess.Card;
 /* END_Include_section */
 
 %include <logicalaccess/plugins/readers/idp/SMART-DLL/SMARTComm70.h>
+
+%feature("flatnested") DESFireCommands::DataFileSetting;
+%feature("flatnested") DESFireCommands::ValueFileSetting;
+%feature("flatnested") DESFireCommands::RecordFileSetting;
+%feature("flatnested") DESFireCommands::FileSetting;
+%feature("flatnested") DESFireCommands::DESFireCardVersion;

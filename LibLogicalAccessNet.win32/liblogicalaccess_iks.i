@@ -17,13 +17,11 @@ using LibLogicalAccess;
 #include <logicalaccess/iks/packet/DesfireChangeKey.hpp>
 #include <logicalaccess/iks/packet/GenRandom.hpp>
 #include <logicalaccess/key.hpp>
-#include <logicalaccess/cards/keystorage.hpp">
-#include <logicalaccess/cards/keydiversification.hpp">
 
 using namespace logicalaccess;
+using namespace logicalaccess::iks;
 %}
 
-%template(UByteVector) std::vector<uint8_t>;
 %template(UByteArray8) std::array<uint8_t, 8>;
 %template(UByteArray16) std::array<uint8_t, 16>;
 %template(UByteArray32) std::array<uint8_t, 32>;
@@ -31,14 +29,18 @@ using namespace logicalaccess;
 %typemap(cstype) const BaseCommand & "BaseCommand"
 %typemap(csin) const BaseCommand & %{out $csinput%}
 %typemap(imtype) const BaseCommand & "BaseCommand"
+%typemap(csout, excode=SWIGEXCODE) const BaseCommand & {
+	BaseCommand ret = $imcall;$excode
+	return ret;
+}
 
 %typemap(cstype) uint8_t * "ref byte"
 %typemap(csin) uint8_t * %{ref $csinput%}  
 %typemap(imtype) uint8_t * "ref byte"
-
-%typemap(cstype) const std::vector<uint8_t> & "UByteVector"
-%typemap(csin) const std::vector<uint8_t> & %{ref $csinput%}  
-%typemap(imtype) const std::vector<uint8_t> & "UByteVector"
+%typemap(csout, excode=SWIGEXCODE) uint8_t * {
+	byte ret = $imcall;$excode
+	return ret;
+}
 
 %typemap(ctype) iks::IslogKeyServer::IKSConfig "iks::IslogKeyServer::IKSConfig"
 %typemap(cstype) iks::IslogKeyServer::IKSConfig "IslogKeyServer.IKSConfig"
@@ -60,12 +62,6 @@ using namespace logicalaccess;
 
 /* Shared_ptr */
 
-%shared_ptr(logicalaccess::KeyDiversification);
-%shared_ptr(logicalaccess::KeyStorage);
-%shared_ptr(logicalaccess::BaseResponse);
-%shared_ptr(BaseResponse);
-%shared_ptr(logicalaccess::Key);
-
 /* END_Shared_ptr */
 
 %include <logicalaccess/iks/IslogKeyServer.hpp>
@@ -75,3 +71,4 @@ using namespace logicalaccess;
 %include <logicalaccess/iks/packet/DesfireAuth.hpp>
 %include <logicalaccess/iks/packet/DesfireChangeKey.hpp>
 %include <logicalaccess/iks/packet/GenRandom.hpp>
+

@@ -57,6 +57,9 @@ using namespace logicalaccess;
 
 /* Shared_ptr */
 
+%shared_ptr(DataField);
+%shared_ptr(SerialPortXml);
+
 /* END_Shared_ptr */
 
 /* Configuration_section */
@@ -92,9 +95,13 @@ using namespace logicalaccess;
 	return ret;
 }
 
-
 typedef std::shared_ptr<logicalaccess::Chip> ChipPtr;
 typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
+
+%nodefaultctor ISO15693ReaderCommunication;
+%nodefaultdtor ISO15693ReaderCommunication;
+
+%ignore logicalaccess::TcpDataTransport::connect();
 
 %template(ChipCollection) std::vector<std::shared_ptr<logicalaccess::Chip> >;
 %template(LocationNodeCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;
@@ -105,12 +112,9 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %template(FormatPtrVector) std::vector<std::shared_ptr<logicalaccess::Format> >;
 %template(ReaderUnitPtrVector) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
 %template(SerialPortXmlPtrVector) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >;
-
-
-%rename(IsEqual) operator==;
-%rename(IsDifferent) operator!=;
-%rename(CompareTo) operator<;
-%ignore operator<<;
+//%template(ChipEnableShared) std::enable_shared_from_this<logicalaccess::Chip>;
+//%template(ReaderProviderEnableShared) std::enable_shared_from_this<logicalaccess::ReaderProvider>;
+//%template(ReaderUnitEnableShared) std::enable_shared_from_this<logicalaccess::ReaderUnit>;
 
 /* END_Configuration_section */
 
