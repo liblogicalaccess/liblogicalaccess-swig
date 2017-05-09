@@ -289,23 +289,23 @@ using LibLogicalAccess.Card;
 %typemap(csin) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& %{out $csinput%}  
 %typemap(imtype) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& "out SerialPortXmlPtrVector"
 
-%typemap(ctype) PCSCReaderUnitType "PCSCReaderUnitType"
-%typemap(cstype) PCSCReaderUnitType "PCSCReaderUnitType"
-%typemap(csin) PCSCReaderUnitType %{$csinput%}  
-%typemap(imtype) PCSCReaderUnitType "PCSCReaderUnitType"
-%typemap(csout, excode=SWIGEXCODE) PCSCReaderUnitType {
-	PCSCReaderUnitType ret = $imcall;$excode
-	return ret;
-}
+//%typemap(ctype) PCSCReaderUnitType "PCSCReaderUnitType"
+//%typemap(cstype) PCSCReaderUnitType "PCSCReaderUnitType"
+//%typemap(csin) PCSCReaderUnitType %{$csinput%}  
+//%typemap(imtype) PCSCReaderUnitType "PCSCReaderUnitType"
+//%typemap(csout, excode=SWIGEXCODE) PCSCReaderUnitType {
+//	PCSCReaderUnitType ret = $imcall;$excode
+//	return ret;
+//}
 
-%typemap(ctype) PCSCShareMode "PCSCShareMode"
-%typemap(cstype) PCSCShareMode "PCSCShareMode"
-%typemap(csin) PCSCShareMode %{$csinput%}  
-%typemap(imtype) PCSCShareMode "PCSCShareMode"
-%typemap(csout, excode=SWIGEXCODE) PCSCShareMode {
-	PCSCShareMode ret = $imcall;$excode
-	return ret;
-}
+//%typemap(ctype) PCSCShareMode "PCSCShareMode"
+//%typemap(cstype) PCSCShareMode "PCSCShareMode"
+//%typemap(csin) PCSCShareMode %{$csinput%}  
+//%typemap(imtype) PCSCShareMode "PCSCShareMode"
+//%typemap(csout, excode=SWIGEXCODE) PCSCShareMode {
+//	PCSCShareMode ret = $imcall;$excode
+//	return ret;
+//}
 
 %typemap(ctype) TLVPtr "TLV*"
 %typemap(cstype) TLVPtr "TLV"
@@ -369,6 +369,28 @@ using LibLogicalAccess.Card;
 	HIDEncryptionMode ret = $imcall;$excode
 	return ret;
 }
+
+%typemap(ctype) FileSetting& "logicalaccess::DESFireCommands::FileSetting*"
+%typemap(cstype) FileSetting& "out DESFireCommands.FileSetting"
+%typemap(csin) FileSetting& %{out $csinput%} 
+%typemap(imtype) FileSetting& "out LibLogicalAccess.Card.DESFireCommands.FileSetting"
+%typemap(csout, excode=SWIGEXCODE) FileSetting& {
+	DESFireCommands.FileSetting ret = $imcall;$excode
+	return ret;
+}
+%typemap(in) FileSetting& %{ $1 = ($1_ltype)$input; %}
+%typemap(out) FileSetting& %{ $result = (FileSettings*)$1; %}
+
+%typemap(ctype) FileSetting* "logicalaccess::DESFireCommands::FileSetting*"
+%typemap(cstype) FileSetting* "ref DESFireCommands.FileSetting"
+%typemap(csin) FileSetting* %{ref $csinput%}  
+%typemap(imtype) FileSetting* "ref LibLogicalAccess.Card.DESFireCommands.FileSetting"
+%typemap(csout, excode=SWIGEXCODE) FileSetting* {
+	DESFireCommands.FileSetting* ret = $imcall;$excode
+	return ret;
+}
+%typemap(in) FileSetting* %{ $1 = ($1_ltype)$input; %}
+%typemap(out) FileSetting* %{ $result = (FileSettings*)$1; %}
 
 %include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>

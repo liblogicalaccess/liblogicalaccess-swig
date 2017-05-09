@@ -268,8 +268,6 @@ using LibLogicalAccess.Reader;
 %ignore pcsc_share_mode_to_string;
 %ignore pcsc_protocol_to_string;
 
-%nodefautlctor logicalaccess::OmnikeyXX21ReaderUnit::SecureModeStatus;
-
 /* Include_section */
 
 %include <logicalaccess/plugins/cards/cps3/cps3chip.hpp>
@@ -406,10 +404,10 @@ using LibLogicalAccess.Reader;
 
 /* END_Include_section */
 
-%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
-%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
-%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
-%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
+//%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
+//%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
+//%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
+//%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
 
 %feature("flatnested") EPassDG2::BioInfo;
 %feature("flatnested") DESFireCommands::DataFileSetting;
@@ -417,7 +415,7 @@ using LibLogicalAccess.Reader;
 %feature("flatnested") DESFireCommands::RecordFileSetting;
 %feature("flatnested") DESFireCommands::FileSetting;
 %feature("flatnested") DESFireCommands::DESFireCardVersion;
-%feature("flatnested") logicalaccess::OmnikeyXX21ReaderUnit::SecureModeStatus;
+%feature("flatnested") OmnikeyXX21ReaderUnit::SecureModeStatus;
 
 %template(DFNameCollection) std::vector<logicalaccess::DFName>;
 %template(BioInfosVector) std::vector<logicalaccess::EPassDG2::BioInfo>;
