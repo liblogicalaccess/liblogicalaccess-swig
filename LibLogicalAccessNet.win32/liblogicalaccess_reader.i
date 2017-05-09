@@ -3,6 +3,8 @@
 
 %include "liblogicalaccess.i"
 
+%import "liblogicalaccess_crypto.i"
+
 %import "liblogicalaccess_data.i"
 %import "liblogicalaccess_core.i"
 %import "liblogicalaccess_iks.i"
@@ -395,7 +397,6 @@ using LibLogicalAccess.Card;
 	HIDEncryptionMode ret = $imcall;$excode
 	return ret;
 }
-
 
 %include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>

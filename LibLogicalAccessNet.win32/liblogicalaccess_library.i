@@ -61,6 +61,8 @@
   static CustomExceptionHelper exceptionHelper = new CustomExceptionHelper();
 %}
 
+/** ATTENTION PAS FINI ICI **/
+
 %{
 #define CATCH_CSE(EXCEPT) \
 	catch (EXCEPT e) \

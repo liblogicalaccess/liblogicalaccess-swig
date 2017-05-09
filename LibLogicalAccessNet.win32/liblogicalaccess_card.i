@@ -85,10 +85,10 @@
 #include <logicalaccess/plugins/cards/iso7816/iso7816nfctag4cardservice.hpp>
 #include <logicalaccess/plugins/cards/iso7816/iso7816storagecardservice.hpp>
 #include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
-#include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifare1kchip.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifare4kchip.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifarekey.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifarelocation.hpp>
@@ -334,10 +334,10 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/iso7816/iso7816nfctag4cardservice.hpp>
 %include <logicalaccess/plugins/cards/iso7816/iso7816storagecardservice.hpp>
 %include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
-%include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifare1kchip.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifare4kchip.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
+%include <logicalaccess/plugins/cards/mifare/mifarechip.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifarekey.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifarelocation.hpp>

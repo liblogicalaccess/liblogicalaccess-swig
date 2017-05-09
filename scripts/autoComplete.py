@@ -127,6 +127,29 @@ def includewrite():
 		i += 1	
 	with open(readerpath, "w") as f:
 		f.write(''.join(lines))
+		
+	cryptopath = path.replace("{0}", "_crypto")
+	cryptoinc = lookdata("CRYPTO")
+	lines = cleandoc(cryptopath)
+	i = 0
+	while i < len(lines):
+		if "/* Additional_include */\n" in lines[i]:
+			i += 2
+			for crinc in cryptoinc:
+				lines.insert(i, "#include {0}\n".format(crinc))
+				i += 1
+			lines.insert(i, "\n")
+			i += 1
+		if "/* Include_section */\n" in lines[i]:
+			i += 2
+			for crinc in cryptoinc:
+				lines.insert(i, "%include {0}\n".format(crinc))
+				i += 1
+			lines.insert(i, "\n")
+			i += 1
+		i += 1	
+	with open(cryptopath, "w") as f:
+		f.write(''.join(lines))
 	
 def find_classdecl(node, filename):
 	global curnamespace
@@ -179,6 +202,7 @@ def main():
 	includeprocess("../packages/include/logicalaccess/plugins/cards/**/*.hpp", "CARD")
 	includeprocess("../packages/include/logicalaccess/readerproviders/**/*.hpp", "CORE")
 	includeprocess("../packages/include/logicalaccess/plugins/readers/**/*.hpp", "READER")
+	includeprocess("../packages/include/logicalaccess/crypto/**/*.hpp", "CRYPTO")
 	sharedptrprocess()
 	sharedptrwrite()
 	includewrite()
