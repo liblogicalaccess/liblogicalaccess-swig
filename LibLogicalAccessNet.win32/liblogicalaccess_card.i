@@ -8,6 +8,10 @@
 %import "liblogicalaccess_iks.i"
 
 %{
+#include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
 
 /* Additional_include */
 
@@ -145,11 +149,6 @@
 
 /* END_Additional_include */
 
-#include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
-#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
-#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
-#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
-
 using namespace logicalaccess;
 
 %}
@@ -166,20 +165,10 @@ using LibLogicalAccess.Reader;
 %shared_ptr(logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
 %shared_ptr(CPS3Commands);
 
-
 %typemap(ctype) size_t* indexByte "size_t*"
 %typemap(cstype) size_t* indexByte "out uint"
 %typemap(csin) size_t* indexByte %{out $csinput%}  
 %typemap(imtype) size_t* indexByte "out uint"
-
-//%typemap(ctype) OmnikeyXX21ReaderUnit::SecureModeStatus "OmnikeyXX21ReaderUnit::SecureModeStatus"
-//%typemap(cstype) OmnikeyXX21ReaderUnit::SecureModeStatus "OmnikeyXX21ReaderUnit.SecureModeStatus"
-//%typemap(csin) OmnikeyXX21ReaderUnit::SecureModeStatus %{$csinput%}  
-//%typemap(imtype) OmnikeyXX21ReaderUnit::SecureModeStatus "LibLogicalAccess.Reader.OmnikeyXX21ReaderUnit.SecureModeStatus"
-//%typemap(csout, excode=SWIGEXCODE) OmnikeyXX21ReaderUnit::SecureModeStatus {
-//	OmnikeyXX21ReaderUnit.SecureModeStatus ret = $imcall;$excode
-//	return ret;
-//}
 
 %typemap(ctype) logicalaccess::OmnikeyReaderUnit "logicalaccess::OmnikeyReaderUnit"
 %typemap(cstype) logicalaccess::OmnikeyReaderUnit "OmnikeyReaderUnit"
@@ -267,6 +256,11 @@ using LibLogicalAccess.Reader;
 %ignore logicalaccess::Commands;
 %ignore pcsc_share_mode_to_string;
 %ignore pcsc_protocol_to_string;
+
+%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
 
 /* Include_section */
 
@@ -403,19 +397,6 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/twic/twicstoragecardservice.hpp>
 
 /* END_Include_section */
-
-//%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
-//%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
-//%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
-//%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
-
-%feature("flatnested") EPassDG2::BioInfo;
-%feature("flatnested") DESFireCommands::DataFileSetting;
-%feature("flatnested") DESFireCommands::ValueFileSetting;
-%feature("flatnested") DESFireCommands::RecordFileSetting;
-%feature("flatnested") DESFireCommands::FileSetting;
-%feature("flatnested") DESFireCommands::DESFireCardVersion;
-%feature("flatnested") OmnikeyXX21ReaderUnit::SecureModeStatus;
 
 %template(DFNameCollection) std::vector<logicalaccess::DFName>;
 %template(BioInfosVector) std::vector<logicalaccess::EPassDG2::BioInfo>;

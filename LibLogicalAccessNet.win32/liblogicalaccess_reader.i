@@ -260,6 +260,8 @@ using LibLogicalAccess.Card;
 
 %template(ReaderUnitCollection) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
 
+%feature("valuewrapper") logicalaccess::OmnikeyXX21ReaderUnit::SecureModeStatus;
+
 %apply unsigned short *INOUT { unsigned short * }
 %apply int *INOUT { int * }
 %apply unsigned long *OUTPUT { unsigned long* pdwOutLen}
@@ -334,14 +336,38 @@ using LibLogicalAccess.Card;
 	return ret;
 }
 
-%typemap(ctype) DESFireCommands::FileSettings "DESFireCommands::FileSettings"
-%typemap(cstype) DESFireCommands::FileSettings "DESFireCommands.FileSettings"
-%typemap(csin) DESFireCommands::FileSettings %{$csinput%}  
-%typemap(imtype) DESFireCommands::FileSettings "LibLogicalAccess.Card.DESFireCommands.FileSettings"
-%typemap(csout, excode=SWIGEXCODE) DESFireCommands::FileSettingss {
-	DESFireCommands.FileSettings ret = $imcall;$excode
+%typemap(ctype) FileSetting "DESFireCommands::FileSetting"
+%typemap(cstype) FileSetting "DESFireCommands.FileSetting"
+%typemap(in) FileSetting "$1 = $input"
+%typemap(csin) FileSetting %{$csinput%}  
+%typemap(imtype) FileSetting "LibLogicalAccess.Card.DESFireCommands.FileSetting"
+%typemap(csout, excode=SWIGEXCODE) FileSetting {
+	DESFireCommands.FileSetting ret = $imcall;$excode
 	return ret;
 }
+
+%typemap(ctype) FileSetting& "logicalaccess::DESFireCommands::FileSetting*"
+%typemap(cstype) FileSetting& "out DESFireCommands.FileSetting"
+%typemap(csin) FileSetting& %{out $csinput%} 
+%typemap(imtype) FileSetting& "out LibLogicalAccess.Card.DESFireCommands.FileSetting"
+%typemap(csout, excode=SWIGEXCODE) FileSetting& {
+	DESFireCommands.FileSetting ret = $imcall;$excode
+	return ret;
+}
+%typemap(in) FileSetting& %{ $1 = ($1_ltype)$input; %}
+%typemap(out) FileSetting& %{ $result = (FileSetting*)$1; %}
+
+%typemap(ctype) FileSetting* "logicalaccess::DESFireCommands::FileSetting*"
+%typemap(cstype) FileSetting* "ref DESFireCommands.FileSetting"
+%typemap(csin) FileSetting* %{ref $csinput%}  
+%typemap(imtype) FileSetting* "ref LibLogicalAccess.Card.DESFireCommands.FileSetting"
+%typemap(csout, excode=SWIGEXCODE) FileSetting* {
+	DESFireCommands.FileSetting* ret = $imcall;$excode
+	return ret;
+}
+%typemap(in) FileSetting* %{ $1 = ($1_ltype)$input; %}
+%typemap(out) FileSetting* %{ $result = (FileSetting*)$1; %}
+
 
 %typemap(ctype) DESFireCommands::DESFireCardVersion "DESFireCommands::DESFireCardVersion"
 %typemap(cstype) DESFireCommands::DESFireCardVersion "DESFireCommands.DESFireCardVersion"
@@ -370,27 +396,6 @@ using LibLogicalAccess.Card;
 	return ret;
 }
 
-%typemap(ctype) FileSetting& "logicalaccess::DESFireCommands::FileSetting*"
-%typemap(cstype) FileSetting& "out DESFireCommands.FileSetting"
-%typemap(csin) FileSetting& %{out $csinput%} 
-%typemap(imtype) FileSetting& "out LibLogicalAccess.Card.DESFireCommands.FileSetting"
-%typemap(csout, excode=SWIGEXCODE) FileSetting& {
-	DESFireCommands.FileSetting ret = $imcall;$excode
-	return ret;
-}
-%typemap(in) FileSetting& %{ $1 = ($1_ltype)$input; %}
-%typemap(out) FileSetting& %{ $result = (FileSettings*)$1; %}
-
-%typemap(ctype) FileSetting* "logicalaccess::DESFireCommands::FileSetting*"
-%typemap(cstype) FileSetting* "ref DESFireCommands.FileSetting"
-%typemap(csin) FileSetting* %{ref $csinput%}  
-%typemap(imtype) FileSetting* "ref LibLogicalAccess.Card.DESFireCommands.FileSetting"
-%typemap(csout, excode=SWIGEXCODE) FileSetting* {
-	DESFireCommands.FileSetting* ret = $imcall;$excode
-	return ret;
-}
-%typemap(in) FileSetting* %{ $1 = ($1_ltype)$input; %}
-%typemap(out) FileSetting* %{ $result = (FileSettings*)$1; %}
 
 %include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
@@ -616,9 +621,3 @@ using LibLogicalAccess.Card;
 /* END_Include_section */
 
 %include <logicalaccess/plugins/readers/idp/SMART-DLL/SMARTComm70.h>
-
-%feature("flatnested") DESFireCommands::DataFileSetting;
-%feature("flatnested") DESFireCommands::ValueFileSetting;
-%feature("flatnested") DESFireCommands::RecordFileSetting;
-%feature("flatnested") DESFireCommands::FileSetting;
-%feature("flatnested") DESFireCommands::DESFireCardVersion;
