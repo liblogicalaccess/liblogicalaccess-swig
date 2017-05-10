@@ -103,19 +103,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 %ignore logicalaccess::TcpDataTransport::connect();
 
-%template(ChipCollection) std::vector<std::shared_ptr<logicalaccess::Chip> >;
-%template(LocationNodeCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;
-
-%template(LocationNodeWeakPtr) std::weak_ptr<logicalaccess::LocationNode>;
-%template(ReaderProviderWeakPtr) std::weak_ptr<logicalaccess::ReaderProvider>;
-%template(ReaderUnitWeakPtr) std::weak_ptr<logicalaccess::ReaderUnit>;
-%template(FormatPtrVector) std::vector<std::shared_ptr<logicalaccess::Format> >;
-%template(ReaderUnitPtrVector) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
-%template(SerialPortXmlPtrVector) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >;
-//%template(ChipEnableShared) std::enable_shared_from_this<logicalaccess::Chip>;
-//%template(ReaderProviderEnableShared) std::enable_shared_from_this<logicalaccess::ReaderProvider>;
-//%template(ReaderUnitEnableShared) std::enable_shared_from_this<logicalaccess::ReaderUnit>;
-
 /* END_Configuration_section */
 
 /* Include_section */
@@ -158,6 +145,24 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 %include "liblogicalaccess_cardservice.i"
 %include "liblogicalaccess_readerservice.i"
+
+%template(ChipPtrCollection) std::vector<std::shared_ptr<logicalaccess::Chip> >;
+%template(LocationNodePtrCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;
+%template(FormatPtrVector) std::vector<std::shared_ptr<logicalaccess::Format> >;
+%template(ReaderUnitPtrVector) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
+%template(SerialPortXmlPtrVector) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >;
+
+%template(LocationNodeWeakPtr) std::weak_ptr<logicalaccess::LocationNode>;
+%template(ReaderProviderWeakPtr) std::weak_ptr<logicalaccess::ReaderProvider>;
+%template(ReaderUnitWeakPtr) std::weak_ptr<logicalaccess::ReaderUnit>;
+
+
+%template(ChipEnableShared) std::enable_shared_from_this<logicalaccess::Chip>;
+%template(ReaderProviderEnableShared) std::enable_shared_from_this<logicalaccess::ReaderProvider>;
+%template(ReaderUnitEnableShared) std::enable_shared_from_this<logicalaccess::ReaderUnit>;
+%nodefaultdtor ChipEnableShared;
+%nodefaultdtor ReaderProviderEnableShared;
+%nodefaultdtor ReaderUnitEnableShared;
 
 %pragma(csharp) imclasscode=%{
 	public static System.Collections.Generic.Dictionary<string, System.Type> chipDictionary;

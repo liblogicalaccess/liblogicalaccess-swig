@@ -4,6 +4,7 @@
 %include "liblogicalaccess.i"
 
 %{
+#include "logicalaccess/cards/keystorage.hpp"
 #include <logicalaccess/plugins/readers/pcsc-private/type_fwd.hpp>
 #include <logicalaccess/techno.hpp>
 #include <logicalaccess/key.hpp>
@@ -142,6 +143,8 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte)
 %apply unsigned char *OUTPUT { unsigned char & }
 %apply unsigned char INPUT[] { const unsigned char *data }
 %apply unsigned int *INOUT { unsigned int *pos }
+%apply unsigned int INPUT[] { unsigned int *positions, unsigned int *locations }
+
 
 %typemap(ctype) const unsigned char * "const unsigned char *"
 %typemap(cstype) const unsigned char * "byte[]"
@@ -246,17 +249,17 @@ namespace std {
 %ignore logicalaccess::DataTransport::getReaderUnit;
 %ignore logicalaccess::DataTransport::setReaderUnit;
 
-//namespace std {
-//    template <class T> class enable_shared_from_this {
-//    public:
-//        ~enable_shared_from_this();
-//        shared_ptr<T> shared_from_this();
-//        shared_ptr<const T> shared_from_this() const;
-//	protected:
-//		enable_shared_from_this();
-//        enable_shared_from_this(const enable_shared_from_this &);
-//    };
-//}
+namespace std {
+    template <class T> class enable_shared_from_this {
+    public:
+        ~enable_shared_from_this();
+        shared_ptr<T> shared_from_this();
+        //shared_ptr<const T> shared_from_this() const;
+	protected:
+		enable_shared_from_this();
+        enable_shared_from_this(const enable_shared_from_this &);
+    };
+}
 
 namespace std {
 	template<class Ty> class weak_ptr {
@@ -282,10 +285,7 @@ namespace std {
 	};
 }
 
-//%template(KeyEnableShared) std::enable_shared_from_this<logicalaccess::Key>;
-//%template(DataFieldEnableShared) std::enable_shared_from_this<logicalaccess::DataField>;
-//%template(KeyStorageEnableShared) std::enable_shared_from_this<logicalaccess::KeyStorage>;
-
+%include "logicalaccess/cards/keystorage.hpp"
 %include <logicalaccess/techno.hpp>
 %include <logicalaccess/xmlserializable.hpp>
 %include <logicalaccess/readerproviders/datatransport.hpp>
@@ -326,3 +326,10 @@ namespace std {
 %include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
 %include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/keydiversification.hpp>
+
+%template(KeyEnableShared) std::enable_shared_from_this<logicalaccess::Key>;
+%template(DataFieldEnableShared) std::enable_shared_from_this<logicalaccess::DataField>;
+%template(KeyStorageEnableShared) std::enable_shared_from_this<logicalaccess::KeyStorage>;
+%nodefaultdtor KeyEnableShared;
+%nodefaultdtor DataFieldEnableShared;
+%nodefaultdtor KeyStorageEnableShared;

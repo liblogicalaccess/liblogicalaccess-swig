@@ -6,8 +6,10 @@ import glob
 import re
 import clang.cindex
 
+baseinc = ["../packages/include/logicalaccess/plugins/cards/", "../packages/include/logicalaccess/plugins/readerproviders/"]
 regexsharedptr = r"(?<=std::shared_ptr<)(.*?)(?=>)"
 regexns = r"(?<=namespace )(.*?)(?=\n)"
+regexinclude = r"(?<=#include [\"<])(.*?.hpp)(?=[\">]\n)"
 includebase = "<logicalaccess{0}>"
 include = []
 nest = []
@@ -33,8 +35,33 @@ def	includeprocess(path, category):
 	for filename in glob.glob(path, recursive=True):
 		with open(filename, "r") as f:
 			content = f.read()
+			curpath = filename.replace("\\", "/")
 			filename = filename.replace("\\", "/").split("logicalaccess")[-1]
-			include.append((category, includebase.replace("{0}", filename)))
+			regex = re.findall(regexinclude, content)
+			for inc in regex:
+				inc = inc.replace("\\", "/")
+				incpath = "/".join(curpath.split("/")[:-1]) + "/" + inc
+				if inc.split("/")[0] == "logicalaccess":
+					if inc.split("/")[1] == "plugins" and category != "CORE" and category != "CRYPTO":
+						inc = "<" + inc + ">"
+						if (category, inc) not in include:
+							include.append((category, inc))
+				elif os.path.isfile(incpath) and category != "CORE" and category != "CRYPTO":
+					inc = (os.path.normpath(incpath).split("logicalaccess")[-1]).replace("\\", "/")
+					inc = (includebase.replace("{0}", inc))
+					if (category, inc) not in include:
+						include.append((category, inc))
+				else:
+					for el in baseinc:
+						if os.path.isfile(el + inc) and category != "CORE" and category != "CRYPTO":
+							inc = (os.path.normpath(el + inc).split("logicalaccess")[-1]).replace("\\", "/")
+							inc = (includebase.replace("{0}", inc))
+							if (category, inc) not in include:
+								include.append((category, inc))
+								break
+			inc = includebase.replace("{0}", filename)
+			if (category, inc) not in include:
+				include.append((category, includebase.replace("{0}", filename)))
 			parsesharedptr(content)
 
 
@@ -204,7 +231,8 @@ def main():
 	includeprocess("../packages/include/logicalaccess/readerproviders/**/*.hpp", "CORE")
 	includeprocess("../packages/include/logicalaccess/plugins/readers/**/*.hpp", "READER")
 	includeprocess("../packages/include/logicalaccess/crypto/**/*.hpp", "CRYPTO")
-	sharedptrprocess()
-	sharedptrwrite()
+	# sharedptrprocess()
+	# sharedptrwrite()
 	includewrite()
+
 main()

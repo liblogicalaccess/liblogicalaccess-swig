@@ -44,7 +44,8 @@ using namespace logicalaccess;
 
 
 %template(NdefRecordCollection) std::vector<std::shared_ptr<logicalaccess::NdefRecord> >;
-//%template(CardServiceEnableShared) std::enable_shared_from_this<logicalaccess::CardService>;
+%template(CardServiceEnableShared) std::enable_shared_from_this<logicalaccess::CardService>;
+%nodefaultdtor CardServiceEnableShared;
 
 %pragma(csharp) imclasscode=%{
   public static CardService createCardService(System.IntPtr cPtr, bool owner)

@@ -48,6 +48,7 @@
 %ignore operator<<;
 %ignore operator bool;
 %ignore operator int;
+%ignore std::ostream;
 
 /*****SHARED PTR SECTION*****/
 
