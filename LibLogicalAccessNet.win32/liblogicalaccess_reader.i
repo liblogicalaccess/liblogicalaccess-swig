@@ -10,8 +10,9 @@
 %import "liblogicalaccess_iks.i"
 
 %{
-#include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
 
 /* Additional_include */
 
@@ -262,7 +263,7 @@ using LibLogicalAccess.Card;
 
 %template(ReaderUnitCollection) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
 
-%feature("valuewrapper") logicalaccess::OmnikeyXX21ReaderUnit::SecureModeStatus;
+//%feature("valuewrapper") logicalaccess::OmnikeyXX21ReaderUnit::SecureModeStatus;
 
 %apply unsigned short *INOUT { unsigned short * }
 %apply int *INOUT { int * }
@@ -338,38 +339,6 @@ using LibLogicalAccess.Card;
 	return ret;
 }
 
-%typemap(ctype) FileSetting "DESFireCommands::FileSetting"
-%typemap(cstype) FileSetting "DESFireCommands.FileSetting"
-%typemap(in) FileSetting "$1 = $input"
-%typemap(csin) FileSetting %{$csinput%}  
-%typemap(imtype) FileSetting "LibLogicalAccess.Card.DESFireCommands.FileSetting"
-%typemap(csout, excode=SWIGEXCODE) FileSetting {
-	DESFireCommands.FileSetting ret = $imcall;$excode
-	return ret;
-}
-
-%typemap(ctype) FileSetting& "logicalaccess::DESFireCommands::FileSetting*"
-%typemap(cstype) FileSetting& "out DESFireCommands.FileSetting"
-%typemap(csin) FileSetting& %{out $csinput%} 
-%typemap(imtype) FileSetting& "out LibLogicalAccess.Card.DESFireCommands.FileSetting"
-%typemap(csout, excode=SWIGEXCODE) FileSetting& {
-	DESFireCommands.FileSetting ret = $imcall;$excode
-	return ret;
-}
-%typemap(in) FileSetting& %{ $1 = ($1_ltype)$input; %}
-%typemap(out) FileSetting& %{ $result = (FileSetting*)$1; %}
-
-%typemap(ctype) FileSetting* "logicalaccess::DESFireCommands::FileSetting*"
-%typemap(cstype) FileSetting* "ref DESFireCommands.FileSetting"
-%typemap(csin) FileSetting* %{ref $csinput%}  
-%typemap(imtype) FileSetting* "ref LibLogicalAccess.Card.DESFireCommands.FileSetting"
-%typemap(csout, excode=SWIGEXCODE) FileSetting* {
-	DESFireCommands.FileSetting* ret = $imcall;$excode
-	return ret;
-}
-%typemap(in) FileSetting* %{ $1 = ($1_ltype)$input; %}
-%typemap(out) FileSetting* %{ $result = (FileSetting*)$1; %}
-
 
 %typemap(ctype) DESFireCommands::DESFireCardVersion "DESFireCommands::DESFireCardVersion"
 %typemap(cstype) DESFireCommands::DESFireCardVersion "DESFireCommands.DESFireCardVersion"
@@ -399,6 +368,7 @@ using LibLogicalAccess.Card;
 }
 
 %include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
 
 /* Include_section */

@@ -219,13 +219,13 @@ namespace std {
 		return ret;
 	}
 
-	%typemap(cstype) vector<uint8_t> "UByteVector"
-	%typemap(csin) vector<uint8_t> %{$csinput%}  
-	%typemap(imtype) vector<uint8_t> "UByteVector"
-	%typemap(csout, excode=SWIGEXCODE) vector<uint8_t> {
-		UByteVector ret = $imcall;$excode
-		return ret;
-	}
+	//%typemap(cstype) vector<uint8_t> "UByteVector"
+	//%typemap(csin) vector<uint8_t> %{$csinput%}  
+	//%typemap(imtype) vector<uint8_t> "UByteVector"
+	//%typemap(csout, excode=SWIGEXCODE) vector<uint8_t> {
+	//	UByteVector ret = $imcall;$excode
+	//	return ret;
+	//}
 	
 	%typemap(cstype) const vector<uint8_t> &"UByteVector"
 	%typemap(csin) const vector<uint8_t> & %{$csinput%}  
