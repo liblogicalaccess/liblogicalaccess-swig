@@ -161,6 +161,7 @@ def find_classdecl(node, filename):
 			else:
 				if "::".join(nest) + "::" + c.spelling not in classlist:
 					classlist.append("::".join(nest) + "::" + c.spelling)
+					nest.append(c.spelling)
 			find_classdecl(c, filename)		
 		elif c.kind == clang.cindex.CursorKind.NAMESPACE and c.location.file.name == filename:
 			nest.append(c.spelling)

@@ -13,6 +13,7 @@
 #include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
 
 /* Additional_include */
 
@@ -294,24 +295,6 @@ using LibLogicalAccess.Card;
 %typemap(csin) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& %{out $csinput%}  
 %typemap(imtype) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& "out SerialPortXmlPtrVector"
 
-//%typemap(ctype) PCSCReaderUnitType "PCSCReaderUnitType"
-//%typemap(cstype) PCSCReaderUnitType "PCSCReaderUnitType"
-//%typemap(csin) PCSCReaderUnitType %{$csinput%}  
-//%typemap(imtype) PCSCReaderUnitType "PCSCReaderUnitType"
-//%typemap(csout, excode=SWIGEXCODE) PCSCReaderUnitType {
-//	PCSCReaderUnitType ret = $imcall;$excode
-//	return ret;
-//}
-
-//%typemap(ctype) PCSCShareMode "PCSCShareMode"
-//%typemap(cstype) PCSCShareMode "PCSCShareMode"
-//%typemap(csin) PCSCShareMode %{$csinput%}  
-//%typemap(imtype) PCSCShareMode "PCSCShareMode"
-//%typemap(csout, excode=SWIGEXCODE) PCSCShareMode {
-//	PCSCShareMode ret = $imcall;$excode
-//	return ret;
-//}
-
 %typemap(ctype) TLVPtr "TLV*"
 %typemap(cstype) TLVPtr "TLV"
 %typemap(csin) TLVPtr %{$csinput%}  
@@ -349,15 +332,6 @@ using LibLogicalAccess.Card;
 	return ret;
 }
 
-//%typemap(ctype) EncryptionMode "EncryptionMode"
-//%typemap(cstype) EncryptionMode "LibLogicalAccess.Card.EncryptionMode"
-//%typemap(csin) EncryptionMode %{$csinput%}  
-//%typemap(imtype) EncryptionMode "LibLogicalAccess.Card.EncryptionMode"
-//%typemap(csout, excode=SWIGEXCODE) EncryptionMode {
-//	EncryptionMode ret = $imcall;$excode
-//	return ret;
-//}
-
 %typemap(ctype) HIDEncryptionMode "HIDEncryptionMode"
 %typemap(cstype) HIDEncryptionMode "HIDEncryptionMode"
 %typemap(csin) HIDEncryptionMode %{$csinput%}  
@@ -367,9 +341,17 @@ using LibLogicalAccess.Card;
 	return ret;
 }
 
+%typemap(ctype) FileSetting& "logicalaccess::DESFireCommands::FileSetting *"
+%typemap(in) FileSetting& "$1 = (logicalaccess::DESFireCommands::FileSetting *)$input;"
+%typemap(cstype) FileSetting& "out DESFireCommands.FileSetting"
+%typemap(csin) FileSetting& %{out $csinput%}  
+%typemap(imtype) FileSetting& "out LibLogicalAccess.Card.DESFireCommands.FileSetting"
+
+
 %include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
 
 /* Include_section */
 

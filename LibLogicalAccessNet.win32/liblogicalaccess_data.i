@@ -5,7 +5,6 @@
 
 %{
 #include <logicalaccess/plugins/readers/pcsc-private/type_fwd.hpp>
-#include <logicalaccess/lla_fwd.hpp>
 #include <logicalaccess/techno.hpp>
 #include <logicalaccess/key.hpp>
 #include <logicalaccess/xmlserializable.hpp>
@@ -219,13 +218,13 @@ namespace std {
 		return ret;
 	}
 
-	//%typemap(cstype) vector<uint8_t> "UByteVector"
-	//%typemap(csin) vector<uint8_t> %{$csinput%}  
-	//%typemap(imtype) vector<uint8_t> "UByteVector"
-	//%typemap(csout, excode=SWIGEXCODE) vector<uint8_t> {
-	//	UByteVector ret = $imcall;$excode
-	//	return ret;
-	//}
+	%typemap(cstype) vector<uint8_t> "UByteVector"
+	%typemap(csin) vector<uint8_t> %{$csinput%}  
+	%typemap(imtype) vector<uint8_t> "UByteVector"
+	%typemap(csout, excode=SWIGEXCODE) vector<uint8_t> {
+		UByteVector ret = $imcall;$excode
+		return ret;
+	}
 	
 	%typemap(cstype) const vector<uint8_t> &"UByteVector"
 	%typemap(csin) const vector<uint8_t> & %{$csinput%}  
@@ -243,13 +242,6 @@ namespace std {
 		return ret;
 	}
 };
-
-%shared_ptr(logicalaccess::XmlSerializable);
-%shared_ptr(logicalaccess::DataTransport);
-%shared_ptr(logicalaccess::ResultChecker);
-%shared_ptr(logicalaccess::ReaderCardAdapter);
-%shared_ptr(logicalaccess::KeyStorage);
-%shared_ptr(logicalaccess::KeyDiversification);
 
 %ignore logicalaccess::DataTransport::getReaderUnit;
 %ignore logicalaccess::DataTransport::setReaderUnit;
@@ -294,7 +286,6 @@ namespace std {
 //%template(DataFieldEnableShared) std::enable_shared_from_this<logicalaccess::DataField>;
 //%template(KeyStorageEnableShared) std::enable_shared_from_this<logicalaccess::KeyStorage>;
 
-%include <logicalaccess/lla_fwd.hpp>
 %include <logicalaccess/techno.hpp>
 %include <logicalaccess/xmlserializable.hpp>
 %include <logicalaccess/readerproviders/datatransport.hpp>
