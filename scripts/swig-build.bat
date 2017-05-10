@@ -1,0 +1,1 @@
+swig -csharp -c++ -I%1\packages\include -outdir "%1%2" -namespace %3 -dllimport LibLogicalAccessNet.win32.dll "%4"
