@@ -17,18 +17,31 @@
 
 /* Additional_include */
 
+#include <logicalaccess/readerproviders/lcddisplay.hpp>
 #include <logicalaccess/plugins/readers/a3mlgm5600/readercardadapters/a3mlgm5600readercardadapter.hpp>
+#include <logicalaccess/logs.hpp>
 #include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600lcddisplay.hpp>
+#include <logicalaccess/logicalaccess_api.hpp>
+#include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
 #include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600_fwd.hpp>
 #include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600ledbuzzerdisplay.hpp>
 #include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunit.hpp>
+#include <logicalaccess/readerproviders/readerprovider.hpp>
 #include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerprovider.hpp>
+#include <logicalaccess/readerproviders/readerunit.hpp>
+#include <logicalaccess/readerproviders/serialportxml.hpp>
 #include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunitconfiguration.hpp>
+#include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
+#include <logicalaccess/cards/readercardadapter.hpp>
+#include <logicalaccess/readerproviders/iso14443readercommunication.hpp>
 #include <logicalaccess/plugins/readers/admitto/admittoreaderunit.hpp>
 #include <logicalaccess/plugins/readers/admitto/admittoreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/admitto/admittoreaderunitconfiguration.hpp>
+#include <logicalaccess/readerproviders/circularbufferparser.hpp>
 #include <logicalaccess/plugins/readers/admitto/readercardadapters/admittobufferparser.hpp>
+#include <logicalaccess/readerproviders/serialportdatatransport.hpp>
 #include <logicalaccess/plugins/readers/admitto/readercardadapters/admittodatatransport.hpp>
+#include <logicalaccess/bufferhelper.hpp>
 #include <logicalaccess/plugins/readers/admitto/readercardadapters/admittoreadercardadapter.hpp>
 #include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerunit.hpp>
 #include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerprovider.hpp>
@@ -73,19 +86,24 @@
 #include <logicalaccess/plugins/readers/idondemand/idondemandreaderunitconfiguration.hpp>
 #include <logicalaccess/plugins/cards/generictag/generictagaccesscontrolcardservice.hpp>
 #include <logicalaccess/plugins/readers/idondemand/commands/generictagidondemandaccesscontrolcardservice.hpp>
+#include <logicalaccess/cards/commands.hpp>
 #include <logicalaccess/plugins/readers/idondemand/commands/generictagidondemandcommands.hpp>
 #include <logicalaccess/plugins/readers/idondemand/readercardadapters/idondemandreadercardadapter.hpp>
+#include <logicalaccess/readerproviders/datatransport.hpp>
 #include <logicalaccess/plugins/readers/idp/idpreaderunit.hpp>
 #include <logicalaccess/plugins/readers/idp/idpdatatransport.hpp>
 #include <logicalaccess/plugins/readers/idp/IDPReaderUnit.hpp>
 #include <logicalaccess/plugins/readers/idp/idpreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/idp/idpreaderunitconfiguration.hpp>
+#include <logicalaccess/cards/chip.hpp>
 #include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
 #include <logicalaccess/plugins/readers/idp/readercardadapters/idpreadercardadapter.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
+#include <logicalaccess/cards/readermemorykeystorage.hpp>
+#include <logicalaccess/resultchecker.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816resultchecker.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816commands.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
@@ -104,7 +122,14 @@
 #include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
 #include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
+#include <logicalaccess/crypto/symmetric_key.hpp>
+#include <logicalaccess/crypto/aes_symmetric_key.hpp>
+#include <logicalaccess/crypto/aes_initialization_vector.hpp>
+#include <logicalaccess/crypto/aes_cipher.hpp>
+#include <logicalaccess/crypto/cmac.hpp>
+#include <logicalaccess/myexception.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/samiso7816resultchecker.hpp>
+#include <logicalaccess/key.hpp>
 #include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
@@ -116,6 +141,7 @@
 #include <logicalaccess/plugins/readers/nfc/nfcdatatransport.hpp>
 #include <logicalaccess/plugins/readers/nfc/nfcreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/nfc/nfcreaderunitconfiguration.hpp>
+#include <logicalaccess/services/uidchanger/uidchangerservice.hpp>
 #include <logicalaccess/plugins/readers/nfc/commands/mifareclassicuidchangerservice.hpp>
 #include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
 #include <logicalaccess/plugins/readers/nfc/readercardadapters/nfcreadercardadapter.hpp>
@@ -134,6 +160,7 @@
 #include <logicalaccess/plugins/readers/osdp/osdpreaderunit.hpp>
 #include <logicalaccess/plugins/readers/osdp/osdpreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/osdp/osdpreaderunitconfiguration.hpp>
+#include <logicalaccess/cards/aes128key.hpp>
 #include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpbufferparser.hpp>
 #include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpdatatransport.hpp>
 #include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpreadercardadapter.hpp>
@@ -142,7 +169,9 @@
 #include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
 #include <logicalaccess/plugins/readers/pcsc/pcscreaderprovider.hpp>
+#include <logicalaccess/utils.hpp>
 #include <logicalaccess/plugins/readers/pcsc/pcsc_fwd.hpp>
+#include <logicalaccess/lla_fwd.hpp>
 #include <logicalaccess/plugins/readers/pcsc/pcsc_connection.hpp>
 #include <logicalaccess/plugins/readers/pcsc/pcsc_ctl_datatransport.hpp>
 #include <logicalaccess/plugins/readers/pcsc/commands/acsacrresultchecker.hpp>
@@ -194,6 +223,7 @@
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeylanxx21readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
+#include <logicalaccess/cards/tripledeskey.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx22readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx25readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/scmreaderunit.hpp>
@@ -203,6 +233,7 @@
 #include <logicalaccess/plugins/readers/pcsc-private/TLV.hpp>
 #include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
 #include <logicalaccess/plugins/readers/pcsc-private/commands/HIDiClassOmnikeyXX27Commands.hpp>
+#include <logicalaccess/techno.hpp>
 #include <logicalaccess/plugins/readers/pcsc-private/readers/omnikeyXX27readerunit.hpp>
 #include <logicalaccess/plugins/readers/promag/promagreaderunit.hpp>
 #include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>
@@ -213,6 +244,7 @@
 #include <logicalaccess/plugins/readers/rfideas/rfideasreaderunit.hpp>
 #include <logicalaccess/plugins/readers/rfideas/rfideasreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/rfideas/rfideasreaderunitconfiguration.hpp>
+#include <logicalaccess/readerproviders/tcpdatatransport.hpp>
 #include <logicalaccess/plugins/readers/rpleth/rplethdatatransport.hpp>
 #include <logicalaccess/plugins/readers/rpleth/readercardadapters/rplethreadercardadapter.hpp>
 #include <logicalaccess/plugins/readers/rpleth/rplethlcddisplay.hpp>
@@ -239,7 +271,12 @@
 #include <logicalaccess/plugins/readers/stidprg/stidprgreaderunit.hpp>
 #include <logicalaccess/plugins/readers/stidprg/stidprgreaderunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/stidprg/stidprgresultchecker.hpp>
+#include <logicalaccess/services/accesscontrol/accesscontrolcardservice.hpp>
 #include <logicalaccess/plugins/readers/stidprg/STidPRG_Prox_AccessControl.hpp>
+#include <logicalaccess/services/accesscontrol/formats/corporate1000format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand26format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand34withfacilityformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityformat.hpp>
 #include <logicalaccess/plugins/readers/stidprg/stid_prg_utils.hpp>
 #include <logicalaccess/plugins/readers/stidprg/readercardadapters/stidprgbufferparser.hpp>
 #include <logicalaccess/plugins/readers/stidprg/readercardadapters/stidprgdatatransport.hpp>
@@ -248,6 +285,7 @@
 #include <logicalaccess/plugins/readers/stidstr/stidstrledbuzzerdisplay.hpp>
 #include <logicalaccess/plugins/readers/stidstr/stidstrreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/stidstr/stidstrreaderunit.hpp>
+#include <logicalaccess/cards/hmac1key.hpp>
 #include <logicalaccess/plugins/readers/stidstr/stidstrreaderunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreadercardadapter.hpp>
 #include <logicalaccess/plugins/readers/stidstr/commands/desfireev1stidstrcommands.hpp>
@@ -379,18 +417,31 @@ using LibLogicalAccess.Card;
 
 /* Include_section */
 
+%include <logicalaccess/readerproviders/lcddisplay.hpp>
 %include <logicalaccess/plugins/readers/a3mlgm5600/readercardadapters/a3mlgm5600readercardadapter.hpp>
+%include <logicalaccess/logs.hpp>
 %include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600lcddisplay.hpp>
+%include <logicalaccess/logicalaccess_api.hpp>
+%include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
 %include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600_fwd.hpp>
 %include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600ledbuzzerdisplay.hpp>
 %include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunit.hpp>
+%include <logicalaccess/readerproviders/readerprovider.hpp>
 %include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerprovider.hpp>
+%include <logicalaccess/readerproviders/readerunit.hpp>
+%include <logicalaccess/readerproviders/serialportxml.hpp>
 %include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600readerunitconfiguration.hpp>
+%include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
+%include <logicalaccess/cards/readercardadapter.hpp>
+%include <logicalaccess/readerproviders/iso14443readercommunication.hpp>
 %include <logicalaccess/plugins/readers/admitto/admittoreaderunit.hpp>
 %include <logicalaccess/plugins/readers/admitto/admittoreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/admitto/admittoreaderunitconfiguration.hpp>
+%include <logicalaccess/readerproviders/circularbufferparser.hpp>
 %include <logicalaccess/plugins/readers/admitto/readercardadapters/admittobufferparser.hpp>
+%include <logicalaccess/readerproviders/serialportdatatransport.hpp>
 %include <logicalaccess/plugins/readers/admitto/readercardadapters/admittodatatransport.hpp>
+%include <logicalaccess/bufferhelper.hpp>
 %include <logicalaccess/plugins/readers/admitto/readercardadapters/admittoreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerunit.hpp>
 %include <logicalaccess/plugins/readers/axesstmc13/axesstmc13readerprovider.hpp>
@@ -435,19 +486,24 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/idondemand/idondemandreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/cards/generictag/generictagaccesscontrolcardservice.hpp>
 %include <logicalaccess/plugins/readers/idondemand/commands/generictagidondemandaccesscontrolcardservice.hpp>
+%include <logicalaccess/cards/commands.hpp>
 %include <logicalaccess/plugins/readers/idondemand/commands/generictagidondemandcommands.hpp>
 %include <logicalaccess/plugins/readers/idondemand/readercardadapters/idondemandreadercardadapter.hpp>
+%include <logicalaccess/readerproviders/datatransport.hpp>
 %include <logicalaccess/plugins/readers/idp/idpreaderunit.hpp>
 %include <logicalaccess/plugins/readers/idp/idpdatatransport.hpp>
 %include <logicalaccess/plugins/readers/idp/IDPReaderUnit.hpp>
 %include <logicalaccess/plugins/readers/idp/idpreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/idp/idpreaderunitconfiguration.hpp>
+%include <logicalaccess/cards/chip.hpp>
 %include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/idp/readercardadapters/idpreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
+%include <logicalaccess/cards/readermemorykeystorage.hpp>
+%include <logicalaccess/resultchecker.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816resultchecker.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816commands.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
@@ -466,7 +522,14 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
 %include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
+%include <logicalaccess/crypto/symmetric_key.hpp>
+%include <logicalaccess/crypto/aes_symmetric_key.hpp>
+%include <logicalaccess/crypto/aes_initialization_vector.hpp>
+%include <logicalaccess/crypto/aes_cipher.hpp>
+%include <logicalaccess/crypto/cmac.hpp>
+%include <logicalaccess/myexception.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samiso7816resultchecker.hpp>
+%include <logicalaccess/key.hpp>
 %include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
@@ -478,6 +541,7 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/nfc/nfcdatatransport.hpp>
 %include <logicalaccess/plugins/readers/nfc/nfcreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/nfc/nfcreaderunitconfiguration.hpp>
+%include <logicalaccess/services/uidchanger/uidchangerservice.hpp>
 %include <logicalaccess/plugins/readers/nfc/commands/mifareclassicuidchangerservice.hpp>
 %include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
 %include <logicalaccess/plugins/readers/nfc/readercardadapters/nfcreadercardadapter.hpp>
@@ -496,6 +560,7 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/osdp/osdpreaderunit.hpp>
 %include <logicalaccess/plugins/readers/osdp/osdpreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/osdp/osdpreaderunitconfiguration.hpp>
+%include <logicalaccess/cards/aes128key.hpp>
 %include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpbufferparser.hpp>
 %include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpdatatransport.hpp>
 %include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpreadercardadapter.hpp>
@@ -504,7 +569,9 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
 %include <logicalaccess/plugins/readers/pcsc/pcscreaderprovider.hpp>
+%include <logicalaccess/utils.hpp>
 %include <logicalaccess/plugins/readers/pcsc/pcsc_fwd.hpp>
+%include <logicalaccess/lla_fwd.hpp>
 %include <logicalaccess/plugins/readers/pcsc/pcsc_connection.hpp>
 %include <logicalaccess/plugins/readers/pcsc/pcsc_ctl_datatransport.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/acsacrresultchecker.hpp>
@@ -556,6 +623,7 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeylanxx21readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
+%include <logicalaccess/cards/tripledeskey.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx22readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx25readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/scmreaderunit.hpp>
@@ -565,6 +633,7 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/pcsc-private/TLV.hpp>
 %include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc-private/commands/HIDiClassOmnikeyXX27Commands.hpp>
+%include <logicalaccess/techno.hpp>
 %include <logicalaccess/plugins/readers/pcsc-private/readers/omnikeyXX27readerunit.hpp>
 %include <logicalaccess/plugins/readers/promag/promagreaderunit.hpp>
 %include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>
@@ -575,6 +644,7 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/rfideas/rfideasreaderunit.hpp>
 %include <logicalaccess/plugins/readers/rfideas/rfideasreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/rfideas/rfideasreaderunitconfiguration.hpp>
+%include <logicalaccess/readerproviders/tcpdatatransport.hpp>
 %include <logicalaccess/plugins/readers/rpleth/rplethdatatransport.hpp>
 %include <logicalaccess/plugins/readers/rpleth/readercardadapters/rplethreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/rpleth/rplethlcddisplay.hpp>
@@ -601,7 +671,12 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/stidprg/stidprgreaderunit.hpp>
 %include <logicalaccess/plugins/readers/stidprg/stidprgreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/stidprg/stidprgresultchecker.hpp>
+%include <logicalaccess/services/accesscontrol/accesscontrolcardservice.hpp>
 %include <logicalaccess/plugins/readers/stidprg/STidPRG_Prox_AccessControl.hpp>
+%include <logicalaccess/services/accesscontrol/formats/corporate1000format.hpp>
+%include <logicalaccess/services/accesscontrol/formats/wiegand26format.hpp>
+%include <logicalaccess/services/accesscontrol/formats/wiegand34withfacilityformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityformat.hpp>
 %include <logicalaccess/plugins/readers/stidprg/stid_prg_utils.hpp>
 %include <logicalaccess/plugins/readers/stidprg/readercardadapters/stidprgbufferparser.hpp>
 %include <logicalaccess/plugins/readers/stidprg/readercardadapters/stidprgdatatransport.hpp>
@@ -610,6 +685,7 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/stidstr/stidstrledbuzzerdisplay.hpp>
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderunit.hpp>
+%include <logicalaccess/cards/hmac1key.hpp>
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/stidstr/commands/desfireev1stidstrcommands.hpp>
@@ -618,5 +694,3 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreaderdatatransport.hpp>
 
 /* END_Include_section */
-
-

@@ -24,8 +24,6 @@ using namespace logicalaccess;
 %feature("director") NFCTagCardService;
 
 %ignore FieldSortPredicate;
-%ignore logicalaccess::Getronik40BitFormat::calcChecksum;
-
 
 /* original header files */
 %include <logicalaccess/services/cardservice.hpp>
@@ -41,7 +39,6 @@ using namespace logicalaccess;
 %include <logicalaccess/services/nfctag/nfctagcardservice.hpp>
 
 %include <logicalaccess/services/uidchanger/uidchangerservice.hpp>
-
 
 %template(NdefRecordCollection) std::vector<std::shared_ptr<logicalaccess::NdefRecord> >;
 %template(CardServiceEnableShared) std::enable_shared_from_this<logicalaccess::CardService>;

@@ -261,11 +261,6 @@ using LibLogicalAccess.Reader;
 %ignore pcsc_share_mode_to_string;
 %ignore pcsc_protocol_to_string;
 
-%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
-%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
-%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
-%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
-
 /* Include_section */
 
 %include <logicalaccess/plugins/cards/iso7816/iso7816chip.hpp>

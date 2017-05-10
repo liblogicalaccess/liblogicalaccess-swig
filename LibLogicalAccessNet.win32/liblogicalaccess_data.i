@@ -252,17 +252,18 @@ namespace std {
 namespace std {
     template <class T> class enable_shared_from_this {
     public:
-        ~enable_shared_from_this();
         shared_ptr<T> shared_from_this();
         //shared_ptr<const T> shared_from_this() const;
 	protected:
 		enable_shared_from_this();
         enable_shared_from_this(const enable_shared_from_this &);
+		~enable_shared_from_this();
     };
 }
 
 namespace std {
-	template<class Ty> class weak_ptr {
+	template<class Ty> 
+	class weak_ptr {
 	public:
 	    typedef Ty element_type;
 	

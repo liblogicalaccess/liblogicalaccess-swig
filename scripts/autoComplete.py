@@ -42,23 +42,30 @@ def	includeprocess(path, category):
 				inc = inc.replace("\\", "/")
 				incpath = "/".join(curpath.split("/")[:-1]) + "/" + inc
 				if inc.split("/")[0] == "logicalaccess":
-					if inc.split("/")[1] == "plugins" and category != "CORE" and category != "CRYPTO":
+					if (inc.split("/")[1] == "plugins" and category == "CARD" or category == "READER") or (inc.split("/")[1] == "crypto" and category == "CRYPTO") or (category == "CORE" and inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders"):
 						inc = "<" + inc + ">"
 						if (category, inc) not in include:
 							include.append((category, inc))
-				elif os.path.isfile(incpath) and category != "CORE" and category != "CRYPTO":
+				elif os.path.isfile(incpath):
 					inc = (os.path.normpath(incpath).split("logicalaccess")[-1]).replace("\\", "/")
 					inc = (includebase.replace("{0}", inc))
-					if (category, inc) not in include:
-						include.append((category, inc))
+					print (inc)
+					print (inc.split("/")[1])
+					print (category)
+					print (inc.split("/")[1] == "plugins" and category == "CARD" or category == "READER")
+					print ("---------")
+					if (inc.split("/")[1] == "plugins" and category == "CARD" or category == "READER") or (inc.split("/")[1] == "crypto" and category == "CRYPTO") or (category == "CORE" and inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders"):
+						if (category, inc) not in include:
+							include.append((category, inc))
 				else:
 					for el in baseinc:
-						if os.path.isfile(el + inc) and category != "CORE" and category != "CRYPTO":
+						if os.path.isfile(el + inc):
 							inc = (os.path.normpath(el + inc).split("logicalaccess")[-1]).replace("\\", "/")
 							inc = (includebase.replace("{0}", inc))
-							if (category, inc) not in include:
-								include.append((category, inc))
-								break
+							if (inc.split("/")[1] == "plugins" and category == "CARD" or category == "READER") or (inc.split("/")[1] == "crypto" and category == "CRYPTO") or (category == "CORE" and inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders"):
+								if (category, inc) not in include:
+									include.append((category, inc))
+									break
 			inc = includebase.replace("{0}", filename)
 			if (category, inc) not in include:
 				include.append((category, includebase.replace("{0}", filename)))
@@ -231,8 +238,10 @@ def main():
 	includeprocess("../packages/include/logicalaccess/readerproviders/**/*.hpp", "CORE")
 	includeprocess("../packages/include/logicalaccess/plugins/readers/**/*.hpp", "READER")
 	includeprocess("../packages/include/logicalaccess/crypto/**/*.hpp", "CRYPTO")
-	# sharedptrprocess()
-	# sharedptrwrite()
+	sharedptrprocess()
+	sharedptrwrite()
 	includewrite()
+	for el in include:
+		print (el)
 
 main()

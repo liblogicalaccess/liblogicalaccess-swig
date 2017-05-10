@@ -15,37 +15,37 @@ using LibLogicalAccess.Reader;
 %{
 /* Additional_include */
 
+#include <logicalaccess/readerproviders/readerprovider.hpp>
 #include <logicalaccess/cards/accessinfo.hpp>
 #include <logicalaccess/cards/aes128key.hpp>
 #include <logicalaccess/cards/chip.hpp>
+#include <logicalaccess/cards/readercardadapter.hpp>
 #include <logicalaccess/cards/commands.hpp>
+#include <logicalaccess/cards/keystorage.hpp>
 #include <logicalaccess/cards/computermemorykeystorage.hpp>
 #include <logicalaccess/cards/hmac1key.hpp>
 #include <logicalaccess/cards/IKSStorage.hpp>
 #include <logicalaccess/cards/keydiversification.hpp>
-#include <logicalaccess/cards/keystorage.hpp>
 #include <logicalaccess/cards/location.hpp>
 #include <logicalaccess/cards/locationnode.hpp>
-#include <logicalaccess/cards/readercardadapter.hpp>
+#include <logicalaccess/readerproviders/datatransport.hpp>
 #include <logicalaccess/cards/readermemorykeystorage.hpp>
 #include <logicalaccess/cards/samkeystorage.hpp>
 #include <logicalaccess/cards/tripledeskey.hpp>
 #include <logicalaccess/readerproviders/circularbufferparser.hpp>
-#include <logicalaccess/readerproviders/datatransport.hpp>
+#include <logicalaccess/readerproviders/readercommunication.hpp>
 #include <logicalaccess/readerproviders/iso14443areadercommunication.hpp>
 #include <logicalaccess/readerproviders/iso14443breadercommunication.hpp>
 #include <logicalaccess/readerproviders/iso14443readercommunication.hpp>
 #include <logicalaccess/readerproviders/iso15693readercommunication.hpp>
 #include <logicalaccess/readerproviders/lcddisplay.hpp>
 #include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
-#include <logicalaccess/readerproviders/readercommunication.hpp>
 #include <logicalaccess/readerproviders/readerconfiguration.hpp>
-#include <logicalaccess/readerproviders/readerprovider.hpp>
 #include <logicalaccess/readerproviders/readerunit.hpp>
 #include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
 #include <logicalaccess/readerproviders/serialport.hpp>
-#include <logicalaccess/readerproviders/serialportdatatransport.hpp>
 #include <logicalaccess/readerproviders/serialportxml.hpp>
+#include <logicalaccess/readerproviders/serialportdatatransport.hpp>
 #include <logicalaccess/readerproviders/tcpdatatransport.hpp>
 #include <logicalaccess/readerproviders/udpdatatransport.hpp>
 
@@ -107,37 +107,37 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 /* Include_section */
 
+%include <logicalaccess/readerproviders/readerprovider.hpp>
 %include <logicalaccess/cards/accessinfo.hpp>
 %include <logicalaccess/cards/aes128key.hpp>
 %include <logicalaccess/cards/chip.hpp>
+%include <logicalaccess/cards/readercardadapter.hpp>
 %include <logicalaccess/cards/commands.hpp>
+%include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/computermemorykeystorage.hpp>
 %include <logicalaccess/cards/hmac1key.hpp>
 %include <logicalaccess/cards/IKSStorage.hpp>
 %include <logicalaccess/cards/keydiversification.hpp>
-%include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/location.hpp>
 %include <logicalaccess/cards/locationnode.hpp>
-%include <logicalaccess/cards/readercardadapter.hpp>
+%include <logicalaccess/readerproviders/datatransport.hpp>
 %include <logicalaccess/cards/readermemorykeystorage.hpp>
 %include <logicalaccess/cards/samkeystorage.hpp>
 %include <logicalaccess/cards/tripledeskey.hpp>
 %include <logicalaccess/readerproviders/circularbufferparser.hpp>
-%include <logicalaccess/readerproviders/datatransport.hpp>
+%include <logicalaccess/readerproviders/readercommunication.hpp>
 %include <logicalaccess/readerproviders/iso14443areadercommunication.hpp>
 %include <logicalaccess/readerproviders/iso14443breadercommunication.hpp>
 %include <logicalaccess/readerproviders/iso14443readercommunication.hpp>
 %include <logicalaccess/readerproviders/iso15693readercommunication.hpp>
 %include <logicalaccess/readerproviders/lcddisplay.hpp>
 %include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
-%include <logicalaccess/readerproviders/readercommunication.hpp>
 %include <logicalaccess/readerproviders/readerconfiguration.hpp>
-%include <logicalaccess/readerproviders/readerprovider.hpp>
 %include <logicalaccess/readerproviders/readerunit.hpp>
 %include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
 %include <logicalaccess/readerproviders/serialport.hpp>
-%include <logicalaccess/readerproviders/serialportdatatransport.hpp>
 %include <logicalaccess/readerproviders/serialportxml.hpp>
+%include <logicalaccess/readerproviders/serialportdatatransport.hpp>
 %include <logicalaccess/readerproviders/tcpdatatransport.hpp>
 %include <logicalaccess/readerproviders/udpdatatransport.hpp>
 
