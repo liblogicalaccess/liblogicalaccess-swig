@@ -572,5 +572,3 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreaderdatatransport.hpp>
 
 /* END_Include_section */
-
-%include <logicalaccess/plugins/readers/idp/SMART-DLL/SMARTComm70.h>

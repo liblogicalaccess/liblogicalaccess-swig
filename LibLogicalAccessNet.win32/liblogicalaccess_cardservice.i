@@ -24,7 +24,6 @@ using namespace logicalaccess;
 %feature("director") NFCTagCardService;
 
 %ignore FieldSortPredicate;
-%ignore logicalaccess::Getronik40BitFormat::calcChecksum;
 
 
 /* original header files */

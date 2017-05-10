@@ -59,7 +59,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\packages\lib\Win32\Debug;$(SolutionDir)\packages\lib\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>desfirecards.lib;em4102cards.lib;em4135cards.lib;generictagcards.lib;icode1cards.lib;icode2cards.lib;indalacards.lib;infineonmydcards.lib;iso7816cards.lib;iso15693cards.lib;legicprimecards.lib;mifarecards.lib;mifarepluscards.lib;mifareultralightcards.lib;proxcards.lib;proxlitecards.lib;smartframecards.lib;stmlri512cards.lib;tagitcards.lib;twiccards.lib;a3mlgm5600readers.lib;admittoreaders.lib;axesstmc13readers.lib;axesstmclegicreaders.lib;deisterreaders.lib;elatecreaders.lib;gunneboreaders.lib;idondemandreaders.lib;iso7816readers.lib;keyboardreaders.lib;pcscreaders.lib;promagreaders.lib;rfideasreaders.lib;scielreaders.lib;smartidreaders.lib;stidstrreaders.lib;rplethreaders.lib;ok5553readers.lib;samav2cards.lib;felicacards.lib;cps3cards.lib;stidprgreaders.lib;osdpreaders.lib;gigatmsreaders.lib;epasscards.lib;topazcards.lib;iclasscards.lib;iclasscards_5321.lib;private-pcscreaders.lib;libnfc-nfcreaders.lib;liblogicalaccess.lib;logicalaccess-cryptolib.lib;libeay32.lib;ssleay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>desfirecards.lib;em4102cards.lib;em4135cards.lib;generictagcards.lib;icode1cards.lib;icode2cards.lib;indalacards.lib;infineonmydcards.lib;iso7816cards.lib;iso15693cards.lib;legicprimecards.lib;mifarecards.lib;mifarepluscards.lib;mifareultralightcards.lib;proxcards.lib;proxlitecards.lib;smartframecards.lib;stmlri512cards.lib;tagitcards.lib;twiccards.lib;a3mlgm5600readers.lib;admittoreaders.lib;axesstmc13readers.lib;axesstmclegicreaders.lib;deisterreaders.lib;elatecreaders.lib;gunneboreaders.lib;idondemandreaders.lib;iso7816readers.lib;keyboardreaders.lib;pcscreaders.lib;promagreaders.lib;rfideasreaders.lib;scielreaders.lib;smartidreaders.lib;stidstrreaders.lib;rplethreaders.lib;ok5553readers.lib;samav2cards.lib;felicacards.lib;cps3cards.lib;stidprgreaders.lib;osdpreaders.lib;gigatmsreaders.lib;epasscards.lib;topazcards.lib;iclasscards.lib;iclasscards_5321.lib;private-pcscreaders.lib;libnfc-nfcreaders.lib;liblogicalaccess.lib;logicalaccess-cryptolib.lib;libeay32.lib;ssleay32.lib;idpreaders.lib;seoscards.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -97,44 +97,44 @@
   <ItemGroup>
     <CustomBuild Include="liblogicalaccess_card.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)scripts\swig-build.bat $(SolutionDir) \LibLogicalAccessNet\Generated\Card LibLogicalAccess.Card "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)scripts\swig-build.bat $(SolutionDir) \LibLogicalAccessNet\Generated\Card LibLogicalAccess.Card "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
     </CustomBuild>
     <None Include="liblogicalaccess_cardservice.i" />
     <CustomBuild Include="liblogicalaccess_data.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)scripts\swig-build.bat $(SolutionDir) \LibLogicalAccessNet\Generated LibLogicalAccess "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)scripts\swig-build.bat $(SolutionDir) \LibLogicalAccessNet\Generated LibLogicalAccess "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="liblogicalaccess_library.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)scripts\swig-build.bat $(SolutionDir) \LibLogicalAccessNet\Generated LibLogicalAccess "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)scripts\swig-build.bat $(SolutionDir) \LibLogicalAccessNet\Generated LibLogicalAccess "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="liblogicalaccess_reader.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)scripts\swig-build.bat $(SolutionDir) \LibLogicalAccessNet\Generated\Reader LibLogicalAccess.Reader "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)scripts\swig-build.bat $(SolutionDir) \LibLogicalAccessNet\Generated\Reader LibLogicalAccess.Reader "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Reader -namespace LibLogicalAccess.Reader -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="liblogicalaccess_iks.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)scripts\swig-build.bat $(SolutionDir) \LibLogicalAccessNet\Generated LibLogicalAccess "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)scripts\swig-build.bat $(SolutionDir) \LibLogicalAccessNet\Generated LibLogicalAccess "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="liblogicalaccess_core.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)scripts\swig-build.bat $(SolutionDir) \LibLogicalAccessNet\Generated\Core LibLogicalAccess "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)scripts\swig-build.bat $(SolutionDir) \LibLogicalAccessNet\Generated\Core LibLogicalAccess "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Core -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Core -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
     </CustomBuild>
