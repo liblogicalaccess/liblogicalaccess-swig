@@ -25,6 +25,9 @@ using namespace logicalaccess;
 
 %ignore FieldSortPredicate;
 
+%shared_ptr(std::enable_shared_from_this<logicalaccess::CardService>);
+%template(CardServiceEnableShared) std::enable_shared_from_this<logicalaccess::CardService>;
+
 /* original header files */
 %include <logicalaccess/services/cardservice.hpp>
 %include <logicalaccess/services/storage/storagecardservice.hpp>
@@ -41,8 +44,6 @@ using namespace logicalaccess;
 %include <logicalaccess/services/uidchanger/uidchangerservice.hpp>
 
 %template(NdefRecordCollection) std::vector<std::shared_ptr<logicalaccess::NdefRecord> >;
-%template(CardServiceEnableShared) std::enable_shared_from_this<logicalaccess::CardService>;
-%nodefaultdtor CardServiceEnableShared;
 
 %pragma(csharp) imclasscode=%{
   public static CardService createCardService(System.IntPtr cPtr, bool owner)

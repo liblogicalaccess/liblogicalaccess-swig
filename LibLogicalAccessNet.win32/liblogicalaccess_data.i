@@ -4,11 +4,11 @@
 %include "liblogicalaccess.i"
 
 %{
+#include <logicalaccess/xmlserializable.hpp>
 #include "logicalaccess/cards/keystorage.hpp"
 #include <logicalaccess/plugins/readers/pcsc-private/type_fwd.hpp>
 #include <logicalaccess/techno.hpp>
 #include <logicalaccess/key.hpp>
-#include <logicalaccess/xmlserializable.hpp>
 #include <logicalaccess/cards/readercardadapter.hpp>
 #include <logicalaccess/readerproviders/datatransport.hpp>
 #include <logicalaccess/resultchecker.hpp>
@@ -286,9 +286,16 @@ namespace std {
 	};
 }
 
-%include "logicalaccess/cards/keystorage.hpp"
-%include <logicalaccess/techno.hpp>
+%shared_ptr(std::enable_shared_from_this<logicalaccess::Key>);
+%shared_ptr(std::enable_shared_from_this<logicalaccess::DataField>);
+%shared_ptr(std::enable_shared_from_this<logicalaccess::KeyStorage>);
+%template(KeyEnableShared) std::enable_shared_from_this<logicalaccess::Key>;
+%template(DataFieldEnableShared) std::enable_shared_from_this<logicalaccess::DataField>;
+%template(KeyStorageEnableShared) std::enable_shared_from_this<logicalaccess::KeyStorage>;
+
 %include <logicalaccess/xmlserializable.hpp>
+%include <logicalaccess/cards/keystorage.hpp>
+%include <logicalaccess/techno.hpp>
 %include <logicalaccess/readerproviders/datatransport.hpp>
 %include <logicalaccess/resultchecker.hpp>
 %include <logicalaccess/cards/readercardadapter.hpp>
@@ -327,10 +334,3 @@ namespace std {
 %include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
 %include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/keydiversification.hpp>
-
-%template(KeyEnableShared) std::enable_shared_from_this<logicalaccess::Key>;
-%template(DataFieldEnableShared) std::enable_shared_from_this<logicalaccess::DataField>;
-%template(KeyStorageEnableShared) std::enable_shared_from_this<logicalaccess::KeyStorage>;
-%nodefaultdtor KeyEnableShared;
-%nodefaultdtor DataFieldEnableShared;
-%nodefaultdtor KeyStorageEnableShared;

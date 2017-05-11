@@ -15,20 +15,21 @@ using LibLogicalAccess.Reader;
 %{
 /* Additional_include */
 
+#include <logicalaccess/readerproviders/readerunit.hpp>
 #include <logicalaccess/readerproviders/readerprovider.hpp>
 #include <logicalaccess/cards/accessinfo.hpp>
 #include <logicalaccess/cards/aes128key.hpp>
 #include <logicalaccess/cards/chip.hpp>
+#include <logicalaccess/readerproviders/datatransport.hpp>
 #include <logicalaccess/cards/readercardadapter.hpp>
 #include <logicalaccess/cards/commands.hpp>
 #include <logicalaccess/cards/keystorage.hpp>
 #include <logicalaccess/cards/computermemorykeystorage.hpp>
 #include <logicalaccess/cards/hmac1key.hpp>
-#include <logicalaccess/cards/IKSStorage.hpp>
+#include <logicalaccess/cards/iksstorage.hpp>
 #include <logicalaccess/cards/keydiversification.hpp>
 #include <logicalaccess/cards/location.hpp>
 #include <logicalaccess/cards/locationnode.hpp>
-#include <logicalaccess/readerproviders/datatransport.hpp>
 #include <logicalaccess/cards/readermemorykeystorage.hpp>
 #include <logicalaccess/cards/samkeystorage.hpp>
 #include <logicalaccess/cards/tripledeskey.hpp>
@@ -41,7 +42,6 @@ using LibLogicalAccess.Reader;
 #include <logicalaccess/readerproviders/lcddisplay.hpp>
 #include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
 #include <logicalaccess/readerproviders/readerconfiguration.hpp>
-#include <logicalaccess/readerproviders/readerunit.hpp>
 #include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
 #include <logicalaccess/readerproviders/serialport.hpp>
 #include <logicalaccess/readerproviders/serialportxml.hpp>
@@ -103,24 +103,32 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 %ignore logicalaccess::TcpDataTransport::connect();
 
+%shared_ptr(std::enable_shared_from_this<logicalaccess::Chip>);
+%shared_ptr(std::enable_shared_from_this<logicalaccess::ReaderProvider>);
+%shared_ptr(std::enable_shared_from_this<logicalaccess::ReaderUnit>);
+%template(ChipEnableShared) std::enable_shared_from_this<logicalaccess::Chip>;
+%template(ReaderProviderEnableShared) std::enable_shared_from_this<logicalaccess::ReaderProvider>;
+%template(ReaderUnitEnableShared) std::enable_shared_from_this<logicalaccess::ReaderUnit>;
+
 /* END_Configuration_section */
 
 /* Include_section */
 
+%include <logicalaccess/readerproviders/readerunit.hpp>
 %include <logicalaccess/readerproviders/readerprovider.hpp>
 %include <logicalaccess/cards/accessinfo.hpp>
 %include <logicalaccess/cards/aes128key.hpp>
 %include <logicalaccess/cards/chip.hpp>
+%include <logicalaccess/readerproviders/datatransport.hpp>
 %include <logicalaccess/cards/readercardadapter.hpp>
 %include <logicalaccess/cards/commands.hpp>
 %include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/computermemorykeystorage.hpp>
 %include <logicalaccess/cards/hmac1key.hpp>
-%include <logicalaccess/cards/IKSStorage.hpp>
+%include <logicalaccess/cards/iksstorage.hpp>
 %include <logicalaccess/cards/keydiversification.hpp>
 %include <logicalaccess/cards/location.hpp>
 %include <logicalaccess/cards/locationnode.hpp>
-%include <logicalaccess/readerproviders/datatransport.hpp>
 %include <logicalaccess/cards/readermemorykeystorage.hpp>
 %include <logicalaccess/cards/samkeystorage.hpp>
 %include <logicalaccess/cards/tripledeskey.hpp>
@@ -133,7 +141,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/readerproviders/lcddisplay.hpp>
 %include <logicalaccess/readerproviders/ledbuzzerdisplay.hpp>
 %include <logicalaccess/readerproviders/readerconfiguration.hpp>
-%include <logicalaccess/readerproviders/readerunit.hpp>
 %include <logicalaccess/readerproviders/readerunitconfiguration.hpp>
 %include <logicalaccess/readerproviders/serialport.hpp>
 %include <logicalaccess/readerproviders/serialportxml.hpp>
@@ -155,14 +162,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %template(LocationNodeWeakPtr) std::weak_ptr<logicalaccess::LocationNode>;
 %template(ReaderProviderWeakPtr) std::weak_ptr<logicalaccess::ReaderProvider>;
 %template(ReaderUnitWeakPtr) std::weak_ptr<logicalaccess::ReaderUnit>;
-
-
-%template(ChipEnableShared) std::enable_shared_from_this<logicalaccess::Chip>;
-%template(ReaderProviderEnableShared) std::enable_shared_from_this<logicalaccess::ReaderProvider>;
-%template(ReaderUnitEnableShared) std::enable_shared_from_this<logicalaccess::ReaderUnit>;
-%nodefaultdtor ChipEnableShared;
-%nodefaultdtor ReaderProviderEnableShared;
-%nodefaultdtor ReaderUnitEnableShared;
 
 %pragma(csharp) imclasscode=%{
 	public static System.Collections.Generic.Dictionary<string, System.Type> chipDictionary;

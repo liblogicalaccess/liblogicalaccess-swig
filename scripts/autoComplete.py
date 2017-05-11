@@ -6,7 +6,7 @@ import glob
 import re
 import clang.cindex
 
-baseinc = ["../packages/include/logicalaccess/plugins/cards/", "../packages/include/logicalaccess/plugins/readerproviders/"]
+baseinc = ["../packages/include/logicalaccess/plugins/cards/", "../packages/include/logicalaccess/plugins/readers/"]
 regexsharedptr = r"(?<=std::shared_ptr<)(.*?)(?=>)"
 regexns = r"(?<=namespace )(.*?)(?=\n)"
 regexinclude = r"(?<=#include [\"<])(.*?.hpp)(?=[\">]\n)"
@@ -14,6 +14,7 @@ includebase = "<logicalaccess{0}>"
 include = []
 nest = []
 classlist = []
+tmpinclude = []
 
 def	parsesharedptr(content):
 	ns = re.findall(regexns, content)
@@ -29,6 +30,50 @@ def	parsesharedptr(content):
 		if "std::" not in strmatch and strmatch not in classlist:
 			classlist.append(strmatch)
 
+def	innerincludeprocess(content, curpath, category):
+	regex = re.findall(regexinclude, content)
+	for inc in regex:
+		inc = inc.lower().replace("\\", "/")
+		incpath = "/".join(curpath.split("/")[:-1]) + "/" + inc
+		if inc.split("/")[0] == "logicalaccess":
+			if (inc.split("/")[1] == "plugins" and (category == "CARD" or category == "READER")) or (inc.split("/")[1] == "crypto" and category == "CRYPTO") or (category == "CORE" and (inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders")):
+				inc = "<" + inc + ">"
+				tmp = curpath.split("logicalaccess")[0] + inc.replace(">", "").replace("<", "")
+				if (category, inc) not in include and inc.split("/")[-1] not in tmpinclude:
+					tmpinclude.append(inc.split("/")[-1])
+					with open(tmp, "r") as f:
+						content = f.read()
+						innerincludeprocess(content, tmp, category)
+						tmpinclude.pop()
+					include.append((category, inc))
+		elif os.path.isfile(incpath):
+			inc = (os.path.normpath(incpath).split("logicalaccess")[-1]).replace("\\", "/")
+			inc = (includebase.replace("{0}", inc))
+			if (inc.split("/")[1] == "plugins" and (category == "CARD" or category == "READER")) or (inc.split("/")[1] == "crypto" and category == "CRYPTO") or (category == "CORE" and (inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders")):
+				tmp = curpath.split("logicalaccess")[0] + inc.replace(">", "").replace("<", "")
+				if (category, inc) not in include and inc.split("/")[-1] not in tmpinclude:
+					tmpinclude.append(inc.split("/")[-1])
+					with open(tmp, "r") as f:
+						content = f.read()
+						innerincludeprocess(content, tmp, category)
+						tmpinclude.pop()
+					include.append((category, inc))
+		else:
+			for el in baseinc:
+				if os.path.isfile(el + inc):
+					inc = (os.path.normpath(el + inc).split("logicalaccess")[-1]).replace("\\", "/")
+					inc = (includebase.replace("{0}", inc))
+					if (inc.split("/")[1] == "plugins" and (category == "CARD" or category == "READER")) or (inc.split("/")[1] == "crypto" and category == "CRYPTO") or (category == "CORE" and (inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders")):
+						tmp = curpath.split("logicalaccess")[0] + inc.replace(">", "").replace("<", "")
+						if (category, inc) not in include and inc.split("/")[-1] not in tmpinclude:
+							tmpinclude.append(inc.split("/")[-1])
+							with open(tmp, "r") as f:
+								content = f.read()
+								innerincludeprocess(content, tmp, category)
+								tmpinclude.pop()
+							include.append((category, inc))
+							break
+			
 def	includeprocess(path, category):
 	if len(glob.glob(path, recursive=True)) == 0:
 		print ("[ERROR]: nothing found in " + path)
@@ -37,38 +82,10 @@ def	includeprocess(path, category):
 			content = f.read()
 			curpath = filename.replace("\\", "/")
 			filename = filename.replace("\\", "/").split("logicalaccess")[-1]
-			regex = re.findall(regexinclude, content)
-			for inc in regex:
-				inc = inc.replace("\\", "/")
-				incpath = "/".join(curpath.split("/")[:-1]) + "/" + inc
-				if inc.split("/")[0] == "logicalaccess":
-					if (inc.split("/")[1] == "plugins" and category == "CARD" or category == "READER") or (inc.split("/")[1] == "crypto" and category == "CRYPTO") or (category == "CORE" and inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders"):
-						inc = "<" + inc + ">"
-						if (category, inc) not in include:
-							include.append((category, inc))
-				elif os.path.isfile(incpath):
-					inc = (os.path.normpath(incpath).split("logicalaccess")[-1]).replace("\\", "/")
-					inc = (includebase.replace("{0}", inc))
-					print (inc)
-					print (inc.split("/")[1])
-					print (category)
-					print (inc.split("/")[1] == "plugins" and category == "CARD" or category == "READER")
-					print ("---------")
-					if (inc.split("/")[1] == "plugins" and category == "CARD" or category == "READER") or (inc.split("/")[1] == "crypto" and category == "CRYPTO") or (category == "CORE" and inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders"):
-						if (category, inc) not in include:
-							include.append((category, inc))
-				else:
-					for el in baseinc:
-						if os.path.isfile(el + inc):
-							inc = (os.path.normpath(el + inc).split("logicalaccess")[-1]).replace("\\", "/")
-							inc = (includebase.replace("{0}", inc))
-							if (inc.split("/")[1] == "plugins" and category == "CARD" or category == "READER") or (inc.split("/")[1] == "crypto" and category == "CRYPTO") or (category == "CORE" and inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders"):
-								if (category, inc) not in include:
-									include.append((category, inc))
-									break
-			inc = includebase.replace("{0}", filename)
+			innerincludeprocess(content, curpath, category)
+			inc = includebase.replace("{0}", filename).lower()
 			if (category, inc) not in include:
-				include.append((category, includebase.replace("{0}", filename)))
+				include.append((category, inc))
 			parsesharedptr(content)
 
 
@@ -238,8 +255,8 @@ def main():
 	includeprocess("../packages/include/logicalaccess/readerproviders/**/*.hpp", "CORE")
 	includeprocess("../packages/include/logicalaccess/plugins/readers/**/*.hpp", "READER")
 	includeprocess("../packages/include/logicalaccess/crypto/**/*.hpp", "CRYPTO")
-	sharedptrprocess()
-	sharedptrwrite()
+	# sharedptrprocess()
+	# sharedptrwrite()
 	includewrite()
 	for el in include:
 		print (el)
