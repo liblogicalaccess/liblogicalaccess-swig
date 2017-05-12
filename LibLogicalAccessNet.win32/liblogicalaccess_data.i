@@ -4,6 +4,8 @@
 %include "liblogicalaccess.i"
 
 %{
+#include <logicalaccess/lla_fwd.hpp>
+#include <logicalaccess/utils.hpp>
 #include <logicalaccess/xmlserializable.hpp>
 #include "logicalaccess/cards/keystorage.hpp"
 #include <logicalaccess/plugins/readers/pcsc-private/type_fwd.hpp>
@@ -203,6 +205,11 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte)
 %typemap(csin) logicalaccess::STidTamperSwitchBehavior& %{out $csinput%}  
 %typemap(imtype) logicalaccess::STidTamperSwitchBehavior& "out STidTamperSwitchBehavior"
 
+%typemap(ctype) boost::circular_buffer<unsigned char>& "void *"
+%typemap(cstype) boost::circular_buffer<unsigned char>& "System.IntPtr"
+%typemap(csin) boost::circular_buffer<unsigned char>& %{$csinput%}  
+%typemap(imtype) boost::circular_buffer<unsigned char>& "System.IntPtr"
+
 %include <std_vector.i>
 
 namespace std {
@@ -244,6 +251,7 @@ namespace std {
 		UByteVector ret = $imcall;$excode
 		return ret;
 	}
+
 };
 
 %ignore logicalaccess::DataTransport::getReaderUnit;
@@ -286,6 +294,20 @@ namespace std {
 	};
 }
 
+namespace logicalaccess
+{
+	class LIBLOGICALACCESS_API ElapsedTimeCounter
+	{
+	  public:
+	    ElapsedTimeCounter();
+	    size_t elapsed() const;
+	
+	  private:
+	    using TimePoint = std::chrono::steady_clock::time_point;
+	    TimePoint creation_;
+	};
+}
+
 %shared_ptr(std::enable_shared_from_this<logicalaccess::Key>);
 %shared_ptr(std::enable_shared_from_this<logicalaccess::DataField>);
 %shared_ptr(std::enable_shared_from_this<logicalaccess::KeyStorage>);
@@ -293,6 +315,7 @@ namespace std {
 %template(DataFieldEnableShared) std::enable_shared_from_this<logicalaccess::DataField>;
 %template(KeyStorageEnableShared) std::enable_shared_from_this<logicalaccess::KeyStorage>;
 
+%include <logicalaccess/lla_fwd.hpp>
 %include <logicalaccess/xmlserializable.hpp>
 %include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/techno.hpp>

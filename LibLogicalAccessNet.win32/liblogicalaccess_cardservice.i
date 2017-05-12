@@ -17,10 +17,8 @@ using namespace logicalaccess;
 //%feature("director") CardService;
 %feature("director") IdentityCardService;
 
-%typemap(csdirectorin) SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< logicalaccess::NdefMessage > "new NdefMessage($iminput, true)"
-%typemap(csdirectorout) SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< logicalaccess::NdefMessage > "NdefMessage.getCPtr($cscall).Handle"
-//%typemap(csdirectorin) SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< TYPE > "new $1_type($iminput, true)"
-//%typemap(csdirectorout) SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< TYPE > "$1_type.getCPtr($cscall).Handle"
+//%typemap(csdirectorin) SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< logicalaccess::NdefMessage > "new NdefMessage($iminput, true)"
+//%typemap(csdirectorout) SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< logicalaccess::NdefMessage > "NdefMessage.getCPtr($cscall).Handle"
 %feature("director") NFCTagCardService;
 
 %ignore FieldSortPredicate;

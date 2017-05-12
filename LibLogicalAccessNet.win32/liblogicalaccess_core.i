@@ -6,6 +6,8 @@
 %import "liblogicalaccess_data.i"
 %import "liblogicalaccess_iks.i"
 
+%import "liblogicalaccess_crypto.i"
+
 %typemap(csimports) SWIGTYPE
 %{
 using LibLogicalAccess;
@@ -50,6 +52,9 @@ using LibLogicalAccess.Reader;
 #include <logicalaccess/readerproviders/udpdatatransport.hpp>
 
 /* END_Additional_include */
+
+#include <logicalaccess/crypto/symmetric_cipher.hpp>
+#include <logicalaccess/crypto/openssl_symmetric_cipher.hpp>
 
 using namespace logicalaccess;
 
@@ -150,14 +155,17 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 /* END_Include_section */
 
+#include <logicalaccess/crypto/symmetric_cipher.hpp>
+#include <logicalaccess/crypto/openssl_symmetric_cipher.hpp>
+
 %include "liblogicalaccess_cardservice.i"
 %include "liblogicalaccess_readerservice.i"
 
-%template(ChipPtrCollection) std::vector<std::shared_ptr<logicalaccess::Chip> >;
+%template(ChipVector) std::vector<std::shared_ptr<logicalaccess::Chip> >;
 %template(LocationNodePtrCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;
-%template(FormatPtrVector) std::vector<std::shared_ptr<logicalaccess::Format> >;
-%template(ReaderUnitPtrVector) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
-%template(SerialPortXmlPtrVector) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >;
+%template(ReaderUnitVector) std::vector<std::shared_ptr<ReaderUnit> >;
+%template(FormatVector) std::vector<std::shared_ptr<logicalaccess::Format> >;
+%template(SerialPortXmlVector) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >;
 
 %template(LocationNodeWeakPtr) std::weak_ptr<logicalaccess::LocationNode>;
 %template(ReaderProviderWeakPtr) std::weak_ptr<logicalaccess::ReaderProvider>;

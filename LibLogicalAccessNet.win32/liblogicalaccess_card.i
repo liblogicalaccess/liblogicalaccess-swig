@@ -3,6 +3,8 @@
 
 %include "liblogicalaccess.i"
 
+%import "liblogicalaccess_crypto.i"
+
 %import "liblogicalaccess_data.i"
 %import "liblogicalaccess_core.i"
 %import "liblogicalaccess_iks.i"
@@ -245,7 +247,6 @@ using LibLogicalAccess.Reader;
 %typemap(csin) logicalaccess::DESFireKeySettings & %{out $csinput%}  
 %typemap(imtype) logicalaccess::DESFireKeySettings & "out LibLogicalAccess.Card.DESFireKeySettings"
 
-
 %apply unsigned char MBINOUT[] { unsigned char recordSize[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char maxNumberRecords[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char currentNumberRecords[ANY] }
@@ -263,6 +264,8 @@ using LibLogicalAccess.Reader;
 %apply unsigned char MBINOUT[] { unsigned char curval[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char productionbatchnumber[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char uniqueserialnumber[ANY] }
+
+%shared_ptr(logicalaccess::DFName);
 
 %ignore logicalaccess::Commands;
 %ignore pcsc_share_mode_to_string;

@@ -19,7 +19,7 @@
     <RepositoryUrl>https://github.com/islog/liblogicalaccess</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>liblogicalaccess nfc rfid</PackageTags>
-    <SignAssembly>True</SignAssembly>
+    <SignAssembly>False</SignAssembly>
     <AssemblyOriginatorKeyFile>$(ISLOGRepository)keys/islog_sign.pfx</AssemblyOriginatorKeyFile>
     <CLSCompliant>True</CLSCompliant>
   </PropertyGroup>

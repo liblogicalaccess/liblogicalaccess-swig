@@ -10,7 +10,6 @@
 %import "liblogicalaccess_iks.i"
 
 %{
-
 /* Additional_include */
 
 #include <logicalaccess/plugins/readers/a3mlgm5600/readercardadapters/a3mlgm5600readercardadapter.hpp>
@@ -274,6 +273,7 @@
 #include <logicalaccess/cards/accessinfo.hpp>
 
 using namespace logicalaccess;
+using MifarePlusSL1PCSCCommands = MifarePlusSL1Policy<MifarePlusSL1Commands, MifarePCSCCommands>;
 
 %}
 
@@ -288,17 +288,20 @@ using LibLogicalAccess.Card;
 /* END_Shared_ptr */
 
 %shared_ptr(logicalaccess::ReaderConfiguration);
-%shared_ptr(CSMARTCommon);
 %shared_ptr(boost::asio::ip::udp::socket);
 %shared_ptr(boost::interprocess::mapped_region);
 %shared_ptr(boost::interprocess::named_mutex);
-%shared_ptr(logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
+%shared_ptr(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
+%shared_ptr(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
 %shared_ptr(logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
+%shared_ptr(logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
+%shared_ptr(logicalaccess::SAMAV2Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
+%shared_ptr(logicalaccess::SAMAV2Commands<KeyEntryAV2Information, SETAV2>);
+%shared_ptr(logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
+%shared_ptr(logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>);
 %shared_ptr(openssl::OpenSSLSymmetricCipher);
 %shared_ptr(openssl::SymmetricKey);
 %shared_ptr(openssl::InitializationVector);
-
-%template(ReaderUnitCollection) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
 
 %apply unsigned short *INOUT { unsigned short * }
 %apply int *INOUT { int * }
@@ -309,6 +312,24 @@ using LibLogicalAccess.Card;
 %apply unsigned char OUTPUT[] { unsigned char* pstate }
 %apply unsigned char OUTPUT[] { unsigned char* result }
 %apply unsigned int *INOUT { size_t* resultlen }
+
+%apply unsigned char MBINOUT[] { unsigned char recordSize[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char maxNumberRecords[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char currentNumberRecords[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char accessRights[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char uid[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char batchNo[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char fileSize[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char keytype[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char rfu[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char desfireAid[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char set[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char keyclass[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char dfname[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char limit[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char curval[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char productionbatchnumber[ANY] }
+%apply unsigned char MBINOUT[] { unsigned char uniqueserialnumber[ANY] }
 
 %typemap(ctype) __int64 "long"
 %typemap(cstype) __int64 "long"
@@ -381,10 +402,64 @@ using LibLogicalAccess.Card;
 %typemap(csin) FileSetting& %{out $csinput%}  
 %typemap(imtype) FileSetting& "out LibLogicalAccess.Card.DESFireCommands.FileSetting"
 
+%typemap(ctype) DESFireKeyType "DESFireKeyType"
+%typemap(cstype) DESFireKeyType "DESFireKeyType"
+%typemap(csin) DESFireKeyType %{$csinput%}  
+%typemap(imtype) DESFireKeyType "LibLogicalAccess.Reader.DESFireKeyType"
+%typemap(csvarin, excode=SWIGEXCODE2) DESFireKeyType %{
+    set {
+      $imcall;$excode
+    } %}
+%typemap(csvarout, excode=SWIGEXCODE2) DESFireKeyType %{
+    get {
+      DESFireKeyType ret = $imcall;$excode
+      return ret;
+} %}
+
+%typemap(ctype) logicalaccess::DESFireKeyType& "logicalaccess::DESFireKeyType*"
+%typemap(cstype) logicalaccess::DESFireKeyType& "out DESFireKeyType"
+%typemap(csin) logicalaccess::DESFireKeyType& %{out $csinput%}  
+%typemap(imtype) logicalaccess::DESFireKeyType& "out LibLogicalAccess.Reader.DESFireKeyType"
+
+%typemap(ctype) DESFireKeySettings "DESFireKeySettings"
+%typemap(cstype) DESFireKeySettings "DESFireKeySettings"
+%typemap(csin) DESFireKeySettings %{$csinput%}  
+%typemap(imtype) DESFireKeySettings "LibLogicalAccess.Reader.DESFireKeySettings"
+%typemap(csout, excode=SWIGEXCODE) DESFireKeySettings {
+	DESFireKeySettings ret = $imcall;$excode
+	return ret;
+}
+
+%typemap(ctype) logicalaccess::DESFireKeySettings & "logicalaccess::DESFireKeySettings*"
+%typemap(cstype) logicalaccess::DESFireKeySettings & "out DESFireKeySettings"
+%typemap(csin) logicalaccess::DESFireKeySettings & %{out $csinput%}  
+%typemap(imtype) logicalaccess::DESFireKeySettings & "out LibLogicalAccess.Reader.DESFireKeySettings"
+
+
+%typemap(cstype) nfc_context *  "System.IntPtr"
+%typemap(csin) nfc_context *  %{$csinput%}  
+%typemap(imtype) nfc_context * "System.IntPtr"
+%typemap(csout, excode=SWIGEXCODE) nfc_context * {
+	System.IntPtr ret = $imcall;$excode
+	return ret;
+}
+
+%typemap(cstype) nfc_device *  "System.IntPtr"
+%typemap(csin) nfc_device *  %{$csinput%}  
+%typemap(imtype) nfc_device * "System.IntPtr"
+%typemap(csout, excode=SWIGEXCODE) nfc_device * {
+	System.IntPtr ret = $imcall;$excode
+	return ret;
+}
+
+typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
+
 %ignore logicalaccess::SAMISO7816Commands< logicalaccess::KeyEntryAV2Information,logicalaccess::SETAV2 >;
 %ignore logicalaccess::SAMISO7816Commands< logicalaccess::KeyEntryAV1Information,logicalaccess::SETAV1 >;
 %ignore SAMISO7816Commands< KeyEntryAV2Information,SETAV2 >;
 %ignore SAMISO7816Commands< KeyEntryAV1Information,SETAV1 >;
+%ignore *::getCSMART;
+
 
 /* Include_section */
 
@@ -645,3 +720,12 @@ using LibLogicalAccess.Card;
 %include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreaderdatatransport.hpp>
 
 /* END_Include_section */
+
+%template(MifarePlusSL1PCSCCommandsTmp) logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
+
+//%template(AV1SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
+//%template(AV2SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
+//%template(AV1SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
+//%template(AV2SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
+//%template(AV2SAMAV2Commands) logicalaccess::SAMAV2Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
+//%template(AV1SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;

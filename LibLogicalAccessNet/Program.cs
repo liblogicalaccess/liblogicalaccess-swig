@@ -75,7 +75,7 @@ namespace liblogicalaccess_swig2._0
             Console.ReadLine();
         }
 
-        static string UCharCollectionToHexString(UCharCollection uchars)
+        static string UCharCollectionToHexString(UByteVector uchars)
         {
             string str = String.Empty;
             foreach (byte b in uchars)

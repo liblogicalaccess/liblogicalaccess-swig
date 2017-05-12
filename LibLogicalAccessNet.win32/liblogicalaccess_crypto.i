@@ -36,6 +36,8 @@
 
 %}
 
+%rename(NullDeltion) operator();
+
 /* Include_section */
 
 %include <logicalaccess/crypto/initialization_vector.hpp>
