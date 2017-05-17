@@ -57,9 +57,8 @@
 	internal $csclassnameNode tail
 	{
 		get {
-			if (this._tail == null && (int)size() > 0)
-			{
-				this._tail = new $csclassnameNode(($typemap(cstype, CTYPE))getItem(0), 0, this);
+			if (this._tail == null && (int)size() > 0) {
+				this._tail = new $csclassnameNode(($typemap(cstype, CTYPE))getItem((int)size() - 1), (int)size() - 1, this);
 			}
 			return this._tail;
 		}
@@ -73,31 +72,110 @@
 	
 	public $csclassnameNode AddFirst($typemap(cstype, CTYPE) value)
 	{
-		push_front(value);
-		$csclassnameNode	tmp = this.head;
-		while (tmp != null)	{
-			tmp.index++;
-			tmp = tmp.next;
-		}
-
-		$csclassnameNode	toAdd = new $csclassnameNode(value, 0, this);
-		toAdd.next = this.head;
-		this.head.prev = toAdd;
-		this.head = toAdd;
-		return this.First;
+		$csclassnameNode	newNode = new $csclassnameNode(value, 0, this);
+		AddFirst(newNode);
+		return newNode;
 	}
 	
+	public void AddFirst($csclassnameNode newNode)
+	{
+        if (this.Count == 0)
+        {
+            newNode.next = null;
+            newNode.prev = null;
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else
+        {
+			$csclassnameNode	tmp = this.First;
+		    
+		    while (tmp != null)	{
+		    	tmp.index++;
+		    	tmp = tmp.Next;
+		    }
+            newNode.next = this.head;
+            this.head.prev = newNode;
+            this.head = newNode;
+        }
+        push_front(newNode.Value);
+		if (newNode.index == -1)
+			newNode.index = 0;
+		if (newNode.list == null)
+			newNode.list = this;
+	}
+
 	public $csclassnameNode AddLast($typemap(cstype, CTYPE) value)
 	{
-		push_back(value);
+		$csclassnameNode	newNode = new $csclassnameNode(value, (int)size(), this);
+		AddLast(newNode);
+		return newNode;
+	}
 
-		$csclassnameNode	toAdd = new $csclassnameNode(value, (int)size() - 1, this);
-		toAdd.prev = this.tail;
-		this.tail.next = toAdd;
-		this.tail = toAdd;
-		return this.Last;
+	public void AddLast($csclassnameNode newNode)
+	{
+        if (this.Count == 0)
+        {
+            newNode.next = null;
+            newNode.prev = null;
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else
+        {
+            newNode.prev = this.Last;
+            this.Last.next = newNode;
+            this.tail = newNode;
+        }
+        push_back(newNode.Value);
+        if (newNode.index == -1)
+			newNode.index = (int)size() - 1;
+		if (newNode.list == null)
+			newNode.list = this;
 	}
 	
+	public $csclassnameNode AddBefore($csclassnameNode node, $typemap(cstype, CTYPE) value)
+	{
+		$csclassnameNode newNode = new $csclassnameNode(value, node.index, this);
+		AddBefore(node, newNode);
+		return newNode;
+	}
+
+	public void AddBefore($csclassnameNode node, $csclassnameNode newNode)
+	{
+		ValidateNode(node);
+		ValidateNode(newNode);
+		newNode.next = node;
+		newNode.prev = node.Previous;
+		node.Previous.next = newNode;
+		node.prev = newNode;
+		insertIndex(node.index, newNode.Value);
+
+		if (newNode.index == -1)
+			newNode.index = node.index;
+		if (newNode.list == null)
+			newNode.list = this;
+
+		$csclassnameNode tmp = node;
+		while (tmp != null)
+		{
+			tmp.index++;
+			tmp = tmp.Next;
+		}
+	}
+
+	public $csclassnameNode AddAfter($csclassnameNode node, $typemap(cstype, CTYPE) value)
+	{
+		$csclassnameNode newNode = new $csclassnameNode(value, node.index + 1, this);
+		AddBefore(node.Next, newNode);
+		return newNode;
+	}
+
+	public void AddAfter($csclassnameNode node, $csclassnameNode newNode)
+	{
+		AddBefore(node.Next, newNode);
+	}
+
 	public void Add($typemap(cstype, CTYPE) value)
 	{
 		this.AddLast(value);
@@ -106,38 +184,46 @@
 	public void RemoveFirst()
 	{
 		pop_front();
-		this.head = this.head.next;
-		$csclassnameNode tmp = this.head;
-		while (tmp != null) {
-			tmp.index--;
-			tmp = tmp.next;
+		this.First.Next.prev = null;
+		this.head = this.First.Next;
+		$csclassnameNode node = this.First;
+		while (node != null) {
+			node.index--;
+			node = node.Next;
 		}
 	}
 
 	public void RemoveLast()
 	{
 		pop_back();
-		this.tail = this.tail.prev;
+		this.Last.Previous.next = null;
+		this.tail = this.Last.Previous;
 	}
 
 	public bool Remove($typemap(cstype, CTYPE) value)
 	{
-		$csclassnameNode tmp = Find(value);
-		return Remove(tmp);
+		$csclassnameNode node = Find(value);
+		return Remove(node);
 	}
 
 	public bool Remove($csclassnameNode node)
 	{
+		ValidateNode(node);
 		if (node != null)
 		{
 			rmvIndex(node.index);
-            node.next.prev = node.prev; 
-            node.prev.next = node.next;
+			$csclassnameNode tmp = node;
+			while (tmp != null) {
+				tmp.index--;
+				tmp = tmp.Next;
+			}
+            node.Next.prev = node.Previous; 
+            node.Previous.next = node.Next;
             if (this.head == node) {
-                this.head = node.next;
+                this.head = node.Next;
 			} 
 			else if (this.tail == node) {
-				this.tail = node.prev;
+				this.tail = node.Previous;
 			}
 			return true;
 		}
@@ -147,12 +233,12 @@
 	public $csclassnameNode Find($typemap(cstype, CTYPE) value)
 	{
 		int tmpPos = find_item(value);
-		$csclassnameNode tmp = this.head;
+		$csclassnameNode tmp = this.First;
 		int i = 0;
 
 		if (tmpPos != -1) {
 			while (i != tmpPos) {
-				tmp = tmp.next;
+				tmp = tmp.Next;
 				++i;
 			}
 			return tmp;
@@ -172,6 +258,34 @@
 		for (int i=0; i < this.Count; i++)
 			array.SetValue(current.Value, index+i);
 			current = current.Next;
+	}
+
+	public void Clear()
+	{
+		$csclassnameNode current = this.First;
+		
+		while (current != null)
+		{
+			$csclassnameNode tmp = current;
+			current = current.Next;
+			tmp.list = null;
+			tmp.next = null;
+			tmp.prev = null;
+		}
+		
+		this.head = null;
+		clear();
+	}
+
+	internal void ValidateNode($csclassnameNode node)
+	{
+		if (node == null) {
+		    throw new System.ArgumentNullException("node"); 
+		} 
+		
+		if ( node.list != this) { 
+		    throw new System.InvalidOperationException("node");
+		}
 	}
 
 	global::System.Collections.Generic.IEnumerator<$typemap(cstype, CTYPE)> global::System.Collections.Generic.IEnumerable<$typemap(cstype, CTYPE)>.GetEnumerator() 
@@ -201,8 +315,8 @@
 		public $csclassnameEnumerator($csclassname collection)
 		{
 			collectionRef = collection;
-			currentNode = null;
-			currentIndex = -1;
+			currentNode = collection.First;
+			currentIndex = 0;
 			currentObject = null;
 			currentSize = collectionRef.Count;
 		}
@@ -231,16 +345,14 @@
 		
 		public bool MoveNext()
 		{
-			int size = collectionRef.Count;
-
-			if (currentNode == null) {
-				currentIndex = collectionRef.Count + 1;
-				return false;
-			}
-			++currentIndex;
-			currentObject = currentNode.item;
-            currentNode = currentNode.next;
-			return true;
+            if (currentNode == null) {
+                currentIndex = collectionRef.Count + 1;
+                return false;
+            }
+            ++currentIndex;
+            currentObject = currentNode.Value;
+            currentNode = currentNode.Next;
+            return true;
 		}
 		
 		public void Reset()
@@ -262,8 +374,6 @@
 	public sealed class $csclassnameNode
 	{
 		internal $csclassname		list;
-		internal $csclassnameNode	next;
-		internal $csclassnameNode	prev;
 		internal $typemap(cstype, CTYPE)			item;
 		internal int			index;
 		
@@ -284,26 +394,44 @@
 			get { return this.list; }
 		}
 
-		public $csclassnameNode Next
+		private $csclassnameNode _next;
+		internal $csclassnameNode	next
 		{
 			get {
-				if (this.next == null && index + 1 < (int)this.list.size())
-					this.next = new $csclassnameNode(this.list.getItem(index + 1), index + 1, this.list);
+				if (this._next == null && index + 1 < (int)this.list.size()) {
+					this._next = new $csclassnameNode(this.list.getItem(index + 1), index + 1, this.list);
+					this._next.prev = this;
+				}
 				if (index + 1 == (int)this.list.size() - 1)
-					this.list.tail = this.next;
-				return this.next; 
+					this.list.tail = this._next;
+				return this._next; 
 			}
+			set { this._next = value; }
 		}
-		
-		public $csclassnameNode Previous
+
+		public $csclassnameNode Next
+		{
+			get { return this.next; }
+		}
+	
+		private $csclassnameNode _prev;
+		internal $csclassnameNode	prev
 		{
 			get { 
-				if (this.prev == null && index - 1 >= 0 )
-					this.prev = new $csclassnameNode(this.list.getItem(index - 1), index - 1, this.list);
+				if (this._prev == null && index - 1 >= 0) {
+					this._prev = new $csclassnameNode(this.list.getItem(index - 1), index - 1, this.list);
+					this._prev.next = this;
+				}
 				if (index - 1 == 0)
-					this.list.head = this.prev;
-				return this.prev;
+					this.list.head = this._prev;
+				return this._prev;
 			}
+			set { this._prev = value; }
+		}
+
+		public $csclassnameNode Previous
+		{
+			get { return this.prev; }
 		}
 		
 		public $typemap(cstype, CTYPE) Value
@@ -318,7 +446,6 @@ public:
 	typedef size_t size_type;
 	typedef CTYPE value_type;
 	typedef CONST_REFERENCE const_reference;
-	%rename(Clear) clear;
 	void clear();
 	void push_front(CTYPE const& x);
 	void push_back(CTYPE const& x);
@@ -327,28 +454,39 @@ public:
 	size_type size() const;
 	%extend {
 		const CTYPE& getItem(int index) {
-			std::list< CTYPE >::iterator iter = $self->begin();
+			std::list< CTYPE >::iterator it = $self->begin();
 			
 			if (index >= 0 && index < (int)($self->size())) {
 				for (int i = 0; i != index; i++)
-					iter++;
-				return *iter;
+					it++;
+				return *it;
 			} else {
 				throw std::out_of_range("index");
 			}
 		}
 		
 		int find_item(CTYPE const& x) {
-			std::list< CTYPE >::iterator iter = $self->begin();
+			std::list< CTYPE >::iterator it = $self->begin();
 			int i = 0;
 			
-			while (iter != $self->end() && *iter != x) {
-				++iter;
+			while (it != $self->end() && *it != x) {
+				++it;
 				++i;
 			}
-			if (*iter != NULL)
+			if (*it != NULL)
 				return i;
 			return -1;
+		}
+
+		void insertIndex(int index, CTYPE const& value) {
+			std::list< CTYPE >::iterator it = $self->begin();
+			int i = 0;
+
+			while (it != $self->end() && i != index) {
+				++it;
+				++i;
+			}
+			$self->insert(it, value);
 		}
 
 		bool rmv(const CTYPE& value) {
@@ -397,6 +535,7 @@ namespace std {
 %csmethodmodifiers std::list::push_back "private"
 %csmethodmodifiers std::list::rmv "private"
 %csmethodmodifiers std::list::rmvIndex "private"
+%csmethodmodifiers std::list::insertIndex "private"
 
 namespace std {
 	template<class T> 
