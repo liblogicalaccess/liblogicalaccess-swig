@@ -1,5 +1,10 @@
 cd ..
 
+rm .\LibLogicalAccessNet\Generated\*.cs
+rm .\LibLogicalAccessNet\Generated\Reader\*.cs
+rm .\LibLogicalAccessNet\Generated\Card\*.cs
+rm .\LibLogicalAccessNet\Generated\Core\*.cs
+
 $Commands = @((".\LibLogicalAccessNet\Generated\Card", "LibLogicalAccess.Card", ".\LibLogicalAccessNet.win32\liblogicalaccess_card.i"),
             (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_data.i"),
             (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_library.i"),
