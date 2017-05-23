@@ -163,18 +163,14 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte)
 	return ret;
 }
 
-%rename(getConstData) *::getData() const;
+%ignore *::getData() const;
 
 %apply unsigned char OUTPUT[] { unsigned char* getData() }
 %typemap(csout, excode=SWIGEXCODE) unsigned char* getData() {
 	byte[] ret = $imcall;$excode
 	return ret;
 }
-%apply unsigned char OUTPUT[] { const unsigned char* getConstData() }
-%typemap(csout, excode=SWIGEXCODE) const unsigned char* getConstData() {
-	byte[] ret = $imcall;$excode
-	return ret;
-}
+
 
 %typemap(cstype) size_t* "ref uint"
 %typemap(csin) size_t* %{ref $csinput%}  
