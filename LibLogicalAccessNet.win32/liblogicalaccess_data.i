@@ -51,7 +51,7 @@ using namespace logicalaccess;
 %typemap(cstype)	CTYPE MBINOUT[] "CSTYPE[]"
 %typemap(imtype, out="System.IntPtr")
 					CTYPE MBINOUT[] "CSTYPE[]"
-%typemap(csin)		CTYPE "$csinput"
+%typemap(csin)		CTYPE MBINOUT[] "$csinput"
 %typemap(in)		CTYPE MBINOUT[] "$1 = $input;"
 %typemap(csout, excode=SWIGEXCODE)
 					CTYPE MBINOUT[] {

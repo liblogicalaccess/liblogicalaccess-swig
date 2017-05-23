@@ -23,4 +23,5 @@
     <AssemblyOriginatorKeyFile>$(ISLOGRepository)keys/islog_sign.pfx</AssemblyOriginatorKeyFile>
     <CLSCompliant>True</CLSCompliant>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net4.0|x64'" />
 </Project>
