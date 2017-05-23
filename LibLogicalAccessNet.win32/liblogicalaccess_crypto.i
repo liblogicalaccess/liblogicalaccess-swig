@@ -34,19 +34,21 @@
 
 /* END_Additional_include */
 
+using namespace openssl;
+
 %}
 
 %rename(NullDeltion) operator();
 
 /* Include_section */
 
-%include <logicalaccess/crypto/initialization_vector.hpp>
-%include <logicalaccess/crypto/symmetric_cipher.hpp>
+//%include <logicalaccess/crypto/initialization_vector.hpp>
+//%include <logicalaccess/crypto/symmetric_cipher.hpp>
 %include <logicalaccess/crypto/openssl_symmetric_cipher.hpp>
 %include <logicalaccess/crypto/aes_cipher.hpp>
 %include <logicalaccess/crypto/aes_helper.hpp>
-%include <logicalaccess/crypto/aes_initialization_vector.hpp>
-%include <logicalaccess/crypto/symmetric_key.hpp>
+//%include <logicalaccess/crypto/aes_initialization_vector.hpp>
+//%include <logicalaccess/crypto/symmetric_key.hpp>
 %include <logicalaccess/crypto/aes_symmetric_key.hpp>
 %include <logicalaccess/crypto/openssl.hpp>
 %include <logicalaccess/crypto/asymmetric_key.hpp>

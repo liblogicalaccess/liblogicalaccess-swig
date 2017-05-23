@@ -6,7 +6,7 @@
 %import "liblogicalaccess_data.i"
 %import "liblogicalaccess_iks.i"
 
-%import "liblogicalaccess_crypto.i"
+//%import "liblogicalaccess_crypto.i"
 
 %typemap(csimports) SWIGTYPE
 %{
@@ -53,7 +53,11 @@ using LibLogicalAccess.Reader;
 
 /* END_Additional_include */
 
+#include <logicalaccess/crypto/initialization_vector.hpp>
+#include <logicalaccess/crypto/aes_initialization_vector.hpp>
+#include <logicalaccess/crypto/symmetric_key.hpp>
 #include <logicalaccess/crypto/symmetric_cipher.hpp>
+#include <logicalaccess/crypto/openssl_symmetric_cipher_context.hpp>
 #include <logicalaccess/crypto/openssl_symmetric_cipher.hpp>
 
 using namespace logicalaccess;
@@ -62,8 +66,8 @@ using namespace logicalaccess;
 
 /* Shared_ptr */
 
-%shared_ptr(DataField);
-%shared_ptr(SerialPortXml);
+//%shared_ptr(DataField);
+//%shared_ptr(SerialPortXml);
 
 /* END_Shared_ptr */
 
@@ -107,6 +111,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %nodefaultdtor ISO15693ReaderCommunication;
 
 %ignore logicalaccess::TcpDataTransport::connect();
+%ignore *::getTime;
 
 %shared_ptr(std::enable_shared_from_this<logicalaccess::Chip>);
 %shared_ptr(std::enable_shared_from_this<logicalaccess::ReaderProvider>);
@@ -116,6 +121,14 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %template(ReaderUnitEnableShared) std::enable_shared_from_this<logicalaccess::ReaderUnit>;
 
 /* END_Configuration_section */
+
+
+%include <logicalaccess/crypto/initialization_vector.hpp>
+%include <logicalaccess/crypto/aes_initialization_vector.hpp>
+%include <logicalaccess/crypto/symmetric_key.hpp>
+%include <logicalaccess/crypto/symmetric_cipher.hpp>
+%include <logicalaccess/crypto/openssl_symmetric_cipher_context.hpp>
+%include <logicalaccess/crypto/openssl_symmetric_cipher.hpp>
 
 /* Include_section */
 
@@ -155,15 +168,12 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 /* END_Include_section */
 
-#include <logicalaccess/crypto/symmetric_cipher.hpp>
-#include <logicalaccess/crypto/openssl_symmetric_cipher.hpp>
-
 %include "liblogicalaccess_cardservice.i"
 %include "liblogicalaccess_readerservice.i"
 
 %template(ChipVector) std::vector<std::shared_ptr<logicalaccess::Chip> >;
 %template(LocationNodePtrCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;
-%template(ReaderUnitVector) std::vector<std::shared_ptr<ReaderUnit> >;
+%template(ReaderUnitVector) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
 %template(FormatVector) std::vector<std::shared_ptr<logicalaccess::Format> >;
 %template(SerialPortXmlVector) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >;
 
@@ -195,7 +205,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 		if (cPtr == System.IntPtr.Zero) {
 		  return ret;
 		}
-		string ct = (liblogicalaccess_cardPINVOKE.Chip_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		string ct = ($modulePINVOKE.Chip_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
 		if (chipDictionary == null)
 			chipDictionary = createDictionary<Chip>();
         if (chipDictionary.ContainsKey(ct))
@@ -210,35 +220,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %typemap(csout, excode=SWIGEXCODE)
   logicalaccess::Chip*, std::shared_ptr<logicalaccess::Chip> {
     System.IntPtr cPtr = $imcall;
-    Chip ret = liblogicalaccess_cardPINVOKE.createChip(cPtr, $owner);$excode
-    return ret;
-}
-
-%pragma(csharp) imclasscode=%{
-	public static System.Collections.Generic.Dictionary<string, System.Type> locationDictionary;
-
-	public static Location	createLocation(System.IntPtr cPtr, bool owner)
-	{
-		Location ret = null;
-		if (cPtr == System.IntPtr.Zero) {
-		  return ret;
-		}
-		string ct = ($modulePINVOKE.Location_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
-		if (locationDictionary == null)
-			locationDictionary = createDictionary<Location>();
-        if (locationDictionary.ContainsKey(ct))
-        {
-            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
-            ret = (Location)System.Activator.CreateInstance(locationDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
-        }
-		return ret;
-	}
-%}
-
-%typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::Location*, std::shared_ptr<logicalaccess::Location> {
-    System.IntPtr cPtr = $imcall;
-    Location ret = liblogicalaccess_cardPINVOKE.createLocation(cPtr, $owner);$excode
+    Chip ret = liblogicalaccess_corePINVOKE.createChip(cPtr, $owner);$excode
     return ret;
 }
 
@@ -266,39 +248,70 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %typemap(csout, excode=SWIGEXCODE)
   logicalaccess::AccessInfo*, std::shared_ptr<logicalaccess::AccessInfo> {
     System.IntPtr cPtr = $imcall;
-    AccessInfo ret = liblogicalaccess_cardPINVOKE.createAccessInfo(cPtr, $owner);$excode
+    AccessInfo ret = liblogicalaccess_corePINVOKE.createAccessInfo(cPtr, $owner);$excode
     return ret;
 }
 
 %pragma(csharp) imclasscode=%{
-  public static KeyStorage createKeyStorage(System.IntPtr cPtr, bool owner)
+	public static System.Collections.Generic.Dictionary<string, System.Type> locationDictionary;
+
+	public static Location	createLocation(System.IntPtr cPtr, bool owner)
+	{
+		Location ret = null;
+		if (cPtr == System.IntPtr.Zero) {
+		  return ret;
+		}
+		string ct = ($modulePINVOKE.Location_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (locationDictionary == null)
+			locationDictionary = createDictionary<Location>();
+        if (locationDictionary.ContainsKey(ct))
+        {
+            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            ret = (Location)System.Activator.CreateInstance(locationDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
+        }
+		return ret;
+	}
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::Location*, std::shared_ptr<logicalaccess::Location> {
+    System.IntPtr cPtr = $imcall;
+    Location ret = liblogicalaccess_corePINVOKE.createLocation(cPtr, $owner);$excode
+    return ret;
+}
+
+%pragma(csharp) imclasscode=%{
+  public static CardService createCardService(System.IntPtr cPtr, bool owner)
   {
-    KeyStorage ret = null;
+    CardService ret = null;
     if (cPtr == System.IntPtr.Zero) {
       return ret;
     }
-	KeyStorageType ks = (KeyStorageType)($modulePINVOKE.KeyStorage_getType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
-    switch (ks) {
-	   case KeyStorageType.KST_COMPUTER_MEMORY:
-	     ret = new ComputerMemoryKeyStorage(cPtr, owner);
+	CardServiceType svcType = (CardServiceType)($modulePINVOKE.CardService_getServiceType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+    switch (svcType) {
+       case CardServiceType.CST_ACCESS_CONTROL:
+	     ret = new AccessControlCardService(cPtr, owner);
 	     break;
-	   case KeyStorageType.KST_READER_MEMORY:
-	     ret = new ReaderMemoryKeyStorage(cPtr, owner);
-		 break;
-	   case KeyStorageType.KST_SAM:
-	     ret = new SAMKeyStorage(cPtr, owner);
-		 break;
-	   case KeyStorageType.KST_SERVER:
-	     ret = new IKSStorage(cPtr, owner);
-		 break;
+	   case CardServiceType.CST_IDENTITY:
+	     ret = new IdentityCardService(cPtr, owner);
+	     break;
+	   case CardServiceType.CST_NFC_TAG:
+	     ret = new NFCTagCardService(cPtr, owner);
+	     break;
+	   case CardServiceType.CST_STORAGE:
+	     ret = new StorageCardService(cPtr, owner);
+	     break;
+	   case CardServiceType.CST_UID_CHANGER:
+	     ret = new UIDChangerService(cPtr, owner);
+	     break;
       }
       return ret;
     }
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::KeyStorage*, std::shared_ptr<logicalaccess::KeyStorage> {
+  logicalaccess::CardService*, std::shared_ptr<logicalaccess::CardService> {
     System.IntPtr cPtr = $imcall;
-    KeyStorage ret = liblogicalaccess_cardPINVOKE.createKeyStorage(cPtr, $owner);$excode
+    CardService ret = liblogicalaccess_corePINVOKE.createCardService(cPtr, $owner);$excode
     return ret;
 }

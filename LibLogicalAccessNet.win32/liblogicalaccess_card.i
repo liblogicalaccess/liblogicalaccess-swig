@@ -228,10 +228,10 @@ using LibLogicalAccess.Reader;
       return ret;
 } %}
 
-%typemap(ctype) DESFireKeyType& "DESFireKeyType*"
-%typemap(cstype) DESFireKeyType& "out LibLogicalAccess.Card.DESFireKeyType"
-%typemap(csin) DESFireKeyType& %{out $csinput%}  
-%typemap(imtype) DESFireKeyType& "out LibLogicalAccess.Card.DESFireKeyType"
+%typemap(ctype) logicalaccess::DESFireKeyType& "DESFireKeyType*"
+%typemap(cstype) logicalaccess::DESFireKeyType& "out DESFireKeyType"
+%typemap(csin) logicalaccess::DESFireKeyType& %{out $csinput%}  
+%typemap(imtype) logicalaccess::DESFireKeyType& "out LibLogicalAccess.Card.DESFireKeyType"
 
 %typemap(ctype) DESFireKeySettings "DESFireKeySettings"
 %typemap(cstype) DESFireKeySettings "DESFireKeySettings"
@@ -246,6 +246,15 @@ using LibLogicalAccess.Reader;
 %typemap(cstype) logicalaccess::DESFireKeySettings & "out DESFireKeySettings"
 %typemap(csin) logicalaccess::DESFireKeySettings & %{out $csinput%}  
 %typemap(imtype) logicalaccess::DESFireKeySettings & "out LibLogicalAccess.Card.DESFireKeySettings"
+
+%typemap(ctype) std::vector<unsigned char>::const_iterator "std::vector<unsigned char>::const_iterator"
+%typemap(cstype) std::vector<unsigned char>::const_iterator "UByteVector.UByteVectorEnumerator"
+%typemap(csin) std::vector<unsigned char>::const_iterator  %{$csinput%}  
+%typemap(imtype) std::vector<unsigned char>::const_iterator "LogicalAccess.UByteVector.UByteVectorEnumerator"
+%typemap(csout, excode=SWIGEXCODE) std::vector<unsigned char>::const_iterator {
+	UByteVector.UByteVectorEnumerator ret = $imcall;$excode
+	return ret;
+}
 
 %apply unsigned char MBINOUT[] { unsigned char recordSize[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char maxNumberRecords[ANY] }
@@ -270,6 +279,7 @@ using LibLogicalAccess.Reader;
 %ignore logicalaccess::Commands;
 %ignore pcsc_share_mode_to_string;
 %ignore pcsc_protocol_to_string;
+%ignore *::getTime;
 
 /* Include_section */
 
@@ -428,3 +438,4 @@ using LibLogicalAccess.Reader;
 %template(AV1SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
 %template(AV2SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
 %template(AV2SAMAV2Commands) logicalaccess::SAMAV2Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
+

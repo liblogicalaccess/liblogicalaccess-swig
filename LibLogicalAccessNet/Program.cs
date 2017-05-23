@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace liblogicalaccess_swig2._0
+namespace LibLogicalAccess
 {
     class Program
     {
@@ -21,7 +21,7 @@ namespace liblogicalaccess_swig2._0
                 // Create the default reader unit. On PC/SC, we will listen on all readers.
                 ReaderUnit readerUnit = readerProvider.createReaderUnit();
 
-                ReaderUnitCollection readerList = readerProvider.getReaderList();
+                ReaderUnitVector readerList = readerProvider.getReaderList();
                 if (readerProvider.getRPType() == "PCSC" && readerList.Count == 0)
                 {
                     Console.WriteLine("No readers on this system.");

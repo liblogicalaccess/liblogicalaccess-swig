@@ -10,6 +10,7 @@
 %import "liblogicalaccess_iks.i"
 
 %{
+
 /* Additional_include */
 
 #include <logicalaccess/plugins/readers/a3mlgm5600/readercardadapters/a3mlgm5600readercardadapter.hpp>
@@ -273,6 +274,7 @@
 #include <logicalaccess/cards/accessinfo.hpp>
 
 using namespace logicalaccess;
+using namespace logicalaccess::openssl;
 using MifarePlusSL1PCSCCommands = MifarePlusSL1Policy<MifarePlusSL1Commands, MifarePCSCCommands>;
 
 %}
@@ -459,6 +461,8 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %ignore SAMISO7816Commands< KeyEntryAV2Information,SETAV2 >;
 %ignore SAMISO7816Commands< KeyEntryAV1Information,SETAV1 >;
 %ignore *::getCSMART;
+
+
 
 
 /* Include_section */
@@ -722,6 +726,9 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 /* END_Include_section */
 
 %template(MifarePlusSL1PCSCCommandsTmp) logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
+%template(UByteVectorList) std::list<std::vector<unsigned char> >;
+%template(ChipList) std::list<std::shared_ptr<logicalaccess::Chip> >;
+%template(DFNameVector) std::vector<logicalaccess::DFName>;
 
 //%template(AV1SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
 //%template(AV2SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;

@@ -17,6 +17,7 @@
 %include <std_string.i>
 %include <std_shared_ptr.i>
 %include <std_array.i>
+%include <std_list.i>
 %include <wchar.i>
 %include <exception.i>
 %include <arrays_csharp.i>

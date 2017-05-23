@@ -63,20 +63,19 @@ using namespace logicalaccess;
 %typemap(csvarout, excode=SWIGEXCODE2) 
 					CTYPE MBINOUT[] %{ 
 		get { 
-			CSTYPE[] ret = new CSTYPE[$1_dim0]; 
-			System.IntPtr data = $imcall; 
-			System.Runtime.InteropServices.Marshal.Copy(data, ret, 0, $1_dim0);$excode 
-		    return ret; 
+		  CSTYPE[] ret = new CSTYPE[$1_dim0]; 
+		  System.IntPtr data = $imcall; 
+		  System.Runtime.InteropServices.Marshal.Copy(data, ret, 0, $1_dim0);$excode 
+		  return ret; 
 		}
 %}
 %typemap(csvarin, excode=SWIGEXCODE2) 
 					CTYPE MBINOUT[] %{ 
 		set { 
-			if ($csinput.Length > $1_dim0)
-			{
-                throw new System.IndexOutOfRangeException();
-			}
-			$imcall;$excode
+		  if ($csinput.Length > $1_dim0) {
+            throw new System.IndexOutOfRangeException();
+		  }
+		  $imcall;$excode
 		}
 %}
 %typemap(freearg)	CTYPE MBINOUT[] ""
@@ -96,14 +95,20 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte)
 %typemap(csdirectorin) unsigned char * "$iminput"
 %typemap(csdirectorout) unsigned char * "$cscall"
 %typemap(csin) unsigned char * "$csinput"
+%typemap(csout) unsigned char * {
+	System.IntPtr data = $imcall; 
+	string ret = System.Runtime.InteropServices.Marshal.PtrToStringAuto(data);$excode 
+	return ret; 
+}
 %typemap(csvarin, excode=SWIGEXCODE2) unsigned char * %{
     set {
       $imcall;$excode
 } %}
 %typemap(csvarout, excode=SWIGEXCODE2) unsigned char * %{
     get {
-      string ret = $imcall;$excode
-      return ret;
+      System.IntPtr data = $imcall; 
+	  string ret = System.Runtime.InteropServices.Marshal.PtrToStringAuto(data);$excode 
+	  return ret; 
 } %}
 
 %typemap(ctype) void**, const void** "void**"
@@ -148,6 +153,7 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte)
 %apply unsigned int INPUT[] { unsigned int *positions, unsigned int *locations }
 
 
+
 %typemap(ctype) const unsigned char * "const unsigned char *"
 %typemap(cstype) const unsigned char * "byte[]"
 %typemap(imtype, out="System.IntPtr") const unsigned char * "byte[]"
@@ -161,6 +167,11 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte)
 
 %apply unsigned char OUTPUT[] { unsigned char* getData() }
 %typemap(csout, excode=SWIGEXCODE) unsigned char* getData() {
+	byte[] ret = $imcall;$excode
+	return ret;
+}
+%apply unsigned char OUTPUT[] { const unsigned char* getConstData() }
+%typemap(csout, excode=SWIGEXCODE) const unsigned char* getConstData() {
 	byte[] ret = $imcall;$excode
 	return ret;
 }
@@ -209,6 +220,10 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte)
 %typemap(cstype) boost::circular_buffer<unsigned char>& "System.IntPtr"
 %typemap(csin) boost::circular_buffer<unsigned char>& %{$csinput%}  
 %typemap(imtype) boost::circular_buffer<unsigned char>& "System.IntPtr"
+%typemap(csout, excode=SWIGEXCODE) boost::circular_buffer<unsigned char>& {
+    System.IntPtr ret = $imcall;$excode
+	return ret;
+}
 
 %include <std_vector.i>
 
@@ -357,3 +372,38 @@ namespace logicalaccess
 %include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
 %include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/keydiversification.hpp>
+
+%template(DataFieldList) std::list<std::shared_ptr<logicalaccess::DataField> >;
+
+%pragma(csharp) imclasscode=%{
+  public static KeyStorage createKeyStorage(System.IntPtr cPtr, bool owner)
+  {
+    KeyStorage ret = null;
+    if (cPtr == System.IntPtr.Zero) {
+      return ret;
+    }
+	KeyStorageType ks = (KeyStorageType)($modulePINVOKE.KeyStorage_getType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+    switch (ks) {
+	   case KeyStorageType.KST_COMPUTER_MEMORY:
+	     ret = new ComputerMemoryKeyStorage(cPtr, owner);
+	     break;
+	   case KeyStorageType.KST_READER_MEMORY:
+	     ret = new ReaderMemoryKeyStorage(cPtr, owner);
+		 break;
+	   case KeyStorageType.KST_SAM:
+	     ret = new SAMKeyStorage(cPtr, owner);
+		 break;
+	   case KeyStorageType.KST_SERVER:
+	     ret = new IKSStorage(cPtr, owner);
+		 break;
+      }
+      return ret;
+    }
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::KeyStorage*, std::shared_ptr<logicalaccess::KeyStorage> {
+    System.IntPtr cPtr = $imcall;
+    KeyStorage ret = $modulePINVOKE.createKeyStorage(cPtr, $owner);$excode
+    return ret;
+}
