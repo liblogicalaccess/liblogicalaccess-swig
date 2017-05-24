@@ -72,6 +72,8 @@ namespace LibLogicalAccess
                 Console.WriteLine("Error : {0}", ex.Message);
             }
 
+            MifareSpringCardCommands test = new MifareSpringCardCommands();
+
             Console.ReadLine();
         }
 

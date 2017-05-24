@@ -3,8 +3,6 @@
 
 %include "liblogicalaccess.i"
 
-%import "liblogicalaccess_crypto.i"
-
 %import "liblogicalaccess_data.i"
 %import "liblogicalaccess_core.i"
 %import "liblogicalaccess_iks.i"
@@ -454,6 +452,15 @@ using LibLogicalAccess.Card;
 	return ret;
 }
 
+//%typemap(ctype) logicalaccess::PCSCShareMode "logicalaccess::PCSCShareMode"
+//%typemap(cstype) logicalaccess::PCSCShareMode "PCSCShareMode"
+//%typemap(csin) logicalaccess::PCSCShareMode  %{$csinput%}  
+//%typemap(imtype) logicalaccess::PCSCShareMode "LibLogicalAccess.Reader.PCSCShareMode"
+//%typemap(csout, excode=SWIGEXCODE) logicalaccess::PCSCShareMode {
+//	PCSCShareMode ret = $imcall;$excode
+//	return ret;
+//}
+
 typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
 
 %ignore logicalaccess::SAMISO7816Commands< logicalaccess::KeyEntryAV2Information,logicalaccess::SETAV2 >;
@@ -461,9 +468,6 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %ignore SAMISO7816Commands< KeyEntryAV2Information,SETAV2 >;
 %ignore SAMISO7816Commands< KeyEntryAV1Information,SETAV1 >;
 %ignore *::getCSMART;
-
-
-
 
 /* Include_section */
 
@@ -561,6 +565,8 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %include <logicalaccess/plugins/readers/iso7816/commands/mifareplusiso7816resultchecker.hpp>
 %include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samiso7816commands.hpp>
+%template(AV1SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
+%template(AV2SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
 %include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
 %include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
@@ -620,6 +626,7 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareomnikeyxx27resultchecker.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/mifareplussl1commands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_pcsc_sl1.hpp>
+%template(MifarePlusSL1PCSCCommands) logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_acsacr1222l_sl1.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_omnikeyxx21_sl1.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/mifareplussl3auth.hpp>
@@ -725,14 +732,14 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 
 /* END_Include_section */
 
-%template(MifarePlusSL1PCSCCommandsTmp) logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
+//WARNING: cette ligne doit suivre l'inclusion de mifareplus_pcsc_sl1.hpp en attendant un fix du script autoComplete
+//%template(MifarePlusSL1PCSCCommands) logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
+
+//WARNING: cette ligne doit suivre l'inclusion de samiso7816commands.hpp en attendant un fix du script autoComplete
+//%template(AV1SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
+//%template(AV2SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
+
 %template(UByteVectorList) std::list<std::vector<unsigned char> >;
 %template(ChipList) std::list<std::shared_ptr<logicalaccess::Chip> >;
-%template(DFNameVector) std::vector<logicalaccess::DFName>;
 
-//%template(AV1SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
-//%template(AV2SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
-//%template(AV1SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
-//%template(AV2SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
-//%template(AV2SAMAV2Commands) logicalaccess::SAMAV2Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
-//%template(AV1SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
+%template(DFNameVector) std::vector<logicalaccess::DFName>;

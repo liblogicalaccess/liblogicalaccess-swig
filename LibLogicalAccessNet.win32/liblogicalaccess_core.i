@@ -6,7 +6,8 @@
 %import "liblogicalaccess_data.i"
 %import "liblogicalaccess_iks.i"
 
-//%import "liblogicalaccess_crypto.i"
+%include "liblogicalaccess_cardservice.i"
+%include "liblogicalaccess_readerservice.i"
 
 %typemap(csimports) SWIGTYPE
 %{
@@ -16,10 +17,10 @@ using LibLogicalAccess.Reader;
 
 %{
 
-#include <logicalaccess/crypto/initialization_vector.hpp>
-#include <logicalaccess/crypto/aes_initialization_vector.hpp>
 #include <logicalaccess/crypto/symmetric_key.hpp>
+#include <logicalaccess/crypto/initialization_vector.hpp>
 #include <logicalaccess/crypto/symmetric_cipher.hpp>
+#include <logicalaccess/crypto/aes_initialization_vector.hpp>
 #include <logicalaccess/crypto/openssl_symmetric_cipher_context.hpp>
 #include <logicalaccess/crypto/openssl_symmetric_cipher.hpp>
 
@@ -79,15 +80,6 @@ using namespace logicalaccess;
 %apply unsigned int INOUT[] { unsigned int* locations, unsigned int* positions }
 %apply unsigned char INPUT[] { const unsigned char* data }
 
-%typemap(ctype) CardServiceType "CardServiceType"
-%typemap(cstype) CardServiceType "CardServiceType"
-%typemap(csin) CardServiceType %{$csinput%}  
-%typemap(imtype) CardServiceType "CardServiceType"
-%typemap(csout, excode=SWIGEXCODE) CardServiceType {
-	CardServiceType ret = $imcall;$excode
-	return ret;
-}
-
 %typemap(ctype) KeyStorageType "KeyStorageType"
 %typemap(cstype) KeyStorageType "KeyStorageType"
 %typemap(csin) KeyStorageType %{$csinput%}  
@@ -125,10 +117,10 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 /* END_Configuration_section */
 
 
-%include <logicalaccess/crypto/initialization_vector.hpp>
-%include <logicalaccess/crypto/aes_initialization_vector.hpp>
 %include <logicalaccess/crypto/symmetric_key.hpp>
+%include <logicalaccess/crypto/initialization_vector.hpp>
 %include <logicalaccess/crypto/symmetric_cipher.hpp>
+%include <logicalaccess/crypto/aes_initialization_vector.hpp>
 %include <logicalaccess/crypto/openssl_symmetric_cipher_context.hpp>
 %include <logicalaccess/crypto/openssl_symmetric_cipher.hpp>
 
@@ -170,8 +162,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 /* END_Include_section */
 
-%include "liblogicalaccess_cardservice.i"
-%include "liblogicalaccess_readerservice.i"
+//%include "liblogicalaccess_cardservice.i"
+//%include "liblogicalaccess_readerservice.i"
 
 %template(ChipVector) std::vector<std::shared_ptr<logicalaccess::Chip> >;
 %template(LocationNodePtrCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;

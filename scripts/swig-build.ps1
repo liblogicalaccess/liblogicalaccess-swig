@@ -10,7 +10,7 @@ $Commands = @((".\LibLogicalAccessNet\Generated\Card", "LibLogicalAccess.Card", 
 foreach ($Command in $Commands){
 	Start-Job -Init ([ScriptBlock]::Create("Set-Location $pwd")) -ArgumentList $Command  {
 
-        $cmd = "C:\islog\dev\lib\swigwin-3.0.12\swig.exe"
+        $cmd = "C:\islog\dev\swigwin-3.0.12\swig.exe"
 
 		& $cmd -csharp -c++ -Ipackages\include -outdir $args[0] -namespace $args[1] -dllimport LibLogicalAccessNet.win32.dll $args[2]
 				

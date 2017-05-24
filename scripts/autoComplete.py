@@ -36,7 +36,7 @@ def	innerincludeprocess(content, curpath, category):
 		inc = inc.lower().replace("\\", "/")
 		incpath = "/".join(curpath.split("/")[:-1]) + "/" + inc
 		if inc.split("/")[0] == "logicalaccess":
-			if (inc.split("/")[1] == "plugins" and (category == "CARD" or category == "READER")) or (inc.split("/")[1] == "crypto" and category == "CRYPTO") or (category == "CORE" and (inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders")):
+			if (inc.split("/")[1] == "plugins" and (category == "CARD" or category == "READER")) or (category == "CORE" and (inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders")):
 				inc = "<" + inc + ">"
 				tmp = curpath.split("logicalaccess")[0] + inc.replace(">", "").replace("<", "")
 				if (category, inc) not in include and inc.split("/")[-1] not in tmpinclude:
@@ -49,7 +49,7 @@ def	innerincludeprocess(content, curpath, category):
 		elif os.path.isfile(incpath):
 			inc = (os.path.normpath(incpath).split("logicalaccess")[-1]).replace("\\", "/")
 			inc = (includebase.replace("{0}", inc))
-			if (inc.split("/")[1] == "plugins" and (category == "CARD" or category == "READER")) or (inc.split("/")[1] == "crypto" and category == "CRYPTO") or (category == "CORE" and (inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders")):
+			if (inc.split("/")[1] == "plugins" and (category == "CARD" or category == "READER")) or (category == "CORE" and (inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders")):
 				tmp = curpath.split("logicalaccess")[0] + inc.replace(">", "").replace("<", "")
 				if (category, inc) not in include and inc.split("/")[-1] not in tmpinclude:
 					tmpinclude.append(inc.split("/")[-1])
@@ -63,7 +63,7 @@ def	innerincludeprocess(content, curpath, category):
 				if os.path.isfile(el + inc):
 					inc = (os.path.normpath(el + inc).split("logicalaccess")[-1]).replace("\\", "/")
 					inc = (includebase.replace("{0}", inc))
-					if (inc.split("/")[1] == "plugins" and (category == "CARD" or category == "READER")) or (inc.split("/")[1] == "crypto" and category == "CRYPTO") or (category == "CORE" and (inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders")):
+					if (inc.split("/")[1] == "plugins" and (category == "CARD" or category == "READER")) or (category == "CORE" and (inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders")):
 						tmp = curpath.split("logicalaccess")[0] + inc.replace(">", "").replace("<", "")
 						if (category, inc) not in include and inc.split("/")[-1] not in tmpinclude:
 							tmpinclude.append(inc.split("/")[-1])
@@ -176,31 +176,7 @@ def includewrite():
 			lines.insert(i, "\n")
 			i += 1
 		i += 1	
-	with open(readerpath, "w") as f:
-		f.write(''.join(lines))
-		
-	cryptopath = path.replace("{0}", "_crypto")
-	cryptoinc = lookdata("CRYPTO")
-	lines = cleandoc(cryptopath)
-	i = 0
-	while i < len(lines):
-		if "/* Additional_include */\n" in lines[i]:
-			i += 2
-			for crinc in cryptoinc:
-				lines.insert(i, "#include {0}\n".format(crinc))
-				i += 1
-			lines.insert(i, "\n")
-			i += 1
-		if "/* Include_section */\n" in lines[i]:
-			i += 2
-			for crinc in cryptoinc:
-				lines.insert(i, "%include {0}\n".format(crinc))
-				i += 1
-			lines.insert(i, "\n")
-			i += 1
-		i += 1	
-	with open(cryptopath, "w") as f:
-		f.write(''.join(lines))
+
 	
 def find_classdecl(node, filename):
 	global curnamespace
@@ -254,7 +230,6 @@ def main():
 	includeprocess("../packages/include/logicalaccess/plugins/cards/**/*.hpp", "CARD")
 	includeprocess("../packages/include/logicalaccess/readerproviders/**/*.hpp", "CORE")
 	includeprocess("../packages/include/logicalaccess/plugins/readers/**/*.hpp", "READER")
-	includeprocess("../packages/include/logicalaccess/crypto/**/*.hpp", "CRYPTO")
 	# sharedptrprocess()
 	# sharedptrwrite()
 	includewrite()

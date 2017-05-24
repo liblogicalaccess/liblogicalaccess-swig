@@ -3,8 +3,6 @@
 
 %include "liblogicalaccess.i"
 
-%import "liblogicalaccess_crypto.i"
-
 %import "liblogicalaccess_data.i"
 %import "liblogicalaccess_core.i"
 %import "liblogicalaccess_iks.i"
@@ -431,11 +429,10 @@ using LibLogicalAccess.Reader;
 
 /* END_Include_section */
 
-%template(DFNameCollection) std::vector<logicalaccess::DFName>;
 %template(BioInfosVector) std::vector<logicalaccess::EPassDG2::BioInfo>;
+
 %template(AV1SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
 %template(AV2SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
 %template(AV1SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
 %template(AV2SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
 %template(AV2SAMAV2Commands) logicalaccess::SAMAV2Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
-

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace swig
+namespace LibLogicalAccess
 {
     class CustomException : global::System.Exception
     {

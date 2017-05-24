@@ -50,7 +50,7 @@
            void CustomExceptionRegisterCallback(CustomExceptionDelegate customCallback);
 
     static void SetPendingCustomException(string exceptionName, string message) {
-	  var exception = (swig.CustomException)System.Activator.CreateInstance("swig", "swig." + exceptionName, false, 0, null, new System.String[1] { message }, null, null, null).Unwrap();
+	  var exception = (LibLogicalAccess.CustomException)System.Activator.CreateInstance(System.Type.GetType("LibLogicalAccess." + exceptionName + ", LibLogicalAccessNet") , false, 0, null, new System.String[1] { message }, null);
 	  SWIGPendingException.Set(exception);
     }
 
