@@ -742,4 +742,4 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %template(UByteVectorList) std::list<std::vector<unsigned char> >;
 %template(ChipList) std::list<std::shared_ptr<logicalaccess::Chip> >;
 
-%template(DFNameVector) std::vector<logicalaccess::DFName>;
+

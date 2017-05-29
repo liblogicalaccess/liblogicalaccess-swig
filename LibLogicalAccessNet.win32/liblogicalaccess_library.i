@@ -63,61 +63,61 @@
 
 /** ATTENTION PAS FINI ICI **/
 
-%{
-#define CATCH_CSE(EXCEPT) \
-	catch (EXCEPT e) \
-	{ \
-	  std::string name(typeid(e).name());\
-	  if (name.find("class ") != std::string::npos)\
-		 name.erase(0, name.find(" ") + 1);\
-	  SWIG_CSharpSetPendingExceptionCustom(name.c_str(), e.what());\
-	}\
-
-#define FOR_EACH_EXCEPTION(ACTION)\
-	ACTION(NotAwakeException)\
-	ACTION(NotBornException)\
-	ACTION(NotAliveException)\
-%}
-
-%exception %{
-try 
-{
-  $action
-} 
-FOR_EACH_EXCEPTION( CATCH_CSE )
-catch (std::out_of_range &e)
-{
-	SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, e.what(), "unknown");
-}
-catch (std::logic_error &e)
-{
-	SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, e.what(), "unknown");
-}
-catch (std::range_error &e)
-{
-	SWIG_CSharpSetPendingException(SWIG_CSharpOutOfMemoryException, e.what());
-}
-catch (std::overflow_error &e)
-{
-	SWIG_CSharpSetPendingException(SWIG_CSharpOverflowException, e.what());
-}
-catch (std::underflow_error &e)
-{
-	SWIG_CSharpSetPendingException(SWIG_CSharpOverflowException, e.what());
-}
-catch (std::runtime_error &e)
-{
-	SWIG_CSharpSetPendingException(SWIG_CSharpSystemException, e.what());
-}
-catch (std::bad_cast &e)
-{
-	SWIG_CSharpSetPendingException(SWIG_CSharpInvalidCastException, e.what());
-}
-catch (std::exception &e)
-{
-	SWIG_CSharpSetPendingException(SWIG_CSharpSystemException, e.what());
-}
-%}
+//%{
+//#define CATCH_CSE(EXCEPT) \
+//	catch (EXCEPT e) \
+//	{ \
+//	  std::string name(typeid(e).name());\
+//	  if (name.find("class ") != std::string::npos)\
+//		 name.erase(0, name.find(" ") + 1);\
+//	  SWIG_CSharpSetPendingExceptionCustom(name.c_str(), e.what());\
+//	}\
+//
+//#define FOR_EACH_EXCEPTION(ACTION)\
+//	ACTION(NotAwakeException)\
+//	ACTION(NotBornException)\
+//	ACTION(NotAliveException)\
+//%}
+//
+//%exception %{
+//try 
+//{
+//  $action
+//} 
+//FOR_EACH_EXCEPTION( CATCH_CSE )
+//catch (std::out_of_range &e)
+//{
+//	SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, e.what(), "unknown");
+//}
+//catch (std::logic_error &e)
+//{
+//	SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, e.what(), "unknown");
+//}
+//catch (std::range_error &e)
+//{
+//	SWIG_CSharpSetPendingException(SWIG_CSharpOutOfMemoryException, e.what());
+//}
+//catch (std::overflow_error &e)
+//{
+//	SWIG_CSharpSetPendingException(SWIG_CSharpOverflowException, e.what());
+//}
+//catch (std::underflow_error &e)
+//{
+//	SWIG_CSharpSetPendingException(SWIG_CSharpOverflowException, e.what());
+//}
+//catch (std::runtime_error &e)
+//{
+//	SWIG_CSharpSetPendingException(SWIG_CSharpSystemException, e.what());
+//}
+//catch (std::bad_cast &e)
+//{
+//	SWIG_CSharpSetPendingException(SWIG_CSharpInvalidCastException, e.what());
+//}
+//catch (std::exception &e)
+//{
+//	SWIG_CSharpSetPendingException(SWIG_CSharpSystemException, e.what());
+//}
+//%}
 
 %{
 	#include <logicalaccess/dynlibrary/idynlibrary.hpp>
