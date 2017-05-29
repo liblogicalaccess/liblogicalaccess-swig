@@ -62,7 +62,6 @@ using LibLogicalAccess.Reader;
 
 /* END_Additional_include */
 
-
 using namespace logicalaccess;
 
 %}

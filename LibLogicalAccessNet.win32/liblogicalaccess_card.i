@@ -296,6 +296,7 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
+%template(DFNameVector) std::vector<logicalaccess::DFName>;
 %include <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
 %include <logicalaccess/plugins/cards/iso7816/iso7816nfctag4cardservice.hpp>
