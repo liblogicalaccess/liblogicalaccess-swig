@@ -137,7 +137,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)\packages\lib\Win32\Release;$(SolutionDir)\packages\lib\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\packages\lib\Win32\Release;$(SolutionDir)\packages\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>desfirecards.lib;em4102cards.lib;em4135cards.lib;generictagcards.lib;icode1cards.lib;icode2cards.lib;indalacards.lib;infineonmydcards.lib;iso7816cards.lib;iso15693cards.lib;legicprimecards.lib;mifarecards.lib;mifarepluscards.lib;mifareultralightcards.lib;proxcards.lib;proxlitecards.lib;smartframecards.lib;stmlri512cards.lib;tagitcards.lib;twiccards.lib;a3mlgm5600readers.lib;admittoreaders.lib;axesstmc13readers.lib;axesstmclegicreaders.lib;deisterreaders.lib;elatecreaders.lib;gunneboreaders.lib;idondemandreaders.lib;iso7816readers.lib;keyboardreaders.lib;pcscreaders.lib;promagreaders.lib;rfideasreaders.lib;scielreaders.lib;smartidreaders.lib;stidstrreaders.lib;rplethreaders.lib;ok5553readers.lib;samav2cards.lib;felicacards.lib;cps3cards.lib;stidprgreaders.lib;osdpreaders.lib;gigatmsreaders.lib;epasscards.lib;topazcards.lib;iclasscards.lib;iclasscards_5321.lib;private-pcscreaders.lib;libnfc-nfcreaders.lib;liblogicalaccess.lib;logicalaccess-cryptolib.lib;libeay32.lib;ssleay32.lib;idpreaders.lib;seoscards.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>Powershell.exe -executionpolicy remotesigned -File $(SolutionDir)scripts\swig-build.ps1</Command>
@@ -159,6 +160,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)\packages\lib\x64\Release;$(SolutionDir)\packages\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>desfirecards.lib;em4102cards.lib;em4135cards.lib;generictagcards.lib;icode1cards.lib;icode2cards.lib;indalacards.lib;infineonmydcards.lib;iso7816cards.lib;iso15693cards.lib;legicprimecards.lib;mifarecards.lib;mifarepluscards.lib;mifareultralightcards.lib;proxcards.lib;proxlitecards.lib;smartframecards.lib;stmlri512cards.lib;tagitcards.lib;twiccards.lib;a3mlgm5600readers.lib;admittoreaders.lib;axesstmc13readers.lib;axesstmclegicreaders.lib;deisterreaders.lib;elatecreaders.lib;gunneboreaders.lib;idondemandreaders.lib;iso7816readers.lib;keyboardreaders.lib;pcscreaders.lib;promagreaders.lib;rfideasreaders.lib;scielreaders.lib;smartidreaders.lib;stidstrreaders.lib;rplethreaders.lib;ok5553readers.lib;samav2cards.lib;felicacards.lib;cps3cards.lib;stidprgreaders.lib;osdpreaders.lib;gigatmsreaders.lib;epasscards.lib;topazcards.lib;iclasscards.lib;iclasscards_5321.lib;private-pcscreaders.lib;libnfc-nfcreaders.lib;liblogicalaccess.lib;logicalaccess-cryptolib.lib;libeay32.lib;ssleay32.lib;idpreaders.lib;seoscards.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>Powershell.exe -executionpolicy remotesigned -File $(SolutionDir)scripts\swig-build.ps1</Command>
