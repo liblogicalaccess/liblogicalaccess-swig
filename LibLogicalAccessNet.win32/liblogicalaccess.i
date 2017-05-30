@@ -1122,11 +1122,12 @@ static void SWIG_CSharpSetPendingExceptionCustom(const char *name, const char *m
     static CustomExceptionDelegate customDelegate =
                                    new CustomExceptionDelegate(SetPendingCustomException);
 
-    [global::System.Runtime.InteropServices.DllImport("$dllimport", EntryPoint="CustomExceptionRegisterCallback$module")]
-    public static extern void CustomExceptionRegisterCallback_$module(CustomExceptionDelegate customCallback);
+    [global::System.Runtime.InteropServices.DllImport("$dllimport", EntryPoint="CustomExceptionRegisterCallback_$module")]
+    public static extern void CustomExceptionRegisterCallback_$module(CustomExceptionDelegate customDelegate);
 
     static void SetPendingCustomException(string exceptionName, string message) {
-	  var exception = (LibLogicalAccess.CustomException)System.Activator.CreateInstance(System.Type.GetType("LibLogicalAccess." + exceptionName + ", LibLogicalAccessNet") , false, 0, null, new System.String[1] { message }, null);
+	  System.Type type = System.Type.GetType("LibLogicalAccess." + exceptionName.Split(new string[] { "::" }, System.StringSplitOptions.None)[exceptionName.Split(new string[] { "::" }, System.StringSplitOptions.None).Length - 1] + ", LibLogicalAccessNet");
+      var exception = (LibLogicalAccess.CustomException)System.Activator.CreateInstance(type, new object[] { message });
 	  SWIGPendingException.Set(exception);
     }
 
@@ -1137,13 +1138,12 @@ static void SWIG_CSharpSetPendingExceptionCustom(const char *name, const char *m
   static CustomExceptionHelper exceptionHelper = new CustomExceptionHelper();
 %}
 
-/** ATTENTION PAS FINI ICI **/
-
 %{
 #define CATCH_CSE(EXCEPT) \
-	catch (EXCEPT e) \
+	catch (EXCEPT &e) \
 	{ \
 	  std::string name(typeid(e).name());\
+	  std::cout << "OK -> " << name << std::endl;\
 	  if (name.find("class ") != std::string::npos)\
 		 name.erase(0, name.find(" ") + 1);\
 	  SWIG_CSharpSetPendingExceptionCustom(name.c_str(), e.what());\

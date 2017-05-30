@@ -13,6 +13,7 @@
 %shared_ptr(logicalaccess::LibLogicalAccessException);
 %shared_ptr(logicalaccess::CardException);
 %shared_ptr(logicalaccess::IKSException);
+%shared_ptr(logicalaccess::openssl::OpenSSLException);
 
 %include <logicalaccess/myexception.hpp>
 %include <logicalaccess/crypto/openssl_exception.hpp>
