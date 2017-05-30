@@ -2,6 +2,7 @@
 %module(directors="1") liblogicalaccess_data
 
 %include "liblogicalaccess.i"
+%import "liblogicalaccess_exception.i"
 
 %{
 #include <logicalaccess/lla_fwd.hpp>
@@ -214,12 +215,23 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte)
 
 %typemap(ctype) boost::circular_buffer<unsigned char>& "void *"
 %typemap(cstype) boost::circular_buffer<unsigned char>& "System.IntPtr"
-%typemap(csin) boost::circular_buffer<unsigned char>& %{$csinput%}  
+%typemap(csin) boost::circular_buffer<unsigned char>& %{ $csinput%}  
 %typemap(imtype) boost::circular_buffer<unsigned char>& "System.IntPtr"
 %typemap(csout, excode=SWIGEXCODE) boost::circular_buffer<unsigned char>& {
     System.IntPtr ret = $imcall;$excode
 	return ret;
 }
+
+%typemap(ctype) boost::property_tree::ptree& "void *"
+%typemap(cstype) boost::property_tree::ptree& "System.IntPtr"
+%typemap(csin) boost::property_tree::ptree& %{$csinput%}  
+%typemap(imtype) boost::property_tree::ptree& "System.IntPtr"
+%typemap(csout, excode=SWIGEXCODE) boost::property_tree::ptree& {
+    System.IntPtr ret = $imcall;$excode
+	return ret;
+}
+
+
 
 %include <std_vector.i>
 
@@ -238,31 +250,6 @@ namespace std {
 		BoolCollection ret = $imcall;$excode
 		return ret;
 	}
-
-	//%typemap(cstype) vector<uint8_t> "UByteVector"
-	//%typemap(csin) vector<uint8_t> %{$csinput%}  
-	//%typemap(imtype) vector<uint8_t> "UByteVector"
-	//%typemap(csout, excode=SWIGEXCODE) vector<uint8_t> {
-	//	UByteVector ret = $imcall;$excode
-	//	return ret;
-	//}
-	//
-	//%typemap(cstype) const vector<uint8_t> &"UByteVector"
-	//%typemap(csin) const vector<uint8_t> & %{$csinput%}  
-	//%typemap(imtype) const vector<uint8_t> & "UByteVector"
-	//	%typemap(csout, excode=SWIGEXCODE) const vector<uint8_t> & {
-	//	UByteVector ret = $imcall;$excode
-	//	return ret;
-	//}
-	//
-	//%typemap(cstype) const vector<unsigned char> & "UByteVector"
-	//%typemap(csin) const vector<unsigned char> & %{$csinput%}  
-	//%typemap(imtype) const vector<unsigned char> & "UByteVector"
-	//%typemap(csout, excode=SWIGEXCODE) const vector<unsigned char> & {
-	//	UByteVector ret = $imcall;$excode
-	//	return ret;
-	//}
-
 };
 
 %ignore logicalaccess::DataTransport::getReaderUnit;

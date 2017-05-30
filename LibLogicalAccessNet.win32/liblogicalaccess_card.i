@@ -2,6 +2,7 @@
 %module(directors="1") liblogicalaccess_card
 
 %include "liblogicalaccess.i"
+%import "liblogicalaccess_exception.i"
 
 %import "liblogicalaccess_data.i"
 %import "liblogicalaccess_core.i"

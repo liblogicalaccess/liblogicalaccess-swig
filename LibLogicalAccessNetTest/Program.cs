@@ -40,7 +40,10 @@ namespace LibLogicalAccessTest
                             Console.WriteLine("\tCSN: {0}", UCharCollectionToHexString(chip.getChipIdentifier()));
                             Console.WriteLine("\tChip Name: {0}", chip.getCardType());
 
+                            NumberDataField test = new NumberDataField();
 
+                            uint pos = 30;
+                            test.getLinearData(IntPtr.Zero, 2, ref pos);
 
                             readerUnit.disconnect();
                         }

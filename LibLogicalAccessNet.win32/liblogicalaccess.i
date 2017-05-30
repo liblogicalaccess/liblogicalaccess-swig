@@ -38,10 +38,6 @@
 %ignore hasEnding;
 %ignore logicalaccess::LibraryManager::getCardService;
 %ignore logicalaccess::LibraryManager::getReaderService;
-%ignore logicalaccess::XmlSerializable::unSerialize(std::istream& is, const std::string& rootNode);
-%ignore logicalaccess::XmlSerializable::unSerialize(boost::property_tree::ptree& node);
-%ignore logicalaccess::XmlSerializable::unSerialize(boost::property_tree::ptree& node, const std::string& rootNode);
-%ignore logicalaccess::XmlSerializable::serialize(boost::property_tree::ptree& parentNode);
 
 %rename(IsEqual) operator==;
 %rename(IsDifferent) operator!=;
@@ -1100,6 +1096,105 @@
 %shared_ptr(OpenSSLSymmetricCipher);
 %shared_ptr(SymmetricKey);
 
+/*****EXCPETION HANDLING*****/
+
+%insert(runtime) %{
+typedef void (SWIGSTDCALL* CSharpExceptionCallback_t)(const char *, const char *);
+static CSharpExceptionCallback_t customExceptionCallback = NULL;
+
+#ifdef __cplusplus
+extern "C"
+#endif
+SWIGEXPORT
+void SWIGSTDCALL CustomExceptionRegisterCallback_$module(CSharpExceptionCallback_t customCallback) {
+  customExceptionCallback = customCallback;
+}
+
+static void SWIG_CSharpSetPendingExceptionCustom(const char *name, const char *message) {
+  customExceptionCallback(name, message);
+}
+%}
+
+%pragma(csharp) imclasscode=%{
+  class CustomExceptionHelper {
+    // C# delegate for the C/C++ customExceptionCallback
+	public delegate void CustomExceptionDelegate(string exceptionName, string message);
+    static CustomExceptionDelegate customDelegate =
+                                   new CustomExceptionDelegate(SetPendingCustomException);
+
+    [global::System.Runtime.InteropServices.DllImport("$dllimport", EntryPoint="CustomExceptionRegisterCallback$module")]
+    public static extern void CustomExceptionRegisterCallback_$module(CustomExceptionDelegate customCallback);
+
+    static void SetPendingCustomException(string exceptionName, string message) {
+	  var exception = (LibLogicalAccess.CustomException)System.Activator.CreateInstance(System.Type.GetType("LibLogicalAccess." + exceptionName + ", LibLogicalAccessNet") , false, 0, null, new System.String[1] { message }, null);
+	  SWIGPendingException.Set(exception);
+    }
+
+    static CustomExceptionHelper() {
+      CustomExceptionRegisterCallback_$module(customDelegate);
+    }
+  }
+  static CustomExceptionHelper exceptionHelper = new CustomExceptionHelper();
+%}
+
+/** ATTENTION PAS FINI ICI **/
+
+%{
+#define CATCH_CSE(EXCEPT) \
+	catch (EXCEPT e) \
+	{ \
+	  std::string name(typeid(e).name());\
+	  if (name.find("class ") != std::string::npos)\
+		 name.erase(0, name.find(" ") + 1);\
+	  SWIG_CSharpSetPendingExceptionCustom(name.c_str(), e.what());\
+	}\
+
+#define FOR_EACH_EXCEPTION(ACTION)\
+	ACTION(logicalaccess::IKSException)\
+	ACTION(logicalaccess::CardException)\
+	ACTION(logicalaccess::LibLogicalAccessException)\
+%}
+
+%exception %{
+try 
+{
+  $action
+} 
+FOR_EACH_EXCEPTION( CATCH_CSE )
+catch (std::out_of_range &e)
+{
+	SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, e.what(), "unknown");
+}
+catch (std::logic_error &e)
+{
+	SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, e.what(), "unknown");
+}
+catch (std::range_error &e)
+{
+	SWIG_CSharpSetPendingException(SWIG_CSharpOutOfMemoryException, e.what());
+}
+catch (std::overflow_error &e)
+{
+	SWIG_CSharpSetPendingException(SWIG_CSharpOverflowException, e.what());
+}
+catch (std::underflow_error &e)
+{
+	SWIG_CSharpSetPendingException(SWIG_CSharpOverflowException, e.what());
+}
+catch (std::runtime_error &e)
+{
+	SWIG_CSharpSetPendingException(SWIG_CSharpSystemException, e.what());
+}
+catch (std::bad_cast &e)
+{
+	SWIG_CSharpSetPendingException(SWIG_CSharpInvalidCastException, e.what());
+}
+catch (std::exception &e)
+{
+	SWIG_CSharpSetPendingException(SWIG_CSharpSystemException, e.what());
+}
+%}
+
 /*****POST PROCESSING INSTRUCTIONS*****/
 
 %{
@@ -1107,5 +1202,8 @@
 	#include <algorithm>
 
 	using namespace std;
+
+	#include <logicalaccess/myexception.hpp>
+
 %}
 

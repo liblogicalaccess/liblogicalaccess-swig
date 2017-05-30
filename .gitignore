@@ -17,6 +17,8 @@ LibLogicalAccessNet/Generated/*/*.cs
 !LibLogicalAccessNet/Generated/Card/.gitkeep
 !LibLogicalAccessNet/Generated/Core/.gitkeep
 !LibLogicalAccessNet/Generated/Reader/.gitkeep
+LibLogicalAccessNet/Exception/*.cs
+!LibLogicalAccessNet/Exception/CustomException.cs
 *.sdf
 *opensdf
 .vs

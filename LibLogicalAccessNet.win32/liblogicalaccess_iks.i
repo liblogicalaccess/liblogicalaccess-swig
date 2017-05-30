@@ -1,6 +1,9 @@
 /* File : liblogicalaccess_iks.i */
 %module(directors="1") liblogicalaccess_iks
 
+%include "liblogicalaccess.i"
+
+%import "liblogicalaccess_exception.i"
 %import "liblogicalaccess_data.i"
 
 %typemap(csimports) SWIGTYPE
@@ -71,4 +74,3 @@ using namespace logicalaccess::iks;
 %include <logicalaccess/iks/packet/DesfireAuth.hpp>
 %include <logicalaccess/iks/packet/DesfireChangeKey.hpp>
 %include <logicalaccess/iks/packet/GenRandom.hpp>
-

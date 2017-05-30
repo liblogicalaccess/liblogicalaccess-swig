@@ -7,6 +7,7 @@ rm .\LibLogicalAccessNet\Generated\Core\*.cs
 
 $Commands = @((".\LibLogicalAccessNet\Generated\Card", "LibLogicalAccess.Card", ".\LibLogicalAccessNet.win32\liblogicalaccess_card.i"),
             (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_data.i"),
+            (".\LibLogicalAccessNet\Exception", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_exception.i"),
             (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_library.i"),
             (".\LibLogicalAccessNet\Generated\Reader", "LibLogicalAccess.Reader", ".\LibLogicalAccessNet.win32\liblogicalaccess_reader.i"),
             (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_iks.i"),

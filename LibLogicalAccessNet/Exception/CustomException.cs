@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LibLogicalAccess
 {
-    class CustomException : global::System.Exception
+    public abstract class CustomException : global::System.Exception
     {
         public CustomException()
         {
@@ -18,6 +18,19 @@ namespace LibLogicalAccess
         public CustomException(string message, Exception inner)
             : base(message, inner)
         {
+        }
+
+        public override string Message
+        {
+            get
+            {
+                return what();
+            }
+        }
+
+        public virtual string what()
+        {
+            return null;
         }
     }
 }

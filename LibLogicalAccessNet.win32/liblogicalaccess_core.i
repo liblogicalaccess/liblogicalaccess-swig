@@ -2,8 +2,8 @@
 %module(directors="1") liblogicalaccess_core
 
 %include "liblogicalaccess.i"
+%import "liblogicalaccess_exception.i"
 
-%import "liblogicalaccess_data.i"
 %import "liblogicalaccess_iks.i"
 
 %include "liblogicalaccess_cardservice.i"

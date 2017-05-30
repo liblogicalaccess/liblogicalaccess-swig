@@ -3,6 +3,7 @@
 
 %include "liblogicalaccess.i"
 
+%import "liblogicalaccess_exception.i"
 %import "liblogicalaccess_data.i"
 %import "liblogicalaccess_core.i"
 %import "liblogicalaccess_iks.i"
@@ -741,5 +742,3 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 
 %template(UByteVectorList) std::list<std::vector<unsigned char> >;
 %template(ChipList) std::list<std::shared_ptr<logicalaccess::Chip> >;
-
-
