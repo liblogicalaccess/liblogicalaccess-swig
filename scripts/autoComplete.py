@@ -39,25 +39,25 @@ def	innerincludeprocess(content, curpath, category):
 			if (inc.split("/")[1] == "plugins" and (category == "CARD" or category == "READER")) or (category == "CORE" and (inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders")):
 				inc = "<" + inc + ">"
 				tmp = curpath.split("logicalaccess")[0] + inc.replace(">", "").replace("<", "")
-				if (category, inc) not in include and inc.split("/")[-1] not in tmpinclude:
+				if (category, inc, "include") not in include and (category, inc, "import") not in include and inc.split("/")[-1] not in tmpinclude:
 					tmpinclude.append(inc.split("/")[-1])
 					with open(tmp, "r") as f:
 						content = f.read()
 						innerincludeprocess(content, tmp, category)
 						tmpinclude.pop()
-					include.append((category, inc))
+					include.append((category, inc, "import"))
 		elif os.path.isfile(incpath):
 			inc = (os.path.normpath(incpath).split("logicalaccess")[-1]).replace("\\", "/")
 			inc = (includebase.replace("{0}", inc))
 			if (inc.split("/")[1] == "plugins" and (category == "CARD" or category == "READER")) or (category == "CORE" and (inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders")):
 				tmp = curpath.split("logicalaccess")[0] + inc.replace(">", "").replace("<", "")
-				if (category, inc) not in include and inc.split("/")[-1] not in tmpinclude:
+				if (category, inc, "include") not in include and (category, inc, "import") not in include and inc.split("/")[-1] not in tmpinclude:
 					tmpinclude.append(inc.split("/")[-1])
 					with open(tmp, "r") as f:
 						content = f.read()
 						innerincludeprocess(content, tmp, category)
 						tmpinclude.pop()
-					include.append((category, inc))
+					include.append((category, inc, "import"))
 		else:
 			for el in baseinc:
 				if os.path.isfile(el + inc):
@@ -65,13 +65,13 @@ def	innerincludeprocess(content, curpath, category):
 					inc = (includebase.replace("{0}", inc))
 					if (inc.split("/")[1] == "plugins" and (category == "CARD" or category == "READER")) or (category == "CORE" and (inc.split("/")[1] == "cards" or inc.split("/")[1] == "readerproviders")):
 						tmp = curpath.split("logicalaccess")[0] + inc.replace(">", "").replace("<", "")
-						if (category, inc) not in include and inc.split("/")[-1] not in tmpinclude:
+						if (category, inc, "include") not in include and (category, inc, "import") not in include and inc.split("/")[-1] not in tmpinclude:
 							tmpinclude.append(inc.split("/")[-1])
 							with open(tmp, "r") as f:
 								content = f.read()
 								innerincludeprocess(content, tmp, category)
 								tmpinclude.pop()
-							include.append((category, inc))
+							include.append((category, inc, "import"))
 							break
 			
 def	includeprocess(path, category):
@@ -84,8 +84,10 @@ def	includeprocess(path, category):
 			filename = filename.replace("\\", "/").split("logicalaccess")[-1]
 			innerincludeprocess(content, curpath, category)
 			inc = includebase.replace("{0}", filename).lower()
-			if (category, inc) not in include:
-				include.append((category, inc))
+			if (category, inc, "include") not in include and (category, inc, "import") not in include:
+				include.append((category, inc, "include"))
+			elif (category, inc, "import") in include:
+			  include[include.index((category, inc, "import"))] = (category, inc, "include")
 			parsesharedptr(content)
 
 
@@ -102,9 +104,9 @@ def cleandoc(path):
 
 def	lookdata(curcat):
 	retinclude = []
-	for cat, inc in include:
+	for cat, inc, type in include:
 		if curcat == cat:
-			retinclude.append(inc)
+			retinclude.append((inc, type))
 	return retinclude
 	
 def includewrite():
@@ -117,15 +119,15 @@ def includewrite():
 	while i < len(lines):
 		if "/* Additional_include */\n" in lines[i]:
 			i += 2
-			for cinc in cardinc:			
+			for cinc, type in cardinc:			
 				lines.insert(i, "#include {0}\n".format(cinc))
 				i += 1
 			lines.insert(i, "\n")
 			i += 1
 		if "/* Include_section */\n" in lines[i]:
 			i += 2
-			for cinc in cardinc:			
-				lines.insert(i, "%include {0}\n".format(cinc))
+			for cinc, type in cardinc:			
+				lines.insert(i, "%{0} {1}\n".format(type, cinc))
 				i += 1
 			lines.insert(i, "\n")
 			i += 1
@@ -140,15 +142,15 @@ def includewrite():
 	while i < len(lines):
 		if "/* Additional_include */\n" in lines[i]:
 			i += 2
-			for cinc in cardinc:
+			for cinc, type in cardinc:
 				lines.insert(i, "#include {0}\n".format(cinc))
 				i += 1
 			lines.insert(i, "\n")
 			i += 1
 		if "/* Include_section */\n" in lines[i]:
 			i += 2
-			for cinc in cardinc:
-				lines.insert(i, "%include {0}\n".format(cinc))
+			for cinc, type in cardinc:
+				lines.insert(i, "%{0} {1}\n".format(type, cinc))
 				i += 1
 			lines.insert(i, "\n")
 			i += 1
@@ -163,20 +165,21 @@ def includewrite():
 	while i < len(lines):
 		if "/* Additional_include */\n" in lines[i]:
 			i += 2
-			for rinc in readerinc:
+			for rinc, type in readerinc:
 				lines.insert(i, "#include {0}\n".format(rinc))
 				i += 1
 			lines.insert(i, "\n")
 			i += 1
 		if "/* Include_section */\n" in lines[i]:
 			i += 2
-			for rinc in readerinc:
-				lines.insert(i, "%include {0}\n".format(rinc))
+			for rinc, type in readerinc:
+				lines.insert(i, "%{0} {1}\n".format(type, rinc))
 				i += 1
 			lines.insert(i, "\n")
 			i += 1
 		i += 1	
-
+	with open(readerpath, "w") as f:
+		f.write(''.join(lines))
 	
 def find_classdecl(node, filename):
 	global curnamespace

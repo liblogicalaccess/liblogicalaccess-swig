@@ -272,6 +272,7 @@ using LibLogicalAccess.Reader;
 %apply unsigned char MBINOUT[] { unsigned char curval[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char productionbatchnumber[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char uniqueserialnumber[ANY] }
+%apply logicalaccess::MifareAccessInfo::DataBlockAccessBits MBINOUT[] { logicalaccess::MifareAccessInfo::DataBlockAccessBits d_data_blocks_access_bits[ANY] }
 
 %shared_ptr(logicalaccess::DFName);
 
@@ -316,7 +317,7 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
 %include <logicalaccess/plugins/cards/epass/epasschip.hpp>
 %include <logicalaccess/plugins/cards/epass/epassidentityservice.hpp>
-%include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
+%import <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 %include <logicalaccess/plugins/cards/epass/epassreadercardadapter.hpp>
 %include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 %include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
@@ -338,21 +339,21 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/iclass/hidiclass8x2kschip.hpp>
 %include <logicalaccess/plugins/cards/iclass/hidiclassaccesscontrolcardservice.hpp>
 %include <logicalaccess/plugins/cards/iclass/hidiclasslocation.hpp>
-%include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
-%include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
-%include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
-%include <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
-%include <logicalaccess/plugins/readers/pcsc/pcsc_fwd.hpp>
-%include <logicalaccess/plugins/readers/pcsc/pcsc_connection.hpp>
-%include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
-%include <logicalaccess/plugins/readers/pcsc/pcscreaderprovider.hpp>
-%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
-%include <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
+%import <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
+%import <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
+%import <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
+%import <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
+%import <logicalaccess/plugins/readers/pcsc/pcsc_fwd.hpp>
+%import <logicalaccess/plugins/readers/pcsc/pcsc_connection.hpp>
+%import <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
+%import <logicalaccess/plugins/readers/pcsc/pcscreaderprovider.hpp>
+%import <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
+%import <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
 %include <logicalaccess/plugins/cards/iclass/pcschidiclassdatatransport.hpp>
 %include <logicalaccess/plugins/cards/iclass/omnikeyhidiclassdatatransport.hpp>
-%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
-%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
-%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
+%import <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunitconfiguration.hpp>
+%import <logicalaccess/plugins/readers/pcsc/readers/omnikeyreaderunit.hpp>
+%import <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
 %include <logicalaccess/plugins/cards/iclass/hidiclasspcsccommands.hpp>
 %include <logicalaccess/plugins/cards/iclass/hidiclassstoragecardservice.hpp>
 %include <logicalaccess/plugins/cards/iclass/omnikeyxx21licensecheckerservice.hpp>

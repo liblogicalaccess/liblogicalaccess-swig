@@ -15,6 +15,7 @@
 #include <logicalaccess/cards/readercardadapter.hpp>
 #include <logicalaccess/readerproviders/datatransport.hpp>
 #include <logicalaccess/resultchecker.hpp>
+#include <logicalaccess/services/accesscontrol/formats/BitsetStream.hpp>
 #include <logicalaccess/services/accesscontrol/formats/customformat/datafield.hpp>
 #include <logicalaccess/services/accesscontrol/encodings/binarydatatype.hpp>
 #include <logicalaccess/services/accesscontrol/encodings/bcdbytedatatype.hpp>
@@ -28,6 +29,8 @@
 #include <logicalaccess/services/accesscontrol/formats/customformat/stringdatafield.hpp>
 #include <logicalaccess/services/accesscontrol/formats/customformat/customformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/staticformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/corporate1000format.hpp>
 #include <logicalaccess/services/accesscontrol/formats/rawformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/wiegand26format.hpp>
 #include <logicalaccess/services/accesscontrol/formats/wiegand34format.hpp>
@@ -65,18 +68,18 @@ using namespace logicalaccess;
 					CTYPE MBINOUT[] %{ 
 		get { 
 		  CSTYPE[] ret = new CSTYPE[$1_dim0]; 
-		  System.IntPtr data = $imcall; 
-		  System.Runtime.InteropServices.Marshal.Copy(data, ret, 0, $1_dim0);$excode 
+		  System.IntPtr data = $imcall;
+          System.Runtime.InteropServices.Marshal.Copy(data, ret, 0, $1_dim0);$excode
 		  return ret; 
 		}
 %}
 %typemap(csvarin, excode=SWIGEXCODE2) 
 					CTYPE MBINOUT[] %{ 
 		set { 
-		  if ($csinput.Length > $1_dim0) {
+          if ($csinput.Length > $1_dim0) {
             throw new System.IndexOutOfRangeException();
 		  }
-		  $imcall;$excode
+          $imcall;$excode
 		}
 %}
 %typemap(freearg)	CTYPE MBINOUT[] ""
@@ -84,7 +87,58 @@ using namespace logicalaccess;
 
 %enddef // CSHARP_MEMBER_ARRAYS
 
+%define CSHARP_MEMBER_STRUCT_ARRAYS( CTYPE, CSTYPE )
+
+%typemap(ctype)		CTYPE MBINOUT[] "CTYPE*"
+%typemap(cstype)	CTYPE MBINOUT[] "CSTYPE[]"
+%typemap(imtype, out="System.IntPtr")
+					CTYPE MBINOUT[] "CSTYPE[]"
+%typemap(csin)		CTYPE MBINOUT[] "$csinput"
+%typemap(in)		CTYPE MBINOUT[] "$1 = $input;"
+%typemap(csout, excode=SWIGEXCODE)
+					CTYPE MBINOUT[] {
+		CSTYPE[] ret = new CSTYPE[$1_dim0]; 
+		System.IntPtr data = $imcall;
+		for (int i = 0; i < $1_dim0; i++) 
+		{
+			System.IntPtr = CSTYPE.getItem(data, i);
+			ret[i] = new CSTYPE(ptr, $owner);
+		}$excode
+		return ret; 
+}
+%typemap(csvarout, excode=SWIGEXCODE2) 
+					CTYPE MBINOUT[] %{ 
+		get { 
+			CSTYPE[] ret = new CSTYPE[$1_dim0]; 
+			System.IntPtr data = $imcall;
+			for (int i = 0; i < $1_dim0; i++) 
+			{
+				System.IntPtr ptr = CSTYPE.getItem(data, i);
+				ret[i] = new CSTYPE(ptr, $owner);
+			}$excode
+			return ret; 
+		}
+%}
+%typemap(csvarin, excode=SWIGEXCODE2) 
+					CTYPE MBINOUT[] %{ 
+		set { 
+          if ($csinput.Length > $1_dim0) {
+            throw new System.IndexOutOfRangeException();
+		  }
+		  for (int i = 0; i < $1_dim0; i++)
+		  {
+			CSTYPE.setItem((System.IntPtr)swigCPtr, value[i], i);
+		  }
+          $imcall;$excode
+		}
+%}
+%typemap(freearg)	CTYPE MBINOUT[] ""
+%typemap(argout)	CTYPE MBINOUT[] ""
+
+%enddef // CSHARP_MEMBER_STRUCT_ARRAYS
+
 CSHARP_MEMBER_ARRAYS(unsigned char, byte)
+CSHARP_MEMBER_STRUCT_ARRAYS(logicalaccess::MifareAccessInfo::DataBlockAccessBits, MifareAccessInfo.DataBlockAccessBits)
 
 %typemap(ctype) unsigned char * "unsigned char *"
 %typemap(cstype) unsigned char * "string"
@@ -104,13 +158,13 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte)
 %typemap(csvarin, excode=SWIGEXCODE2) unsigned char * %{
     set {
       $imcall;$excode
-} %}
+	  } %}
 %typemap(csvarout, excode=SWIGEXCODE2) unsigned char * %{
     get {
       System.IntPtr data = $imcall; 
 	  string ret = System.Runtime.InteropServices.Marshal.PtrToStringAuto(data);$excode 
 	  return ret; 
-} %}
+	  } %}
 
 %typemap(ctype) void**, const void** "void**"
 %typemap(cstype) void**, const void** "global::System.IntPtr[]"
@@ -292,19 +346,7 @@ namespace std {
 	};
 }
 
-namespace logicalaccess
-{
-	class LIBLOGICALACCESS_API ElapsedTimeCounter
-	{
-	  public:
-	    ElapsedTimeCounter();
-	    size_t elapsed() const;
-	
-	  private:
-	    using TimePoint = std::chrono::steady_clock::time_point;
-	    TimePoint creation_;
-	};
-}
+/**************************************/
 
 %shared_ptr(std::enable_shared_from_this<logicalaccess::Key>);
 %shared_ptr(std::enable_shared_from_this<logicalaccess::DataField>);
@@ -321,6 +363,7 @@ namespace logicalaccess
 %include <logicalaccess/resultchecker.hpp>
 %include <logicalaccess/cards/readercardadapter.hpp>
 %include <logicalaccess/key.hpp>
+%include <logicalaccess/services/accesscontrol/formats/BitsetStream.hpp>
 %include <logicalaccess/services/accesscontrol/formats/customformat/datafield.hpp>
 %include <logicalaccess/services/accesscontrol/encodings/encoding.hpp>
 %include <logicalaccess/services/accesscontrol/encodings/datarepresentation.hpp>
@@ -333,6 +376,7 @@ namespace logicalaccess
 %include <logicalaccess/services/accesscontrol/encodings/nodatarepresentation.hpp>
 %include <logicalaccess/services/accesscontrol/formats/format.hpp>
 %include <logicalaccess/services/accesscontrol/formats/staticformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/corporate1000format.hpp>
 %include <logicalaccess/services/accesscontrol/formats/wiegandformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/customformat/valuedatafield.hpp>
 %include <logicalaccess/services/accesscontrol/formats/customformat/binarydatafield.hpp>

@@ -403,38 +403,38 @@ using LibLogicalAccess.Card;
 %typemap(csin) FileSetting& %{out $csinput%}  
 %typemap(imtype) FileSetting& "out LibLogicalAccess.Card.DESFireCommands.FileSetting"
 
-%typemap(ctype) DESFireKeyType "DESFireKeyType"
-%typemap(cstype) DESFireKeyType "DESFireKeyType"
-%typemap(csin) DESFireKeyType %{$csinput%}  
-%typemap(imtype) DESFireKeyType "LibLogicalAccess.Reader.DESFireKeyType"
-%typemap(csvarin, excode=SWIGEXCODE2) DESFireKeyType %{
-    set {
-      $imcall;$excode
-    } %}
-%typemap(csvarout, excode=SWIGEXCODE2) DESFireKeyType %{
-    get {
-      DESFireKeyType ret = $imcall;$excode
-      return ret;
-} %}
-
+//%typemap(ctype) DESFireKeyType "DESFireKeyType"
+//%typemap(cstype) DESFireKeyType "DESFireKeyType"
+//%typemap(csin) DESFireKeyType %{$csinput%}  
+//%typemap(imtype) DESFireKeyType "LibLogicalAccess.Reader.DESFireKeyType"
+//%typemap(csvarin, excode=SWIGEXCODE2) DESFireKeyType %{
+//    set {
+//      $imcall;$excode
+//    } %}
+//%typemap(csvarout, excode=SWIGEXCODE2) DESFireKeyType %{
+//    get {
+//      DESFireKeyType ret = $imcall;$excode
+//      return ret;
+//} %}
+//
 %typemap(ctype) logicalaccess::DESFireKeyType& "logicalaccess::DESFireKeyType*"
 %typemap(cstype) logicalaccess::DESFireKeyType& "out DESFireKeyType"
 %typemap(csin) logicalaccess::DESFireKeyType& %{out $csinput%}  
-%typemap(imtype) logicalaccess::DESFireKeyType& "out LibLogicalAccess.Reader.DESFireKeyType"
+%typemap(imtype) logicalaccess::DESFireKeyType& "out LibLogicalAccess.Card.DESFireKeyType"
 
-%typemap(ctype) DESFireKeySettings "DESFireKeySettings"
-%typemap(cstype) DESFireKeySettings "DESFireKeySettings"
-%typemap(csin) DESFireKeySettings %{$csinput%}  
-%typemap(imtype) DESFireKeySettings "LibLogicalAccess.Reader.DESFireKeySettings"
-%typemap(csout, excode=SWIGEXCODE) DESFireKeySettings {
-	DESFireKeySettings ret = $imcall;$excode
-	return ret;
-}
-
+//%typemap(ctype) DESFireKeySettings "DESFireKeySettings"
+//%typemap(cstype) DESFireKeySettings "DESFireKeySettings"
+//%typemap(csin) DESFireKeySettings %{$csinput%}  
+//%typemap(imtype) DESFireKeySettings "LibLogicalAccess.Reader.DESFireKeySettings"
+//%typemap(csout, excode=SWIGEXCODE) DESFireKeySettings {
+//	DESFireKeySettings ret = $imcall;$excode
+//	return ret;
+//}
+//
 %typemap(ctype) logicalaccess::DESFireKeySettings & "logicalaccess::DESFireKeySettings*"
 %typemap(cstype) logicalaccess::DESFireKeySettings & "out DESFireKeySettings"
 %typemap(csin) logicalaccess::DESFireKeySettings & %{out $csinput%}  
-%typemap(imtype) logicalaccess::DESFireKeySettings & "out LibLogicalAccess.Reader.DESFireKeySettings"
+%typemap(imtype) logicalaccess::DESFireKeySettings & "out LibLogicalAccess.Card.DESFireKeySettings"
 
 
 %typemap(cstype) nfc_context *  "System.IntPtr"
@@ -462,6 +462,14 @@ using LibLogicalAccess.Card;
 //	return ret;
 //}
 
+%typemap(cstype) std::vector<logicalaccess::DFName>  "DFNameVector"
+%typemap(csin) std::vector<logicalaccess::DFName>  %{$csinput%}  
+%typemap(imtype) std::vector<logicalaccess::DFName> "LibLogicalAccess.Card.DFNameVector"
+%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::DFName> {
+	DFNameVector ret = $imcall;$excode
+	return ret;
+}
+
 typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
 
 %ignore logicalaccess::SAMISO7816Commands< logicalaccess::KeyEntryAV2Information,logicalaccess::SETAV2 >;
@@ -469,6 +477,18 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %ignore SAMISO7816Commands< KeyEntryAV2Information,SETAV2 >;
 %ignore SAMISO7816Commands< KeyEntryAV1Information,SETAV1 >;
 %ignore *::getCSMART;
+
+
+%inline %{
+typedef enum : uint16_t
+{
+	PROTOCOL_UNDEFINED = 0x00000000,
+	PROTOCOL_T0 = 0x00000001,
+	PROTOCOL_T1 = 0x00000002,
+	PROTOCOL_ANY = 0x00000003, // SCARD_PROTOCOL_T0 | SCARD_PROTOCOL_T1
+	PROTOCOL_RAW = 0x00001111
+} SCardProtocol;
+%}
 
 /* Include_section */
 
@@ -521,12 +541,12 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %include <logicalaccess/plugins/readers/gunnebo/readercardadapters/gunnebobufferparser.hpp>
 %include <logicalaccess/plugins/readers/gunnebo/readercardadapters/gunnebodatatransport.hpp>
 %include <logicalaccess/plugins/readers/gunnebo/readercardadapters/gunneboreadercardadapter.hpp>
-%include <logicalaccess/plugins/cards/generictag/generictagchip.hpp>
+%import <logicalaccess/plugins/cards/generictag/generictagchip.hpp>
 %include <logicalaccess/plugins/readers/idondemand/generictagidondemandchip.hpp>
 %include <logicalaccess/plugins/readers/idondemand/idondemandreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/idondemand/idondemandreaderunit.hpp>
 %include <logicalaccess/plugins/readers/idondemand/idondemandreaderprovider.hpp>
-%include <logicalaccess/plugins/cards/generictag/generictagaccesscontrolcardservice.hpp>
+%import <logicalaccess/plugins/cards/generictag/generictagaccesscontrolcardservice.hpp>
 %include <logicalaccess/plugins/readers/idondemand/commands/generictagidondemandaccesscontrolcardservice.hpp>
 %include <logicalaccess/plugins/readers/idondemand/commands/generictagidondemandcommands.hpp>
 %include <logicalaccess/plugins/readers/idondemand/readercardadapters/idondemandreadercardadapter.hpp>
@@ -546,34 +566,32 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/idp/readercardadapters/idpreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816resultchecker.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
-%include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
-%include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
-%include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
-%include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
-%include <logicalaccess/plugins/cards/samav2/samchip.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
+%import <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
+%import <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
+%import <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
+%import <logicalaccess/plugins/cards/samav2/samcommands.hpp>
+%import <logicalaccess/plugins/cards/samav2/samchip.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816commands.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
-%include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
-%include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
+%import <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
+%import <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/iso7816iso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/desfireev1iso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816resultchecker.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/mifareplusiso7816resultchecker.hpp>
-%include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
+%import <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samiso7816commands.hpp>
-%template(AV1SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
-%template(AV2SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
 %include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
-%include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
+%import <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samiso7816resultchecker.hpp>
-%include <logicalaccess/plugins/cards/twic/twiclocation.hpp>
-%include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
+%import <logicalaccess/plugins/cards/twic/twiclocation.hpp>
+%import <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
@@ -585,9 +603,9 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %include <logicalaccess/plugins/readers/nfc/nfcdatatransport.hpp>
 %include <logicalaccess/plugins/readers/nfc/nfcreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/nfc/commands/mifareclassicuidchangerservice.hpp>
-%include <logicalaccess/plugins/cards/mifare/mifarekey.hpp>
-%include <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
+%import <logicalaccess/plugins/cards/mifare/mifarekey.hpp>
+%import <logicalaccess/plugins/cards/mifare/mifareaccessinfo.hpp>
+%import <logicalaccess/plugins/cards/mifare/mifarecommands.hpp>
 %include <logicalaccess/plugins/readers/nfc/readercardadapters/nfcreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/nfc/commands/mifarenfccommands.hpp>
 %include <logicalaccess/plugins/readers/ok5553/ok5553readerunitconfiguration.hpp>
@@ -595,9 +613,9 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %include <logicalaccess/plugins/readers/ok5553/ok5553readerprovider.hpp>
 %include <logicalaccess/plugins/readers/ok5553/readercardadapters/ok5553readercardadapter.hpp>
 %include <logicalaccess/plugins/readers/ok5553/commands/mifareok5553commands.hpp>
-%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightlocation.hpp>
-%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcommands.hpp>
+%import <logicalaccess/plugins/cards/mifareultralight/mifareultralightaccessinfo.hpp>
+%import <logicalaccess/plugins/cards/mifareultralight/mifareultralightlocation.hpp>
+%import <logicalaccess/plugins/cards/mifareultralight/mifareultralightcommands.hpp>
 %include <logicalaccess/plugins/readers/ok5553/commands/mifareultralightok5553commands.hpp>
 %include <logicalaccess/plugins/readers/ok5553/readercardadapters/iso7816ok5553readercardadapter.hpp>
 %include <logicalaccess/plugins/readers/osdp/osdpsecurechannel.hpp>
@@ -613,32 +631,31 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %include <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
 %include <logicalaccess/plugins/readers/pcsc/pcsc_ctl_datatransport.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/acsacrresultchecker.hpp>
-%include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
-%include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
+%import <logicalaccess/plugins/cards/felica/felicalocation.hpp>
+%import <logicalaccess/plugins/cards/felica/felicacommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/felicascmcommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/felicaspringcardcommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/id3resultchecker.hpp>
-%include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
-%include <logicalaccess/plugins/cards/iso15693/iso15693commands.hpp>
+%import <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
+%import <logicalaccess/plugins/cards/iso15693/iso15693commands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/iso15693pcsccommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifarepcsccommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifarecherrycommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareomnikeyxx21commands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareomnikeyxx27resultchecker.hpp>
-%include <logicalaccess/plugins/cards/mifareplus/mifareplussl1commands.hpp>
+%import <logicalaccess/plugins/cards/mifareplus/mifareplussl1commands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_pcsc_sl1.hpp>
-%template(MifarePlusSL1PCSCCommands) logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_acsacr1222l_sl1.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_omnikeyxx21_sl1.hpp>
-%include <logicalaccess/plugins/cards/mifareplus/mifareplussl3auth.hpp>
-%include <logicalaccess/plugins/cards/mifareplus/mifareplussl3commands.hpp>
+%import <logicalaccess/plugins/cards/mifareplus/mifareplussl3auth.hpp>
+%import <logicalaccess/plugins/cards/mifareplus/mifareplussl3commands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_pcsc_sl3.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifarespringcardcommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareplus_sprincard_sl1.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifarescmcommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightpcsccommands.hpp>
-%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/mifareultralight/mifareultralightccommands.hpp>
+%import <logicalaccess/plugins/cards/mifareultralight/mifareultralightcaccessinfo.hpp>
+%import <logicalaccess/plugins/cards/mifareultralight/mifareultralightccommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcpcsccommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcacsacrcommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcomnikeyxx21commands.hpp>
@@ -648,9 +665,9 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %include <logicalaccess/plugins/readers/pcsc/commands/mifare_cl1356_commands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/proxcommand.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/springcardresultchecker.hpp>
-%include <logicalaccess/plugins/cards/topaz/topazaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/topaz/topazlocation.hpp>
-%include <logicalaccess/plugins/cards/topaz/topazcommands.hpp>
+%import <logicalaccess/plugins/cards/topaz/topazaccessinfo.hpp>
+%import <logicalaccess/plugins/cards/topaz/topazlocation.hpp>
+%import <logicalaccess/plugins/cards/topaz/topazcommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/topazacsacrcommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/topazomnikeyxx27commands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/topazpcsccommands.hpp>
@@ -675,9 +692,9 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %include <logicalaccess/plugins/readers/pcsc-private/type_fwd.hpp>
 %include <logicalaccess/plugins/readers/pcsc-private/omnikeyxx27securemode.hpp>
 %include <logicalaccess/plugins/readers/pcsc-private/tlv.hpp>
-%include <logicalaccess/plugins/cards/iclass/hidiclasskey.hpp>
-%include <logicalaccess/plugins/cards/iclass/hidiclassaccessinfo.hpp>
-%include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
+%import <logicalaccess/plugins/cards/iclass/hidiclasskey.hpp>
+%import <logicalaccess/plugins/cards/iclass/hidiclassaccessinfo.hpp>
+%import <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc-private/commands/hidiclassomnikeyxx27commands.hpp>
 %include <logicalaccess/plugins/readers/pcsc-private/readers/omnikeyxx27readerunit.hpp>
 %include <logicalaccess/plugins/readers/promag/promagreaderunitconfiguration.hpp>

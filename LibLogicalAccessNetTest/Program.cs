@@ -20,12 +20,23 @@ namespace LibLogicalAccessTest
                 ReaderUnit readerUnit = readerProvider.createReaderUnit();
 
                 ReaderUnitVector readerList = readerProvider.getReaderList();
+                //ReaderUnit a = readerList[0];
+                //ReaderUnit b = readerList.getitem(0);
+                //ReaderUnit c = readerList.getitemcopy(0);
+                //Console.WriteLine(a.getRPType());
+                //Console.WriteLine(b.getRPType());
+                //Console.WriteLine(c.getRPType());
+                //((LibLogicalAccess.Reader.PCSCReaderUnit)c).getChipList();
+                //((LibLogicalAccess.Reader.PCSCReaderUnit)b).getChipList();
+                //((LibLogicalAccess.Reader.PCSCReaderUnit)a).getChipList();
+
                 if (readerProvider.getRPType() == "PCSC" && readerList.Count == 0)
                 {
                     Console.WriteLine("No readers on this system.");
                     Environment.Exit(1);
                 }
                 Console.WriteLine("{0} readers on this system.", readerList.Count);
+
 
                 if (readerUnit.connectToReader())
                 {
@@ -40,7 +51,9 @@ namespace LibLogicalAccessTest
                             Console.WriteLine("\tCSN: {0}", UCharCollectionToHexString(chip.getChipIdentifier()));
                             Console.WriteLine("\tChip Name: {0}", chip.getCardType());
 
-                            LibLogicalAccess.Reader.PCSCDataTransport.CheckCardError(1);
+                            BinaryDataField tmp = new BinaryDataField();
+                            tmp.getValue();
+
 
                             readerUnit.disconnect();
                         }

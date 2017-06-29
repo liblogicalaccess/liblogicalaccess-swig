@@ -20,6 +20,7 @@
 %include <std_list.i>
 %include <wchar.i>
 %include <exception.i>
+%include <carrays.i>
 %include <arrays_csharp.i>
 %include <stdint.i>
 
@@ -1143,7 +1144,6 @@ static void SWIG_CSharpSetPendingExceptionCustom(const char *name, const char *m
 	catch (EXCEPT &e) \
 	{ \
 	  std::string name(typeid(e).name());\
-	  std::cout << "OK -> " << name << std::endl;\
 	  if (name.find("class ") != std::string::npos)\
 		 name.erase(0, name.find(" ") + 1);\
 	  SWIG_CSharpSetPendingExceptionCustom(name.c_str(), e.what());\
@@ -1198,12 +1198,11 @@ catch (std::exception &e)
 /*****POST PROCESSING INSTRUCTIONS*****/
 
 %{
-	#include "msliblogicalaccessswigwin32.h"
-	#include <algorithm>
+#include "msliblogicalaccessswigwin32.h"
+#include <algorithm>
 
-	using namespace std;
+using namespace std;
 
-	#include <logicalaccess/myexception.hpp>
-
+#include <logicalaccess/myexception.hpp>
 %}
 
