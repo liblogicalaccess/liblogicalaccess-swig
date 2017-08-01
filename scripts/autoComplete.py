@@ -184,6 +184,12 @@ def includewrite():
 def find_classdecl(node, filename):
 	global curnamespace
 	for c in node.get_children():
+		try:
+			c.kind
+		except ValueError as e:
+			print(e)
+			continue #unknown template type
+	
 		if c.kind == clang.cindex.CursorKind.CLASS_DECL and c.location.file.name == filename:
 			if len(nest) == 0:
 				if c.spelling not in classlist:
