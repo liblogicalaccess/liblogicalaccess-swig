@@ -1,4 +1,6 @@
 ﻿using LibLogicalAccess;
+using LibLogicalAccess.Card;
+using LibLogicalAccess.Reader;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,7 +14,7 @@ namespace LibLogicalAccessTest
             try
             {
                 LibraryManager manager = LibraryManager.getInstance();
-
+                
                 // Explicitly use the PC/SC Reader Provider.
                 ReaderProvider readerProvider = manager.getReaderProvider("PCSC");
 
@@ -51,9 +53,13 @@ namespace LibLogicalAccessTest
                             Console.WriteLine("\tCSN: {0}", UCharCollectionToHexString(chip.getChipIdentifier()));
                             Console.WriteLine("\tChip Name: {0}", chip.getCardType());
 
-                            BinaryDataField tmp = new BinaryDataField();
-                            tmp.getValue();
-
+                            var cmd = (chip.getCommands() as DESFireEV1ISO7816Commands).getBridgeDF();
+                            DESFireEV1ISO7816Commands cmdev1 = chip.getCommands() as DESFireEV1ISO7816Commands;
+                            DESFireKey key = new DESFireKey();
+                            key.setKeyType(DESFireKeyType.DF_KEY_DES);
+                            //key.setKeyStorage(new IKSStorage("imported-zero-des"));
+                            cmd.selectApplication(0x00);
+                            cmd.authenticate(0, key);
 
                             readerUnit.disconnect();
                         }

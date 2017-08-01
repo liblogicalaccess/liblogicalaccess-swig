@@ -23,6 +23,7 @@
 %include <carrays.i>
 %include <arrays_csharp.i>
 %include <stdint.i>
+%include <swiginterface.i>
 
 /*****WARNING SECTION*****/
 
@@ -151,7 +152,7 @@
 %shared_ptr(logicalaccess::EM4135Chip);
 %shared_ptr(logicalaccess::EPassAccessInfo);
 %shared_ptr(logicalaccess::EPassChip);
-%shared_ptr(logicalaccess::EPassCommand);
+%shared_ptr(logicalaccess::EPassCommands);
 %shared_ptr(logicalaccess::EPassCrypto);
 %shared_ptr(logicalaccess::EPassIdentityService);
 %shared_ptr(logicalaccess::EPassReaderCardAdapter);
@@ -406,7 +407,7 @@
 %shared_ptr(logicalaccess::PromagReaderUnitConfiguration);
 %shared_ptr(logicalaccess::ProxAccessControlCardService);
 %shared_ptr(logicalaccess::ProxChip);
-%shared_ptr(logicalaccess::ProxCommand);
+%shared_ptr(logicalaccess::ProxCommands);
 %shared_ptr(logicalaccess::ProxLiteChip);
 %shared_ptr(logicalaccess::ProxLocation);
 %shared_ptr(logicalaccess::RFIDeasReaderCardAdapter);
@@ -674,7 +675,7 @@
 %shared_ptr(EM4135Chip);
 %shared_ptr(EPassAccessInfo);
 %shared_ptr(EPassChip);
-%shared_ptr(EPassCommand);
+%shared_ptr(EPassCommands);
 %shared_ptr(EPassCrypto);
 %shared_ptr(EPassIdentityService);
 %shared_ptr(EPassReaderCardAdapter);
@@ -929,7 +930,7 @@
 %shared_ptr(PromagReaderUnitConfiguration);
 %shared_ptr(ProxAccessControlCardService);
 %shared_ptr(ProxChip);
-%shared_ptr(ProxCommand);
+%shared_ptr(ProxCommands);
 %shared_ptr(ProxLiteChip);
 %shared_ptr(ProxLocation);
 %shared_ptr(RFIDeasReaderCardAdapter);
@@ -1097,6 +1098,193 @@
 %shared_ptr(OpenSSLSymmetricCipher);
 %shared_ptr(SymmetricKey);
 
+/*** MULTIPLE INHERITANCE ***/
+
+%define INTERFACEPTR(CTYPE)
+%typemap(csinterfacecode,
+         declaration="  System.IntPtr $interfacename_GetInterfaceCPtr();\n",
+         cptrmethod="$interfacename_GetInterfaceCPtr") CTYPE %{
+  public System.IntPtr $interfacename_GetInterfaceCPtr() {
+    return $imclassname.$csclazzname$interfacename_GetInterfaceCPtr(swigCPtr.Handle);
+  }
+%}
+%enddef
+
+// ReaderCommunication + ISO14443BReaderCommunication + ISO14443AReaderCommunication 
+
+%interface_custom("ReaderCommunication", "IReaderCommunication", ReaderCommunication)
+INTERFACEPTR(logicalaccess::ReaderCommunication);
+%interface_custom("ISO14443AReaderCommunication", "IISO14443AReaderCommunication", ISO14443AReaderCommunication)
+INTERFACEPTR(logicalaccess::ISO14443AReaderCommunication);
+%interface_custom("ISO14443BReaderCommunication", "IISO14443BReaderCommunication", ISO14443BReaderCommunication)
+INTERFACEPTR(logicalaccess::ISO14443BReaderCommunication);
+
+%interface_custom("ISO14443ReaderCommunication", "IISO14443ReaderCommunication", ISO14443ReaderCommunication)
+%typemap(csclassmodifiers) logicalaccess::ISO14443ReaderCommunication "public abstract class";
+INTERFACEPTR(logicalaccess::ISO14443ReaderCommunication);
+
+%interface_custom("ISO15693ReaderCommunication", "IISO15693ReaderCommunication", ISO15693ReaderCommunication)
+INTERFACEPTR(logicalaccess::ISO15693ReaderCommunication);
+
+// Commands -> SAMAV2 family:
+
+//%interface_custom("Commands", "ICommands", Commands);
+//INTERFACEPTR(logicalaccess::Commands);
+//
+//%interface_custom("AV1SAMCommands", "IAV1SAMCommands", logicalaccess::SAMCommands);
+//INTERFACEPTR(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
+//
+//%interface_custom("AV2SAMCommands", "IAV2SAMCommands", logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
+//INTERFACEPTR(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
+//
+//%interface_custom("AV2SAMAV2Commands", "IAV2SAMAV2Commands", logicalaccess::SAMAV2Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
+//INTERFACEPTR(logicalaccess::SAMAV2Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
+
+//// Commands -> DESFire family:
+//
+//%interface_custom("Commands", "ICommands", Commands);
+//INTERFACEPTR(logicalaccess::Commands);
+//
+//%interface_custom("DESFireCommands", "IDESFireCommands", logicalaccess::DESFireCommands);
+//INTERFACEPTR(logicalaccess::DESFireCommands);
+//
+//%interface_custom("ISO7816Commands", "IISO7816Commands", logicalaccess::ISO7816Commands);
+//INTERFACEPTR(logicalaccess::ISO7816Commands);
+//
+//%interface_custom("DESFireIS07816Commands", "IDESFireIS07816Commands", logicalaccess::DESFireIS07816Commands);
+//INTERFACEPTR(logicalaccess::DESFireIS07816Commands);
+//
+//%interface_custom("DESFireEV1Commands", "IDESFireEV1Commands", logicalaccess::DESFireEV1Commands);
+//INTERFACEPTR(logicalaccess::DESFireEV1Commands);
+//
+//%interface_custom("ISO7816ISO7816Commands", "IISO7816ISO7816Commands", logicalaccess::ISO7816ISO7816Commands);
+//INTERFACEPTR(logicalaccess::ISO7816ISO7816Commands);
+//
+//%ignore logicalaccess::DESFireCommands::getKeySettings(DESFireKeySettings&, unsigned char&);
+//%ignore logicalaccess::DESFireCommands::selectApplication(unsigned int);
+//%ignore logicalaccess::DESFireCommands::createApplication(unsigned int, DESFireKeySettings, unsigned char);
+//
+//%rename(selectApplicationEV1) logicalaccess::DESFireEV1Commands::selectApplication(std::shared_ptr<DESFireLocation>);
+//
+//// DESFireISO7816Commands
+//
+//%ignore logicalaccess::DESFireISO7816Commands::selectApplication(std::shared_ptr<DESFireLocation> location);
+//%ignore logicalaccess::DESFireISO7816Commands::createApplication(std::shared_ptr<DESFireLocation> location, DESFireKeySettings settings, unsigned char maxNbKeys);
+//%ignore logicalaccess::DESFireISO7816Commands::createStdDataFile(std::shared_ptr<DESFireLocation> location, DESFireAccessRights accessRights, unsigned int fileSize);
+//
+//%ignore logicalaccess::DESFireISO7816Commands::getEncryptionMode(unsigned char, bool, bool*);
+//%ignore logicalaccess::DESFireISO7816Commands::getEncryptionMode(const DESFireCommands::FileSetting&, bool, bool*);
+//%ignore logicalaccess::DESFireISO7816Commands::getFileLength(unsigned char);
+//
+//%extend logicalaccess::DESFireISO7816Commands {
+//%proxycode %{
+//	private DESFireCommands dfCmd;
+//	protected DESFireCommands singledfCmd
+//	{
+//		get {
+//			if (dfCmd == null)
+//				dfCmd = new DESFireCommands(swigCPtr.Handle, true);
+//			return dfCmd;
+//		}
+//	}
+//
+//	public override void createStdDataFile(DESFireLocation location, DESFireAccessRights accessRights, uint fileSize)
+//	{ 
+//		singledfCmd.createStdDataFile(location, accessRights, fileSize);
+//	}
+//
+//	public override void createApplication(DESFireLocation location, DESFireKeySettings ks, byte maxNbKeys)
+//	{ 
+//		singledfCmd.createApplication(location, ks, maxNbKeys);
+//	}
+//
+//	public override void selectApplication(DESFireLocation location)
+//	{ 
+//		singledfCmd.selectApplication(location);
+//	}
+//
+//	public EncryptionMode getEncryptionMode(byte fileno, bool isReadMode, bool* needLoadKey)
+//	{
+//		return singledfCmd.getEncryptionMode(fileno, isReadMode, needLoadKey);
+//	}
+//
+//	public EncryptionMode getEncryptionMode(byte fileno, bool isReadMode)
+//	{
+//		return singledfCmd.getEncryptionMode(fileno, isReadMode);
+//	}
+//
+//	public EncryptionMode getEncryptionMode(DESFireCommands.FileSettings fs, bool isReadMode, bool* needLoadKey)
+//	{
+//		return singledfCmd.getEncryptionMode(fs, isReadMode, needLoadKey);
+//	}
+//
+//	public EncryptionMode getEncryptionMode(DESFireCommands.FileSettings fs, bool isReadMode)
+//	{
+//		return singledfCmd.getEncryptionMode(fs, isReadMode);
+//	}
+//
+//	public uint getFileLength(byte fileno)
+//	{
+//		return singledfCmd.getFileLength(fileno);
+//	}
+//
+//%}
+//}
+
+//// DESFireEV1STidSTRCommands
+//
+//%rename(createApplicationLoc) logicalaccess::DESFireCommands::createApplication(std::shared_ptr<DESFireLocation> location, DESFireKeySettings settings, unsigned char maxNbKeys);
+//%rename(createApplicationLoc) logicalaccess::DESFireEV1Commands::createApplication(std::shared_ptr<DESFireLocation> location, DESFireKeySettings settings, unsigned char maxNbKeys);
+//%rename(createApplicationLoc) logicalaccess::DESFireEV1STidSTRCommands::createApplication(std::shared_ptr<DESFireLocation> location, DESFireKeySettings settings, unsigned char maxNbKeys);
+//
+//%rename(createStdDataFileIso) logicalaccess::DESFireEV1STidSTRCommands::createStdDataFile(unsigned char fileno, EncryptionMode comSettings, DESFireAccessRights accessRights, unsigned int fileSize, unsigned short isoFID);
+//
+//// DESFireEV1ISO7816Commands
+//
+////%ignore logicalaccess::DESFireEV1ISO7816Commands::createStdDataFile(std::shared_ptr<logicalaccess::DESFireLocation>, logicalaccess::DESFireAccessRights, unsigned int);
+//%rename(createApplicationLoc) logicalaccess::DESFireEV1ISO7816Commands::createApplication(std::shared_ptr<DESFireLocation> location, DESFireKeySettings settings, unsigned char maxNbKeys);
+//%rename(createStdDataFileIso) logicalaccess::DESFireEV1Commands::createStdDataFile(unsigned char fileno, EncryptionMode comSettings, DESFireAccessRights accessRights, unsigned int fileSize, unsigned short isoFID = 0x00);
+//%rename(createStdDataFileIso) logicalaccess::DESFireEV1ISO7816Commands::createStdDataFile(unsigned char fileno, EncryptionMode comSettings, DESFireAccessRights accessRights, unsigned int fileSize, unsigned short isoFID);
+//
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::getFreeMem "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::getDFNames "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::getISOFileIDs "public";
+////%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::createApplication "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::getKeySettings "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::getCardUID "public";
+////%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::createStdDataFile "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::createBackupFile "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::createLinearRecordFile "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::createCyclicRecordFile "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::iso_selectFile "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::iso_readRecords "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::iso_appendrecord "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::iso_getChallenge "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::iso_externalAuthenticate "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::iso_internalAuthenticate "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::authenticateISO "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::authenticateAES "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::iso_selectApplication "public";
+//%csmethodmodifiers logicalaccess::DESFireEV1ISO7816Commands::setConfiguration "public";
+
+//// MifareUltralightCOmnikeyXX22Commands
+//
+//%csmethodmodifiers logicalaccess::MifareUltralightCOmnikeyXX22Commands::authenticate "public";
+//
+//// MifareUltralightCPCSCCommands
+//
+//%csmethodmodifiers logicalaccess::MifareUltralightCPCSCCommands::authenticate "public";
+
+// TwicISO7816Commands
+
+//%csmethodmodifiers logicalaccess::TwicISO7816Commands::selectTWICApplication "public";
+//%csmethodmodifiers logicalaccess::TwicISO7816Commands::getUnsignedCardholderUniqueIdentifier "public";
+//%csmethodmodifiers logicalaccess::TwicISO7816Commands::getTWICPrivacyKey "public";
+//%csmethodmodifiers logicalaccess::TwicISO7816Commands::getCardholderUniqueIdentifier "public";
+//%csmethodmodifiers logicalaccess::TwicISO7816Commands::getCardHolderFingerprints "public";
+//%csmethodmodifiers logicalaccess::TwicISO7816Commands::getSecurityObject "public";
+//%csmethodmodifiers logicalaccess::TwicISO7816Commands::getTWICData "public";
+
 /*****EXCPETION HANDLING*****/
 
 %insert(runtime) %{
@@ -1195,6 +1383,10 @@ catch (std::exception &e)
 }
 %}
 
+/*****MULTIPLE INHERITANCE MANAGEMENT*****/
+
+// No good solution found yet.
+
 /*****POST PROCESSING INSTRUCTIONS*****/
 
 %{
@@ -1205,4 +1397,3 @@ using namespace std;
 
 #include <logicalaccess/myexception.hpp>
 %}
-

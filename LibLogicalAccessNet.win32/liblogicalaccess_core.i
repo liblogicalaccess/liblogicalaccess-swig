@@ -157,7 +157,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 		{
 			ret = new Chip(cPtr, owner);
 		}
-		ret.getChipIdentifier();
 		return ret;
 	}
 %}
@@ -166,6 +165,38 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
   logicalaccess::Chip*, std::shared_ptr<logicalaccess::Chip> {
     System.IntPtr cPtr = $imcall;
     Chip ret = liblogicalaccess_corePINVOKE.createChip(cPtr, $owner);$excode
+    return ret;
+}
+
+%pragma(csharp) imclasscode=%{
+	public static System.Collections.Generic.Dictionary<string, System.Type> cmdDictionary;
+
+	public static Commands	createCommands(System.IntPtr cPtr, bool owner)
+	{
+		Commands ret = null;
+		if (cPtr == System.IntPtr.Zero) {
+		  return ret;
+		}
+		string ct = ($imclassname.Commands_getCmdType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (cmdDictionary == null)
+			cmdDictionary = createDictionary<Commands>();
+        if (cmdDictionary.ContainsKey(ct))
+        {
+            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.CreateInstance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            ret = (Commands)System.Activator.CreateInstance(cmdDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
+        }
+		else
+		{
+			ret = new Commands(cPtr, owner);
+		}
+		return ret;
+	}
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::Commands*, std::shared_ptr<logicalaccess::Commands>, std::shared_ptr<logicalaccess::Commands>& {
+    System.IntPtr cPtr = $imcall;
+    Commands ret = liblogicalaccess_corePINVOKE.createCommands(cPtr, $owner);$excode
     return ret;
 }
 
@@ -219,7 +250,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::ReaderUnit*, std::shared_ptr<logicalaccess::ReaderUnit> {
+  logicalaccess::ReaderUnit*, std::shared_ptr<logicalaccess::ReaderUnit>, std::shared_ptr<logicalaccess::ReaderUnit> & {
     System.IntPtr cPtr = $imcall;
     ReaderUnit ret = liblogicalaccess_corePINVOKE.createReaderUnit(cPtr, $owner);$excode
     return ret;

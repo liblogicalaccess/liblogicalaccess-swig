@@ -477,6 +477,7 @@ typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Pol
 %ignore SAMISO7816Commands< KeyEntryAV2Information,SETAV2 >;
 %ignore SAMISO7816Commands< KeyEntryAV1Information,SETAV1 >;
 %ignore *::getCSMART;
+%ignore logicalaccess::EncapsulateGuard;
 
 
 %inline %{
