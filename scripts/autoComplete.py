@@ -219,7 +219,7 @@ def	sharedptrwrite():
 	with open(path, "r") as f:
 		lines = f.readlines()
 		i = lines.index("/*****SHARED PTR SECTION*****/\n") + 1
-		while i != lines.index("/*****POST PROCESSING INSTRUCTIONS*****/\n") - 1:
+		while i != lines.index("/*** MULTIPLE INHERITANCE ***/\n") - 1:
 			del lines[i]
 	i = lines.index("/*****SHARED PTR SECTION*****/\n") + 1
 	lines.insert(i, "\n")
