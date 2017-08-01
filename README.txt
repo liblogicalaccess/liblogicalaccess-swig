@@ -90,3 +90,11 @@ Dépôt dans lesquels des changements ont été opérés:
 - liblogicalaccess-private : nouvelle branche sur le repos principal -> develop_stagiaire
 - LibLogicalAccessWinForms : liblogicalaccesscs branch: v2
 - ReadCard: readcard branch:v2
+
+
+Liens utiles:
+
+- Pull request en attente: https://github.com/swig/swig/pull/989 // pull request de std_list.i et std_vector.i
+- Issue toujours ouverte: https://github.com/swig/swig/issues/1022 // Issue à propos de l'heritage virtuel non géré
+- Question sans reponse sur SO: https://stackoverflow.com/questions/45352707/how-to-use-interface-with-a-templated-class, 
+// Question à propos du couplage des directive %template et %interface
