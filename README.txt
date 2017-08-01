@@ -58,7 +58,7 @@ Les 3 premiers, en Python, vont servir à adapter dynamiquement les interfaces lo
 
 - adaptExceptionClass.py: a lancer juste après le build SWIG pour adapter les classe d'exceptions générées automatiquement. 
 
-- callScriptPython.bat: sert simplement à appeler un script python à travers une commande .bat. Utile pour appeler le script depuis Visual Studio, en évènement post-build ou pré-build. Pour l'instant, ce script n'a jamais vraiment été utilisé. 
+- callScriptPython.bat: sert simplement à appeler le script python adaptExceptionClass à travers une commande .bat. Utile pour appeler le script depuis Visual Studio, en évènement post-build.
 
 - swig-build.ps1: script Powershell pour compiler les interfaces et optimiser l'utilisation de la mémoire et du processeur. 
 
