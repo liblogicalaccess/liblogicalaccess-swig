@@ -112,7 +112,8 @@
       <Command>Powershell.exe -executionpolicy remotesigned -File $(SolutionDir)scripts\swig-build.ps1</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>call "$(SolutionDir)scripts\callScriptPython.bat"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
