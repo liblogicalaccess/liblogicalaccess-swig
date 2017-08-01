@@ -56,11 +56,9 @@ Les 3 premiers, en Python, vont servir à adapter dynamiquement les interfaces lo
 
 - autoComplete.py: ce script - a ne pas lancer trop souvent car extrêmement gourmand en temps, ne le lancer que lorsque des changements majeurs dans la lib ont été effectués - va servir à ajouter automatiquement les fichiers à inclure lorsqu'ils s'agit de plugins notamment, ainsi qu'ajouter les directives %shared_ptr() automatiquement pour chaque classe dans l'interface liblogicalaccess.i 
 
-- createExceptionClass.py: ce script regarde dans les fichiers de la lib qui contiennent des classes pour les générer en C#. La liste des fichiers n'est pas dynamique, donc si un fichier avec une nouvelle classe est ajouté dans la lib, il faudra rajouter son emplacement dans le script à la main. 
+- adaptExceptionClass.py: a lancer juste après le build SWIG pour adapter les classe d'exceptions générées automatiquement. 
 
-- adaptExceptionClass.py: a lancer juste après le précédant pour adapter la classe générée automatiquement. 
-
-- callScriptPython.bat: sert simplement à appeler un script python à travers une commande .bat. Utile pour appeler le script depuis Visual Studio, en évènement post-build ou pré-build. Pour l'instant, ce script n'a jamais vraiment été utilisé. 
+- callScriptPython.bat: sert simplement à appeler le script python adaptExceptionClass à travers une commande .bat. Utile pour appeler le script depuis Visual Studio, en évènement post-build.
 
 - swig-build.ps1: script Powershell pour compiler les interfaces et optimiser l'utilisation de la mémoire et du processeur. 
 
