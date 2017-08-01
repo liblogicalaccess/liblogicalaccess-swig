@@ -96,3 +96,8 @@ Liens utiles:
 - Issue toujours ouverte: https://github.com/swig/swig/issues/1022 // Issue à propos de l'heritage virtuel non géré
 - Question sans reponse sur SO: https://stackoverflow.com/questions/45352707/how-to-use-interface-with-a-templated-class, 
 // Question à propos du couplage des directive %template et %interface
+
+TO DO:
+
+- bouger la solution .NET dans un sous dossier pour ne pas merge les paquets
+- ajouter en evenements post build le lancement du script .bat
