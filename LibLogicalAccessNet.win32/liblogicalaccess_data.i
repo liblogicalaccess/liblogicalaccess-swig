@@ -220,13 +220,6 @@ CSHARP_MEMBER_STRUCT_ARRAYS(logicalaccess::MifareAccessInfo::DataBlockAccessBits
 
 %ignore *::getData() const;
 
-//%apply unsigned char OUTPUT[] { unsigned char* getData() }
-//%typemap(csout, excode=SWIGEXCODE) unsigned char* getData() {
-//	byte[] ret = $imcall;$excode
-//	return ret;
-//}
-
-
 %typemap(cstype) size_t* "ref uint"
 %typemap(csin) size_t* %{ref $csinput%}  
 %typemap(imtype) size_t* "ref uint"

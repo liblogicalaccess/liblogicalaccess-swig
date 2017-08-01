@@ -66,13 +66,6 @@ using namespace logicalaccess;
 
 %}
 
-/* Shared_ptr */
-
-//%shared_ptr(DataField);
-//%shared_ptr(SerialPortXml);
-
-/* END_Shared_ptr */
-
 /* Configuration_section */
 
 %apply unsigned int *INOUT { unsigned int* pos }
@@ -383,9 +376,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/readerproviders/udpdatatransport.hpp>
 
 /* END_Include_section */
-
-//%include "liblogicalaccess_cardservice.i"
-//%include "liblogicalaccess_readerservice.i"
 
 %template(ChipVector) std::vector<std::shared_ptr<logicalaccess::Chip> >;
 %template(LocationNodePtrCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;

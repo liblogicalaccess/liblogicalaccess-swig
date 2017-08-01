@@ -751,12 +751,10 @@ typedef enum : uint16_t
 
 /* END_Include_section */
 
-//WARNING: cette ligne doit suivre l'inclusion de mifareplus_pcsc_sl1.hpp en attendant un fix du script autoComplete
-//%template(MifarePlusSL1PCSCCommands) logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
+%template(MifarePlusSL1PCSCCommands) logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
 
-//WARNING: cette ligne doit suivre l'inclusion de samiso7816commands.hpp en attendant un fix du script autoComplete
-//%template(AV1SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
-//%template(AV2SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
+%template(AV1SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
+%template(AV2SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
 
 %template(UByteVectorList) std::list<std::vector<unsigned char> >;
 %template(ChipList) std::list<std::shared_ptr<logicalaccess::Chip> >;
