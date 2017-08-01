@@ -205,7 +205,6 @@ def	sharedptrprocess():
 	options = clang.cindex.TranslationUnit.PARSE_SKIP_FUNCTION_BODIES | clang.cindex.TranslationUnit.PARSE_INCOMPLETE
 	for filename in glob.glob("../packages/include/logicalaccess/**/*.hpp", recursive=True):
 		tu = index.parse(filename, ['-x', 'c++', '-std=c++11', '-DLIBLOGICALACCESS_API='], unsaved_files=None, options=options)
-		print ('Translation unit:', tu.spelling)
 		find_classdecl(tu.cursor, filename)
 	classlist.sort()
 	
@@ -229,14 +228,14 @@ def	sharedptrwrite():
 		f.write(''.join(lines))
 		
 def main():
+	print("Processing includes...")
 	includeprocess("../packages/include/logicalaccess/cards/**/*.hpp", "CORE")
 	includeprocess("../packages/include/logicalaccess/plugins/cards/**/*.hpp", "CARD")
 	includeprocess("../packages/include/logicalaccess/readerproviders/**/*.hpp", "CORE")
 	includeprocess("../packages/include/logicalaccess/plugins/readers/**/*.hpp", "READER")
-	# sharedptrprocess()
-	# sharedptrwrite()
+	print("Processing shared_ptr...")
+	sharedptrprocess()
+	sharedptrwrite()
 	includewrite()
-	for el in include:
-		print (el)
 
 main()
