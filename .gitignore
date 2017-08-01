@@ -11,6 +11,11 @@ Release
 *_wrap.h
 *_wrap.cxx
 *.nupkg
+*.obj
+*.idb
+*.pdb
+*.tlog
+*.log
 LibLogicalAccessNet/Generated/*.cs
 LibLogicalAccessNet/Generated/*/*.cs
 !LibLogicalAccessNet/Generated/.gitkeep
