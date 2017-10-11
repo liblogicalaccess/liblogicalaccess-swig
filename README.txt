@@ -99,5 +99,4 @@ Liens utiles:
 
 TO DO:
 
-- bouger la solution .NET dans un sous dossier pour ne pas merge les paquets
 - ajouter en evenements post build le lancement du script .bat
