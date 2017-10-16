@@ -115,7 +115,7 @@ namespace DESFireEV1Tests
             cmdev1.createStdDataFile(0x00, EncryptionMode.CM_ENCRYPT, ar, file_size, 0);
             cmdev1.authenticate(0, key);
             DESFireChip dchip = cmd.getChip() as DESFireChip;
-            dchip.getCrypto().setKey(0x535, 0, key);
+            dchip.getCrypto().setKey(0x535, 0, 0, key);
     
             cmd.changeKey(0, new_key);
         }
@@ -130,7 +130,7 @@ namespace DESFireEV1Tests
     
             var storage = chip.getService(CardServiceType.CST_STORAGE) as StorageCardService;
             var test = chip.getCardType();
-            var cmd = (chip.getCommands() as DESFireEV1ISO7816Commands).getBridgeDF();
+            var cmd = (chip.getCommands() as DESFireEV1ISO7816Commands);
             DESFireEV1ISO7816Commands cmdev1 = chip.getCommands() as DESFireEV1ISO7816Commands;
             DESFireKey key = new DESFireKey();
             key.setKeyType(DESFireKeyType.DF_KEY_DES);

@@ -17,8 +17,8 @@ foreach ($Command in $Commands){
 	Start-Job -Init ([ScriptBlock]::Create("Set-Location $pwd")) -ArgumentList $Command  {
 
         $cmd = $env:SWIG + "\swig.exe"
-
-		& $cmd -csharp -c++ -Ipackages\include -outdir $args[0] -namespace $args[1] -dllimport LibLogicalAccessNet.win32.dll $args[2]
+		$currentPath = (Get-Item -Path ".\" -Verbose).FullName + "\..\packages\include"
+		& $cmd -csharp -c++ -I"$currentPath" -outdir $args[0] -namespace $args[1] -dllimport LibLogicalAccessNet.win32.dll $args[2]
 				
 		if ($LASTEXITCODE -ne 0) {
 			throw ("Command returned non-zero error-code ${LASTEXITCODE}: ${command}")
@@ -37,3 +37,5 @@ foreach ($Job in Get-Job){
 	" " 
 	Remove-Job $Job
 }
+
+cd scripts

@@ -41,7 +41,7 @@ namespace DESFireEV1Tests
             var location_root_node = chip.getRootLocationNode();
 
             var cmdev1 = chip.getCommands() as DESFireEV1ISO7816Commands;
-            var cmd = cmdev1.getBridgeDF();
+            var cmd = cmdev1;
             Assert.IsNotNull(cmd, "Cannot get correct command object from chip.");
             Assert.IsNotNull(cmdev1, "Cannot get correct command object from chip.");
 

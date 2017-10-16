@@ -3,7 +3,7 @@
 	<groupId>eu.islog.lib.readers</groupId>
 	<artifactId>liblogicalaccess-swig</artifactId>
 	<packaging>pom</packaging>
-	<version>1.86.0-SNAPSHOT</version>
+	<version>1.87.0-SNAPSHOT</version>
 	<name>LibLogicalAccess SWIG</name>
 	
     <build>
@@ -104,21 +104,21 @@
 		<dependency>
 			<groupId>eu.islog.lib.readers</groupId>
 			<artifactId>liblogicalaccess</artifactId>
-			<version>1.86.0-SNAPSHOT</version>
+			<version>1.87.0-SNAPSHOT</version>
 			<scope>compile</scope>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>eu.islog.lib.readers</groupId>
 			<artifactId>liblogicalaccess-libnfc</artifactId>
-			<version>1.86.0-SNAPSHOT</version>
+			<version>1.87.0-SNAPSHOT</version>
 			<scope>compile</scope>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>eu.islog.lib.readers</groupId>
 			<artifactId>liblogicalaccess-private</artifactId>
-			<version>1.86.0-SNAPSHOT</version>
+			<version>1.87.0-SNAPSHOT</version>
 			<scope>compile</scope>
 			<type>zip</type>
 		</dependency>
