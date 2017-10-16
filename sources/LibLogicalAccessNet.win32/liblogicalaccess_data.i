@@ -150,7 +150,7 @@ CSHARP_MEMBER_STRUCT_ARRAYS(logicalaccess::MifareAccessInfo::DataBlockAccessBits
 %typemap(csdirectorin) unsigned char * "$iminput"
 %typemap(csdirectorout) unsigned char * "$cscall"
 %typemap(csin) unsigned char * "$csinput"
-%typemap(csout) unsigned char * {
+%typemap(csout, excode=SWIGEXCODE) unsigned char * {
 	System.IntPtr data = $imcall; 
 	string ret = System.Runtime.InteropServices.Marshal.PtrToStringAuto(data);$excode 
 	return ret; 
