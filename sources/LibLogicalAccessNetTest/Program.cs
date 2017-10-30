@@ -53,7 +53,7 @@ namespace LibLogicalAccessTest
                             Console.WriteLine("\tCSN: {0}", UCharCollectionToHexString(chip.getChipIdentifier()));
                             Console.WriteLine("\tChip Name: {0}", chip.getCardType());
 
-                            var cmd = (chip.getCommands() as DESFireEV1ISO7816Commands).getBridgeDF();
+                            var cmd = (chip.getCommands() as DESFireEV1ISO7816Commands);
                             DESFireEV1ISO7816Commands cmdev1 = chip.getCommands() as DESFireEV1ISO7816Commands;
                             DESFireKey key = new DESFireKey();
                             key.setKeyType(DESFireKeyType.DF_KEY_DES);

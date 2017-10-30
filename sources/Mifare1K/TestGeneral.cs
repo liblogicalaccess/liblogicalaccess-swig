@@ -62,7 +62,7 @@ namespace Mifare1KTests
             data[47] = 0xff;
             MifareAccessInfo.SectorAccessBits sab = new MifareAccessInfo.SectorAccessBits();
 
-            cmd.writeSector(2, 0, data, new MifareKey(), new MifareKey(), sab, 0, out sab);
+            cmd.writeSector(2, 0, data, new MifareKey(), new MifareKey(), sab, 0, sab);
 
             tmp = cmd.readSector(2, 0, new MifareKey(), new MifareKey(), sab);
 
@@ -87,8 +87,8 @@ namespace Mifare1KTests
 
 
             var newkey = new MifareKey("ff ff ff ff ff fa");
-            cmd.changeKeys(MifareKeyType.KT_KEY_A, new MifareKey(), newkey, new MifareKey(), 2, out sab);
-            cmd.changeKeys(MifareKeyType.KT_KEY_A, newkey, new MifareKey(), new MifareKey(), 2, out sab);
+            cmd.changeKeys(MifareKeyType.KT_KEY_A, new MifareKey(), newkey, new MifareKey(), 2, sab);
+            cmd.changeKeys(MifareKeyType.KT_KEY_A, newkey, new MifareKey(), new MifareKey(), 2, sab);
             Debug.WriteLine("ChangeKey: OK");
 
             var service = chip.getService(CardServiceType.CST_ACCESS_CONTROL) as AccessControlCardService;
