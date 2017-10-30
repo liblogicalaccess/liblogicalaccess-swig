@@ -35,4 +35,7 @@
     <OutputPath>bin\Debug\net4.6\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="cd $(SolutionDir)\scripts &#xD;&#xA;.\adaptExceptionScript.bat" />
+  </Target>
 </Project>
