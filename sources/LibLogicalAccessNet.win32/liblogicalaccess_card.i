@@ -25,17 +25,32 @@
 #include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
 #include <logicalaccess/plugins/cards/iso7816/iso7816nfctag4cardservice.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev1nfctag4cardservice.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireev2chip.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirestoragecardservice.hpp>
 #include <logicalaccess/plugins/cards/desfire/nxpkeydiversification.hpp>
 #include <logicalaccess/plugins/cards/desfire/nxpav1keydiversification.hpp>
 #include <logicalaccess/plugins/cards/desfire/nxpav2keydiversification.hpp>
 #include <logicalaccess/plugins/cards/desfire/omnitechkeydiversification.hpp>
 #include <logicalaccess/plugins/cards/desfire/sagemkeydiversification.hpp>
+#include <logicalaccess/plugins/cards/desfireev2/desfireev2commands.hpp>
+#include <logicalaccess/plugins/cards/desfireev2/desfireev2chip.hpp>
+#include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
+#include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
+#include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
+#include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
+#include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
+#include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/samiso7816commands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
+#include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
+#include <logicalaccess/plugins/cards/desfireev2/desfireev2crypto.hpp>
 #include <logicalaccess/plugins/cards/em4102/em4102chip.hpp>
 #include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
 #include <logicalaccess/plugins/cards/epass/epassaccessinfo.hpp>
@@ -44,7 +59,6 @@
 #include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
 #include <logicalaccess/plugins/cards/epass/epasschip.hpp>
 #include <logicalaccess/plugins/cards/epass/epassidentityservice.hpp>
-#include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 #include <logicalaccess/plugins/cards/epass/epassreadercardadapter.hpp>
 #include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 #include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
@@ -66,7 +80,6 @@
 #include <logicalaccess/plugins/cards/iclass/hidiclass8x2kschip.hpp>
 #include <logicalaccess/plugins/cards/iclass/hidiclassaccesscontrolcardservice.hpp>
 #include <logicalaccess/plugins/cards/iclass/hidiclasslocation.hpp>
-#include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
 #include <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
@@ -108,6 +121,7 @@
 #include <logicalaccess/plugins/cards/mifareplus/mifareplusaesauth.hpp>
 #include <logicalaccess/plugins/cards/mifareplus/mifarepluschip.hpp>
 #include <logicalaccess/plugins/cards/mifareplus/mifarepluslocation.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplusschip.hpp>
 #include <logicalaccess/plugins/cards/mifareplus/mifareplussl0chip.hpp>
 #include <logicalaccess/plugins/cards/mifareplus/mifareplussl0commands.hpp>
 #include <logicalaccess/plugins/cards/mifareplus/mifareplussl1chip.hpp>
@@ -116,6 +130,7 @@
 #include <logicalaccess/plugins/cards/mifareplus/mifareplussl3chip.hpp>
 #include <logicalaccess/plugins/cards/mifareplus/mifareplussl3commands.hpp>
 #include <logicalaccess/plugins/cards/mifareplus/mifareplusstoragecardservice_sl1.hpp>
+#include <logicalaccess/plugins/cards/mifareplus/mifareplusxchip.hpp>
 #include <logicalaccess/plugins/cards/mifareultralight/mifareultralightaccessinfo.hpp>
 #include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcaccessinfo.hpp>
 #include <logicalaccess/plugins/cards/mifareultralight/mifareultralightlocation.hpp>
@@ -131,15 +146,9 @@
 #include <logicalaccess/plugins/cards/prox/proxchip.hpp>
 #include <logicalaccess/plugins/cards/prox/proxlocation.hpp>
 #include <logicalaccess/plugins/cards/proxlite/proxlitechip.hpp>
-#include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
-#include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
-#include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
-#include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
 #include <logicalaccess/plugins/cards/samav2/samchip.hpp>
 #include <logicalaccess/plugins/cards/samav2/samav1chip.hpp>
 #include <logicalaccess/plugins/cards/samav2/samav2chip.hpp>
-#include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
-#include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
 #include <logicalaccess/plugins/cards/seos/seoschip.hpp>
 #include <logicalaccess/plugins/cards/smartframe/smartframechip.hpp>
 #include <logicalaccess/plugins/cards/stmlri512/stmlri512chip.hpp>
@@ -238,11 +247,11 @@ using LibLogicalAccess.Reader;
 %typemap(csin) logicalaccess::DESFireKeySettings & %{out $csinput%}  
 %typemap(imtype) logicalaccess::DESFireKeySettings & "out LibLogicalAccess.Card.DESFireKeySettings"
 
-%typemap(ctype) std::vector<unsigned char>::const_iterator "std::vector<unsigned char>::const_iterator"
-%typemap(cstype) std::vector<unsigned char>::const_iterator "UByteVector.UByteVectorEnumerator"
-%typemap(csin) std::vector<unsigned char>::const_iterator  %{$csinput%}  
-%typemap(imtype) std::vector<unsigned char>::const_iterator "LogicalAccess.UByteVector.UByteVectorEnumerator"
-%typemap(csout, excode=SWIGEXCODE) std::vector<unsigned char>::const_iterator {
+%typemap(ctype) std::vector<uint8_t>::const_iterator "std::vector<uint8_t>::const_iterator"
+%typemap(cstype) std::vector<uint8_t>::const_iterator "UByteVector.UByteVectorEnumerator"
+%typemap(csin) std::vector<uint8_t>::const_iterator  %{$csinput%}  
+%typemap(imtype) std::vector<uint8_t>::const_iterator "LogicalAccess.UByteVector.UByteVectorEnumerator"
+%typemap(csout, excode=SWIGEXCODE) std::vector<uint8_t>::const_iterator {
 	UByteVector.UByteVectorEnumerator ret = $imcall;$excode
 	return ret;
 }
@@ -289,17 +298,32 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>
-%include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
 %include <logicalaccess/plugins/cards/iso7816/iso7816nfctag4cardservice.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev1nfctag4cardservice.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfireev2chip.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfirestoragecardservice.hpp>
 %include <logicalaccess/plugins/cards/desfire/nxpkeydiversification.hpp>
 %include <logicalaccess/plugins/cards/desfire/nxpav1keydiversification.hpp>
 %include <logicalaccess/plugins/cards/desfire/nxpav2keydiversification.hpp>
 %include <logicalaccess/plugins/cards/desfire/omnitechkeydiversification.hpp>
 %include <logicalaccess/plugins/cards/desfire/sagemkeydiversification.hpp>
+%include <logicalaccess/plugins/cards/desfireev2/desfireev2commands.hpp>
+%include <logicalaccess/plugins/cards/desfireev2/desfireev2chip.hpp>
+%include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
+%include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
+%include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
+%include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
+%import <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
+%import <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
+%include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
+%import <logicalaccess/plugins/readers/iso7816/commands/samiso7816commands.hpp>
+%import <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
+%include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
+%import <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
+%include <logicalaccess/plugins/cards/desfireev2/desfireev2crypto.hpp>
 %include <logicalaccess/plugins/cards/em4102/em4102chip.hpp>
 %include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
 %include <logicalaccess/plugins/cards/epass/epassaccessinfo.hpp>
@@ -308,7 +332,6 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
 %include <logicalaccess/plugins/cards/epass/epasschip.hpp>
 %include <logicalaccess/plugins/cards/epass/epassidentityservice.hpp>
-%import <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 %include <logicalaccess/plugins/cards/epass/epassreadercardadapter.hpp>
 %include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 %include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
@@ -330,7 +353,6 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/iclass/hidiclass8x2kschip.hpp>
 %include <logicalaccess/plugins/cards/iclass/hidiclassaccesscontrolcardservice.hpp>
 %include <logicalaccess/plugins/cards/iclass/hidiclasslocation.hpp>
-%import <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
 %import <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
 %import <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
 %import <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
@@ -372,6 +394,7 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/mifareplus/mifareplusaesauth.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/mifarepluschip.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/mifarepluslocation.hpp>
+%include <logicalaccess/plugins/cards/mifareplus/mifareplusschip.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/mifareplussl0chip.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/mifareplussl0commands.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/mifareplussl1chip.hpp>
@@ -380,6 +403,7 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/mifareplus/mifareplussl3chip.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/mifareplussl3commands.hpp>
 %include <logicalaccess/plugins/cards/mifareplus/mifareplusstoragecardservice_sl1.hpp>
+%include <logicalaccess/plugins/cards/mifareplus/mifareplusxchip.hpp>
 %include <logicalaccess/plugins/cards/mifareultralight/mifareultralightaccessinfo.hpp>
 %include <logicalaccess/plugins/cards/mifareultralight/mifareultralightcaccessinfo.hpp>
 %include <logicalaccess/plugins/cards/mifareultralight/mifareultralightlocation.hpp>
@@ -395,15 +419,9 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/prox/proxchip.hpp>
 %include <logicalaccess/plugins/cards/prox/proxlocation.hpp>
 %include <logicalaccess/plugins/cards/proxlite/proxlitechip.hpp>
-%include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
-%include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
-%include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
-%include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
 %include <logicalaccess/plugins/cards/samav2/samchip.hpp>
 %include <logicalaccess/plugins/cards/samav2/samav1chip.hpp>
 %include <logicalaccess/plugins/cards/samav2/samav2chip.hpp>
-%include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
-%include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
 %include <logicalaccess/plugins/cards/seos/seoschip.hpp>
 %include <logicalaccess/plugins/cards/smartframe/smartframechip.hpp>
 %include <logicalaccess/plugins/cards/stmlri512/stmlri512chip.hpp>

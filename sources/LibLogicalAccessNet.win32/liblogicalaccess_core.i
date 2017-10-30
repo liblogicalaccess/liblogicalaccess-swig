@@ -30,9 +30,11 @@ using LibLogicalAccess.Reader;
 #include <logicalaccess/readerproviders/readerprovider.hpp>
 #include <logicalaccess/cards/accessinfo.hpp>
 #include <logicalaccess/cards/aes128key.hpp>
+#include <logicalaccess/cards/ichip.hpp>
 #include <logicalaccess/cards/chip.hpp>
 #include <logicalaccess/readerproviders/datatransport.hpp>
 #include <logicalaccess/cards/readercardadapter.hpp>
+#include <logicalaccess/cards/icommands.hpp>
 #include <logicalaccess/cards/commands.hpp>
 #include <logicalaccess/cards/keystorage.hpp>
 #include <logicalaccess/cards/computermemorykeystorage.hpp>
@@ -345,9 +347,11 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/readerproviders/readerprovider.hpp>
 %include <logicalaccess/cards/accessinfo.hpp>
 %include <logicalaccess/cards/aes128key.hpp>
+%include <logicalaccess/cards/ichip.hpp>
 %include <logicalaccess/cards/chip.hpp>
 %include <logicalaccess/readerproviders/datatransport.hpp>
 %include <logicalaccess/cards/readercardadapter.hpp>
+%include <logicalaccess/cards/icommands.hpp>
 %include <logicalaccess/cards/commands.hpp>
 %include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/computermemorykeystorage.hpp>

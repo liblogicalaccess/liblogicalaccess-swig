@@ -97,6 +97,7 @@
 #include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
 #include <logicalaccess/plugins/cards/samav2/samchip.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816commands.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
 #include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
 #include <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
@@ -114,6 +115,8 @@
 #include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
+#include <logicalaccess/plugins/cards/desfireev2/desfireev2commands.hpp>
+#include <logicalaccess/plugins/readers/iso7816-private/commands/desfireev2iso7816commands.hpp>
 #include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/keyboard/keyboardsharedstruct.hpp>
 #include <logicalaccess/plugins/readers/keyboard/keyboardreaderunit.hpp>
@@ -206,6 +209,7 @@
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeylanxx21readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx22readerunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx23readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx25readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/scmreaderunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/springcardreaderunit.hpp>
@@ -262,6 +266,8 @@
 #include <logicalaccess/plugins/readers/stidstr/stidstrreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/stidstr/stidstrreaderunit.hpp>
 #include <logicalaccess/plugins/readers/stidstr/stidstrreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>
 #include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreadercardadapter.hpp>
 #include <logicalaccess/plugins/readers/stidstr/commands/desfireev1stidstrcommands.hpp>
 #include <logicalaccess/plugins/readers/stidstr/commands/mifarestidstrcommands.hpp>
@@ -578,6 +584,7 @@ typedef enum : uint16_t
 %import <logicalaccess/plugins/cards/samav2/samcommands.hpp>
 %import <logicalaccess/plugins/cards/samav2/samchip.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816commands.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
 %import <logicalaccess/plugins/cards/desfire/desfireev1commands.hpp>
 %import <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
 %import <logicalaccess/plugins/cards/iso7816/iso7816commands.hpp>
@@ -595,6 +602,8 @@ typedef enum : uint16_t
 %import <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
+%import <logicalaccess/plugins/cards/desfireev2/desfireev2commands.hpp>
+%include <logicalaccess/plugins/readers/iso7816-private/commands/desfireev2iso7816commands.hpp>
 %include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/keyboard/keyboardsharedstruct.hpp>
 %include <logicalaccess/plugins/readers/keyboard/keyboardreaderunit.hpp>
@@ -687,6 +696,7 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeylanxx21readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx22readerunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx23readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx25readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/scmreaderunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/springcardreaderunit.hpp>
@@ -743,6 +753,8 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderunit.hpp>
 %include <logicalaccess/plugins/readers/stidstr/stidstrreaderunitconfiguration.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>
 %include <logicalaccess/plugins/readers/stidstr/readercardadapters/stidstrreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/stidstr/commands/desfireev1stidstrcommands.hpp>
 %include <logicalaccess/plugins/readers/stidstr/commands/mifarestidstrcommands.hpp>

@@ -30,7 +30,7 @@
 #include <logicalaccess/services/accesscontrol/formats/customformat/customformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/format.hpp>
 #include <logicalaccess/services/accesscontrol/formats/staticformat.hpp>
-#include <logicalaccess/services/accesscontrol/formats/corporate1000format.hpp>
+#include <logicalaccess/services/accesscontrol/formats/wiegand35format.hpp>
 #include <logicalaccess/services/accesscontrol/formats/rawformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/wiegand26format.hpp>
 #include <logicalaccess/services/accesscontrol/formats/wiegand34format.hpp>
@@ -38,7 +38,7 @@
 #include <logicalaccess/services/accesscontrol/formats/wiegand37format.hpp>
 #include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityrightparity2format.hpp>
-#include <logicalaccess/services/accesscontrol/formats/hidhoneywellformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/hidhoneywell40bitformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/getronik40bitformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/fascn200bitformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
@@ -283,7 +283,7 @@ CSHARP_MEMBER_STRUCT_ARRAYS(logicalaccess::MifareAccessInfo::DataBlockAccessBits
 %include <std_vector.i>
 
 namespace std {
-	%template(UByteVector) vector<unsigned char>;
+	%template(UByteVector) vector<uint8_t>;
 	%template(UShortCollection) vector<unsigned short>;
 	%template(UCharCollectionCollection) vector<vector<unsigned char> >;
 	%template(StringCollection) vector<string>;
@@ -339,6 +339,36 @@ namespace std {
 	};
 }
 
+%pragma(csharp) imclasscode=%{
+
+	public static System.Collections.Generic.Dictionary<string, System.Type> formatDictionary;
+
+	public static Format	createFormat(System.IntPtr cPtr, bool owner)
+	{
+		Format ret = null;
+		if (cPtr == System.IntPtr.Zero) {
+		  return ret;
+		}
+		string ct = ($imclassname.Format_getName(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		ct = ct.Replace(" ", string.Empty).Replace("-", string.Empty);
+		if (formatDictionary == null)
+			formatDictionary = liblogicalaccess_corePINVOKE.createDictionary<Format>();
+        if (formatDictionary.ContainsKey(ct))
+        {
+            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            ret = (Format)System.Activator.CreateInstance(formatDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
+        }
+		return ret;
+	}
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::Format*, std::shared_ptr<logicalaccess::Format> {
+    System.IntPtr cPtr = $imcall;
+    Format ret = liblogicalaccess_dataPINVOKE.createFormat(cPtr, $owner);$excode
+    return ret;
+}
+
 /**************************************/
 
 %shared_ptr(std::enable_shared_from_this<logicalaccess::Key>);
@@ -369,7 +399,7 @@ namespace std {
 %include <logicalaccess/services/accesscontrol/encodings/nodatarepresentation.hpp>
 %include <logicalaccess/services/accesscontrol/formats/format.hpp>
 %include <logicalaccess/services/accesscontrol/formats/staticformat.hpp>
-%include <logicalaccess/services/accesscontrol/formats/corporate1000format.hpp>
+%include <logicalaccess/services/accesscontrol/formats/wiegand35format.hpp>
 %include <logicalaccess/services/accesscontrol/formats/wiegandformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/customformat/valuedatafield.hpp>
 %include <logicalaccess/services/accesscontrol/formats/customformat/binarydatafield.hpp>
@@ -384,7 +414,7 @@ namespace std {
 %include <logicalaccess/services/accesscontrol/formats/wiegand37format.hpp>
 %include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityrightparity2format.hpp>
-%include <logicalaccess/services/accesscontrol/formats/hidhoneywellformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/hidhoneywell40bitformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/getronik40bitformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/fascn200bitformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
