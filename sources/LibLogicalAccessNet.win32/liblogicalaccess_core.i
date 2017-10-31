@@ -383,7 +383,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 %template(ChipVector) std::vector<std::shared_ptr<logicalaccess::Chip> >;
 %template(LocationNodePtrCollection) std::vector<std::shared_ptr<logicalaccess::LocationNode> >;
-%template(DESFireAccessRightsVector) std::vector<std::shared_ptr<logicalaccess::DESFireAccessRights> >;
 %template(ReaderUnitVector) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
 %template(FormatVector) std::vector<std::shared_ptr<logicalaccess::Format> >;
 %template(SerialPortXmlVector) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >;

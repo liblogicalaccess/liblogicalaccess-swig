@@ -369,6 +369,28 @@ namespace std {
     return ret;
 }
 
+%typemap(ctype) ByteVector::const_iterator "ByteVector::const_iterator"
+%typemap(cstype) ByteVector::const_iterator "UByteVector.UByteVectorEnumerator"
+%typemap(csin) ByteVector::const_iterator  %{$csinput%}  
+%typemap(imtype) ByteVector::const_iterator "LogicalAccess.UByteVector.UByteVectorEnumerator"
+%typemap(csout, excode=SWIGEXCODE) ByteVector::const_iterator {
+	UByteVector.UByteVectorEnumerator ret = $imcall;$excode
+	return ret;
+}
+
+%typemap(ctype) std::vector<unsigned char>::const_iterator& "const ByteVector::const_iterator&"
+%typemap(cstype) std::vector<unsigned char>::const_iterator& "UByteVector.UByteVectorConstEnumerator"
+%typemap(csin) std::vector<unsigned char>::const_iterator&  %{$csinput%}  
+%typemap(imtype) std::vector<unsigned char>::const_iterator& "LogicalAccess.UByteVector.UByteVectorConstEnumerator"
+%typemap(csout, excode=SWIGEXCODE) const std::vector<unsigned char>::const_iterator& {
+	UByteVector.UByteVectorConstEnumerator ret = $imcall;$excode
+	return ret;
+}
+
+%include <std_pair.i>
+
+%template(PairByteVectorByteVector) std::pair<ByteVector, ByteVector>;
+
 /**************************************/
 
 %shared_ptr(std::enable_shared_from_this<logicalaccess::Key>);

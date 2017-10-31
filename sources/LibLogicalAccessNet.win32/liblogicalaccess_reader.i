@@ -476,6 +476,18 @@ using LibLogicalAccess.Card;
 	return ret;
 }
 
+%typemap(cstype) std::vector<logicalaccess::DESFireAccessRights>  "DESFireAccessRightsVector"
+%typemap(csin) std::vector<logicalaccess::DESFireAccessRights>  %{$csinput%}  
+%typemap(imtype) std::vector<logicalaccess::DESFireAccessRights> "LibLogicalAccess.Card.DESFireAccessRightsVector"
+%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::DESFireAccessRights> {
+	DESFireAccessRightsVector ret = $imcall;$excode
+	return ret;
+}
+
+%typemap(cstype) const std::vector<logicalaccess::DESFireAccessRights>& "DESFireAccessRightsVector"
+%typemap(csin) const std::vector<logicalaccess::DESFireAccessRights>& %{out $csinput%}  
+%typemap(imtype) const std::vector<logicalaccess::DESFireAccessRights>& "DESFireAccessRightsVector"
+
 typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
 
 %ignore logicalaccess::SAMISO7816Commands< logicalaccess::KeyEntryAV2Information,logicalaccess::SETAV2 >;
@@ -768,5 +780,5 @@ typedef enum : uint16_t
 %template(AV1SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
 %template(AV2SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
 
-%template(UByteVectorList) std::list<std::vector<unsigned char> >;
+%template(UByteVectorList) std::list<std::vector<uint8_t> >;
 %template(ChipList) std::list<std::shared_ptr<logicalaccess::Chip> >;

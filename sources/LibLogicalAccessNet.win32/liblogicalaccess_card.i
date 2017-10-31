@@ -247,15 +247,6 @@ using LibLogicalAccess.Reader;
 %typemap(csin) logicalaccess::DESFireKeySettings & %{out $csinput%}  
 %typemap(imtype) logicalaccess::DESFireKeySettings & "out LibLogicalAccess.Card.DESFireKeySettings"
 
-%typemap(ctype) std::vector<uint8_t>::const_iterator "std::vector<uint8_t>::const_iterator"
-%typemap(cstype) std::vector<uint8_t>::const_iterator "UByteVector.UByteVectorEnumerator"
-%typemap(csin) std::vector<uint8_t>::const_iterator  %{$csinput%}  
-%typemap(imtype) std::vector<uint8_t>::const_iterator "LogicalAccess.UByteVector.UByteVectorEnumerator"
-%typemap(csout, excode=SWIGEXCODE) std::vector<uint8_t>::const_iterator {
-	UByteVector.UByteVectorEnumerator ret = $imcall;$excode
-	return ret;
-}
-
 %apply unsigned char MBINOUT[] { unsigned char recordSize[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char maxNumberRecords[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char currentNumberRecords[ANY] }
@@ -276,6 +267,7 @@ using LibLogicalAccess.Reader;
 %apply logicalaccess::MifareAccessInfo::DataBlockAccessBits MBINOUT[] { logicalaccess::MifareAccessInfo::DataBlockAccessBits d_data_blocks_access_bits[ANY] }
 
 %shared_ptr(logicalaccess::DFName);
+%shared_ptr(logicalaccess::DESFireAccessRights);
 
 %ignore logicalaccess::Commands;
 %ignore pcsc_share_mode_to_string;
@@ -444,6 +436,7 @@ using LibLogicalAccess.Reader;
 %template(BioInfosVector) std::vector<logicalaccess::EPassDG2::BioInfo>;
 
 %template(DFNameVector) std::vector<logicalaccess::DFName>;
+%template(DESFireAccessRightsVector) std::vector<logicalaccess::DESFireAccessRights>;
 %template(AV1SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
 %template(AV2SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
 %template(AV1SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;

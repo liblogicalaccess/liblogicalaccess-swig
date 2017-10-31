@@ -189,7 +189,13 @@ def find_classdecl(node, filename):
 		except ValueError as e:
 			print(e)
 			continue #unknown template type
-	
+		
+		#if c.kind == clang.cindex.CursorKind.STRUCT_DECL and c.spelling != None and c.location.file.name == filename:
+		#	if c.spelling not in classlist:
+		#		classlist.append(c.spelling)
+		#	print(c.spelling)
+		#	print(c.location.file.name)
+		
 		if c.kind == clang.cindex.CursorKind.CLASS_DECL and c.location.file.name == filename:
 			if len(nest) == 0:
 				if c.spelling not in classlist:
