@@ -94,7 +94,7 @@ namespace DESFireEV1Tests
         }
 
         [TestMethod]
-        public void wiegand26()
+        public void Wiegand26()
         {
             var formatWiegand26 = new Wiegand26Format();
             formatWiegand26.setUid(1000);
@@ -109,7 +109,7 @@ namespace DESFireEV1Tests
         }
 
         [TestMethod]
-        public void wiegand37()
+        public void Wiegand37()
         {
             var formatWiegand37 = new Wiegand37Format();
             formatWiegand37.setUid(98765);
@@ -122,7 +122,7 @@ namespace DESFireEV1Tests
         }
 
         [TestMethod]
-        public void wiegand34()
+        public void Wiegand34()
         {
             var formatWiegand34 = new Wiegand34Format();
             formatWiegand34.setUid(9865);
@@ -135,7 +135,7 @@ namespace DESFireEV1Tests
         }
 
         [TestMethod]
-        public void wiegand34WithFacility()
+        public void Wiegand34WithFacility()
         {
             var formatWiegand34F = new Wiegand34WithFacilityFormat();
             formatWiegand34F.setUid(9765);
@@ -150,7 +150,7 @@ namespace DESFireEV1Tests
         }
 
         [TestMethod]
-        public void wiegand37WithFacility()
+        public void Wiegand37WithFacility()
         {
 
             var formatWiegand37F = new Wiegand37WithFacilityFormat();
@@ -166,7 +166,7 @@ namespace DESFireEV1Tests
         }
 
         [TestMethod]
-        public void wiegand37WithFacilityRightParity2()
+        public void Wiegand37WithFacilityRightParity2()
         {
 
             var formatWiegand37F2F = new Wiegand37WithFacilityRightParity2Format();
@@ -207,7 +207,7 @@ namespace DESFireEV1Tests
         }
 
         [TestMethod]
-        public void Wiegand35Format()
+        public void Wiegand35()
         {
             var formatWiegand35 = new Wiegand35Format();
             formatWiegand35.setUid(39248);
