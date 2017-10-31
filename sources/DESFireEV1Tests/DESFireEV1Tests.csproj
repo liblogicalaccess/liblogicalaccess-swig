@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestAllDESFire.cs" />
     <Compile Include="TestGeneral.cs" />
   </ItemGroup>
   <ItemGroup>
