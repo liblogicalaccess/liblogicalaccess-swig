@@ -1064,10 +1064,10 @@ namespace DESFireEV1Tests
             acr.readAndWriteAccess = TaskAccessRights.AR_KEY8;
             acr.writeAccess = TaskAccessRights.AR_KEY9;
             accessrightses.Add(acr);
-            cmdev2.changeFileSettings(0x00, EncryptionMode.CM_ENCRYPT, accessrightses, false);
-            cmdev2.changeFileSettings(0x01, EncryptionMode.CM_ENCRYPT, accessrightses, false);
-            cmdev2.changeFileSettings(0x02, EncryptionMode.CM_ENCRYPT, accessrightses, false);
-            cmdev2.changeFileSettings(0x03, EncryptionMode.CM_ENCRYPT, accessrightses, false);
+            cmdev2.changeFileSettings(0x00, EncryptionMode.CM_ENCRYPT, out accessrightses, false);
+            cmdev2.changeFileSettings(0x01, EncryptionMode.CM_ENCRYPT, out accessrightses, false);
+            cmdev2.changeFileSettings(0x02, EncryptionMode.CM_ENCRYPT, out accessrightses, false);
+            cmdev2.changeFileSettings(0x03, EncryptionMode.CM_ENCRYPT, out accessrightses, false);
 
             cmdev2.authenticateEV2First(0x04, aesDefault);
             var read = cmdev2.readData(0x00, 0, 0, EncryptionMode.CM_ENCRYPT);

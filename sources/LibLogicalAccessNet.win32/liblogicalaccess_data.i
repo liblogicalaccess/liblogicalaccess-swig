@@ -378,14 +378,10 @@ namespace std {
 	return ret;
 }
 
-//%typemap(ctype) std::vector<unsigned char>::const_iterator& "const ByteVector::const_iterator&"
-//%typemap(cstype) std::vector<unsigned char>::const_iterator& "UByteVector.UByteVectorConstEnumerator"
-//%typemap(csin) std::vector<unsigned char>::const_iterator&  %{$csinput%}  
-//%typemap(imtype) std::vector<unsigned char>::const_iterator& "LogicalAccess.UByteVector.UByteVectorConstEnumerator"
-//%typemap(csout, excode=SWIGEXCODE) const std::vector<unsigned char>::const_iterator& {
-//	UByteVector.UByteVectorConstEnumerator ret = $imcall;$excode
-//	return ret;
-//}
+%typemap(cstype) std::vector<unsigned char>::const_iterator& "out UByteVector.UByteVectorEnumerator"
+%typemap(csin) std::vector<unsigned char>::const_iterator& %{out $csinput%}  
+%typemap(imtype) std::vector<unsigned char>::const_iterator& "out UByteVector.UByteVectorEnumerator"
+
 
 %include <std_pair.i>
 
