@@ -107,7 +107,7 @@
 							<workingDirectory>./sources</workingDirectory>
 							<arguments>
 								<argument>/p:Configuration=Release</argument>
-								<argument>/p:Platform="Any CPU"</argument>
+								<argument>/p:Platform=Any CPU</argument>
 								<argument>/t:Build</argument>
 							</arguments>
 						</configuration>
@@ -152,7 +152,7 @@
 							<workingDirectory>./sources</workingDirectory>
 							<arguments>
 								<argument>/p:Configuration=Debug</argument>
-								<argument>/p:Platform="Any CPU"</argument>
+								<argument>/p:Platform=Any CPU</argument>
 								<argument>/t:Build</argument>
 							</arguments>
 						</configuration>
