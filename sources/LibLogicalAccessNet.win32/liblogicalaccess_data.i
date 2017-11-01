@@ -191,8 +191,6 @@ CSHARP_MEMBER_STRUCT_ARRAYS(logicalaccess::MifareAccessInfo::DataBlockAccessBits
 %apply int { const int32_t & }
 %apply unsigned int { uint32_t }
 %apply unsigned int { const uint32_t & }
-%apply unsigned int { size_t }
-%apply unsigned int { const size_t & }
 %apply long { int64_t }
 %apply long { const int64_t & }
 %apply unsigned long { uint64_t }
