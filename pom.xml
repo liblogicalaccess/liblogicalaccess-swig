@@ -16,12 +16,23 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>clean-Win32</id>
+						<id>build-swig</id>
+						<phase>compile</phase>
+						<configuration>
+							<executable>sources/scripts/generate-swig.bat</executable>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>clean-x86</id>
 						<phase>clean</phase>
 						<configuration>
+							<workingDirectory>./sources</workingDirectory>
 							<arguments>
 								<argument>/p:Configuration=Release</argument>
-								<argument>/p:Platform=Win32</argument>
+								<argument>/p:Platform=x86</argument>
 								<argument>/t:Clean</argument>
 							</arguments>
 						</configuration>
@@ -30,12 +41,73 @@
 						</goals>
 					</execution>
 					<execution>
-						<id>build-Win32</id>
-						<phase>compile</phase>
+						<id>clean-x64</id>
+						<phase>clean</phase>
 						<configuration>
+							<workingDirectory>./sources</workingDirectory>
 							<arguments>
 								<argument>/p:Configuration=Release</argument>
-								<argument>/p:Platform=Win32</argument>
+								<argument>/p:Platform=x64</argument>
+								<argument>/t:Clean</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>clean-AnyCPU</id>
+						<phase>clean</phase>
+						<configuration>
+							<workingDirectory>./sources</workingDirectory>
+							<arguments>
+								<argument>/p:Configuration=Release</argument>
+								<argument>/p:Platform="Any CPU"</argument>
+								<argument>/t:Clean</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>build-x86</id>
+						<phase>compile</phase>
+						<configuration>
+							<workingDirectory>./sources</workingDirectory>
+							<arguments>
+								<argument>/p:Configuration=Release</argument>
+								<argument>/p:Platform=x86</argument>
+								<argument>/t:Build</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>build-x64</id>
+						<phase>compile</phase>
+						<configuration>
+							<workingDirectory>./sources</workingDirectory>
+							<arguments>
+								<argument>/p:Configuration=Release</argument>
+								<argument>/p:Platform=x64</argument>
+								<argument>/t:Build</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>build-AnyCPU</id>
+						<phase>compile</phase>
+						<configuration>
+							<workingDirectory>./sources</workingDirectory>
+							<arguments>
+								<argument>/p:Configuration=Release</argument>
+								<argument>/p:Platform="Any CPU"</argument>
 								<argument>/t:Build</argument>
 							</arguments>
 						</configuration>
