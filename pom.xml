@@ -115,6 +115,51 @@
 							<goal>exec</goal>
 						</goals>
 					</execution>
+					<execution>
+						<id>build-x86-debug</id>
+						<phase>compile</phase>
+						<configuration>
+							<workingDirectory>./sources</workingDirectory>
+							<arguments>
+								<argument>/p:Configuration=Debug</argument>
+								<argument>/p:Platform=x86</argument>
+								<argument>/t:Build</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>build-x64-debug</id>
+						<phase>compile</phase>
+						<configuration>
+							<workingDirectory>./sources</workingDirectory>
+							<arguments>
+								<argument>/p:Configuration=Debug</argument>
+								<argument>/p:Platform=x64</argument>
+								<argument>/t:Build</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>build-AnyCPU-debug</id>
+						<phase>compile</phase>
+						<configuration>
+							<workingDirectory>./sources</workingDirectory>
+							<arguments>
+								<argument>/p:Configuration=Debug</argument>
+								<argument>/p:Platform="Any CPU"</argument>
+								<argument>/t:Build</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>
