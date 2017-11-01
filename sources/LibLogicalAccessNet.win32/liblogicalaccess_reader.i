@@ -484,9 +484,9 @@ using LibLogicalAccess.Card;
 	return ret;
 }
 
-%typemap(cstype) const std::vector<logicalaccess::DESFireAccessRights>& "DESFireAccessRightsVector"
+%typemap(cstype) const std::vector<logicalaccess::DESFireAccessRights>& "out LibLogicalAccess.Card.DESFireAccessRightsVector"
 %typemap(csin) const std::vector<logicalaccess::DESFireAccessRights>& %{out $csinput%}  
-%typemap(imtype) const std::vector<logicalaccess::DESFireAccessRights>& "DESFireAccessRightsVector"
+%typemap(imtype) const std::vector<logicalaccess::DESFireAccessRights>& "out LibLogicalAccess.Card.DESFireAccessRightsVector"
 
 typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
 
