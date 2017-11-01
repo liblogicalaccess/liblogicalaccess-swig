@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>LibLogicalAccessNetTest</RootNamespace>
     <AssemblyName>LibLogicalAccessNetTest</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -70,6 +70,9 @@
       <Project>{2a4d8c7d-84f8-4634-911b-8e001116d4dd}</Project>
       <Name>LibLogicalAccessNet</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

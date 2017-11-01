@@ -14,9 +14,11 @@ def main():
 				content = f.read()
 				content = re.sub(regex, "CustomException", content)
 				content = re.sub(regexwhat, "public override string", content)
+				f.flush()
 				f.close()
 			with open(exceptionPath + "/" + filename, "w") as f:
 				f.write(content)
+				f.flush()
 				f.close()
 				
 main()
