@@ -18,7 +18,7 @@
     <RepositoryUrl>https://github.com/islog/liblogicalaccess</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>liblogicalaccess nfc rfid</PackageTags>
-    <SignAssembly>False</SignAssembly>
+    <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>$(ISLOGRepository)keys/islog_sign.pfx</AssemblyOriginatorKeyFile>
     <CLSCompliant>True</CLSCompliant>
   </PropertyGroup>
@@ -54,7 +54,4 @@
     <OutputPath>bin\Debug\net46\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="cd $(SolutionDir)\scripts &#xD;&#xA;.\adaptExceptionScript.bat" />
-  </Target>
 </Project>

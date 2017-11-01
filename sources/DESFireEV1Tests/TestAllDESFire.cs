@@ -15,22 +15,8 @@ namespace DESFireEV1Tests
 {
 
     [TestClass]
-    public class TestAllDESFire : Core
+    public class TestAllDESFire
     {
-        [TestInitialize]
-        public override void Introduction()
-        {
-            Debug.WriteLine("This test target DESFireEV1 cards. It tests that we are able to change a key using Islog Key Server.");
-            Debug.WriteLine("You will have 20 seconds to insert a card. Test log below");
-            Debug.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
-            Debug.WriteLine("TESTS LIST: ");
-            Debug.WriteLine("Authenticate");
-            Debug.WriteLine("ChangeKey");
-            Debug.WriteLine("WriteRead");
-            Debug.WriteLine("ReadFormat");
-        }
-
         public static UByteVector StringToUByteVector(string hex)
         {
             return new UByteVector(Enumerable.Range(0, hex.Length)
