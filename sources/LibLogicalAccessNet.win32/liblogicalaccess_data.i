@@ -367,6 +367,39 @@ namespace std {
     return ret;
 }
 
+%pragma(csharp) imclasscode=%{
+  public static KeyStorage createKeyStorage(System.IntPtr cPtr, bool owner)
+  {
+    KeyStorage ret = null;
+    if (cPtr == System.IntPtr.Zero) {
+      return ret;
+    }
+	KeyStorageType ks = (KeyStorageType)(liblogicalaccess_dataPINVOKE.KeyStorage_getType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+    switch (ks) {
+	   case KeyStorageType.KST_COMPUTER_MEMORY:
+	     ret = new ComputerMemoryKeyStorage(cPtr, owner);
+	     break;
+	   case KeyStorageType.KST_READER_MEMORY:
+	     ret = new ReaderMemoryKeyStorage(cPtr, owner);
+		 break;
+	   case KeyStorageType.KST_SAM:
+	     ret = new SAMKeyStorage(cPtr, owner);
+		 break;
+	   case KeyStorageType.KST_SERVER:
+	     ret = new IKSStorage(cPtr, owner);
+		 break;
+      }
+      return ret;
+    }
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::KeyStorage*, std::shared_ptr<logicalaccess::KeyStorage> {
+    System.IntPtr cPtr = $imcall;
+    KeyStorage ret = liblogicalaccess_dataPINVOKE.createKeyStorage(cPtr, $owner);$excode
+    return ret;
+}
+
 %typemap(ctype) ByteVector::const_iterator "ByteVector::const_iterator"
 %typemap(cstype) ByteVector::const_iterator "UByteVector.UByteVectorEnumerator"
 %typemap(csin) ByteVector::const_iterator  %{$csinput%}  
@@ -440,36 +473,3 @@ namespace std {
 %include <logicalaccess/cards/keydiversification.hpp>
 
 %template(DataFieldList) std::list<std::shared_ptr<logicalaccess::DataField> >;
-
-%pragma(csharp) imclasscode=%{
-  public static KeyStorage createKeyStorage(System.IntPtr cPtr, bool owner)
-  {
-    KeyStorage ret = null;
-    if (cPtr == System.IntPtr.Zero) {
-      return ret;
-    }
-	KeyStorageType ks = (KeyStorageType)($modulePINVOKE.KeyStorage_getType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
-    switch (ks) {
-	   case KeyStorageType.KST_COMPUTER_MEMORY:
-	     ret = new ComputerMemoryKeyStorage(cPtr, owner);
-	     break;
-	   case KeyStorageType.KST_READER_MEMORY:
-	     ret = new ReaderMemoryKeyStorage(cPtr, owner);
-		 break;
-	   case KeyStorageType.KST_SAM:
-	     ret = new SAMKeyStorage(cPtr, owner);
-		 break;
-	   case KeyStorageType.KST_SERVER:
-	     ret = new IKSStorage(cPtr, owner);
-		 break;
-      }
-      return ret;
-    }
-%}
-
-%typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::KeyStorage*, std::shared_ptr<logicalaccess::KeyStorage> {
-    System.IntPtr cPtr = $imcall;
-    KeyStorage ret = $modulePINVOKE.createKeyStorage(cPtr, $owner);$excode
-    return ret;
-}

@@ -468,25 +468,25 @@ using LibLogicalAccess.Card;
 //	return ret;
 //}
 
-%typemap(cstype) std::vector<logicalaccess::DFName>  "DFNameVector"
-%typemap(csin) std::vector<logicalaccess::DFName>  %{$csinput%}  
-%typemap(imtype) std::vector<logicalaccess::DFName> "LibLogicalAccess.Card.DFNameVector"
-%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::DFName> {
-	DFNameVector ret = $imcall;$excode
-	return ret;
-}
+//%typemap(cstype) std::vector<logicalaccess::DFName>  "DFNameVector"
+//%typemap(csin) std::vector<logicalaccess::DFName>  %{$csinput%}  
+//%typemap(imtype) std::vector<logicalaccess::DFName> "LibLogicalAccess.Card.DFNameVector"
+//%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::DFName> {
+//	DFNameVector ret = $imcall;$excode
+//	return ret;
+//}
 
-%typemap(cstype) std::vector<logicalaccess::DESFireAccessRights>  "DESFireAccessRightsVector"
-%typemap(csin) std::vector<logicalaccess::DESFireAccessRights>  %{$csinput%}  
-%typemap(imtype) std::vector<logicalaccess::DESFireAccessRights> "LibLogicalAccess.Card.DESFireAccessRightsVector"
-%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::DESFireAccessRights> {
-	DESFireAccessRightsVector ret = $imcall;$excode
-	return ret;
-}
+//%typemap(cstype) std::vector<logicalaccess::DESFireAccessRights>  "DESFireAccessRightsVector"
+//%typemap(csin) std::vector<logicalaccess::DESFireAccessRights>  %{$csinput%}  
+//%typemap(imtype) std::vector<logicalaccess::DESFireAccessRights> "LibLogicalAccess.Card.DESFireAccessRightsVector"
+//%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::DESFireAccessRights> {
+//	DESFireAccessRightsVector ret = $imcall;$excode
+//	return ret;
+//}
 
-%typemap(cstype) const std::vector<logicalaccess::DESFireAccessRights>& "out LibLogicalAccess.Card.DESFireAccessRightsVector"
-%typemap(csin) const std::vector<logicalaccess::DESFireAccessRights>& %{out $csinput%}  
-%typemap(imtype) const std::vector<logicalaccess::DESFireAccessRights>& "out LibLogicalAccess.Card.DESFireAccessRightsVector"
+//%typemap(cstype) const std::vector<logicalaccess::DESFireAccessRights>& "out LibLogicalAccess.Card.DESFireAccessRightsVector"
+//%typemap(csin) const std::vector<logicalaccess::DESFireAccessRights>& %{out $csinput%}  
+//%typemap(imtype) const std::vector<logicalaccess::DESFireAccessRights>& "out LibLogicalAccess.Card.DESFireAccessRightsVector"
 
 typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
 

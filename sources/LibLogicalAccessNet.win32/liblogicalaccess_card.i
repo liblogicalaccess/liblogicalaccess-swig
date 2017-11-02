@@ -266,8 +266,7 @@ using LibLogicalAccess.Reader;
 %apply unsigned char MBINOUT[] { unsigned char uniqueserialnumber[ANY] }
 %apply logicalaccess::MifareAccessInfo::DataBlockAccessBits MBINOUT[] { logicalaccess::MifareAccessInfo::DataBlockAccessBits d_data_blocks_access_bits[ANY] }
 
-%shared_ptr(logicalaccess::DFName);
-%shared_ptr(logicalaccess::DESFireAccessRights);
+
 
 %ignore logicalaccess::Commands;
 %ignore pcsc_share_mode_to_string;
@@ -432,6 +431,8 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/twic/twicstoragecardservice.hpp>
 
 /* END_Include_section */
+
+%include <std_vector.i>
 
 %template(BioInfosVector) std::vector<logicalaccess::EPassDG2::BioInfo>;
 

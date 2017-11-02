@@ -102,7 +102,7 @@ namespace DESFireEV1Tests
                     var aesNew = new DESFireKey();
                     var desNew2 = new DESFireKey();
                     var aesNew2 = new DESFireKey();
-                    cleanupKeys(desDefault, aesDefault, desNew, aesNew, desNew2, aesNew2);
+                    cleanupKeys(ref desDefault, ref aesDefault, ref desNew, ref aesNew, ref desNew2, ref aesNew2);
 
                     cleanupCard(cmd, desDefault);
 
@@ -172,7 +172,7 @@ namespace DESFireEV1Tests
 
                         appIDS = cmdev1.getApplicationIDs();
 
-                        var dfNames = cmdev1.getDFNames();
+                        //  var dfNames = cmdev1.getDFNames();
 
                         // EV1 DES test
                         cmd.selectApplication(0x521);
@@ -185,8 +185,8 @@ namespace DESFireEV1Tests
                         ev1Test(cmdev1, cmdev2, aesNew, aesNew2);
 
                         cleanupCard(cmdev1, desDefault);
-                        cleanupKeys(desDefault, aesDefault, desNew, aesNew, desNew2,
-                            aesNew2);
+                        cleanupKeys(ref desDefault, ref aesDefault, ref desNew, ref aesNew, ref desNew2,
+                            ref aesNew2);
                         cmdev1.createApplication(
                             0x523,
                             (DESFireKeySettings) (
@@ -218,8 +218,8 @@ namespace DESFireEV1Tests
 
 #if TESTUNIT_SAM_DESFIRE
                         cleanupCard(cmdev1, desDefault);
-                        cleanupKeys(desDefault, aesDefault, desNew, aesNew, desNew2,
-                            aesNew2);
+                        cleanupKeys(ref desDefault, ref aesDefault, ref desNew, ref aesNew, ref desNew2,
+                            ref aesNew2);
                         cmdev1.createApplication(
                             0x600,
                             (DESFireKeySettings) (
@@ -246,12 +246,12 @@ namespace DESFireEV1Tests
                             aesNew2);
 #endif
 
-                        if (!cmdev2.Equals(null))
+                        if (cmdev2 != null)
                         {
                             // EV2
                             cleanupCard(cmdev1, desDefault);
-                            cleanupKeys(desDefault, aesDefault, desNew, aesNew, desNew2,
-                                aesNew2);
+                            cleanupKeys(ref desDefault, ref aesDefault, ref desNew, ref aesNew, ref desNew2,
+                                ref aesNew2);
 
                             // EV2 application
                             cmdev1.createApplication(
@@ -298,8 +298,8 @@ namespace DESFireEV1Tests
 
 #if TESTUNIT_SAM_DESFIRE
                             cleanupCard(cmdev1, desDefault);
-                            cleanupKeys(desDefault, aesDefault, desNew, aesNew, desNew2,
-                                aesNew2);
+                            cleanupKeys(ref desDefault, ref aesDefault, ref desNew, ref aesNew, ref desNew2,
+                                ref aesNew2);
                             cmdev1.createApplication(
                                 0x600,
                                 (DESFireKeySettings) (
@@ -329,8 +329,8 @@ namespace DESFireEV1Tests
 
 
         void classicTest(DESFireISO7816Commands cmd,
-                         DESFireKey newKey,
-                         DESFireKey newKey2)
+            DESFireKey newKey,
+            DESFireKey newKey2)
         {
             DESFireAccessRights acr = new DESFireAccessRights();
             acr.changeAccess = TaskAccessRights.AR_KEY0;
@@ -349,9 +349,11 @@ namespace DESFireEV1Tests
 
             cmd.changeKeySettings(DESFireKeySettings.KS_DEFAULT);
 
-            var dataArray = new byte[]{
+            var dataArray = new byte[]
+            {
                 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
-                0x07, 0x08, 0x09, 0x0a, 0x0b};
+                0x07, 0x08, 0x09, 0x0a, 0x0b
+            };
             UByteVector read, data = new UByteVector(dataArray);
             UByteVector datalong = data;
 
@@ -441,7 +443,7 @@ namespace DESFireEV1Tests
             cmd.createLinearRecordFile(0x04, EncryptionMode.CM_MAC, acr, 15, 5);
             cmd.createLinearRecordFile(0x05, EncryptionMode.CM_PLAIN, acr, 15, 5);
 
-            data = new UByteVector(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
+            data = new UByteVector(new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
             cmd.writeRecord(0x00, 0, data, EncryptionMode.CM_ENCRYPT);
             cmd.writeRecord(0x01, 0, data, EncryptionMode.CM_MAC);
             cmd.writeRecord(0x02, 0, data, EncryptionMode.CM_PLAIN);
@@ -453,7 +455,7 @@ namespace DESFireEV1Tests
             cmd.commitTransaction();
 
             // Writer record 1
-            data = new UByteVector(new byte[] { 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
+            data = new UByteVector(new byte[] {0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
             cmd.writeRecord(0x00, 3, data, EncryptionMode.CM_ENCRYPT);
             cmd.writeRecord(0x01, 3, data, EncryptionMode.CM_MAC);
             cmd.writeRecord(0x02, 3, data, EncryptionMode.CM_PLAIN);
@@ -562,14 +564,14 @@ namespace DESFireEV1Tests
 
             cmd.changeKey(1, newKey);
             var keyversion = cmd.getKeyVersion(1);
-            Assert.Equals(keyversion, newKey.getKeyVersion());
+            Assert.AreEqual(keyversion, newKey.getKeyVersion());
             cmd.changeKey(1, newKey2);
             keyversion = cmd.getKeyVersion(1);
-            Assert.Equals(keyversion, newKey2.getKeyVersion());
+            Assert.AreEqual(keyversion, newKey2.getKeyVersion());
             cmd.changeKey(0, newKey);
             cmd.authenticate(0, newKey);
             keyversion = cmd.getKeyVersion(0);
-            Assert.Equals(keyversion, newKey.getKeyVersion());
+            Assert.AreEqual(keyversion, newKey.getKeyVersion());
 
             newKey2.setKeyDiversification(
                 new NXPAV2KeyDiversification());
@@ -581,9 +583,9 @@ namespace DESFireEV1Tests
         }
 
         void ev1Test(DESFireEV1ISO7816Commands cmdev1,
-                     DESFireEV2ISO7816Commands cmdev2,
-                     DESFireKey newKey,
-                     DESFireKey newKey2)
+            DESFireEV2ISO7816Commands cmdev2,
+            DESFireKey newKey,
+            DESFireKey newKey2)
         {
             DESFireAccessRights acr = new DESFireAccessRights();
             acr.changeAccess = TaskAccessRights.AR_KEY0;
@@ -645,10 +647,10 @@ namespace DESFireEV1Tests
             cmdev1.changeFileSettings(0x0c, EncryptionMode.CM_ENCRYPT, acr, false);
 
 
-                    // Read/write with free is not really handle
-                    /*acr.readAccess = TaskAccessRights.AR_FREE;
-                    acr.writeAccess = TaskAccessRights.AR_FREE;
-                    cmdev1.changeFileSettings(0x08, EncryptionMode.CM_ENCRYPT, acr, false);*/
+            // Read/write with free is not really handle
+            /*acr.readAccess = TaskAccessRights.AR_FREE;
+            acr.writeAccess = TaskAccessRights.AR_FREE;
+            cmdev1.changeFileSettings(0x08, EncryptionMode.CM_ENCRYPT, acr, false);*/
 
             var dataArray = new byte[]
             {
@@ -670,7 +672,7 @@ namespace DESFireEV1Tests
             cmdev1.writeData(0x01, 0, data, EncryptionMode.CM_MAC);
             cmdev1.writeData(0x00, 0, data, EncryptionMode.CM_ENCRYPT);
 
-            data = new UByteVector(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
+            data = new UByteVector(new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
 
             // backup
             cmdev1.writeData(0x03, 0, data, EncryptionMode.CM_ENCRYPT);
@@ -680,7 +682,7 @@ namespace DESFireEV1Tests
             cmdev1.writeData(0x05, 0, data, EncryptionMode.CM_PLAIN);
             cmdev1.writeData(0x05, 0, data, EncryptionMode.CM_PLAIN);
 
-            data = new UByteVector(new byte[] { 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
+            data = new UByteVector(new byte[] {0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
             // standard
             cmdev1.writeData(0x00, 3, data, EncryptionMode.CM_ENCRYPT);
             cmdev1.writeData(0x00, 3, data, EncryptionMode.CM_ENCRYPT);
@@ -775,7 +777,7 @@ namespace DESFireEV1Tests
             cmdev1.getValue(0x0e, EncryptionMode.CM_PLAIN, out value);
 
             // Writer record 0
-            data = new UByteVector(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
+            data = new UByteVector(new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
             cmdev1.writeRecord(0x06, 0, data, EncryptionMode.CM_ENCRYPT);
             cmdev1.writeRecord(0x07, 0, data, EncryptionMode.CM_MAC);
             cmdev1.writeRecord(0x08, 0, data, EncryptionMode.CM_PLAIN);
@@ -787,7 +789,7 @@ namespace DESFireEV1Tests
             cmdev1.commitTransaction();
 
             // Writer record 1
-            data = new UByteVector(new byte[] { 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
+            data = new UByteVector(new byte[] {0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
             cmdev1.writeRecord(0x06, 3, data, EncryptionMode.CM_ENCRYPT);
             cmdev1.writeRecord(0x07, 3, data, EncryptionMode.CM_MAC);
             cmdev1.writeRecord(0x08, 3, data, EncryptionMode.CM_PLAIN);
@@ -834,14 +836,14 @@ namespace DESFireEV1Tests
 
             cmdev1.changeKey(1, newKey);
             var keyversion = cmdev1.getKeyVersion(1);
-            Assert.Equals(keyversion, newKey.getKeyVersion());
+            Assert.AreEqual(keyversion, newKey.getKeyVersion());
             cmdev1.changeKey(1, newKey2);
             keyversion = cmdev1.getKeyVersion(1);
-            Assert.Equals(keyversion, newKey2.getKeyVersion());
+            Assert.AreEqual(keyversion, newKey2.getKeyVersion());
             cmdev1.changeKey(0, newKey);
             cmdev1.authenticate(0, newKey);
             keyversion = cmdev1.getKeyVersion(0);
-            Assert.Equals(keyversion, newKey.getKeyVersion());
+            Assert.AreEqual(keyversion, newKey.getKeyVersion());
 
             newKey2.setKeyDiversification(
                 new NXPAV2KeyDiversification());
@@ -853,29 +855,29 @@ namespace DESFireEV1Tests
 
             // BUG : iso_readRecords seems to break CMAC so we do it at the end...
             // cmdev1.iso_appendrecord(data, 00); //Security status not sat....
-           /* if (!cmdev2) // EV2 has changed iso...it do not work probably because of free access
-                         // not handle
-                read = cmdev1.iso_readRecords(50, 0, DESFireRecords.DF_RECORD_ALLRECORDS);*/
+            /* if (!cmdev2) // EV2 has changed iso...it do not work probably because of free access
+                          // not handle
+                 read = cmdev1.iso_readRecords(50, 0, DESFireRecords.DF_RECORD_ALLRECORDS);*/
         }
 
         void authMasterCard(DESFireISO7816Commands cmd,
-                            DESFireKey masterPICCKey)
+            DESFireKey masterPICCKey)
         {
             cmd.selectApplication(0x00);
             cmd.authenticate(0, masterPICCKey);
         }
 
         void cleanupCard(DESFireISO7816Commands cmd,
-                         DESFireKey masterPICCKey)
+            DESFireKey masterPICCKey)
         {
             authMasterCard(cmd, masterPICCKey);
             cmd.erase();
         }
 
         void ev2Test(DESFireKey masterPICCKey,
-                     DESFireEV2ISO7816Commands cmdev2,
-                     DESFireKey desNew,
-                     DESFireKey aesNew)
+            DESFireEV2ISO7816Commands cmdev2,
+            DESFireKey desNew,
+            DESFireKey aesNew)
         {
             var desDefault = new DESFireKey();
             desDefault.setKeyType(DESFireKeyType.DF_KEY_DES);
@@ -888,9 +890,9 @@ namespace DESFireEV1Tests
             // DES Create App with keystore 0 version 1
             cmdev2.createApplication(
                 0x777,
-                (DESFireKeySettings)(
-                    (int)DESFireKeySettings.KS_DEFAULT |
-                    (int)DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
+                (DESFireKeySettings) (
+                    (int) DESFireKeySettings.KS_DEFAULT |
+                    (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_DES, FidSupport.FIDS_NO_ISO_FID, 0x00,
                 new UByteVector(), 4, 0, 1, 2, false, false);
 
@@ -898,7 +900,7 @@ namespace DESFireEV1Tests
             cmdev2.authenticate(0x00, desDefault);
             cmdev2.changeKeyEV2(0x00, 0x01, desNew);
             var keyversion = cmdev2.getKeyVersion(0x00, 0x01);
-            Assert.Equals(keyversion[0], desNew.getKeyVersion());
+            Assert.AreEqual(keyversion[0], desNew.getKeyVersion());
             cmdev2.changeKeyEV2(0x00, 0x00, desNew);
             cmdev2.authenticate(0x00, desNew);
             cmdev2.changeKeyEV2(0x00, 0x00, desDefault);
@@ -914,14 +916,14 @@ namespace DESFireEV1Tests
             cmdev2.changeKeyEV2(0x01, 0x01, desNew);
             cmdev2.finalizeKeySet(0x01, 0x02);
             keyversion = cmdev2.getKeyVersion(0x01, 0x01);
-            Assert.Equals(keyversion[0], desNew.getKeyVersion());
+            Assert.AreEqual(keyversion[0], desNew.getKeyVersion());
 
             // Create KeySet 2 version 4
             cmdev2.initliazeKeySet(0x02, DESFireKeyType.DF_KEY_AES);
             cmdev2.changeKeyEV2(0x02, 0x00, aesNew);
             cmdev2.finalizeKeySet(0x02, 0x04);
             keyversion = cmdev2.getKeyVersion(0x02, 0x01);
-            Assert.Equals(keyversion[0], aesNew.getKeyVersion());
+            Assert.AreEqual(keyversion[0], aesNew.getKeyVersion());
 
             // Create KeySet 3 version 3
             cmdev2.initliazeKeySet(0x03, DESFireKeyType.DF_KEY_AES);
@@ -931,11 +933,11 @@ namespace DESFireEV1Tests
             cmdev2.finalizeKeySet(0x03, 0x03);
 
             keyversion = cmdev2.getKeyVersion(0x00, 0x00);
-            Assert.Equals(keyversion.Count(), 4);
-            Assert.Equals(keyversion[0], 0x01);
-            Assert.Equals(keyversion[1], 0x02);
-            Assert.Equals(keyversion[2], 0x04);
-            Assert.Equals(keyversion[3], 0x03);
+            Assert.AreEqual(keyversion.Count(), 4);
+            Assert.AreEqual(keyversion[0], 0x01);
+            Assert.AreEqual(keyversion[1], 0x02);
+            Assert.AreEqual(keyversion[2], 0x04);
+            Assert.AreEqual(keyversion[3], 0x03);
 
             // Create roll to keyset 1 version 2 (we are version 1)
             cmdev2.authenticate(0x02, desDefault);
@@ -945,41 +947,41 @@ namespace DESFireEV1Tests
             cmdev2.authenticate(0x00, desNew);
             desNew.setKeyDiversification(null);
             keyversion = cmdev2.getKeyVersion(0x00, 0x00);
-            Assert.Equals(keyversion.Count(), 4);
-            Assert.Equals(keyversion[0], 0x02);
-            Assert.Equals(keyversion[1], 0x04);
-            Assert.Equals(keyversion[2], 0x03);
-            Assert.Equals(keyversion[3], 0x01);
+            Assert.AreEqual(keyversion.Count(), 4);
+            Assert.AreEqual(keyversion[0], 0x02);
+            Assert.AreEqual(keyversion[1], 0x04);
+            Assert.AreEqual(keyversion[2], 0x03);
+            Assert.AreEqual(keyversion[3], 0x01);
 
             // Create roll to keyset 3 version 3 (we are version 2)
             cmdev2.authenticate(0x02, desNew);
             cmdev2.rollKeySet(0x02);
             cmdev2.authenticate(0x00, aesDefault);
             keyversion = cmdev2.getKeyVersion(0x00, 0x00);
-            Assert.Equals(keyversion.Count(), 4);
-            Assert.Equals(keyversion[0], 0x03);
-            Assert.Equals(keyversion[1], 0x01);
-            Assert.Equals(keyversion[2], 0x02);
-            Assert.Equals(keyversion[3], 0x04);
+            Assert.AreEqual(keyversion.Count(), 4);
+            Assert.AreEqual(keyversion[0], 0x03);
+            Assert.AreEqual(keyversion[1], 0x01);
+            Assert.AreEqual(keyversion[2], 0x02);
+            Assert.AreEqual(keyversion[3], 0x04);
             // Create roll to keyset 2 version 4 (we are version 3)
             cmdev2.authenticate(0x02, aesDefault);
             cmdev2.rollKeySet(0x3);
             cmdev2.authenticate(0x00, aesNew);
             keyversion = cmdev2.getKeyVersion(0x00, 0x00);
-            Assert.Equals(keyversion.Count(), 4);
-            Assert.Equals(keyversion[0], 0x04);
-            Assert.Equals(keyversion[1], 0x03);
-            Assert.Equals(keyversion[2], 0x01);
-            Assert.Equals(keyversion[3], 0x02);
+            Assert.AreEqual(keyversion.Count(), 4);
+            Assert.AreEqual(keyversion[0], 0x04);
+            Assert.AreEqual(keyversion[1], 0x03);
+            Assert.AreEqual(keyversion[2], 0x01);
+            Assert.AreEqual(keyversion[3], 0x02);
 
             cleanupCard(cmdev2, masterPICCKey);
 
             // AES Create App with keystore 0 version 1
             cmdev2.createApplication(
                 0x778,
-                (DESFireKeySettings)(
-                    (int)DESFireKeySettings.KS_DEFAULT |
-                    (int)DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
+                (DESFireKeySettings) (
+                    (int) DESFireKeySettings.KS_DEFAULT |
+                    (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_AES, FidSupport.FIDS_NO_ISO_FID, 0x00,
                 new UByteVector(), 3, 0, 1, 2, false, false);
 
@@ -1037,7 +1039,7 @@ namespace DESFireEV1Tests
             cmdev2.createCyclicRecordFile(0x02, EncryptionMode.CM_ENCRYPT, acr, 200, 5, 0, true);
             cmdev2.createLinearRecordFile(0x03, EncryptionMode.CM_ENCRYPT, acr, 200, 5, 0, true);
 
-                    // Multi DESFireAccessRights
+            // Multi DESFireAccessRights
             DESFireAccessRightsVector accessrightses = new DESFireAccessRightsVector();
             accessrightses.Add(acr);
             acr.changeAccess = TaskAccessRights.AR_NEVER;
@@ -1109,7 +1111,7 @@ namespace DESFireEV1Tests
                 cmdev2.changeKey(0x12, DAMENCKey);
             }
             catch (Exception)
-    {
+            {
                 // Card with default keys
                 (cmdev2.getChip() as DESFireChip)
                     .getCrypto()
@@ -1131,17 +1133,17 @@ namespace DESFireEV1Tests
 
             var damInfo = cmdev2.createDAMChallenge(
                 DAMMACKey, DAMENCKey, DAMDefaultKey, 0x777, 0, 0, 100,
-                (DESFireKeySettings)(
-                    (int)DESFireKeySettings.KS_DEFAULT |
-                    (int)DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
+                (DESFireKeySettings) (
+                    (int) DESFireKeySettings.KS_DEFAULT |
+                    (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_DES, FidSupport.FIDS_NO_ISO_FID, 0x00,
                 new UByteVector(), 3, 0, 1, 0, false, false);
 
             cmdev2.createDelegatedApplication(
                 damInfo, 0x777, 0, 0, 100,
-                (DESFireKeySettings)(
-                    (int)DESFireKeySettings.KS_DEFAULT |
-                    (int)DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
+                (DESFireKeySettings) (
+                    (int) DESFireKeySettings.KS_DEFAULT |
+                    (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_DES, FidSupport.FIDS_NO_ISO_FID, 0x00,
                 new UByteVector(), 3, 0, 1, 0, false, false);
             (cmdev2.getChip() as DESFireChip)
@@ -1151,18 +1153,18 @@ namespace DESFireEV1Tests
             // Test with just one version more
             damInfo = cmdev2.createDAMChallenge(
                 DAMMACKey, DAMENCKey, DAMDefaultKey, 0x777, 0, 1, 100,
-                (DESFireKeySettings)(
-                    (int)DESFireKeySettings.KS_DEFAULT |
-                    (int)DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
+                (DESFireKeySettings) (
+                    (int) DESFireKeySettings.KS_DEFAULT |
+                    (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_DES, FidSupport.FIDS_NO_ISO_FID, 0x00,
                 new UByteVector(), 3, 0, 1, 0, false, false);
 
             // Override with a new version
             cmdev2.createDelegatedApplication(
                 damInfo, 0x777, 0, 1, 100,
-                (DESFireKeySettings)(
-                    (int)DESFireKeySettings.KS_DEFAULT |
-                    (int)DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
+                (DESFireKeySettings) (
+                    (int) DESFireKeySettings.KS_DEFAULT |
+                    (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_DES, FidSupport.FIDS_NO_ISO_FID, 0x00,
                 new UByteVector(), 3, 0, 1, 0, false, false);
             (cmdev2.getChip() as DESFireChip)
@@ -1194,17 +1196,17 @@ namespace DESFireEV1Tests
             DAMDefaultKey.setKeyType(DESFireKeyType.DF_KEY_AES);
             damInfo = cmdev2.createDAMChallenge(
                 DAMMACKey, DAMENCKey, DAMDefaultKey, 0x888, 1, 1, 100,
-                (DESFireKeySettings)(
-                    (int)DESFireKeySettings.KS_DEFAULT |
-                    (int)DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
+                (DESFireKeySettings) (
+                    (int) DESFireKeySettings.KS_DEFAULT |
+                    (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_AES, FidSupport.FIDS_NO_ISO_FID, 0x00,
                 new UByteVector(), 3, 0, 1, 0, false, false);
 
             cmdev2.createDelegatedApplication(
                 damInfo, 0x888, 1, 1, 100,
-                (DESFireKeySettings)(
-                    (int)DESFireKeySettings.KS_DEFAULT |
-                    (int)DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
+                (DESFireKeySettings) (
+                    (int) DESFireKeySettings.KS_DEFAULT |
+                    (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_AES, FidSupport.FIDS_NO_ISO_FID, 0x00,
                 new UByteVector(), 3, 0, 1, 0, false, false);
             (cmdev2.getChip() as DESFireChip)
@@ -1226,294 +1228,297 @@ namespace DESFireEV1Tests
             cmdev2.authenticate(0x00, aesDefault);
 
             authMasterCard(cmdev2, masterPICCKey);
-            }
+        }
 
-            void testSAMAuthChangeKey(DESFireISO7816Commands cmd,
-                                      DESFireKeyType cryptomethod,
-                                      DESFireKey newKeyWithoutSAM,
-                                      DESFireKey newKeyWithoutSAM2)
+        void testSAMAuthChangeKey(DESFireISO7816Commands cmd,
+            DESFireKeyType cryptomethod,
+            DESFireKey newKeyWithoutSAM,
+            DESFireKey newKeyWithoutSAM2)
+        {
+            var crypto = (cmd.getChip() as DESFireChip)
+                .getCrypto();
+            // Default: Keyslot DES 21 / AES 20 - version 0
+            // New: Keyslot DES 21 / AES 20 - version 1
+            // New2: Keyslot DES 21 / AES 20 - version 2
+            // WARNING EV2 NEED OFFLINE CRYPTO KEY Keyslot 19 used
+            byte keyslot = (cryptomethod == DESFireKeyType.DF_KEY_DES)
+                ? (byte) 21
+                : // DES
+                (byte) 20; // AES
+            var samKeyStorage = new SAMKeyStorage();
+            samKeyStorage.setKeySlot(keyslot);
+
+            var defaultKey = new DESFireKey();
+            defaultKey.setKeyType(cryptomethod);
+            defaultKey.setKeyVersion(0);
+            defaultKey.setKeyStorage(samKeyStorage);
+
+            var newKey = new DESFireKey();
+            newKey.setKeyType(cryptomethod);
+            newKey.setKeyVersion(1);
+            newKey.setKeyStorage(samKeyStorage);
+
+            var newKey2 = new DESFireKey();
+            newKey2.setKeyType(cryptomethod);
+            newKey2.setKeyVersion(2);
+            newKey2.setKeyStorage(samKeyStorage);
+
+            cmd.authenticate(0x00, defaultKey);
+
+            cmd.changeKey(0x00, newKey);
+            cmd.authenticate(0x00, newKeyWithoutSAM); // Test with normal
+            cmd.authenticate(0x00, newKey); // Test with normal
+            cmd.changeKey(0x00, newKey2);
+            cmd.authenticate(0x00, newKeyWithoutSAM2);
+            cmd.authenticate(0x00, newKey2); // Test with normal
+
+            // changekey full sam
+            crypto.setKey(crypto.d_currentAid, 0, 0x01, defaultKey);
+            cmd.changeKey(0x01, newKey);
+            cmd.changeKey(0x01, newKey2);
+            cmd.authenticate(0x01, newKeyWithoutSAM2); // Test with normal
+
+            // TEST AV2 Diversification with SAM
+            cmd.authenticate(0x00, newKey2);
+            crypto.setKey(crypto.d_currentAid, 0, 0x01, newKey2); // Set newKey2
+            newKey.setKeyDiversification(
+                new NXPAV2KeyDiversification());
+            newKeyWithoutSAM.setKeyDiversification(
+                new NXPAV2KeyDiversification());
+            cmd.changeKey(0x01, newKey);
+            cmd.authenticate(0x01, newKeyWithoutSAM); // Test with normal
+            cmd.authenticate(0x00, newKey2);
+            crypto.setKey(crypto.d_currentAid, 0, 0x01, newKey); // Set newKey
+            cmd.changeKey(0x01, newKey2);
+            newKey.setKeyDiversification(null);
+            newKeyWithoutSAM.setKeyDiversification(null);
+
+            // dump key
+            samKeyStorage.setDumpKey(true);
+            cmd.authenticate(0x00, newKey2);
+            // dump key remove the flag
+            newKey2.setKeyStorage(samKeyStorage);
+            newKey.setKeyStorage(samKeyStorage);
+            // get both keys from dump
+            crypto.setKey(crypto.d_currentAid, 0, 0x01, newKey2); // Set newKey2
+            cmd.changeKey(0x01, newKey);
+
+            cmd.authenticate(0x01, newKeyWithoutSAM); // Test with normal key
+            cmd.authenticate(0x00, newKey2);
+
+            // Only one of each is dump
+            if (cryptomethod != DESFireKeyType.DF_KEY_DES)
             {
-                var crypto = (cmd.getChip() as DESFireChip)
-                                  .getCrypto();
-                // Default: Keyslot DES 21 / AES 20 - version 0
-                // New: Keyslot DES 21 / AES 20 - version 1
-                // New2: Keyslot DES 21 / AES 20 - version 2
-                // WARNING EV2 NEED OFFLINE CRYPTO KEY Keyslot 19 used
-                byte keyslot = (cryptomethod == DESFireKeyType.DF_KEY_DES) ? (byte)21 : // DES
-                                      (byte)20;                                         // AES
-                var samKeyStorage = new SAMKeyStorage();
-                samKeyStorage.setKeySlot(keyslot);
-
-                var defaultKey = new DESFireKey();
-                defaultKey.setKeyType(cryptomethod);
-                defaultKey.setKeyVersion(0);
-                defaultKey.setKeyStorage(samKeyStorage);
-
-                var newKey = new DESFireKey();
-                newKey.setKeyType(cryptomethod);
-                newKey.setKeyVersion(1);
-                newKey.setKeyStorage(samKeyStorage);
-
-                var newKey2 = new DESFireKey();
-                newKey2.setKeyType(cryptomethod);
-                newKey2.setKeyVersion(2);
-                newKey2.setKeyStorage(samKeyStorage);
-
-                cmd.authenticate(0x00, defaultKey);
-
-                cmd.changeKey(0x00, newKey);
-                cmd.authenticate(0x00, newKeyWithoutSAM); // Test with normal
-                cmd.authenticate(0x00, newKey);           // Test with normal
-                cmd.changeKey(0x00, newKey2);
-                cmd.authenticate(0x00, newKeyWithoutSAM2);
-                cmd.authenticate(0x00, newKey2); // Test with normal
-
-                // changekey full sam
-                crypto.setKey(crypto.d_currentAid, 0, 0x01, defaultKey);
-                cmd.changeKey(0x01, newKey);
-                cmd.changeKey(0x01, newKey2);
-                cmd.authenticate(0x01, newKeyWithoutSAM2); // Test with normal
-
-                // TEST AV2 Diversification with SAM
-                cmd.authenticate(0x00, newKey2);
-                crypto.setKey(crypto.d_currentAid, 0, 0x01, newKey2); // Set newKey2
-                newKey.setKeyDiversification(
-                    new NXPAV2KeyDiversification());
-                newKeyWithoutSAM.setKeyDiversification(
-                    new NXPAV2KeyDiversification());
-                cmd.changeKey(0x01, newKey);
-                cmd.authenticate(0x01, newKeyWithoutSAM); // Test with normal
-                cmd.authenticate(0x00, newKey2);
-                crypto.setKey(crypto.d_currentAid, 0, 0x01, newKey); // Set newKey
-                cmd.changeKey(0x01, newKey2);
-                newKey.setKeyDiversification(null);
-                newKeyWithoutSAM.setKeyDiversification(null);
-
-                // dump key
-                samKeyStorage.setDumpKey(true);
-                cmd.authenticate(0x00, newKey2);
-                // dump key remove the flag
-                newKey2.setKeyStorage(samKeyStorage);
-                newKey.setKeyStorage(samKeyStorage);
-                // get both keys from dump
-                crypto.setKey(crypto.d_currentAid, 0, 0x01, newKey2); // Set newKey2
-                cmd.changeKey(0x01, newKey);
-
-                cmd.authenticate(0x01, newKeyWithoutSAM); // Test with normal key
-                cmd.authenticate(0x00, newKey2);
-
-                // Only one of each is dump
-                if (cryptomethod != DESFireKeyType.DF_KEY_DES)
-                {
-                    // SAM DumpSecretKey dump DES Key with version in the first 8 block and 8 last
-                    // also
-                    // This is not compatible with what we are doing and make changekey fail
-                    (newKey2.getKeyStorage() as SAMKeyStorage)
-                        .setDumpKey(true);
-                    (newKey.getKeyStorage() as SAMKeyStorage)
-                        .setDumpKey(true);
-                    crypto.setKey(crypto.d_currentAid, 0, 0x01, newKeyWithoutSAM);
-                    cmd.changeKey(0x01, newKeyWithoutSAM2);
-                    crypto.setKey(crypto.d_currentAid, 0, 0x01, newKey2);
-                    cmd.changeKey(0x01, newKeyWithoutSAM);
-                    cmd.authenticate(0x01, newKeyWithoutSAM); // Test with normal
-                }
-                else
-                {
-                    // TEST Sagem Diversification with SAM ONLY DES
-                    samKeyStorage.setDumpKey(false);
-                    cmd.authenticate(0x00, newKey2);
-                    crypto.setKey(crypto.d_currentAid, 0, 0x01, newKey); // Set newKey2
-                    samKeyStorage.setDumpKey(true);
-                    newKey2.setKeyDiversification(
-                        new SagemKeyDiversification());
-                    cmd.changeKey(0x01, newKey2);
-                    newKeyWithoutSAM2.setKeyDiversification(
-                        new SagemKeyDiversification());
-                    cmd.authenticate(0x01, newKeyWithoutSAM2); // Test with normal
-                    samKeyStorage.setDumpKey(false);
-
-                    cmd.authenticate(0x00, newKey2);
-                    cmd.changeKey(0x01, newKeyWithoutSAM);
-                    cmd.authenticate(0x01, newKey);
-                    newKey2.setKeyDiversification(null);
-                    newKeyWithoutSAM2.setKeyDiversification(null);
-
-                    cmd.authenticate(0x00, newKey2);
-                    crypto.setKey(crypto.d_currentAid, 0, 0x01, newKeyWithoutSAM); // Set newKey2
-                    cmd.changeKey(0x01, newKeyWithoutSAM2);
-                    cmd.authenticate(0x01, newKey2);
-                }
-            }
-
-            void testSAMEV2AuthChangeKey(
-                DESFireEV2ISO7816Commands cmd,
-                DESFireKey newKeyWithoutSAM,
-                DESFireKey newKeyWithoutSAM2)
-            {
-                var crypto = (cmd.getChip() as DESFireChip).getCrypto();
-                // Default: Keyslot DES 21 / AES 20 - version 0
-                // New: Keyslot DES 21 / AES 20 - version 1
-                // New2: Keyslot DES 21 / AES 20 - version 2
-                // WARNING EV2 NEED OFFLINE CRYPTO KEY Keyslot 19 used
-                byte keyslot = 19; // AES offline
-                var samKeyStorage = new SAMKeyStorage();
-                samKeyStorage.setKeySlot(keyslot);
-
-                var defaultKey = new DESFireKey();
-                defaultKey.setKeyType(DESFireKeyType.DF_KEY_AES);
-                defaultKey.setKeyVersion(0);
-                defaultKey.setKeyStorage(samKeyStorage);
-
-                var newKey = new DESFireKey();
-                newKey.setKeyType(DESFireKeyType.DF_KEY_AES);
-                newKey.setKeyVersion(1);
-                newKey.setKeyStorage(samKeyStorage);
-
-                var newKey2 = new DESFireKey();
-                newKey2.setKeyType(DESFireKeyType.DF_KEY_AES);
-                newKey2.setKeyVersion(2);
-                newKey2.setKeyStorage(samKeyStorage);
-
-                cmd.sam_authenticateEV2First(0x00, defaultKey);
+                // SAM DumpSecretKey dump DES Key with version in the first 8 block and 8 last
+                // also
+                // This is not compatible with what we are doing and make changekey fail
+                (newKey2.getKeyStorage() as SAMKeyStorage)
+                    .setDumpKey(true);
+                (newKey.getKeyStorage() as SAMKeyStorage)
+                    .setDumpKey(true);
+                crypto.setKey(crypto.d_currentAid, 0, 0x01, newKeyWithoutSAM);
+                cmd.changeKey(0x01, newKeyWithoutSAM2);
+                crypto.setKey(crypto.d_currentAid, 0, 0x01, newKey2);
                 cmd.changeKey(0x01, newKeyWithoutSAM);
-                cmd.changeKey(0x02, newKeyWithoutSAM2);
-                cmd.sam_authenticateEV2First(0x01, newKey);
-                cmd.sam_authenticateEV2First(0x02, newKey2);
+                cmd.authenticate(0x01, newKeyWithoutSAM); // Test with normal
             }
-
-            void cleanupKeys(DESFireKey desDefault,
-                 DESFireKey aesDefault,
-                 DESFireKey desNew,
-                 DESFireKey aesNew,
-                 DESFireKey desNew2,
-                 DESFireKey aesNew2)
-{
-                /*desDefault = new DESFireKey("99 11 88 99 88 11 88 99 88
-                11 88 99 88 11 88 99");
-                desDefault.setKeyType(DESFireKeyType.DF_KEY_DES);
-                desDefault.setKeyVersion(1);
-                aesDefault = new DESFireKey("99 11 88 99 88 11 88 99 88
-                11 88 99 88 11 88 99");
-                aesDefault.setKeyType(DESFireKeyType.DF_KEY_AES);
-                aesDefault.setKeyVersion(1);*/
-
-                desDefault = new DESFireKey();
-                desDefault.setKeyType(DESFireKeyType.DF_KEY_DES);
-                desDefault.setKeyVersion(0);
-                aesDefault = new DESFireKey();
-                aesDefault.setKeyType(DESFireKeyType.DF_KEY_AES);
-                aesDefault.setKeyVersion(0);
-
-                desNew = new DESFireKey(
-                    "88 11 88 99 88 11 88 99 88 10 88 98 88 10 88 98");
-                desNew.setKeyType(DESFireKeyType.DF_KEY_DES);
-                desNew.setKeyVersion(1);
-                aesNew = new DESFireKey(
-                    "88 11 88 99 88 11 88 99 88 11 88 99 88 11 88 99");
-                aesNew.setKeyType(DESFireKeyType.DF_KEY_AES);
-                aesNew.setKeyVersion(1);
-                desNew2 = new DESFireKey(
-                    "98 10 88 98 88 10 88 89 88 10 88 98 88 10 88 98");
-                desNew2.setKeyType(DESFireKeyType.DF_KEY_DES);
-                desNew2.setKeyVersion(2);
-                aesNew2 = new DESFireKey(
-                    "99 11 88 99 88 11 88 99 88 11 88 99 88 11 88 99");
-                aesNew2.setKeyType(DESFireKeyType.DF_KEY_AES);
-                aesNew2.setKeyVersion(2);
-            }
-
-            void testPICCKey(DESFireEV1ISO7816Commands cmdev1,
-                             DESFireKey desDefault,
-                 DESFireKey aesDefault,
-                 DESFireKey desNew,
-                 DESFireKey aesNew)
-{
-                cmdev1.authenticate(0x00, desDefault);
-                cmdev1.changeKey(0x00, desNew);
-                cmdev1.authenticate(0x00, desNew);
-                var keyversion = cmdev1.getKeyVersion(0x00);
-                Assert.Equals(desNew.getKeyVersion(), keyversion);
-                cmdev1.changeKey(0x00, desDefault);
-                cmdev1.authenticate(0x00, desDefault);
-                keyversion = cmdev1.getKeyVersion(0x00);
-                Assert.Equals(desDefault.getKeyVersion(), keyversion);
-
-
-                cmdev1.changeKey(0x00, aesNew);
-                cmdev1.authenticate(0x00, aesNew);
-                keyversion = cmdev1.getKeyVersion(0x00);
-                Assert.Equals(aesNew.getKeyVersion(), keyversion);
-                cmdev1.changeKey(0x00, aesDefault);
-                cmdev1.authenticate(0x00, aesDefault);
-                keyversion = cmdev1.getKeyVersion(0x00);
-                Assert.Equals(desDefault.getKeyVersion(), keyversion);
-
-
-                cmdev1.changeKey(0x00, desDefault);
-                cmdev1.authenticate(0x00, desDefault);
-                keyversion = cmdev1.getKeyVersion(0x00);
-                Assert.Equals(desDefault.getKeyVersion(), keyversion);
-                }
-
-            void setConfigurationTest(
-                DESFireEV1ISO7816Commands cmdev1,
-                DESFireEV2ISO7816Commands cmdev2,
-                DESFireKey desDefault)
+            else
             {
-                var newDefaultKey = new DESFireKey(
-                    "99 11 88 99 88 11 88 99 88 11 88 99 88 11 88 99");
-                newDefaultKey.setKeyType(DESFireKeyType.DF_KEY_3K3DES);
-                newDefaultKey.setKeyVersion(0x01);
-                var oldDefaultKey = new DESFireKey();
-                oldDefaultKey.setKeyType(DESFireKeyType.DF_KEY_3K3DES);
-                oldDefaultKey.setKeyVersion(0x00);
+                // TEST Sagem Diversification with SAM ONLY DES
+                samKeyStorage.setDumpKey(false);
+                cmd.authenticate(0x00, newKey2);
+                crypto.setKey(crypto.d_currentAid, 0, 0x01, newKey); // Set newKey2
+                samKeyStorage.setDumpKey(true);
+                newKey2.setKeyDiversification(
+                    new SagemKeyDiversification());
+                cmd.changeKey(0x01, newKey2);
+                newKeyWithoutSAM2.setKeyDiversification(
+                    new SagemKeyDiversification());
+                cmd.authenticate(0x01, newKeyWithoutSAM2); // Test with normal
+                samKeyStorage.setDumpKey(false);
 
-                cmdev1.setConfiguration(true, false);
-                cmdev1.setConfiguration(newDefaultKey);
+                cmd.authenticate(0x00, newKey2);
+                cmd.changeKey(0x01, newKeyWithoutSAM);
+                cmd.authenticate(0x01, newKey);
+                newKey2.setKeyDiversification(null);
+                newKeyWithoutSAM2.setKeyDiversification(null);
 
-             /*   if (cmdev2)
-                {
-                    // There is no way back for the two last params
-                    cmdev2.setConfiguration(true, false, false, false);
-                    cmdev2.setConfiguration(0x04, 0x20);
-                }*/
+                cmd.authenticate(0x00, newKey2);
+                crypto.setKey(crypto.d_currentAid, 0, 0x01, newKeyWithoutSAM); // Set newKey2
+                cmd.changeKey(0x01, newKeyWithoutSAM2);
+                cmd.authenticate(0x01, newKey2);
+            }
+        }
 
-                // Application
-                cmdev1.createApplication(
-                    0x521,
-                    (DESFireKeySettings)(
-                        (int)DESFireKeySettings.KS_DEFAULT |
-                        (int)DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
-                    2, DESFireKeyType.DF_KEY_AES,
-                    FidSupport.FIDS_ISO_FID, 0x125,
-                    StringToUByteVector("0125"));
+        void testSAMEV2AuthChangeKey(
+            DESFireEV2ISO7816Commands cmd,
+            DESFireKey newKeyWithoutSAM,
+            DESFireKey newKeyWithoutSAM2)
+        {
+            var crypto = (cmd.getChip() as DESFireChip).getCrypto();
+            // Default: Keyslot DES 21 / AES 20 - version 0
+            // New: Keyslot DES 21 / AES 20 - version 1
+            // New2: Keyslot DES 21 / AES 20 - version 2
+            // WARNING EV2 NEED OFFLINE CRYPTO KEY Keyslot 19 used
+            byte keyslot = 19; // AES offline
+            var samKeyStorage = new SAMKeyStorage();
+            samKeyStorage.setKeySlot(keyslot);
 
-                cmdev1.selectApplication(0x521);
-                newDefaultKey.setKeyType(DESFireKeyType.DF_KEY_AES);
-                cmdev1.authenticate(0x00, newDefaultKey);
+            var defaultKey = new DESFireKey();
+            defaultKey.setKeyType(DESFireKeyType.DF_KEY_AES);
+            defaultKey.setKeyVersion(0);
+            defaultKey.setKeyStorage(samKeyStorage);
 
-           /*     if (cmdev2)
-                {
-                    // TODO fix this and also add dfname change go DAM
-                    // Wrong authentication...
-                    // cmdev2.setConfigurationPDCap(0x02, 0x03, 0x04);
-                    // Currently give an error wrong value...
-                    // cmdev2.setConfiguration({},
-                    // StringToUByteVector("D2760000850100"));
-                    cmdev2.setConfiguration(false, true, true);
-                }*/
+            var newKey = new DESFireKey();
+            newKey.setKeyType(DESFireKeyType.DF_KEY_AES);
+            newKey.setKeyVersion(1);
+            newKey.setKeyStorage(samKeyStorage);
 
-                // delegate application test
+            var newKey2 = new DESFireKey();
+            newKey2.setKeyType(DESFireKeyType.DF_KEY_AES);
+            newKey2.setKeyVersion(2);
+            newKey2.setKeyStorage(samKeyStorage);
 
-                cmdev1.selectApplication(0x00);
-                cmdev1.authenticate(0x00, desDefault);
-                cmdev1.setConfiguration(oldDefaultKey);
+            cmd.sam_authenticateEV2First(0x00, defaultKey);
+            cmd.changeKey(0x01, newKeyWithoutSAM);
+            cmd.changeKey(0x02, newKeyWithoutSAM2);
+            cmd.sam_authenticateEV2First(0x01, newKey);
+            cmd.sam_authenticateEV2First(0x02, newKey2);
+        }
 
-                /*	if (cmdev2)
-                        {
-                                var dfNames = cmdev2.getDFNames();
-                        }*/
+        void cleanupKeys(ref DESFireKey desDefault,
+            ref DESFireKey aesDefault,
+            ref DESFireKey desNew,
+            ref DESFireKey aesNew,
+            ref DESFireKey desNew2,
+            ref DESFireKey aesNew2)
+        {
+            /*desDefault = new DESFireKey("99 11 88 99 88 11 88 99 88
+            11 88 99 88 11 88 99");
+            desDefault.setKeyType(DESFireKeyType.DF_KEY_DES);
+            desDefault.setKeyVersion(1);
+            aesDefault = new DESFireKey("99 11 88 99 88 11 88 99 88
+            11 88 99 88 11 88 99");
+            aesDefault.setKeyType(DESFireKeyType.DF_KEY_AES);
+            aesDefault.setKeyVersion(1);*/
+
+            desDefault = new DESFireKey();
+            desDefault.setKeyType(DESFireKeyType.DF_KEY_DES);
+            desDefault.setKeyVersion(0);
+            aesDefault = new DESFireKey();
+            aesDefault.setKeyType(DESFireKeyType.DF_KEY_AES);
+            aesDefault.setKeyVersion(0);
+
+            desNew = new DESFireKey(
+                "88 11 88 99 88 11 88 99 88 10 88 98 88 10 88 98");
+            desNew.setKeyType(DESFireKeyType.DF_KEY_DES);
+            desNew.setKeyVersion(1);
+            aesNew = new DESFireKey(
+                "88 11 88 99 88 11 88 99 88 11 88 99 88 11 88 99");
+            aesNew.setKeyType(DESFireKeyType.DF_KEY_AES);
+            aesNew.setKeyVersion(1);
+            desNew2 = new DESFireKey(
+                "98 10 88 98 88 10 88 89 88 10 88 98 88 10 88 98");
+            desNew2.setKeyType(DESFireKeyType.DF_KEY_DES);
+            desNew2.setKeyVersion(2);
+            aesNew2 = new DESFireKey(
+                "99 11 88 99 88 11 88 99 88 11 88 99 88 11 88 99");
+            aesNew2.setKeyType(DESFireKeyType.DF_KEY_AES);
+            aesNew2.setKeyVersion(2);
+        }
+
+        void testPICCKey(DESFireEV1ISO7816Commands cmdev1,
+            DESFireKey desDefault,
+            DESFireKey aesDefault,
+            DESFireKey desNew,
+            DESFireKey aesNew)
+        {
+            cmdev1.authenticate(0x00, desDefault);
+            cmdev1.changeKey(0x00, desNew);
+            cmdev1.authenticate(0x00, desNew);
+            var keyversion = cmdev1.getKeyVersion(0x00);
+            Assert.AreEqual(desNew.getKeyVersion(), keyversion);
+            cmdev1.changeKey(0x00, desDefault);
+            cmdev1.authenticate(0x00, desDefault);
+            keyversion = cmdev1.getKeyVersion(0x00);
+            Assert.AreEqual(desDefault.getKeyVersion(), keyversion);
+
+
+            cmdev1.changeKey(0x00, aesNew);
+            cmdev1.authenticate(0x00, aesNew);
+            keyversion = cmdev1.getKeyVersion(0x00);
+            Assert.AreEqual(aesNew.getKeyVersion(), keyversion);
+            cmdev1.changeKey(0x00, aesDefault);
+            cmdev1.authenticate(0x00, aesDefault);
+            keyversion = cmdev1.getKeyVersion(0x00);
+            Assert.AreEqual(desDefault.getKeyVersion(), keyversion);
+
+
+            cmdev1.changeKey(0x00, desDefault);
+            cmdev1.authenticate(0x00, desDefault);
+            keyversion = cmdev1.getKeyVersion(0x00);
+            Assert.AreEqual(desDefault.getKeyVersion(), keyversion);
+        }
+
+        void setConfigurationTest(
+            DESFireEV1ISO7816Commands cmdev1,
+            DESFireEV2ISO7816Commands cmdev2,
+            DESFireKey desDefault)
+        {
+            var newDefaultKey = new DESFireKey(
+                "99 11 88 99 88 11 88 99 88 11 88 99 88 11 88 99");
+            newDefaultKey.setKeyType(DESFireKeyType.DF_KEY_3K3DES);
+            newDefaultKey.setKeyVersion(0x01);
+            var oldDefaultKey = new DESFireKey();
+            oldDefaultKey.setKeyType(DESFireKeyType.DF_KEY_3K3DES);
+            oldDefaultKey.setKeyVersion(0x00);
+
+            cmdev1.setConfiguration(true, false);
+            cmdev1.setConfiguration(newDefaultKey);
+
+            if (cmdev2 != null)
+            {
+                // There is no way back for the two last params
+                cmdev2.setConfiguration(true, false, false, false);
+                cmdev2.setConfiguration(0x04, 0x20);
+            }
+
+
+            // Application
+            cmdev1.createApplication(
+                0x521,
+                (DESFireKeySettings) (
+                    (int) DESFireKeySettings.KS_DEFAULT |
+                    (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
+                2, DESFireKeyType.DF_KEY_AES,
+                FidSupport.FIDS_ISO_FID, 0x125,
+                StringToUByteVector("0125"));
+
+            cmdev1.selectApplication(0x521);
+            newDefaultKey.setKeyType(DESFireKeyType.DF_KEY_AES);
+            cmdev1.authenticate(0x00, newDefaultKey);
+
+            if (cmdev2 != null)
+            {
+                // TODO fix this and also add dfname change go DAM
+                // Wrong authentication...
+                // cmdev2.setConfigurationPDCap(0x02, 0x03, 0x04);
+                // Currently give an error wrong value...
+                // cmdev2.setConfiguration({},
+                // StringToUByteVector("D2760000850100"));
+                cmdev2.setConfiguration(false, true, true);
+            }
+
+            // delegate application test
+
+            cmdev1.selectApplication(0x00);
+            cmdev1.authenticate(0x00, desDefault);
+            cmdev1.setConfiguration(oldDefaultKey);
+
+            if (cmdev2 != null)
+            {
+               // var dfNames = cmdev2.getDFNames();
             }
         }
     }
+}
