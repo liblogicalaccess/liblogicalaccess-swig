@@ -115,8 +115,6 @@
 #include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
-#include <logicalaccess/plugins/cards/desfireev2/desfireev2commands.hpp>
-#include <logicalaccess/plugins/readers/iso7816-private/commands/desfireev2iso7816commands.hpp>
 #include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/keyboard/keyboardsharedstruct.hpp>
 #include <logicalaccess/plugins/readers/keyboard/keyboardreaderunit.hpp>
@@ -213,14 +211,16 @@
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx25readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/scmreaderunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/springcardreaderunit.hpp>
-#include <logicalaccess/plugins/readers/pcsc-private/type_fwd.hpp>
-#include <logicalaccess/plugins/readers/pcsc-private/omnikeyxx27securemode.hpp>
-#include <logicalaccess/plugins/readers/pcsc-private/tlv.hpp>
+#include <logicalaccess/plugins/cards/desfireev2/desfireev2commands.hpp>
+#include <logicalaccess/plugins/readers/private-iso7816/commands/desfireev2iso7816commands.hpp>
+#include <logicalaccess/plugins/readers/private-pcsc/type_fwd.hpp>
+#include <logicalaccess/plugins/readers/private-pcsc/omnikeyxx27securemode.hpp>
+#include <logicalaccess/plugins/readers/private-pcsc/tlv.hpp>
 #include <logicalaccess/plugins/cards/iclass/hidiclasskey.hpp>
 #include <logicalaccess/plugins/cards/iclass/hidiclassaccessinfo.hpp>
 #include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
-#include <logicalaccess/plugins/readers/pcsc-private/commands/hidiclassomnikeyxx27commands.hpp>
-#include <logicalaccess/plugins/readers/pcsc-private/readers/omnikeyxx27readerunit.hpp>
+#include <logicalaccess/plugins/readers/private-pcsc/commands/hidiclassomnikeyxx27commands.hpp>
+#include <logicalaccess/plugins/readers/private-pcsc/readers/omnikeyxx27readerunit.hpp>
 #include <logicalaccess/plugins/readers/promag/promagreaderunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/promag/promagreaderunit.hpp>
 #include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>
@@ -468,25 +468,8 @@ using LibLogicalAccess.Card;
 //	return ret;
 //}
 
-//%typemap(cstype) std::vector<logicalaccess::DFName>  "DFNameVector"
-//%typemap(csin) std::vector<logicalaccess::DFName>  %{$csinput%}  
-//%typemap(imtype) std::vector<logicalaccess::DFName> "LibLogicalAccess.Card.DFNameVector"
-//%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::DFName> {
-//	DFNameVector ret = $imcall;$excode
-//	return ret;
-//}
-
-//%typemap(cstype) std::vector<logicalaccess::DESFireAccessRights>  "DESFireAccessRightsVector"
-//%typemap(csin) std::vector<logicalaccess::DESFireAccessRights>  %{$csinput%}  
-//%typemap(imtype) std::vector<logicalaccess::DESFireAccessRights> "LibLogicalAccess.Card.DESFireAccessRightsVector"
-//%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::DESFireAccessRights> {
-//	DESFireAccessRightsVector ret = $imcall;$excode
-//	return ret;
-//}
-
-//%typemap(cstype) const std::vector<logicalaccess::DESFireAccessRights>& "out LibLogicalAccess.Card.DESFireAccessRightsVector"
-//%typemap(csin) const std::vector<logicalaccess::DESFireAccessRights>& %{out $csinput%}  
-//%typemap(imtype) const std::vector<logicalaccess::DESFireAccessRights>& "out LibLogicalAccess.Card.DESFireAccessRightsVector"
+%template(DFNameVector) std::vector<logicalaccess::DFName>;
+%template(DESFireAccessRightsVector) std::vector<logicalaccess::DESFireAccessRights>;
 
 typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
 
@@ -614,8 +597,6 @@ typedef enum : uint16_t
 %import <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
-%import <logicalaccess/plugins/cards/desfireev2/desfireev2commands.hpp>
-%include <logicalaccess/plugins/readers/iso7816-private/commands/desfireev2iso7816commands.hpp>
 %include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/keyboard/keyboardsharedstruct.hpp>
 %include <logicalaccess/plugins/readers/keyboard/keyboardreaderunit.hpp>
@@ -712,14 +693,16 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx25readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/scmreaderunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/springcardreaderunit.hpp>
-%include <logicalaccess/plugins/readers/pcsc-private/type_fwd.hpp>
-%include <logicalaccess/plugins/readers/pcsc-private/omnikeyxx27securemode.hpp>
-%include <logicalaccess/plugins/readers/pcsc-private/tlv.hpp>
+%import <logicalaccess/plugins/cards/desfireev2/desfireev2commands.hpp>
+%include <logicalaccess/plugins/readers/private-iso7816/commands/desfireev2iso7816commands.hpp>
+%include <logicalaccess/plugins/readers/private-pcsc/type_fwd.hpp>
+%include <logicalaccess/plugins/readers/private-pcsc/omnikeyxx27securemode.hpp>
+%include <logicalaccess/plugins/readers/private-pcsc/tlv.hpp>
 %import <logicalaccess/plugins/cards/iclass/hidiclasskey.hpp>
 %import <logicalaccess/plugins/cards/iclass/hidiclassaccessinfo.hpp>
 %import <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
-%include <logicalaccess/plugins/readers/pcsc-private/commands/hidiclassomnikeyxx27commands.hpp>
-%include <logicalaccess/plugins/readers/pcsc-private/readers/omnikeyxx27readerunit.hpp>
+%include <logicalaccess/plugins/readers/private-pcsc/commands/hidiclassomnikeyxx27commands.hpp>
+%include <logicalaccess/plugins/readers/private-pcsc/readers/omnikeyxx27readerunit.hpp>
 %include <logicalaccess/plugins/readers/promag/promagreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/promag/promagreaderunit.hpp>
 %include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>

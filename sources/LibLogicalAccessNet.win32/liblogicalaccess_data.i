@@ -9,7 +9,7 @@
 #include <logicalaccess/utils.hpp>
 #include <logicalaccess/xmlserializable.hpp>
 #include "logicalaccess/cards/keystorage.hpp"
-#include <logicalaccess/plugins/readers/pcsc-private/type_fwd.hpp>
+#include <logicalaccess/plugins/readers/private-pcsc/type_fwd.hpp>
 #include <logicalaccess/techno.hpp>
 #include <logicalaccess/key.hpp>
 #include <logicalaccess/cards/readercardadapter.hpp>

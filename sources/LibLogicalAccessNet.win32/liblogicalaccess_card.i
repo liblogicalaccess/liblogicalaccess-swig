@@ -436,8 +436,6 @@ using LibLogicalAccess.Reader;
 
 %template(BioInfosVector) std::vector<logicalaccess::EPassDG2::BioInfo>;
 
-%template(DFNameVector) std::vector<logicalaccess::DFName>;
-%template(DESFireAccessRightsVector) std::vector<logicalaccess::DESFireAccessRights>;
 %template(AV1SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
 %template(AV2SAMCommands) logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
 %template(AV1SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;

@@ -61,7 +61,7 @@ namespace DESFireEV1Tests
             Debug.WriteLine("Please select index of the reader unit to use:");
             for (int x = 0; x < readers.Count(); ++x)
             {
-                Debug.WriteLine("\t" + readers[x]);
+                Debug.WriteLine("\t" + readers[x].getName());
             }
 
             if (ruindex < 0 || ruindex >= readers.Count())
@@ -107,6 +107,8 @@ namespace DESFireEV1Tests
                     cleanupCard(cmd, desDefault);
 
                     // Test Create App
+
+                    Debug.WriteLine("Card type: " + chip.getCardType());
 
                     if (chip.getCardType() == "DESFire")
                     {
@@ -172,7 +174,7 @@ namespace DESFireEV1Tests
 
                         appIDS = cmdev1.getApplicationIDs();
 
-                        //  var dfNames = cmdev1.getDFNames();
+                        var dfNames = cmdev1.getDFNames();
 
                         // EV1 DES test
                         cmd.selectApplication(0x521);
@@ -321,9 +323,13 @@ namespace DESFireEV1Tests
                         testPICCKey(cmdev1, desDefault, aesDefault, desNew, aesNew);
                     }
 
+                    readerConfig.getReaderUnit().disconnect();
                 }
                 readerConfig.getReaderUnit().waitRemoval(0x1);
+                readerConfig.getReaderUnit().disconnectFromReader();
             }
+            else
+                throw new Exception("no card detected.");
         }
 
 
@@ -855,9 +861,10 @@ namespace DESFireEV1Tests
 
             // BUG : iso_readRecords seems to break CMAC so we do it at the end...
             // cmdev1.iso_appendrecord(data, 00); //Security status not sat....
-            /* if (!cmdev2) // EV2 has changed iso...it do not work probably because of free access
-                          // not handle
-                 read = cmdev1.iso_readRecords(50, 0, DESFireRecords.DF_RECORD_ALLRECORDS);*/
+            if (cmdev2 == null) // EV2 has changed iso...it do not work probably because of free access
+                // not handle
+                read = cmdev1.iso_readRecords(50, 0, DESFireRecords.DF_RECORD_ALLRECORDS);
+
         }
 
         void authMasterCard(DESFireISO7816Commands cmd,
@@ -1052,10 +1059,10 @@ namespace DESFireEV1Tests
             acr.readAndWriteAccess = TaskAccessRights.AR_KEY8;
             acr.writeAccess = TaskAccessRights.AR_KEY9;
             accessrightses.Add(acr);
-            cmdev2.changeFileSettings(0x00, EncryptionMode.CM_ENCRYPT, out accessrightses, false);
-            cmdev2.changeFileSettings(0x01, EncryptionMode.CM_ENCRYPT, out accessrightses, false);
-            cmdev2.changeFileSettings(0x02, EncryptionMode.CM_ENCRYPT, out accessrightses, false);
-            cmdev2.changeFileSettings(0x03, EncryptionMode.CM_ENCRYPT, out accessrightses, false);
+            cmdev2.changeFileSettings(0x00, EncryptionMode.CM_ENCRYPT, accessrightses, false);
+            cmdev2.changeFileSettings(0x01, EncryptionMode.CM_ENCRYPT, accessrightses, false);
+            cmdev2.changeFileSettings(0x02, EncryptionMode.CM_ENCRYPT, accessrightses, false);
+            cmdev2.changeFileSettings(0x03, EncryptionMode.CM_ENCRYPT, accessrightses, false);
 
             cmdev2.authenticateEV2First(0x04, aesDefault);
             var read = cmdev2.readData(0x00, 0, 0, EncryptionMode.CM_ENCRYPT);
@@ -1517,7 +1524,7 @@ namespace DESFireEV1Tests
 
             if (cmdev2 != null)
             {
-               // var dfNames = cmdev2.getDFNames();
+                var dfNames = cmdev2.getDFNames();
             }
         }
     }
