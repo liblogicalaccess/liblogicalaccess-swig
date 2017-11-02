@@ -251,6 +251,34 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
     return ret;
   }
 
+%pragma(csharp) imclasscode=%{
+	public static System.Collections.Generic.Dictionary<string, System.Type> ReaderUnitConfigurationDictionary;
+
+	public static ReaderUnitConfiguration createReaderUnitConfiguration(System.IntPtr cPtr, bool owner)
+	{
+		ReaderUnitConfiguration ret = null;
+		if (cPtr == System.IntPtr.Zero) {
+		  return ret;
+		}
+		string rpt = ($imclassname.ReaderUnitConfiguration_getRPType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (ReaderUnitConfigurationDictionary == null)
+			ReaderUnitConfigurationDictionary = createDictionary<ReaderUnitConfiguration>();
+        if (ReaderUnitConfigurationDictionary.ContainsKey(rpt))
+        {
+            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            ret = (ReaderUnitConfiguration)System.Activator.CreateInstance(ReaderUnitConfigurationDictionary[rpt], flags, null, new object[] { cPtr, owner }, null);
+        }
+		return ret;
+	}
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::ReaderUnitConfiguration*, std::shared_ptr<logicalaccess::ReaderUnitConfiguration>, std::shared_ptr<logicalaccess::ReaderUnitConfiguration> & {
+    System.IntPtr cPtr = $imcall;
+    ReaderUnitConfiguration ret = liblogicalaccess_corePINVOKE.createReaderUnitConfiguration(cPtr, $owner);$excode
+    return ret;
+  }
+
 %template(getVectorReaderUnit) getVectorPart<std::shared_ptr<logicalaccess::ReaderUnit> >;
 
 %typemap(csout, excode=SWIGEXCODE)
