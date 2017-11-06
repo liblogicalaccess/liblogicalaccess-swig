@@ -28,6 +28,9 @@
 %include <std_pair.i>
 %include <std_vector.i>
 
+
+/*****OVERRIDE STRING NULL EXCEPTION*****/
+
 %{
 #include <string>
 %}
