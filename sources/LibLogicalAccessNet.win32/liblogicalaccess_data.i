@@ -413,9 +413,6 @@ namespace std {
 %typemap(csin) std::vector<unsigned char>::const_iterator& %{out $csinput%}  
 %typemap(imtype) std::vector<unsigned char>::const_iterator& "out UByteVector.UByteVectorEnumerator"
 
-
-%include <std_pair.i>
-
 %template(PairByteVectorByteVector) std::pair<ByteVector, ByteVector>;
 
 /**************************************/

@@ -24,6 +24,8 @@
 %include <arrays_csharp.i>
 %include <stdint.i>
 %include <swiginterface.i>
+%include <cpointer.i>
+%include <std_pair.i>
 
 /*****WARNING SECTION*****/
 
@@ -1199,34 +1201,42 @@ FOR_EACH_EXCEPTION( CATCH_CSE )
 catch (std::out_of_range &e)
 {
 	SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, e.what(), "unknown");
+	return $null;
 }
 catch (std::logic_error &e)
 {
 	SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, e.what(), "unknown");
+	return $null;
 }
 catch (std::range_error &e)
 {
 	SWIG_CSharpSetPendingException(SWIG_CSharpOutOfMemoryException, e.what());
+	return $null;
 }
 catch (std::overflow_error &e)
 {
 	SWIG_CSharpSetPendingException(SWIG_CSharpOverflowException, e.what());
+	return $null;
 }
 catch (std::underflow_error &e)
 {
 	SWIG_CSharpSetPendingException(SWIG_CSharpOverflowException, e.what());
+	return $null;
 }
 catch (std::runtime_error &e)
 {
 	SWIG_CSharpSetPendingException(SWIG_CSharpSystemException, e.what());
+	return $null;
 }
 catch (std::bad_cast &e)
 {
 	SWIG_CSharpSetPendingException(SWIG_CSharpInvalidCastException, e.what());
+	return $null;
 }
 catch (std::exception &e)
 {
 	SWIG_CSharpSetPendingException(SWIG_CSharpSystemException, e.what());
+	return $null;
 }
 %}
 
