@@ -26,6 +26,38 @@
 %include <swiginterface.i>
 %include <cpointer.i>
 %include <std_pair.i>
+%include <std_vector.i>
+
+%{
+#include <string>
+%}
+
+%typemap(in) std::string 
+%{
+	if (!$input) {
+		$1.clear();
+	} else {
+		$1.assign($input);
+	}
+%}
+
+%typemap(in) const std::string&
+%{
+	$*1_ltype $1_str;
+	if ($input) {
+		$1_str = $*1_ltype($input);
+	}
+	$1 = &$1_str;
+%}
+
+%typemap(directorout, canthrow=1) std::string
+%{ 
+	if (!$input) {
+		$result.clear();
+	} else {
+		$result.assign($input);
+	}
+%}
 
 /*****WARNING SECTION*****/
 

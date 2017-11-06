@@ -277,9 +277,6 @@ CSHARP_MEMBER_STRUCT_ARRAYS(logicalaccess::MifareAccessInfo::DataBlockAccessBits
 }
 
 
-
-%include <std_vector.i>
-
 namespace std {
 	%template(UByteVector) vector<uint8_t>;
 	%template(UShortCollection) vector<unsigned short>;
