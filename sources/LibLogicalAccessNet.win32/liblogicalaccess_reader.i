@@ -468,8 +468,26 @@ using LibLogicalAccess.Card;
 //	return ret;
 //}
 
-%template(DFNameVector) std::vector<logicalaccess::DFName>;
-%template(DESFireAccessRightsVector) std::vector<logicalaccess::DESFireAccessRights>;
+/**** FORWARD Card Type Vector ****/
+
+%typemap(cstype) std::vector<logicalaccess::DFName> "LibLogicalAccess.Card.DFNameVector"
+%typemap(csin) std::vector<logicalaccess::DFName> "LibLogicalAccess.Card.DFNameVector.getCPtr($csinput)"
+%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::DFName> {
+	LibLogicalAccess.Card.DFNameVector ret = new LibLogicalAccess.Card.DFNameVector($imcall, true);$excode
+	return ret;
+}
+
+%typemap(cstype) std::vector<logicalaccess::DESFireAccessRights> "LibLogicalAccess.Card.DESFireAccessRightsVector"
+%typemap(csin) std::vector<logicalaccess::DESFireAccessRights> "LibLogicalAccess.Card.DESFireAccessRightsVector.getCPtr($csinput)"
+%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::DESFireAccessRights> {
+	LibLogicalAccess.Card.DESFireAccessRights ret = new LibLogicalAccess.Card.DESFireAccessRights($imcall, true);$excode
+	return ret;
+}
+
+%template() std::vector<logicalaccess::DESFireAccessRights>;
+%template() std::vector<logicalaccess::DFName>;
+
+/**** FORWARD Card Type Vector END ****/
 
 typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
 
