@@ -11,7 +11,7 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0.0</FileVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Company>AdrienJ</Company>
+    <Company>ISLOG</Company>
     <Authors>AdrienJ</Authors>
     <PackageProjectUrl>http://liblogicalaccess.islog.com/</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/islog/liblogicalaccess/blob/master/LICENSE.LibLogicalAccess.txt</PackageLicenseUrl>
