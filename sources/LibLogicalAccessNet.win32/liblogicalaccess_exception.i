@@ -6,7 +6,7 @@
 %{
 #include <memory> 
 #include <logicalaccess/myexception.hpp>
-#include <logicalaccess/crypto/openssl_exception.hpp>
+#include <logicalaccess/plugins/crypto/openssl_exception.hpp>
 %}
 
 %shared_ptr(logicalaccess::Exception::exception);
@@ -16,4 +16,4 @@
 %shared_ptr(logicalaccess::openssl::OpenSSLException);
 
 %include <logicalaccess/myexception.hpp>
-%include <logicalaccess/crypto/openssl_exception.hpp>
+%include <logicalaccess/plugins/crypto/openssl_exception.hpp>

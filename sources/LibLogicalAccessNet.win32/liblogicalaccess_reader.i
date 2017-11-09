@@ -74,7 +74,7 @@
 #include <logicalaccess/plugins/readers/idp/idpreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/idp/idpreaderunit.hpp>
 #include <logicalaccess/plugins/readers/idp/idpdatatransport.hpp>
-#include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
+#include <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
@@ -90,6 +90,11 @@
 #include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
+#include <logicalaccess/plugins/crypto/initialization_vector.hpp>
+#include <logicalaccess/plugins/crypto/symmetric_cipher.hpp>
+#include <logicalaccess/plugins/crypto/openssl_symmetric_cipher.hpp>
+#include <logicalaccess/plugins/crypto/des_cipher.hpp>
+#include <logicalaccess/plugins/crypto/aes_cipher.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
 #include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
 #include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
@@ -106,6 +111,11 @@
 #include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816resultchecker.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/mifareplusiso7816resultchecker.hpp>
 #include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
+#include <logicalaccess/plugins/crypto/symmetric_key.hpp>
+#include <logicalaccess/plugins/crypto/aes_symmetric_key.hpp>
+#include <logicalaccess/plugins/crypto/aes_initialization_vector.hpp>
+#include <logicalaccess/plugins/crypto/openssl.hpp>
+#include <logicalaccess/plugins/crypto/cmac.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/samiso7816commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
 #include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
@@ -114,7 +124,6 @@
 #include <logicalaccess/plugins/cards/twic/twiclocation.hpp>
 #include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
-#include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
 #include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/keyboard/keyboardsharedstruct.hpp>
 #include <logicalaccess/plugins/readers/keyboard/keyboardreaderunit.hpp>
@@ -574,7 +583,7 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/idp/idpreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/idp/idpreaderunit.hpp>
 %include <logicalaccess/plugins/readers/idp/idpdatatransport.hpp>
-%include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816readercardadapter.hpp>
+%import <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
@@ -590,6 +599,11 @@ typedef enum : uint16_t
 %import <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
 %import <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
 %import <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
+%import <logicalaccess/plugins/crypto/initialization_vector.hpp>
+%import <logicalaccess/plugins/crypto/symmetric_cipher.hpp>
+%import <logicalaccess/plugins/crypto/openssl_symmetric_cipher.hpp>
+%import <logicalaccess/plugins/crypto/des_cipher.hpp>
+%import <logicalaccess/plugins/crypto/aes_cipher.hpp>
 %import <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
 %import <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
 %import <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
@@ -606,6 +620,11 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816resultchecker.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/mifareplusiso7816resultchecker.hpp>
 %import <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
+%import <logicalaccess/plugins/crypto/symmetric_key.hpp>
+%import <logicalaccess/plugins/crypto/aes_symmetric_key.hpp>
+%import <logicalaccess/plugins/crypto/aes_initialization_vector.hpp>
+%import <logicalaccess/plugins/crypto/openssl.hpp>
+%import <logicalaccess/plugins/crypto/cmac.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samiso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
 %import <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
@@ -614,7 +633,6 @@ typedef enum : uint16_t
 %import <logicalaccess/plugins/cards/twic/twiclocation.hpp>
 %import <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
-%include <logicalaccess/plugins/readers/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/keyboard/keyboardsharedstruct.hpp>
 %include <logicalaccess/plugins/readers/keyboard/keyboardreaderunit.hpp>

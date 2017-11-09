@@ -17,12 +17,12 @@ using LibLogicalAccess.Reader;
 
 %{
 
-#include <logicalaccess/crypto/symmetric_key.hpp>
-#include <logicalaccess/crypto/initialization_vector.hpp>
-#include <logicalaccess/crypto/symmetric_cipher.hpp>
-#include <logicalaccess/crypto/aes_initialization_vector.hpp>
-#include <logicalaccess/crypto/openssl_symmetric_cipher_context.hpp>
-#include <logicalaccess/crypto/openssl_symmetric_cipher.hpp>
+#include <logicalaccess/plugins/crypto/symmetric_key.hpp>
+#include <logicalaccess/plugins/crypto/initialization_vector.hpp>
+#include <logicalaccess/plugins/crypto/symmetric_cipher.hpp>
+#include <logicalaccess/plugins/crypto/aes_initialization_vector.hpp>
+#include <logicalaccess/plugins/crypto/openssl_symmetric_cipher_context.hpp>
+#include <logicalaccess/plugins/crypto/openssl_symmetric_cipher.hpp>
 
 /* Additional_include */
 
@@ -362,12 +362,12 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 /* END_Configuration_section */
 
 
-%include <logicalaccess/crypto/symmetric_key.hpp>
-%include <logicalaccess/crypto/initialization_vector.hpp>
-%include <logicalaccess/crypto/symmetric_cipher.hpp>
-%include <logicalaccess/crypto/aes_initialization_vector.hpp>
-%include <logicalaccess/crypto/openssl_symmetric_cipher_context.hpp>
-%include <logicalaccess/crypto/openssl_symmetric_cipher.hpp>
+%include <logicalaccess/plugins/crypto/symmetric_key.hpp>
+%include <logicalaccess/plugins/crypto/initialization_vector.hpp>
+%include <logicalaccess/plugins/crypto/symmetric_cipher.hpp>
+%include <logicalaccess/plugins/crypto/aes_initialization_vector.hpp>
+%include <logicalaccess/plugins/crypto/openssl_symmetric_cipher_context.hpp>
+%include <logicalaccess/plugins/crypto/openssl_symmetric_cipher.hpp>
 
 /* Include_section */
 
