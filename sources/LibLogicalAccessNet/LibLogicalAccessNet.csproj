@@ -54,4 +54,7 @@
     <OutputPath>bin\Debug\net46\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if /I &quot;$(ConfigurationName)&quot; == &quot;Release&quot; call fsign &quot;$(TargetPath)&quot;" />
+  </Target>
 </Project>
