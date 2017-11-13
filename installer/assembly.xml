@@ -8,7 +8,7 @@
             <directory>/output</directory>
             <outputDirectory>/exe/</outputDirectory>
             <includes>
-                <include>*.exe</include>
+                <include>*.msm</include>
             </includes>
         </fileSet>
     </fileSets>

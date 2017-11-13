@@ -34,3 +34,5 @@ installer/LibLogicalAccessNet-SetupFiles
 /installer/output
 /installer/build.LibLogicalAccessNetMergex64-cache
 /installer/VERSION
+/installer/build.LibLogicalAccessNetMergex86-cache
+/installer/build.LibLogicalAccessNetMergex86.aip
