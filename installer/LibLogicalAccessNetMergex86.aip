@@ -10,6 +10,7 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="." IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+    <ROW Directory="scripts_Dir" Directory_Parent="APPDIR" DefaultDir="scripts"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="LibLogicalAccessNet.win32.dll" ComponentId="{757F82E5-C2AA-4CD1-8647-06CD8818971E}" Directory_="APPDIR" Attributes="0" KeyPath="LibLogicalAccessNet.win32.dll"/>
@@ -63,6 +64,7 @@
     <ROW Component="promagreaders.dll" ComponentId="{27E17702-BB07-457E-9333-CFF9FC428A91}" Directory_="APPDIR" Attributes="0" KeyPath="promagreaders.dll"/>
     <ROW Component="proxcards.dll" ComponentId="{76AFD100-C430-4C5E-AE7C-F3783BBB3BE1}" Directory_="APPDIR" Attributes="0" KeyPath="proxcards.dll"/>
     <ROW Component="proxlitecards.dll" ComponentId="{76383307-37B2-48A6-928C-EBF4D81D7D25}" Directory_="APPDIR" Attributes="0" KeyPath="proxlitecards.dll"/>
+    <ROW Component="reg2vbs.vbs" ComponentId="{41BD1A83-0E12-4BB7-882A-9DF24D78F379}" Directory_="scripts_Dir" Attributes="0" KeyPath="reg2vbs.vbs" Type="0"/>
     <ROW Component="rfideasreaders.dll" ComponentId="{B0DE5E96-DCCA-42BC-9D31-2EE42D6B25EB}" Directory_="APPDIR" Attributes="0" KeyPath="rfideasreaders.dll"/>
     <ROW Component="rplethreaders.dll" ComponentId="{86D56079-CF9C-4774-AB80-11A48DC3E07B}" Directory_="APPDIR" Attributes="0" KeyPath="rplethreaders.dll"/>
     <ROW Component="samav2cards.dll" ComponentId="{914A535D-4AC6-4795-9874-0E4DBE451264}" Directory_="APPDIR" Attributes="0" KeyPath="samav2cards.dll"/>
@@ -80,11 +82,15 @@
     <ROW Component="twiccards.dll" ComponentId="{227B281D-312F-4F41-9E4E-BC42F195A1EA}" Directory_="APPDIR" Attributes="0" KeyPath="twiccards.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="TargetFeature" Title="TargetFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="LibLogicalAccessNet.win32.dll SmartComm70.dll a3mlgm5600readers.dll admittoreaders.dll axesstmc13readers.dll axesstmclegicreaders.dll cps3cards.dll deisterreaders.dll desfirecards.dll desfireev2cards.dll elatecreaders.dll em4102cards.dll em4135cards.dll epasscards.dll felicacards.dll generictagcards.dll gigatmsreaders.dll gunneboreaders.dll iclasscards.dll iclasscards_5321.dll icode1cards.dll icode2cards.dll idondemandreaders.dll idpreaders.dll indalacards.dll infineonmydcards.dll islogkbdhook32.exe islogkbdhooklib32.dll iso15693cards.dll iso7816cards.dll iso7816readers.dll keyboardreaders.dll legicprimecards.dll libeay32.dll liblogicalaccess.dll libnfc.dll libnfcnfcreaders.dll libusb0_x86.dll llatests.dll mifarecards.dll mifarepluscards.dll mifareultralightcards.dll ok5553readers.dll osdpreaders.dll pcProxAPI.dll pcscreaders.dll privateiso7816readers.dll privatepcscreaders.dll promagreaders.dll proxcards.dll proxlitecards.dll rfideasreaders.dll rplethreaders.dll samav2cards.dll scardsyn.dll scielreaders.dll seoscards.dll smartframecards.dll smartidreaders.dll ssleay32.dll stidprgreaders.dll stidstrreaders.dll stmlri512cards.dll tagitcards.dll topazcards.dll twiccards.dll"/>
+    <ROW Feature="TargetFeature" Title="TargetFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="LibLogicalAccessNet.win32.dll SmartComm70.dll a3mlgm5600readers.dll admittoreaders.dll axesstmc13readers.dll axesstmclegicreaders.dll cps3cards.dll deisterreaders.dll desfirecards.dll desfireev2cards.dll elatecreaders.dll em4102cards.dll em4135cards.dll epasscards.dll felicacards.dll generictagcards.dll gigatmsreaders.dll gunneboreaders.dll iclasscards.dll iclasscards_5321.dll icode1cards.dll icode2cards.dll idondemandreaders.dll idpreaders.dll indalacards.dll infineonmydcards.dll islogkbdhook32.exe islogkbdhooklib32.dll iso15693cards.dll iso7816cards.dll iso7816readers.dll keyboardreaders.dll legicprimecards.dll libeay32.dll liblogicalaccess.dll libnfc.dll libnfcnfcreaders.dll libusb0_x86.dll llatests.dll mifarecards.dll mifarepluscards.dll mifareultralightcards.dll ok5553readers.dll osdpreaders.dll pcProxAPI.dll pcscreaders.dll privateiso7816readers.dll privatepcscreaders.dll promagreaders.dll proxcards.dll proxlitecards.dll reg2vbs.vbs rfideasreaders.dll rplethreaders.dll samav2cards.dll scardsyn.dll scielreaders.dll seoscards.dll smartframecards.dll smartidreaders.dll ssleay32.dll stidprgreaders.dll stidstrreaders.dll stmlri512cards.dll tagitcards.dll topazcards.dll twiccards.dll"/>
     <ATTRIBUTE name="CurrentFeature" value="TargetFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="LibLogicalAccessNet.win32.dll" Component_="LibLogicalAccessNet.win32.dll" FileName="LIBLOG~2.DLL|LibLogicalAccessNet.win32.dll" Attributes="0" SourcePath="..\sources\LibLogicalAccessNet.win32\bin\Release\Win32\LibLogicalAccessNet.win32.dll" SelfReg="false"/>
+    <ROW File="LibLogicalAccessNet.win32.dll" Component_="LibLogicalAccessNet.win32.dll" FileName="LIBLOG~2.DLL|LibLogicalAccessNet.win32.dll" Attributes="0" SourcePath="..\sources\LibLogicalAccessNet.win32\bin\Release\Win32\LibLogicalAccessNet.win32.dll" SelfReg="false" NextFile="reg2vbs.vbs"/>
+    <ROW File="SCardSvr.vbs" Component_="reg2vbs.vbs" FileName="SCardSvr.vbs" Attributes="0" SourcePath="scripts\SCardSvr.vbs" SelfReg="false" NextFile="disable_driver_rfid.reg"/>
+    <ROW File="SCardSvr_Win7.reg" Component_="reg2vbs.vbs" FileName="SCARDS~1.REG|SCardSvr_Win7.reg" Attributes="0" SourcePath="scripts\SCardSvr_Win7.reg" SelfReg="false" NextFile="SCardSvr_Win8.1.reg"/>
+    <ROW File="SCardSvr_Win8.1.reg" Component_="reg2vbs.vbs" FileName="SCARDS~2.REG|SCardSvr_Win8.1.reg" Attributes="0" SourcePath="scripts\SCardSvr_Win8.1.reg" SelfReg="false" NextFile="SCardSvr_Win8.reg"/>
+    <ROW File="SCardSvr_Win8.reg" Component_="reg2vbs.vbs" FileName="SCARDS~3.REG|SCardSvr_Win8.reg" Attributes="0" SourcePath="scripts\SCardSvr_Win8.reg" SelfReg="false"/>
     <ROW File="SmartComm70.dll" Component_="SmartComm70.dll" FileName="SMARTC~1.DLL|SmartComm70.dll" Attributes="0" SourcePath="..\packages\dll\Win32\SmartComm70.dll" SelfReg="false" NextFile="ssleay32.dll"/>
     <ROW File="a3mlgm5600readers.dll" Component_="a3mlgm5600readers.dll" FileName="A3MLGM~1.DLL|a3mlgm5600readers.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\a3mlgm5600readers.dll" SelfReg="false" NextFile="admittoreaders.dll"/>
     <ROW File="admittoreaders.dll" Component_="admittoreaders.dll" FileName="ADMITT~1.DLL|admittoreaders.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\admittoreaders.dll" SelfReg="false" NextFile="axesstmc13readers.dll"/>
@@ -94,6 +100,7 @@
     <ROW File="deisterreaders.dll" Component_="deisterreaders.dll" FileName="DEISTE~1.DLL|deisterreaders.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\deisterreaders.dll" SelfReg="false" NextFile="desfirecards.dll"/>
     <ROW File="desfirecards.dll" Component_="desfirecards.dll" FileName="DESFIR~1.DLL|desfirecards.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\desfirecards.dll" SelfReg="false" NextFile="desfireev2cards.dll"/>
     <ROW File="desfireev2cards.dll" Component_="desfireev2cards.dll" FileName="DESFIR~2.DLL|desfireev2cards.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\desfireev2cards.dll" SelfReg="false" NextFile="elatecreaders.dll"/>
+    <ROW File="disable_driver_rfid.reg" Component_="reg2vbs.vbs" FileName="DISABL~1.REG|disable_driver_rfid.reg" Attributes="0" SourcePath="scripts\disable_driver_rfid.reg" SelfReg="false" NextFile="SCardSvr_Win7.reg"/>
     <ROW File="elatecreaders.dll" Component_="elatecreaders.dll" FileName="ELATEC~1.DLL|elatecreaders.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\elatecreaders.dll" SelfReg="false" NextFile="LibLogicalAccessNet.win32.dll"/>
     <ROW File="em4102cards.dll" Component_="em4102cards.dll" FileName="EM4102~1.DLL|em4102cards.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\em4102cards.dll" SelfReg="false" NextFile="em4135cards.dll"/>
     <ROW File="em4135cards.dll" Component_="em4135cards.dll" FileName="EM4135~1.DLL|em4135cards.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\em4135cards.dll" SelfReg="false" NextFile="epasscards.dll"/>
@@ -135,6 +142,7 @@
     <ROW File="promagreaders.dll" Component_="promagreaders.dll" FileName="PROMAG~1.DLL|promagreaders.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\promagreaders.dll" SelfReg="false" NextFile="proxcards.dll"/>
     <ROW File="proxcards.dll" Component_="proxcards.dll" FileName="PROXCA~1.DLL|proxcards.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\proxcards.dll" SelfReg="false" NextFile="proxlitecards.dll"/>
     <ROW File="proxlitecards.dll" Component_="proxlitecards.dll" FileName="PROXLI~1.DLL|proxlitecards.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\proxlitecards.dll" SelfReg="false" NextFile="rfideasreaders.dll"/>
+    <ROW File="reg2vbs.vbs" Component_="reg2vbs.vbs" FileName="reg2vbs.vbs" Attributes="0" SourcePath="scripts\reg2vbs.vbs" SelfReg="false" NextFile="SCardSvr.vbs"/>
     <ROW File="rfideasreaders.dll" Component_="rfideasreaders.dll" FileName="RFIDEA~1.DLL|rfideasreaders.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\rfideasreaders.dll" SelfReg="false" NextFile="rplethreaders.dll"/>
     <ROW File="rplethreaders.dll" Component_="rplethreaders.dll" FileName="RPLETH~1.DLL|rplethreaders.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\rplethreaders.dll" SelfReg="false" NextFile="samav2cards.dll"/>
     <ROW File="samav2cards.dll" Component_="samav2cards.dll" FileName="SAMAV2~1.DLL|samav2cards.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\samav2cards.dll" SelfReg="false" NextFile="scielreaders.dll"/>
@@ -152,7 +160,7 @@
     <ROW File="twiccards.dll" Component_="twiccards.dll" FileName="TWICCA~1.DLL|twiccards.dll" Attributes="0" SourcePath="..\packages\dll\Win32\Release\twiccards.dll" SelfReg="false" NextFile="a3mlgm5600readers.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFileName="[|ProductName]-[|ProductVersion]" Languages="en;fr" LangOpt="1" InstallationType="4"/>
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="output" PackageFileName="[|ProductName]-[|ProductVersion]" Languages="en;fr" LangOpt="1" InstallationType="4"/>
     <ATTRIBUTE name="CurrentBuild" value="DefaultBuild"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
