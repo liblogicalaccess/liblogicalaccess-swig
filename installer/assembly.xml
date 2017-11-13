@@ -6,7 +6,7 @@
     <fileSets>
         <fileSet>
             <directory>/output</directory>
-            <outputDirectory>/exe/</outputDirectory>
+            <outputDirectory>/msm/</outputDirectory>
             <includes>
                 <include>*.msm</include>
             </includes>
