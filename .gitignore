@@ -28,3 +28,9 @@ sources/!LibLogicalAccessNet/Exception/CustomException.cs
 *opensdf
 .vs
 sources/LibLogicalAccessNet.win32/*.filters
+installer/LibLogicalAccessNet-cache
+installer/LibLogicalAccessNet-SetupFiles
+/installer/build.LibLogicalAccessNetMergex64.aip
+/installer/output
+/installer/build.LibLogicalAccessNetMergex64-cache
+/installer/VERSION
