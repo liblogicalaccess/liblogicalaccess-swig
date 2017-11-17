@@ -76,8 +76,6 @@
 
 %ignore newDynLibrary;
 %ignore hasEnding;
-%ignore logicalaccess::LibraryManager::getCardService;
-%ignore logicalaccess::LibraryManager::getReaderService;
 
 %rename(IsEqual) operator==;
 %rename(IsDifferent) operator!=;
@@ -196,7 +194,7 @@
 %shared_ptr(logicalaccess::EPassChip);
 %shared_ptr(logicalaccess::EPassCommands);
 %shared_ptr(logicalaccess::EPassCrypto);
-%shared_ptr(logicalaccess::EPassIdentityService);
+%shared_ptr(logicalaccess::EPassIdentityCardService);
 %shared_ptr(logicalaccess::EPassReaderCardAdapter);
 %shared_ptr(logicalaccess::EPassUtils);
 %shared_ptr(logicalaccess::ElapsedTimeCounter);
@@ -325,7 +323,7 @@
 %shared_ptr(logicalaccess::MifareCL1356Commands);
 %shared_ptr(logicalaccess::MifareCherryCommands);
 %shared_ptr(logicalaccess::MifareChip);
-%shared_ptr(logicalaccess::MifareClassicUIDChangerService);
+%shared_ptr(logicalaccess::MifareClassicUIDChangerCardService);
 %shared_ptr(logicalaccess::MifareCommands);
 %shared_ptr(logicalaccess::MifareKey);
 %shared_ptr(logicalaccess::MifareLocation);
@@ -361,7 +359,7 @@
 %shared_ptr(logicalaccess::MifarePlusSL3PCSCCommands);
 %shared_ptr(logicalaccess::MifarePlusSpringcardAES_SL1_Auth);
 %shared_ptr(logicalaccess::MifarePlusSpringcardSL1Commands);
-%shared_ptr(logicalaccess::MifarePlusStorageCardServiceSL1);
+%shared_ptr(logicalaccess::MifarePlusStorageSL1CardService);
 %shared_ptr(logicalaccess::MifarePlusXChip);
 %shared_ptr(logicalaccess::MifareSCMCommands);
 %shared_ptr(logicalaccess::MifareSTidSTRCommands);
@@ -386,7 +384,7 @@
 %shared_ptr(logicalaccess::MifareUltralightOK5553Commands);
 %shared_ptr(logicalaccess::MifareUltralightPCSCCommands);
 %shared_ptr(logicalaccess::MifareUltralightStorageCardService);
-%shared_ptr(logicalaccess::MifareUltralightUIDChangerService);
+%shared_ptr(logicalaccess::MifareUltralightUIDChangerCardService);
 %shared_ptr(logicalaccess::NFCDataTransport);
 %shared_ptr(logicalaccess::NFCReaderCardAdapter);
 %shared_ptr(logicalaccess::NFCReaderProvider);
@@ -428,7 +426,7 @@
 %shared_ptr(logicalaccess::OmnikeyXX22ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX23ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX25ReaderUnit);
-%shared_ptr(logicalaccess::OmnikeyXX27AccessControlService);
+%shared_ptr(logicalaccess::OmnikeyXX27AccessControlCardService);
 %shared_ptr(logicalaccess::OmnikeyXX27ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX27SecureMode);
 %shared_ptr(logicalaccess::OmnitechKeyDiversification);
@@ -502,7 +500,7 @@
 %shared_ptr(logicalaccess::SSLTransport);
 %shared_ptr(logicalaccess::STidPRGBufferParser);
 %shared_ptr(logicalaccess::STidPRGDataTransport);
-%shared_ptr(logicalaccess::STidPRGProxAccessControl);
+%shared_ptr(logicalaccess::STidPRGProxAccessControlCardService);
 %shared_ptr(logicalaccess::STidPRGReaderCardAdapter);
 %shared_ptr(logicalaccess::STidPRGReaderProvider);
 %shared_ptr(logicalaccess::STidPRGReaderUnit);
@@ -557,7 +555,7 @@
 %shared_ptr(logicalaccess::TwicLocation);
 %shared_ptr(logicalaccess::TwicProfile);
 %shared_ptr(logicalaccess::TwicStorageCardService);
-%shared_ptr(logicalaccess::UIDChangerService);
+%shared_ptr(logicalaccess::UIDChangerCardService);
 %shared_ptr(logicalaccess::UdpDataTransport);
 %shared_ptr(logicalaccess::ValueDataField);
 %shared_ptr(logicalaccess::Wiegand26Format);
@@ -722,7 +720,7 @@
 %shared_ptr(EPassChip);
 %shared_ptr(EPassCommands);
 %shared_ptr(EPassCrypto);
-%shared_ptr(EPassIdentityService);
+%shared_ptr(EPassIdentityCardService);
 %shared_ptr(EPassReaderCardAdapter);
 %shared_ptr(EPassUtils);
 %shared_ptr(ElapsedTimeCounter);
@@ -851,7 +849,7 @@
 %shared_ptr(MifareCL1356Commands);
 %shared_ptr(MifareCherryCommands);
 %shared_ptr(MifareChip);
-%shared_ptr(MifareClassicUIDChangerService);
+%shared_ptr(MifareClassicUIDChangerCardService);
 %shared_ptr(MifareCommands);
 %shared_ptr(MifareKey);
 %shared_ptr(MifareLocation);
@@ -887,7 +885,7 @@
 %shared_ptr(MifarePlusSL3PCSCCommands);
 %shared_ptr(MifarePlusSpringcardAES_SL1_Auth);
 %shared_ptr(MifarePlusSpringcardSL1Commands);
-%shared_ptr(MifarePlusStorageCardServiceSL1);
+%shared_ptr(MifarePlusStorageSL1CardService);
 %shared_ptr(MifarePlusXChip);
 %shared_ptr(MifareSCMCommands);
 %shared_ptr(MifareSTidSTRCommands);
@@ -912,7 +910,7 @@
 %shared_ptr(MifareUltralightOK5553Commands);
 %shared_ptr(MifareUltralightPCSCCommands);
 %shared_ptr(MifareUltralightStorageCardService);
-%shared_ptr(MifareUltralightUIDChangerService);
+%shared_ptr(MifareUltralightUIDChangerCardService);
 %shared_ptr(NFCDataTransport);
 %shared_ptr(NFCReaderCardAdapter);
 %shared_ptr(NFCReaderProvider);
@@ -954,7 +952,7 @@
 %shared_ptr(OmnikeyXX22ReaderUnit);
 %shared_ptr(OmnikeyXX23ReaderUnit);
 %shared_ptr(OmnikeyXX25ReaderUnit);
-%shared_ptr(OmnikeyXX27AccessControlService);
+%shared_ptr(OmnikeyXX27AccessControlCardService);
 %shared_ptr(OmnikeyXX27ReaderUnit);
 %shared_ptr(OmnikeyXX27SecureMode);
 %shared_ptr(OmnitechKeyDiversification);
@@ -1028,7 +1026,7 @@
 %shared_ptr(SSLTransport);
 %shared_ptr(STidPRGBufferParser);
 %shared_ptr(STidPRGDataTransport);
-%shared_ptr(STidPRGProxAccessControl);
+%shared_ptr(STidPRGProxAccessControlCardService);
 %shared_ptr(STidPRGReaderCardAdapter);
 %shared_ptr(STidPRGReaderProvider);
 %shared_ptr(STidPRGReaderUnit);
@@ -1083,7 +1081,7 @@
 %shared_ptr(TwicLocation);
 %shared_ptr(TwicProfile);
 %shared_ptr(TwicStorageCardService);
-%shared_ptr(UIDChangerService);
+%shared_ptr(UIDChangerCardService);
 %shared_ptr(UdpDataTransport);
 %shared_ptr(ValueDataField);
 %shared_ptr(Wiegand26Format);
@@ -1169,9 +1167,6 @@ INTERFACEPTR(logicalaccess::ISO14443ReaderCommunication);
 
 %interface_custom("ISO15693ReaderCommunication", "IISO15693ReaderCommunication", ISO15693ReaderCommunication)
 INTERFACEPTR(logicalaccess::ISO15693ReaderCommunication);
-
-%interface_custom("ISO14443ReaderCommunication", "IISO14443ReaderCommunication", ISO14443ReaderCommunication)
-INTERFACEPTR(logicalaccess::IISO14443ReaderCommunication);
 
 /*****EXCPETION HANDLING*****/
 

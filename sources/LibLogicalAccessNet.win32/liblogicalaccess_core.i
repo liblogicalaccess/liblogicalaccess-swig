@@ -114,8 +114,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %}
 
 %pragma(csharp) imclasscode=%{
-	public static System.Collections.Generic.Dictionary<string, System.Type> chipDictionary;
-
 	public static System.Collections.Generic.Dictionary<string, System.Type> createDictionary<T>() where T : class
 	{
         System.Collections.Generic.Dictionary<string, System.Type> dictionary = new System.Collections.Generic.Dictionary<string, System.Type>();
@@ -130,6 +128,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
         }
         return dictionary;
 	}
+
+	public static System.Collections.Generic.Dictionary<string, System.Type> chipDictionary;
 
 	public static Chip	createChip(System.IntPtr cPtr, bool owner)
 	{
@@ -348,32 +348,24 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 }
 
 %pragma(csharp) imclasscode=%{
-  public static CardService createCardService(System.IntPtr cPtr, bool owner)
-  {
-    CardService ret = null;
-    if (cPtr == System.IntPtr.Zero) {
-      return ret;
-    }
-	CardServiceType svcType = (CardServiceType)($imclassname.CardService_getServiceType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
-    switch (svcType) {
-       case CardServiceType.CST_ACCESS_CONTROL:
-	     ret = new AccessControlCardService(cPtr, owner);
-	     break;
-	   case CardServiceType.CST_IDENTITY:
-	     ret = new IdentityCardService(cPtr, owner);
-	     break;
-	   case CardServiceType.CST_NFC_TAG:
-	     ret = new NFCTagCardService(cPtr, owner);
-	     break;
-	   case CardServiceType.CST_STORAGE:
-	     ret = new StorageCardService(cPtr, owner);
-	     break;
-	   case CardServiceType.CST_UID_CHANGER:
-	     ret = new UIDChangerService(cPtr, owner);
-	     break;
-      }
-      return ret;
-    }
+	public static System.Collections.Generic.Dictionary<string, System.Type> cardServiceDictionary;
+
+	public static CardService	createCardService(System.IntPtr cPtr, bool owner)
+	{
+		CardService ret = null;
+		if (cPtr == System.IntPtr.Zero) {
+		  return ret;
+		}
+		string ct = ($imclassname.CardService_getCSType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (cardServiceDictionary == null)
+			cardServiceDictionary = createDictionary<CardService>();
+        if (cardServiceDictionary.ContainsKey(ct))
+        {
+            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            ret = (CardService)System.Activator.CreateInstance(cardServiceDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
+        }
+		return ret;
+	}
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
@@ -383,6 +375,29 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
     return ret;
 }
 
+%pragma(csharp) imclasscode=%{
+  public static ReaderService createReaderService(System.IntPtr cPtr, bool owner)
+  {
+    ReaderService ret = null;
+    if (cPtr == System.IntPtr.Zero) {
+      return ret;
+    }
+	ReaderServiceType svcType = (ReaderServiceType)($imclassname.ReaderService_getServiceType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+    switch (svcType) {
+       case ReaderServiceType.RST_LICENSE_CHECKER:
+	     ret = new LicenseCheckerService(cPtr, owner);
+	     break;
+      }
+      return ret;
+    }
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::ReaderService*, std::shared_ptr<logicalaccess::ReaderService> {
+    System.IntPtr cPtr = $imcall;
+    ReaderService ret = liblogicalaccess_corePINVOKE.createReaderService(cPtr, $owner);$excode
+    return ret;
+}
 
 /* END_Configuration_section */
 
