@@ -6,9 +6,6 @@
 
 %import "liblogicalaccess_iks.i"
 
-%include "liblogicalaccess_cardservice.i"
-%include "liblogicalaccess_readerservice.i"
-
 %typemap(csimports) SWIGTYPE
 %{
 using LibLogicalAccess;
@@ -279,6 +276,34 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
     return ret;
   }
 
+%pragma(csharp) imclasscode=%{
+	public static System.Collections.Generic.Dictionary<string, System.Type> ReaderProviderDictionary;
+
+	public static ReaderProvider createReaderProvider(System.IntPtr cPtr, bool owner)
+	{
+		ReaderProvider ret = null;
+		if (cPtr == System.IntPtr.Zero) {
+		  return ret;
+		}
+		string rpt = ($imclassname.ReaderProvider_getRPType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (ReaderProviderDictionary == null)
+			ReaderProviderDictionary = createDictionary<ReaderProvider>();
+        if (ReaderProviderDictionary.ContainsKey(rpt))
+        {
+            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            ret = (ReaderProvider)System.Activator.CreateInstance(ReaderProviderDictionary[rpt], flags, null, new object[] { cPtr, owner }, null);
+        }
+		return ret;
+	}
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::ReaderProvider*, std::shared_ptr<logicalaccess::ReaderProvider>, std::shared_ptr<logicalaccess::ReaderProvider> & {
+    System.IntPtr cPtr = $imcall;
+    ReaderProvider ret = liblogicalaccess_corePINVOKE.createReaderProvider(cPtr, $owner);$excode
+    return ret;
+  }
+
 %template(getVectorReaderUnit) getVectorPart<std::shared_ptr<logicalaccess::ReaderUnit> >;
 
 %typemap(csout, excode=SWIGEXCODE)
@@ -361,6 +386,9 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 /* END_Configuration_section */
 
+/* Include external swig after typemap */
+%include "liblogicalaccess_readerservice.i"
+%include "liblogicalaccess_cardservice.i"
 
 %include <logicalaccess/plugins/crypto/symmetric_key.hpp>
 %include <logicalaccess/plugins/crypto/initialization_vector.hpp>

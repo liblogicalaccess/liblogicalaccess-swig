@@ -1170,6 +1170,9 @@ INTERFACEPTR(logicalaccess::ISO14443ReaderCommunication);
 %interface_custom("ISO15693ReaderCommunication", "IISO15693ReaderCommunication", ISO15693ReaderCommunication)
 INTERFACEPTR(logicalaccess::ISO15693ReaderCommunication);
 
+%interface_custom("ISO14443ReaderCommunication", "IISO14443ReaderCommunication", ISO14443ReaderCommunication)
+INTERFACEPTR(logicalaccess::IISO14443ReaderCommunication);
+
 /*****EXCPETION HANDLING*****/
 
 %insert(runtime) %{

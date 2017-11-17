@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio 2017
 VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibLogicalAccessNet.win32", "LibLogicalAccessNet.win32\LibLogicalAccessNet.win32.vcxproj", "{14229126-896D-4055-8A80-AB8094E603D6}"

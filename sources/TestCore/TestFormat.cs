@@ -11,7 +11,7 @@ namespace DESFireEV1Tests
     public class TestFormat
     {
         [TestMethod]
-        public void General()
+        public void TestGetAllFormat()
         {
             Debug.WriteLine("Start format... ");
             foreach (FormatType type in Enum.GetValues(typeof(FormatType)))
