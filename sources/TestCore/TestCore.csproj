@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReaderProvider.cs" />
+    <Compile Include="TestGetType.cs" />
     <Compile Include="TestFormat.cs" />
   </ItemGroup>
   <ItemGroup>

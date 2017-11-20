@@ -351,6 +351,7 @@
 %shared_ptr(logicalaccess::MifarePlusSL1AccessInfo);
 %shared_ptr(logicalaccess::MifarePlusSL1Chip);
 %shared_ptr(logicalaccess::MifarePlusSL1Commands);
+%shared_ptr(logicalaccess::MifarePlusSL1StorageCardService);
 %shared_ptr(logicalaccess::MifarePlusSL1_2kChip);
 %shared_ptr(logicalaccess::MifarePlusSL1_4kChip);
 %shared_ptr(logicalaccess::MifarePlusSL3Auth);
@@ -359,7 +360,6 @@
 %shared_ptr(logicalaccess::MifarePlusSL3PCSCCommands);
 %shared_ptr(logicalaccess::MifarePlusSpringcardAES_SL1_Auth);
 %shared_ptr(logicalaccess::MifarePlusSpringcardSL1Commands);
-%shared_ptr(logicalaccess::MifarePlusStorageSL1CardService);
 %shared_ptr(logicalaccess::MifarePlusXChip);
 %shared_ptr(logicalaccess::MifareSCMCommands);
 %shared_ptr(logicalaccess::MifareSTidSTRCommands);
@@ -877,6 +877,7 @@
 %shared_ptr(MifarePlusSL1AccessInfo);
 %shared_ptr(MifarePlusSL1Chip);
 %shared_ptr(MifarePlusSL1Commands);
+%shared_ptr(MifarePlusSL1StorageCardService);
 %shared_ptr(MifarePlusSL1_2kChip);
 %shared_ptr(MifarePlusSL1_4kChip);
 %shared_ptr(MifarePlusSL3Auth);
@@ -885,7 +886,6 @@
 %shared_ptr(MifarePlusSL3PCSCCommands);
 %shared_ptr(MifarePlusSpringcardAES_SL1_Auth);
 %shared_ptr(MifarePlusSpringcardSL1Commands);
-%shared_ptr(MifarePlusStorageSL1CardService);
 %shared_ptr(MifarePlusXChip);
 %shared_ptr(MifareSCMCommands);
 %shared_ptr(MifareSTidSTRCommands);

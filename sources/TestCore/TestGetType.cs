@@ -115,7 +115,6 @@ namespace TestCore
             (desFireEv2Chip.getService(CardServiceType.CST_NFC_TAG) as DESFireEV1NFCTag4CardService).GetType();
         }
 
-
         [TestMethod]
         public void TestGetReaderProvider()
         {
@@ -166,6 +165,11 @@ namespace TestCore
             Assert.IsTrue(readerProvider is STidPRGReaderProvider);
             readerProvider = libManager.getReaderProvider("STidSTR");
             Assert.IsTrue(readerProvider is STidSTRReaderProvider);
+
+
+            var readerConfiguration = new ReaderConfiguration();
+            readerConfiguration.setReaderProvider(PCSCReaderProvider.createInstance());
+            (readerConfiguration.getReaderProvider() as PCSCReaderProvider).GetType();
         }
     }
 }
