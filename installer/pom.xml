@@ -44,7 +44,7 @@
 						<configuration>
 							<arguments>
 								<argument>${Mergex64}</argument>
-								<argument>${version}.${buildNumber}</argument>
+								<argument>${version}</argument>
 							</arguments>
 							<executable>SetAIVersion</executable>
 						</configuration>
@@ -58,7 +58,7 @@
 						<configuration>
 							<arguments>
 								<argument>${Mergex86}</argument>
-								<argument>${version}.${buildNumber}</argument>
+								<argument>${version}</argument>
 							</arguments>
 							<executable>SetAIVersion</executable>
 						</configuration>

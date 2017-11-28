@@ -1210,28 +1210,35 @@ static void SWIG_CSharpSetPendingExceptionCustom(const char *name, const char *m
   static CustomExceptionHelper exceptionHelper = new CustomExceptionHelper();
 %}
 
-%{
-#define CATCH_CSE(EXCEPT) \
-	catch (EXCEPT &e) \
-	{ \
-	  std::string name(typeid(e).name());\
-	  if (name.find("class ") != std::string::npos)\
-		 name.erase(0, name.find(" ") + 1);\
-	  SWIG_CSharpSetPendingExceptionCustom(name.c_str(), e.what());\
-	}\
-
-#define FOR_EACH_EXCEPTION(ACTION)\
-	ACTION(logicalaccess::IKSException)\
-	ACTION(logicalaccess::CardException)\
-	ACTION(logicalaccess::LibLogicalAccessException)\
-%}
-
 %exception %{
 try 
 {
-  $action
-} 
-FOR_EACH_EXCEPTION( CATCH_CSE )
+	$action
+}
+catch (logicalaccess::IKSException &e) \
+{
+	std::string name(typeid(e).name());
+	if (name.find("class ") != std::string::npos)
+		name.erase(0, name.find(" ") + 1);
+	SWIG_CSharpSetPendingExceptionCustom(name.c_str(), e.what());
+	return $null;
+}
+catch (logicalaccess::CardException &e)
+{
+	std::string name(typeid(e).name());
+	if (name.find("class ") != std::string::npos)
+		name.erase(0, name.find(" ") + 1);
+	SWIG_CSharpSetPendingExceptionCustom(name.c_str(), e.what());
+	return $null;
+}
+catch (logicalaccess::LibLogicalAccessException &e)
+{
+	std::string name(typeid(e).name());
+	if (name.find("class ") != std::string::npos)
+		name.erase(0, name.find(" ") + 1);
+	SWIG_CSharpSetPendingExceptionCustom(name.c_str(), e.what());
+	return $null;
+}
 catch (std::out_of_range &e)
 {
 	SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, e.what(), "unknown");
