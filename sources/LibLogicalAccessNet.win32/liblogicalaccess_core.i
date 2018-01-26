@@ -14,6 +14,8 @@ using LibLogicalAccess.Reader;
 
 %{
 
+#include <boost/asio/ssl.hpp>
+
 #include <logicalaccess/plugins/crypto/symmetric_key.hpp>
 #include <logicalaccess/plugins/crypto/initialization_vector.hpp>
 #include <logicalaccess/plugins/crypto/symmetric_cipher.hpp>
