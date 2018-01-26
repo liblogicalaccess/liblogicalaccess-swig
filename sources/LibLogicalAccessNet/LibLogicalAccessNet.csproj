@@ -7,7 +7,7 @@
       ISLOG RFID library layer for C#
     </Description>
     <Copyright>Copyright (C) 2017</Copyright>
-    <Version>2.0.0.0-pre20180126</Version>
+    <Version>2.0.0.0</Version>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0.0</FileVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
