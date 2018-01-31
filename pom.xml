@@ -6,6 +6,12 @@
 	<version>2.0.0-SNAPSHOT</version>
 	<name>LibLogicalAccess SWIG</name>
 	
+	<parent>
+		<groupId>eu.islog</groupId>
+		<artifactId>default-pom</artifactId>
+		<version>1.8.4</version>
+	</parent>
+	
     <build>
 		<plugins>
 			<plugin>
