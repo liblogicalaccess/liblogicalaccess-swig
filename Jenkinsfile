@@ -25,7 +25,7 @@ pipeline {
 				// gitversion do not support vs2017 project for now https://github.com/GitTools/GitVersion/issues/1315
 				powershell 'sources/scripts/update-gitversion-vs2017proj.ps1 sources/LibLogicalAccessNet/LibLogicalAccessNet.csproj'
 				powershell 'sources/scripts/generate-swig.bat'
-				powershell "islog-build $true"		
+				powershell 'islog-build 1'
 				warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', consoleParsers: [[parserName: 'MSBuild']], defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', unHealthy: ''
 				powershell 'islog-package'
             }
