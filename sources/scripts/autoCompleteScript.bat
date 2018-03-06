@@ -15,5 +15,5 @@ for /f "tokens=2,*" %%i in ('reg query %PythonRegKey%\InstallPath /ve') do (
 
 set PYTHONPATH=%~dp0
 
-set PYTHONPATH=%~dp0
+"%PythonInstallPath%\Scripts\pip" install -r requirements.txt
 "%PythonInstallPath%\python.exe" %~dp0\autoComplete.py
