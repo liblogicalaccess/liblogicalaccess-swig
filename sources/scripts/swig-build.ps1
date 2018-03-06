@@ -17,7 +17,7 @@ foreach ($Command in $Commands){
 	Start-Job -Init ([ScriptBlock]::Create("Set-Location $pwd")) -ArgumentList $Command  {
 
         $cmd = $env:SWIG + "\swig.exe"
-		$currentPath = (Get-Item -Path ".\" -Verbose).FullName + "\..\packages\include"
+		$currentPath = (Get-Item -Path ".\" -Verbose).FullName + "\..\installer\packages\include"
 		& $cmd -csharp -c++ -I"$currentPath" -outdir $args[0] -namespace $args[1] -dllimport LibLogicalAccessNet.win32.dll $args[2]
 				
 		if ($LASTEXITCODE -ne 0) {

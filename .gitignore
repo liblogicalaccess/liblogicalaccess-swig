@@ -30,9 +30,6 @@ sources/!LibLogicalAccessNet/Exception/CustomException.cs
 sources/LibLogicalAccessNet.win32/*.filters
 installer/LibLogicalAccessNet-cache
 installer/LibLogicalAccessNet-SetupFiles
-/installer/build.LibLogicalAccessNetMergex64.aip
 /installer/output
-/installer/build.LibLogicalAccessNetMergex64-cache
 /installer/VERSION
-/installer/build.LibLogicalAccessNetMergex86-cache
-/installer/build.LibLogicalAccessNetMergex86.aip
+/installer/build.*

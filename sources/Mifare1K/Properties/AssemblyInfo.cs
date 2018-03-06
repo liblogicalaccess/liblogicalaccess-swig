@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -15,6 +15,8 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("f34e8a7b-7d85-4d44-9cd3-0bb79567c2df")]
 
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+// [assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]
+
+[assembly: AssemblyInformationalVersion("2.0.0+135.Branch.master.Sha.95205e05cd687715bf86c57fa0a371fa28b7a14a")]

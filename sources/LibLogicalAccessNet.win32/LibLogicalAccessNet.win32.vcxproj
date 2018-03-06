@@ -69,28 +69,28 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)..\packages\include\;$(SolutionDir)..\packages\include\logicalaccess\plugins\cards\;$(SolutionDir)..\packages\include\logicalaccess\plugins\readers\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\installer\packages\include\;$(SolutionDir)..\installer\packages\include\logicalaccess\plugins\cards\;$(SolutionDir)..\installer\packages\include\logicalaccess\plugins\readers\;$(IncludePath)</IncludePath>
     <OutDir>$(ProjectDir)bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>
     </IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)..\packages\include\;$(SolutionDir)..\packages\include\logicalaccess\plugins\cards\;$(SolutionDir)..\packages\include\logicalaccess\plugins\readers\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\installer\packages\include\;$(SolutionDir)..\installer\packages\include\logicalaccess\plugins\cards\;$(SolutionDir)..\installer\packages\include\logicalaccess\plugins\readers\;$(IncludePath)</IncludePath>
     <OutDir>$(ProjectDir)bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>
     </IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)..\packages\include\;$(SolutionDir)..\packages\include\logicalaccess\plugins\cards\;$(SolutionDir)..\packages\include\logicalaccess\plugins\readers\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\installer\packages\include\;$(SolutionDir)..\installer\packages\include\logicalaccess\plugins\cards\;$(SolutionDir)..\installer\packages\include\logicalaccess\plugins\readers\;$(IncludePath)</IncludePath>
     <OutDir>$(ProjectDir)bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>
     </IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)..\packages\include\;$(SolutionDir)..\packages\include\logicalaccess\plugins\cards\;$(SolutionDir)..\packages\include\logicalaccess\plugins\readers\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\installer\packages\include\;$(SolutionDir)..\installer\packages\include\logicalaccess\plugins\cards\;$(SolutionDir)..\installer\packages\include\logicalaccess\plugins\readers\;$(IncludePath)</IncludePath>
     <OutDir>$(ProjectDir)bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>
     </IntDir>
@@ -109,7 +109,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\packages\lib\Win32\Debug;$(SolutionDir)..\packages\lib\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\installer\packages\lib\Win32\Debug;$(SolutionDir)..\installer\packages\lib\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>desfirecards.lib;em4102cards.lib;em4135cards.lib;generictagcards.lib;icode1cards.lib;icode2cards.lib;indalacards.lib;infineonmydcards.lib;iso7816cards.lib;iso15693cards.lib;legicprimecards.lib;mifarecards.lib;mifarepluscards.lib;mifareultralightcards.lib;proxcards.lib;proxlitecards.lib;smartframecards.lib;stmlri512cards.lib;tagitcards.lib;twiccards.lib;a3mlgm5600readers.lib;admittoreaders.lib;axesstmc13readers.lib;axesstmclegicreaders.lib;deisterreaders.lib;elatecreaders.lib;gunneboreaders.lib;idondemandreaders.lib;iso7816readers.lib;keyboardreaders.lib;pcscreaders.lib;promagreaders.lib;rfideasreaders.lib;scielreaders.lib;smartidreaders.lib;stidstrreaders.lib;rplethreaders.lib;ok5553readers.lib;samav2cards.lib;felicacards.lib;cps3cards.lib;stidprgreaders.lib;osdpreaders.lib;gigatmsreaders.lib;epasscards.lib;topazcards.lib;iclasscards.lib;iclasscards_5321.lib;private-pcscreaders.lib;libnfc-nfcreaders.lib;liblogicalaccess.lib;logicalaccess-cryptolib.lib;libcrypto.lib;libssl.lib;idpreaders.lib;seoscards.lib;desfireev2cards.lib;private-iso7816readers.lib</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
@@ -135,7 +135,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\packages\lib\x64\Debug;$(SolutionDir)..\packages\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\installer\packages\lib\x64\Debug;$(SolutionDir)..\installer\packages\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>desfirecards.lib;em4102cards.lib;em4135cards.lib;generictagcards.lib;icode1cards.lib;icode2cards.lib;indalacards.lib;infineonmydcards.lib;iso7816cards.lib;iso15693cards.lib;legicprimecards.lib;mifarecards.lib;mifarepluscards.lib;mifareultralightcards.lib;proxcards.lib;proxlitecards.lib;smartframecards.lib;stmlri512cards.lib;tagitcards.lib;twiccards.lib;a3mlgm5600readers.lib;admittoreaders.lib;axesstmc13readers.lib;axesstmclegicreaders.lib;deisterreaders.lib;elatecreaders.lib;gunneboreaders.lib;idondemandreaders.lib;iso7816readers.lib;keyboardreaders.lib;pcscreaders.lib;promagreaders.lib;rfideasreaders.lib;scielreaders.lib;smartidreaders.lib;stidstrreaders.lib;rplethreaders.lib;ok5553readers.lib;samav2cards.lib;felicacards.lib;cps3cards.lib;stidprgreaders.lib;osdpreaders.lib;gigatmsreaders.lib;epasscards.lib;topazcards.lib;iclasscards.lib;iclasscards_5321.lib;private-pcscreaders.lib;libnfc-nfcreaders.lib;liblogicalaccess.lib;logicalaccess-cryptolib.lib;libcrypto.lib;libssl.lib;idpreaders.lib;seoscards.lib;desfireev2cards.lib;private-iso7816readers.lib</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
@@ -161,7 +161,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\packages\lib\Win32\Release;$(SolutionDir)..\packages\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\installer\packages\lib\Win32\Release;$(SolutionDir)..\installer\packages\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>desfirecards.lib;em4102cards.lib;em4135cards.lib;generictagcards.lib;icode1cards.lib;icode2cards.lib;indalacards.lib;infineonmydcards.lib;iso7816cards.lib;iso15693cards.lib;legicprimecards.lib;mifarecards.lib;mifarepluscards.lib;mifareultralightcards.lib;proxcards.lib;proxlitecards.lib;smartframecards.lib;stmlri512cards.lib;tagitcards.lib;twiccards.lib;a3mlgm5600readers.lib;admittoreaders.lib;axesstmc13readers.lib;axesstmclegicreaders.lib;deisterreaders.lib;elatecreaders.lib;gunneboreaders.lib;idondemandreaders.lib;iso7816readers.lib;keyboardreaders.lib;pcscreaders.lib;promagreaders.lib;rfideasreaders.lib;scielreaders.lib;smartidreaders.lib;stidstrreaders.lib;rplethreaders.lib;ok5553readers.lib;samav2cards.lib;felicacards.lib;cps3cards.lib;stidprgreaders.lib;osdpreaders.lib;gigatmsreaders.lib;epasscards.lib;topazcards.lib;iclasscards.lib;iclasscards_5321.lib;private-pcscreaders.lib;libnfc-nfcreaders.lib;liblogicalaccess.lib;logicalaccess-cryptolib.lib;libcrypto.lib;libssl.lib;idpreaders.lib;seoscards.lib;desfireev2cards.lib;private-iso7816readers.lib</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
@@ -187,7 +187,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\packages\lib\x64\Release;$(SolutionDir)..\packages\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\installer\packages\lib\x64\Release;$(SolutionDir)..\installer\packages\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>desfirecards.lib;em4102cards.lib;em4135cards.lib;generictagcards.lib;icode1cards.lib;icode2cards.lib;indalacards.lib;infineonmydcards.lib;iso7816cards.lib;iso15693cards.lib;legicprimecards.lib;mifarecards.lib;mifarepluscards.lib;mifareultralightcards.lib;proxcards.lib;proxlitecards.lib;smartframecards.lib;stmlri512cards.lib;tagitcards.lib;twiccards.lib;a3mlgm5600readers.lib;admittoreaders.lib;axesstmc13readers.lib;axesstmclegicreaders.lib;deisterreaders.lib;elatecreaders.lib;gunneboreaders.lib;idondemandreaders.lib;iso7816readers.lib;keyboardreaders.lib;pcscreaders.lib;promagreaders.lib;rfideasreaders.lib;scielreaders.lib;smartidreaders.lib;stidstrreaders.lib;rplethreaders.lib;ok5553readers.lib;samav2cards.lib;felicacards.lib;cps3cards.lib;stidprgreaders.lib;osdpreaders.lib;gigatmsreaders.lib;epasscards.lib;topazcards.lib;iclasscards.lib;iclasscards_5321.lib;private-pcscreaders.lib;libnfc-nfcreaders.lib;liblogicalaccess.lib;logicalaccess-cryptolib.lib;libcrypto.lib;libssl.lib;idpreaders.lib;seoscards.lib;desfireev2cards.lib;private-iso7816readers.lib</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
@@ -216,10 +216,10 @@
   <ItemGroup>
     <CustomBuild Include="liblogicalaccess_card.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Card -namespace LibLogicalAccess.Card -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
@@ -232,10 +232,10 @@
     <None Include="liblogicalaccess_cardservice.i" />
     <CustomBuild Include="liblogicalaccess_data.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
@@ -247,10 +247,10 @@
     </CustomBuild>
     <CustomBuild Include="liblogicalaccess_library.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
@@ -262,10 +262,10 @@
     </CustomBuild>
     <CustomBuild Include="liblogicalaccess_reader.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Reader -namespace LibLogicalAccess.Reader -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Reader -namespace LibLogicalAccess.Reader -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Reader -namespace LibLogicalAccess.Reader -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Reader -namespace LibLogicalAccess.Reader -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Reader -namespace LibLogicalAccess.Reader -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Reader -namespace LibLogicalAccess.Reader -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Reader -namespace LibLogicalAccess.Reader -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Reader -namespace LibLogicalAccess.Reader -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
@@ -277,10 +277,10 @@
     </CustomBuild>
     <CustomBuild Include="liblogicalaccess_iks.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
@@ -292,10 +292,10 @@
     </CustomBuild>
     <CustomBuild Include="liblogicalaccess_core.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Core -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Core -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Core -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Core -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Core -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Core -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Core -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Generated\Core -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
@@ -307,7 +307,7 @@
     </CustomBuild>
     <CustomBuild Include="liblogicalaccess_exception.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Exception -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">swig -csharp -c++ -I$(SolutionDir)..\installer\packages\include -outdir $(SolutionDir)\LibLogicalAccessNet\Exception -namespace LibLogicalAccess -dllimport LibLogicalAccessNet.win32.dll "%(FullPath)"</Command>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename)_wrap.cxx;%(Outputs)</Outputs>
     </CustomBuild>
