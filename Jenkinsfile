@@ -22,7 +22,7 @@ pipeline {
         stage('Build') {
             steps {
 				powershell 'islog-prebuild'
-				# gitversion do not support vs2017 project for now https://github.com/GitTools/GitVersion/issues/1315
+				// gitversion do not support vs2017 project for now https://github.com/GitTools/GitVersion/issues/1315
 				powershell '.\sources\scripts\update-gitversion-vs2017proj.ps1 .\sources\LibLogicalAccessNet\LibLogicalAccessNet.csproj'
 				powershell '.\sources\scripts\generate-swig.bat'
 				powershell 'islog-build $true'				
