@@ -13,29 +13,60 @@ $Commands = @((".\LibLogicalAccessNet\Generated\Card", "LibLogicalAccess.Card", 
             (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_iks.i"),
             (".\LibLogicalAccessNet\Generated\Core", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_core.i"))
 
-foreach ($Command in $Commands){
-	Start-Job -Init ([ScriptBlock]::Create("Set-Location $pwd")) -ArgumentList $Command  {
+$currentFolder = (Get-Item -Path ".\" -Verbose).FullName
+			
+$RunspaceCollection = @()
+[Collections.Arraylist]$qwinstaResults = @()
+$RunspacePool = [RunspaceFactory]::CreateRunspacePool(1,30)
+$RunspacePool.Open()
 
+$ScriptBlock = {
+	Param(
+		[string]$currentFolder,
+		[string]$outdir,
+		[string]$namespace,
+		[string]$interface
+	)
+	
+	Try
+	{
+		cd $currentFolder
         $cmd = $env:SWIG + "\swig.exe"
 		$currentPath = (Get-Item -Path ".\" -Verbose).FullName + "\..\installer\packages\include"
-		& $cmd -csharp -c++ -I"$currentPath" -outdir $args[0] -namespace $args[1] -dllimport LibLogicalAccessNet.win32.dll $args[2]
-				
+	
+		$output = & $cmd -csharp -c++ -I"$currentPath" -outdir $outdir -namespace $namespace -dllimport LibLogicalAccessNet.win32.dll $interface
 		if ($LASTEXITCODE -ne 0) {
-			throw ("Command returned non-zero error-code ${LASTEXITCODE}: ${command}")
+			throw ("Command returned non-zero error-code ${LASTEXITCODE}: $cmd -csharp -c++ -I$currentPath -outdir $outdir -namespace $namespace -dllimport LibLogicalAccessNet.win32.dll $interface`n$output")
 		}
+
+		return $output;
+	}
+	Catch
+	{
+		return $_.Exception.Message;
 	}
 }
 
+foreach ($Command in $Commands){
+	$Powershell = [PowerShell]::Create().AddScript($ScriptBlock).AddParameters(@($currentFolder, $Command[0], $Command[1], $Command[2]))
+	$Powershell.RunspacePool = $RunspacePool
+	[Collections.Arraylist]$RunspaceCollection += New-Object -TypeName PSObject -Property @{
+		Runspace = $PowerShell.BeginInvoke()
+		PowerShell = $PowerShell  
+	}
+}
 
-Get-Job | Wait-Job
-
-foreach ($Job in Get-Job){
-	$Job
-    "Code = $($Job.State)"
-	"****************************************"
-	Receive-Job $Job
-	" " 
-	Remove-Job $Job
+While($RunspaceCollection) {
+	Foreach ($Runspace in $RunspaceCollection.ToArray()) {
+		If ($Runspace.Runspace.IsCompleted) {
+			$output = $Runspace.PowerShell.EndInvoke($Runspace.Runspace)
+			if (![string]::IsNullOrEmpty($output)) {
+				Write-Host $output
+			}
+			$Runspace.PowerShell.Dispose()
+			$RunspaceCollection.Remove($Runspace)
+		}
+	}
 }
 
 cd scripts
