@@ -19,5 +19,7 @@ if (!($s.Project.PropertyGroup -eq $null) -and !($s.Project.PropertyGroup[0] -eq
 	$s.Project.PropertyGroup[0].AssemblyVersion = "$AssemblySemVer";
 	$s.Project.PropertyGroup[0].FileVersion = "$AssemblySemFileVer";
 	
-	$s.save($projectFile)
+	
+	$fullProjectPath = (Get-Item -Path ".\").FullName + "\" + $projectFile
+	$s.save($fullProjectPath)
 }
