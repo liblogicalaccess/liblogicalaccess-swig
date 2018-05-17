@@ -56,18 +56,23 @@ foreach ($Command in $Commands){
 		PowerShell = $PowerShell  
 	}
 }
-
+$Failed=$false
 While($RunspaceCollection) {
 	Foreach ($Runspace in $RunspaceCollection.ToArray()) {
 		If ($Runspace.Runspace.IsCompleted) {
 			$output = $Runspace.PowerShell.EndInvoke($Runspace.Runspace)
 			if (![string]::IsNullOrEmpty($output)) {
 				Write-Host $output
+				$Failed=$true
 			}
 			$Runspace.PowerShell.Dispose()
 			$RunspaceCollection.Remove($Runspace)
 		}
 	}
+}
+
+if ($Failed) {
+	throw ("SWIG generation failed.")
 }
 
 cd scripts
