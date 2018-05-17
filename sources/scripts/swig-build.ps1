@@ -15,19 +15,6 @@ $Commands = @((".\LibLogicalAccessNet\Generated\Card", "LibLogicalAccess.Card", 
 
 $currentFolder = (Get-Item -Path ".\" -Verbose).FullName
 
-#DEBUG
-#foreach ($Command in $Commands){
-#	cd $currentFolder
-#	$cmd = $env:SWIG + "\swig.exe"
-#	$currentPath = (Get-Item -Path ".\" -Verbose).FullName + "\..\installer\packages\include"
-
-#	$output = & $cmd -csharp -c++ -I"$currentPath" -outdir $Command[0] -namespace $Command[1] -dllimport LibLogicalAccessNet.win32.dll $Command[2]
-#	if ($LASTEXITCODE -ne 0) {
-#		throw ("Command returned non-zero error-code ${LASTEXITCODE}: $cmd -csharp -c++ -I$currentPath -outdir $Command[0] -namespace $Command[1] -dllimport LibLogicalAccessNet.win32.dll $Command[2]`n$output")
-#	}
-#}
-#return 0;
-
 $RunspaceCollection = @()
 [Collections.Arraylist]$qwinstaResults = @()
 $RunspacePool = [RunspaceFactory]::CreateRunspacePool(1,30)
@@ -47,7 +34,8 @@ $ScriptBlock = {
         $cmd = $env:SWIG + "\swig.exe"
 		$currentPath = (Get-Item -Path ".\" -Verbose).FullName + "\..\installer\packages\include"
 	
-		$output = & $cmd -csharp -c++ -I"$currentPath" -outdir $outdir -namespace $namespace -dllimport LibLogicalAccessNet.win32.dll $interface
+		$output = & $cmd -csharp -c++ -I"$currentPath" -outdir $outdir -namespace $namespace -dllimport LibLogicalAccessNet.win32.dll $interface 2>&1
+		
 		if ($LASTEXITCODE -ne 0) {
 			throw ("Command returned non-zero error-code ${LASTEXITCODE}: $cmd -csharp -c++ -I$currentPath -outdir $outdir -namespace $namespace -dllimport LibLogicalAccessNet.win32.dll $interface`n$output")
 		}
