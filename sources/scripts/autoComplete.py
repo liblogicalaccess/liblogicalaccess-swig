@@ -8,7 +8,7 @@ import clang.cindex
 
 baseinc = ["../../installer/packages/include/logicalaccess/plugins/cards/", "../../installer/packages/include/logicalaccess/plugins/readers/"]
 regexsharedptr = r"(?<=std::shared_ptr<)(.*?)(?=>)"
-regexns = r"(?<=namespace )(.*?)(?=\n)"
+regexns = r"(?<=\nnamespace )(.*?)(?=\n)"
 regexinclude = r"(?<=#include [\"<])(.*?.hpp)(?=[\">]\n)"
 includebase = "<logicalaccess{0}>"
 include = []
