@@ -26,26 +26,6 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<phase>compile</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-								<exec executable="../sources/scripts/postbuild.bat">
-									<arg value="${islog.ISLOGSign}" />
-									<arg value="../sources/LibLogicalAccessNet.win32/bin" />
-								</exec>
-							</tasks>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
 						<phase>compile</phase>
