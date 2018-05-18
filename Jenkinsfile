@@ -27,9 +27,13 @@ pipeline {
 				powershell 'sources/scripts/generate-swig.ps1'
 				powershell 'islog-build 1'
 				warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', consoleParsers: [[parserName: 'MSBuild']], defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', unHealthy: ''
+            }
+        }
+		
+		stage('Package') {
+            steps {
 				powershell 'islog-sign'
 				powershell 'islog-package'
-				powershell 'islog-publish sources/LibLogicalAccessNet.win32/bin $false $true'
             }
         }
         
@@ -37,7 +41,7 @@ pipeline {
 		stage('Publish') {
             steps {
 				// No PDB publish since gitlink do not support pdb portable
-                powershell 'islog-publish'
+                powershell 'islog-publish sources/LibLogicalAccessNet.win32/bin $false $true'
             }
         }
     }
@@ -52,5 +56,22 @@ pipeline {
         unstable {
             updateGitlabCommitStatus name: 'build', state: 'success'
         }
+		
+        changed {
+            script {
+                if (currentBuild.currentResult == 'FAILURE') { // Other values: SUCCESS, UNSTABLE
+                    // Send an email only if the build status has changed from green/unstable to red
+                    emailext subject: '$DEFAULT_SUBJECT',
+                        body: '$DEFAULT_CONTENT',
+                        recipientProviders: [
+                            [$class: 'CulpritsRecipientProvider'],
+                            [$class: 'DevelopersRecipientProvider'],
+                            [$class: 'RequesterRecipientProvider']
+                        ], 
+                        replyTo: 'cis@islog.com',
+                        to: 'reports@islog.com'
+                }
+            }
+		}
     }
 }
