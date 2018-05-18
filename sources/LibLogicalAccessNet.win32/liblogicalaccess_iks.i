@@ -13,6 +13,7 @@ using LibLogicalAccess;
 
 %{
 #include <logicalaccess/iks/IslogKeyServer.hpp>
+#include <logicalaccess/iks/RemoteCrypto.hpp>
 #include <logicalaccess/key.hpp>
 
 using namespace logicalaccess;
@@ -62,3 +63,4 @@ using namespace logicalaccess::iks;
 /* END_Shared_ptr */
 
 %include <logicalaccess/iks/IslogKeyServer.hpp>
+%include <logicalaccess/iks/RemoteCrypto.hpp>
