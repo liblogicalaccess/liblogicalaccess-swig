@@ -62,7 +62,7 @@ While($RunspaceCollection) {
 		If ($Runspace.Runspace.IsCompleted) {
 			$output = $Runspace.PowerShell.EndInvoke($Runspace.Runspace)
 			if (![string]::IsNullOrEmpty($output)) {
-				Write-Host $output
+				Write-Output $output
 				$Failed=$true
 			}
 			$Runspace.PowerShell.Dispose()
