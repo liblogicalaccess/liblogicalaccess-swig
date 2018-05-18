@@ -87,8 +87,6 @@
 
 /*****SHARED PTR SECTION*****/
 
-%shared_ptr(MyClock);
-%shared_ptr(SubTestTracker);
 %shared_ptr(boost::asio::ip::udp::socket);
 %shared_ptr(boost::interprocess::mapped_region);
 %shared_ptr(boost::interprocess::named_mutex);
@@ -188,6 +186,7 @@
 %shared_ptr(logicalaccess::DeisterReaderProvider);
 %shared_ptr(logicalaccess::DeisterReaderUnit);
 %shared_ptr(logicalaccess::DeisterReaderUnitConfiguration);
+%shared_ptr(logicalaccess::DummyCommands);
 %shared_ptr(logicalaccess::EM4102Chip);
 %shared_ptr(logicalaccess::EM4135Chip);
 %shared_ptr(logicalaccess::EPassAccessInfo);
@@ -450,7 +449,6 @@
 %shared_ptr(logicalaccess::PromagReaderUnitConfiguration);
 %shared_ptr(logicalaccess::ProxAccessControlCardService);
 %shared_ptr(logicalaccess::ProxChip);
-%shared_ptr(logicalaccess::ProxCommands);
 %shared_ptr(logicalaccess::ProxLiteChip);
 %shared_ptr(logicalaccess::ProxLocation);
 %shared_ptr(logicalaccess::RFIDeasReaderCardAdapter);
@@ -468,6 +466,7 @@
 %shared_ptr(logicalaccess::ReaderService);
 %shared_ptr(logicalaccess::ReaderUnit);
 %shared_ptr(logicalaccess::ReaderUnitConfiguration);
+%shared_ptr(logicalaccess::RemoteCrypto);
 %shared_ptr(logicalaccess::ResultChecker);
 %shared_ptr(logicalaccess::RplethDataTransport);
 %shared_ptr(logicalaccess::RplethLCDDisplay);
@@ -497,7 +496,6 @@
 %shared_ptr(logicalaccess::SCIELReaderUnitConfiguration);
 %shared_ptr(logicalaccess::SCMReaderUnit);
 %shared_ptr(logicalaccess::SEOSChip);
-%shared_ptr(logicalaccess::SSLTransport);
 %shared_ptr(logicalaccess::STidPRGBufferParser);
 %shared_ptr(logicalaccess::STidPRGDataTransport);
 %shared_ptr(logicalaccess::STidPRGProxAccessControlCardService);
@@ -521,6 +519,7 @@
 %shared_ptr(logicalaccess::SerialPortDataTransport);
 %shared_ptr(logicalaccess::SerialPortXml);
 %shared_ptr(logicalaccess::Settings);
+%shared_ptr(logicalaccess::SignatureHelper);
 %shared_ptr(logicalaccess::SmartFrameChip);
 %shared_ptr(logicalaccess::SmartIDLEDBuzzerDisplay);
 %shared_ptr(logicalaccess::SmartIDReaderCardAdapter);
@@ -570,20 +569,10 @@
 %shared_ptr(logicalaccess::WindowsDynLibrary);
 %shared_ptr(logicalaccess::WindowsRegistry);
 %shared_ptr(logicalaccess::XmlSerializable);
-%shared_ptr(logicalaccess::iks::AesEncryptCommand);
-%shared_ptr(logicalaccess::iks::AesEncryptResponse);
-%shared_ptr(logicalaccess::iks::BaseCommand);
-%shared_ptr(logicalaccess::iks::BaseResponse);
-%shared_ptr(logicalaccess::iks::DesEncryptCommand);
-%shared_ptr(logicalaccess::iks::DesEncryptResponse);
-%shared_ptr(logicalaccess::iks::DesfireAuthCommand);
-%shared_ptr(logicalaccess::iks::DesfireAuthResponse);
-%shared_ptr(logicalaccess::iks::DesfireChangeKeyCommand);
-%shared_ptr(logicalaccess::iks::DesfireChangeKeyResponse);
-%shared_ptr(logicalaccess::iks::GenRandomCommand);
-%shared_ptr(logicalaccess::iks::GenRandomResponse);
+%shared_ptr(logicalaccess::iks::IKSRPCClient);
 %shared_ptr(logicalaccess::iks::IslogKeyServer);
-%shared_ptr(logicalaccess::iks::KeyDivInfo);
+%shared_ptr(logicalaccess::iks::RPCException);
+%shared_ptr(logicalaccess::iks::RemoteCryptoIKSProvider);
 %shared_ptr(logicalaccess::openssl::AESCipher);
 %shared_ptr(logicalaccess::openssl::AESInitializationVector);
 %shared_ptr(logicalaccess::openssl::AESSymmetricKey);
@@ -613,8 +602,6 @@
 %shared_ptr(openssl::InitializationVector);
 %shared_ptr(openssl::OpenSSLSymmetricCipher);
 %shared_ptr(openssl::SymmetricKey);
-%shared_ptr(MyClock);
-%shared_ptr(SubTestTracker);
 %shared_ptr(socket);
 %shared_ptr(mapped_region);
 %shared_ptr(named_mutex);
@@ -714,6 +701,7 @@
 %shared_ptr(DeisterReaderProvider);
 %shared_ptr(DeisterReaderUnit);
 %shared_ptr(DeisterReaderUnitConfiguration);
+%shared_ptr(DummyCommands);
 %shared_ptr(EM4102Chip);
 %shared_ptr(EM4135Chip);
 %shared_ptr(EPassAccessInfo);
@@ -976,7 +964,6 @@
 %shared_ptr(PromagReaderUnitConfiguration);
 %shared_ptr(ProxAccessControlCardService);
 %shared_ptr(ProxChip);
-%shared_ptr(ProxCommands);
 %shared_ptr(ProxLiteChip);
 %shared_ptr(ProxLocation);
 %shared_ptr(RFIDeasReaderCardAdapter);
@@ -994,6 +981,7 @@
 %shared_ptr(ReaderService);
 %shared_ptr(ReaderUnit);
 %shared_ptr(ReaderUnitConfiguration);
+%shared_ptr(RemoteCrypto);
 %shared_ptr(ResultChecker);
 %shared_ptr(RplethDataTransport);
 %shared_ptr(RplethLCDDisplay);
@@ -1023,7 +1011,6 @@
 %shared_ptr(SCIELReaderUnitConfiguration);
 %shared_ptr(SCMReaderUnit);
 %shared_ptr(SEOSChip);
-%shared_ptr(SSLTransport);
 %shared_ptr(STidPRGBufferParser);
 %shared_ptr(STidPRGDataTransport);
 %shared_ptr(STidPRGProxAccessControlCardService);
@@ -1047,6 +1034,7 @@
 %shared_ptr(SerialPortDataTransport);
 %shared_ptr(SerialPortXml);
 %shared_ptr(Settings);
+%shared_ptr(SignatureHelper);
 %shared_ptr(SmartFrameChip);
 %shared_ptr(SmartIDLEDBuzzerDisplay);
 %shared_ptr(SmartIDReaderCardAdapter);
@@ -1096,20 +1084,10 @@
 %shared_ptr(WindowsDynLibrary);
 %shared_ptr(WindowsRegistry);
 %shared_ptr(XmlSerializable);
-%shared_ptr(AesEncryptCommand);
-%shared_ptr(AesEncryptResponse);
-%shared_ptr(BaseCommand);
-%shared_ptr(BaseResponse);
-%shared_ptr(DesEncryptCommand);
-%shared_ptr(DesEncryptResponse);
-%shared_ptr(DesfireAuthCommand);
-%shared_ptr(DesfireAuthResponse);
-%shared_ptr(DesfireChangeKeyCommand);
-%shared_ptr(DesfireChangeKeyResponse);
-%shared_ptr(GenRandomCommand);
-%shared_ptr(GenRandomResponse);
+%shared_ptr(IKSRPCClient);
 %shared_ptr(IslogKeyServer);
-%shared_ptr(KeyDivInfo);
+%shared_ptr(RPCException);
+%shared_ptr(RemoteCryptoIKSProvider);
 %shared_ptr(AESCipher);
 %shared_ptr(AESInitializationVector);
 %shared_ptr(AESSymmetricKey);

@@ -161,6 +161,7 @@
 #include <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
 #include <logicalaccess/plugins/readers/pcsc/pcsc_ctl_datatransport.hpp>
 #include <logicalaccess/plugins/readers/pcsc/commands/acsacrresultchecker.hpp>
+#include <logicalaccess/plugins/readers/pcsc/commands/dummycommand.hpp>
 #include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 #include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
 #include <logicalaccess/plugins/readers/pcsc/commands/felicascmcommands.hpp>
@@ -193,7 +194,6 @@
 #include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcspringcardcommands.hpp>
 #include <logicalaccess/plugins/readers/pcsc/commands/mifare_acr1222l_commands.hpp>
 #include <logicalaccess/plugins/readers/pcsc/commands/mifare_cl1356_commands.hpp>
-#include <logicalaccess/plugins/readers/pcsc/commands/proxcommand.hpp>
 #include <logicalaccess/plugins/readers/pcsc/commands/springcardresultchecker.hpp>
 #include <logicalaccess/plugins/cards/topaz/topazaccessinfo.hpp>
 #include <logicalaccess/plugins/cards/topaz/topazlocation.hpp>
@@ -230,6 +230,7 @@
 #include <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
 #include <logicalaccess/plugins/readers/private-pcsc/commands/hidiclassomnikeyxx27commands.hpp>
 #include <logicalaccess/plugins/readers/private-pcsc/readers/omnikeyxx27readerunit.hpp>
+#include <logicalaccess/plugins/readers/private-pcsc/services/omnikeyxx27accesscontrolservice.hpp>
 #include <logicalaccess/plugins/readers/promag/promagreaderunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/promag/promagreaderunit.hpp>
 #include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>
@@ -670,6 +671,7 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/pcsc/pcscdatatransport.hpp>
 %include <logicalaccess/plugins/readers/pcsc/pcsc_ctl_datatransport.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/acsacrresultchecker.hpp>
+%include <logicalaccess/plugins/readers/pcsc/commands/dummycommand.hpp>
 %import <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 %import <logicalaccess/plugins/cards/felica/felicacommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/felicascmcommands.hpp>
@@ -702,7 +704,6 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/pcsc/commands/mifareultralightcspringcardcommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifare_acr1222l_commands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/mifare_cl1356_commands.hpp>
-%include <logicalaccess/plugins/readers/pcsc/commands/proxcommand.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/springcardresultchecker.hpp>
 %import <logicalaccess/plugins/cards/topaz/topazaccessinfo.hpp>
 %import <logicalaccess/plugins/cards/topaz/topazlocation.hpp>
@@ -739,6 +740,7 @@ typedef enum : uint16_t
 %import <logicalaccess/plugins/cards/iclass/picopasscommands.hpp>
 %include <logicalaccess/plugins/readers/private-pcsc/commands/hidiclassomnikeyxx27commands.hpp>
 %include <logicalaccess/plugins/readers/private-pcsc/readers/omnikeyxx27readerunit.hpp>
+%include <logicalaccess/plugins/readers/private-pcsc/services/omnikeyxx27accesscontrolservice.hpp>
 %include <logicalaccess/plugins/readers/promag/promagreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/promag/promagreaderunit.hpp>
 %include <logicalaccess/plugins/readers/promag/promagreaderprovider.hpp>

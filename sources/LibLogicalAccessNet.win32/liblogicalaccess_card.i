@@ -106,9 +106,9 @@
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
 #include <logicalaccess/plugins/cards/iclass/hidiclasspcsccommands.hpp>
 #include <logicalaccess/plugins/cards/iclass/hidiclassstoragecardservice.hpp>
-#include <logicalaccess/plugins/cards/iclass/omnikeyxx21licensecheckerservice.hpp>
 #include <logicalaccess/plugins/cards/iclass/picopasssimple.hpp>
 #include <logicalaccess/plugins/cards/iclass_5321/omnikeyhidiclassdatatransportimpl.hpp>
+#include <logicalaccess/plugins/cards/iclass_5321/omnikeyxx21licensecheckerservice.hpp>
 #include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
 #include <logicalaccess/plugins/cards/iso15693/iso15693commands.hpp>
 #include <logicalaccess/plugins/cards/iso15693/iso15693chip.hpp>
@@ -383,9 +383,9 @@ using LibLogicalAccess.Reader;
 %import <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
 %include <logicalaccess/plugins/cards/iclass/hidiclasspcsccommands.hpp>
 %include <logicalaccess/plugins/cards/iclass/hidiclassstoragecardservice.hpp>
-%include <logicalaccess/plugins/cards/iclass/omnikeyxx21licensecheckerservice.hpp>
 %include <logicalaccess/plugins/cards/iclass/picopasssimple.hpp>
 %include <logicalaccess/plugins/cards/iclass_5321/omnikeyhidiclassdatatransportimpl.hpp>
+%include <logicalaccess/plugins/cards/iclass_5321/omnikeyxx21licensecheckerservice.hpp>
 %include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
 %include <logicalaccess/plugins/cards/iso15693/iso15693commands.hpp>
 %include <logicalaccess/plugins/cards/iso15693/iso15693chip.hpp>
