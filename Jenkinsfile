@@ -27,7 +27,9 @@ pipeline {
 				powershell 'sources/scripts/generate-swig.ps1'
 				powershell 'islog-build 1'
 				warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', consoleParsers: [[parserName: 'MSBuild']], defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', unHealthy: ''
+				powershell 'islog-sign'
 				powershell 'islog-package'
+				powershell 'islog-publish sources/LibLogicalAccessNet.win32/bin $false $true'
             }
         }
         
