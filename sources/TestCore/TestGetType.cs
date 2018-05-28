@@ -100,7 +100,7 @@ namespace TestCore
         [TestMethod]
         public void TestGetAllReaderService()
         {
-            OmnikeyXX21ReaderUnit pcscReader = new OmnikeyXX21ReaderUnit("COUCOU");
+            OmnikeyXX21ReaderUnit pcscReader = new OmnikeyXX21ReaderUnit("my-reader-name");
             var readerService = pcscReader.getService(ReaderServiceType.RST_LICENSE_CHECKER);
             (readerService as LicenseCheckerService).GetType();
             readerService = LibraryManager.getInstance()

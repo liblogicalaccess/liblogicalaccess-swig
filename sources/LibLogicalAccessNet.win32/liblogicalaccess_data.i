@@ -345,6 +345,7 @@ namespace std {
 		  return ret;
 		}
 		string ct = ($imclassname.Format_getName(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
 		ct = ct.Replace(" ", string.Empty).Replace("-", string.Empty);
 		if (formatDictionary == null)
 			formatDictionary = liblogicalaccess_corePINVOKE.createDictionary<Format>();
@@ -372,6 +373,7 @@ namespace std {
       return ret;
     }
 	KeyStorageType ks = (KeyStorageType)(liblogicalaccess_dataPINVOKE.KeyStorage_getType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+	if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
     switch (ks) {
 	   case KeyStorageType.KST_COMPUTER_MEMORY:
 	     ret = new ComputerMemoryKeyStorage(cPtr, owner);
@@ -394,6 +396,62 @@ namespace std {
   logicalaccess::KeyStorage*, std::shared_ptr<logicalaccess::KeyStorage> {
     System.IntPtr cPtr = $imcall;
     KeyStorage ret = liblogicalaccess_dataPINVOKE.createKeyStorage(cPtr, $owner);$excode
+    return ret;
+}
+
+%template(getListDataField) getVectorPart<std::shared_ptr<logicalaccess::DataField> >;
+
+%typemap(csout, excode=SWIGEXCODE)
+  std::vector<logicalaccess::DataField*>, std::vector<std::shared_ptr<logicalaccess::DataField> >, 
+  const std::vector<logicalaccess::DataField*>&, const std::vector<std::shared_ptr<logicalaccess::DataField> >& {
+	System.IntPtr cPtr = $imcall;
+	DataFieldVector tmp = new DataFieldVector(cPtr, $owner);
+	DataFieldVector ret = new DataFieldVector();
+	for (int i = 0; i < tmp.Count; i++)
+	{
+	  ret.Add(liblogicalaccess_dataPINVOKE.createDataField(liblogicalaccess_dataPINVOKE.getListDataField(DataFieldVector.getCPtr(tmp), i), $owner));
+	}$excode;
+	return ret;
+  }
+
+%pragma(csharp) imclasscode=%{
+  public static DataField createDataField(System.IntPtr cPtr, bool owner)
+  {
+    DataField ret = null;
+    if (cPtr == System.IntPtr.Zero) {
+      return ret;
+    }
+	DataFieldType df = (DataFieldType)(liblogicalaccess_dataPINVOKE.DataField_getDFType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+	if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
+    switch (df) {
+	   case DataFieldType.DFT_VALUE:
+	     ret = new ValueDataField(cPtr, owner);
+	     break;
+	  /* Not implemented yet.
+	   case DataFieldType.DFT_CHECKSUM:
+	     ret = new ChecksumDataField(cPtr, owner);
+		 break;*/
+	   case DataFieldType.DFT_PARITY:
+	     ret = new ParityDataField(cPtr, owner);
+		 break;
+	   case DataFieldType.DFT_BINARY:
+	     ret = new BinaryDataField(cPtr, owner);
+		 break;
+	   case DataFieldType.DFT_NUMBER:
+	     ret = new NumberDataField(cPtr, owner);
+		 break;
+	   case DataFieldType.DFT_STRING:
+	     ret = new StringDataField(cPtr, owner);
+		 break;
+      }
+      return ret;
+    }
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::DataField*, std::shared_ptr<logicalaccess::DataField> {
+    System.IntPtr cPtr = $imcall;
+    DataField ret = liblogicalaccess_dataPINVOKE.createDataField(cPtr, $owner);$excode
     return ret;
 }
 
@@ -466,4 +524,4 @@ namespace std {
 %include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/keydiversification.hpp>
 
-%template(DataFieldList) std::list<std::shared_ptr<logicalaccess::DataField> >;
+%template(DataFieldVector) std::vector<std::shared_ptr<logicalaccess::DataField> >;

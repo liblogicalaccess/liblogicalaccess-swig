@@ -1269,3 +1269,11 @@ using namespace std;
 
 #include <logicalaccess/myexception.hpp>
 %}
+
+%inline %{
+  template<class T>
+  T getVectorPart(std::vector<T> vector, int i)
+  {
+    return vector[i];
+  }
+%}

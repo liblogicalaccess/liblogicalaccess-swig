@@ -107,14 +107,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %template(ReaderProviderEnableShared) std::enable_shared_from_this<logicalaccess::ReaderProvider>;
 %template(ReaderUnitEnableShared) std::enable_shared_from_this<logicalaccess::ReaderUnit>;
 
-%inline %{
-  template<class T>
-  T getVectorPart(std::vector<T> vector, int i)
-  {
-    return vector[i];
-  }
-%}
-
 %pragma(csharp) imclasscode=%{
 	public static System.Collections.Generic.Dictionary<string, System.Type> createDictionary<T>() where T : class
 	{
@@ -172,6 +164,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 		  return ret;
 		}
 		string ct = ($imclassname.Commands_getCmdType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
 		if (cmdDictionary == null)
 			cmdDictionary = createDictionary<Commands>();
         if (cmdDictionary.ContainsKey(ct))
@@ -204,6 +197,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 		  return ret;
 		}
 		string ct = ($imclassname.AccessInfo_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
 		if (accessInfoDictionary == null)
 			accessInfoDictionary = createDictionary<AccessInfo>();
         if (accessInfoDictionary.ContainsKey(ct))
@@ -232,6 +226,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 		  return ret;
 		}
 		string rpt = ($imclassname.ReaderUnit_getRPType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
 		if (readerUnitDictionary == null)
 			readerUnitDictionary = createDictionary<ReaderUnit>();
         if (readerUnitDictionary.ContainsKey(rpt))
@@ -260,6 +255,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 		  return ret;
 		}
 		string rpt = ($imclassname.ReaderUnitConfiguration_getRPType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
 		if (ReaderUnitConfigurationDictionary == null)
 			ReaderUnitConfigurationDictionary = createDictionary<ReaderUnitConfiguration>();
         if (ReaderUnitConfigurationDictionary.ContainsKey(rpt))
@@ -288,6 +284,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 		  return ret;
 		}
 		string rpt = ($imclassname.ReaderProvider_getRPType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
 		if (ReaderProviderDictionary == null)
 			ReaderProviderDictionary = createDictionary<ReaderProvider>();
         if (ReaderProviderDictionary.ContainsKey(rpt))
@@ -331,6 +328,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 		  return ret;
 		}
 		string ct = ($imclassname.Location_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
 		if (locationDictionary == null)
 			locationDictionary = createDictionary<Location>();
         if (locationDictionary.ContainsKey(ct))
@@ -359,6 +357,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 		  return ret;
 		}
 		string ct = ($imclassname.CardService_getCSType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
 		if (cardServiceDictionary == null)
 			cardServiceDictionary = createDictionary<CardService>();
         if (cardServiceDictionary.ContainsKey(ct))
@@ -385,6 +384,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
       return ret;
     }
 	ReaderServiceType svcType = (ReaderServiceType)($imclassname.ReaderService_getServiceType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+	if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
     switch (svcType) {
        case ReaderServiceType.RST_LICENSE_CHECKER:
 	     ret = new LicenseCheckerService(cPtr, owner);

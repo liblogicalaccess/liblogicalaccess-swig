@@ -5,7 +5,7 @@ using LibLogicalAccess;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DESFireEV1Tests
+namespace TestCore
 {
     [TestClass]
     public class TestFormat
@@ -256,10 +256,11 @@ namespace DESFireEV1Tests
             Assert.AreEqual(formatFASCN200.getPOACategory(), FASCNPOAssociationCategory.POA_CIVIL);
         }
 
+        [TestMethod]
         public void Custom()
         {
             var formatCustom = new CustomFormat();
-            DataFieldList fieldList = new DataFieldList();
+            DataFieldVector fieldList = new DataFieldVector();
 
             var numberDataField = new NumberDataField();
             numberDataField.setPosition(0);
@@ -280,14 +281,14 @@ namespace DESFireEV1Tests
 
             var stringDataField = new StringDataField();
             stringDataField.setPosition(224);
-            stringDataField.setPaddingChar((byte) 'H');
+            stringDataField.setPaddingChar((byte)'H');
             stringDataField.setDataLength(200);
             stringDataField.setValue("Le lamasticot sur kappou !");
             fieldList.Add(stringDataField);
 
             var parityDataField = new ParityDataField();
             parityDataField.setPosition(424);
-            parityDataField.setBitsUsePositions(new UIntCollection(new List<int> {0x01, 0x08, 0x0a, 0x0c, 0x12}));
+            parityDataField.setBitsUsePositions(new UIntCollection(new List<uint> { 0x01, 0x08, 0x0a, 0x0c, 0x12 }));
             parityDataField.setParityType(ParityType.PT_ODD);
             fieldList.Add(parityDataField);
 
@@ -316,14 +317,14 @@ namespace DESFireEV1Tests
             var stringLittleDataField = new StringDataField();
             stringLittleDataField.setDataRepresentation(littleEdian);
             stringLittleDataField.setPosition(649);
-            stringLittleDataField.setPaddingChar((byte) 'H');
+            stringLittleDataField.setPaddingChar((byte)'H');
             stringLittleDataField.setDataLength(200);
             stringLittleDataField.setValue("Le lamasticot sur kappou !");
             fieldList.Add(stringLittleDataField);
 
             var parityLittleDataField = new ParityDataField();
             parityLittleDataField.setPosition(850);
-            parityLittleDataField.setBitsUsePositions(new UIntCollection(new List<uint> {501, 356, 286, 1, 623}));
+            parityLittleDataField.setBitsUsePositions(new UIntCollection(new List<uint> { 501, 356, 286, 1, 623 }));
             parityLittleDataField.setParityType(ParityType.PT_ODD);
             fieldList.Add(parityLittleDataField);
 
@@ -352,14 +353,14 @@ namespace DESFireEV1Tests
             var stringNoDataField = new StringDataField();
             stringNoDataField.setDataRepresentation(nodatarepre);
             stringNoDataField.setPosition(1075);
-            stringNoDataField.setPaddingChar((byte) 'H');
+            stringNoDataField.setPaddingChar((byte)'H');
             stringNoDataField.setDataLength(200);
             stringNoDataField.setValue("Le lamasticot sur kappou !");
             fieldList.Add(stringNoDataField);
 
             var parityNoDataField = new ParityDataField();
             parityNoDataField.setPosition(1275);
-            parityNoDataField.setBitsUsePositions(new UIntCollection(new List<uint> {598, 123, 452, 21, 900}));
+            parityNoDataField.setBitsUsePositions(new UIntCollection(new List<uint> { 598, 123, 452, 21, 900 }));
             parityNoDataField.setParityType(ParityType.PT_ODD);
             fieldList.Add(parityNoDataField);
 
@@ -402,6 +403,22 @@ namespace DESFireEV1Tests
                 0x56, 0x78, 0x9a, 0xbc, 0xcd, 0xef, 0xff, 0xff, 0xff, 0xff
             });
             Assert.IsTrue(value.SequenceEqual(rvalue), "Data not equal");
+
+            var fieldListTmp = formatCustom.getFieldList();
+            Assert.AreEqual(fieldList.Count, 12);
+            var fieldListTmpArray = fieldListTmp.ToArray();
+            Assert.IsTrue(fieldListTmpArray[0] is NumberDataField);
+            Assert.IsTrue(fieldListTmpArray[1] is BinaryDataField);
+            Assert.IsTrue(fieldListTmpArray[2] is StringDataField);
+            Assert.IsTrue(fieldListTmpArray[3] is NumberDataField);
+            Assert.IsTrue(fieldListTmpArray[4] is BinaryDataField);
+            Assert.IsTrue(fieldListTmpArray[5] is StringDataField);
+            Assert.IsTrue(fieldListTmpArray[6] is NumberDataField);
+            Assert.IsTrue(fieldListTmpArray[7] is BinaryDataField);
+            Assert.IsTrue(fieldListTmpArray[8] is StringDataField);
+            Assert.IsTrue(fieldListTmpArray[9] is ParityDataField);
+            Assert.IsTrue(fieldListTmpArray[10] is ParityDataField);
+            Assert.IsTrue(fieldListTmpArray[11] is ParityDataField);
         }
     }
 }
