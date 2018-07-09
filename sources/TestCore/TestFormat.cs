@@ -404,6 +404,51 @@ namespace TestCore
             });
             Assert.IsTrue(value.SequenceEqual(rvalue), "Data not equal");
 
+            int x = 0;
+            foreach (var fieldTmp in formatCustom.getFieldList())
+            {
+                switch (x)
+                {
+                    case 0:
+                        Assert.IsTrue(fieldTmp is NumberDataField);
+                        break;
+                    case 1:
+                        Assert.IsTrue(fieldTmp is BinaryDataField);
+                        break;
+                    case 2:
+                        Assert.IsTrue(fieldTmp is StringDataField);
+                        break;
+                    case 3:
+                        Assert.IsTrue(fieldTmp is NumberDataField);
+                        break;
+                    case 4:
+                        Assert.IsTrue(fieldTmp is BinaryDataField);
+                        break;
+                    case 5:
+                        Assert.IsTrue(fieldTmp is StringDataField);
+                        break;
+                    case 6:
+                        Assert.IsTrue(fieldTmp is NumberDataField);
+                        break;
+                    case 7:
+                        Assert.IsTrue(fieldTmp is BinaryDataField);
+                        break;
+                    case 8:
+                        Assert.IsTrue(fieldTmp is StringDataField);
+                        break;
+                    case 9:
+                        Assert.IsTrue(fieldTmp is ParityDataField);
+                        break;
+                    case 10:
+                        Assert.IsTrue(fieldTmp is ParityDataField);
+                        break;
+                    case 11:
+                        Assert.IsTrue(fieldTmp is ParityDataField);
+                        break;
+                }
+                ++x;
+            }
+
             var fieldListTmp = formatCustom.getFieldList();
             Assert.AreEqual(fieldList.Count, 12);
             var fieldListTmpArray = fieldListTmp.ToArray();

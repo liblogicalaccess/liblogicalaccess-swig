@@ -482,7 +482,7 @@ using LibLogicalAccess.Card;
 
 %typemap(cstype) std::vector<logicalaccess::DFName> "LibLogicalAccess.Card.DFNameVector"
 %typemap(csin) std::vector<logicalaccess::DFName> "LibLogicalAccess.Card.DFNameVector.getCPtr($csinput)"
-%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::DFName> {
+%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::DFName>, std::vector<logicalaccess::DFName> & {
 	LibLogicalAccess.Card.DFNameVector ret = new LibLogicalAccess.Card.DFNameVector($imcall, true);$excode
 	return ret;
 }

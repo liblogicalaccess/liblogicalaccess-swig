@@ -148,7 +148,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::Chip*, std::shared_ptr<logicalaccess::Chip> {
+  logicalaccess::Chip*, std::shared_ptr<logicalaccess::Chip>, std::shared_ptr<logicalaccess::Chip> & {
     System.IntPtr cPtr = $imcall;
     Chip ret = liblogicalaccess_corePINVOKE.createChip(cPtr, $owner);$excode
     return ret;
@@ -210,7 +210,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::AccessInfo*, std::shared_ptr<logicalaccess::AccessInfo> {
+  logicalaccess::AccessInfo*, std::shared_ptr<logicalaccess::AccessInfo>, std::shared_ptr<logicalaccess::AccessInfo> & {
     System.IntPtr cPtr = $imcall;
     AccessInfo ret = liblogicalaccess_corePINVOKE.createAccessInfo(cPtr, $owner);$excode
     return ret;
@@ -341,7 +341,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::Location*, std::shared_ptr<logicalaccess::Location> {
+  logicalaccess::Location*, std::shared_ptr<logicalaccess::Location>, std::shared_ptr<logicalaccess::Location> & {
     System.IntPtr cPtr = $imcall;
     Location ret = liblogicalaccess_corePINVOKE.createLocation(cPtr, $owner);$excode
     return ret;
@@ -370,7 +370,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::CardService*, std::shared_ptr<logicalaccess::CardService> {
+  logicalaccess::CardService*, std::shared_ptr<logicalaccess::CardService>, std::shared_ptr<logicalaccess::CardService> & {
     System.IntPtr cPtr = $imcall;
     CardService ret = liblogicalaccess_corePINVOKE.createCardService(cPtr, $owner);$excode
     return ret;
@@ -395,7 +395,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::ReaderService*, std::shared_ptr<logicalaccess::ReaderService> {
+  logicalaccess::ReaderService*, std::shared_ptr<logicalaccess::ReaderService>, std::shared_ptr<logicalaccess::ReaderService> & {
     System.IntPtr cPtr = $imcall;
     ReaderService ret = liblogicalaccess_corePINVOKE.createReaderService(cPtr, $owner);$excode
     return ret;

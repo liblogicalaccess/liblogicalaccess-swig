@@ -359,7 +359,7 @@ namespace std {
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::Format*, std::shared_ptr<logicalaccess::Format> {
+  logicalaccess::Format*, std::shared_ptr<logicalaccess::Format>, std::shared_ptr<logicalaccess::Format> & {
     System.IntPtr cPtr = $imcall;
     Format ret = liblogicalaccess_dataPINVOKE.createFormat(cPtr, $owner);$excode
     return ret;
@@ -393,13 +393,13 @@ namespace std {
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::KeyStorage*, std::shared_ptr<logicalaccess::KeyStorage> {
+  logicalaccess::KeyStorage*, std::shared_ptr<logicalaccess::KeyStorage>, std::shared_ptr<logicalaccess::KeyStorage> & {
     System.IntPtr cPtr = $imcall;
     KeyStorage ret = liblogicalaccess_dataPINVOKE.createKeyStorage(cPtr, $owner);$excode
     return ret;
 }
 
-%template(getListDataField) getVectorPart<std::shared_ptr<logicalaccess::DataField> >;
+%template(getVectorDataField) getVectorPart<std::shared_ptr<logicalaccess::DataField> >;
 
 %typemap(csout, excode=SWIGEXCODE)
   std::vector<logicalaccess::DataField*>, std::vector<std::shared_ptr<logicalaccess::DataField> >, 
@@ -409,7 +409,7 @@ namespace std {
 	DataFieldVector ret = new DataFieldVector();
 	for (int i = 0; i < tmp.Count; i++)
 	{
-	  ret.Add(liblogicalaccess_dataPINVOKE.createDataField(liblogicalaccess_dataPINVOKE.getListDataField(DataFieldVector.getCPtr(tmp), i), $owner));
+	  ret.Add(liblogicalaccess_dataPINVOKE.createDataField(liblogicalaccess_dataPINVOKE.getVectorDataField(DataFieldVector.getCPtr(tmp), i), $owner));
 	}$excode;
 	return ret;
   }
@@ -449,11 +449,11 @@ namespace std {
 %}
 
 %typemap(csout, excode=SWIGEXCODE)
-  logicalaccess::DataField*, std::shared_ptr<logicalaccess::DataField> {
+  logicalaccess::DataField*, std::shared_ptr<logicalaccess::DataField>, std::shared_ptr<logicalaccess::DataField> & {
     System.IntPtr cPtr = $imcall;
     DataField ret = liblogicalaccess_dataPINVOKE.createDataField(cPtr, $owner);$excode
     return ret;
-}
+  }
 
 %typemap(ctype) ByteVector::const_iterator "ByteVector::const_iterator"
 %typemap(cstype) ByteVector::const_iterator "UByteVector.UByteVectorEnumerator"
