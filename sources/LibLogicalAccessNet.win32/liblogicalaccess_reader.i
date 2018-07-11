@@ -7,6 +7,7 @@
 %import "liblogicalaccess_data.i"
 %import "liblogicalaccess_core.i"
 %import "liblogicalaccess_iks.i"
+%import "liblogicalaccess_card_sam.i"
 
 %{
 
@@ -308,13 +309,14 @@ using LibLogicalAccess.Card;
 %shared_ptr(boost::asio::ip::udp::socket);
 %shared_ptr(boost::interprocess::mapped_region);
 %shared_ptr(boost::interprocess::named_mutex);
-%shared_ptr(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
-%shared_ptr(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
-%shared_ptr(logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
-%shared_ptr(logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
-%shared_ptr(logicalaccess::SAMAV2Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
-%shared_ptr(logicalaccess::SAMAV2Commands<KeyEntryAV2Information, SETAV2>);
+
+//%shared_ptr(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
+//%shared_ptr(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
+%shared_ptr(logicalaccess::SAMISO7816Commands<KeyEntryAV1Information, SETAV1>);
+%shared_ptr(logicalaccess::SAMISO7816Commands<KeyEntryAV2Information, SETAV2>);
 %shared_ptr(logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
+%shared_ptr(logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
+
 %shared_ptr(logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>);
 %shared_ptr(openssl::OpenSSLSymmetricCipher);
 %shared_ptr(openssl::SymmetricKey);
@@ -419,34 +421,11 @@ using LibLogicalAccess.Card;
 %typemap(csin) FileSetting& %{out $csinput%}  
 %typemap(imtype) FileSetting& "out LibLogicalAccess.Card.DESFireCommands.FileSetting"
 
-//%typemap(ctype) DESFireKeyType "DESFireKeyType"
-//%typemap(cstype) DESFireKeyType "DESFireKeyType"
-//%typemap(csin) DESFireKeyType %{$csinput%}  
-//%typemap(imtype) DESFireKeyType "LibLogicalAccess.Reader.DESFireKeyType"
-//%typemap(csvarin, excode=SWIGEXCODE2) DESFireKeyType %{
-//    set {
-//      $imcall;$excode
-//    } %}
-//%typemap(csvarout, excode=SWIGEXCODE2) DESFireKeyType %{
-//    get {
-//      DESFireKeyType ret = $imcall;$excode
-//      return ret;
-//} %}
-//
 %typemap(ctype) logicalaccess::DESFireKeyType& "logicalaccess::DESFireKeyType*"
 %typemap(cstype) logicalaccess::DESFireKeyType& "out DESFireKeyType"
 %typemap(csin) logicalaccess::DESFireKeyType& %{out $csinput%}  
 %typemap(imtype) logicalaccess::DESFireKeyType& "out LibLogicalAccess.Card.DESFireKeyType"
 
-//%typemap(ctype) DESFireKeySettings "DESFireKeySettings"
-//%typemap(cstype) DESFireKeySettings "DESFireKeySettings"
-//%typemap(csin) DESFireKeySettings %{$csinput%}  
-//%typemap(imtype) DESFireKeySettings "LibLogicalAccess.Reader.DESFireKeySettings"
-//%typemap(csout, excode=SWIGEXCODE) DESFireKeySettings {
-//	DESFireKeySettings ret = $imcall;$excode
-//	return ret;
-//}
-//
 %typemap(ctype) logicalaccess::DESFireKeySettings & "logicalaccess::DESFireKeySettings*"
 %typemap(cstype) logicalaccess::DESFireKeySettings & "out DESFireKeySettings"
 %typemap(csin) logicalaccess::DESFireKeySettings & %{out $csinput%}  
@@ -501,10 +480,6 @@ using LibLogicalAccess.Card;
 
 typedef logicalaccess::MifarePlusSL1PCSCCommands logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
 
-%ignore logicalaccess::SAMISO7816Commands< logicalaccess::KeyEntryAV2Information,logicalaccess::SETAV2 >;
-%ignore logicalaccess::SAMISO7816Commands< logicalaccess::KeyEntryAV1Information,logicalaccess::SETAV1 >;
-%ignore SAMISO7816Commands< KeyEntryAV2Information,SETAV2 >;
-%ignore SAMISO7816Commands< KeyEntryAV1Information,SETAV1 >;
 %ignore *::getCSMART;
 %ignore logicalaccess::EncapsulateGuard;
 
@@ -797,9 +772,6 @@ typedef enum : uint16_t
 /* END_Include_section */
 
 %template(MifarePlusSL1PCSCCommands) logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
-
-%template(AV1SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
-%template(AV2SAMISO7816Commands) logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>;
 
 %template(UByteVectorList) std::list<std::vector<uint8_t> >;
 %template(ChipList) std::list<std::shared_ptr<logicalaccess::Chip> >;
