@@ -1,6 +1,11 @@
 /* File : liblogicalaccess_card_sam.i */
 %module(directors="1") liblogicalaccess_card_sam
 
+%typemap(csimports) SWIGTYPE
+%{
+using LibLogicalAccess;
+using LibLogicalAccess.Reader;
+%}
 
 %{
 #include <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
