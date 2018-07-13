@@ -7,7 +7,6 @@
 %import "liblogicalaccess_data.i"
 %import "liblogicalaccess_core.i"
 %import "liblogicalaccess_iks.i"
-%include "liblogicalaccess_card_sam.i"
 
 %{
 /* Additional_include */
@@ -274,7 +273,8 @@ using LibLogicalAccess.Reader;
 %apply unsigned char MBINOUT[] { unsigned char uniqueserialnumber[ANY] }
 %apply logicalaccess::MifareAccessInfo::DataBlockAccessBits MBINOUT[] { logicalaccess::MifareAccessInfo::DataBlockAccessBits d_data_blocks_access_bits[ANY] }
 
-
+%include "liblogicalaccess_card_sam.i"
+%import "liblogicalaccess_reader_sam.i"
 
 %ignore logicalaccess::Commands;
 %ignore pcsc_share_mode_to_string;
