@@ -16,6 +16,7 @@ using LibLogicalAccess.Card;
 using LibLogicalAccess.Reader;
 %}
 
+/* We need to include sam object templated before include other - this required to import iso7816readercardadapter... */
 %{
 #include <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 %}
