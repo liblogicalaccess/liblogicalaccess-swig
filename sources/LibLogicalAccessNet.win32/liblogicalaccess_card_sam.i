@@ -1,13 +1,8 @@
 /* File : liblogicalaccess_card_sam.i */
 %module(directors="1") liblogicalaccess_card_sam
 
-%typemap(csimports) SWIGTYPE
 %{
-using LibLogicalAccess;
-using LibLogicalAccess.Reader;
-%}
-
-%{
+#include <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
 #include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
 #include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
@@ -28,11 +23,12 @@ using LibLogicalAccess.Reader;
 
 /* Include_section */
 
-%import <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
-%import <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
+%include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
 %include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
 %include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
-%import <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
+%include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
 %include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
 %include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
 

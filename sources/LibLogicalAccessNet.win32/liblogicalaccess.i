@@ -64,7 +64,7 @@
 
 /*****WARNING SECTION*****/
 
-#pragma SWIG nowarn=314
+#pragma SWIG nowarn=314,401,833
 
 //Ignored Warning:
 // - 314: 'lock' is a C# keyword, renaming to 'lock_'

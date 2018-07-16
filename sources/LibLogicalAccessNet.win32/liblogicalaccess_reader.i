@@ -8,6 +8,18 @@
 %import "liblogicalaccess_core.i"
 %import "liblogicalaccess_iks.i"
 %import "liblogicalaccess_card_sam.i"
+
+%typemap(csimports) SWIGTYPE
+%{
+using LibLogicalAccess;
+using LibLogicalAccess.Card;
+using LibLogicalAccess.Reader;
+%}
+
+%{
+#include <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816readercardadapter.hpp>
+%}
+%import <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 %include "liblogicalaccess_reader_sam.i"
 
 %{
