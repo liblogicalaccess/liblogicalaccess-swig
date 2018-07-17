@@ -18,7 +18,7 @@ namespace ISO15693Tests
             Debug.WriteLine("You will have 20 seconds to insert a card. Test log below");
             Debug.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
-            Debug.WriteLine("TESTS LIST: ");
+            Debug.WriteLine("TESTS LIST:");
             Debug.WriteLine("SystemInformation");
             Debug.WriteLine("WriteBlock");
             Debug.WriteLine("ReadBlock");
