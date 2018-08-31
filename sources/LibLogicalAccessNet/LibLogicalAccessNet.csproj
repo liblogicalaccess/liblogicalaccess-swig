@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;netstandard2.0;net4.6;net4.5;net4.0;net2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>LibLogicalAccessNet</AssemblyName>
     <RootNamespace>LibLogicalAccess</RootNamespace>
     <Description>ISLOG RFID library layer for C#</Description>
