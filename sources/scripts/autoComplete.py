@@ -242,6 +242,7 @@ def	sharedptrwrite():
 def main():
 	print("Processing includes...")
 	includeprocess("../../installer/packages/include/logicalaccess/cards/**/*.hpp", "CORE")
+	includeprocess("../../installer/packages/include/logicalaccess/services/**/*.hpp", "CORE")
 	includeprocess("../../installer/packages/include/logicalaccess/plugins/cards/**/*.hpp", "CARD")
 	includeprocess("../../installer/packages/include/logicalaccess/readerproviders/**/*.hpp", "CORE")
 	includeprocess("../../installer/packages/include/logicalaccess/plugins/readers/**/*.hpp", "READER")
