@@ -231,7 +231,6 @@ using LibLogicalAccess.Reader;
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeylanxx21readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx22readerunit.hpp>
-#include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx23readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx25readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/scmreaderunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/springcardreaderunit.hpp>
@@ -715,7 +714,6 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx21readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeylanxx21readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx22readerunit.hpp>
-%include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx23readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx25readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/scmreaderunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/springcardreaderunit.hpp>

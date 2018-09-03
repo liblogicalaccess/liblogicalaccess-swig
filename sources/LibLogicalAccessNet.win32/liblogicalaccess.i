@@ -103,6 +103,7 @@
 %shared_ptr(logicalaccess::ACSACRReaderUnit);
 %shared_ptr(logicalaccess::ACSACRResultChecker);
 %shared_ptr(logicalaccess::AES128Key);
+%shared_ptr(logicalaccess::AESCryptoService);
 %shared_ptr(logicalaccess::AESHelper);
 %shared_ptr(logicalaccess::APDUWrapperGuard);
 %shared_ptr(logicalaccess::ASCIIFormat);
@@ -252,6 +253,7 @@
 %shared_ptr(logicalaccess::HIDiClassPCSCCommands::SecureModeGuard);
 %shared_ptr(logicalaccess::HIDiClassStorageCardService);
 %shared_ptr(logicalaccess::HMAC1Key);
+%shared_ptr(logicalaccess::IAESCryptoService);
 %shared_ptr(logicalaccess::IChip);
 %shared_ptr(logicalaccess::ICode1Chip);
 %shared_ptr(logicalaccess::ICode2Chip);
@@ -423,7 +425,6 @@
 %shared_ptr(logicalaccess::OmnikeyXX21ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX21ReaderUnitConfiguration);
 %shared_ptr(logicalaccess::OmnikeyXX22ReaderUnit);
-%shared_ptr(logicalaccess::OmnikeyXX23ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX25ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX27AccessControlCardService);
 %shared_ptr(logicalaccess::OmnikeyXX27ReaderUnit);
@@ -437,6 +438,7 @@
 %shared_ptr(logicalaccess::PCSCReaderProvider);
 %shared_ptr(logicalaccess::PCSCReaderUnit);
 %shared_ptr(logicalaccess::PCSCReaderUnitConfiguration);
+%shared_ptr(logicalaccess::PKCSKeyStorage);
 %shared_ptr(logicalaccess::ParityDataField);
 %shared_ptr(logicalaccess::PicoPassCommands);
 %shared_ptr(logicalaccess::PicoPassSimpleCommands);
@@ -618,6 +620,7 @@
 %shared_ptr(ACSACRReaderUnit);
 %shared_ptr(ACSACRResultChecker);
 %shared_ptr(AES128Key);
+%shared_ptr(AESCryptoService);
 %shared_ptr(AESHelper);
 %shared_ptr(APDUWrapperGuard);
 %shared_ptr(ASCIIFormat);
@@ -767,6 +770,7 @@
 %shared_ptr(SecureModeGuard);
 %shared_ptr(HIDiClassStorageCardService);
 %shared_ptr(HMAC1Key);
+%shared_ptr(IAESCryptoService);
 %shared_ptr(IChip);
 %shared_ptr(ICode1Chip);
 %shared_ptr(ICode2Chip);
@@ -938,7 +942,6 @@
 %shared_ptr(OmnikeyXX21ReaderUnit);
 %shared_ptr(OmnikeyXX21ReaderUnitConfiguration);
 %shared_ptr(OmnikeyXX22ReaderUnit);
-%shared_ptr(OmnikeyXX23ReaderUnit);
 %shared_ptr(OmnikeyXX25ReaderUnit);
 %shared_ptr(OmnikeyXX27AccessControlCardService);
 %shared_ptr(OmnikeyXX27ReaderUnit);
@@ -952,6 +955,7 @@
 %shared_ptr(PCSCReaderProvider);
 %shared_ptr(PCSCReaderUnit);
 %shared_ptr(PCSCReaderUnitConfiguration);
+%shared_ptr(PKCSKeyStorage);
 %shared_ptr(ParityDataField);
 %shared_ptr(PicoPassCommands);
 %shared_ptr(PicoPassSimpleCommands);
