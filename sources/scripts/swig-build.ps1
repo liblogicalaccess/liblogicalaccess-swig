@@ -72,6 +72,7 @@ While($RunspaceCollection) {
 }
 
 if ($Failed) {
+	cd ..
 	throw ("SWIG generation failed.")
 }
 

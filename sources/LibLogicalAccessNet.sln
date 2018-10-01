@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
+# Visual Studio 15
 VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibLogicalAccessNet.win32", "LibLogicalAccessNet.win32\LibLogicalAccessNet.win32.vcxproj", "{14229126-896D-4055-8A80-AB8094E603D6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibLogicalAccessNet", "LibLogicalAccessNet\LibLogicalAccessNet.csproj", "{2A4D8C7D-84F8-4634-911B-8E001116D4DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLogicalAccessNetTest", "LibLogicalAccessNetTest\LibLogicalAccessNetTest.csproj", "{B0680F3A-CD65-4BF4-B9B1-EE4B6CBC6D89}"
@@ -27,16 +25,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{14229126-896D-4055-8A80-AB8094E603D6}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{14229126-896D-4055-8A80-AB8094E603D6}.Debug|x64.ActiveCfg = Debug|x64
-		{14229126-896D-4055-8A80-AB8094E603D6}.Debug|x64.Build.0 = Debug|x64
-		{14229126-896D-4055-8A80-AB8094E603D6}.Debug|x86.ActiveCfg = Debug|Win32
-		{14229126-896D-4055-8A80-AB8094E603D6}.Debug|x86.Build.0 = Debug|Win32
-		{14229126-896D-4055-8A80-AB8094E603D6}.Release|Any CPU.ActiveCfg = Release|Win32
-		{14229126-896D-4055-8A80-AB8094E603D6}.Release|x64.ActiveCfg = Release|x64
-		{14229126-896D-4055-8A80-AB8094E603D6}.Release|x64.Build.0 = Release|x64
-		{14229126-896D-4055-8A80-AB8094E603D6}.Release|x86.ActiveCfg = Release|Win32
-		{14229126-896D-4055-8A80-AB8094E603D6}.Release|x86.Build.0 = Release|Win32
 		{2A4D8C7D-84F8-4634-911B-8E001116D4DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2A4D8C7D-84F8-4634-911B-8E001116D4DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A4D8C7D-84F8-4634-911B-8E001116D4DD}.Debug|x64.ActiveCfg = Debug|Any CPU

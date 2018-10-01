@@ -33,3 +33,8 @@ installer/LibLogicalAccessNet-SetupFiles
 /installer/output
 /installer/VERSION
 /installer/build.*
+sources/LibLogicalAccessNet.win32/build/
+sources/LibLogicalAccessNet.win32/bin/
+/installer/conanbuildinfo.txt
+/installer/conaninfo.txt
+/installer/conan_imports_manifest.txt

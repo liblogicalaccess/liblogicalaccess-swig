@@ -173,37 +173,5 @@
 				</configuration>
 			</plugin>
 		</plugins>
-	</build>
-	
-	<dependencies>
-		<dependency>
-			<groupId>eu.islog.lib.readers</groupId>
-			<artifactId>liblogicalaccess</artifactId>
-			<version>2.0.0-SNAPSHOT</version>
-			<scope>compile</scope>
-			<type>zip</type>
-		</dependency>
-		<dependency>
-			<groupId>eu.islog.lib.readers</groupId>
-			<artifactId>liblogicalaccess-libnfc</artifactId>
-			<version>2.0.0-SNAPSHOT</version>
-			<scope>compile</scope>
-			<type>zip</type>
-		</dependency>
-		<dependency>
-			<groupId>eu.islog.lib.readers</groupId>
-			<artifactId>liblogicalaccess-private</artifactId>
-			<version>2.0.0-SNAPSHOT</version>
-			<scope>compile</scope>
-			<type>zip</type>
-		</dependency>
-		<dependency>
-			<groupId>lib.portable</groupId>
-			<artifactId>boost</artifactId>
-			<version>1.66.0</version>
-			<scope>compile</scope>
-			<type>zip</type>
-		</dependency>
-	</dependencies>
-	
+	</build>	
 </project>
