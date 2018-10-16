@@ -1,7 +1,7 @@
 pipeline {
 	agent {
 		node {
-			label 'master'
+			label 'cis-win2016'
 			customWorkspace "K:/jenkins_data/liblogicalaccess-swig/build-pipeline/${BRANCH_NAME}"
 		}
 	}
