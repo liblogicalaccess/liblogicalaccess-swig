@@ -1,7 +1,7 @@
 pipeline {
 	agent {
 		node {
-			label 'master'
+			label 'cis-win2016'
 			customWorkspace "K:/jenkins_data/liblogicalaccess-swig/build-pipeline/${BRANCH_NAME}"
 		}
 	}
@@ -21,7 +21,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-				powershell 'islog-prebuild'
+                powershell 'echo Build'
+				//powershell 'islog-prebuild'
 				// gitversion do not support vs2017 project for now https://github.com/GitTools/GitVersion/issues/1315
 				powershell 'sources/scripts/update-gitversion-vs2017proj.ps1 sources/LibLogicalAccessNet/LibLogicalAccessNet.csproj'
 				powershell 'sources/scripts/generate-swig.ps1'
@@ -40,6 +41,7 @@ pipeline {
 		
 		stage('Publish') {
             steps {
+                powershell 'echo Publish'
 				// No PDB publish since gitlink do not support pdb portable
                 powershell 'islog-publish sources/LibLogicalAccessNet.win32/bin $false $true'
             }
