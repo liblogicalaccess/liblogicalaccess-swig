@@ -1,4 +1,3 @@
-# x64_msvc_debug / x64_msvc_release / x86_msvc_debug / x86_msvc_release
 from conans import ConanFile
 import os
 

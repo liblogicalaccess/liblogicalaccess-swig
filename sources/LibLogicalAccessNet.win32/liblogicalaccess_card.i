@@ -224,6 +224,7 @@ using namespace logicalaccess;
 %typemap(csimports) SWIGTYPE
 %{
 using LibLogicalAccess;
+using LibLogicalAccess.Crypto;
 using LibLogicalAccess.Reader;
 %}
 

@@ -14,6 +14,7 @@
 using LibLogicalAccess;
 using LibLogicalAccess.Card;
 using LibLogicalAccess.Reader;
+using LibLogicalAccess.Crypto;
 %}
 
 /* We need to include sam object templated before include other - this required to import iso7816readercardadapter... */
@@ -355,6 +356,7 @@ using MifarePlusSL1PCSCCommands = MifarePlusSL1Policy<MifarePlusSL1Commands, Mif
 %{
 using LibLogicalAccess;
 using LibLogicalAccess.Card;
+using LibLogicalAccess.Crypto;
 %}
 
 /* Shared_ptr */
