@@ -1,8 +1,8 @@
 @echo off
 
 set PythonRegKey=
-set PythonRegKey36Machine=HKLM\SOFTWARE\Python\PythonCore\3.6
-set PythonRegKey36User=HKCU\SOFTWARE\Python\PythonCore\3.6
+set PythonRegKey36Machine=HKLM\SOFTWARE\Python\PythonCore\3.6.5
+set PythonRegKey36User=HKCU\SOFTWARE\Python\PythonCore\3.6.5
 
 reg query %PythonRegKey36Machine%\InstallPath /ve >nul 2>&1 && set PythonRegKey=%PythonRegKey36Machine%
 reg query %PythonRegKey36User%\InstallPath /ve >nul 2>&1 && set PythonRegKey=%PythonRegKey36User%

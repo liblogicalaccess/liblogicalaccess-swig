@@ -1,5 +1,5 @@
 cd sources/scripts
-& .\autoCompleteScript.bat
+& python.exe .\autoComplete.py
 & .\swig-build.ps1
-& .\adaptExceptionScript.bat
+& python.exe .\adaptExceptionClass.py
 cd ../..

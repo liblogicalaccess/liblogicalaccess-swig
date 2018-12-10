@@ -16,6 +16,73 @@ nest = []
 classlist = []
 tmpinclude = []
 
+def arglist_disable_export_macros():
+	return ['-DLLA_CORE_API=',
+	'-DLLA_CARDS_CPS3_API=',
+'-DLLA_CARDS_DESFIRE_API=',
+'-DLLA_CARDS_EM4102_API=',
+'-DLLA_CARDS_EM4135_API=',
+'-DLLA_CARDS_EPASS_API=',
+'-DLLA_CARDS_FELICA_API=',
+'-DLLA_CARDS_GENERICTAG_API=',
+'-DLLA_CARDS_ICODE1_API=',
+'-DLLA_CARDS_ICODE2_API=',
+'-DLLA_CARDS_INDALA_API=',
+'-DLLA_CARDS_INFINEONMYD_API=',
+'-DLLA_CARDS_ISO15693_API=',
+'-DLLA_CARDS_ISO7816_API=',
+'-DLLA_READERS_PRIVATE_KEYBOARD_API=',
+'-DLLA_CARDS_LEGICPRIME_API=',
+'-DLLA_CARDS_MIFARE_API=',
+'-DLLA_CARDS_MIFAREPLUS_API=',
+'-DLLA_CARDS_MIFAREULTRALIGHT_API=',
+'-DLLA_CARDS_PROX_API=',
+'-DLLA_CARDS_PROXLITE_API=',
+'-DLLA_CARDS_SAMAV2_API=',
+'-DLLA_CARDS_SEOS_API=',
+'-DLLA_CARDS_SMARTFRAME_API=',
+'-DLLA_CARDS_STMLRI_API=',
+'-DLLA_CARDS_TAGIT_API=',
+'-DLLA_CARDS_TOPAZ_API=',
+'-DLLA_CARDS_TWIC_API=',
+'-DLLA_CRYPTO_API=',
+'-DLLA_COMMON_API=',
+'-DLLA_READERS_A3MLGM5600_API=',
+'-DLLA_READERS_ADMITTO_API=',
+'-DLLA_READERS_A3MLGM5600_API=',
+'-DLLA_READERS_ADMITTO_API=',
+'-DLLA_READERS_A3MLGM5600_API=',
+'-DLLA_READERS_ADMITTO_API=',
+'-DLLA_READERS_AXESSTMC13_API=',
+'-DLLA_READERS_AXESSTMCLEGIC_API=',
+'-DLLA_READERS_DEISTER_API=',
+'-DLLA_READERS_ELATEC_API=',
+'-DLLA_READERS_GIGATMS_API=',
+'-DLLA_READERS_GUNNEBO_API=',
+'-DLLA_READERS_IDONDEMAND_API=',
+'-DLLA_READERS_ISO7816_API=',
+'-DLLA_READERS_PRIVATE_KEYBOARD_API=',
+'-DLLA_READERS_OK5553_API=',
+'-DLLA_READERS_OSDP_API=',
+'-DLLA_READERS_PCSC_API=',
+'-DLLA_READERS_PROMAG_API=',
+'-DLLA_READERS_RFIDEAS_API=',
+'-DLLA_READERS_RPLETH_API=',
+'-DLLA_READERS_SCIEL_API=',
+'-DLLA_READERS_SMARTID_API=',
+'-DLLA_READERS_STIDPRG_API=',
+'-DLLA_READERS_STIDSTR_API=',
+'-DLLA_CORE_API=',
+'-DLLA_CARDS_PRIVATE_DESFIRE2_API=',
+'-DLLA_CARDS_PRIVATE_ICLASS_API=',
+'-DLLA_CARDS_PRIVATE_ICLASS5321_API=',
+'-DLLA_CARDS_PRIVATE_ICLASS_API=',
+'-DLLA_CARDS_PRIVATE_ICLASS5321_API=',
+'-DLLA_READERS_PRIVATE_IDP_API=',
+'-DLLA_READERS_PRIVATE_ISO7816_API=',
+                '-DLLA_READERS_PRIVATE_PCSC_API=',
+                '-DLLA_READERS_NFC_NFC_API=']
+
 def	parsesharedptr(content):
 	ns = re.findall(regexns, content)
 	matches = re.finditer(regexsharedptr, content)
@@ -216,7 +283,7 @@ def	sharedptrprocess():
 	index = clang.cindex.Index.create()
 	options = clang.cindex.TranslationUnit.PARSE_SKIP_FUNCTION_BODIES | clang.cindex.TranslationUnit.PARSE_INCOMPLETE
 	for filename in glob.glob("../../installer/packages/include/logicalaccess/**/*.hpp", recursive=True):
-		tu = index.parse(filename, ['-x', 'c++', '-std=c++11', '-DLIBLOGICALACCESS_API='], unsaved_files=None, options=options)
+		tu = index.parse(filename, ['-x', 'c++', '-std=c++11'] + arglist_disable_export_macros(), unsaved_files=None, options=options)
 		find_classdecl(tu.cursor, filename)
 	classlist.sort()
 	

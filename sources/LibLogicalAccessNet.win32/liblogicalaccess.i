@@ -8,7 +8,72 @@
 	using System.Runtime.InteropServices;
 %}
 
-#define LIBLOGICALACCESS_API
+
+#define LLA_CORE_API
+#define LLA_CARDS_CPS3_API
+#define LLA_CARDS_DESFIRE_API
+#define LLA_CARDS_EM4102_API
+#define LLA_CARDS_EM4135_API
+#define LLA_CARDS_EPASS_API
+#define LLA_CARDS_FELICA_API
+#define LLA_CARDS_GENERICTAG_API
+#define LLA_CARDS_ICODE1_API
+#define LLA_CARDS_ICODE2_API
+#define LLA_CARDS_INDALA_API
+#define LLA_CARDS_INFINEONMYD_API
+#define LLA_CARDS_ISO15693_API
+#define LLA_CARDS_ISO7816_API
+#define LLA_READERS_PRIVATE_KEYBOARD_API
+#define LLA_CARDS_LEGICPRIME_API
+#define LLA_CARDS_MIFARE_API
+#define LLA_CARDS_MIFAREPLUS_API
+#define LLA_CARDS_MIFAREULTRALIGHT_API
+#define LLA_CARDS_PROX_API
+#define LLA_CARDS_PROXLITE_API
+#define LLA_CARDS_SAMAV2_API
+#define LLA_CARDS_SEOS_API
+#define LLA_CARDS_SMARTFRAME_API
+#define LLA_CARDS_STMLRI_API
+#define LLA_CARDS_TAGIT_API
+#define LLA_CARDS_TOPAZ_API
+#define LLA_CARDS_TWIC_API
+#define LLA_CRYPTO_API
+#define LLA_COMMON_API
+#define LLA_READERS_A3MLGM5600_API
+#define LLA_READERS_ADMITTO_API
+#define LLA_READERS_A3MLGM5600_API
+#define LLA_READERS_ADMITTO_API
+#define LLA_READERS_A3MLGM5600_API
+#define LLA_READERS_ADMITTO_API
+#define LLA_READERS_AXESSTMC13_API
+#define LLA_READERS_AXESSTMCLEGIC_API
+#define LLA_READERS_DEISTER_API
+#define LLA_READERS_ELATEC_API
+#define LLA_READERS_GIGATMS_API
+#define LLA_READERS_GUNNEBO_API
+#define LLA_READERS_IDONDEMAND_API
+#define LLA_READERS_ISO7816_API
+#define LLA_READERS_PRIVATE_KEYBOARD_API
+#define LLA_READERS_OK5553_API
+#define LLA_READERS_OSDP_API
+#define LLA_READERS_PCSC_API
+#define LLA_READERS_PROMAG_API
+#define LLA_READERS_RFIDEAS_API
+#define LLA_READERS_RPLETH_API
+#define LLA_READERS_SCIEL_API
+#define LLA_READERS_SMARTID_API
+#define LLA_READERS_STIDPRG_API
+#define LLA_READERS_STIDSTR_API
+#define LLA_CORE_API
+#define LLA_CARDS_PRIVATE_DESFIRE2_API
+#define LLA_CARDS_PRIVATE_ICLASS_API
+#define LLA_CARDS_PRIVATE_ICLASS5321_API
+#define LLA_CARDS_PRIVATE_ICLASS_API
+#define LLA_CARDS_PRIVATE_ICLASS5321_API
+#define LLA_READERS_PRIVATE_IDP_API
+#define LLA_READERS_PRIVATE_ISO7816_API
+#define LLA_READERS_PRIVATE_PCSC_API
+#define LLA_READERS_NFC_NFC_API
 
 /*****SWIG INCLUSIONS*****/
 
@@ -416,6 +481,7 @@
 %shared_ptr(logicalaccess::OSDPReaderUnit);
 %shared_ptr(logicalaccess::OSDPReaderUnitConfiguration);
 %shared_ptr(logicalaccess::OSDPSecureChannel);
+%shared_ptr(logicalaccess::Omnikey5023AccessControlCardService);
 %shared_ptr(logicalaccess::Omnikey5427ReaderUnitConfiguration);
 %shared_ptr(logicalaccess::OmnikeyHIDiClassDataTransport);
 %shared_ptr(logicalaccess::OmnikeyHIDiClassDataTransportImpl);
@@ -425,6 +491,7 @@
 %shared_ptr(logicalaccess::OmnikeyXX21ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX21ReaderUnitConfiguration);
 %shared_ptr(logicalaccess::OmnikeyXX22ReaderUnit);
+%shared_ptr(logicalaccess::OmnikeyXX23ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX25ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX27AccessControlCardService);
 %shared_ptr(logicalaccess::OmnikeyXX27ReaderUnit);
@@ -442,6 +509,7 @@
 %shared_ptr(logicalaccess::ParityDataField);
 %shared_ptr(logicalaccess::PicoPassCommands);
 %shared_ptr(logicalaccess::PicoPassSimpleCommands);
+%shared_ptr(logicalaccess::PosixDynLibrary);
 %shared_ptr(logicalaccess::Profile);
 %shared_ptr(logicalaccess::PromagBufferParser);
 %shared_ptr(logicalaccess::PromagDataTransport);
@@ -933,6 +1001,7 @@
 %shared_ptr(OSDPReaderUnit);
 %shared_ptr(OSDPReaderUnitConfiguration);
 %shared_ptr(OSDPSecureChannel);
+%shared_ptr(Omnikey5023AccessControlCardService);
 %shared_ptr(Omnikey5427ReaderUnitConfiguration);
 %shared_ptr(OmnikeyHIDiClassDataTransport);
 %shared_ptr(OmnikeyHIDiClassDataTransportImpl);
@@ -942,6 +1011,7 @@
 %shared_ptr(OmnikeyXX21ReaderUnit);
 %shared_ptr(OmnikeyXX21ReaderUnitConfiguration);
 %shared_ptr(OmnikeyXX22ReaderUnit);
+%shared_ptr(OmnikeyXX23ReaderUnit);
 %shared_ptr(OmnikeyXX25ReaderUnit);
 %shared_ptr(OmnikeyXX27AccessControlCardService);
 %shared_ptr(OmnikeyXX27ReaderUnit);
@@ -959,6 +1029,7 @@
 %shared_ptr(ParityDataField);
 %shared_ptr(PicoPassCommands);
 %shared_ptr(PicoPassSimpleCommands);
+%shared_ptr(PosixDynLibrary);
 %shared_ptr(Profile);
 %shared_ptr(PromagBufferParser);
 %shared_ptr(PromagDataTransport);
