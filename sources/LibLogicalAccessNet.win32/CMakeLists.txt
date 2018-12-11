@@ -21,3 +21,4 @@ target_compile_options(LibLogicalAccessNet.win32 PRIVATE "/bigobj")
 target_link_libraries(LibLogicalAccessNet.win32 PUBLIC
 CONAN_PKG::LogicalAccessPrivate
 CONAN_PKG::LogicalAccessNFC)
+install(TARGETS LibLogicalAccessNet.win32 RUNTIME DESTINATION bin)

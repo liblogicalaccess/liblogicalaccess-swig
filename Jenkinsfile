@@ -55,7 +55,7 @@ pipeline {
                 dir('sources/LibLogicalAccessNet.win32') {
 					script {
 						conan.withFreshWindowsConanCache {
-							powershell './conan-build.ps1'
+							powershell '.\conan-build.ps1 -allConfig 0 -publish 1'
 						}
 					}
                 }
