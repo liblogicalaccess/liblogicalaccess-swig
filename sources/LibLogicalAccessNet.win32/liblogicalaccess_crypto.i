@@ -34,12 +34,6 @@ using namespace openssl;
 
 %}
 
-%shared_ptr(RSA)
-%shared_ptr(SSL_CTX)
-%shared_ptr(SSL)
-
-%rename(NullDeletion) operator();
-
 /* Include_section */
 
 %include <logicalaccess/plugins/crypto/initialization_vector.hpp>
