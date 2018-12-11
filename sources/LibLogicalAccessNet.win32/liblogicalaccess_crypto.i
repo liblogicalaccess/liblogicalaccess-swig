@@ -15,29 +15,18 @@
 #include <logicalaccess/plugins/crypto/aes_helper.hpp>
 #include <logicalaccess/plugins/crypto/aes_symmetric_key.hpp>
 #include <logicalaccess/plugins/crypto/openssl.hpp>
-#include <logicalaccess/plugins/crypto/asymmetric_key.hpp>
-#include <logicalaccess/plugins/crypto/asymmetric_cipher.hpp>
 #include <logicalaccess/plugins/crypto/cmac.hpp>
 #include <logicalaccess/plugins/crypto/des_cipher.hpp>
 #include <logicalaccess/plugins/crypto/des_helper.hpp>
 #include <logicalaccess/plugins/crypto/des_initialization_vector.hpp>
 #include <logicalaccess/plugins/crypto/des_symmetric_key.hpp>
 #include <logicalaccess/plugins/crypto/pem.hpp>
-#include <logicalaccess/plugins/crypto/evp_pkey.hpp>
 #include <logicalaccess/plugins/crypto/lla_random.hpp>
-#include <logicalaccess/plugins/crypto/null_deleter.hpp>
-#include <logicalaccess/plugins/crypto/openssl_asymmetric_cipher.hpp>
-#include <logicalaccess/plugins/crypto/rsa_cipher.hpp>
-#include <logicalaccess/plugins/crypto/rsa_key.hpp>
 #include <logicalaccess/plugins/crypto/sha.hpp>
-#include <logicalaccess/plugins/crypto/ssl_context.hpp>
-#include <logicalaccess/plugins/crypto/ssl_object.hpp>
 #include <logicalaccess/plugins/crypto/openssl_symmetric_cipher_context.hpp>
 #include <logicalaccess/plugins/crypto/symmetric_cipher.hpp>
 #include <logicalaccess/plugins/crypto/symmetric_key.hpp>
 #include <logicalaccess/plugins/crypto/initialization_vector.hpp>
-
-#include <logicalaccess/x509_certificate.hpp>
 
 /* END_Additional_include */
 
@@ -60,26 +49,16 @@ using namespace openssl;
 %include <logicalaccess/plugins/crypto/aes_helper.hpp>
 %include <logicalaccess/plugins/crypto/aes_symmetric_key.hpp>
 %include <logicalaccess/plugins/crypto/openssl.hpp>
-%include <logicalaccess/plugins/crypto/asymmetric_key.hpp>
-%include <logicalaccess/plugins/crypto/asymmetric_cipher.hpp>
 %include <logicalaccess/plugins/crypto/cmac.hpp>
 %include <logicalaccess/plugins/crypto/des_cipher.hpp>
 %include <logicalaccess/plugins/crypto/des_helper.hpp>
 %include <logicalaccess/plugins/crypto/des_initialization_vector.hpp>
 %include <logicalaccess/plugins/crypto/des_symmetric_key.hpp>
 %include <logicalaccess/plugins/crypto/pem.hpp>
-%include <logicalaccess/plugins/crypto/evp_pkey.hpp>
 %include <logicalaccess/plugins/crypto/lla_random.hpp>
-%include <logicalaccess/plugins/crypto/null_deleter.hpp>
-%include <logicalaccess/plugins/crypto/openssl_asymmetric_cipher.hpp>
-%include <logicalaccess/plugins/crypto/rsa_cipher.hpp>
-%include <logicalaccess/plugins/crypto/rsa_key.hpp>
 %include <logicalaccess/plugins/crypto/sha.hpp>
-%include <logicalaccess/plugins/crypto/ssl_context.hpp>
-%include <logicalaccess/plugins/crypto/ssl_object.hpp>
 %include <logicalaccess/plugins/crypto/aes_initialization_vector.hpp>
 %include <logicalaccess/plugins/crypto/symmetric_cipher.hpp>
 %include <logicalaccess/plugins/crypto/openssl_symmetric_cipher_context.hpp>
-%import <logicalaccess/x509_certificate.hpp>
 
 /* END_Include_section */

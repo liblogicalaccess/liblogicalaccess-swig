@@ -23,7 +23,6 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/plugins/crypto/aes_initialization_vector.hpp>
 #include <logicalaccess/plugins/crypto/openssl_symmetric_cipher_context.hpp>
 #include <logicalaccess/plugins/crypto/openssl_symmetric_cipher.hpp>
-#include <logicalaccess/x509_certificate.hpp>
 
 /* Additional_include */
 
@@ -458,8 +457,6 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 /* Include external swig after typemap */
 %include "liblogicalaccess_readerservice.i"
 %include "liblogicalaccess_cardservice.i"
-
-%include <logicalaccess/x509_certificate.hpp>
 
 %import <logicalaccess/plugins/crypto/symmetric_key.hpp>
 %import <logicalaccess/plugins/crypto/initialization_vector.hpp>
