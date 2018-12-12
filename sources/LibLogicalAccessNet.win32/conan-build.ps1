@@ -32,7 +32,7 @@ foreach ($Profile in $Profiles){
 			Exec-External { conan upload $PackageName -r islog-test --all --confirm --check --force }
 		}
 		cp bin/LibLogicalAccessNet.win32.* ../bin/$Profile[2]/Release/
-		Remove-Item * -Recurse -Force*
+		Remove-Item * -Recurse -Force
 	}
 }
 
