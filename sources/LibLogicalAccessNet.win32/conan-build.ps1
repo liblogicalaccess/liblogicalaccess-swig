@@ -1,9 +1,6 @@
 [CmdletBinding()]
 param( 
   [Parameter(Mandatory=$false)]
-  [bool]$allConfig,
-  
-  [Parameter(Mandatory=$false)]
   [bool]$publish
 )
 
@@ -23,18 +20,16 @@ $Profiles = @(("compilers/x64_msvc_release", "Release", "x86_64"),
 
 foreach ($Profile in $Profiles){
 
-	if ($allConfig -or ($Profile[1] -eq "Release"))
-	{
-		Exec-External { conan install -p $Profile[0] -u .. }
-		Exec-External { conan build .. }
-        $arch = $Profile[2];
-        cp bin/LibLogicalAccessNet.win32.* ../bin/$arch/Release/
-		if ($publish) {
-			Exec-External { conan export-pkg .. $PackageName }
-			Exec-External { conan upload $PackageName -r islog-test --all --confirm --check --force }
-		}
-		Remove-Item * -Recurse -Force
-	}
+    Exec-External { conan install -p $Profile[0] -u .. }
+    Exec-External { conan build .. }
+    $config = $Profile[1];
+    $arch = $Profile[2];
+    cp bin/LibLogicalAccessNet.win32.* ../bin/$arch/$config/
+    if ($publish) {
+        Exec-External { conan export-pkg .. $PackageName }
+        Exec-External { conan upload $PackageName -r islog-test --all --confirm --check --force }
+    }
+    Remove-Item * -Recurse -Force
 }
 
 cd ..
