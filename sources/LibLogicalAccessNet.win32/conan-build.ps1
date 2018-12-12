@@ -27,11 +27,12 @@ foreach ($Profile in $Profiles){
 	{
 		Exec-External { conan install -p $Profile[0] -u .. }
 		Exec-External { conan build .. }
+        $arch = $Profile[2];
+        cp bin/LibLogicalAccessNet.win32.* ../bin/$arch/Release/
 		if ($publish) {
 			Exec-External { conan export-pkg .. $PackageName }
 			Exec-External { conan upload $PackageName -r islog-test --all --confirm --check --force }
 		}
-		cp bin/LibLogicalAccessNet.win32.* ../bin/$Profile[2]/Release/
 		Remove-Item * -Recurse -Force
 	}
 }
