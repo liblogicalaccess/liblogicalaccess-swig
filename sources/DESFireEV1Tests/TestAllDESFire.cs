@@ -834,11 +834,11 @@ namespace DESFireEV1Tests
             cmdev1.deleteFile(0x04);
             cmdev1.deleteFile(0x05);
 
-            cmdev1.iso_selectFile(42);
-            cmdev1.iso_selectFile(45);
-            cmdev1.iso_selectFile(48);
+            cmdev1.getISO7816Commands().selectFile(42);
+            cmdev1.getISO7816Commands().selectFile(45);
+            cmdev1.getISO7816Commands().selectFile(48);
 
-            cmdev1.iso_selectFile(50);
+            cmdev1.getISO7816Commands().selectFile(50);
 
             cmdev1.changeKey(1, newKey);
             var keyversion = cmdev1.getKeyVersion(1);
@@ -863,7 +863,7 @@ namespace DESFireEV1Tests
             // cmdev1.iso_appendrecord(data, 00); //Security status not sat....
             if (cmdev2 == null) // EV2 has changed iso...it do not work probably because of free access
                 // not handle
-                read = cmdev1.iso_readRecords(50, 0, DESFireRecords.DF_RECORD_ALLRECORDS);
+                read = cmdev1.getISO7816Commands().readRecords(50, 0, ISORecords.ISO_RECORD_ALLRECORDS);
 
         }
 

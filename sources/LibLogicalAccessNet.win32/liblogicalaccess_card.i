@@ -193,6 +193,7 @@
 #include <logicalaccess/plugins/cards/samav2/samav1chip.hpp>
 #include <logicalaccess/plugins/cards/samav2/samav2chip.hpp>
 #include <logicalaccess/plugins/cards/seos/lla_cards_seos_api.hpp>
+#include <logicalaccess/plugins/cards/seos/seoscommands.hpp>
 #include <logicalaccess/plugins/cards/seos/seoschip.hpp>
 #include <logicalaccess/plugins/cards/smartframe/lla_cards_smartframe_api.hpp>
 #include <logicalaccess/plugins/cards/smartframe/smartframechip.hpp>
@@ -502,6 +503,7 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/samav2/samav1chip.hpp>
 %include <logicalaccess/plugins/cards/samav2/samav2chip.hpp>
 %include <logicalaccess/plugins/cards/seos/lla_cards_seos_api.hpp>
+%include <logicalaccess/plugins/cards/seos/seoscommands.hpp>
 %include <logicalaccess/plugins/cards/seos/seoschip.hpp>
 %include <logicalaccess/plugins/cards/smartframe/lla_cards_smartframe_api.hpp>
 %include <logicalaccess/plugins/cards/smartframe/smartframechip.hpp>

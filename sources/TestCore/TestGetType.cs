@@ -116,6 +116,70 @@ namespace TestCore
         }
 
         [TestMethod]
+        public void TestGetDataTransport()
+        {
+            var readerUnit = PCSCReaderProvider.createInstance().createReaderUnit();
+
+            DataTransport dt = new RplethDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is RplethDataTransport);
+            dt = new SerialPortDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is SerialPortDataTransport);
+            dt = new TcpDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is TcpDataTransport);
+            dt = new UdpDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is UdpDataTransport);
+            dt = new IDPDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is IDPDataTransport);
+            dt = new NFCDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is NFCDataTransport);
+            dt = new PCSCDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is PCSCDataTransport);
+            dt = new AdmittoDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is AdmittoDataTransport);
+            dt = new AxessTMC13DataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is AxessTMC13DataTransport);
+            dt = new AxessTMCLegicDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is AxessTMCLegicDataTransport);
+            dt = new DeisterDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is DeisterDataTransport);
+            dt = new ElatecDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is ElatecDataTransport);
+            dt = new GigaTMSDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is GigaTMSDataTransport);
+            dt = new GunneboDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is GunneboDataTransport);
+            dt = new OSDPDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is OSDPDataTransport);
+            dt = new STidPRGDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is STidPRGDataTransport);
+            dt = new STidSTRDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is STidSTRDataTransport);
+            /*  dt = new PCSCHIDiClassDataTransport(); //Need an Argument
+              readerUnit.setDataTransport(dt);
+              Assert.IsTrue(readerUnit.getDataTransport() is PCSCHIDiClassDataTransport);*/
+            dt = new PCSCControlDataTransport();
+            readerUnit.setDataTransport(dt);
+            Assert.IsTrue(readerUnit.getDataTransport() is PCSCControlDataTransport);
+        }
+
+        [TestMethod]
         public void TestGetReaderProvider()
         {
             var libManager = LibraryManager.getInstance();

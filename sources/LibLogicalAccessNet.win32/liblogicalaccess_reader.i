@@ -144,6 +144,11 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/plugins/readers/iso7816/commands/iso7816iso7816commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/desfireev1iso7816commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816resultchecker.hpp>
+#include <logicalaccess/plugins/cards/epass/lla_cards_epass_api.hpp>
+#include <logicalaccess/plugins/cards/epass/epasscrypto.hpp>
+#include <logicalaccess/plugins/cards/epass/utils.hpp>
+#include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/epassiso7816commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/mifareplusiso7816resultchecker.hpp>
 #include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
 #include <logicalaccess/plugins/crypto/symmetric_key.hpp>
@@ -671,6 +676,11 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/iso7816/commands/iso7816iso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/desfireev1iso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816resultchecker.hpp>
+%import <logicalaccess/plugins/cards/epass/lla_cards_epass_api.hpp>
+%import <logicalaccess/plugins/cards/epass/epasscrypto.hpp>
+%import <logicalaccess/plugins/cards/epass/utils.hpp>
+%import <logicalaccess/plugins/cards/epass/epasscommands.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/epassiso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/mifareplusiso7816resultchecker.hpp>
 %import <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
 %import <logicalaccess/plugins/crypto/symmetric_key.hpp>

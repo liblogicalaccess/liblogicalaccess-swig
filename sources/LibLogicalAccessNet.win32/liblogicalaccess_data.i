@@ -366,6 +366,35 @@ namespace std {
 }
 
 %pragma(csharp) imclasscode=%{
+	public static System.Collections.Generic.Dictionary<string, System.Type> dataTransportDictionary;
+
+	public static DataTransport	createDataTransport(System.IntPtr cPtr, bool owner)
+	{
+		DataTransport ret = null;
+		if (cPtr == System.IntPtr.Zero) {
+		  return ret;
+		}
+		string ct = ($imclassname.DataTransport_getTransportType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
+		if (dataTransportDictionary == null)
+			dataTransportDictionary = liblogicalaccess_corePINVOKE.createDictionary<DataTransport>();
+        if (dataTransportDictionary.ContainsKey(ct))
+        {
+            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            ret = (DataTransport)System.Activator.CreateInstance(dataTransportDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
+        }
+		return ret;
+	}
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::DataTransport*, std::shared_ptr<logicalaccess::DataTransport>, std::shared_ptr<logicalaccess::DataTransport> & {
+    System.IntPtr cPtr = $imcall;
+    DataTransport ret = liblogicalaccess_dataPINVOKE.createDataTransport(cPtr, $owner);$excode
+    return ret;
+}
+
+%pragma(csharp) imclasscode=%{
   public static KeyStorage createKeyStorage(System.IntPtr cPtr, bool owner)
   {
     KeyStorage ret = null;

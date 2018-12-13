@@ -259,6 +259,7 @@
 %shared_ptr(logicalaccess::EPassChip);
 %shared_ptr(logicalaccess::EPassCommands);
 %shared_ptr(logicalaccess::EPassCrypto);
+%shared_ptr(logicalaccess::EPassISO7816Commands);
 %shared_ptr(logicalaccess::EPassIdentityCardService);
 %shared_ptr(logicalaccess::EPassReaderCardAdapter);
 %shared_ptr(logicalaccess::EPassUtils);
@@ -566,6 +567,7 @@
 %shared_ptr(logicalaccess::SCIELReaderUnitConfiguration);
 %shared_ptr(logicalaccess::SCMReaderUnit);
 %shared_ptr(logicalaccess::SEOSChip);
+%shared_ptr(logicalaccess::SEOSCommands);
 %shared_ptr(logicalaccess::STidPRGBufferParser);
 %shared_ptr(logicalaccess::STidPRGDataTransport);
 %shared_ptr(logicalaccess::STidPRGProxAccessControlCardService);
@@ -767,6 +769,7 @@
 %shared_ptr(EPassChip);
 %shared_ptr(EPassCommands);
 %shared_ptr(EPassCrypto);
+%shared_ptr(EPassISO7816Commands);
 %shared_ptr(EPassIdentityCardService);
 %shared_ptr(EPassReaderCardAdapter);
 %shared_ptr(EPassUtils);
@@ -1074,6 +1077,7 @@
 %shared_ptr(SCIELReaderUnitConfiguration);
 %shared_ptr(SCMReaderUnit);
 %shared_ptr(SEOSChip);
+%shared_ptr(SEOSCommands);
 %shared_ptr(STidPRGBufferParser);
 %shared_ptr(STidPRGDataTransport);
 %shared_ptr(STidPRGProxAccessControlCardService);
