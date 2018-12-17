@@ -373,13 +373,6 @@ using LibLogicalAccess.Crypto;
 %shared_ptr(boost::interprocess::mapped_region);
 %shared_ptr(boost::interprocess::named_mutex);
 
-//%shared_ptr(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
-//%shared_ptr(logicalaccess::SAMCommands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
-//%shared_ptr(logicalaccess::SAMISO7816Commands<KeyEntryAV1Information, SETAV1>);
-//%shared_ptr(logicalaccess::SAMISO7816Commands<KeyEntryAV2Information, SETAV2>);
-//%shared_ptr(logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>);
-//%shared_ptr(logicalaccess::SAMISO7816Commands<logicalaccess::KeyEntryAV2Information, logicalaccess::SETAV2>);
-
 %shared_ptr(logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>);
 %shared_ptr(openssl::OpenSSLSymmetricCipher);
 %shared_ptr(openssl::SymmetricKey);
@@ -431,24 +424,6 @@ using LibLogicalAccess.Crypto;
 %typemap(cstype) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& "out SerialPortXmlPtrVector"
 %typemap(csin) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& %{out $csinput%}  
 %typemap(imtype) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >& "out SerialPortXmlPtrVector"
-
-%typemap(ctype) TLVPtr "TLV*"
-%typemap(cstype) TLVPtr "TLV"
-%typemap(csin) TLVPtr %{$csinput%}  
-%typemap(imtype) TLVPtr "TLV"
-%typemap(csout, excode=SWIGEXCODE) TLV {
-	TLV ret = $imcall;$excode
-	return ret;
-}
-
-%typemap(ctype) PCSCDataTransportPtr "PCSCDataTransport*"
-%typemap(cstype) PCSCDataTransportPtr "PCSCDataTransport"
-%typemap(csin) PCSCDataTransportPtr %{$csinput%}  
-%typemap(imtype) PCSCDataTransportPtr "PCSCDataTransport"
-%typemap(csout, excode=SWIGEXCODE) PCSCDataTransport {
-	PCSCDataTransport ret = $imcall;$excode
-	return ret;
-}
 
 %typemap(ctype) CardServiceType "CardServiceType"
 %typemap(cstype) CardServiceType "CardServiceType"
