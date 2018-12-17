@@ -125,7 +125,7 @@
 #include <logicalaccess/plugins/cards/iclass/lla_cards_private_iclass5321_api.hpp>
 #include <logicalaccess/plugins/cards/iclass/picopasssimple.hpp>
 #include <logicalaccess/plugins/cards/iclass-5321/lla_cards_private_iclass5321_api.hpp>
-#include <logicalaccess/plugins/cards/iclass-5321/omnikeyhidiclassdatatransportimpl.hpp>
+#include <logicalaccess/plugins/cards/iclass-5321/omnikeyhidiclassimpldatatransport.hpp>
 #include <logicalaccess/plugins/cards/iclass-5321/omnikeyxx21licensecheckerservice.hpp>
 #include <logicalaccess/plugins/cards/iso15693/lla_cards_iso15693_api.hpp>
 #include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
@@ -435,7 +435,7 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/iclass/lla_cards_private_iclass5321_api.hpp>
 %include <logicalaccess/plugins/cards/iclass/picopasssimple.hpp>
 %include <logicalaccess/plugins/cards/iclass-5321/lla_cards_private_iclass5321_api.hpp>
-%include <logicalaccess/plugins/cards/iclass-5321/omnikeyhidiclassdatatransportimpl.hpp>
+%include <logicalaccess/plugins/cards/iclass-5321/omnikeyhidiclassimpldatatransport.hpp>
 %include <logicalaccess/plugins/cards/iclass-5321/omnikeyxx21licensecheckerservice.hpp>
 %include <logicalaccess/plugins/cards/iso15693/lla_cards_iso15693_api.hpp>
 %include <logicalaccess/plugins/cards/iso15693/iso15693location.hpp>
