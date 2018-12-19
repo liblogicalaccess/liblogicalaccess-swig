@@ -345,17 +345,28 @@ namespace std {
 		if (cPtr == System.IntPtr.Zero) {
 		  return ret;
 		}
-		string ct = ($imclassname.Format_getName(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+        int ft = (liblogicalaccess_dataPINVOKE.Format_getType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
 		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
-		ct = ct.Replace(" ", string.Empty).Replace("-", string.Empty);
-		if (formatDictionary == null)
-			formatDictionary = liblogicalaccess_corePINVOKE.createDictionary<Format>();
-        if (formatDictionary.ContainsKey(ct))
+        switch ((FormatType)ft)
         {
-            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
-            ret = (Format)System.Activator.CreateInstance(formatDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
+            case FormatType.FT_WIEGAND26: return new Wiegand26Format();
+            case FormatType.FT_WIEGAND34: return new Wiegand34Format();
+            case FormatType.FT_WIEGAND34FACILITY: return new Wiegand34WithFacilityFormat();
+            case FormatType.FT_WIEGAND37: return new Wiegand37Format();
+            case FormatType.FT_WIEGAND37FACILITY: return new Wiegand37WithFacilityFormat();
+            case FormatType.FT_WIEGAND35: return new Wiegand35Format();
+            case FormatType.FT_DATACLOCK: return new DataClockFormat();
+            case FormatType.FT_FASCN200BIT: return new FASCN200BitFormat();
+            case FormatType.FT_HIDHONEYWELL: return new HIDHoneywell40BitFormat();
+            case FormatType.FT_GETRONIK40BIT: return new Getronik40BitFormat();
+            case FormatType.FT_BARIUM_FERRITE_PCSC: return new BariumFerritePCSCFormat();
+            case FormatType.FT_RAW: return new RawFormat();
+            case FormatType.FT_CUSTOM: return new CustomFormat();
+            case FormatType.FT_ASCII: return new ASCIIFormat();
+            default:
+                throw new LibLogicalAccessNetException($"Unknown format type: {ft}");
+                break;
         }
-		return ret;
 	}
 %}
 
@@ -384,6 +395,8 @@ namespace std {
             System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
             ret = (DataTransport)System.Activator.CreateInstance(dataTransportDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
         }
+        else
+            throw new LibLogicalAccessNetException($"Unknown DataTransport type: {ct}");
 		return ret;
 	}
 %}

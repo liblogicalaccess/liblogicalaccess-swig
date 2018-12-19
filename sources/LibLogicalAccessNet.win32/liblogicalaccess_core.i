@@ -256,6 +256,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
             System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
             ret = (AccessInfo)System.Activator.CreateInstance(accessInfoDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
         }
+        else
+            throw new LibLogicalAccessNetException($"Unknown AccessInfo type: {ct}");
 		return ret;
 	}
 %}
@@ -387,6 +389,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
             System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
             ret = (Location)System.Activator.CreateInstance(locationDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
         }
+        else
+            throw new LibLogicalAccessNetException($"Unknown Location type: {ct}");
 		return ret;
 	}
 %}
@@ -416,6 +420,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
             System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
             ret = (CardService)System.Activator.CreateInstance(cardServiceDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
         }
+        else
+            throw new LibLogicalAccessNetException($"Unknown CardService type: {ct}");
 		return ret;
 	}
 %}
