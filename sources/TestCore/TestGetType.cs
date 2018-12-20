@@ -132,9 +132,9 @@ namespace TestCore
             dt = new UDPDataTransport();
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is UDPDataTransport);
-            dt = new IDPDataTransport();
-            readerUnit.setDataTransport(dt);
-            Assert.IsTrue(readerUnit.getDataTransport() is IDPDataTransport);
+//            dt = new IDPDataTransport();
+//            readerUnit.setDataTransport(dt);
+//            Assert.IsTrue(readerUnit.getDataTransport() is IDPDataTransport);
             dt = new NFCDataTransport();
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is NFCDataTransport);
@@ -205,8 +205,8 @@ namespace TestCore
             //Assert.IsTrue(readerProvider is IDPReaderProvider);
             //readerProvider = libManager.getReaderProvider("ISO7816"); //Return null by c++
             //Assert.IsTrue(readerProvider is ISO7816ReaderProvider);
-            readerProvider = libManager.getReaderProvider("Keyboard");
-            Assert.IsTrue(readerProvider is KeyboardReaderProvider);
+            //readerProvider = libManager.getReaderProvider("Keyboard");
+            //Assert.IsTrue(readerProvider is KeyboardReaderProvider);
             readerProvider = libManager.getReaderProvider("NFC");
             Assert.IsTrue(readerProvider is NFCReaderProvider);
             readerProvider = libManager.getReaderProvider("OK5553");
@@ -217,8 +217,8 @@ namespace TestCore
             Assert.IsTrue(readerProvider is PCSCReaderProvider);
             readerProvider = libManager.getReaderProvider("Promag");
             Assert.IsTrue(readerProvider is PromagReaderProvider);
-            readerProvider = libManager.getReaderProvider("RFIDeas");
-            Assert.IsTrue(readerProvider is RFIDeasReaderProvider);
+            //readerProvider = libManager.getReaderProvider("RFIDeas");
+            //Assert.IsTrue(readerProvider is RFIDeasReaderProvider);
             readerProvider = libManager.getReaderProvider("Rpleth");
             Assert.IsTrue(readerProvider is RplethReaderProvider);
             readerProvider = libManager.getReaderProvider("SCIEL");

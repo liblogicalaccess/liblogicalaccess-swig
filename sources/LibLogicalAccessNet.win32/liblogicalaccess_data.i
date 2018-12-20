@@ -572,3 +572,4 @@ namespace std {
 %include <logicalaccess/cards/keydiversification.hpp>
 
 %template(DataFieldVector) std::vector<std::shared_ptr<logicalaccess::DataField> >;
+%template(TLVVector) std::vector<std::shared_ptr<logicalaccess::TLV> >;

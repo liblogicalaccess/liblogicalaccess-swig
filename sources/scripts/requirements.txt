@@ -1,1 +1,1 @@
-libclang-py3==3.9.0
+clang>=6.0.0

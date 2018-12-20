@@ -12,13 +12,24 @@ liblogicalaccess_core_wrap.cxx
 liblogicalaccess_iks_wrap.cxx
 liblogicalaccess_exception_wrap.cxx)
 
-add_library(LibLogicalAccessNet.win32 SHARED ${LLA_SWIG_SOURCES})
-#Enable PDB for release
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Zi")
-set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
-#Enable big obj
-target_compile_options(LibLogicalAccessNet.win32 PRIVATE "/bigobj")
-target_link_libraries(LibLogicalAccessNet.win32 PUBLIC
-CONAN_PKG::LogicalAccessPrivate
-CONAN_PKG::LogicalAccessNFC)
-install(TARGETS LibLogicalAccessNet.win32 RUNTIME DESTINATION bin)
+if (MSVC)
+  set(TARGET_NAME LibLogicalAccessNet.win32)
+else()
+  set(TARGET_NAME LogicalAccessNetNative)
+endif()
+
+add_library(${TARGET_NAME} SHARED ${LLA_SWIG_SOURCES})
+if (MSVC)
+  #Enable PDB for release
+  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Zi")
+  set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
+  #Enable big obj
+  target_compile_options(${TARGET_NAME} PRIVATE "/bigobj")
+else()
+  target_include_directories(${TARGET_NAME} PUBLIC /usr/include/PCSC)
+endif()
+
+target_link_libraries(${TARGET_NAME} PUBLIC
+  CONAN_PKG::LogicalAccessPrivate
+  CONAN_PKG::LogicalAccessNFC)
+install(TARGETS ${TARGET_NAME} RUNTIME DESTINATION bin LIBRARY DESTINATION lib)

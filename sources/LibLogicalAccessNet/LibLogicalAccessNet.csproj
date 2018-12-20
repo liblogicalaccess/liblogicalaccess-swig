@@ -17,7 +17,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>liblogicalaccess nfc rfid</PackageTags>
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(ISLOGRepository)keys/islog_sign.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(ISLOGRepository)keys/islog_sign.snk</AssemblyOriginatorKeyFile>
     <CLSCompliant>True</CLSCompliant>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>

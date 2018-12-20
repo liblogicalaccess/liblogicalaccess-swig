@@ -28,6 +28,9 @@ using LibLogicalAccess.Crypto;
 
 #include <logicalaccess/readerproviders/readerunit.hpp>
 #include <logicalaccess/readerproviders/readerprovider.hpp>
+#include <logicalaccess/cards/keystorage.hpp>
+#include <logicalaccess/cards/IKSStorage.hpp>
+#include <logicalaccess/cards/PKCSkeystorage.hpp>
 #include <logicalaccess/cards/accessinfo.hpp>
 #include <logicalaccess/cards/aes128key.hpp>
 #include <logicalaccess/cards/ichip.hpp>
@@ -36,14 +39,11 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/cards/readercardadapter.hpp>
 #include <logicalaccess/cards/icommands.hpp>
 #include <logicalaccess/cards/commands.hpp>
-#include <logicalaccess/cards/keystorage.hpp>
 #include <logicalaccess/cards/computermemorykeystorage.hpp>
 #include <logicalaccess/cards/hmac1key.hpp>
-#include <logicalaccess/cards/iksstorage.hpp>
 #include <logicalaccess/cards/keydiversification.hpp>
 #include <logicalaccess/cards/location.hpp>
 #include <logicalaccess/cards/locationnode.hpp>
-#include <logicalaccess/cards/pkcskeystorage.hpp>
 #include <logicalaccess/cards/readermemorykeystorage.hpp>
 #include <logicalaccess/cards/samkeystorage.hpp>
 #include <logicalaccess/cards/tripledeskey.hpp>
@@ -63,10 +63,10 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/services/accesscontrol/encodings/encoding.hpp>
 #include <logicalaccess/services/accesscontrol/encodings/littleendiandatarepresentation.hpp>
 #include <logicalaccess/services/accesscontrol/encodings/nodatarepresentation.hpp>
+#include <logicalaccess/services/accesscontrol/formats/BitsetStream.hpp>
 #include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/bariumferritepcscformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/bithelper.hpp>
-#include <logicalaccess/services/accesscontrol/formats/bitsetstream.hpp>
 #include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/fascn200bitformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/format.hpp>
@@ -481,6 +481,9 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 %include <logicalaccess/readerproviders/readerunit.hpp>
 %include <logicalaccess/readerproviders/readerprovider.hpp>
+%include <logicalaccess/cards/keystorage.hpp>
+%include <logicalaccess/cards/IKSStorage.hpp>
+%include <logicalaccess/cards/PKCSkeystorage.hpp>
 %include <logicalaccess/cards/accessinfo.hpp>
 %include <logicalaccess/cards/aes128key.hpp>
 %include <logicalaccess/cards/ichip.hpp>
@@ -489,14 +492,11 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/cards/readercardadapter.hpp>
 %include <logicalaccess/cards/icommands.hpp>
 %include <logicalaccess/cards/commands.hpp>
-%include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/computermemorykeystorage.hpp>
 %include <logicalaccess/cards/hmac1key.hpp>
-%include <logicalaccess/cards/iksstorage.hpp>
 %include <logicalaccess/cards/keydiversification.hpp>
 %include <logicalaccess/cards/location.hpp>
 %include <logicalaccess/cards/locationnode.hpp>
-%include <logicalaccess/cards/pkcskeystorage.hpp>
 %include <logicalaccess/cards/readermemorykeystorage.hpp>
 %include <logicalaccess/cards/samkeystorage.hpp>
 %include <logicalaccess/cards/tripledeskey.hpp>
@@ -516,10 +516,10 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/services/accesscontrol/encodings/encoding.hpp>
 %include <logicalaccess/services/accesscontrol/encodings/littleendiandatarepresentation.hpp>
 %include <logicalaccess/services/accesscontrol/encodings/nodatarepresentation.hpp>
+%include <logicalaccess/services/accesscontrol/formats/BitsetStream.hpp>
 %include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/bariumferritepcscformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/bithelper.hpp>
-%include <logicalaccess/services/accesscontrol/formats/bitsetstream.hpp>
 %include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/fascn200bitformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/format.hpp>

@@ -21,43 +21,73 @@ pipeline {
     }
 
     stages {
+        stage('Linux Swig Support Container') {
+            agent { label 'linux' }
+            steps {
+                sh "docker build --pull -t docker-registry.islog.com:5000/swig-support:cis-latest -f Dockerfile ."
+                sh "docker push docker-registry.islog.com:5000/swig-support:cis-latest"
+            }
+        }
+
+        // Only x64 release
+        stage('Linux Swig') {
+            agent { docker 'docker-registry.islog.com:5000/swig-support:cis-latest' }
+            steps {
+                script {
+                    conan.withFreshWindowsConanCache {
+                        sh "./linux.sh"
+                        dir('sources/LibLogicalAccessNet.win32') {
+                            sh "mkdir build"
+                            dir('build') {
+                                sh 'conan install -p compilers/x64_gcc6_release -u ..'
+                                sh 'conan build ..'
+                                sh 'conan package ..'
+                                sh 'conan export-pkg --profile compilers/x64_gcc6_release .. LogicalAccessSwig/2.1.0@islog/develop'
+                                sh 'conan upload LogicalAccessSwig/2.1.0@islog/develop -r islog-test --all --confirm --check --force'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         stage('Pre-Build') {
             steps {
                 deleteDir()
-                checkout scm;
-				
-				dir('installer') {
-					script {
-						conan.withFreshWindowsConanCache {
-							bat 'conan-imports.bat'
-						}
-					}
-				}
+                checkout scm
+
+                dir('installer') {
+                    script {
+                        conan.withFreshWindowsConanCache {
+                            bat 'conan-imports.bat'
+                        }
+                    }
+                }
                 dir('sources/scripts') {
                     bat 'pip install -r requirements.txt'
                 }
-			}
-		}
-		
-		stage('Generate SWIG') {
-			steps {
+            }
+        }
+
+        stage('Generate SWIG') {
+            steps {
                 // gitversion do not support vs2017 project for now https://github.com/GitTools/GitVersion/issues/1315
                 powershell 'sources/scripts/update-gitversion-vs2017proj.ps1 sources/LibLogicalAccessNet/LibLogicalAccessNet.csproj'
                 powershell 'sources/scripts/generate-swig.ps1'
-			}
-		}
-		
-		stage('Build') {
-			steps {
-			    dir('sources') {
-                  powershell 'islog-build 0 Release'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('sources') {
+                    powershell 'islog-build 0 Release'
                 }
                 dir('sources/LibLogicalAccessNet.win32') {
-					script {
-						conan.withFreshWindowsConanCache {
-							powershell './conan-build.ps1 -publish 1'
-						}
-					}
+                    script {
+                        conan.withFreshWindowsConanCache {
+                            powershell './conan-build.ps1 -publish 1'
+                        }
+                    }
                 }
                 warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', consoleParsers: [[parserName: 'MSBuild']], defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', unHealthy: ''
             }

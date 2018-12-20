@@ -9,14 +9,15 @@ class LLASwig(ConanFile):
     description = "<Description of LLA here>"
     settings = "os", "compiler", "build_type", "arch"
     requires = 'LogicalAccessPrivate/' + version + '@islog/develop', 'LogicalAccessNFC/' + version + '@islog/develop'
-    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', 'LogicalAccess:LLA_BUILD_RFIDEAS=True'
+    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True'
     generators = "cmake"
 
     def configure(self):
-        pass
+        if self.settings.os == 'Windows':
+            self.options['LogicalAccess'].LLA_BUILD_RFIDEAS = True
     
     def configure_cmake(self):
-        cmake = CMake(self, toolset='v141')
+        cmake = CMake(self)
         cmake.configure()
         return cmake
 
