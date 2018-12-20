@@ -533,6 +533,8 @@ typedef enum : uint16_t
 } SCardProtocol;
 %}
 
+%feature("director") ISO7816ReaderUnit;
+
 /* Include_section */
 
 %include <logicalaccess/plugins/readers/a3mlgm5600/lla_readers_a3mlgm5600_api.hpp>
