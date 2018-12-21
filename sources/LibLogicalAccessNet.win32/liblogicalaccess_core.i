@@ -223,10 +223,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
             System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.CreateInstance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
             ret = (Commands)System.Activator.CreateInstance(cmdDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
         }
-		else
-		{
-			ret = new Commands(cPtr, owner);
-		}
+        else
+            throw new LibLogicalAccessNetException($"Unknown Command type: {ct}");
 		return ret;
 	}
 %}
@@ -287,6 +285,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
             System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
             ret = (ReaderUnit)System.Activator.CreateInstance(readerUnitDictionary[rpt], flags, null, new object[] { cPtr, owner }, null);
         }
+		else
+            throw new LibLogicalAccessNetException($"Unknown ReaderUnit type: {rpt}");
 		return ret;
 	}
 %}
@@ -316,6 +316,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
             System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
             ret = (ReaderUnitConfiguration)System.Activator.CreateInstance(ReaderUnitConfigurationDictionary[rpt], flags, null, new object[] { cPtr, owner }, null);
         }
+		else
+            throw new LibLogicalAccessNetException($"Unknown ReaderUnitConfiguration type: {rpt}");
 		return ret;
 	}
 %}
@@ -345,6 +347,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
             System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
             ret = (ReaderProvider)System.Activator.CreateInstance(ReaderProviderDictionary[rpt], flags, null, new object[] { cPtr, owner }, null);
         }
+		else
+            throw new LibLogicalAccessNetException($"Unknown ReaderProvider type: {rpt}");
 		return ret;
 	}
 %}
@@ -446,6 +450,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
        case ReaderServiceType.RST_LICENSE_CHECKER:
 	     ret = new LicenseCheckerService(cPtr, owner);
 	     break;
+		default:
+            throw new LibLogicalAccessNetException($"Unknown ReaderService type: {svcType}");
       }
       return ret;
     }

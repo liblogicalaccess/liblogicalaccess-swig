@@ -365,7 +365,6 @@ namespace std {
             case FormatType.FT_ASCII: return new ASCIIFormat();
             default:
                 throw new LibLogicalAccessNetException($"Unknown format type: {ft}");
-                break;
         }
 	}
 %}
@@ -430,6 +429,8 @@ namespace std {
 	   case KeyStorageType.KST_SERVER:
 	     ret = new IKSStorage(cPtr, owner);
 		 break;
+	   default:
+         throw new LibLogicalAccessNetException($"Unknown KeyStorage type: {ks}");
       }
       return ret;
     }
@@ -486,6 +487,8 @@ namespace std {
 	   case DataFieldType.DFT_STRING:
 	     ret = new StringDataField(cPtr, owner);
 		 break;
+	   default:
+         throw new LibLogicalAccessNetException($"Unknown DataField type: {df}");
       }
       return ret;
     }
