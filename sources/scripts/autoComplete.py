@@ -17,7 +17,11 @@ include = []
 nest = []
 classlist = []
 tmpinclude = []
+DEBUG = False
 
+def log(s):
+    if DEBUG:
+        print(s)
 
 def arglist_disable_export_macros():
     return ['-DLLA_CORE_API=',
@@ -99,7 +103,7 @@ def parsesharedptr(content):
         if "::" not in strmatch:
             strmatch = "::".join(ns) + "::" + strmatch
         if "std::" not in strmatch and strmatch not in classlist:
-            print("Add from parsesharedptr: {}".format(strmatch))
+            log("Add from parsesharedptr: {}".format(strmatch))
             classlist.append(strmatch)
 
 
@@ -157,9 +161,9 @@ def innerincludeprocess(content, curpath, category):
 
 def includeprocess(path, category):
     if len(glob.glob(path, recursive=True)) == 0:
-        print("[ERROR]: nothing found in " + path)
+        log("[ERROR]: nothing found in " + path)
     for filename in glob.glob(path, recursive=True):
-        print('Will read file {}'.format(filename))
+        log('Will read file {}'.format(filename))
         with open(filename, "r", encoding='utf-8') as f:
             content = f.read()
             curpath = filename.replace("\\", "/")
@@ -272,28 +276,28 @@ def find_classdecl(node, filename):
         try:
             c.kind
         except ValueError as e:
-            print(e)
+            log(e)
             continue  # unknown template type
 
         # if c.kind == clang.cindex.CursorKind.STRUCT_DECL and c.spelling != None and c.location.file.name == filename:
         #	if c.spelling not in classlist:
         #		classlist.append(c.spelling)
-        #	print(c.spelling)
-        #	print(c.location.file.name)
+        #	log(c.spelling)
+        #	log(c.location.file.name)
 
         if c.kind == clang.cindex.CursorKind.CLASS_DECL and c.location.file.name == filename:
             if len(nest) == 0:
                 if c.spelling not in classlist:
-                    print("Add SPELLING {}. Filename: {}".format(c.spelling, filename))
+                    log("Add SPELLING {}. Filename: {}".format(c.spelling, filename))
                     classlist.append(c.spelling)
             else:
                 if "::".join(nest) + "::" + c.spelling not in classlist:
-                    print("Add OTHER {}. Filename: {}".format("::".join(nest) + "::" + c.spelling, filename))
+                    log("Add OTHER {}. Filename: {}".format("::".join(nest) + "::" + c.spelling, filename))
                     classlist.append("::".join(nest) + "::" + c.spelling)
                     nest.append(c.spelling)
             find_classdecl(c, filename)
         elif c.kind == clang.cindex.CursorKind.NAMESPACE and c.location.file.name == filename:
-            print("Add namespace: {}".format(c.spelling))
+            log("Add namespace: {}".format(c.spelling))
             nest.append(c.spelling)
             find_classdecl(c, filename)
         if len(nest) > 0 and nest[-1] == c.spelling:
@@ -360,7 +364,7 @@ def sharedptrwrite():
     lines.insert(i, "\n")
     i += 1
     for sptr in classlist:
-        print("Would add {}".format(sptr))
+        log("Would add {}".format(sptr))
 
     for sptr in classlist:
         lines.insert(i, "%shared_ptr(" + sptr + ");" + "\n")
