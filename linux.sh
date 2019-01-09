@@ -2,7 +2,7 @@
 
 (cd installer && conan install -p compilers/x64_gcc6_release -u .)
 (cd sources/scripts/ && pip3 install -r requirements.txt)
-(cd sources/scripts/ && python3 autoComplete.py)
+(cd sources/scripts/ && python3 lla.py)
 
 
 # Build
