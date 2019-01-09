@@ -207,7 +207,7 @@ def gather_lla_types(node):
                 fqn = '::'.join(full_namespaces) + '::' + child_node.spelling
                 types.add(fqn)
 
-                types |= find_template_parents(child_node)
+                #types |= find_template_parents(child_node)
         else:
             types |= gather_lla_types(child_node)
     return types
@@ -337,11 +337,6 @@ def main():
         clang.cindex.Config.set_library_file('/usr/lib/llvm-6.0/lib/libclang.so')
     else:
         clang.cindex.Config.set_library_file('C:\\Program Files\\LLVM\\bin\\libclang.dll')
-
-    x = find_lla_infos('test.cpp')
-    print(x.types)
-    return 0
-
     clean_files('../LibLogicalAccessNet.win32/')
 
     card_module_result = find_lla_infos("../../installer/packages/include/logicalaccess/plugins/cards/**/*.hpp")
@@ -360,7 +355,7 @@ def main():
     write_for_module('core', core_module_result)
 
     # Types
-    all_types = card_module_result.types | reader_module_result.types | core_module_result.types
+    all_types = card_module_result.types | reader_module_result.types | core_module_result.types | crypto_module_result.types
     write_shared_ptr(all_types)
 
 
