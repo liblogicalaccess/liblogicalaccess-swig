@@ -8,6 +8,10 @@ import clang.cindex
 from multiprocessing.pool import Pool
 import logging
 
+if os.name == 'posix':
+    clang.cindex.Config.set_library_file('/usr/lib/llvm-6.0/lib/libclang.so')
+else:
+    clang.cindex.Config.set_library_file('C:\\Program Files\\LLVM\\bin\\libclang.dll')
 
 def arglist_disable_export_macros():
     return ['-DLLA_CORE_API=',
@@ -151,7 +155,9 @@ def find_namespaces(node):
     namespaces = []
     parent = node.semantic_parent
     while parent and parent.semantic_parent:
-        if parent.kind == clang.cindex.CursorKind.NAMESPACE:
+        if parent.kind == clang.cindex.CursorKind.NAMESPACE or \
+            parent.kind == clang.cindex.CursorKind.CLASS_DECL or \
+                parent.kind == clang.cindex.CursorKind.STRUCT_DECL:
             namespaces = [parent.spelling] + namespaces
         parent = parent.semantic_parent
     return namespaces
@@ -202,14 +208,15 @@ def gather_lla_types(node):
         if child_node.kind == clang.cindex.CursorKind.CLASS_DECL or \
                 child_node.kind == clang.cindex.CursorKind.STRUCT_DECL:
 
+            if len(child_node.spelling) == 0:
+                continue
+
             if is_lla_namespace(child_node):
                 full_namespaces = find_namespaces(child_node)
                 fqn = '::'.join(full_namespaces) + '::' + child_node.spelling
                 types.add(fqn)
 
-                #types |= find_template_parents(child_node)
-        else:
-            types |= gather_lla_types(child_node)
+        types |= gather_lla_types(child_node)
     return types
 
 
@@ -261,6 +268,7 @@ def find_lla_infos(glob_string):
                 files |= set(glob.glob(glob_str, recursive=True))
         else:
             files = glob.glob(glob_string, recursive=True)
+        files = [f.replace("\\", "/") for f in files]
         search_result = SearchResult()
         ret = p.map(process_file_includes, files)
         for r in ret:
@@ -321,22 +329,20 @@ def write_shared_ptr(all_types):
     lines.insert(i, "\n")
     i += 1
 
+    all_types = list(all_types)
+    all_types.sort()
+    for t in all_types:
+        lines.insert(i, "%shared_ptr(" + t + ");" + "\n")
+        i += 1
     for t in all_types:
         print('SPTR: {}'.format(t))
         lines.insert(i, "%shared_ptr(" + t.replace('logicalaccess::', '') + ");" + "\n")
-        i += 1
-    for t in all_types:
-        lines.insert(i, "%shared_ptr(" + t + ");" + "\n")
         i += 1
     with open(path, "w") as f:
         f.write(''.join(lines))
 
 
 def main():
-    if os.name == 'posix':
-        clang.cindex.Config.set_library_file('/usr/lib/llvm-6.0/lib/libclang.so')
-    else:
-        clang.cindex.Config.set_library_file('C:\\Program Files\\LLVM\\bin\\libclang.dll')
     clean_files('../LibLogicalAccessNet.win32/')
 
     card_module_result = find_lla_infos("../../installer/packages/include/logicalaccess/plugins/cards/**/*.hpp")
