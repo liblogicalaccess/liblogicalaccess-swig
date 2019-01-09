@@ -56,13 +56,12 @@ pipeline {
                 deleteDir()
                 checkout scm
 
-                dir('installer') {
-                    script {
-                        conan.withFreshWindowsConanCache {
-                            bat 'conan-imports.bat'
-                        }
+                script {
+                    conan.withFreshWindowsConanCache {
+                       powershell 'islog-prebuild'
                     }
                 }
+                
                 dir('sources/scripts') {
                     bat 'pip install -r requirements.txt'
                 }
