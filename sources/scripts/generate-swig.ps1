@@ -1,5 +1,5 @@
 cd sources/scripts
-Write-Host "Build swig interface..."
+Write-Host "Build swig interface files..."
 & python.exe .\autoComplete.py
 Write-Host "Build swig interface done. Calling SWIG..."
 & .\swig-build.ps1
