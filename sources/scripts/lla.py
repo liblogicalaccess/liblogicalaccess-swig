@@ -9,6 +9,14 @@ from multiprocessing.pool import Pool
 import logging
 import enum
 
+
+# Known issues:
+#   + Template instantiation through inheritance tree are not detected. Therefore
+#     SAMCommand<> templates have been manually written into the corresponding '.i' file.
+#   + Include processing is regex based, and therefore is not aware of possible preprocessor if/else
+#     that could prevent an include.
+
+
 if os.name == 'posix':
     clang.cindex.Config.set_library_file('/usr/lib/llvm-6.0/lib/libclang.so')
 else:
@@ -308,7 +316,11 @@ class SearchResult:
 
         self.swig_includes = set()  # %include files
         self.imports = set()
-        self.magic = []  # List of tuple (SwigCategory / filepath)
+
+        # List of include / import in a tuple (SwigCategory / filepath).
+        # This list is ordered and includes / imports must be written in
+        # the given order.
+        self.magic = []
 
     def add_include_import(self, filename, import_or_include):
         if import_or_include == SwigCategory.IMPORT:
@@ -356,7 +368,7 @@ def find_lla_infos(glob_string, category):
 
                 elif category == LLACategory.CORE:
                     if file_full in files:
-                        search_result.add_include_import(r, SwigCategory.IMPORT)
+                        search_result.add_include_import(r, SwigCategory.INCLUDE)
 
                     if r.find('/plugins/') == -1:
                         if r not in search_result.includes:
