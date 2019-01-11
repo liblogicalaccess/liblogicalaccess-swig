@@ -7,11 +7,40 @@ import re
 import clang.cindex
 from multiprocessing.pool import Pool
 import logging
+import enum
 
 if os.name == 'posix':
     clang.cindex.Config.set_library_file('/usr/lib/llvm-6.0/lib/libclang.so')
 else:
     clang.cindex.Config.set_library_file('C:\\Program Files\\LLVM\\bin\\libclang.dll')
+
+# Types that we explicitly do not declare as usable through shared_ptr.
+IGNORED_TYPES = ['logicalaccess::MifareAccessInfo::DataBlockAccessBits',
+                 'logicalaccess::MifareAccessInfo::BlockAccessBits',
+                 'logicalaccess::MifareAccessInfo::SectorTrailerAccessBits']
+
+LLA_INCLUDE_PATH = '../../installer/packages/include/'
+
+
+class LLACategory(enum.Enum):
+    """
+    Category that we have defined when "grouping" files. Those will end-up in
+    different namespace in CSharp code.
+    """
+    CARDS = 1
+    READERS = 2
+    CORE = 3
+    CRYPTO = 4
+
+
+class SwigCategory(enum.Enum):
+    """
+    Swig has %include and %import directives that have different meaning.
+    This enum help distinguish them.
+    """
+    IMPORT = 1
+    INCLUDE = 2
+
 
 def arglist_disable_export_macros():
     return ['-DLLA_CORE_API=',
@@ -122,7 +151,7 @@ def clean_files(swig_file_root):
     """
     for f in glob.glob('{}/*.i'.format(swig_file_root)):
         # It seems we specifically ignore liblogicalaccess_card_sam.i
-        # and liblogicalaccess_crypto.i as they were manually generated ?
+        # as it was manually generated ?
         if f.endswith('liblogicalaccess_card_sam.i'):  # or f.endswith('liblogicalaccess_crypto.i'):
             continue
         clean_swig_file(f)
@@ -134,9 +163,9 @@ def parse_translation_unit(filename):
     :return: A TranslationUnit clang object.
     """
     index = clang.cindex.Index.create()
-    options = clang.cindex.TranslationUnit.PARSE_SKIP_FUNCTION_BODIES | clang.cindex.TranslationUnit.PARSE_INCOMPLETE
+    options = clang.cindex.TranslationUnit.PARSE_SKIP_FUNCTION_BODIES | clang.cindex.TranslationUnit.PARSE_INCOMPLETE | clang.cindex.TranslationUnit.PARSE_DETAILED_PROCESSING_RECORD
     tu = index.parse(filename, ['-x', 'c++', '-std=c++14',
-                                '-I../../installer/packages/include/'] + arglist_disable_export_macros(),
+                                '-I{}'.format(LLA_INCLUDE_PATH)] + arglist_disable_export_macros(),
                      unsaved_files=None, options=options)
     return tu
 
@@ -156,7 +185,7 @@ def find_namespaces(node):
     parent = node.semantic_parent
     while parent and parent.semantic_parent:
         if parent.kind == clang.cindex.CursorKind.NAMESPACE or \
-            parent.kind == clang.cindex.CursorKind.CLASS_DECL or \
+                parent.kind == clang.cindex.CursorKind.CLASS_DECL or \
                 parent.kind == clang.cindex.CursorKind.STRUCT_DECL:
             namespaces = [parent.spelling] + namespaces
         parent = parent.semantic_parent
@@ -168,6 +197,7 @@ def is_lla_namespace(node):
     return len(namespaces) and namespaces[0] == 'logicalaccess'
 
 
+# Unused.
 def find_template_parents(classdecl_node):
     """
     Iterate through the parents of a class, checking for Class Template parents.
@@ -203,6 +233,11 @@ def find_template_parents(classdecl_node):
 
 
 def gather_lla_types(node):
+    """
+    Iterate over a node's children looking for C++ struct or class declaration in order to
+    gather LLA declared types.
+    """
+
     types = set()
     for child_node in node.get_children():
         if child_node.kind == clang.cindex.CursorKind.CLASS_DECL or \
@@ -213,14 +248,25 @@ def gather_lla_types(node):
 
             if is_lla_namespace(child_node):
                 full_namespaces = find_namespaces(child_node)
+
                 fqn = '::'.join(full_namespaces) + '::' + child_node.spelling
-                types.add(fqn)
+                if fqn not in IGNORED_TYPES:
+                    types.add(fqn)
 
         types |= gather_lla_types(child_node)
     return types
 
 
-def gather_includes(filename, includes):
+def gather_includes(filename, includes, ignore_list):
+    """
+    Retrieve nested include from a file.
+
+    For a given file we retrieve included filename, depth first.
+    So if FileA includes files B includes file C, we will return [C, B, A]. This is
+    important because the order matters for Swig.
+
+    The distinction between Import and Include is performed later.
+    """
     regex_include = r"(?<=#include [\"<])(.*?.hpp)(?=[\">]\n)"
 
     files_to_check_next = []
@@ -233,8 +279,16 @@ def gather_includes(filename, includes):
             files_to_check_next.append(inc)
 
     for f in files_to_check_next:
-        includes.append(f)
-        gather_includes('../../installer/packages/include/' + f, includes)
+        if f in ignore_list:
+            continue
+        ignore_list.append(f)
+        gather_includes(LLA_INCLUDE_PATH + f, includes, ignore_list)
+        ignore_list.pop()
+        if f not in includes and f not in ignore_list:
+            includes.append(f)
+    x = filename.replace(LLA_INCLUDE_PATH, '')
+    if x not in includes and x not in ignore_list:
+        includes.append(x)
 
     return includes
 
@@ -245,18 +299,29 @@ def process_file(filename):
     return gather_lla_types(tu.cursor)
 
 
-def process_file_includes(filename):
-    return gather_includes(filename, [])
-
-
 class SearchResult:
     def __init__(self):
         self.types = set()
-        self.includes = set()
+
+        # File that are '#include' into the Swig '.i' file.
+        self.includes = []  # #include files
+
+        self.swig_includes = set()  # %include files
         self.imports = set()
+        self.magic = []  # List of tuple (SwigCategory / filepath)
+
+    def add_include_import(self, filename, import_or_include):
+        if import_or_include == SwigCategory.IMPORT:
+            if filename not in self.imports:
+                self.imports.add(filename)
+                self.magic.append((SwigCategory.IMPORT, filename))
+        if import_or_include == SwigCategory.INCLUDE:
+            if filename not in self.swig_includes:
+                self.swig_includes.add(filename)
+                self.magic.append((SwigCategory.INCLUDE, filename))
 
 
-def find_lla_infos(glob_string):
+def find_lla_infos(glob_string, category):
     """
     Recursively parse headers from source_root and extract LogicalAccess types.
     :return:
@@ -270,14 +335,34 @@ def find_lla_infos(glob_string):
             files = glob.glob(glob_string, recursive=True)
         files = [f.replace("\\", "/") for f in files]
         search_result = SearchResult()
-        ret = p.map(process_file_includes, files)
-        for r in ret:
-            for file in r:
-                file_full = '../../installer/packages/include/' + file
-                if file_full in files:
-                    search_result.includes.add(file)
-                else:
-                    search_result.imports.add(file)
+        for f in files:
+            for r in gather_includes(f, [], []):
+                file_full = LLA_INCLUDE_PATH + r
+                if category == LLACategory.CARDS or category == LLACategory.READERS or category == LLACategory.CRYPTO:
+                    # For plugins, we add our own file (part of file group, aka matched by glob_string)
+                    # to the files to be %include.
+                    if file_full in files:
+                        search_result.add_include_import(r, SwigCategory.INCLUDE)
+
+                    # All files in /plugins/ are added to be #include
+                    if r.find('/plugins/') != -1:
+                        if r not in search_result.includes:
+                            search_result.includes.append(r)
+
+                    # Files in /plugins, but not our own (ie, card plugins when processing reader files)
+                    # are added to be %import.
+                    if r.find('/plugins/') != -1 and file_full not in files:
+                        search_result.add_include_import(r, SwigCategory.IMPORT)
+
+                elif category == LLACategory.CORE:
+                    if file_full in files:
+                        search_result.add_include_import(r, SwigCategory.IMPORT)
+
+                    if r.find('/plugins/') == -1:
+                        if r not in search_result.includes:
+                            search_result.includes.append(r)
+                    else:
+                        search_result.add_include_import(r, SwigCategory.IMPORT)
 
         ret = p.map(process_file, files)
         for r in ret:
@@ -287,6 +372,9 @@ def find_lla_infos(glob_string):
 
 
 def write_for_module(module_name, search_result):
+    """
+    Write includes and import into the "module" file, liblogicalaccess_module_name.i.
+    """
     filename = '../LibLogicalAccessNet.win32/liblogicalaccess_{}.i'.format(module_name)
 
     with open(filename, "r") as f:
@@ -296,20 +384,18 @@ def write_for_module(module_name, search_result):
         if "/* Additional_include */\n" in lines[i]:
             i += 2
             for include in search_result.includes:
-                include = include.replace('../../installer/packages/include/', '')
+                include = include.replace(LLA_INCLUDE_PATH, '')
                 lines.insert(i, "#include <{}>\n".format(include))
                 i += 1
             lines.insert(i, "\n")
             i += 1
         if "/* Include_section */\n" in lines[i]:
             i += 2
-            for include in search_result.includes:
-                include = include.replace('../../installer/packages/include/', '')
-                lines.insert(i, "%include <{}>\n".format(include))
-                i += 1
-            for import_ in search_result.imports:
-                import_ = import_.replace('../../installer/packages/include/', '')
-                lines.insert(i, "%import <{}>\n".format(import_))
+            for swig_category, filepath in search_result.magic:
+                if swig_category == SwigCategory.IMPORT:
+                    lines.insert(i, "%import <{}>\n".format(filepath))
+                else:
+                    lines.insert(i, "%include <{}>\n".format(filepath))
                 i += 1
             lines.insert(i, "\n")
             i += 1
@@ -319,6 +405,11 @@ def write_for_module(module_name, search_result):
 
 
 def write_shared_ptr(all_types):
+    """
+    Write the %shared_ptr() declaration into liblogicalaccess.i for all known types.
+    :param all_types:
+    :return:
+    """
     path = "../LibLogicalAccessNet.win32/liblogicalaccess.i"
     with open(path, "r") as f:
         lines = f.readlines()
@@ -345,19 +436,22 @@ def write_shared_ptr(all_types):
 def main():
     clean_files('../LibLogicalAccessNet.win32/')
 
-    card_module_result = find_lla_infos("../../installer/packages/include/logicalaccess/plugins/cards/**/*.hpp")
-    write_for_module('card', card_module_result)
-
-    crypto_module_result = find_lla_infos("../../installer/packages/include/logicalaccess/plugins/crypto/**/*.hpp")
+    crypto_module_result = find_lla_infos('{}logicalaccess/plugins/crypto/**/*.hpp'.format(LLA_INCLUDE_PATH),
+                                          LLACategory.CRYPTO)
     write_for_module('crypto', crypto_module_result)
 
-    reader_module_result = find_lla_infos("../../installer/packages/include/logicalaccess/plugins/readers/**/*.hpp")
+    card_module_result = find_lla_infos('{}logicalaccess/plugins/cards/**/*.hpp'.format(LLA_INCLUDE_PATH),
+                                        LLACategory.CARDS)
+    write_for_module('card', card_module_result)
+
+    reader_module_result = find_lla_infos('{}logicalaccess/plugins/readers/**/*.hpp'.format(LLA_INCLUDE_PATH),
+                                          LLACategory.READERS)
     write_for_module('reader', reader_module_result)
 
-    core_module_result = find_lla_infos(['../../installer/packages/include/logicalaccess/cards/**/*.hpp',
-                                         '../../installer/packages/include/logicalaccess/services/**/*.hpp',
-                                         '../../installer/packages/include/logicalaccess/readerproviders/**/*.hpp',
-                                         '../../installer/packages/include/logicalaccess/*.hpp'])
+    core_module_result = find_lla_infos(['{}logicalaccess/cards/**/*.hpp'.format(LLA_INCLUDE_PATH),
+                                         '{}logicalaccess/services/**/*.hpp'.format(LLA_INCLUDE_PATH),
+                                         '{}logicalaccess/readerproviders/**/*.hpp'.format(LLA_INCLUDE_PATH),
+                                         '{}logicalaccess/*.hpp'.format(LLA_INCLUDE_PATH)], LLACategory.CORE)
     write_for_module('core', core_module_result)
 
     # Types
