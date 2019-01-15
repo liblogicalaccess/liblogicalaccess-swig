@@ -115,7 +115,8 @@ def arglist_disable_export_macros():
             '-DLLA_READERS_PRIVATE_IDP_API=',
             '-DLLA_READERS_PRIVATE_ISO7816_API=',
             '-DLLA_READERS_PRIVATE_PCSC_API=',
-            '-DLLA_READERS_NFC_NFC_API=']
+            '-DLLA_READERS_NFC_NFC_API='
+			'-DDLLA_CARDS_PRIVATE_SEPROCESSOR_API']
 
 
 def clean_swig_file(filename):
