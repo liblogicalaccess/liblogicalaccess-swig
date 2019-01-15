@@ -26,6 +26,10 @@
 
 /* Include_section */
 
+%include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
+%include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
+%include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
+
 /* END_Include_section */
 
 %template(AV1SAMKeyEntry) logicalaccess::SAMKeyEntry<logicalaccess::KeyEntryAV1Information, logicalaccess::SETAV1>;
