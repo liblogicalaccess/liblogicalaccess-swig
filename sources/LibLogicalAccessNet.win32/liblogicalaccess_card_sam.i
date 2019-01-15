@@ -26,7 +26,12 @@
 
 /* Include_section */
 
+%include <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
+%include <logicalaccess/plugins/cards/samav2/samcrypto.hpp>
+%include <logicalaccess/plugins/cards/samav2/sambasickeyentry.hpp>
 %include <logicalaccess/plugins/cards/samav2/samkeyentry.hpp>
+%include <logicalaccess/plugins/cards/samav2/samkucentry.hpp>
 %include <logicalaccess/plugins/cards/samav2/samcommands.hpp>
 %include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
 
