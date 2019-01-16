@@ -6,6 +6,7 @@ import glob
 import re
 import clang.cindex
 from multiprocessing.pool import Pool
+from functools import partial
 import logging
 import enum
 
@@ -30,7 +31,6 @@ IGNORED_TYPES = ['logicalaccess::MifareAccessInfo::DataBlockAccessBits',
 
 LLA_INCLUDE_PATH = '../../installer/packages/include/'
 
-
 class LLACategory(enum.Enum):
     """
     Category that we have defined when "grouping" files. Those will end-up in
@@ -51,74 +51,11 @@ class SwigCategory(enum.Enum):
     INCLUDE = 2
 
 
-def arglist_disable_export_macros():
-    return ['-DLLA_CORE_API=',
-            '-DLLA_CARDS_CPS3_API=',
-            '-DLLA_CARDS_DESFIRE_API=',
-            '-DLLA_CARDS_EM4102_API=',
-            '-DLLA_CARDS_EM4135_API=',
-            '-DLLA_CARDS_EPASS_API=',
-            '-DLLA_CARDS_FELICA_API=',
-            '-DLLA_CARDS_GENERICTAG_API=',
-            '-DLLA_CARDS_ICODE1_API=',
-            '-DLLA_CARDS_ICODE2_API=',
-            '-DLLA_CARDS_INDALA_API=',
-            '-DLLA_CARDS_INFINEONMYD_API=',
-            '-DLLA_CARDS_ISO15693_API=',
-            '-DLLA_CARDS_ISO7816_API=',
-            '-DLLA_READERS_PRIVATE_KEYBOARD_API=',
-            '-DLLA_CARDS_LEGICPRIME_API=',
-            '-DLLA_CARDS_MIFARE_API=',
-            '-DLLA_CARDS_MIFAREPLUS_API=',
-            '-DLLA_CARDS_MIFAREULTRALIGHT_API=',
-            '-DLLA_CARDS_PROX_API=',
-            '-DLLA_CARDS_PROXLITE_API=',
-            '-DLLA_CARDS_SAMAV2_API=',
-            '-DLLA_CARDS_SEOS_API=',
-            '-DLLA_CARDS_SMARTFRAME_API=',
-            '-DLLA_CARDS_STMLRI_API=',
-            '-DLLA_CARDS_TAGIT_API=',
-            '-DLLA_CARDS_TOPAZ_API=',
-            '-DLLA_CARDS_TWIC_API=',
-            '-DLLA_CRYPTO_API=',
-            '-DLLA_COMMON_API=',
-            '-DLLA_READERS_A3MLGM5600_API=',
-            '-DLLA_READERS_ADMITTO_API=',
-            '-DLLA_READERS_A3MLGM5600_API=',
-            '-DLLA_READERS_ADMITTO_API=',
-            '-DLLA_READERS_A3MLGM5600_API=',
-            '-DLLA_READERS_ADMITTO_API=',
-            '-DLLA_READERS_AXESSTMC13_API=',
-            '-DLLA_READERS_AXESSTMCLEGIC_API=',
-            '-DLLA_READERS_DEISTER_API=',
-            '-DLLA_READERS_ELATEC_API=',
-            '-DLLA_READERS_GIGATMS_API=',
-            '-DLLA_READERS_GUNNEBO_API=',
-            '-DLLA_READERS_IDONDEMAND_API=',
-            '-DLLA_READERS_ISO7816_API=',
-            '-DLLA_READERS_PRIVATE_KEYBOARD_API=',
-            '-DLLA_READERS_OK5553_API=',
-            '-DLLA_READERS_OSDP_API=',
-            '-DLLA_READERS_PCSC_API=',
-            '-DLLA_READERS_PROMAG_API=',
-            '-DLLA_READERS_RFIDEAS_API=',
-            '-DLLA_READERS_RPLETH_API=',
-            '-DLLA_READERS_SCIEL_API=',
-            '-DLLA_READERS_SMARTID_API=',
-            '-DLLA_READERS_STIDPRG_API=',
-            '-DLLA_READERS_STIDSTR_API=',
-            '-DLLA_CORE_API=',
-            '-DLLA_CARDS_PRIVATE_DESFIRE2_API=',
-            '-DLLA_CARDS_PRIVATE_ICLASS_API=',
-            '-DLLA_CARDS_PRIVATE_ICLASS5321_API=',
-            '-DLLA_CARDS_PRIVATE_ICLASS_API=',
-            '-DLLA_CARDS_PRIVATE_ICLASS5321_API=',
-            '-DLLA_READERS_PRIVATE_IDP_API=',
-            '-DLLA_READERS_PRIVATE_ISO7816_API=',
-            '-DLLA_READERS_PRIVATE_PCSC_API=',
-            '-DLLA_READERS_NFC_NFC_API=',
-            '-DLLA_CARDS_PRIVATE_SEPROCESSOR_API=']
-
+def get_clang_define_list(lla_api_defines):
+    result = []
+    for lla_api_define in lla_api_defines:
+        result.append("-D{}=".format(lla_api_define))
+    return result
 
 def clean_swig_file(filename):
     """
@@ -149,6 +86,13 @@ def clean_swig_file(filename):
         except ValueError:
             pass
 
+        try:
+            i = lines.index("/* Define_section */\n") + 1
+            while i != lines.index("/* END_Define_section */\n") - 1:
+                del lines[i]
+        except ValueError:
+            pass
+
     with open(filename, "w") as f:
         f.write(''.join(lines))
 
@@ -167,7 +111,7 @@ def clean_files(swig_file_root):
         clean_swig_file(f)
 
 
-def parse_translation_unit(filename):
+def parse_translation_unit(filename, lla_api_defines):
     """
     Not really a Translation Unit, most likely an header file.
     :return: A TranslationUnit clang object.
@@ -175,7 +119,7 @@ def parse_translation_unit(filename):
     index = clang.cindex.Index.create()
     options = clang.cindex.TranslationUnit.PARSE_SKIP_FUNCTION_BODIES | clang.cindex.TranslationUnit.PARSE_INCOMPLETE | clang.cindex.TranslationUnit.PARSE_DETAILED_PROCESSING_RECORD
     tu = index.parse(filename, ['-x', 'c++', '-std=c++14',
-                                '-I{}'.format(LLA_INCLUDE_PATH)] + arglist_disable_export_macros(),
+                                '-I{}'.format(LLA_INCLUDE_PATH)] + lla_api_defines,
                      unsaved_files=None, options=options)
     return tu
 
@@ -303,9 +247,9 @@ def gather_includes(filename, includes, ignore_list):
     return includes
 
 
-def process_file(filename):
+def process_file(lla_api_defines, filename):
     logging.info('Processing {}'.format(filename))
-    tu = parse_translation_unit(filename)
+    tu = parse_translation_unit(filename, lla_api_defines)
     return gather_lla_types(tu.cursor)
 
 
@@ -335,7 +279,7 @@ class SearchResult:
                 self.magic.append((SwigCategory.INCLUDE, filename))
 
 
-def find_lla_infos(glob_string, category):
+def find_lla_infos(glob_string, category, lla_api_defines):
     """
     Recursively parse headers from source_root and extract LogicalAccess types.
     :return:
@@ -378,7 +322,9 @@ def find_lla_infos(glob_string, category):
                     else:
                         search_result.add_include_import(r, SwigCategory.IMPORT)
 
-        ret = p.map(process_file, files)
+        lla_api_defines = get_clang_define_list(lla_api_defines)
+        func = partial(process_file, lla_api_defines)
+        ret = p.map(func, files)
         for r in ret:
             for type in r:
                 search_result.types.add(type)
@@ -446,26 +392,63 @@ def write_shared_ptr(all_types):
     with open(path, "w") as f:
         f.write(''.join(lines))
 
+def find_lla_api_define(glob_string):
+    """
+    Recursively parse headers from source_root and extract LogicalAccess API define types.
+    Write the define in swig interface and store them for clang
+    :return:
+    """
+    files = glob.glob(glob_string, recursive=True)
+    lla_api_defines = []
+    for file in files:
+        with open(file, "r") as f:
+            lines = f.readlines()
+            define_api = re.search('#  define (.+?)\n', lines[5]).group(1)
+            lla_api_defines.append(define_api)
+    lla_api_defines = list(set(lla_api_defines))
+    lla_api_defines.sort()
+    return lla_api_defines
+
+def write_lla_api_define(lla_api_defines):
+    """
+    Write the lla api define in swig interface
+    :return:
+    """
+    path = "../LibLogicalAccessNet.win32/liblogicalaccess.i"
+    with open(path, "r") as f:
+        lines = f.readlines()
+
+    i = lines.index("/* Define_section */\n") + 1
+    for lla_api_define in lla_api_defines:
+        lines.insert(i, "#define {}\n".format(lla_api_define))
+    lines.insert(i, "\n")
+
+    with open(path, "w") as f:
+        f.write(''.join(lines))
 
 def main():
     clean_files('../LibLogicalAccessNet.win32/')
 
+    lla_api_defines = find_lla_api_define('{}logicalaccess/**/lla_*_api.hpp'.format(LLA_INCLUDE_PATH))
+    write_lla_api_define(lla_api_defines)
+
     crypto_module_result = find_lla_infos('{}logicalaccess/plugins/crypto/**/*.hpp'.format(LLA_INCLUDE_PATH),
-                                          LLACategory.CRYPTO)
+                                          LLACategory.CRYPTO, lla_api_defines)
     write_for_module('crypto', crypto_module_result)
 
     card_module_result = find_lla_infos('{}logicalaccess/plugins/cards/**/*.hpp'.format(LLA_INCLUDE_PATH),
-                                        LLACategory.CARDS)
+                                        LLACategory.CARDS, lla_api_defines)
     write_for_module('card', card_module_result)
 
     reader_module_result = find_lla_infos('{}logicalaccess/plugins/readers/**/*.hpp'.format(LLA_INCLUDE_PATH),
-                                          LLACategory.READERS)
+                                          LLACategory.READERS, lla_api_defines)
     write_for_module('reader', reader_module_result)
 
     core_module_result = find_lla_infos(['{}logicalaccess/cards/**/*.hpp'.format(LLA_INCLUDE_PATH),
                                          '{}logicalaccess/services/**/*.hpp'.format(LLA_INCLUDE_PATH),
                                          '{}logicalaccess/readerproviders/**/*.hpp'.format(LLA_INCLUDE_PATH),
-                                         '{}logicalaccess/*.hpp'.format(LLA_INCLUDE_PATH)], LLACategory.CORE)
+                                         '{}logicalaccess/*.hpp'.format(LLA_INCLUDE_PATH)],
+                                        LLACategory.CORE, lla_api_defines)
     write_for_module('core', core_module_result)
 
     # Types
