@@ -293,6 +293,7 @@ def find_lla_infos(glob_string, category, lla_api_defines):
         else:
             files = glob.glob(glob_string, recursive=True)
         files = [f.replace("\\", "/") for f in files]
+        files = sorted(list(files))
         search_result = SearchResult()
         for f in files:
             for r in gather_includes(f, [], []):
