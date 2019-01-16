@@ -380,7 +380,6 @@
 %shared_ptr(logicalaccess::Key);
 %shared_ptr(logicalaccess::KeyDiversification);
 %shared_ptr(logicalaccess::KeyStorage);
-%shared_ptr(logicalaccess::KeyboardEntry);
 %shared_ptr(logicalaccess::KeyboardReaderProvider);
 %shared_ptr(logicalaccess::KeyboardReaderUnit);
 %shared_ptr(logicalaccess::KeyboardReaderUnitConfiguration);
@@ -926,7 +925,6 @@
 %shared_ptr(Key);
 %shared_ptr(KeyDiversification);
 %shared_ptr(KeyStorage);
-%shared_ptr(KeyboardEntry);
 %shared_ptr(KeyboardReaderProvider);
 %shared_ptr(KeyboardReaderUnit);
 %shared_ptr(KeyboardReaderUnitConfiguration);

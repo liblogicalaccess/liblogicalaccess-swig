@@ -27,7 +27,8 @@ else:
 # Types that we explicitly do not declare as usable through shared_ptr.
 IGNORED_TYPES = ['logicalaccess::MifareAccessInfo::DataBlockAccessBits',
                  'logicalaccess::MifareAccessInfo::BlockAccessBits',
-                 'logicalaccess::MifareAccessInfo::SectorTrailerAccessBits']
+                 'logicalaccess::MifareAccessInfo::SectorTrailerAccessBits',
+                 'logicalaccess::KeyboardEntry']
 
 LLA_INCLUDE_PATH = '../../installer/packages/include/'
 
