@@ -6,7 +6,8 @@ class LogicalAccessSwigConan(ConanFile):
     version = "2.1.0"
     requires = 'LogicalAccessPrivate/' + version + '@islog/develop', 'LogicalAccessNFC/' + version + '@islog/develop'
     settings = "build_type", "arch", "os"
-    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True'
+    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
+                        'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True'
 
     def configure(self):
         if self.settings.os == 'Windows':
