@@ -5,15 +5,17 @@ VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibLogicalAccessNet", "LibLogicalAccessNet\LibLogicalAccessNet.csproj", "{2A4D8C7D-84F8-4634-911B-8E001116D4DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLogicalAccessNetTest", "LibLogicalAccessNetTest\LibLogicalAccessNetTest.csproj", "{B0680F3A-CD65-4BF4-B9B1-EE4B6CBC6D89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibLogicalAccessNetTest", "LibLogicalAccessNetTest\LibLogicalAccessNetTest.csproj", "{B0680F3A-CD65-4BF4-B9B1-EE4B6CBC6D89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mifare1KTests", "Mifare1K\Mifare1KTests.csproj", "{F34E8A7B-7D85-4D44-9CD3-0BB79567C2DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mifare1KTests", "Mifare1K\Mifare1KTests.csproj", "{F34E8A7B-7D85-4D44-9CD3-0BB79567C2DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCore", "TestCore\TestCore.csproj", "{80D0D1C9-CBAB-44C4-9A0F-923ACC6A59FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCore", "TestCore\TestCore.csproj", "{80D0D1C9-CBAB-44C4-9A0F-923ACC6A59FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISO15693Tests", "ISO15693Tests\ISO15693Tests.csproj", "{C6D01D7B-8F2F-4C37-835C-8605F428B255}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISO15693Tests", "ISO15693Tests\ISO15693Tests.csproj", "{C6D01D7B-8F2F-4C37-835C-8605F428B255}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DESFireEV1Tests", "DESFireEV1Tests\DESFireEV1Tests.csproj", "{8995F71F-B1A8-46D1-BF74-5E9DD8013675}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DESFireEV1Tests", "DESFireEV1Tests\DESFireEV1Tests.csproj", "{8995F71F-B1A8-46D1-BF74-5E9DD8013675}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEOSTests", "SEOSTests\SEOSTests.csproj", "{5F6716F8-7DAD-4C9B-A083-C658FAB902E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{8995F71F-B1A8-46D1-BF74-5E9DD8013675}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8995F71F-B1A8-46D1-BF74-5E9DD8013675}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8995F71F-B1A8-46D1-BF74-5E9DD8013675}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F6716F8-7DAD-4C9B-A083-C658FAB902E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F6716F8-7DAD-4C9B-A083-C658FAB902E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F6716F8-7DAD-4C9B-A083-C658FAB902E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F6716F8-7DAD-4C9B-A083-C658FAB902E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

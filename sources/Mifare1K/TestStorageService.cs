@@ -25,7 +25,7 @@ namespace Mifare1KTests
         //[TestMethod]
         public void StorageServiceTests(string[] arg)
         {
-            LLANTestInit();
+            LLATestInit();
 
             Assert.AreEqual(chip.getCardType(), "Mifare1K", "Chip is not a Mifare1K, but is " + chip.getCardType() + " instead.");
 

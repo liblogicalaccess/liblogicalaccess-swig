@@ -25,7 +25,7 @@ namespace Mifare1KTests
         //[TestMethod]
         public void IterateMemoryTests()
         {
-            LLANTestInit();
+            LLATestInit();
 
             LocationNode rootNode = chip.getRootLocationNode();
             LocationNodePtrCollection children = rootNode.getChildrens();

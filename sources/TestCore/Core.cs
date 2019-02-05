@@ -41,7 +41,7 @@ namespace TestCore
         [TestInitialize]
         public abstract void Introduction();
 
-        public static void PCSCTestInit(string card_type = "")
+        public static void PCSCTestInit(string card_type = "", string contact_reader = "")
         {
             // Reader configuration object to store reader provider and reader unit selection.
             ReaderConfiguration readerConfig = new ReaderConfiguration();
@@ -51,7 +51,18 @@ namespace TestCore
             Assert.IsNotNull(provider, "Cannot get PCSC provider.");
             readerConfig.setReaderProvider(provider);
 
-            readerUnit = readerConfig.getReaderProvider().createReaderUnit();
+            readerUnit = null;
+            var readerUnits = readerConfig.getReaderProvider().getReaderList();
+            if (!string.IsNullOrEmpty(contact_reader))
+            {
+                for (int x = 0; x < readerUnits.Count; ++x)
+                {
+                    if (readerUnits[x].getName() == contact_reader)
+                        readerUnit = readerUnits[x];
+                }
+            }
+            else if (readerUnits.Count > 0)
+                readerUnit = readerUnits[0];
             Assert.IsNotNull(readerUnit, "Cannot create reader unit.");
 
             if (card_type.Length > 0)
@@ -93,7 +104,7 @@ namespace TestCore
             Assert.IsNotNull(chip, "getSingleChip() returned NULL");
         }
 
-        public static void LLANTestInit(string card_type = "")
+        public static void LLATestInit(string card_type = "")
         {
             Assert.IsTrue(prologue_has_run, "Call prologue() before initializing the test suite");
             if (reader_type == ReaderType.PCSC)

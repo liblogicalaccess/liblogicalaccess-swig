@@ -30,7 +30,7 @@ namespace DESFireEV1Tests
         [TestMethod]
         public void General()
         {
-            LLANTestInit();
+            LLATestInit();
 
             Debug.WriteLine("Chip identifier: " + UCharCollectionToHexString(chip.getChipIdentifier()));
             Assert.AreEqual(chip.getCardType(), "DESFireEV1", "Chip is not an DESFireEV1, but is " + chip.getCardType() + " instead.");

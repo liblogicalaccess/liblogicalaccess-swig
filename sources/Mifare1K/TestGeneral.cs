@@ -32,7 +32,7 @@ namespace Mifare1KTests
         [TestMethod]
         public void GeneralTests()
         {
-            LLANTestInit();
+            LLATestInit();
 
             Debug.WriteLine("Chip identifier: " + UCharCollectionToHexString(chip.getChipIdentifier()));
             Assert.AreEqual(chip.getChipIdentifier().ToString(), "Mifare1K", "Chip is not an Mifare1K, but is " + chip.getCardType() + " instead.");

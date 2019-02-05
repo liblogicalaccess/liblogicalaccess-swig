@@ -49,7 +49,7 @@ namespace ISO15693Tests
         [TestMethod]
         public void GeneralTest()
         {
-            LLANTestInit();
+            LLATestInit();
 
             Debug.WriteLine("Chip identifier: " + UCharCollectionToHexString(chip.getChipIdentifier()));
             Assert.AreEqual("ISO15693", chip.getCardType(), "Chip is not an ISO15693, but is " + chip.getCardType() + " instead.");

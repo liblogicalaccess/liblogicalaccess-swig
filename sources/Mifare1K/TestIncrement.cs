@@ -86,7 +86,7 @@ namespace Mifare1KTests
         //[TestMethod]
         public void IncrementTests(string[] arg)
         {
-            LLANTestInit("Mifare1K");
+            LLATestInit("Mifare1K");
 
             Assert.AreEqual(chip.getCardType(), "Mifare1K", "Chip is not a Mifare1K, but is " + chip.getCardType() + " instead.");
 
