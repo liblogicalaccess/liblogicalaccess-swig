@@ -26,7 +26,7 @@ namespace SEOSTests
         public void General()
         {
             string seReaderName = "HID Global OMNIKEY 5422 Smartcard Reader 0";
-            string osReaderName = "OMNIKEY CardMan 5x21-CL 0";
+            string osReaderName = "HID OMNIKEY 5127 CK 0";
 
             var provider = LibraryManager.getInstance().getReaderProvider("PCSC");
             Assert.IsNotNull(provider, "Cannot get PCSC provider.");
@@ -65,10 +65,13 @@ namespace SEOSTests
             Debug.WriteLine("Chip identifier: " + Core.UCharCollectionToHexString(chip.getChipIdentifier()));
             Assert.AreEqual(chip.getCardType(), "Seos", "Chip is not an Seos, but is " + chip.getCardType() + " instead.");
 
-            var cmdse = chip.getCommands() as SeosISO7816Commands;
+            var oschip = chip as SeosChip;
+            Assert.IsNotNull(oschip, "Could not get SeosChip");
+
+            var cmdse = oschip.getCommands() as SeosISO7816Commands;
             Assert.IsNotNull(cmdse, "Cannot get correct command object from chip.");
 
-            var seosSEAccessControlCardService = chip.getService(LibLogicalAccess.CardServiceType.CST_ACCESS_CONTROL) as AccessControlCardService;
+            var seosSEAccessControlCardService = oschip.getService(LibLogicalAccess.CardServiceType.CST_ACCESS_CONTROL) as SeosSEAccessControlCardService;
             Assert.IsNotNull(seosSEAccessControlCardService);
 
             var format = new Wiegand26Format();

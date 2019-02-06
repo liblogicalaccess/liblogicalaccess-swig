@@ -274,6 +274,10 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/plugins/readers/pcsc/readers/springcardreaderunit.hpp>
 #include <logicalaccess/plugins/readers/private-iso7816/lla_readers_private_iso7816_api.hpp>
 #include <logicalaccess/plugins/readers/private-iso7816/sio/secureidentityobject.hpp>
+#include <logicalaccess/plugins/cards/seprocessor/lla_cards_private_seprocessor_api.hpp>
+#include <logicalaccess/plugins/cards/seprocessor/seprocessorcommands.hpp>
+#include <logicalaccess/plugins/readers/private-iso7816/commands/seprocessorcrypto.hpp>
+#include <logicalaccess/plugins/readers/private-iso7816/commands/seprocessoriso7816commands.hpp>
 #include <logicalaccess/plugins/readers/private-iso7816/SeosSEAccessControlCardService.hpp>
 #include <logicalaccess/plugins/cards/desfireev2/lla_cards_private_desfire2_api.hpp>
 #include <logicalaccess/plugins/cards/desfireev2/desfireev2commands.hpp>
@@ -284,10 +288,6 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/plugins/readers/private-iso7816/commands/se_asn1_commands.hpp>
 #include <logicalaccess/plugins/cards/seos/seoscommands.hpp>
 #include <logicalaccess/plugins/readers/private-iso7816/commands/seosiso7816commands.hpp>
-#include <logicalaccess/plugins/readers/private-iso7816/commands/seprocessorcrypto.hpp>
-#include <logicalaccess/plugins/cards/seprocessor/lla_cards_private_seprocessor_api.hpp>
-#include <logicalaccess/plugins/cards/seprocessor/seprocessorcommands.hpp>
-#include <logicalaccess/plugins/readers/private-iso7816/commands/seprocessoriso7816commands.hpp>
 #include <logicalaccess/plugins/readers/private-pcsc/type_fwd.hpp>
 #include <logicalaccess/plugins/cards/iclass/lla_cards_private_iclass_api.hpp>
 #include <logicalaccess/plugins/cards/iclass/hidiclasskey.hpp>
@@ -798,6 +798,10 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/pcsc/readers/springcardreaderunit.hpp>
 %include <logicalaccess/plugins/readers/private-iso7816/lla_readers_private_iso7816_api.hpp>
 %include <logicalaccess/plugins/readers/private-iso7816/sio/secureidentityobject.hpp>
+%import <logicalaccess/plugins/cards/seprocessor/lla_cards_private_seprocessor_api.hpp>
+%import <logicalaccess/plugins/cards/seprocessor/seprocessorcommands.hpp>
+%include <logicalaccess/plugins/readers/private-iso7816/commands/seprocessorcrypto.hpp>
+%include <logicalaccess/plugins/readers/private-iso7816/commands/seprocessoriso7816commands.hpp>
 %include <logicalaccess/plugins/readers/private-iso7816/SeosSEAccessControlCardService.hpp>
 %import <logicalaccess/plugins/cards/desfireev2/lla_cards_private_desfire2_api.hpp>
 %import <logicalaccess/plugins/cards/desfireev2/desfireev2commands.hpp>
@@ -808,10 +812,6 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/private-iso7816/commands/se_asn1_commands.hpp>
 %import <logicalaccess/plugins/cards/seos/seoscommands.hpp>
 %include <logicalaccess/plugins/readers/private-iso7816/commands/seosiso7816commands.hpp>
-%include <logicalaccess/plugins/readers/private-iso7816/commands/seprocessorcrypto.hpp>
-%import <logicalaccess/plugins/cards/seprocessor/lla_cards_private_seprocessor_api.hpp>
-%import <logicalaccess/plugins/cards/seprocessor/seprocessorcommands.hpp>
-%include <logicalaccess/plugins/readers/private-iso7816/commands/seprocessoriso7816commands.hpp>
 %include <logicalaccess/plugins/readers/private-pcsc/type_fwd.hpp>
 %import <logicalaccess/plugins/cards/iclass/lla_cards_private_iclass_api.hpp>
 %import <logicalaccess/plugins/cards/iclass/hidiclasskey.hpp>
