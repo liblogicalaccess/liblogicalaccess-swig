@@ -26,7 +26,7 @@ sources/LibLogicalAccessNet/Exception/*.cs
 sources/!LibLogicalAccessNet/Exception/CustomException.cs
 *.sdf
 *opensdf
-.vs/
+.vs
 sources/LibLogicalAccessNet.win32/*.filters
 installer/LibLogicalAccessNet-cache
 installer/LibLogicalAccessNet-SetupFiles
