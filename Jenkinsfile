@@ -24,14 +24,14 @@ pipeline {
         stage('Linux Swig Support Container') {
             agent { label 'linux' }
             steps {
-                sh "docker build --pull -t docker-registry.islog.com:5000/swig-support:cis-latest -f Dockerfile ."
-                sh "docker push docker-registry.islog.com:5000/swig-support:cis-latest"
+                sh "docker build --pull -t docker-registry.islog.com:5000/swig-support:latest -f Dockerfile ."
+                sh "docker push docker-registry.islog.com:5000/swig-support:latest"
             }
         }
 
         // Only x64 release
         stage('Linux Swig') {
-            agent { docker 'docker-registry.islog.com:5000/swig-support:cis-latest' }
+            agent { docker 'docker-registry.islog.com:5000/swig-support:latest' }
             steps {
                 script {
                     conan.withFreshWindowsConanCache {
