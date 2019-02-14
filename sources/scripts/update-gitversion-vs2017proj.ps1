@@ -10,6 +10,7 @@ if ($s.Project.Sdk -eq $null -or !($s.Project.Sdk -eq "Microsoft.NET.Sdk")) {
 }
 
 $NuGetVersionV2=Gitversion /output json /showvariable NuGetVersionV2
+$NuGetVersionV2 += $Env:BUILD_NUMBER
 $AssemblySemVer=Gitversion /output json /showvariable AssemblySemVer
 $AssemblySemFileVer=Gitversion /output json /showvariable AssemblySemFileVer
 
