@@ -179,7 +179,7 @@
     <ROW Path="&lt;AI_DICTS&gt;ui_fr.ail"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DigCertStoreComponent">
-    <ROW TimeStampUrl="http://tsa.starfieldtech.com" SignerDescription="[|ProductName]" DescriptionUrl="http://www.islog.com" SignOptions="7" SignTool="0" Thumbprint="99592ebef77c12e720207118987b394298ee09d8 Subject: D3L&#10;Issuer: Go Daddy Secure Certificate Authority - G2&#10;Valid from 01/03/2019 to 02/05/2020"/>
+    <ROW TimeStampUrl="http://timestamp.verisign.com/scripts/timstamp.dll" SignerDescription="[|ProductName]" DescriptionUrl="http://www.islog.com" SignOptions="7" SignTool="0" Thumbprint="99592ebef77c12e720207118987b394298ee09d8 Subject: D3L&#10;Issuer: Go Daddy Secure Certificate Authority - G2&#10;Valid from 01/03/2019 to 02/05/2020"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
     <ROW Fragment="MSMSequences.aip" Path="&lt;AI_FRAGS&gt;MSMSequences.aip"/>
