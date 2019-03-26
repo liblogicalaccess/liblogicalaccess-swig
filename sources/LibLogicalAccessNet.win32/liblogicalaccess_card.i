@@ -57,6 +57,8 @@
 #include <logicalaccess/plugins/llacommon/lla_common_api.hpp>
 #include <logicalaccess/plugins/llacommon/logs.hpp>
 #include <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816response.hpp>
+#include <logicalaccess/plugins/crypto/sha.hpp>
+#include <logicalaccess/plugins/crypto/iso24727crypto.hpp>
 #include <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 #include <logicalaccess/plugins/readers/iso7816/lla_readers_iso7816_api.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
@@ -77,14 +79,11 @@
 #include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
 #include <logicalaccess/plugins/cards/epass/lla_cards_epass_api.hpp>
 #include <logicalaccess/plugins/cards/epass/epassaccessinfo.hpp>
-#include <logicalaccess/plugins/crypto/sha.hpp>
-#include <logicalaccess/plugins/crypto/iso24727crypto.hpp>
 #include <logicalaccess/plugins/cards/epass/epasscrypto.hpp>
 #include <logicalaccess/plugins/cards/epass/utils.hpp>
 #include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
 #include <logicalaccess/plugins/cards/epass/epasschip.hpp>
 #include <logicalaccess/plugins/cards/epass/epassidentitycardservice.hpp>
-#include <logicalaccess/plugins/cards/epass/epassreadercardadapter.hpp>
 #include <logicalaccess/plugins/cards/felica/lla_cards_felica_api.hpp>
 #include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 #include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
@@ -200,6 +199,7 @@
 #include <logicalaccess/plugins/cards/seos/seoschip.hpp>
 #include <logicalaccess/plugins/cards/seos/seoskey.hpp>
 #include <logicalaccess/plugins/cards/seprocessor/lla_cards_private_seprocessor_api.hpp>
+#include <logicalaccess/plugins/cards/seprocessor/HIDConstant.hpp>
 #include <logicalaccess/plugins/cards/seprocessor/seprocessorcommands.hpp>
 #include <logicalaccess/plugins/cards/seprocessor/seprocessorchip.hpp>
 #include <logicalaccess/plugins/cards/smartframe/lla_cards_smartframe_api.hpp>
@@ -374,6 +374,8 @@ using LibLogicalAccess.Reader;
 %import <logicalaccess/plugins/llacommon/lla_common_api.hpp>
 %import <logicalaccess/plugins/llacommon/logs.hpp>
 %include <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816response.hpp>
+%import <logicalaccess/plugins/crypto/sha.hpp>
+%import <logicalaccess/plugins/crypto/iso24727crypto.hpp>
 %include <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 %import <logicalaccess/plugins/readers/iso7816/lla_readers_iso7816_api.hpp>
 %import <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
@@ -394,14 +396,11 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/em4135/em4135chip.hpp>
 %include <logicalaccess/plugins/cards/epass/lla_cards_epass_api.hpp>
 %include <logicalaccess/plugins/cards/epass/epassaccessinfo.hpp>
-%import <logicalaccess/plugins/crypto/sha.hpp>
-%import <logicalaccess/plugins/crypto/iso24727crypto.hpp>
 %include <logicalaccess/plugins/cards/epass/epasscrypto.hpp>
 %include <logicalaccess/plugins/cards/epass/utils.hpp>
 %include <logicalaccess/plugins/cards/epass/epasscommands.hpp>
 %include <logicalaccess/plugins/cards/epass/epasschip.hpp>
 %include <logicalaccess/plugins/cards/epass/epassidentitycardservice.hpp>
-%include <logicalaccess/plugins/cards/epass/epassreadercardadapter.hpp>
 %include <logicalaccess/plugins/cards/felica/lla_cards_felica_api.hpp>
 %include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 %include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
@@ -517,6 +516,7 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/seos/seoschip.hpp>
 %include <logicalaccess/plugins/cards/seos/seoskey.hpp>
 %include <logicalaccess/plugins/cards/seprocessor/lla_cards_private_seprocessor_api.hpp>
+%include <logicalaccess/plugins/cards/seprocessor/HIDConstant.hpp>
 %include <logicalaccess/plugins/cards/seprocessor/seprocessorcommands.hpp>
 %include <logicalaccess/plugins/cards/seprocessor/seprocessorchip.hpp>
 %include <logicalaccess/plugins/cards/smartframe/lla_cards_smartframe_api.hpp>

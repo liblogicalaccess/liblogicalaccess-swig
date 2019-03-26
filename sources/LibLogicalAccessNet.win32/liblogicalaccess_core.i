@@ -87,6 +87,7 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/services/accesscontrol/formats/format.hpp>
 #include <logicalaccess/iks/RemoteCrypto.hpp>
 #include <logicalaccess/services/accesscontrol/accesscontrolcardservice.hpp>
+#include <logicalaccess/services/accesscontrol/formatinfos.hpp>
 #include <logicalaccess/services/accesscontrol/cardsformatcomposite.hpp>
 #include <logicalaccess/services/accesscontrol/encodings/bcdbytedatatype.hpp>
 #include <logicalaccess/services/accesscontrol/encodings/bcdnibbledatatype.hpp>
@@ -559,6 +560,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/services/accesscontrol/formats/customformat/datafield.hpp>
 %include <logicalaccess/services/accesscontrol/formats/format.hpp>
 %include <logicalaccess/services/accesscontrol/accesscontrolcardservice.hpp>
+%include <logicalaccess/services/accesscontrol/formatinfos.hpp>
 %include <logicalaccess/services/accesscontrol/cardsformatcomposite.hpp>
 %include <logicalaccess/services/accesscontrol/encodings/bcdbytedatatype.hpp>
 %include <logicalaccess/services/accesscontrol/encodings/bcdnibbledatatype.hpp>

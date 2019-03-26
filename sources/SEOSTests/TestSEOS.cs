@@ -79,7 +79,7 @@ namespace SEOSTests
             format.setFacilityCode(42);
             var location = new SeosLocation();
             var aitouse = new SeosAccessInfo();
-            var aitowrite = new SeosAccessInfoValue();
+            var aitowrite = new SeosValueAccessInfo();
             aitouse.auth_key_oid = new UByteVector(new byte[] { 0x03, 0x42, 0x01 });
             aitouse.priv_enc_key_oid = new UByteVector(new byte[] { 0x03, 0x42, 0x01 });
             aitouse.priv_mac_key_oid = new UByteVector(new byte[] { 0x03, 0x42, 0x01 });

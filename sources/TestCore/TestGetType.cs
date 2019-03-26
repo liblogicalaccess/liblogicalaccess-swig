@@ -17,6 +17,52 @@ namespace TestCore
     public class TestGetType
     {
         [TestMethod]
+        public void TestGetAllAccessInfo()
+        {
+            var formatInfos = new FormatInfos();
+            AccessInfo tmpAccessInfo = new DESFireAccessInfo();
+            formatInfos.setAiToWrite(tmpAccessInfo);
+            Assert.IsTrue(formatInfos.getAiToWrite() is DESFireAccessInfo);
+
+            tmpAccessInfo = new EPassAccessInfo();
+            formatInfos.setAiToWrite(tmpAccessInfo);
+            Assert.IsTrue(formatInfos.getAiToWrite() is EPassAccessInfo);
+
+            tmpAccessInfo = new HIDiClassAccessInfo();
+            formatInfos.setAiToWrite(tmpAccessInfo);
+            Assert.IsTrue(formatInfos.getAiToWrite() is HIDiClassAccessInfo);
+
+            tmpAccessInfo = new MifareAccessInfo();
+            formatInfos.setAiToWrite(tmpAccessInfo);
+            Assert.IsTrue(formatInfos.getAiToWrite() is MifareAccessInfo);
+
+            tmpAccessInfo = new MifarePlusSL1AccessInfo();
+            formatInfos.setAiToWrite(tmpAccessInfo);
+            Assert.IsTrue(formatInfos.getAiToWrite() is MifarePlusSL1AccessInfo);
+
+            tmpAccessInfo = new MifareUltralightAccessInfo();
+            formatInfos.setAiToWrite(tmpAccessInfo);
+            Assert.IsTrue(formatInfos.getAiToWrite() is MifareUltralightAccessInfo);
+
+            tmpAccessInfo = new MifareUltralightCAccessInfo();
+            formatInfos.setAiToWrite(tmpAccessInfo);
+            Assert.IsTrue(formatInfos.getAiToWrite() is MifareUltralightCAccessInfo);
+
+            tmpAccessInfo = new SeosAccessInfo();
+            formatInfos.setAiToWrite(tmpAccessInfo);
+            Assert.IsTrue(formatInfos.getAiToWrite() is SeosAccessInfo);
+
+            tmpAccessInfo = new SeosValueAccessInfo();
+            formatInfos.setAiToWrite(tmpAccessInfo);
+            Assert.IsTrue(formatInfos.getAiToWrite() is SeosValueAccessInfo);
+
+            tmpAccessInfo = new TopazAccessInfo();
+            formatInfos.setAiToWrite(tmpAccessInfo);
+            Assert.IsTrue(formatInfos.getAiToWrite() is TopazAccessInfo);
+        }
+
+
+        [TestMethod]
         public void TestGetAllFormat()
         {
             Debug.WriteLine("Start format... ");

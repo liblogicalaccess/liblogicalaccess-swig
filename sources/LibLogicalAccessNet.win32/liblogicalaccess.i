@@ -269,7 +269,6 @@
 %shared_ptr(logicalaccess::EPassEFCOM);
 %shared_ptr(logicalaccess::EPassISO7816Commands);
 %shared_ptr(logicalaccess::EPassIdentityCardService);
-%shared_ptr(logicalaccess::EPassReaderCardAdapter);
 %shared_ptr(logicalaccess::EPassUtils);
 %shared_ptr(logicalaccess::ElapsedTimeCounter);
 %shared_ptr(logicalaccess::ElatecBufferParser);
@@ -309,6 +308,8 @@
 %shared_ptr(logicalaccess::GunneboReaderUnit);
 %shared_ptr(logicalaccess::GunneboReaderUnitConfiguration);
 %shared_ptr(logicalaccess::GunneboSerialPortDataTransport);
+%shared_ptr(logicalaccess::HIDConstant);
+%shared_ptr(logicalaccess::HIDConstant::KeyNumber);
 %shared_ptr(logicalaccess::HIDHoneywell40BitFormat);
 %shared_ptr(logicalaccess::HIDiClass16KSChip);
 %shared_ptr(logicalaccess::HIDiClass2KSChip);
@@ -614,7 +615,6 @@
 %shared_ptr(logicalaccess::ScielBufferParser);
 %shared_ptr(logicalaccess::ScielSerialPortDataTransport);
 %shared_ptr(logicalaccess::SeosAccessInfo);
-%shared_ptr(logicalaccess::SeosAccessInfoValue);
 %shared_ptr(logicalaccess::SeosChip);
 %shared_ptr(logicalaccess::SeosCommands);
 %shared_ptr(logicalaccess::SeosCrypto);
@@ -622,6 +622,7 @@
 %shared_ptr(logicalaccess::SeosKey);
 %shared_ptr(logicalaccess::SeosLocation);
 %shared_ptr(logicalaccess::SeosSEAccessControlCardService);
+%shared_ptr(logicalaccess::SeosValueAccessInfo);
 %shared_ptr(logicalaccess::SerialPort);
 %shared_ptr(logicalaccess::SerialPortDataTransport);
 %shared_ptr(logicalaccess::SerialPortXml);
@@ -852,7 +853,6 @@
 %shared_ptr(EPassEFCOM);
 %shared_ptr(EPassISO7816Commands);
 %shared_ptr(EPassIdentityCardService);
-%shared_ptr(EPassReaderCardAdapter);
 %shared_ptr(EPassUtils);
 %shared_ptr(ElapsedTimeCounter);
 %shared_ptr(ElatecBufferParser);
@@ -892,6 +892,8 @@
 %shared_ptr(GunneboReaderUnit);
 %shared_ptr(GunneboReaderUnitConfiguration);
 %shared_ptr(GunneboSerialPortDataTransport);
+%shared_ptr(HIDConstant);
+%shared_ptr(HIDConstant::KeyNumber);
 %shared_ptr(HIDHoneywell40BitFormat);
 %shared_ptr(HIDiClass16KSChip);
 %shared_ptr(HIDiClass2KSChip);
@@ -1197,7 +1199,6 @@
 %shared_ptr(ScielBufferParser);
 %shared_ptr(ScielSerialPortDataTransport);
 %shared_ptr(SeosAccessInfo);
-%shared_ptr(SeosAccessInfoValue);
 %shared_ptr(SeosChip);
 %shared_ptr(SeosCommands);
 %shared_ptr(SeosCrypto);
@@ -1205,6 +1206,7 @@
 %shared_ptr(SeosKey);
 %shared_ptr(SeosLocation);
 %shared_ptr(SeosSEAccessControlCardService);
+%shared_ptr(SeosValueAccessInfo);
 %shared_ptr(SerialPort);
 %shared_ptr(SerialPortDataTransport);
 %shared_ptr(SerialPortXml);
