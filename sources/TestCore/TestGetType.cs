@@ -180,9 +180,12 @@ namespace TestCore
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is UDPDataTransport);
 #if ENABLE_WINDOWS_SPECIFIC_TESTS
-            dt = new IDPDataTransport();
-            readerUnit.setDataTransport(dt);
-            Assert.IsTrue(readerUnit.getDataTransport() is IDPDataTransport);
+            if (!Environment.Is64BitProcess)
+            {
+                dt = new IDPDataTransport();
+                readerUnit.setDataTransport(dt);
+                Assert.IsTrue(readerUnit.getDataTransport() is IDPDataTransport);
+            }
 #endif
             dt = new NFCDataTransport();
             readerUnit.setDataTransport(dt);
@@ -251,10 +254,14 @@ namespace TestCore
             readerProvider = libManager.getReaderProvider("IdOnDemand");
             Assert.IsTrue(readerProvider is IdOnDemandReaderProvider);
 #if ENABLE_WINDOWS_SPECIFIC_TESTS
-            readerProvider = libManager.getReaderProvider("IDP"); //Need external dll
-            Assert.IsTrue(readerProvider is IDPReaderProvider);
+            if (!Environment.Is64BitProcess)
+            {
+                readerProvider = libManager.getReaderProvider("IDP"); //Need external dll
+                Assert.IsTrue(readerProvider is IDPReaderProvider);
+            }
+
             readerProvider = libManager.getReaderProvider("ISO7816"); //Return null by c++
-            Assert.IsTrue(readerProvider is ISO7816ReaderProvider);
+            Assert.IsTrue(readerProvider == null); // is ISO7816ReaderProvider);
             readerProvider = libManager.getReaderProvider("Keyboard");
             Assert.IsTrue(readerProvider is KeyboardReaderProvider);
 #endif
