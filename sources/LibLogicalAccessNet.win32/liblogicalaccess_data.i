@@ -16,6 +16,8 @@
 #include <logicalaccess/cards/readercardadapter.hpp>
 #include <logicalaccess/readerproviders/datatransport.hpp>
 #include <logicalaccess/resultchecker.hpp>
+#include <logicalaccess/cards/accessinfo.hpp>
+#include <logicalaccess/cards/location.hpp>
 #include <logicalaccess/services/accesscontrol/formatinfos.hpp>
 #include <logicalaccess/services/accesscontrol/formats/BitsetStream.hpp>
 #include <logicalaccess/services/accesscontrol/formats/customformat/datafield.hpp>
@@ -535,6 +537,8 @@ namespace std {
 %include <logicalaccess/cards/readercardadapter.hpp>
 %include <logicalaccess/key.hpp>
 %include <logicalaccess/tlv.hpp>
+%include <logicalaccess/cards/accessinfo.hpp>
+%include <logicalaccess/cards/location.hpp>
 %include <logicalaccess/services/accesscontrol/formatinfos.hpp>
 %include <logicalaccess/services/accesscontrol/formats/BitsetStream.hpp>
 %include <logicalaccess/services/accesscontrol/formats/customformat/datafield.hpp>
