@@ -12,7 +12,7 @@ if ($s.Project.Sdk -eq $null -or !($s.Project.Sdk -eq "Microsoft.NET.Sdk")) {
 $NuGetVersionV2=Gitversion /output json /showvariable NuGetVersionV2
 $Branch=git rev-parse --abbrev-ref HEAD
 $deveBranch = "develop", "heads/origin/develop", "origin/develop"
-if (!($Branch -in $deveBranch))
+if ($Branch -in $deveBranch)
 {
 	$NuGetVersionV2 += $Env:BUILD_NUMBER
 }
