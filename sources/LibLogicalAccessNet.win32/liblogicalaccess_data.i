@@ -411,6 +411,68 @@ namespace std {
 }
 
 %pragma(csharp) imclasscode=%{
+	public static System.Collections.Generic.Dictionary<string, System.Type> accessInfoDictionary;
+
+	public static AccessInfo	createAccessInfo(System.IntPtr cPtr, bool owner)
+	{
+		AccessInfo ret = null;
+		if (cPtr == System.IntPtr.Zero) {
+		  return ret;
+		}
+		string ct = ($imclassname.AccessInfo_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
+		if (accessInfoDictionary == null)
+			accessInfoDictionary = liblogicalaccess_corePINVOKE.createDictionary<AccessInfo>();
+        if (accessInfoDictionary.ContainsKey(ct))
+        {
+            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            ret = (AccessInfo)System.Activator.CreateInstance(accessInfoDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
+        }
+        else
+            throw new LibLogicalAccessNetException($"Unknown AccessInfo type: {ct}");
+		return ret;
+	}
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::AccessInfo*, std::shared_ptr<logicalaccess::AccessInfo>, std::shared_ptr<logicalaccess::AccessInfo> & {
+    System.IntPtr cPtr = $imcall;
+    AccessInfo ret = liblogicalaccess_dataPINVOKE.createAccessInfo(cPtr, $owner);$excode
+    return ret;
+}
+
+%pragma(csharp) imclasscode=%{
+	public static System.Collections.Generic.Dictionary<string, System.Type> locationDictionary;
+
+	public static Location	createLocation(System.IntPtr cPtr, bool owner)
+	{
+		Location ret = null;
+		if (cPtr == System.IntPtr.Zero) {
+		  return ret;
+		}
+		string ct = ($imclassname.Location_getCardType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
+		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
+		if (locationDictionary == null)
+			locationDictionary = liblogicalaccess_corePINVOKE.createDictionary<Location>();
+        if (locationDictionary.ContainsKey(ct))
+        {
+            System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            ret = (Location)System.Activator.CreateInstance(locationDictionary[ct], flags, null, new object[] { cPtr, owner }, null);
+        }
+        else
+            throw new LibLogicalAccessNetException($"Unknown Location type: {ct}");
+		return ret;
+	}
+%}
+
+%typemap(csout, excode=SWIGEXCODE)
+  logicalaccess::Location*, std::shared_ptr<logicalaccess::Location>, std::shared_ptr<logicalaccess::Location> & {
+    System.IntPtr cPtr = $imcall;
+    Location ret = liblogicalaccess_dataPINVOKE.createLocation(cPtr, $owner);$excode
+    return ret;
+}
+
+%pragma(csharp) imclasscode=%{
   public static KeyStorage createKeyStorage(System.IntPtr cPtr, bool owner)
   {
     KeyStorage ret = null;
