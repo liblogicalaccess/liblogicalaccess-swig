@@ -111,6 +111,7 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/services/accesscontrol/formats/getronik40bitformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/hidhoneywell40bitformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/rawformat.hpp>
+#include <logicalaccess/services/accesscontrol/formats/seosformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/wiegandformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/wiegand26format.hpp>
 #include <logicalaccess/services/accesscontrol/formats/wiegand34format.hpp>
@@ -584,6 +585,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/services/accesscontrol/formats/getronik40bitformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/hidhoneywell40bitformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/rawformat.hpp>
+%include <logicalaccess/services/accesscontrol/formats/seosformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/wiegandformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/wiegand26format.hpp>
 %include <logicalaccess/services/accesscontrol/formats/wiegand34format.hpp>

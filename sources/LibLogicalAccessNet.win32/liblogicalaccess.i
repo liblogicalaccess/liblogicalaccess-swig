@@ -618,6 +618,7 @@
 %shared_ptr(logicalaccess::SeosChip);
 %shared_ptr(logicalaccess::SeosCommands);
 %shared_ptr(logicalaccess::SeosCrypto);
+%shared_ptr(logicalaccess::SeosFormat);
 %shared_ptr(logicalaccess::SeosISO7816Commands);
 %shared_ptr(logicalaccess::SeosKey);
 %shared_ptr(logicalaccess::SeosLocation);
@@ -1202,6 +1203,7 @@
 %shared_ptr(SeosChip);
 %shared_ptr(SeosCommands);
 %shared_ptr(SeosCrypto);
+%shared_ptr(SeosFormat);
 %shared_ptr(SeosISO7816Commands);
 %shared_ptr(SeosKey);
 %shared_ptr(SeosLocation);
