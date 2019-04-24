@@ -278,7 +278,7 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/plugins/cards/seprocessor/seprocessorcommands.hpp>
 #include <logicalaccess/plugins/readers/private-iso7816/commands/seprocessorcrypto.hpp>
 #include <logicalaccess/plugins/readers/private-iso7816/commands/seprocessoriso7816commands.hpp>
-#include <logicalaccess/plugins/readers/private-iso7816/SeosSEAccessControlCardService.hpp>
+#include <logicalaccess/plugins/readers/private-pcsc/SeosSEAccessControlCardService.hpp>
 #include <logicalaccess/plugins/cards/desfireev2/lla_cards_private_desfire2_api.hpp>
 #include <logicalaccess/plugins/cards/desfireev2/desfireev2commands.hpp>
 #include <logicalaccess/plugins/readers/private-iso7816/commands/desfireev2iso7816commands.hpp>
@@ -802,7 +802,7 @@ typedef enum : uint16_t
 %import <logicalaccess/plugins/cards/seprocessor/seprocessorcommands.hpp>
 %include <logicalaccess/plugins/readers/private-iso7816/commands/seprocessorcrypto.hpp>
 %include <logicalaccess/plugins/readers/private-iso7816/commands/seprocessoriso7816commands.hpp>
-%include <logicalaccess/plugins/readers/private-iso7816/SeosSEAccessControlCardService.hpp>
+%include <logicalaccess/plugins/readers/private-pcsc/SeosSEAccessControlCardService.hpp>
 %import <logicalaccess/plugins/cards/desfireev2/lla_cards_private_desfire2_api.hpp>
 %import <logicalaccess/plugins/cards/desfireev2/desfireev2commands.hpp>
 %include <logicalaccess/plugins/readers/private-iso7816/commands/desfireev2iso7816commands.hpp>
