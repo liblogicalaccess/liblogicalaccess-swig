@@ -893,34 +893,3 @@ typedef enum : uint16_t
 %template(UByteVectorList) std::list<std::vector<uint8_t> >;
 %template(ChipList) std::list<std::shared_ptr<logicalaccess::Chip> >;
 
-/* SEOS se_asn1_commands.hpp */
-
-%template(PrimitiveTypeZeroUint8) logicalaccess::PrimitiveType<0, uint8_t>;
-%template(PrimitiveTypeOneUint8) logicalaccess::PrimitiveType<1, uint8_t>;
-%template(PrimitiveTypeFourUint8) logicalaccess::PrimitiveType<4, uint8_t>;
-%template(PrimitiveTypeZeroByteVector) logicalaccess::PrimitiveType<0, ByteVector>;
-%template(PrimitiveTypeOneByteVector) logicalaccess::PrimitiveType<1, ByteVector>;
-%template(PrimitiveTypeTwoByteVector) logicalaccess::PrimitiveType<2, ByteVector>;
-%template(PrimitiveTypeThreeByteVector) logicalaccess::PrimitiveType<3, ByteVector>;
-%template(PrimitiveTypeFourByteVector) logicalaccess::PrimitiveType<4, ByteVector>;
-
-
-%template(SetFieldOff) logicalaccess::se::SimpleEmptyTLV<BER_IDENTIFIER_CONTEXTSPECIFIC | 0x02, logicalaccess::se::hf_command_tag>;
-//%template(Transmit) SingleChildTLV<BER_IDENTIFIER_CONTEXTSPECIFIC | 0x01, T, hf_command_tag, any_tag>;
-//%template(SamCommand) SingleChildTLV<BER_IDENTIFIER_CONTEXTSPECIFIC | BER_IDENTIFIER_CONSTRUCTED | 0x00, T, root_tag, sam_command_tag>;
-%template(GetVersionInfo) logicalaccess::se::SimpleEmptyTLV<BER_IDENTIFIER_CONTEXTSPECIFIC | 0x02, logicalaccess::se::sam_command_tag>;
-//%template(ProcessCardApi) SingleChildTLV<BER_IDENTIFIER_CONTEXTSPECIFIC | BER_IDENTIFIER_CONSTRUCTED | 0x05, T, sam_command_tag, process_card_api_tag>;
-//%template(CardApiSeos) SingleChildTLV<BER_IDENTIFIER_CONTEXTSPECIFIC | BER_IDENTIFIER_CONSTRUCTED | 0x06, T, process_card_api_tag, card_api_seos_tag>;
-//%template(InterpreterCommand) SingleChildTLV<0xB9, T, sam_command_tag, interpreter_command_tag>;
-
-%template(ASNSequenceAuthenticationContext) logicalaccess::se::ASNSequence<logicalaccess::se::SeosAuthenticate::AuthenticationContext>;
-%template(ASNSequencePrivacyKeyObject) logicalaccess::se::ASNSequence<logicalaccess::se::PrivacyKeyObject>;
-%template(ASNSequenceAuthKeyObject) logicalaccess::se::ASNSequence<logicalaccess::se::AuthKeyObject>;
-%template(PrivacyKeyObjects) logicalaccess::se::SingleChildTLV<BER_IDENTIFIER_CONTEXTSPECIFIC | BER_IDENTIFIER_CONSTRUCTED | 0x06, logicalaccess::se::ASNSequence<logicalaccess::se::PrivacyKeyObject>, logicalaccess::se::root_tag, logicalaccess::se::root_tag>;
-%template(AuthKeyObjects) logicalaccess::se::SingleChildTLV<BER_IDENTIFIER_CONTEXTSPECIFIC | BER_IDENTIFIER_CONSTRUCTED | 0x07, logicalaccess::se::ASNSequence<logicalaccess::se::AuthKeyObject>, logicalaccess::se::root_tag, logicalaccess::se::root_tag>;
-%template(AuthenticationContextVector) std::vector<logicalaccess::se::SeosAuthenticate::AuthenticationContext>;
-%template(PrivacyKeyObjectVector) std::vector<logicalaccess::se::PrivacyKeyObject>;
-%template(SIOCryptoContextVector) std::vector<logicalaccess::SIO::CryptoContext>;
-%template(AuthKeyObjectVector) std::vector<logicalaccess::se::AuthKeyObject>;
-
-/* END SEOS se_asn1_commands.hpp */
