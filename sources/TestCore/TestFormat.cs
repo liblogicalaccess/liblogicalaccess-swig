@@ -486,5 +486,17 @@ namespace TestCore
             format = composite.createFormatFromXml(FormatXml, string.Empty);
             Assert.IsTrue(format is CustomFormat);
         }
+
+        [TestMethod]
+        public void TestFormatFields()
+        {
+            var w26 = new Wiegand26Format();
+            Assert.AreEqual(2, w26.getFieldList().Count);
+            
+            CardsFormatComposite composite = new CardsFormatComposite();
+            string FormatXml = "<CustomFormat type=\"16\"><Name>Diversification</Name><Fields><BinaryDataField><Name>DivInput</Name><Position>0</Position><IsFixedField>false</IsFixedField><IsIdentifier>false</IsIdentifier><DataRepresentation>4</DataRepresentation><DataType>3</DataType><Length>56</Length><Value/><Padding>0</Padding></BinaryDataField></Fields></CustomFormat>";
+            var format = composite.createFormatFromXml(FormatXml, string.Empty);
+            Assert.AreEqual(1, format.getFieldList().Count);
+        }
     }
 }
