@@ -340,7 +340,7 @@ namespace std {
 
 %pragma(csharp) imclasscode=%{
 
-	public static System.Collections.Generic.Dictionary<string, System.Type> formatDictionary;
+	public static System.Collections.Generic.Dictionary<int, System.Type> formatDictionary;
 
 	public static Format	createFormat(System.IntPtr cPtr, bool owner)
 	{
@@ -350,25 +350,29 @@ namespace std {
 		}
         int ft = (liblogicalaccess_dataPINVOKE.Format_getType(new System.Runtime.InteropServices.HandleRef(null, cPtr)));
 		if (liblogicalaccess_dataPINVOKE.SWIGPendingException.Pending) throw liblogicalaccess_dataPINVOKE.SWIGPendingException.Retrieve();
+                var csType = typeof(CustomFormat); // Just a default
         switch ((FormatType)ft)
         {
-            case FormatType.FT_WIEGAND26: return new Wiegand26Format();
-            case FormatType.FT_WIEGAND34: return new Wiegand34Format();
-            case FormatType.FT_WIEGAND34FACILITY: return new Wiegand34WithFacilityFormat();
-            case FormatType.FT_WIEGAND37: return new Wiegand37Format();
-            case FormatType.FT_WIEGAND37FACILITY: return new Wiegand37WithFacilityFormat();
-            case FormatType.FT_WIEGAND35: return new Wiegand35Format();
-            case FormatType.FT_DATACLOCK: return new DataClockFormat();
-            case FormatType.FT_FASCN200BIT: return new FASCN200BitFormat();
-            case FormatType.FT_HIDHONEYWELL: return new HIDHoneywell40BitFormat();
-            case FormatType.FT_GETRONIK40BIT: return new Getronik40BitFormat();
-            case FormatType.FT_BARIUM_FERRITE_PCSC: return new BariumFerritePCSCFormat();
-            case FormatType.FT_RAW: return new RawFormat();
-            case FormatType.FT_CUSTOM: return new CustomFormat();
-            case FormatType.FT_ASCII: return new ASCIIFormat();
+            case FormatType.FT_WIEGAND26: { csType = typeof(Wiegand26Format); break; }
+            case FormatType.FT_WIEGAND34: { csType = typeof(Wiegand34Format); break; }
+            case FormatType.FT_WIEGAND34FACILITY: { csType = typeof(Wiegand34WithFacilityFormat); break; }
+            case FormatType.FT_WIEGAND37: { csType = typeof(Wiegand37Format); break; }
+            case FormatType.FT_WIEGAND37FACILITY: { csType = typeof(Wiegand37WithFacilityFormat); break; }
+            case FormatType.FT_WIEGAND35: { csType = typeof(Wiegand35Format); break; }
+            case FormatType.FT_DATACLOCK: { csType = typeof(DataClockFormat); break; }
+            case FormatType.FT_FASCN200BIT: { csType = typeof(FASCN200BitFormat); break; }
+            case FormatType.FT_HIDHONEYWELL: { csType = typeof(HIDHoneywell40BitFormat); break; }
+            case FormatType.FT_GETRONIK40BIT: { csType = typeof(Getronik40BitFormat); break; }
+            case FormatType.FT_BARIUM_FERRITE_PCSC: { csType = typeof(BariumFerritePCSCFormat); break; }
+            case FormatType.FT_RAW: { csType = typeof(RawFormat); break; }
+            case FormatType.FT_CUSTOM: { csType = typeof(CustomFormat); break; }
+            case FormatType.FT_ASCII: { csType = typeof(ASCIIFormat); break; }
             default:
                 throw new LibLogicalAccessNetException($"Unknown format type: {ft}");
         }
+        System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+        ret = (Format)System.Activator.CreateInstance(csType, flags, null, new object[] { cPtr, owner }, null);
+        return ret;
 	}
 %}
 
