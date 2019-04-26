@@ -1311,26 +1311,17 @@ try
 }
 catch (logicalaccess::IKSException &e) \
 {
-	std::string name(typeid(e).name());
-	if (name.find("class ") != std::string::npos)
-		name.erase(0, name.find(" ") + 1);
-	SWIG_CSharpSetPendingExceptionCustom(name.c_str(), e.what());
+	SWIG_CSharpSetPendingExceptionCustom("IKSException", e.what());
 	return $null;
 }
 catch (logicalaccess::CardException &e)
 {
-	std::string name(typeid(e).name());
-	if (name.find("class ") != std::string::npos)
-		name.erase(0, name.find(" ") + 1);
-	SWIG_CSharpSetPendingExceptionCustom(name.c_str(), e.what());
+	SWIG_CSharpSetPendingExceptionCustom("CardException", e.what());
 	return $null;
 }
 catch (logicalaccess::LibLogicalAccessException &e)
 {
-	std::string name(typeid(e).name());
-	if (name.find("class ") != std::string::npos)
-		name.erase(0, name.find(" ") + 1);
-	SWIG_CSharpSetPendingExceptionCustom(name.c_str(), e.what());
+	SWIG_CSharpSetPendingExceptionCustom("LibLogicalAccessException", e.what());
 	return $null;
 }
 catch (std::out_of_range &e)
