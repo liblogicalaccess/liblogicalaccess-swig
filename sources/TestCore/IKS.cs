@@ -14,13 +14,12 @@ namespace TestCore
         {
             var iksstorage = new IKSStorage();
             iksstorage.setIKSConfig("127.0.0.1", 12, "MyClientCertPath", "MyClientKeyPath", "MyRootCAPath");
-            string ip;
-            ushort port;
-            string clientCertPath;
-            string clientKeyPath;
-            string rootCAPath;
             var tmp = iksstorage.getIKSConfig();
-            iksstorage.getIKSConfig(out ip, out port, out clientCertPath, out clientCertPath, out rootCAPath);
+            
+            Assert.AreEqual("127.0.0.1", tmp.ip);
+            Assert.AreEqual("MyClientCertPath", tmp.client_cert);
+            Assert.AreEqual("MyClientKeyPath", tmp.client_key);
+            Assert.AreEqual("MyRootCAPath", tmp.root_ca);
         }
     }
 }
