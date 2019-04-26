@@ -1,6 +1,4 @@
-﻿#define ENABLE_WINDOWS_SPECIFIC_TESTS
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
