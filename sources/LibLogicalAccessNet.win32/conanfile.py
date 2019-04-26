@@ -29,6 +29,9 @@ class LLASwig(ConanFile):
     def package(self):
         cmake = self.configure_cmake()
         cmake.install()
+
+    def imports(self):
+        self.copy("*.so*", "lib", "lib")
 	
     def package_info(self):
         pass

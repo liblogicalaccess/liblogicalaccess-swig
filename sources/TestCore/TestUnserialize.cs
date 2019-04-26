@@ -230,7 +230,6 @@ namespace TestCore
         </Card>
     </CardsFormat>
 </ReaderFormatComposite>";
-
             ReaderFormatComposite rfc = new ReaderFormatComposite();
             rfc.unSerialize(config, string.Empty);
         }
