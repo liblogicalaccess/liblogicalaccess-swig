@@ -1,4 +1,4 @@
-FROM docker-registry.islog.com:5000/conan-recipes-support:cis-latest
+FROM docker-registry.islog.com:5000/conan-recipes-support:latest
 RUN apt-get update
 RUN (cd /root/.conan && wget http://conan.islog.private/artifactory/islog-generic/conan-profiles.zip && unzip conan-profiles.zip && rm conan-profiles.zip)
 
