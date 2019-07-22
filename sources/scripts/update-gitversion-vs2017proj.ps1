@@ -16,6 +16,12 @@ if ($Branch -in $deveBranch)
 {
 	$NuGetVersionV2 += $Env:BUILD_NUMBER
 }
+
+if ($Branch -match "^rc[0-9]$")
+{
+	$NuGetVersionV2 += "RC"
+}
+
 $AssemblySemVer=Gitversion /output json /showvariable AssemblySemVer
 $AssemblySemFileVer=Gitversion /output json /showvariable AssemblySemFileVer
 

@@ -12,7 +12,7 @@ Write-Output "Welcome, ISLOG SWIG Win32 Build"
 
 cd build
 
-$PackageName = "LogicalAccessSwig/2.1.0@islog/develop"
+$PackageName = "LogicalAccessSwig/2.1.0@islog/rc1"
 $Profiles = @(("compilers/x64_msvc_release", "Release", "x86_64"),
 			  ("compilers/x86_msvc_release", "Release", "x86"),
 			  ("compilers/x86_msvc_debug", "Debug", "x86"),
@@ -27,7 +27,7 @@ foreach ($Profile in $Profiles){
     cp bin/LibLogicalAccessNet.win32.* ../bin/$arch/$config/
     if ($publish) {
         Exec-External { conan export-pkg .. $PackageName }
-        Exec-External { conan upload $PackageName -r islog-test --all --confirm --check --force }
+        Exec-External { conan upload $PackageName -r islog-test --all --confirm --check }
     }
     Remove-Item * -Recurse -Force
 }
