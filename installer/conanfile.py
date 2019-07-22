@@ -8,7 +8,8 @@ class LogicalAccessSwigConan(ConanFile):
     settings = "build_type", "arch", "os"
     default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
                         'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True'
-
+    revision_mode = "scm"
+    
     def configure(self):
         if self.settings.os == 'Windows':
             self.options['LogicalAccess'].LLA_BUILD_RFIDEAS = True

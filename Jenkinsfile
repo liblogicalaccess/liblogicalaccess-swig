@@ -20,6 +20,10 @@ pipeline {
         )
     }
 
+    environement {
+       CONAN_REVISIONS_ENABLED = 1
+    }
+
     stages {
         stage('Full Swig') {
             parallel {
