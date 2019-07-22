@@ -20,7 +20,7 @@ pipeline {
         )
     }
 
-    environement {
+    environment {
         CONAN_REVISIONS_ENABLED = 1
         PACKAGE_NAME = "LogicalAccessSwig/2.1.0@islog/rc1"
     }
