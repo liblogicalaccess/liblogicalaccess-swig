@@ -21,7 +21,8 @@ pipeline {
     }
 
     environement {
-       CONAN_REVISIONS_ENABLED = 1
+        CONAN_REVISIONS_ENABLED = 1
+        PACKAGE_NAME = "LogicalAccessSwig/2.1.0@islog/develop"
     }
 
     stages {
@@ -52,8 +53,8 @@ pipeline {
                                                 sh 'conan install -p compilers/x64_gcc6_release -u ..'
                                                 sh 'conan build ..'
                                                 sh 'conan package ..'
-                                                sh 'conan export-pkg --profile compilers/x64_gcc6_release .. LogicalAccessSwig/2.1.0@islog/develop'
-                                                sh 'conan upload LogicalAccessSwig/2.1.0@islog/develop -r islog-test --all --confirm --check --force'
+                                                sh "conan export-pkg --profile compilers/x64_gcc6_release .. ${PACKAGE_NAME}"
+                                                sh "conan upload ${PACKAGE_NAME} -r islog-test --all --confirm --check --force"
                                             }
                                         }
                                     }
