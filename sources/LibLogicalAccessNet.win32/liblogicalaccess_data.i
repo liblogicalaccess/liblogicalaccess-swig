@@ -48,6 +48,7 @@
 #include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/bariumferritepcscformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
+#include <logicalaccess/services/nfctag/urirecord.hpp>
 #include <stdint.h>
 
 using namespace logicalaccess;
@@ -640,6 +641,7 @@ namespace std {
 %include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/bariumferritepcscformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
+%include <logicalaccess/services/nfctag/urirecord.hpp>
 %include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/keydiversification.hpp>
 
