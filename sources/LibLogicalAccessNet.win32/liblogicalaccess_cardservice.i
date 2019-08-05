@@ -29,6 +29,7 @@ using namespace logicalaccess;
 %include <logicalaccess/services/identity/identity_service.hpp>
 
 %include <logicalaccess/services/nfctag/ndefrecord.hpp>
+%include <logicalaccess/services/nfctag/nfcdata.hpp>
 %include <logicalaccess/services/nfctag/ndefmessage.hpp>
 %include <logicalaccess/services/nfctag/nfctagcardservice.hpp>
 
