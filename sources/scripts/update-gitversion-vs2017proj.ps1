@@ -16,7 +16,7 @@ if (($Branch -in $deveBranch) -or ($Branch -match "^rc[0-9]$"))
 {
     $buildNumber = $Env:BUILD_NUMBER
     $buildNumber = $buildNumber.padLeft(4, '0')
-    $NuGetVersionV2 = $version.replace('-0001', "-$($buildNumber)")
+    $NuGetVersionV2 = $NuGetVersionV2.replace('-0001', "-$($buildNumber)")
 }
 
 $AssemblySemVer=Gitversion /output json /showvariable AssemblySemVer
