@@ -3,7 +3,7 @@ next-version: 2.1.0
 branches:
   master:
     regex: (origin\/)?master
-#  develop:
-#    regex: (origin\/)?develop
+  develop:
+    regex: (origin\/)?will_never_match
 ignore:
   sha: []
