@@ -341,8 +341,6 @@ namespace std {
 
 %pragma(csharp) imclasscode=%{
 
-	public static System.Collections.Generic.Dictionary<int, System.Type> formatDictionary;
-
 	public static Format	createFormat(System.IntPtr cPtr, bool owner)
 	{
 		Format ret = null;
