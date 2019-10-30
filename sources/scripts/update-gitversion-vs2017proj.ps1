@@ -15,6 +15,9 @@ $AssemblySemFileVer=Gitversion /output json /showvariable AssemblySemFileVer
 
 if (!($s.Project.PropertyGroup -eq $null) -and !($s.Project.PropertyGroup[0] -eq $null))
 {
+	Write-Output "Update Version to "$NuGetVersionV2
+	Write-Output "Update AssemblyVersion to "$AssemblySemVer
+	Write-Output "Update FileVersion to "$AssemblySemFileVer
 	$s.Project.PropertyGroup[0].Version = "$NuGetVersionV2";
 	$s.Project.PropertyGroup[0].AssemblyVersion = "$AssemblySemVer";
 	$s.Project.PropertyGroup[0].FileVersion = "$AssemblySemFileVer";
