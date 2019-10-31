@@ -4,7 +4,7 @@ param(
   [bool]$publish
 )
 
-. islog-utils.ps1
+Import-Module IslogUtils
 
 Write-Output "Welcome, ISLOG SWIG Win32 Build"
 
@@ -20,14 +20,14 @@ $Profiles = @(("compilers/x64_msvc_release", "Release", "x86_64"),
 
 foreach ($Profile in $Profiles){
 
-    Exec-External { conan install -p $Profile[0] -u .. }
-    Exec-External { conan build .. }
+    ExecExternal { conan install -p $Profile[0] -u .. }
+    ExecExternal { conan build .. }
     $config = $Profile[1];
     $arch = $Profile[2];
     cp bin/LibLogicalAccessNet.win32.* ../bin/$arch/$config/
     if ($publish) {
-        Exec-External { conan export-pkg .. $PackageName }
-        Exec-External { conan upload $PackageName -r islog-test --all --confirm --check }
+        ExecExternal { conan export-pkg .. $PackageName }
+        ExecExternal { conan upload $PackageName -r islog-test --all --confirm --check }
     }
     Remove-Item * -Recurse -Force
 }

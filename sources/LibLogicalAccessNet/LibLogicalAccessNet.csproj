@@ -5,7 +5,7 @@
     <RootNamespace>LibLogicalAccess</RootNamespace>
     <Description>ISLOG RFID library layer for C#</Description>
     <Copyright>Copyright (C) 2018</Copyright>
-    <Version>Tagging local repo with 2.1.0-develop-0125 2.1.0-develop-0125</Version>
+    <Version>2.1.0-develop-0512</Version>
     <AssemblyVersion>2.1.0.0</AssemblyVersion>
     <FileVersion>2.1.0.0</FileVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
