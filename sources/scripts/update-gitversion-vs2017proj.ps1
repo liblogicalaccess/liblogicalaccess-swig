@@ -4,12 +4,14 @@ param(
   [String]$projectFile
 )
 
+Import-Module IslogUtils
+
 [xml]$s = get-content $projectFile
 if ($s.Project.Sdk -eq $null -or !($s.Project.Sdk -eq "Microsoft.NET.Sdk")) {
 	throw ("Error: $project is not a .NET SDK project")
 }
 
-$NuGetVersionV2=Gitversion /output json /showvariable NuGetVersionV2
+$NuGetVersionV2=GetISLOGVersion
 $AssemblySemVer=Gitversion /output json /showvariable AssemblySemVer
 $AssemblySemFileVer=Gitversion /output json /showvariable AssemblySemFileVer
 

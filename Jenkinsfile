@@ -68,7 +68,6 @@ pipeline {
                     stages {
                         stage('Pre-Build') {
                             steps {
-								echo "NODE_NAME = ${env.NODE_NAME}"
                                 deleteDir()
                                 checkout scm
 
@@ -86,7 +85,6 @@ pipeline {
 
                         stage('Generate SWIG') {
                             steps {
-								echo "NODE_NAME = ${env.NODE_NAME}"
                                 // gitversion do not support vs2017 project for now https://github.com/GitTools/GitVersion/issues/1315
                                 powershell 'sources/scripts/update-gitversion-vs2017proj.ps1 sources/LibLogicalAccessNet/LibLogicalAccessNet.csproj'
                                 powershell 'sources/scripts/generate-swig.ps1'
@@ -95,7 +93,6 @@ pipeline {
 
                         stage('Build') {
                             steps {
-								echo "NODE_NAME = ${env.NODE_NAME}"
                                 dir('sources') {
                                     powershell 'islog-build 0 Release'
                                 }
@@ -112,7 +109,6 @@ pipeline {
 
                         stage('Package') {
                             steps {
-								echo "NODE_NAME = ${env.NODE_NAME}"
                                 powershell 'islog-sign'
                                 powershell 'islog-package'
                             }
@@ -120,7 +116,6 @@ pipeline {
 
                         stage('Publish') {
                             steps {
-								echo "NODE_NAME = ${env.NODE_NAME}"
                                 powershell 'islog-publish sources/LibLogicalAccessNet.win32/bin $false $true'
                             }
                         }
