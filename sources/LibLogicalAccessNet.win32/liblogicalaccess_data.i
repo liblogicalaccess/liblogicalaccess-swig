@@ -48,6 +48,7 @@
 #include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/bariumferritepcscformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
+#include <logicalaccess/services/nfctag/ndefrecord.hpp>
 #include <logicalaccess/services/nfctag/urirecord.hpp>
 #include <stdint.h>
 
@@ -340,8 +341,6 @@ namespace std {
 }
 
 %pragma(csharp) imclasscode=%{
-
-	public static System.Collections.Generic.Dictionary<int, System.Type> formatDictionary;
 
 	public static Format	createFormat(System.IntPtr cPtr, bool owner)
 	{
@@ -641,6 +640,7 @@ namespace std {
 %include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/bariumferritepcscformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/asciiformat.hpp>
+%include <logicalaccess/services/nfctag/ndefrecord.hpp>
 %include <logicalaccess/services/nfctag/urirecord.hpp>
 %include <logicalaccess/cards/keystorage.hpp>
 %include <logicalaccess/cards/keydiversification.hpp>

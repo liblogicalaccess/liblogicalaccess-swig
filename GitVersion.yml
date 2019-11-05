@@ -4,6 +4,6 @@ branches:
   master:
     regex: (origin\/)?master
   develop:
-    regex: (origin\/)?develop
+    regex: (origin\/)?will_never_match
 ignore:
   sha: []
