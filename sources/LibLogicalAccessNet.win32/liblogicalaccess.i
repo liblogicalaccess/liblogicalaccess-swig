@@ -1272,6 +1272,7 @@ INTERFACEPTR(logicalaccess::ISO15693ReaderCommunication);
 
 %{
 #include "msliblogicalaccessswigwin32.h"
+#include <algorithm>
 #include <vector>
 %}
 

@@ -16,6 +16,7 @@ using LibLogicalAccess;
 #include <logicalaccess/key.hpp>
 #include <logicalaccess/myexception.hpp>
 #include <array>
+#include <algorithm>
 
 using namespace logicalaccess;
 using namespace logicalaccess::iks;
