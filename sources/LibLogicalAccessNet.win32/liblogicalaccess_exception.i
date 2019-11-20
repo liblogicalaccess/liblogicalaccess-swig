@@ -1,7 +1,7 @@
 /* File : liblogicalaccess_exception.i */
 %module(directors="1") liblogicalaccess_exception
 
-%import "liblogicalaccess.i"
+%include "liblogicalaccess.i"
 
 %{
 #include <memory> 

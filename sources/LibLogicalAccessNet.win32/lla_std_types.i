@@ -23,6 +23,7 @@
 
 %{
 #include <stdint.h>
+#include <vector>
 
 using namespace logicalaccess;
 %}

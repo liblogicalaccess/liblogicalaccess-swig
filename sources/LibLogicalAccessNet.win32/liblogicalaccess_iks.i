@@ -1,6 +1,7 @@
 /* File : liblogicalaccess_iks.i */
 %module(directors="1") liblogicalaccess_iks
 
+%include "custom_exception.i"
 %import "liblogicalaccess_exception.i"
 %import "liblogicalaccess_data.i"
 
@@ -13,6 +14,8 @@ using LibLogicalAccess;
 #include <logicalaccess/iks/IslogKeyServer.hpp>
 #include <logicalaccess/iks/RemoteCrypto.hpp>
 #include <logicalaccess/key.hpp>
+#include <logicalaccess/myexception.hpp>
+#include <array>
 
 using namespace logicalaccess;
 using namespace logicalaccess::iks;
