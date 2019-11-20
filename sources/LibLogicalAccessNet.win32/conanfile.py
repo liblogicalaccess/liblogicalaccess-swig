@@ -3,12 +3,12 @@ import os
 
 class LLASwig(ConanFile):
     name = "LogicalAccessSwig"
-    version = "2.1.0"
+    version = "2.1.1"
     license = "<Put the package license here>"
     url = "<Package recipe repository url here, for issues about the package>"
     description = "<Description of LLA here>"
     settings = "os", "compiler", "build_type", "arch"
-    requires = 'LogicalAccessPrivate/' + version + '@islog/master', 'LogicalAccessNFC/' + version + '@islog/master'
+    requires = 'LogicalAccessPrivate/' + version + '@islog/develop', 'LogicalAccessNFC/' + version + '@islog/develop'
     default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
                         'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True'
     generators = "cmake"
