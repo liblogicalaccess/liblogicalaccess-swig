@@ -54,14 +54,14 @@ namespace Mifare1KTests
             aiToWrite = maiToWrite;
 
             // Data to write
-            UByteVector writeData = new UByteVector(16);
+            ByteVector writeData = new ByteVector(16);
             for (int i = 0; i < 16; i++)
             {
                 writeData[i] = (byte)'e';
             }
 
             // Data read
-            UByteVector readData = new UByteVector();
+            ByteVector readData = new ByteVector();
 
             // Write data on the specified location with the specified key
             storage.writeData(location, aiToUse, aiToWrite, writeData, CardBehavior.CB_DEFAULT);

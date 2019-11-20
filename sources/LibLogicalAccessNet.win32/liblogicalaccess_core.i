@@ -2,9 +2,8 @@
 %module(directors="1") liblogicalaccess_core
 
 %include "liblogicalaccess.i"
-%import "liblogicalaccess_exception.i"
-
 %import "liblogicalaccess_iks.i"
+%import "liblogicalaccess_exception.i"
 
 %typemap(csimports) SWIGTYPE
 %{
@@ -123,8 +122,14 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/services/accesscontrol/readerformatcomposite.hpp>
 #include <logicalaccess/services/aes_crypto_service.hpp>
 #include <logicalaccess/services/identity/identity_service.hpp>
+#include <logicalaccess/services/json/json_dump_card_service.hpp>
 #include <logicalaccess/services/licensechecker/license_checker_service.hpp>
+#include <logicalaccess/services/nfctag/nfcdata.hpp>
+#include <logicalaccess/services/nfctag/lockcontroltlv.hpp>
+#include <logicalaccess/services/nfctag/memorycontroltlv.hpp>
 #include <logicalaccess/services/nfctag/ndefrecord.hpp>
+#include <logicalaccess/services/nfctag/textrecord.hpp>
+#include <logicalaccess/services/nfctag/urirecord.hpp>
 #include <logicalaccess/services/nfctag/ndefmessage.hpp>
 #include <logicalaccess/services/nfctag/nfctagcardservice.hpp>
 #include <logicalaccess/services/storage/storagecardservice.hpp>
@@ -535,8 +540,14 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/services/accesscontrol/readerformatcomposite.hpp>
 %include <logicalaccess/services/aes_crypto_service.hpp>
 %include <logicalaccess/services/identity/identity_service.hpp>
+%include <logicalaccess/services/json/json_dump_card_service.hpp>
 %include <logicalaccess/services/licensechecker/license_checker_service.hpp>
+%include <logicalaccess/services/nfctag/nfcdata.hpp>
+%include <logicalaccess/services/nfctag/lockcontroltlv.hpp>
+%include <logicalaccess/services/nfctag/memorycontroltlv.hpp>
 %include <logicalaccess/services/nfctag/ndefrecord.hpp>
+%include <logicalaccess/services/nfctag/textrecord.hpp>
+%include <logicalaccess/services/nfctag/urirecord.hpp>
 %include <logicalaccess/services/nfctag/ndefmessage.hpp>
 %include <logicalaccess/services/nfctag/nfctagcardservice.hpp>
 %include <logicalaccess/services/storage/storagecardservice.hpp>

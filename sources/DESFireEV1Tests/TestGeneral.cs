@@ -50,7 +50,7 @@ namespace DESFireEV1Tests
             cmd.erase();
             cmdev1.createApplication(0x521, DESFireKeySettings.KS_DEFAULT, 3,
                                       DESFireKeyType.DF_KEY_AES,
-                                      FidSupport.FIDS_NO_ISO_FID, 0, new UByteVector());
+                                      FidSupport.FIDS_NO_ISO_FID, 0, new ByteVector());
 
             cmd.selectApplication(0x521);
             DESFireKey key = new DESFireKey();
@@ -67,11 +67,11 @@ namespace DESFireEV1Tests
 
 
             cmdev1.authenticate(1, key);
-            UByteVector data = new UByteVector(new byte[] { 0x01, 0x02, 0x03, 0x04});
+            ByteVector data = new ByteVector(new byte[] { 0x01, 0x02, 0x03, 0x04});
             cmdev1.writeData(0, 0, data, EncryptionMode.CM_ENCRYPT);
 
             cmdev1.authenticate(2, key);
-            UByteVector tmp = cmdev1.readData(0, 0, 4, EncryptionMode.CM_ENCRYPT);
+            ByteVector tmp = cmdev1.readData(0, 0, 4, EncryptionMode.CM_ENCRYPT);
             Assert.IsTrue(data.SequenceEqual(tmp), "read and write data are different!");
             Debug.WriteLine("WriteRead: OK");
 
@@ -131,7 +131,7 @@ namespace DESFireEV1Tests
 
             cmdev1.createApplication(0x534, DESFireKeySettings.KS_DEFAULT, 3,
                 DESFireKeyType.DF_KEY_AES,
-                FidSupport.FIDS_NO_ISO_FID, 0, new UByteVector());
+                FidSupport.FIDS_NO_ISO_FID, 0, new ByteVector());
             cmd.selectApplication(0x534);
 
             key = new DESFireKey();
@@ -155,10 +155,10 @@ namespace DESFireEV1Tests
             }
 
             var storage = cmdev1.getChip().getService(CardServiceType.CST_STORAGE) as StorageCardService;
-            storage.writeData(location, daiToUse, daiToUse, new UByteVector(writeData), CardBehavior.CB_DEFAULT);
+            storage.writeData(location, daiToUse, daiToUse, new ByteVector(writeData), CardBehavior.CB_DEFAULT);
             Debug.WriteLine("WriteService: OK");
 
-            UByteVector readData = storage.readData(location, daiToUse, 16, CardBehavior.CB_DEFAULT);
+            ByteVector readData = storage.readData(location, daiToUse, 16, CardBehavior.CB_DEFAULT);
             Debug.WriteLine("ReadService: OK");
 
             Assert.AreEqual(writeData.Length, readData.Count, "Data read is not what we wrote.");

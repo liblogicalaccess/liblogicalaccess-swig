@@ -92,7 +92,7 @@ namespace LibLogicalAccessTest
             Console.ReadLine();
         }
 
-        static string UCharCollectionToHexString(UByteVector uchars)
+        static string UCharCollectionToHexString(ByteVector uchars)
         {
             string str = String.Empty;
             foreach (byte b in uchars)

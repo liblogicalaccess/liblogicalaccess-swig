@@ -30,7 +30,10 @@
 #include <logicalaccess/plugins/crypto/openssl_exception.hpp>
 #include <logicalaccess/plugins/crypto/openssl_symmetric_cipher_context.hpp>
 #include <logicalaccess/plugins/crypto/pem.hpp>
+#include <logicalaccess/plugins/crypto/public_key.hpp>
+#include <logicalaccess/plugins/crypto/pkcs7Certificate.hpp>
 #include <logicalaccess/plugins/crypto/signature_helper.hpp>
+#include <logicalaccess/plugins/crypto/x509Certificate.hpp>
 
 /* END_Additional_include */
 
@@ -61,6 +64,9 @@ using namespace openssl;
 %include <logicalaccess/plugins/crypto/openssl_exception.hpp>
 %include <logicalaccess/plugins/crypto/openssl_symmetric_cipher_context.hpp>
 %include <logicalaccess/plugins/crypto/pem.hpp>
+%include <logicalaccess/plugins/crypto/public_key.hpp>
+%include <logicalaccess/plugins/crypto/pkcs7Certificate.hpp>
 %include <logicalaccess/plugins/crypto/signature_helper.hpp>
+%include <logicalaccess/plugins/crypto/x509Certificate.hpp>
 
 /* END_Include_section */

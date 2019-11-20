@@ -80,9 +80,9 @@ namespace SEOSTests
             var location = new SeosLocation();
             var aitouse = new SeosAccessInfo();
             var aitowrite = new SeosValueAccessInfo();
-            aitouse.auth_key_oid = new UByteVector(new byte[] { 0x03, 0x42, 0x01 });
-            aitouse.priv_enc_key_oid = new UByteVector(new byte[] { 0x03, 0x42, 0x01 });
-            aitouse.priv_mac_key_oid = new UByteVector(new byte[] { 0x03, 0x42, 0x01 });
+            aitouse.auth_key_oid = new ByteVector(new byte[] { 0x03, 0x42, 0x01 });
+            aitouse.priv_enc_key_oid = new ByteVector(new byte[] { 0x03, 0x42, 0x01 });
+            aitouse.priv_mac_key_oid = new ByteVector(new byte[] { 0x03, 0x42, 0x01 });
             aitouse.ref_data_qualifier = 2;
             seosSEAccessControlCardService.writeFormat(format, null, aitouse, null);
         }

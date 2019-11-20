@@ -45,8 +45,8 @@ namespace Mifare1KTests
             cmd.authenticate(8, 0, MifareKeyType.KT_KEY_A);
             Debug.WriteLine("Authenticate: OK");
 
-            UByteVector data = new UByteVector(16);
-            UByteVector tmp = new UByteVector();
+            ByteVector data = new ByteVector(16);
+            ByteVector tmp = new ByteVector();
 
             cmd.updateBinary(8, data);
             tmp = cmd.readBinary(8, 16);

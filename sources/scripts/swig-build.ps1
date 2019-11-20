@@ -12,6 +12,7 @@ $Commands = @((".\LibLogicalAccessNet\Generated\Card", "LibLogicalAccess.Card", 
             (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_library.i"),
             (".\LibLogicalAccessNet\Generated\Reader", "LibLogicalAccess.Reader", ".\LibLogicalAccessNet.win32\liblogicalaccess_reader.i"),
             (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_iks.i"),
+            (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\lla_std_types.i"),
             (".\LibLogicalAccessNet\Generated\Crypto", "LibLogicalAccess.Crypto", ".\LibLogicalAccessNet.win32\liblogicalaccess_crypto.i"),
             (".\LibLogicalAccessNet\Generated\Core", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_core.i"))
 

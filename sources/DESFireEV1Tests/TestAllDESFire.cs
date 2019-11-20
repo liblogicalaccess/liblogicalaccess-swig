@@ -17,9 +17,9 @@ namespace DESFireEV1Tests
     [TestClass]
     public class TestAllDESFire
     {
-        public static UByteVector StringToUByteVector(string hex)
+        public static ByteVector StringToByteVector(string hex)
         {
-            return new UByteVector(Enumerable.Range(0, hex.Length)
+            return new ByteVector(Enumerable.Range(0, hex.Length)
                 .Where(x => x % 2 == 0)
                 .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
                 .ToArray());
@@ -151,7 +151,7 @@ namespace DESFireEV1Tests
                                 (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                             2, DESFireKeyType.DF_KEY_AES,
                             FidSupport.FIDS_ISO_FID, 0x125,
-                            StringToUByteVector("0125"));
+                            StringToByteVector("0125"));
                         cmdev1.deleteApplication(0x521);
 
                         // EV1 test
@@ -162,7 +162,7 @@ namespace DESFireEV1Tests
                                 (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                             2, DESFireKeyType.DF_KEY_DES,
                             FidSupport.FIDS_ISO_FID, 0x125,
-                            StringToUByteVector("0125"));
+                            StringToByteVector("0125"));
                         cmdev1.createApplication(
                             0x522,
                             (DESFireKeySettings) (
@@ -170,7 +170,7 @@ namespace DESFireEV1Tests
                                 (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                             2, DESFireKeyType.DF_KEY_AES,
                             FidSupport.FIDS_ISO_FID, 0x225,
-                            StringToUByteVector("0225"));
+                            StringToByteVector("0225"));
 
                         appIDS = cmdev1.getApplicationIDs();
 
@@ -196,7 +196,7 @@ namespace DESFireEV1Tests
                                 (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                             2, DESFireKeyType.DF_KEY_DES,
                             FidSupport.FIDS_ISO_FID, 0x325,
-                            StringToUByteVector("0325"));
+                            StringToByteVector("0325"));
                         cmdev1.createApplication(
                             0x524,
                             (DESFireKeySettings) (
@@ -204,7 +204,7 @@ namespace DESFireEV1Tests
                                 (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                             2, DESFireKeyType.DF_KEY_AES,
                             FidSupport.FIDS_ISO_FID, 0x425,
-                            StringToUByteVector("0425"));
+                            StringToByteVector("0425"));
 
 
                         // EV1 authenticateISO DES test
@@ -229,7 +229,7 @@ namespace DESFireEV1Tests
                                 (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                             3, DESFireKeyType.DF_KEY_DES,
                             FidSupport.FIDS_ISO_FID, 0x006,
-                            StringToUByteVector("0006"));
+                            StringToByteVector("0006"));
                         cmdev1.createApplication(
                             0x601,
                             (DESFireKeySettings) (
@@ -237,7 +237,7 @@ namespace DESFireEV1Tests
                                 (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                             3, DESFireKeyType.DF_KEY_AES,
                             FidSupport.FIDS_ISO_FID, 0x106,
-                            StringToUByteVector("0106"));
+                            StringToByteVector("0106"));
 
                         cmd.selectApplication(0x600);
                         testSAMAuthChangeKey(cmdev1, DESFireKeyType.DF_KEY_DES, desNew,
@@ -263,7 +263,7 @@ namespace DESFireEV1Tests
                                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                                 2, DESFireKeyType.DF_KEY_DES,
                                 FidSupport.FIDS_ISO_FID, 0x135,
-                                StringToUByteVector("0135"));
+                                StringToByteVector("0135"));
                             cmdev1.createApplication(
                                 0x532,
                                 (DESFireKeySettings) (
@@ -271,7 +271,7 @@ namespace DESFireEV1Tests
                                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                                 2, DESFireKeyType.DF_KEY_AES,
                                 FidSupport.FIDS_ISO_FID, 0x235,
-                                StringToUByteVector("0235"));
+                                StringToByteVector("0235"));
                             cmdev1.createApplication(
                                 0x533,
                                 (DESFireKeySettings) (
@@ -279,7 +279,7 @@ namespace DESFireEV1Tests
                                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                                 2, DESFireKeyType.DF_KEY_AES,
                                 FidSupport.FIDS_ISO_FID, 0x335,
-                                StringToUByteVector("0335"));
+                                StringToByteVector("0335"));
 
                             // EV2 DES test
                             cmd.selectApplication(0x531);
@@ -309,7 +309,7 @@ namespace DESFireEV1Tests
                                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                                 3, DESFireKeyType.DF_KEY_AES,
                                 FidSupport.FIDS_ISO_FID, 0x006,
-                                StringToUByteVector("0006"));
+                                StringToByteVector("0006"));
 
                             cmd.selectApplication(0x600);
                             testSAMEV2AuthChangeKey(cmdev2, aesNew, aesNew2);
@@ -360,11 +360,11 @@ namespace DESFireEV1Tests
                 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
                 0x07, 0x08, 0x09, 0x0a, 0x0b
             };
-            UByteVector read, data = new UByteVector(dataArray);
-            UByteVector datalong = data;
+            ByteVector read, data = new ByteVector(dataArray);
+            ByteVector datalong = data;
 
             Array.Resize(ref dataArray, 100);
-            datalong = new UByteVector(dataArray);
+            datalong = new ByteVector(dataArray);
 
             // createStdDataFile
             cmd.createStdDataFile(0x00, EncryptionMode.CM_ENCRYPT, acr, 200);
@@ -449,7 +449,7 @@ namespace DESFireEV1Tests
             cmd.createLinearRecordFile(0x04, EncryptionMode.CM_MAC, acr, 15, 5);
             cmd.createLinearRecordFile(0x05, EncryptionMode.CM_PLAIN, acr, 15, 5);
 
-            data = new UByteVector(new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
+            data = new ByteVector(new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
             cmd.writeRecord(0x00, 0, data, EncryptionMode.CM_ENCRYPT);
             cmd.writeRecord(0x01, 0, data, EncryptionMode.CM_MAC);
             cmd.writeRecord(0x02, 0, data, EncryptionMode.CM_PLAIN);
@@ -461,7 +461,7 @@ namespace DESFireEV1Tests
             cmd.commitTransaction();
 
             // Writer record 1
-            data = new UByteVector(new byte[] {0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
+            data = new ByteVector(new byte[] {0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
             cmd.writeRecord(0x00, 3, data, EncryptionMode.CM_ENCRYPT);
             cmd.writeRecord(0x01, 3, data, EncryptionMode.CM_MAC);
             cmd.writeRecord(0x02, 3, data, EncryptionMode.CM_PLAIN);
@@ -663,7 +663,7 @@ namespace DESFireEV1Tests
                 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
                 0x07, 0x08, 0x09, 0x0a, 0x0b
             };
-            UByteVector read, data = new UByteVector(dataArray);
+            ByteVector read, data = new ByteVector(dataArray);
             // standard
             cmdev1.writeData(0x00, 0, data, EncryptionMode.CM_ENCRYPT);
             cmdev1.writeData(0x00, 0, data, EncryptionMode.CM_ENCRYPT);
@@ -673,12 +673,12 @@ namespace DESFireEV1Tests
             cmdev1.writeData(0x02, 0, data, EncryptionMode.CM_PLAIN);
 
             Array.Resize(ref dataArray, 100);
-            data = new UByteVector(dataArray);
+            data = new ByteVector(dataArray);
             cmdev1.writeData(0x02, 0, data, EncryptionMode.CM_PLAIN);
             cmdev1.writeData(0x01, 0, data, EncryptionMode.CM_MAC);
             cmdev1.writeData(0x00, 0, data, EncryptionMode.CM_ENCRYPT);
 
-            data = new UByteVector(new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
+            data = new ByteVector(new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
 
             // backup
             cmdev1.writeData(0x03, 0, data, EncryptionMode.CM_ENCRYPT);
@@ -688,7 +688,7 @@ namespace DESFireEV1Tests
             cmdev1.writeData(0x05, 0, data, EncryptionMode.CM_PLAIN);
             cmdev1.writeData(0x05, 0, data, EncryptionMode.CM_PLAIN);
 
-            data = new UByteVector(new byte[] {0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
+            data = new ByteVector(new byte[] {0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
             // standard
             cmdev1.writeData(0x00, 3, data, EncryptionMode.CM_ENCRYPT);
             cmdev1.writeData(0x00, 3, data, EncryptionMode.CM_ENCRYPT);
@@ -783,7 +783,7 @@ namespace DESFireEV1Tests
             cmdev1.getValue(0x0e, EncryptionMode.CM_PLAIN, out value);
 
             // Writer record 0
-            data = new UByteVector(new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
+            data = new ByteVector(new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
             cmdev1.writeRecord(0x06, 0, data, EncryptionMode.CM_ENCRYPT);
             cmdev1.writeRecord(0x07, 0, data, EncryptionMode.CM_MAC);
             cmdev1.writeRecord(0x08, 0, data, EncryptionMode.CM_PLAIN);
@@ -795,7 +795,7 @@ namespace DESFireEV1Tests
             cmdev1.commitTransaction();
 
             // Writer record 1
-            data = new UByteVector(new byte[] {0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
+            data = new ByteVector(new byte[] {0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
             cmdev1.writeRecord(0x06, 3, data, EncryptionMode.CM_ENCRYPT);
             cmdev1.writeRecord(0x07, 3, data, EncryptionMode.CM_MAC);
             cmdev1.writeRecord(0x08, 3, data, EncryptionMode.CM_PLAIN);
@@ -901,7 +901,7 @@ namespace DESFireEV1Tests
                     (int) DESFireKeySettings.KS_DEFAULT |
                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_DES, FidSupport.FIDS_NO_ISO_FID, 0x00,
-                new UByteVector(), 4, 0, 1, 2, false, false);
+                new ByteVector(), 4, 0, 1, 2, false, false);
 
             cmdev2.selectApplication(0x777);
             cmdev2.authenticate(0x00, desDefault);
@@ -990,7 +990,7 @@ namespace DESFireEV1Tests
                     (int) DESFireKeySettings.KS_DEFAULT |
                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_AES, FidSupport.FIDS_NO_ISO_FID, 0x00,
-                new UByteVector(), 3, 0, 1, 2, false, false);
+                new ByteVector(), 3, 0, 1, 2, false, false);
 
             cmdev2.selectApplication(0x778);
             cmdev2.authenticate(0x00, aesDefault);
@@ -1144,7 +1144,7 @@ namespace DESFireEV1Tests
                     (int) DESFireKeySettings.KS_DEFAULT |
                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_DES, FidSupport.FIDS_NO_ISO_FID, 0x00,
-                new UByteVector(), 3, 0, 1, 0, false, false);
+                new ByteVector(), 3, 0, 1, 0, false, false);
 
             cmdev2.createDelegatedApplication(
                 damInfo, 0x777, 0, 0, 100,
@@ -1152,7 +1152,7 @@ namespace DESFireEV1Tests
                     (int) DESFireKeySettings.KS_DEFAULT |
                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_DES, FidSupport.FIDS_NO_ISO_FID, 0x00,
-                new UByteVector(), 3, 0, 1, 0, false, false);
+                new ByteVector(), 3, 0, 1, 0, false, false);
             (cmdev2.getChip() as DESFireChip)
                 .getCrypto()
                 .setKeyInAllKeySet(0x777, 3, 14, DAMDefaultKey);
@@ -1164,7 +1164,7 @@ namespace DESFireEV1Tests
                     (int) DESFireKeySettings.KS_DEFAULT |
                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_DES, FidSupport.FIDS_NO_ISO_FID, 0x00,
-                new UByteVector(), 3, 0, 1, 0, false, false);
+                new ByteVector(), 3, 0, 1, 0, false, false);
 
             // Override with a new version
             cmdev2.createDelegatedApplication(
@@ -1173,7 +1173,7 @@ namespace DESFireEV1Tests
                     (int) DESFireKeySettings.KS_DEFAULT |
                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_DES, FidSupport.FIDS_NO_ISO_FID, 0x00,
-                new UByteVector(), 3, 0, 1, 0, false, false);
+                new ByteVector(), 3, 0, 1, 0, false, false);
             (cmdev2.getChip() as DESFireChip)
                 .getCrypto()
                 .setKeyInAllKeySet(0x777, 3, 14, DAMDefaultKey);
@@ -1207,7 +1207,7 @@ namespace DESFireEV1Tests
                     (int) DESFireKeySettings.KS_DEFAULT |
                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_AES, FidSupport.FIDS_NO_ISO_FID, 0x00,
-                new UByteVector(), 3, 0, 1, 0, false, false);
+                new ByteVector(), 3, 0, 1, 0, false, false);
 
             cmdev2.createDelegatedApplication(
                 damInfo, 0x888, 1, 1, 100,
@@ -1215,7 +1215,7 @@ namespace DESFireEV1Tests
                     (int) DESFireKeySettings.KS_DEFAULT |
                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 14, DESFireKeyType.DF_KEY_AES, FidSupport.FIDS_NO_ISO_FID, 0x00,
-                new UByteVector(), 3, 0, 1, 0, false, false);
+                new ByteVector(), 3, 0, 1, 0, false, false);
             (cmdev2.getChip() as DESFireChip)
                 .getCrypto()
                 .setKeyInAllKeySet(0x888, 3, 14, DAMDefaultKey);
@@ -1499,7 +1499,7 @@ namespace DESFireEV1Tests
                     (int) DESFireKeySettings.KS_FREE_CREATE_DELETE_WITHOUT_MK),
                 2, DESFireKeyType.DF_KEY_AES,
                 FidSupport.FIDS_ISO_FID, 0x125,
-                StringToUByteVector("0125"));
+                StringToByteVector("0125"));
 
             cmdev1.selectApplication(0x521);
             newDefaultKey.setKeyType(DESFireKeyType.DF_KEY_AES);
@@ -1512,7 +1512,7 @@ namespace DESFireEV1Tests
                 // cmdev2.setConfigurationPDCap(0x02, 0x03, 0x04);
                 // Currently give an error wrong value...
                 // cmdev2.setConfiguration({},
-                // StringToUByteVector("D2760000850100"));
+                // StringToByteVector("D2760000850100"));
                 cmdev2.setConfiguration(false, true, true);
             }
 

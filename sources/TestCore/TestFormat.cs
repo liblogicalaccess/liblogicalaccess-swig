@@ -14,8 +14,8 @@ namespace TestCore
             var formatWiegand26 = new Wiegand26Format();
             formatWiegand26.setUid(1000);
             formatWiegand26.setFacilityCode(67);
-            UByteVector formatBuf = formatWiegand26.getLinearData();
-            var result = new UByteVector(new byte[] {0xa1, 0x81, 0xf4, 0x40});
+            ByteVector formatBuf = formatWiegand26.getLinearData();
+            var result = new ByteVector(new byte[] {0xa1, 0x81, 0xf4, 0x40});
             Assert.IsTrue(formatBuf.SequenceEqual(result), "Data not equal");
             formatWiegand26 = new Wiegand26Format();
             formatWiegand26.setLinearData(result);
@@ -29,7 +29,7 @@ namespace TestCore
             var formatWiegand37 = new Wiegand37Format();
             formatWiegand37.setUid(98765);
             var formatBuf = formatWiegand37.getLinearData();
-            var result = new UByteVector(new byte[] {0x00, 0x00, 0x18, 0x1c, 0xd8});
+            var result = new ByteVector(new byte[] {0x00, 0x00, 0x18, 0x1c, 0xd8});
             Assert.IsTrue(formatBuf.SequenceEqual(result), "Data not equal");
             formatWiegand37 = new Wiegand37Format();
             formatWiegand37.setLinearData(result);
@@ -42,7 +42,7 @@ namespace TestCore
             var formatWiegand34 = new Wiegand34Format();
             formatWiegand34.setUid(9865);
             var formatBuf = formatWiegand34.getLinearData();
-            var result = new UByteVector(new byte[] {0x00, 0x00, 0x13, 0x44, 0xc0});
+            var result = new ByteVector(new byte[] {0x00, 0x00, 0x13, 0x44, 0xc0});
             Assert.IsTrue(formatBuf.SequenceEqual(result), "Data not equal");
             formatWiegand34 = new Wiegand34Format();
             formatWiegand34.setLinearData(result);
@@ -56,7 +56,7 @@ namespace TestCore
             formatWiegand34F.setUid(9765);
             formatWiegand34F.setFacilityCode(89);
             var formatBuf = formatWiegand34F.getLinearData();
-            var result = new UByteVector(new byte[] {0x00, 0x2c, 0x93, 0x12, 0xc0});
+            var result = new ByteVector(new byte[] {0x00, 0x2c, 0x93, 0x12, 0xc0});
             Assert.IsTrue(formatBuf.SequenceEqual(result), "Data not equal");
             formatWiegand34F = new Wiegand34WithFacilityFormat();
             formatWiegand34F.setLinearData(result);
@@ -71,7 +71,7 @@ namespace TestCore
             formatWiegand37F.setUid(95265);
             formatWiegand37F.setFacilityCode(15);
             var formatBuf = formatWiegand37F.getLinearData();
-            var result = new UByteVector(new byte[] {0x00, 0x07, 0x97, 0x42, 0x10});
+            var result = new ByteVector(new byte[] {0x00, 0x07, 0x97, 0x42, 0x10});
             Assert.IsTrue(formatBuf.SequenceEqual(result), "Data not equal");
             formatWiegand37F = new Wiegand37WithFacilityFormat();
             formatWiegand37F.setLinearData(result);
@@ -86,7 +86,7 @@ namespace TestCore
             formatWiegand37F2F.setUid(75265);
             formatWiegand37F2F.setFacilityCode(85);
             var formatBuf = formatWiegand37F2F.getLinearData();
-            var result = new UByteVector(new byte[] {0x80, 0x2a, 0xa4, 0xc0, 0x30});
+            var result = new ByteVector(new byte[] {0x80, 0x2a, 0xa4, 0xc0, 0x30});
             Assert.IsTrue(formatBuf.SequenceEqual(result), "Data not equal");
             formatWiegand37F2F = new Wiegand37WithFacilityRightParity2Format();
             formatWiegand37F2F.setLinearData(result);
@@ -108,7 +108,7 @@ namespace TestCore
             for (int x = 0; x < 10; ++x)
                 result += ' ';
 
-            var resultBytes = new UByteVector(System.Text.Encoding.ASCII.GetBytes(result));
+            var resultBytes = new ByteVector(System.Text.Encoding.ASCII.GetBytes(result));
 
             Assert.IsTrue(formatBuf.SequenceEqual(resultBytes), "Data not equal");
 
@@ -125,7 +125,7 @@ namespace TestCore
             formatWiegand35.setUid(39248);
             formatWiegand35.setCompanyCode(235);
             var formatBuf = formatWiegand35.getLinearData();
-            var result = new UByteVector(new byte[] {0xc3, 0xac, 0x26, 0x54, 0x20});
+            var result = new ByteVector(new byte[] {0xc3, 0xac, 0x26, 0x54, 0x20});
             Assert.IsTrue(formatBuf.SequenceEqual(result), "Data not equal");
             formatWiegand35 = new Wiegand35Format();
             formatWiegand35.setLinearData(result);
@@ -139,7 +139,7 @@ namespace TestCore
             var formatDataClock = new DataClockFormat();
             formatDataClock.setUid(974641);
             var formatBuf = formatDataClock.getLinearData();
-            var result = new UByteVector(new byte[] {0x00, 0x97, 0x46, 0x41, 0xd0});
+            var result = new ByteVector(new byte[] {0x00, 0x97, 0x46, 0x41, 0xd0});
             Assert.IsTrue(formatBuf.SequenceEqual(result), "Data not equal");
             formatDataClock = new DataClockFormat();
             formatDataClock.setLinearData(result);
@@ -150,7 +150,7 @@ namespace TestCore
         public void Raw()
         {
             var formatRaw = new RawFormat();
-            var rawData = new UByteVector(new byte[]
+            var rawData = new ByteVector(new byte[]
             {
                 0x89, 0x59, 0x48, 0x48, 0x56, 0x48, 0x35, 0x48, 0x78, 0x99,
                 0x15, 0x54, 0x36, 0x75, 0x12
@@ -172,7 +172,7 @@ namespace TestCore
             formatBariumFerritePCSC.setUid(46417);
             formatBariumFerritePCSC.setFacilityCode(156);
             var formatBuf = formatBariumFerritePCSC.getLinearData();
-            var result = new UByteVector(new byte[] {0xf0, 0x9c, 0xb5, 0x51, 0x88});
+            var result = new ByteVector(new byte[] {0xf0, 0x9c, 0xb5, 0x51, 0x88});
             Assert.IsTrue(formatBuf.SequenceEqual(result), "Data not equal");
             formatBariumFerritePCSC = new BariumFerritePCSCFormat();
             formatBariumFerritePCSC.setLinearData(result);
@@ -187,7 +187,7 @@ namespace TestCore
             formatGetronik40.setUid(5671);
             formatGetronik40.setField(5671);
             var formatBuf = formatGetronik40.getLinearData();
-            var result = new UByteVector(new byte[] {0x2e, 0x16, 0x27, 0x58, 0x9f});
+            var result = new ByteVector(new byte[] {0x2e, 0x16, 0x27, 0x58, 0x9f});
             Assert.IsTrue(formatBuf.SequenceEqual(result), "Data not equal");
             formatGetronik40 = new Getronik40BitFormat();
             formatGetronik40.setLinearData(result);
@@ -202,7 +202,7 @@ namespace TestCore
             formatHIDHoneywell40Bit.setUid(17866);
             formatHIDHoneywell40Bit.setFacilityCode(895);
             var formatBuf = formatHIDHoneywell40Bit.getLinearData();
-            var result = new UByteVector(new byte[] {0xf3, 0x7f, 0x45, 0xca, 0x03});
+            var result = new ByteVector(new byte[] {0xf3, 0x7f, 0x45, 0xca, 0x03});
             Assert.IsTrue(formatBuf.SequenceEqual(result), "Data not equal");
             formatHIDHoneywell40Bit = new HIDHoneywell40BitFormat();
             formatHIDHoneywell40Bit.setLinearData(result);
@@ -226,7 +226,7 @@ namespace TestCore
             formatFASCN200.setOrganizationalIdentifier(1223);
             formatFASCN200.setPOACategory(FASCNPOAssociationCategory.POA_CIVIL);
             var formatBuf = formatFASCN200.getLinearData();
-            var result = new UByteVector(new byte[]
+            var result = new ByteVector(new byte[]
             {
                 0xD0, 0x43, 0x94, 0x58, 0x21, 0x0C, 0x2C, 0x19, 0xA0, 0x84, 0x6D, 0x83, 0x68,
                 0x5A, 0x10, 0x82, 0x10, 0x8C, 0xE7, 0x39, 0x84, 0x10, 0x8C, 0xA3, 0xF5
@@ -265,7 +265,7 @@ namespace TestCore
             binaryDataField.setPosition(64);
             binaryDataField.setDataLength(160);
             binaryDataField.setPaddingChar(0xFF);
-            binaryDataField.setValue(new UByteVector(new byte[]
+            binaryDataField.setValue(new ByteVector(new byte[]
             {
                 0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xcd, 0xef, 0x12, 0x34,
                 0x56, 0x78, 0x9a, 0xbc, 0xcd, 0xef
@@ -300,7 +300,7 @@ namespace TestCore
             binaryLittleDataField.setPosition(489);
             binaryLittleDataField.setDataLength(160);
             binaryLittleDataField.setPaddingChar(0xFF);
-            binaryLittleDataField.setValue(new UByteVector(new byte[]
+            binaryLittleDataField.setValue(new ByteVector(new byte[]
             {
                 0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xcd, 0xef, 0x12,
                 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xcd, 0xef
@@ -336,7 +336,7 @@ namespace TestCore
             binaryNoDataField.setPosition(915);
             binaryNoDataField.setDataLength(160);
             binaryNoDataField.setPaddingChar(0xFF);
-            binaryNoDataField.setValue(new UByteVector(new byte[]
+            binaryNoDataField.setValue(new ByteVector(new byte[]
             {
                 0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xcd, 0xef, 0x12,
                 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xcd, 0xef
@@ -359,7 +359,7 @@ namespace TestCore
 
             formatCustom.setFieldList(fieldList);
             var formatBuf = formatCustom.getLinearData();
-            var result = new UByteVector(new byte[]
+            var result = new ByteVector(new byte[]
             {
                 0x00, 0x00, 0x00, 0x00, 0x3a, 0xb0, 0xa1, 0xf1, 0x12, 0x34, 0x56, 0x78, 0x9a,
                 0xbc, 0xcd, 0xef, 0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xcd, 0xef, 0xff, 0xff,
@@ -390,7 +390,7 @@ namespace TestCore
             var binaryFieldCheck =
                 formatCustom.getFieldForPosition(489) as BinaryDataField;
             var value = binaryFieldCheck.getValue();
-            var rvalue = new UByteVector(new byte[]
+            var rvalue = new ByteVector(new byte[]
             {
                 0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xcd, 0xef, 0x12, 0x34,
                 0x56, 0x78, 0x9a, 0xbc, 0xcd, 0xef, 0xff, 0xff, 0xff, 0xff

@@ -27,12 +27,12 @@ namespace Mifare1KTests
         public void ValidationTests()
         {
             MifareAccessInfo.SectorAccessBits sab = new MifareAccessInfo.SectorAccessBits();
-            UByteVector array = new UByteVector(3);
+            ByteVector array = new ByteVector(3);
             array[0] = 1;
             Assert.IsFalse(sab.fromArray(array), "Passed validation but shouldn't have.");
 
             byte[] tmp = { 0xff, 0x07, 0x80 };
-            UByteVector array2 = new UByteVector(tmp);
+            ByteVector array2 = new ByteVector(tmp);
             Assert.IsTrue(sab.fromArray(array2), "Failed validation");
         }
     }

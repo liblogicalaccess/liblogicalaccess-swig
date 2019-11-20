@@ -30,7 +30,7 @@ namespace ISO15693Tests
 
             for (uint i = 1; i < 7; ++i)
             {
-                cmd.writeBlock(i, new UByteVector(new byte[]{ ++val, ++val, ++val, ++val }));
+                cmd.writeBlock(i, new ByteVector(new byte[]{ ++val, ++val, ++val, ++val }));
             }
             Debug.WriteLine("WriteBlock: OK");
 
@@ -40,7 +40,7 @@ namespace ISO15693Tests
             {
                 var ret = cmd.readBlock(i);
                 Debug.WriteLine("Read back (" + i + ") : " + ret);
-                var tmp = new UByteVector(new byte[] { ++val, ++val, ++val, ++val });
+                var tmp = new ByteVector(new byte[] { ++val, ++val, ++val, ++val });
                 Assert.AreEqual(tmp, ret, "We didn't read back what we wrote");
             }
             Debug.WriteLine("ReadBlock: OK");
