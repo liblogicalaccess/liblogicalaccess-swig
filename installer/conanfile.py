@@ -3,8 +3,8 @@ import os
 
 class LogicalAccessSwigConan(ConanFile):
     name = "LogicalAccessSwig"
-    version = "2.1.0"
-    requires = 'LogicalAccessPrivate/' + version + '@islog/develop', 'LogicalAccessNFC/' + version + '@islog/develop'
+    version = "2.1.1"
+    requires = 'LogicalAccessPrivate/2.1.0@islog/develop', 'LogicalAccessNFC/2.1.0@islog/develop'
     settings = "build_type", "arch", "os"
     default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
                         'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True'
