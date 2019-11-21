@@ -31,6 +31,8 @@ nice swig -csharp -c++ -I"../swig/csharp" -I"../installer/packages/include" -out
 
 nice swig -csharp -c++ -I"../swig/csharp" -I"../installer/packages/include" -outdir "LibLogicalAccessNet/Generated/Core" -namespace LibLogicalAccess -dllimport LogicalAccessNetNative LibLogicalAccessNet.win32/liblogicalaccess_core.i &
 
+nice swig -csharp -c++ -I"../swig/csharp" -I"../installer/packages/include" -outdir "LibLogicalAccessNet/Generated" -namespace LibLogicalAccess -dllimport LogicalAccessNetNative LibLogicalAccessNet.win32/lla_std_types.i &
+
 wait
 popd
 
