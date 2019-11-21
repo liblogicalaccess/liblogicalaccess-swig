@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using LibLogicalAccess;
@@ -145,6 +146,12 @@ namespace TestCore
         [TestMethod]
         public void TestGetAllReaderService()
         {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Debug.WriteLine("Skipping services test because LICENSE_CHECKER is not available on Linux");
+                return;
+            }
+
             OmnikeyXX21ReaderUnit pcscReader = new OmnikeyXX21ReaderUnit("my-reader-name");
             var readerService = pcscReader.getService(ReaderServiceType.RST_LICENSE_CHECKER);
             (readerService as LicenseCheckerService).GetType();
