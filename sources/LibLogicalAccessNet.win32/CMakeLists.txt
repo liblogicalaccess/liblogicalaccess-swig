@@ -10,7 +10,8 @@ liblogicalaccess_data_wrap.cxx
 liblogicalaccess_library_wrap.cxx
 liblogicalaccess_core_wrap.cxx
 liblogicalaccess_iks_wrap.cxx
-liblogicalaccess_exception_wrap.cxx)
+liblogicalaccess_exception_wrap.cxx
+lla_std_types_wrap.cxx)
 
 if (MSVC)
   set(TARGET_NAME LibLogicalAccessNet.win32)

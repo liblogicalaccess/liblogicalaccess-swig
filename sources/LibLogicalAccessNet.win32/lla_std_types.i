@@ -24,8 +24,6 @@
 %{
 #include <stdint.h>
 #include <vector>
-
-using namespace logicalaccess;
 %}
 
 #pragma SWIG nowarn=314
