@@ -563,6 +563,11 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %template(ReaderUnitVector) std::vector<std::shared_ptr<logicalaccess::ReaderUnit> >;
 %template(FormatVector) std::vector<std::shared_ptr<logicalaccess::Format> >;
 %template(SerialPortXmlVector) std::vector<std::shared_ptr<logicalaccess::SerialPortXml> >;
+%template(NfcDataVector) std::vector<std::shared_ptr<logicalaccess::NfcData> >;
+
+%template(StringFormatMap) std::map<std::string, std::shared_ptr<logicalaccess::Format> >;
+%template(StringKeyMap) std::map<std::string, std::shared_ptr<logicalaccess::Key> >;
+%template(StringFormatInfosMap) std::map<std::string, std::shared_ptr<logicalaccess::FormatInfos> >;
 
 %template(LocationNodeWeakPtr) std::weak_ptr<logicalaccess::LocationNode>;
 %template(ReaderProviderWeakPtr) std::weak_ptr<logicalaccess::ReaderProvider>;
