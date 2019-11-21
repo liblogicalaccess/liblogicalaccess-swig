@@ -8,7 +8,7 @@ class LLASwig(ConanFile):
     url = "<Package recipe repository url here, for issues about the package>"
     description = "<Description of LLA here>"
     settings = "os", "compiler", "build_type", "arch"
-    requires = 'LogicalAccessPrivate/2.1.0@islog/develop', 'LogicalAccessNFC/2.1.0@islog/develop'
+    requires = 'LogicalAccessPrivate/2.1.0@islog/master', 'LogicalAccessNFC/2.1.0@islog/master'
     default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
                         'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True'
     generators = "cmake"
