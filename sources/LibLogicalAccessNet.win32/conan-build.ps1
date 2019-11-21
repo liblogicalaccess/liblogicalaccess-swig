@@ -13,7 +13,8 @@ Write-Output "Welcome, ISLOG SWIG Win32 Build"
 cd build
 
 $PackageName = "LogicalAccessSwig/2.1.1@islog/develop"
-$Profiles = @(
+$Profiles = @(("compilers/x64_msvc_release", "Release", "x86_64"),
+			  ("compilers/x86_msvc_release", "Release", "x86"),
 			  ("compilers/x86_msvc_debug", "Debug", "x86"),
 			  ("compilers/x64_msvc_debug", "Debug", "x86_64"))
 
