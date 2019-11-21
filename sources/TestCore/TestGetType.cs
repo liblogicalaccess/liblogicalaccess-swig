@@ -277,8 +277,8 @@ namespace TestCore
 #if ENABLE_WINDOWS_SPECIFIC_TESTS
             Assert.IsTrue(readerProvider is RFIDeasReaderProvider);
             readerProvider = libManager.getReaderProvider("Rpleth");
-#endif
             Assert.IsTrue(readerProvider is RplethReaderProvider);
+#endif
             readerProvider = libManager.getReaderProvider("SCIEL");
             Assert.IsTrue(readerProvider is SCIELReaderProvider);
             readerProvider = libManager.getReaderProvider("SmartID");
