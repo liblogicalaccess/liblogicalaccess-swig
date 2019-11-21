@@ -10,6 +10,7 @@ pipeline {
 
     options {
         gitLabConnection('Gitlab Pontos')
+        disableConcurrentBuilds()   
     }
 
     triggers {
