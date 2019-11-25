@@ -1,18 +1,27 @@
 from conans import ConanFile, CMake, tools
+from conans.errors import ConanException
 import os
 
 class LLASwig(ConanFile):
     name = "LogicalAccessSwig"
-    version = "2.1.0"
+    version = "2.2.0"
     license = "<Put the package license here>"
     url = "<Package recipe repository url here, for issues about the package>"
     description = "<Description of LLA here>"
     settings = "os", "compiler", "build_type", "arch"
-    requires = 'LogicalAccessPrivate/2.1.0@islog/develop', 'LogicalAccessNFC/2.1.0@islog/develop'
     default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
                         'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True'
     generators = "cmake"
 
+    def requirements(self):
+        try:
+            self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + self.channel)
+            self.requires('LogicalAccessNFC/' + self.version + '@islog/' + self.channel)
+        except ConanException:
+            self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + tools.Git().get_branch())
+            self.requires('LogicalAccessNFC/' + self.version + '@islog/' + tools.Git().get_branch())
+
+    
     def configure(self):
         if self.settings.os == 'Windows':
             self.options['LogicalAccess'].LLA_BUILD_RFIDEAS = True

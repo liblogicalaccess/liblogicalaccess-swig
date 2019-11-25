@@ -23,7 +23,7 @@ pipeline {
 
     environment {
         CONAN_REVISIONS_ENABLED = 1
-        PACKAGE_NAME = "LogicalAccessSwig/2.1.0@islog/develop"
+        PACKAGE_NAME = "LogicalAccessSwig/2.2.0@islog/${BRANCH_NAME}"
     }
 
     stages {
