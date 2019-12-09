@@ -13,7 +13,6 @@ using System.Security.Cryptography;
 
 namespace DESFireEV1Tests
 {
-
     [TestClass]
     public class TestAllDESFire
     {
@@ -87,7 +86,6 @@ namespace DESFireEV1Tests
 
             if (readerConfig.getReaderUnit().waitInsertion(15000))
             {
-
                 if (readerConfig.getReaderUnit().connect())
                 {
                     var chip = readerConfig.getReaderUnit().getSingleChip();
@@ -325,13 +323,13 @@ namespace DESFireEV1Tests
 
                     readerConfig.getReaderUnit().disconnect();
                 }
+
                 readerConfig.getReaderUnit().waitRemoval(0x1);
                 readerConfig.getReaderUnit().disconnectFromReader();
             }
             else
                 throw new Exception("no card detected.");
         }
-
 
 
         void classicTest(DESFireISO7816Commands cmd,
@@ -502,24 +500,24 @@ namespace DESFireEV1Tests
             cmd.createValueFile(0x00, EncryptionMode.CM_ENCRYPT, acr, 2, 15, 5, true);
             cmd.createValueFile(0x01, EncryptionMode.CM_MAC, acr, 2, 15, 5, true);
             cmd.createValueFile(0x02, EncryptionMode.CM_PLAIN, acr, 2, 15, 5, true);
-            uint value;
-            cmd.getValue(0x00, EncryptionMode.CM_ENCRYPT, out value);
-            cmd.getValue(0x01, EncryptionMode.CM_MAC, out value);
-            cmd.getValue(0x02, EncryptionMode.CM_PLAIN, out value);
+            int value;
+            value = cmd.getValue(0x00, EncryptionMode.CM_ENCRYPT);
+            value = cmd.getValue(0x01, EncryptionMode.CM_MAC);
+            value = cmd.getValue(0x02, EncryptionMode.CM_PLAIN);
 
             cmd.credit(0x00, 5, EncryptionMode.CM_ENCRYPT);
             cmd.credit(0x01, 5, EncryptionMode.CM_MAC);
             cmd.credit(0x02, 5, EncryptionMode.CM_PLAIN);
 
-            cmd.getValue(0x00, EncryptionMode.CM_ENCRYPT, out value);
-            cmd.getValue(0x01, EncryptionMode.CM_MAC, out value);
-            cmd.getValue(0x02, EncryptionMode.CM_PLAIN, out value);
+            value = cmd.getValue(0x00, EncryptionMode.CM_ENCRYPT);
+            value = cmd.getValue(0x01, EncryptionMode.CM_MAC);
+            value = cmd.getValue(0x02, EncryptionMode.CM_PLAIN);
 
             cmd.commitTransaction();
 
-            cmd.getValue(0x00, EncryptionMode.CM_ENCRYPT, out value);
-            cmd.getValue(0x01, EncryptionMode.CM_MAC, out value);
-            cmd.getValue(0x02, EncryptionMode.CM_PLAIN, out value);
+            value = cmd.getValue(0x00, EncryptionMode.CM_ENCRYPT);
+            value = cmd.getValue(0x01, EncryptionMode.CM_MAC);
+            value = cmd.getValue(0x02, EncryptionMode.CM_PLAIN);
 
             cmd.debit(0x00, 3, EncryptionMode.CM_ENCRYPT);
             cmd.debit(0x01, 3, EncryptionMode.CM_MAC);
@@ -527,9 +525,9 @@ namespace DESFireEV1Tests
 
             cmd.commitTransaction();
 
-            cmd.getValue(0x00, EncryptionMode.CM_ENCRYPT, out value);
-            cmd.getValue(0x01, EncryptionMode.CM_MAC, out value);
-            cmd.getValue(0x02, EncryptionMode.CM_PLAIN, out value);
+            value = cmd.getValue(0x00, EncryptionMode.CM_ENCRYPT);
+            value = cmd.getValue(0x01, EncryptionMode.CM_MAC);
+            value = cmd.getValue(0x02, EncryptionMode.CM_PLAIN);
 
             cmd.debit(0x00, 3, EncryptionMode.CM_ENCRYPT);
             cmd.debit(0x01, 3, EncryptionMode.CM_MAC);
@@ -547,9 +545,9 @@ namespace DESFireEV1Tests
             cmd.limitedCredit(0x01, 2, EncryptionMode.CM_MAC);
             cmd.limitedCredit(0x02, 2, EncryptionMode.CM_PLAIN);
 
-            cmd.getValue(0x00, EncryptionMode.CM_ENCRYPT, out value);
-            cmd.getValue(0x01, EncryptionMode.CM_MAC, out value);
-            cmd.getValue(0x02, EncryptionMode.CM_PLAIN, out value);
+            value = cmd.getValue(0x00, EncryptionMode.CM_ENCRYPT);
+            value = cmd.getValue(0x01, EncryptionMode.CM_MAC);
+            value = cmd.getValue(0x02, EncryptionMode.CM_PLAIN);
 
             fileIDS = cmd.getFileIDs();
 
@@ -733,24 +731,24 @@ namespace DESFireEV1Tests
 
 
             // CREDIT / DEBIT
-            uint value;
-            cmdev1.getValue(0x0c, EncryptionMode.CM_ENCRYPT, out value);
-            cmdev1.getValue(0x0d, EncryptionMode.CM_MAC, out value);
-            cmdev1.getValue(0x0e, EncryptionMode.CM_PLAIN, out value);
+            int value;
+            value = cmdev1.getValue(0x0c, EncryptionMode.CM_ENCRYPT);
+            value = cmdev1.getValue(0x0d, EncryptionMode.CM_MAC);
+            value = cmdev1.getValue(0x0e, EncryptionMode.CM_PLAIN);
 
             cmdev1.credit(0x0c, 5, EncryptionMode.CM_ENCRYPT);
             cmdev1.credit(0x0d, 5, EncryptionMode.CM_MAC);
             cmdev1.credit(0x0e, 5, EncryptionMode.CM_PLAIN);
 
-            cmdev1.getValue(0x0c, EncryptionMode.CM_ENCRYPT, out value);
-            cmdev1.getValue(0x0d, EncryptionMode.CM_MAC, out value);
-            cmdev1.getValue(0x0e, EncryptionMode.CM_PLAIN, out value);
+            value = cmdev1.getValue(0x0c, EncryptionMode.CM_ENCRYPT);
+            value = cmdev1.getValue(0x0d, EncryptionMode.CM_MAC);
+            value = cmdev1.getValue(0x0e, EncryptionMode.CM_PLAIN);
 
             cmdev1.commitTransaction();
 
-            cmdev1.getValue(0x0c, EncryptionMode.CM_ENCRYPT, out value);
-            cmdev1.getValue(0x0d, EncryptionMode.CM_MAC, out value);
-            cmdev1.getValue(0x0e, EncryptionMode.CM_PLAIN, out value);
+            value = cmdev1.getValue(0x0c, EncryptionMode.CM_ENCRYPT);
+            value = cmdev1.getValue(0x0d, EncryptionMode.CM_MAC);
+            value = cmdev1.getValue(0x0e, EncryptionMode.CM_PLAIN);
 
             cmdev1.debit(0x0c, 3, EncryptionMode.CM_ENCRYPT);
             cmdev1.debit(0x0d, 3, EncryptionMode.CM_MAC);
@@ -758,9 +756,9 @@ namespace DESFireEV1Tests
 
             cmdev1.commitTransaction();
 
-            cmdev1.getValue(0x0c, EncryptionMode.CM_ENCRYPT, out value);
-            cmdev1.getValue(0x0d, EncryptionMode.CM_MAC, out value);
-            cmdev1.getValue(0x0e, EncryptionMode.CM_PLAIN, out value);
+            value = cmdev1.getValue(0x0c, EncryptionMode.CM_ENCRYPT);
+            value = cmdev1.getValue(0x0d, EncryptionMode.CM_MAC);
+            value = cmdev1.getValue(0x0e, EncryptionMode.CM_PLAIN);
 
             cmdev1.debit(0x0c, 3, EncryptionMode.CM_ENCRYPT);
             cmdev1.debit(0x0d, 3, EncryptionMode.CM_MAC);
@@ -778,9 +776,9 @@ namespace DESFireEV1Tests
             cmdev1.limitedCredit(0x0d, 2, EncryptionMode.CM_MAC);
             cmdev1.limitedCredit(0x0e, 2, EncryptionMode.CM_PLAIN);
 
-            cmdev1.getValue(0x0c, EncryptionMode.CM_ENCRYPT, out value);
-            cmdev1.getValue(0x0d, EncryptionMode.CM_MAC, out value);
-            cmdev1.getValue(0x0e, EncryptionMode.CM_PLAIN, out value);
+            value = cmdev1.getValue(0x0c, EncryptionMode.CM_ENCRYPT);
+            value = cmdev1.getValue(0x0d, EncryptionMode.CM_MAC);
+            value = cmdev1.getValue(0x0e, EncryptionMode.CM_PLAIN);
 
             // Writer record 0
             data = new ByteVector(new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b});
@@ -864,7 +862,6 @@ namespace DESFireEV1Tests
             if (cmdev2 == null) // EV2 has changed iso...it do not work probably because of free access
                 // not handle
                 read = cmdev1.getISO7816Commands().readRecords(50, 0, ISORecords.ISO_RECORD_ALLRECORDS);
-
         }
 
         void authMasterCard(DESFireISO7816Commands cmd,
