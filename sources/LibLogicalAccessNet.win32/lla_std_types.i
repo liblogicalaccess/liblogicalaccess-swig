@@ -211,7 +211,9 @@ CSHARP_MEMBER_ARRAYS(unsigned char, byte)
 %apply unsigned long { const uint64_t & }
 %apply void *VOID_INT_PTR { SCARDHANDLE, const SCARDHANDLE &, SCARDCONTEXT, const SCARDCONTEXT & }
 %apply void *VOID_INT_PTR { void * }
+%apply bool &OUTPUT { bool & }
 %apply unsigned int &OUTPUT { unsigned int & }
+%apply bool *INOUT { bool * }
 %apply unsigned char *OUTPUT { unsigned char & }
 %apply unsigned char INPUT[] { const unsigned char *data }
 %apply unsigned int *INOUT { unsigned int *pos }
