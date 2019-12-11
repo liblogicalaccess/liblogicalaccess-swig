@@ -16,12 +16,9 @@
 #define LLA_READERS_SMARTID_API
 #define LLA_READERS_SCIEL_API
 #define LLA_READERS_RPLETH_API
-#define LLA_READERS_RFIDEAS_API
 #define LLA_READERS_PROMAG_API
 #define LLA_READERS_PRIVATE_PCSC_API
-#define LLA_READERS_PRIVATE_KEYBOARD_API
 #define LLA_READERS_PRIVATE_ISO7816_API
-#define LLA_READERS_PRIVATE_IDP_API
 #define LLA_READERS_PCSC_API
 #define LLA_READERS_OSDP_API
 #define LLA_READERS_OK5553_API
@@ -51,7 +48,6 @@
 #define LLA_CARDS_PROXLITE_API
 #define LLA_CARDS_PRIVATE_SEPROCESSOR_API
 #define LLA_CARDS_PRIVATE_ICLASS_API
-#define LLA_CARDS_PRIVATE_ICLASS5321_API
 #define LLA_CARDS_PRIVATE_DESFIRE2_API
 #define LLA_CARDS_MIFARE_API
 #define LLA_CARDS_MIFAREULTRALIGHT_API
@@ -206,6 +202,7 @@
 %shared_ptr(logicalaccess::DeisterReaderUnitConfiguration);
 %shared_ptr(logicalaccess::DeisterSerialPortDataTransport);
 %shared_ptr(logicalaccess::DummyCommands);
+%shared_ptr(logicalaccess::DummyReaderUnit);
 %shared_ptr(logicalaccess::EM4102Chip);
 %shared_ptr(logicalaccess::EM4135Chip);
 %shared_ptr(logicalaccess::EPassAccessInfo);
@@ -287,11 +284,6 @@
 %shared_ptr(logicalaccess::ID3ReaderUnit::APDUWrapperGuard);
 %shared_ptr(logicalaccess::ID3ReaderUnit::APDUWrapperGuard::Adapter);
 %shared_ptr(logicalaccess::ID3ResultChecker);
-%shared_ptr(logicalaccess::IDPDataTransport);
-%shared_ptr(logicalaccess::IDPReaderCardAdapter);
-%shared_ptr(logicalaccess::IDPReaderProvider);
-%shared_ptr(logicalaccess::IDPReaderUnit);
-%shared_ptr(logicalaccess::IDPReaderUnitConfiguration);
 %shared_ptr(logicalaccess::IKSCryptoWrapper);
 %shared_ptr(logicalaccess::IKSException);
 %shared_ptr(logicalaccess::IKSStorage);
@@ -333,10 +325,6 @@
 %shared_ptr(logicalaccess::Key);
 %shared_ptr(logicalaccess::KeyDiversification);
 %shared_ptr(logicalaccess::KeyStorage);
-%shared_ptr(logicalaccess::KeyboardReaderProvider);
-%shared_ptr(logicalaccess::KeyboardReaderUnit);
-%shared_ptr(logicalaccess::KeyboardReaderUnitConfiguration);
-%shared_ptr(logicalaccess::KeyboardSharedStruct);
 %shared_ptr(logicalaccess::LCDDisplay);
 %shared_ptr(logicalaccess::LEDBuzzerDisplay);
 %shared_ptr(logicalaccess::LegicPrimeChip);
@@ -459,10 +447,8 @@
 %shared_ptr(logicalaccess::Omnikey5023AccessControlCardService);
 %shared_ptr(logicalaccess::Omnikey5427ReaderUnitConfiguration);
 %shared_ptr(logicalaccess::OmnikeyHIDiClassDataTransport);
-%shared_ptr(logicalaccess::OmnikeyHIDiClassImplDataTransport);
 %shared_ptr(logicalaccess::OmnikeyLANXX21ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyReaderUnit);
-%shared_ptr(logicalaccess::OmnikeyXX21LicenseCheckerService);
 %shared_ptr(logicalaccess::OmnikeyXX21ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX21ReaderUnit::SecureModeStatus);
 %shared_ptr(logicalaccess::OmnikeyXX21ReaderUnitConfiguration);
@@ -497,10 +483,6 @@
 %shared_ptr(logicalaccess::ProxLiteChip);
 %shared_ptr(logicalaccess::ProxLocation);
 %shared_ptr(logicalaccess::PublicKey);
-%shared_ptr(logicalaccess::RFIDeasReaderCardAdapter);
-%shared_ptr(logicalaccess::RFIDeasReaderProvider);
-%shared_ptr(logicalaccess::RFIDeasReaderUnit);
-%shared_ptr(logicalaccess::RFIDeasReaderUnitConfiguration);
 %shared_ptr(logicalaccess::RandomHelper);
 %shared_ptr(logicalaccess::RawFormat);
 %shared_ptr(logicalaccess::ReaderCardAdapter);
@@ -633,7 +615,6 @@
 %shared_ptr(logicalaccess::Wiegand37WithFacilityFormat);
 %shared_ptr(logicalaccess::Wiegand37WithFacilityRightParity2Format);
 %shared_ptr(logicalaccess::WiegandFormat);
-%shared_ptr(logicalaccess::WindowsRegistry);
 %shared_ptr(logicalaccess::X509Certificate);
 %shared_ptr(logicalaccess::XmlSerializable);
 %shared_ptr(logicalaccess::iks::IslogKeyServer);
@@ -776,6 +757,7 @@
 %shared_ptr(DeisterReaderUnitConfiguration);
 %shared_ptr(DeisterSerialPortDataTransport);
 %shared_ptr(DummyCommands);
+%shared_ptr(DummyReaderUnit);
 %shared_ptr(EM4102Chip);
 %shared_ptr(EM4135Chip);
 %shared_ptr(EPassAccessInfo);
@@ -857,11 +839,6 @@
 %shared_ptr(ID3ReaderUnit::APDUWrapperGuard);
 %shared_ptr(ID3ReaderUnit::APDUWrapperGuard::Adapter);
 %shared_ptr(ID3ResultChecker);
-%shared_ptr(IDPDataTransport);
-%shared_ptr(IDPReaderCardAdapter);
-%shared_ptr(IDPReaderProvider);
-%shared_ptr(IDPReaderUnit);
-%shared_ptr(IDPReaderUnitConfiguration);
 %shared_ptr(IKSCryptoWrapper);
 %shared_ptr(IKSException);
 %shared_ptr(IKSStorage);
@@ -903,10 +880,6 @@
 %shared_ptr(Key);
 %shared_ptr(KeyDiversification);
 %shared_ptr(KeyStorage);
-%shared_ptr(KeyboardReaderProvider);
-%shared_ptr(KeyboardReaderUnit);
-%shared_ptr(KeyboardReaderUnitConfiguration);
-%shared_ptr(KeyboardSharedStruct);
 %shared_ptr(LCDDisplay);
 %shared_ptr(LEDBuzzerDisplay);
 %shared_ptr(LegicPrimeChip);
@@ -1029,10 +1002,8 @@
 %shared_ptr(Omnikey5023AccessControlCardService);
 %shared_ptr(Omnikey5427ReaderUnitConfiguration);
 %shared_ptr(OmnikeyHIDiClassDataTransport);
-%shared_ptr(OmnikeyHIDiClassImplDataTransport);
 %shared_ptr(OmnikeyLANXX21ReaderUnit);
 %shared_ptr(OmnikeyReaderUnit);
-%shared_ptr(OmnikeyXX21LicenseCheckerService);
 %shared_ptr(OmnikeyXX21ReaderUnit);
 %shared_ptr(OmnikeyXX21ReaderUnit::SecureModeStatus);
 %shared_ptr(OmnikeyXX21ReaderUnitConfiguration);
@@ -1067,10 +1038,6 @@
 %shared_ptr(ProxLiteChip);
 %shared_ptr(ProxLocation);
 %shared_ptr(PublicKey);
-%shared_ptr(RFIDeasReaderCardAdapter);
-%shared_ptr(RFIDeasReaderProvider);
-%shared_ptr(RFIDeasReaderUnit);
-%shared_ptr(RFIDeasReaderUnitConfiguration);
 %shared_ptr(RandomHelper);
 %shared_ptr(RawFormat);
 %shared_ptr(ReaderCardAdapter);
@@ -1203,7 +1170,6 @@
 %shared_ptr(Wiegand37WithFacilityFormat);
 %shared_ptr(Wiegand37WithFacilityRightParity2Format);
 %shared_ptr(WiegandFormat);
-%shared_ptr(WindowsRegistry);
 %shared_ptr(X509Certificate);
 %shared_ptr(XmlSerializable);
 %shared_ptr(iks::IslogKeyServer);

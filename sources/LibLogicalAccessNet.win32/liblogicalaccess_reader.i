@@ -1,6 +1,17 @@
 /* File : liblogicalaccess_reader.i */
 %module(directors="1") liblogicalaccess_reader
 
+%include <typemaps.i>
+
+// Some typemaps to handle bool& in director.
+// Need this when PCSCReaderUnit was director.
+%typemap(ctype)   bool* , bool&  "/*ctype*/ bool*"
+%typemap(imtype)  bool* , bool&  "/*imtype*/ ref bool"
+%typemap(cstype)  bool* , bool&  "/*cstype*/ ref bool"
+%typemap(csin)    bool* , bool&  "/*csin*/ ref $csinput"
+%typemap(csdirectorin) bool* , bool&  "/*csdirectorin*/ ref $iminput"
+%typemap(csdirectorout) bool* , bool&  "/*csdirectorout*/ $cscall"
+
 %include "liblogicalaccess.i"
 
 %import "liblogicalaccess_exception.i"
@@ -98,40 +109,26 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/plugins/readers/idondemand/idondemandreaderunit.hpp>
 #include <logicalaccess/plugins/readers/idondemand/idondemandreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/idondemand/readercardadapters/idondemandreadercardadapter.hpp>
-#include <logicalaccess/plugins/readers/idp/lla_readers_private_idp_api.hpp>
-#include <logicalaccess/plugins/readers/idp/idpreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/idp/idpreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/idp/idpreaderunit.hpp>
-#include <logicalaccess/plugins/readers/idp/idpdatatransport.hpp>
-#include <logicalaccess/plugins/cards/iso7816/lla_cards_iso7816_api.hpp>
-#include <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816response.hpp>
+#include <logicalaccess/plugins/cards/desfire/lla_cards_desfire_api.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
 #include <logicalaccess/plugins/crypto/lla_crypto_api.hpp>
 #include <logicalaccess/plugins/crypto/initialization_vector.hpp>
 #include <logicalaccess/plugins/crypto/symmetric_cipher.hpp>
+#include <logicalaccess/plugins/crypto/openssl_symmetric_cipher.hpp>
+#include <logicalaccess/plugins/crypto/des_cipher.hpp>
+#include <logicalaccess/plugins/crypto/aes_cipher.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
+#include <logicalaccess/plugins/cards/iso7816/lla_cards_iso7816_api.hpp>
+#include <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816response.hpp>
 #include <logicalaccess/plugins/crypto/sha.hpp>
 #include <logicalaccess/plugins/crypto/iso24727crypto.hpp>
 #include <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 #include <logicalaccess/plugins/readers/iso7816/lla_readers_iso7816_api.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
-#include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
-#include <logicalaccess/plugins/readers/pcsc/lla_readers_pcsc_api.hpp>
-#include <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/pcsc/pcsc_fwd.hpp>
-#include <logicalaccess/plugins/readers/pcsc/pcsc_connection.hpp>
-#include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
-#include <logicalaccess/plugins/readers/pcsc/pcscreaderprovider.hpp>
-#include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
-#include <logicalaccess/plugins/readers/idp/readercardadapters/idpreadercardadapter.hpp>
-#include <logicalaccess/plugins/cards/desfire/lla_cards_desfire_api.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
-#include <logicalaccess/plugins/crypto/openssl_symmetric_cipher.hpp>
-#include <logicalaccess/plugins/crypto/des_cipher.hpp>
-#include <logicalaccess/plugins/crypto/aes_cipher.hpp>
-#include <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816commands.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
 #include <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
@@ -167,11 +164,7 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/plugins/cards/twic/twiclocation.hpp>
 #include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
-#include <logicalaccess/plugins/readers/keyboard/lla_readers_private_keyboard_api.hpp>
-#include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/keyboard/keyboardsharedstruct.hpp>
-#include <logicalaccess/plugins/readers/keyboard/keyboardreaderunit.hpp>
-#include <logicalaccess/plugins/readers/keyboard/keyboardreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
 #include <logicalaccess/plugins/readers/nfc/lla_readers_nfc_nfc_api.hpp>
 #include <logicalaccess/plugins/readers/nfc/commands/mifareclassicuidchangerservice.hpp>
 #include <logicalaccess/plugins/cards/mifare/lla_cards_mifare_api.hpp>
@@ -206,12 +199,19 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpbufferparser.hpp>
 #include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpreadercardadapter.hpp>
 #include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpserialportdatatransport.hpp>
+#include <logicalaccess/plugins/readers/pcsc/lla_readers_pcsc_api.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
 #include <logicalaccess/plugins/readers/pcsc/atrparser.hpp>
 #include <logicalaccess/plugins/readers/pcsc/commands/acsacrresultchecker.hpp>
 #include <logicalaccess/plugins/readers/pcsc/commands/dummycommand.hpp>
 #include <logicalaccess/plugins/cards/felica/lla_cards_felica_api.hpp>
 #include <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 #include <logicalaccess/plugins/cards/felica/felicacommands.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcsc_fwd.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcsc_connection.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
+#include <logicalaccess/plugins/readers/pcsc/pcscreaderprovider.hpp>
+#include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
 #include <logicalaccess/plugins/readers/pcsc/commands/felicascmcommands.hpp>
 #include <logicalaccess/plugins/readers/pcsc/commands/felicaspringcardcommands.hpp>
 #include <logicalaccess/plugins/readers/pcsc/commands/id3resultchecker.hpp>
@@ -308,10 +308,6 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/plugins/readers/promag/readercardadapters/promagbufferparser.hpp>
 #include <logicalaccess/plugins/readers/promag/readercardadapters/promagreadercardadapter.hpp>
 #include <logicalaccess/plugins/readers/promag/readercardadapters/promagserialportdatatransport.hpp>
-#include <logicalaccess/plugins/readers/rfideas/lla_readers_rfideas_api.hpp>
-#include <logicalaccess/plugins/readers/rfideas/rfideasreaderunitconfiguration.hpp>
-#include <logicalaccess/plugins/readers/rfideas/rfideasreaderunit.hpp>
-#include <logicalaccess/plugins/readers/rfideas/rfideasreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/rpleth/lla_readers_rpleth_api.hpp>
 #include <logicalaccess/plugins/readers/rpleth/rpleth_fwd.hpp>
 #include <logicalaccess/plugins/readers/rpleth/rplethreaderunit.hpp>
@@ -547,8 +543,6 @@ typedef enum : uint16_t
 } SCardProtocol;
 %}
 
-%feature("director") ISO7816ReaderUnit;
-
 /* Include_section */
 
 %include <logicalaccess/plugins/readers/a3mlgm5600/a3mlgm5600_fwd.hpp>
@@ -621,40 +615,26 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/idondemand/idondemandreaderunit.hpp>
 %include <logicalaccess/plugins/readers/idondemand/idondemandreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/idondemand/readercardadapters/idondemandreadercardadapter.hpp>
-%include <logicalaccess/plugins/readers/idp/lla_readers_private_idp_api.hpp>
-%include <logicalaccess/plugins/readers/idp/idpreaderunitconfiguration.hpp>
-%include <logicalaccess/plugins/readers/idp/idpreaderprovider.hpp>
-%include <logicalaccess/plugins/readers/idp/idpreaderunit.hpp>
-%include <logicalaccess/plugins/readers/idp/idpdatatransport.hpp>
-%import <logicalaccess/plugins/cards/iso7816/lla_cards_iso7816_api.hpp>
-%import <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816response.hpp>
+%import <logicalaccess/plugins/cards/desfire/lla_cards_desfire_api.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
 %import <logicalaccess/plugins/crypto/lla_crypto_api.hpp>
 %import <logicalaccess/plugins/crypto/initialization_vector.hpp>
 %import <logicalaccess/plugins/crypto/symmetric_cipher.hpp>
+%import <logicalaccess/plugins/crypto/openssl_symmetric_cipher.hpp>
+%import <logicalaccess/plugins/crypto/des_cipher.hpp>
+%import <logicalaccess/plugins/crypto/aes_cipher.hpp>
+%import <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
+%import <logicalaccess/plugins/cards/iso7816/lla_cards_iso7816_api.hpp>
+%import <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816response.hpp>
 %import <logicalaccess/plugins/crypto/sha.hpp>
 %import <logicalaccess/plugins/crypto/iso24727crypto.hpp>
 %import <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816readercardadapter.hpp>
 %include <logicalaccess/plugins/readers/iso7816/lla_readers_iso7816_api.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerunit.hpp>
-%include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
-%include <logicalaccess/plugins/readers/pcsc/lla_readers_pcsc_api.hpp>
-%include <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
-%include <logicalaccess/plugins/readers/pcsc/pcsc_fwd.hpp>
-%include <logicalaccess/plugins/readers/pcsc/pcsc_connection.hpp>
-%include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
-%include <logicalaccess/plugins/readers/pcsc/pcscreaderprovider.hpp>
-%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
-%include <logicalaccess/plugins/readers/idp/readercardadapters/idpreadercardadapter.hpp>
-%import <logicalaccess/plugins/cards/desfire/lla_cards_desfire_api.hpp>
-%import <logicalaccess/plugins/cards/desfire/desfirekey.hpp>
-%import <logicalaccess/plugins/cards/desfire/desfireaccessinfo.hpp>
-%import <logicalaccess/plugins/cards/desfire/desfirelocation.hpp>
-%import <logicalaccess/plugins/cards/desfire/desfirecommands.hpp>
-%import <logicalaccess/plugins/crypto/openssl_symmetric_cipher.hpp>
-%import <logicalaccess/plugins/crypto/des_cipher.hpp>
-%import <logicalaccess/plugins/crypto/aes_cipher.hpp>
-%import <logicalaccess/plugins/cards/desfire/desfirecrypto.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/desfireiso7816commands.hpp>
 %import <logicalaccess/plugins/cards/desfire/desfireev1location.hpp>
 %import <logicalaccess/plugins/cards/iso7816/iso7816location.hpp>
@@ -690,11 +670,7 @@ typedef enum : uint16_t
 %import <logicalaccess/plugins/cards/twic/twiclocation.hpp>
 %import <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
-%include <logicalaccess/plugins/readers/keyboard/lla_readers_private_keyboard_api.hpp>
-%include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
-%include <logicalaccess/plugins/readers/keyboard/keyboardsharedstruct.hpp>
-%include <logicalaccess/plugins/readers/keyboard/keyboardreaderunit.hpp>
-%include <logicalaccess/plugins/readers/keyboard/keyboardreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
 %include <logicalaccess/plugins/readers/nfc/lla_readers_nfc_nfc_api.hpp>
 %include <logicalaccess/plugins/readers/nfc/commands/mifareclassicuidchangerservice.hpp>
 %import <logicalaccess/plugins/cards/mifare/lla_cards_mifare_api.hpp>
@@ -729,12 +705,19 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpbufferparser.hpp>
 %include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/osdp/readercardadapters/osdpserialportdatatransport.hpp>
+%include <logicalaccess/plugins/readers/pcsc/lla_readers_pcsc_api.hpp>
+%include <logicalaccess/plugins/readers/pcsc/pcscreaderunitconfiguration.hpp>
 %include <logicalaccess/plugins/readers/pcsc/atrparser.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/acsacrresultchecker.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/dummycommand.hpp>
 %import <logicalaccess/plugins/cards/felica/lla_cards_felica_api.hpp>
 %import <logicalaccess/plugins/cards/felica/felicalocation.hpp>
 %import <logicalaccess/plugins/cards/felica/felicacommands.hpp>
+%include <logicalaccess/plugins/readers/pcsc/pcsc_fwd.hpp>
+%include <logicalaccess/plugins/readers/pcsc/pcsc_connection.hpp>
+%include <logicalaccess/plugins/readers/pcsc/pcscreaderunit.hpp>
+%include <logicalaccess/plugins/readers/pcsc/pcscreaderprovider.hpp>
+%include <logicalaccess/plugins/readers/pcsc/readercardadapters/pcscreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/felicascmcommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/felicaspringcardcommands.hpp>
 %include <logicalaccess/plugins/readers/pcsc/commands/id3resultchecker.hpp>
@@ -831,10 +814,6 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/promag/readercardadapters/promagbufferparser.hpp>
 %include <logicalaccess/plugins/readers/promag/readercardadapters/promagreadercardadapter.hpp>
 %include <logicalaccess/plugins/readers/promag/readercardadapters/promagserialportdatatransport.hpp>
-%include <logicalaccess/plugins/readers/rfideas/lla_readers_rfideas_api.hpp>
-%include <logicalaccess/plugins/readers/rfideas/rfideasreaderunitconfiguration.hpp>
-%include <logicalaccess/plugins/readers/rfideas/rfideasreaderunit.hpp>
-%include <logicalaccess/plugins/readers/rfideas/rfideasreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/rpleth/lla_readers_rpleth_api.hpp>
 %include <logicalaccess/plugins/readers/rpleth/rpleth_fwd.hpp>
 %include <logicalaccess/plugins/readers/rpleth/rplethreaderunit.hpp>

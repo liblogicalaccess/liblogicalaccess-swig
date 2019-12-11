@@ -64,6 +64,7 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/cards/tripledeskey.hpp>
 #include <logicalaccess/colorize.hpp>
 #include <logicalaccess/readerproviders/circularbufferparser.hpp>
+#include <logicalaccess/readerproviders/dummyreaderunit.hpp>
 #include <logicalaccess/readerproviders/readercommunication.hpp>
 #include <logicalaccess/readerproviders/iso14443areadercommunication.hpp>
 #include <logicalaccess/readerproviders/iso14443breadercommunication.hpp>
@@ -441,6 +442,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %import <logicalaccess/plugins/crypto/openssl_symmetric_cipher_context.hpp>
 %import <logicalaccess/plugins/crypto/openssl_symmetric_cipher.hpp>
 
+%feature("director") DummyReaderUnit;
+
 /* Include_section */
 
 %include <logicalaccess/lla_core_api.hpp>
@@ -481,6 +484,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/cards/tripledeskey.hpp>
 %include <logicalaccess/colorize.hpp>
 %include <logicalaccess/readerproviders/circularbufferparser.hpp>
+%include <logicalaccess/readerproviders/dummyreaderunit.hpp>
 %include <logicalaccess/readerproviders/readercommunication.hpp>
 %import <logicalaccess/plugins/llacommon/lla_common_api.hpp>
 %import <logicalaccess/plugins/llacommon/logs.hpp>

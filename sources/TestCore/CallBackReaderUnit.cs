@@ -10,54 +10,44 @@ using System.Threading.Tasks;
 
 namespace TestCore
 {
-    public class CallBackReaderUnit : OmnikeyReaderUnit
-    {
-        public CallBackReaderUnit(string rpt) : base(rpt)
-        {
-        }
-
-        public void test()
-        {
-            reconnect(1);
-        }
-
-        public override Chip getSingleChip()
-        {
-            Console.WriteLine("COUCOU LES COPAINS");
-            return null;
-        }
-    }
-
+    /**
+     * This was a test to check that native C++ code can call into C# overriden
+     * method.
+     *
+     * However it only works with multiple LLA workaround.
+     * SWIG has issues with director and non-public method
+     * with default parameters...
+     */
     public class SimpleReaderUnit : PCSCReaderUnit
     {
         public SimpleReaderUnit(string name) : base(name)
         {
         }
 
+        /**
+         * Will be called by native C++ code.
+         */
         public override void disconnect()
         {
             hasBeenCalled = true;
             base.disconnect();
         }
 
-        public void callMe()
-        {
-        }
-
         public bool hasBeenCalled = false;
     }
 
+    public class DummyCSReaderUnit : DummyReaderUnit
+    {
+        public DummyCSReaderUnit(string name) : base(name)
+        {
+        }
+    }
 
     [TestClass]
     public class CallBackReaderUnitTest
     {
-        [TestMethod]
-        public void CallBackReaderUnit_Test()
-        {
-            //var ru = new CallBackReaderUnit("lol");
-            // ru.test();
-        }
-
+        // This test doesnt work because PCSCReaderUnit is not a director.
+        // PCSCReaderUnit is not a director because SWIG codegen issues.
         [TestMethod]
         public void SimpleReaderUnitTest()
         {
@@ -66,30 +56,30 @@ namespace TestCore
                 LibraryManager.getInstance().getReaderProvider("PCSC"));
             ReaderUnitVector readers =
                 readerConfig.getReaderProvider().getReaderList();
-            Console.WriteLine("Please select index of the reader unit to use:");
-            for (int x = 0; x < readers.Count(); ++x)
-            {
-                Console.WriteLine("\t" + readers[x].getName());
-            }
-
             readerConfig.setReaderUnit(readers[0]);
-
+            Assert.IsTrue(readers.Count > 0);
             ReaderUnit ru = readers[0];
-
             ReaderUnit r2 = new SimpleReaderUnit(ru.getName());
             SimpleReaderUnit r2simple = r2 as SimpleReaderUnit;
             r2.setReaderProvider(new ReaderProviderWeakPtr(ru.getReaderProvider()));
             r2.setConfiguration(ru.getConfiguration());
             r2.setDataTransport(ru.getDataTransport());
             r2.setDefaultReaderCardAdapter(ru.getDefaultReaderCardAdapter());
-
+            bool typeA = true;
+            bool typeB = false;
+            Console.WriteLine("Cool: " + typeA + ". B: " + typeB);
+            r2simple.getT_CL_ISOType(ref typeA, ref typeB);
+            Console.WriteLine("Cool: " + typeA + ". B: " + typeB);
             r2.connectToReader();
             r2.waitInsertion(1000);
-            r2.connect();
-            
-            r2.disconnect();
-            r2.disconnectFromReader();
 
+            // Double connect. LLA code should call disconnect() internally.
+            // Yes, this test relies on LLA implementation details, but well...
+            r2.connect();
+            r2.connect();
+            r2simple.getT_CL_ISOType(ref typeA, ref typeB);
+            Console.WriteLine("Cool: " + typeA + ". B: " + typeB);
+            r2.disconnectFromReader();
             Assert.IsTrue(r2simple.hasBeenCalled);
         }
     }
