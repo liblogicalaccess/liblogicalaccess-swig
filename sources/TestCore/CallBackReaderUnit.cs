@@ -32,15 +32,13 @@ namespace TestCore
             hasBeenCalled = true;
             base.disconnect();
         }
-
+        
         public bool hasBeenCalled = false;
     }
 
-    public class DummyCSReaderUnit : DummyReaderUnit
+    public class CustomDataTransport : DummyDataTransport
     {
-        public DummyCSReaderUnit(string name) : base(name)
-        {
-        }
+        
     }
 
     [TestClass]
