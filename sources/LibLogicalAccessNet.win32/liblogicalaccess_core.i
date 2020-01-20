@@ -443,6 +443,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %import <logicalaccess/plugins/crypto/openssl_symmetric_cipher.hpp>
 
 %feature("director") DummyReaderUnit;
+%feature("director") DummyDataTransport;
 
 /* Include_section */
 
