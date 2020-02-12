@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LibLogicalAccess;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,43 @@ namespace TestCore
     [TestClass]
     public class TestFormat
     {
+        string Convert(byte[] data)
+        {
+            char[] characters = data.Select(b => (char) b).ToArray();
+            return new string(characters);
+        }
+
+        [TestMethod]
+        public void Tlv()
+        {
+            var customFormat = new CustomFormat();
+            DataFieldVector fieldList = new DataFieldVector();
+            var tlvDataField = new TLVDataField();
+            tlvDataField.setTag(0x42);
+            tlvDataField.setValue(Convert(new byte[] {0x01, 0x02, 0x03, 0x04}));
+
+            fieldList.Add(tlvDataField);
+            customFormat.setFieldList(fieldList);
+
+
+            ByteVector formatBuf = customFormat.getLinearData();
+            var result = new ByteVector(new byte[] {0x42, 0x04, 0x01, 0x02, 0x03, 0x04});
+            Assert.IsTrue(formatBuf.SequenceEqual(result), "Data not equal");
+
+            var customFormat2 = new CustomFormat();
+            DataFieldVector fieldList2 = new DataFieldVector();
+            var tlvDataField2 = new TLVDataField();
+            tlvDataField2.setPosition(0);
+            tlvDataField2.setDataLength(8 * 6);
+
+            fieldList2.Add(tlvDataField2);
+            customFormat2.setFieldList(fieldList2);
+            customFormat2.setLinearData(result);
+
+            tlvDataField = (TLVDataField) customFormat.getFieldList()[0];
+            Assert.IsTrue(tlvDataField.getValue().Equals(Convert(new byte[] {0x01, 0x02, 0x03, 0x04})));
+        }
+
         [TestMethod]
         public void Wiegand26()
         {

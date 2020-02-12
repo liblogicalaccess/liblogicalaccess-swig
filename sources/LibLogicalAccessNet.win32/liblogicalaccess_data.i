@@ -280,6 +280,9 @@ CSHARP_MEMBER_STRUCT_ARRAYS(logicalaccess::MifareAccessInfo::DataBlockAccessBits
 	   case DataFieldType.DFT_STRING:
 	     ret = new StringDataField(cPtr, owner);
 		 break;
+	   case DataFieldType.DFT_TLV:
+	     ret = new TLVDataField(cPtr, owner);
+		 break;
 	   default:
          throw new LibLogicalAccessNetException($"Unknown DataField type: {df}");
       }
