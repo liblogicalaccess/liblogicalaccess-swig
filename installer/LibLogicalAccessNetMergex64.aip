@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="12.7.2" version="15.3" Modules="msm" RootPath="." Language="en" Id="{A8B8C482-72B2-4B60-84AE-1C2D29242CB7}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="12.7.2" version="15.6" Modules="msm" RootPath="." Language="en" Id="{A8B8C482-72B2-4B60-84AE-1C2D29242CB7}">
   <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
-    <ROW Name="HiddenItems" Value="AppXAppDetailsComponent;AppXCapabilitiesComponent;AppXDependenciesComponent;AppXProductDetailsComponent;AppXVisualAssetsComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent"/>
+    <ROW Name="HiddenItems" Value="AppXAppDetailsComponent;AppXCapabilitiesComponent;AppXDependenciesComponent;AppXProductDetailsComponent;AppXVisualAssetsComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent;FixupComponent"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiValidationComponent">
     <ROW Table="File" Column="Sequence" MinValue="1" MaxValue="2147483647" Description="Sequence with respect to the media images; order must track cabinet order." Options="0" ColumnType="3" ColumnIndex="7" ColumnSize="4" MsiKey="File#Sequence"/>
@@ -179,7 +179,7 @@
     <ROW Path="&lt;AI_DICTS&gt;ui_fr.ail"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DigCertStoreComponent">
-    <ROW TimeStampUrl="http://timestamp.verisign.com/scripts/timstamp.dll" SignerDescription="[|ProductName]" DescriptionUrl="http://www.islog.com" SignOptions="7" SignTool="0" Thumbprint="99592ebef77c12e720207118987b394298ee09d8 Subject: D3L&#10;Issuer: Go Daddy Secure Certificate Authority - G2&#10;Valid from 01/03/2019 to 02/05/2020"/>
+    <ROW TimeStampUrl="http://timestamp.verisign.com/scripts/timstamp.dll" SignerDescription="[|ProductName]" DescriptionUrl="http://www.islog.com" SignOptions="7" SignTool="0" Thumbprint="bc31eb1a325c4f2272f6f0f860823995c51e74d3 Subject: D3L&#10;Issuer: Go Daddy Secure Certificate Authority - G2&#10;Valid from 12/07/2019 to 02/05/2021"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
     <ROW Fragment="MSMSequences.aip" Path="&lt;AI_FRAGS&gt;MSMSequences.aip"/>
