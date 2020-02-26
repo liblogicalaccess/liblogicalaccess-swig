@@ -4,7 +4,7 @@ import os
 
 class LLASwig(ConanFile):
     name = "LogicalAccessSwig"
-    version = "2.2.0"
+    version = "2.2.1"
     license = "<Put the package license here>"
     url = "<Package recipe repository url here, for issues about the package>"
     description = "<Description of LLA here>"
