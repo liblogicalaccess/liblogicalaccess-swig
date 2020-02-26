@@ -12,6 +12,7 @@ class LLASwig(ConanFile):
     default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
                         'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True'
     generators = "cmake"
+    revision_mode = "scm"
 
     def requirements(self):
         try:
