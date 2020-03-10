@@ -11,6 +11,7 @@ liblogicalaccess_library_wrap.cxx
 liblogicalaccess_core_wrap.cxx
 liblogicalaccess_iks_wrap.cxx
 liblogicalaccess_exception_wrap.cxx
+liblogicalaccess_crypto_wrap.cxx
 lla_std_types_wrap.cxx)
 
 if (MSVC)
