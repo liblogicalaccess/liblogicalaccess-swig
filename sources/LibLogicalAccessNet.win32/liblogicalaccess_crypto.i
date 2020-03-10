@@ -37,8 +37,6 @@
 
 /* END_Additional_include */
 
-using namespace openssl;
-
 %}
 
 /* Include_section */
