@@ -34,7 +34,7 @@ pipeline {
                         stage('Linux Swig Support Container') {
                             agent { label 'linux' }
                             steps {
-                                sh "docker build --pull -t docker-registry.islog.com:5000/swig-support:latest -f Dockerfile ."
+                                sh "docker build --no-cache --pull -t docker-registry.islog.com:5000/swig-support:latest -f Dockerfile ."
                                 sh "docker push docker-registry.islog.com:5000/swig-support:latest"
                             }
                         }
