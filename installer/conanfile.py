@@ -4,7 +4,7 @@ import os
 
 class LogicalAccessSwigConan(ConanFile):
     name = "LogicalAccessSwig"
-    version = "2.2.1"
+    version = "2.3.0"
     settings = "build_type", "arch", "os"
     default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
                         'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True'
