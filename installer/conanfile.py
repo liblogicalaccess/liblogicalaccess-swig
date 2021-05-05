@@ -6,6 +6,7 @@ class LogicalAccessSwigConan(ConanFile):
     name = "LogicalAccessSwig"
     version = "2.4.0"
     settings = "build_type", "arch", "os"
+    options = {'LLA_BUILD_PRIVATE': [True, False]}
     default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
                         'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True'
     revision_mode = "scm"
@@ -16,10 +17,12 @@ class LogicalAccessSwigConan(ConanFile):
 
     def requirements(self):
         try:
-            self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + self.channel)
+            if self.options.LLA_BUILD_PRIVATE:
+                self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + self.channel)
             self.requires('LogicalAccessNFC/' + self.version + '@islog/' + self.channel)
         except ConanException:
-            self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + tools.Git().get_branch())
+            if self.options.LLA_BUILD_PRIVATE:
+                self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + tools.Git().get_branch())
             self.requires('LogicalAccessNFC/' + self.version + '@islog/' + tools.Git().get_branch())
     
     def imports(self):

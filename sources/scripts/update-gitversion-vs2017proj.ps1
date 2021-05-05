@@ -4,14 +4,30 @@ param(
   [String]$projectFile
 )
 
-Import-Module IslogUtils
+function GetGitVersion {
+	param()
+	
+    $Branch=GitVersion.exe /output json /showvariable BranchName
+    $masterBranch = "master", "v1", "v2"
+	$version=GitVersion.exe /output json /showvariable NuGetVersionV2
+    if (!($Branch -in $masterBranch) -and (Test-Path env:BUILD_NUMBER))
+    {
+        $version = GitVersion.exe /output json /showvariable MajorMinorPatch
+        $buildNumber = $Env:BUILD_NUMBER
+        $buildNumber = $buildNumber.padLeft(4, '0')
+        $version += "-" + $Branch + "-" + $buildNumber
+        git tag -a $version -m 'tag for gitversion'
+    }
+	return $version
+}
+
 
 [xml]$s = get-content $projectFile
 if ($s.Project.Sdk -eq $null -or !($s.Project.Sdk -eq "Microsoft.NET.Sdk")) {
 	throw ("Error: $project is not a .NET SDK project")
 }
 
-$NuGetVersionV2=GetISLOGVersion
+$NuGetVersionV2=GetGitVersion
 $AssemblySemVer=Gitversion /output json /showvariable AssemblySemVer
 $AssemblySemFileVer=Gitversion /output json /showvariable AssemblySemFileVer
 

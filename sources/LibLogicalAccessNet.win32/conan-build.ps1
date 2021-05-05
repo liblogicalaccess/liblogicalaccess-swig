@@ -1,10 +1,20 @@
 [CmdletBinding()]
 param( 
   [Parameter(Mandatory=$false)]
-  [bool]$publish
+  [bool]$publish,
+  [Parameter(Mandatory=$false)]
+  [bool]$ce
 )
 
-Import-Module IslogUtils
+function ExecExternal {
+  param(
+	[Parameter(Position=0,Mandatory=1)][scriptblock] $command
+  )
+  & $command
+  if ($LASTEXITCODE -ne 0) {
+	throw ("Command returned non-zero error-code ${LASTEXITCODE}: $command")
+  }
+}
 
 Write-Output "Welcome, ISLOG SWIG Win32 Build"
 
@@ -17,10 +27,14 @@ $Profiles = @(("compilers/x64_msvc_release", "Release", "x86_64"),
 			  ("compilers/x86_msvc_release", "Release", "x86"),
 			  ("compilers/x86_msvc_debug", "Debug", "x86"),
 			  ("compilers/x64_msvc_debug", "Debug", "x86_64"))
+$buildPrivate = true
+if ($ce) {
+	$buildPrivate = false
+}
 
 foreach ($Profile in $Profiles){
 
-    ExecExternal { conan install -p $Profile[0] -u .. }
+    ExecExternal { conan install -p $Profile[0] -o LLA_BUILD_PRIVATE=$buildPrivate -u .. }
     ExecExternal { conan build .. }
     $config = $Profile[1];
     $arch = $Profile[2];

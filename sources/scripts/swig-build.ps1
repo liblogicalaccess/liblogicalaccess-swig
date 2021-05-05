@@ -34,7 +34,10 @@ $ScriptBlock = {
 	Try
 	{
 		cd $currentFolder
-        $cmd = $env:SWIG + "\swig.exe"
+		$cmd = "swig.exe"
+		if ($env:SWIG) {
+			$cmd = $env:SWIG + "\" + $cmd
+		}
 		$currentPath = (Get-Item -Path ".\" -Verbose).FullName + "\..\installer\packages\include"
 	
 		$output = & $cmd -csharp -c++ -I"$currentPath" -outdir $outdir -namespace $namespace -dllimport LibLogicalAccessNet.win32.dll $interface 2>&1
