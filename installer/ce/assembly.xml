@@ -12,28 +12,28 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>../sources/LibLogicalAccessNet.win32/bin/Release/Win32/</directory>
+            <directory>../../sources/LibLogicalAccessNet.win32/bin/Release/Win32/</directory>
             <outputDirectory>/dll/Win32/Release</outputDirectory>
             <includes>
                 <include>*.dll</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>../sources/LibLogicalAccessNet.win32/bin/Release/x64/</directory>
+            <directory>../../sources/LibLogicalAccessNet.win32/bin/Release/x64/</directory>
             <outputDirectory>/dll/x64/Release</outputDirectory>
             <includes>
                 <include>*.dll</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>../sources/LibLogicalAccessNet.win32/bin/Debug/Win32/</directory>
+            <directory>../../sources/LibLogicalAccessNet.win32/bin/Debug/Win32/</directory>
             <outputDirectory>/dll/Win32/Debug</outputDirectory>
             <includes>
                 <include>*.dll</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>../sources/LibLogicalAccessNet.win32/bin/Debug/x64/</directory>
+            <directory>../../sources/LibLogicalAccessNet.win32/bin/Debug/x64/</directory>
             <outputDirectory>/dll/x64/Debug</outputDirectory>
             <includes>
                 <include>*.dll</include>
