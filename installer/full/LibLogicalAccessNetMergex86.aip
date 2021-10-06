@@ -95,10 +95,10 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
     <ROW File="LibLogicalAccessNet.win32.dll" Component_="LibLogicalAccessNet.win32.dll" FileName="LIBLOG~2.DLL|LibLogicalAccessNet.win32.dll" Attributes="0" SourcePath="..\..\sources\LibLogicalAccessNet.win32\bin\x86\Release\LibLogicalAccessNet.win32.dll" SelfReg="false" NextFile="reg2vbs.vbs"/>
-    <ROW File="SCardSvr.vbs" Component_="reg2vbs.vbs" FileName="SCardSvr.vbs" Attributes="0" SourcePath="scripts\SCardSvr.vbs" SelfReg="false" NextFile="disable_driver_rfid.reg"/>
-    <ROW File="SCardSvr_Win7.reg" Component_="reg2vbs.vbs" FileName="SCARDS~1.REG|SCardSvr_Win7.reg" Attributes="0" SourcePath="scripts\SCardSvr_Win7.reg" SelfReg="false" NextFile="SCardSvr_Win8.1.reg"/>
-    <ROW File="SCardSvr_Win8.1.reg" Component_="reg2vbs.vbs" FileName="SCARDS~2.REG|SCardSvr_Win8.1.reg" Attributes="0" SourcePath="scripts\SCardSvr_Win8.1.reg" SelfReg="false" NextFile="SCardSvr_Win8.reg"/>
-    <ROW File="SCardSvr_Win8.reg" Component_="reg2vbs.vbs" FileName="SCARDS~3.REG|SCardSvr_Win8.reg" Attributes="0" SourcePath="scripts\SCardSvr_Win8.reg" SelfReg="false" NextFile="remotecryptoiksunified.dll"/>
+    <ROW File="SCardSvr.vbs" Component_="reg2vbs.vbs" FileName="SCardSvr.vbs" Attributes="0" SourcePath="..\scripts\SCardSvr.vbs" SelfReg="false" NextFile="disable_driver_rfid.reg"/>
+    <ROW File="SCardSvr_Win7.reg" Component_="reg2vbs.vbs" FileName="SCARDS~1.REG|SCardSvr_Win7.reg" Attributes="0" SourcePath="..\scripts\SCardSvr_Win7.reg" SelfReg="false" NextFile="SCardSvr_Win8.1.reg"/>
+    <ROW File="SCardSvr_Win8.1.reg" Component_="reg2vbs.vbs" FileName="SCARDS~2.REG|SCardSvr_Win8.1.reg" Attributes="0" SourcePath="..\scripts\SCardSvr_Win8.1.reg" SelfReg="false" NextFile="SCardSvr_Win8.reg"/>
+    <ROW File="SCardSvr_Win8.reg" Component_="reg2vbs.vbs" FileName="SCARDS~3.REG|SCardSvr_Win8.reg" Attributes="0" SourcePath="..\scripts\SCardSvr_Win8.reg" SelfReg="false" NextFile="remotecryptoiksunified.dll"/>
     <ROW File="a3mlgm5600readers.dll" Component_="a3mlgm5600readers.dll" FileName="A3MLGM~1.DLL|a3mlgm5600readers.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\a3mlgm5600readers.dll" SelfReg="false" NextFile="admittoreaders.dll"/>
     <ROW File="admittoreaders.dll" Component_="admittoreaders.dll" FileName="ADMITT~1.DLL|admittoreaders.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\admittoreaders.dll" SelfReg="false" NextFile="axesstmc13readers.dll"/>
     <ROW File="axesstmc13readers.dll" Component_="axesstmc13readers.dll" FileName="AXESST~1.DLL|axesstmc13readers.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\axesstmc13readers.dll" SelfReg="false" NextFile="axesstmclegicreaders.dll"/>
@@ -109,7 +109,7 @@
     <ROW File="desfirecards.dll" Component_="desfirecards.dll" FileName="DESFIR~1.DLL|desfirecards.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\desfirecards.dll" SelfReg="false" NextFile="desfireev2cards.dll"/>
     <ROW File="desfireev2cards.dll" Component_="desfireev2cards.dll" FileName="DESFIR~2.DLL|desfireev2cards.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\desfireev2cards.dll" SelfReg="false" NextFile="elatecreaders.dll"/>
     <ROW File="desfireev3cards.dll" Component_="desfireev3cards.dll" FileName="DESFIR~3.DLL|desfireev3cards.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\desfireev3cards.dll" SelfReg="false"/>
-    <ROW File="disable_driver_rfid.reg" Component_="reg2vbs.vbs" FileName="DISABL~1.REG|disable_driver_rfid.reg" Attributes="0" SourcePath="scripts\disable_driver_rfid.reg" SelfReg="false" NextFile="SCardSvr_Win7.reg"/>
+    <ROW File="disable_driver_rfid.reg" Component_="reg2vbs.vbs" FileName="DISABL~1.REG|disable_driver_rfid.reg" Attributes="0" SourcePath="..\scripts\disable_driver_rfid.reg" SelfReg="false" NextFile="SCardSvr_Win7.reg"/>
     <ROW File="elatecreaders.dll" Component_="elatecreaders.dll" FileName="ELATEC~1.DLL|elatecreaders.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\elatecreaders.dll" SelfReg="false" NextFile="LibLogicalAccessNet.win32.dll"/>
     <ROW File="em4102cards.dll" Component_="em4102cards.dll" FileName="EM4102~1.DLL|em4102cards.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\em4102cards.dll" SelfReg="false" NextFile="em4135cards.dll"/>
     <ROW File="em4135cards.dll" Component_="em4135cards.dll" FileName="EM4135~1.DLL|em4135cards.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\em4135cards.dll" SelfReg="false" NextFile="epasscards.dll"/>
@@ -153,7 +153,7 @@
     <ROW File="promagreaders.dll" Component_="promagreaders.dll" FileName="PROMAG~1.DLL|promagreaders.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\promagreaders.dll" SelfReg="false" NextFile="proxcards.dll"/>
     <ROW File="proxcards.dll" Component_="proxcards.dll" FileName="PROXCA~1.DLL|proxcards.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\proxcards.dll" SelfReg="false" NextFile="proxlitecards.dll"/>
     <ROW File="proxlitecards.dll" Component_="proxlitecards.dll" FileName="PROXLI~1.DLL|proxlitecards.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\proxlitecards.dll" SelfReg="false" NextFile="rfideasreaders.dll"/>
-    <ROW File="reg2vbs.vbs" Component_="reg2vbs.vbs" FileName="reg2vbs.vbs" Attributes="0" SourcePath="scripts\reg2vbs.vbs" SelfReg="false" NextFile="SCardSvr.vbs"/>
+    <ROW File="reg2vbs.vbs" Component_="reg2vbs.vbs" FileName="reg2vbs.vbs" Attributes="0" SourcePath="..\scripts\reg2vbs.vbs" SelfReg="false" NextFile="SCardSvr.vbs"/>
     <ROW File="remotecryptoiksunified.dll" Component_="remotecryptoiksunified.dll" FileName="REMOTE~1.DLL|remotecryptoiksunified.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\remotecryptoiksunified.dll" SelfReg="false" NextFile="iclass5321cards.dll"/>
     <ROW File="rfideasreaders.dll" Component_="rfideasreaders.dll" FileName="RFIDEA~1.DLL|rfideasreaders.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\rfideasreaders.dll" SelfReg="false" NextFile="rplethreaders.dll"/>
     <ROW File="rplethreaders.dll" Component_="rplethreaders.dll" FileName="RPLETH~1.DLL|rplethreaders.dll" Attributes="0" SourcePath="..\packages\dll\x86\Release\rplethreaders.dll" SelfReg="false" NextFile="samav2cards.dll"/>
