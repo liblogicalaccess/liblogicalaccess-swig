@@ -22,6 +22,7 @@ namespace SEOSTests
             Debug.WriteLine("WriteFormat");
         }
 
+#if BUILD_PRIVATE
         [TestMethod]
         public void General()
         {
@@ -86,5 +87,6 @@ namespace SEOSTests
             aitouse.ref_data_qualifier = 2;
             seosSEAccessControlCardService.writeFormat(format, null, aitouse, null);
         }
+#endif
     }
 }

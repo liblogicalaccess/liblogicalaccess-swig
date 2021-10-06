@@ -27,10 +27,6 @@ namespace TestCore
             formatInfos.setAiToWrite(tmpAccessInfo);
             Assert.IsTrue(formatInfos.getAiToWrite() is EPassAccessInfo);
 
-            tmpAccessInfo = new HIDiClassAccessInfo();
-            formatInfos.setAiToWrite(tmpAccessInfo);
-            Assert.IsTrue(formatInfos.getAiToWrite() is HIDiClassAccessInfo);
-
             tmpAccessInfo = new MifareAccessInfo();
             formatInfos.setAiToWrite(tmpAccessInfo);
             Assert.IsTrue(formatInfos.getAiToWrite() is MifareAccessInfo);
@@ -47,6 +43,11 @@ namespace TestCore
             formatInfos.setAiToWrite(tmpAccessInfo);
             Assert.IsTrue(formatInfos.getAiToWrite() is MifareUltralightCAccessInfo);
 
+#if BUILD_PRIVATE
+            tmpAccessInfo = new HIDiClassAccessInfo();
+            formatInfos.setAiToWrite(tmpAccessInfo);
+            Assert.IsTrue(formatInfos.getAiToWrite() is HIDiClassAccessInfo);
+
             tmpAccessInfo = new SeosAccessInfo();
             formatInfos.setAiToWrite(tmpAccessInfo);
             Assert.IsTrue(formatInfos.getAiToWrite() is SeosAccessInfo);
@@ -54,6 +55,8 @@ namespace TestCore
             tmpAccessInfo = new SeosValueAccessInfo();
             formatInfos.setAiToWrite(tmpAccessInfo);
             Assert.IsTrue(formatInfos.getAiToWrite() is SeosValueAccessInfo);
+#endif
+
 
             tmpAccessInfo = new TopazAccessInfo();
             formatInfos.setAiToWrite(tmpAccessInfo);

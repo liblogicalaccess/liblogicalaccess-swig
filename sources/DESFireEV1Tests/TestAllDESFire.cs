@@ -91,7 +91,11 @@ namespace DESFireEV1Tests
                     var chip = readerConfig.getReaderUnit().getSingleChip();
                     var cmd = chip.getCommands() as DESFireISO7816Commands;
                     var cmdev1 = chip.getCommands() as DESFireEV1ISO7816Commands;
+#if BUILD_PRIVATE
                     var cmdev2 = chip.getCommands() as DESFireEV2ISO7816Commands;
+#else
+                    Commands cmdev2 = null;
+#endif
 
                     // Create keys
                     var desDefault = new DESFireKey();
@@ -246,6 +250,7 @@ namespace DESFireEV1Tests
                             aesNew2);
 #endif
 
+#if BUILD_PRIVATE
                         if (cmdev2 != null)
                         {
                             // EV2
@@ -313,6 +318,7 @@ namespace DESFireEV1Tests
                             testSAMEV2AuthChangeKey(cmdev2, aesNew, aesNew2);
 #endif
                         }
+#endif
 
                         cleanupCard(cmdev1, desDefault);
 
@@ -587,7 +593,7 @@ namespace DESFireEV1Tests
         }
 
         void ev1Test(DESFireEV1ISO7816Commands cmdev1,
-            DESFireEV2ISO7816Commands cmdev2,
+            Commands cmdev2,
             DESFireKey newKey,
             DESFireKey newKey2)
         {
@@ -878,6 +884,7 @@ namespace DESFireEV1Tests
             cmd.erase();
         }
 
+#if BUILD_PRIVATE
         void ev2Test(DESFireKey masterPICCKey,
             DESFireEV2ISO7816Commands cmdev2,
             DESFireKey desNew,
@@ -1233,6 +1240,7 @@ namespace DESFireEV1Tests
 
             authMasterCard(cmdev2, masterPICCKey);
         }
+#endif
 
         void testSAMAuthChangeKey(DESFireISO7816Commands cmd,
             DESFireKeyType cryptomethod,
