@@ -47,7 +47,7 @@ pipeline {
                             steps {
                                 script {
                                     conan.withFreshWindowsConanCache {
-                                        sh "./build-linux.sh"
+                                        sh "./build-linux.sh true"
                                         dir('sources/LibLogicalAccessNet.win32') {
                                             sh "mkdir build"
                                             dir('build') {
