@@ -34,6 +34,8 @@ class LLASwig(ConanFile):
         cmake = CMake(self)
 		if self.options.LLA_BUILD_PRIVATE:
             cmake.definitions['LLA_BUILD_PRIVATE'] = True
+        else:
+            cmake.definitions['LLA_BUILD_PRIVATE'] = False
         cmake.configure()
         return cmake
 

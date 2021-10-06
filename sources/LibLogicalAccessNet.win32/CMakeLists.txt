@@ -31,6 +31,10 @@ else()
   target_include_directories(${TARGET_NAME} PUBLIC /usr/include/PCSC)
 endif()
 
+if (LLA_BUILD_PRIVATE)
+	add_compile_definitions(BUILD_PRIVATE)
+endif()
+
 target_link_libraries(${TARGET_NAME} PUBLIC
   CONAN_PKG::LogicalAccessPrivate
   CONAN_PKG::LogicalAccessNFC)

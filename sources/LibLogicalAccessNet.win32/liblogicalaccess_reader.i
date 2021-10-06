@@ -868,7 +868,7 @@ typedef enum : uint16_t
 %template(MifarePlusSL1PCSCCommands) logicalaccess::MifarePlusSL1Policy<logicalaccess::MifarePlusSL1Commands, logicalaccess::MifarePCSCCommands>;
 
 %template(ChipList) std::list<std::shared_ptr<logicalaccess::Chip> >;
-#ifdef LLA_BUILD_PRIVATE
+#ifdef BUILD_PRIVATE
 %template(SIOCryptoContextVector) std::vector<logicalaccess::SIO::CryptoContext>;
 #endif
 
