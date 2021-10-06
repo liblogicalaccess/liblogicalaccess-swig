@@ -27,14 +27,14 @@ $Profiles = @(("compilers/x64_msvc_release", "Release", "x86_64"),
 			  ("compilers/x86_msvc_release", "Release", "x86"),
 			  ("compilers/x86_msvc_debug", "Debug", "x86"),
 			  ("compilers/x64_msvc_debug", "Debug", "x86_64"))
-$buildPrivate = true
+$buildPrivate = $True
 if ($ce) {
-	$buildPrivate = false
+	$buildPrivate = $False
 }
 
 foreach ($Profile in $Profiles){
 
-    ExecExternal { conan install -p $Profile[0] -o LLA_BUILD_PRIVATE=$buildPrivate -u .. }
+    ExecExternal { conan install --profile $Profile[0] -o LLA_BUILD_PRIVATE=$buildPrivate -u .. }
     ExecExternal { conan build .. }
     $config = $Profile[1];
     $arch = $Profile[2];
