@@ -163,13 +163,13 @@
     <ROW Path="&lt;AI_DICTS&gt;ui_fr.ail"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DigCertStoreComponent">
-    <ROW TimeStampUrl="http://timestamp.verisign.com/scripts/timstamp.dll" SignerDescription="[|ProductName]" DescriptionUrl="http://www.islog.com" SignOptions="7" SignTool="0" Thumbprint="bc31eb1a325c4f2272f6f0f860823995c51e74d3 Subject: D3L&#10;Issuer: Go Daddy Secure Certificate Authority - G2&#10;Valid from 12/07/2019 to 02/05/2021"/>
+    <ROW TimeStampUrl="http://timestamp.digicert.com" SignerDescription="[|ProductName]" DescriptionUrl="http://www.hidglobal.com" SignOptions="7" SignTool="0" Thumbprint="2acc3982c939737683657776d0d505f421fff9a6 Subject: HID Global Corporation&#10;Issuer: Symantec Class 3 SHA256 Code Signing CA&#10;Valid from 11/11/2019 to 11/11/2022"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
     <ROW Fragment="MSMSequences.aip" Path="&lt;AI_FRAGS&gt;MSMSequences.aip"/>
     <ROW Fragment="MsmValidation.aip" Path="&lt;AI_FRAGS&gt;MsmValidation.aip"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsmModuleSignatureComponent">
-    <ROW ModuleID="LiblogicalaccessNet" Version="2.0.0" GUID="04C3E8B2_E2D5_4199_9AD6_0064B9F77020" Name="LiblogicalaccessNet" Manufacturer="ISLOG" Comments="Liblogicalaccess library RFID"/>
+    <ROW ModuleID="LiblogicalaccessNet" Version="2.0.0" GUID="04C3E8B2_E2D5_4199_9AD6_0064B9F77020" Name="LiblogicalaccessNet" Manufacturer="HID Global" Comments="Liblogicalaccess library RFID"/>
   </COMPONENT>
 </DOCUMENT>
