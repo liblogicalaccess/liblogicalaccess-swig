@@ -31,11 +31,13 @@ else()
   target_include_directories(${TARGET_NAME} PUBLIC /usr/include/PCSC)
 endif()
 
+set(LLA_ADDITIONAL_LINK)
 if (LLA_BUILD_PRIVATE)
 	add_compile_definitions(BUILD_PRIVATE)
+	list(APPEND LLA_ADDITIONAL_LINK CONAN_PKG::LogicalAccessPrivate)
 endif()
 
 target_link_libraries(${TARGET_NAME} PUBLIC
-  CONAN_PKG::LogicalAccessPrivate
-  CONAN_PKG::LogicalAccessNFC)
+  CONAN_PKG::LogicalAccessNFC
+  ${LLA_ADDITIONAL_LINK})
 install(TARGETS ${TARGET_NAME} RUNTIME DESTINATION bin LIBRARY DESTINATION lib)
