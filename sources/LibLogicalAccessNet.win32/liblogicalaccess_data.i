@@ -9,7 +9,9 @@
 #include <logicalaccess/utils.hpp>
 #include <logicalaccess/xmlserializable.hpp>
 #include "logicalaccess/cards/keystorage.hpp"
+#ifdef BUILD_PRIVATE
 #include <logicalaccess/plugins/readers/private-pcsc/type_fwd.hpp>
+#endif
 #include <logicalaccess/techno.hpp>
 #include <logicalaccess/key.hpp>
 #include <logicalaccess/tlv.hpp>
