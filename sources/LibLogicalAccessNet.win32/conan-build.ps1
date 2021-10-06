@@ -30,6 +30,7 @@ $Profiles = @(("compilers/x64_msvc_release", "Release", "x86_64"),
 $buildPrivate = $True
 if ($ce) {
 	$buildPrivate = $False
+	$env:ASSEMBLYAPPENDER = 'CE'
 }
 
 foreach ($Profile in $Profiles){

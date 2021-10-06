@@ -51,7 +51,7 @@ pipeline {
                                         dir('sources/LibLogicalAccessNet.win32') {
                                             sh "mkdir build"
                                             dir('build') {
-                                                sh 'conan install -p compilers/x64_gcc6_release -u ..'
+                                                sh 'conan install --profile compilers/x64_gcc6_release -u ..'
                                                 sh 'conan build ..'
                                                 sh 'conan package ..'
                                                 sh "conan export-pkg --profile compilers/x64_gcc6_release .. ${PACKAGE_NAME}"

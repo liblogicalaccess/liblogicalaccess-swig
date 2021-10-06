@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <AssemblyName>LibLogicalAccessNet</AssemblyName>
+    <AssemblyName>LibLogicalAccessNet$(ASSEMBLYAPPENDER)</AssemblyName>
     <RootNamespace>LibLogicalAccess</RootNamespace>
     <Description>ISLOG RFID library layer for C#</Description>
     <Copyright>Copyright (C) 2021</Copyright>
