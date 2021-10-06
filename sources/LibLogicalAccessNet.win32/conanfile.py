@@ -5,13 +5,13 @@ import os
 class LLASwig(ConanFile):
     name = "LogicalAccessSwig"
     version = "2.4.0"
-    license = "<Put the package license here>"
-    url = "<Package recipe repository url here, for issues about the package>"
-    description = "<Description of LLA here>"
+    license = "LGPL"
+    url = "https://github.com/islog/liblogicalaccess-swig"
+    description = "SWIG wrapper for LibLogicalAccess"
     settings = "os", "compiler", "build_type", "arch"
     options = {'LLA_BUILD_PRIVATE': [True, False]}
     default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
-                        'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True'
+                        'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True', 'LLA_BUILD_PRIVATE=False'
     generators = "cmake"
     revision_mode = "scm"
 

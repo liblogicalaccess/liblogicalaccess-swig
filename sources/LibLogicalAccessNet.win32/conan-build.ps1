@@ -1,9 +1,9 @@
 [CmdletBinding()]
 param( 
   [Parameter(Mandatory=$false)]
-  [bool]$publish,
+  [switch]$publish,
   [Parameter(Mandatory=$false)]
-  [bool]$ce
+  [switch]$ce
 )
 
 function ExecExternal {

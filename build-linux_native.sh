@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cd sources/LibLogicalAccessNet.win32/ && mkdir -p build && cd build
-conan install -p compilers/x64_gcc6_release ..
+conan install --profile compilers/x64_gcc6_release -o LLA_BUILD_PRIVATE=false ..
 conan build ..

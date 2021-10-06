@@ -8,7 +8,7 @@ class LogicalAccessSwigConan(ConanFile):
     settings = "build_type", "arch", "os"
     options = {'LLA_BUILD_PRIVATE': [True, False]}
     default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
-                        'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True'
+                        'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True', 'LLA_BUILD_PRIVATE=True'
     revision_mode = "scm"
     
     def configure(self):

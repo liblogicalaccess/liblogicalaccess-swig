@@ -1,15 +1,32 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>eu.islog.lib.readers</groupId>
-	<artifactId>LibLogicalAccessNet-exe-CE</artifactId>
+	<artifactId>LibLogicalAccessNet-${packagetype}-exe</artifactId>
 	<packaging>pom</packaging>
 	<version>${version}</version>
-	<name>LibLogicalaccess Community Installer</name>
+	<name>LibLogicalaccess Installer</name>
 	
 	<properties>
+        <packagetype>full</packagetype>
 		<Mergex64>LibLogicalAccessNetMergex64</Mergex64>
-		<Mergex86>LibLogicalAccessNetMergex86</Mergex86>
-	</properties>
+		<Mergex86>LibLogicalAccessNetMergex86</Mergex86>		
+    </properties>
+	
+	<profiles>
+	  <profile>
+		<id>build-ce</id>
+		<activation>
+		  <property>
+			<name>packagetype</name>
+			<value>ce</value>
+		  </property>
+		</activation>
+		<properties>
+			<Mergex64>LibLogicalAccessNetCEMergex64</Mergex64>
+			<Mergex86>LibLogicalAccessNetCEMergex86</Mergex86>
+		</properties>
+	  </profile>
+	</profiles>
 	
 	<distributionManagement>
 		<repository>

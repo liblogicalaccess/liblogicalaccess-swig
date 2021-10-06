@@ -4,13 +4,13 @@
     <AssemblyName>LibLogicalAccessNet</AssemblyName>
     <RootNamespace>LibLogicalAccess</RootNamespace>
     <Description>ISLOG RFID library layer for C#</Description>
-    <Copyright>Copyright (C) 2018</Copyright>
-    <Version>2.1.1</Version>
-    <AssemblyVersion>2.1.1.0</AssemblyVersion>
-    <FileVersion>2.1.1.0</FileVersion>
+    <Copyright>Copyright (C) 2021</Copyright>
+    <Version>2.4.0-develop0001</Version>
+    <AssemblyVersion>2.4.0.0</AssemblyVersion>
+    <FileVersion>2.4.0.0</FileVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Company>ISLOG</Company>
-    <Authors>ISLOG</Authors>
+    <Company>HID Global</Company>
+    <Authors>HID Global</Authors>
     <PackageProjectUrl>http://liblogicalaccess.islog.com/</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/islog/liblogicalaccess/blob/master/LICENSE.LibLogicalAccess.txt</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/islog/liblogicalaccess</RepositoryUrl>
