@@ -1362,6 +1362,7 @@ namespace DESFireEV1Tests
             }
         }
 
+#if BUILD_PRIVATE
         void testSAMEV2AuthChangeKey(
             DESFireEV2ISO7816Commands cmd,
             DESFireKey newKeyWithoutSAM,
@@ -1397,6 +1398,7 @@ namespace DESFireEV1Tests
             cmd.sam_authenticateEV2First(0x01, newKey);
             cmd.sam_authenticateEV2First(0x02, newKey2);
         }
+#endif
 
         void cleanupKeys(ref DESFireKey desDefault,
             ref DESFireKey aesDefault,
@@ -1474,7 +1476,11 @@ namespace DESFireEV1Tests
 
         void setConfigurationTest(
             DESFireEV1ISO7816Commands cmdev1,
+#if BUILD_PRIVATE
             DESFireEV2ISO7816Commands cmdev2,
+#else
+            Commands cmdev2,
+#endif
             DESFireKey desDefault)
         {
             var newDefaultKey = new DESFireKey(
@@ -1488,13 +1494,14 @@ namespace DESFireEV1Tests
             cmdev1.setConfiguration(true, false);
             cmdev1.setConfiguration(newDefaultKey);
 
+#if BUILD_PRIVATE
             if (cmdev2 != null)
             {
                 // There is no way back for the two last params
                 cmdev2.setConfiguration(true, false, false, false);
                 cmdev2.setConfiguration(0x04, 0x20);
             }
-
+#endif
 
             // Application
             cmdev1.createApplication(
@@ -1510,6 +1517,7 @@ namespace DESFireEV1Tests
             newDefaultKey.setKeyType(DESFireKeyType.DF_KEY_AES);
             cmdev1.authenticate(0x00, newDefaultKey);
 
+#if BUILD_PRIVATE
             if (cmdev2 != null)
             {
                 // TODO fix this and also add dfname change go DAM
@@ -1520,6 +1528,7 @@ namespace DESFireEV1Tests
                 // StringToByteVector("D2760000850100"));
                 cmdev2.setConfiguration(false, true, true);
             }
+#endif
 
             // delegate application test
 
@@ -1527,10 +1536,12 @@ namespace DESFireEV1Tests
             cmdev1.authenticate(0x00, desDefault);
             cmdev1.setConfiguration(oldDefaultKey);
 
+#if BUILD_PRIVATE
             if (cmdev2 != null)
             {
                 var dfNames = cmdev2.getDFNames();
             }
+#endif
         }
     }
 }
