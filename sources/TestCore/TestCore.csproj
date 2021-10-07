@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <Configurations>Debug;Release;DebugCE;ReleaseCE</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -10,9 +11,19 @@
 	<DefineConstants>BUILD_PRIVATE</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugCE|AnyCPU'">
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants></DefineConstants>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\bin\Release\</OutputPath>
 	<DefineConstants>BUILD_PRIVATE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseCE|AnyCPU'">
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants></DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

@@ -20,45 +20,86 @@
     <AssemblyOriginatorKeyFile>$(ISLOGRepository)keys/islog_sign.snk</AssemblyOriginatorKeyFile>
     <CLSCompliant>True</CLSCompliant>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <Configurations>Debug;Release;DebugCE;ReleaseCE</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net2.0|AnyCPU'">
     <OutputPath>bin\Release\net2.0\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
 	<DefineConstants>BUILD_PRIVATE</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='ReleaseCE|net2.0|AnyCPU'">
+    <OutputPath>bin\Release\net2.0\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants></DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net2.0|AnyCPU'">
     <OutputPath>bin\Debug\net20\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
 	<DefineConstants>BUILD_PRIVATE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='DebugCE|net2.0|AnyCPU'">
+    <OutputPath>bin\Debug\net20\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants></DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net4.0|AnyCPU'">
     <OutputPath>bin\Release\net40\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
 	<DefineConstants>BUILD_PRIVATE</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='ReleaseCE|net4.0|AnyCPU'">
+    <OutputPath>bin\Release\net40\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants></DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net4.0|AnyCPU'">
     <OutputPath>bin\Debug\net40\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
 	<DefineConstants>BUILD_PRIVATE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='DebugCE|net4.0|AnyCPU'">
+    <OutputPath>bin\Debug\net40\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants></DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net4.5|AnyCPU'">
     <OutputPath>bin\Release\net45\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
 	<DefineConstants>BUILD_PRIVATE</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='ReleaseCE|net4.5|AnyCPU'">
+    <OutputPath>bin\Release\net45\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants></DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net4.5|AnyCPU'">
     <OutputPath>bin\Debug\net45\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
 	<DefineConstants>BUILD_PRIVATE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='DebugCE|net4.5|AnyCPU'">
+    <OutputPath>bin\Debug\net45\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants></DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net4.6|AnyCPU'">
     <OutputPath>bin\Release\net46\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
 	<DefineConstants>BUILD_PRIVATE</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='ReleaseCE|net4.6|AnyCPU'">
+    <OutputPath>bin\Release\net46\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants></DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net4.6|AnyCPU'">
     <OutputPath>bin\Debug\net46\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
 	<DefineConstants>BUILD_PRIVATE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='DebugCE|net4.6|AnyCPU'">
+    <OutputPath>bin\Debug\net46\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants></DefineConstants>
   </PropertyGroup>
 </Project>
