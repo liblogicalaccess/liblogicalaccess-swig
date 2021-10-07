@@ -40,3 +40,4 @@ sources/LibLogicalAccessNet.win32/bin/
 /installer/conan_imports_manifest.txt
 /installer/conan.lock
 /installer/graph_info.json
+/CC_

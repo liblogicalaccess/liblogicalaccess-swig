@@ -13,3 +13,11 @@ powershell -File sources/scripts/update-gitversion-vs2017proj.ps1 sources/LibLog
 powershell -File sources/scripts/generate-swig.ps1
 cd sources/LibLogicalAccessNet.win32
 powershell -File ./conan-build.ps1 %cmdCE%
+
+cd ../
+if "%isCE%"=="y" (
+	msbuild LibLogicalAccessNet.sln /p:Configuration="ReleaseCE"
+) else (
+	msbuild LibLogicalAccessNet.sln /p:Configuration="Release"
+)
+cd ../
