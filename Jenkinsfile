@@ -54,7 +54,7 @@ pipeline {
                                                 sh 'conan install --profile compilers/x64_gcc6_release -o LLA_BUILD_PRIVATE=True -u ..'
                                                 sh 'conan build ..'
                                                 sh 'conan package ..'
-                                                sh "conan export-pkg --profile compilers/x64_gcc6_release .. ${PACKAGE_NAME}"
+                                                sh "conan export-pkg --profile compilers/x64_gcc6_release -o LLA_BUILD_PRIVATE=True .. ${PACKAGE_NAME}"
                                                 sh "conan upload ${PACKAGE_NAME} -r islog-test --all --confirm --check --force"
                                             }
                                         }
