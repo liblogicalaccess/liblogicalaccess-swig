@@ -16,14 +16,13 @@ class LogicalAccessSwigConan(ConanFile):
             self.options['LogicalAccess'].LLA_BUILD_RFIDEAS = True
 
     def requirements(self):
+        self.requires('LogicalAccessNFC/' + self.version)
         try:
             if self.options.LLA_BUILD_PRIVATE:
                 self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + self.channel)
-            self.requires('LogicalAccessNFC/' + self.version + '@islog/' + self.channel)
         except ConanException:
             if self.options.LLA_BUILD_PRIVATE:
                 self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + tools.Git().get_branch())
-            self.requires('LogicalAccessNFC/' + self.version + '@islog/' + tools.Git().get_branch())
     
     def imports(self):
         self.copy("bin/*.dll", keep_path=False, dst="./packages/dll/" + str(self.settings.arch) + "/" + str(self.settings.build_type))
