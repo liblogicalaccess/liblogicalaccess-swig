@@ -1,0 +1,50 @@
+name: Build
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+  push:
+    branches:
+      - master
+      - develop
+jobs:
+  build-gcc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Setup Conan"
+        run: |
+          pip3 install conan
+
+      - name: "Setup LLA"
+        uses: actions/checkout@v2
+        with:
+          repository: islog/liblogicalaccess
+          ref: develop
+          path: lla 
+        run : |
+          sudo apt-get update
+          sudo apt-get install -y libpcsclite-dev
+          conan deploy .
+
+      - name: "Setup LLA-NFC"
+        uses: actions/checkout@v2
+        with:
+          repository: aberod/liblogicalaccess-libnfc
+          ref: develop
+          path: lla-nfc
+        run : |
+          sudo apt-get update
+          sudo apt-get install -y libusb-dev
+          conan deploy .
+          cd vendor/libnfc
+          conan deploy .
+
+      - name: "Build"
+        uses: actions/checkout@v2
+        with:
+          path: lla-swig
+        run: |
+          ./build-linux.sh
+          cd sources
+          dotnet build LibLogicalAccessNet.sln /p:Configuration=ReleaseCE
