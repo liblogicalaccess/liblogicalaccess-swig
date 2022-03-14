@@ -39,14 +39,14 @@ jobs:
         run : |
           sudo apt-get update
           sudo apt-get install -y libpcsclite-dev
-          conan deploy .
+          conan export .
         working-directory: lla
 
       - name: "Setup LLA-NFC"
         run : |
           sudo apt-get update
           sudo apt-get install -y libusb-dev
-          conan deploy .
+          conan export .
           cd vendor/libnfc
           conan deploy .
         working-directory: lla-nfc
