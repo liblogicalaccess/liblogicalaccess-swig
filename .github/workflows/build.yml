@@ -35,6 +35,12 @@ jobs:
           ref: develop
           path: lla-nfc
 
+      - name: "Checkout cppkcs11"
+        uses: actions/checkout@v2
+        with:
+          repository: islog/cppkcs11
+          path: cppkcs
+
       - name: "Setup LLA"
         run : |
           sudo apt-get update
@@ -50,6 +56,12 @@ jobs:
           cd vendor/libnfc
           conan export .
         working-directory: lla-nfc
+
+      - name: "Setup cppkcs11"
+        run : |
+          conan export .
+        working-directory: cppkcs
+
 
       - name: "Build LLA-SWIG"
         run: |
