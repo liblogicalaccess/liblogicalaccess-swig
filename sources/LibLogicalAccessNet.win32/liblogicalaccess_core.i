@@ -64,6 +64,7 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/cards/tripledeskey.hpp>
 #include <logicalaccess/colorize.hpp>
 #include <logicalaccess/readerproviders/circularbufferparser.hpp>
+#include <logicalaccess/readerproviders/dummydatatransport.hpp>
 #include <logicalaccess/readerproviders/dummyreaderunit.hpp>
 #include <logicalaccess/readerproviders/readercommunication.hpp>
 #include <logicalaccess/readerproviders/iso14443areadercommunication.hpp>
@@ -106,6 +107,7 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/services/accesscontrol/formats/customformat/numberdatafield.hpp>
 #include <logicalaccess/services/accesscontrol/formats/customformat/paritydatafield.hpp>
 #include <logicalaccess/services/accesscontrol/formats/customformat/stringdatafield.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/tlvdatafield.hpp>
 #include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/fascn200bitformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/getronik40bitformat.hpp>
@@ -485,6 +487,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/cards/tripledeskey.hpp>
 %include <logicalaccess/colorize.hpp>
 %include <logicalaccess/readerproviders/circularbufferparser.hpp>
+%include <logicalaccess/readerproviders/dummydatatransport.hpp>
 %include <logicalaccess/readerproviders/dummyreaderunit.hpp>
 %include <logicalaccess/readerproviders/readercommunication.hpp>
 %import <logicalaccess/plugins/llacommon/lla_common_api.hpp>
@@ -528,6 +531,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/services/accesscontrol/formats/customformat/numberdatafield.hpp>
 %include <logicalaccess/services/accesscontrol/formats/customformat/paritydatafield.hpp>
 %include <logicalaccess/services/accesscontrol/formats/customformat/stringdatafield.hpp>
+%include <logicalaccess/services/accesscontrol/formats/customformat/tlvdatafield.hpp>
 %include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/fascn200bitformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/getronik40bitformat.hpp>
