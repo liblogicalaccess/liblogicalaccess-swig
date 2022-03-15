@@ -12,8 +12,11 @@ jobs:
   build-gcc:
     runs-on: ubuntu-latest
     steps:
-      - name: "Setup Conan"
+      - name: "Setup"
         run: |
+          sudo apt-get update
+          sudo apt-get upgrade
+          sudo apt-get install -y libclang-6.0-dev
           pip3 install conan
 
       - name: "Checkout LLA-SWIG"
