@@ -91,6 +91,7 @@
 #include <logicalaccess/plugins/cards/iso7816/iso7816readercardadapter.hpp>
 #include <logicalaccess/plugins/cards/iso7816/iso7816response.hpp>
 #include <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
+#include <logicalaccess/plugins/cards/keyboard/lla_readers_private_keyboard_api.hpp>
 #include <logicalaccess/plugins/cards/legicprime/lla_cards_legicprime_api.hpp>
 #include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
 #include <logicalaccess/plugins/cards/mifare/lla_cards_mifare_api.hpp>
@@ -357,6 +358,7 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/iso7816/iso7816readercardadapter.hpp>
 %include <logicalaccess/plugins/cards/iso7816/iso7816response.hpp>
 %include <logicalaccess/plugins/cards/iso7816/readercardadapters/iso7816fuzzingreadercardadapter.hpp>
+%include <logicalaccess/plugins/cards/keyboard/lla_readers_private_keyboard_api.hpp>
 %include <logicalaccess/plugins/cards/legicprime/lla_cards_legicprime_api.hpp>
 %include <logicalaccess/plugins/cards/legicprime/legicprimechip.hpp>
 %include <logicalaccess/plugins/cards/mifare/lla_cards_mifare_api.hpp>

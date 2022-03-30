@@ -12,10 +12,10 @@
 /* Define_section */
 
 #define LLA_READERS_STIDSTR_API
+#define LLA_READERS_PRIVATE_KEYBOARD_API
 #define LLA_READERS_PCSC_API
 #define LLA_READERS_OSDP_API
 #define LLA_READERS_OK5553_API
-#define LLA_READERS_NFC_NFC_API
 #define LLA_READERS_ISO7816_API
 #define LLA_READERS_GUNNEBO_API
 #define LLA_READERS_ELATEC_API
@@ -249,6 +249,10 @@
 %shared_ptr(logicalaccess::Key);
 %shared_ptr(logicalaccess::KeyDiversification);
 %shared_ptr(logicalaccess::KeyStorage);
+%shared_ptr(logicalaccess::KeyboardReaderProvider);
+%shared_ptr(logicalaccess::KeyboardReaderUnit);
+%shared_ptr(logicalaccess::KeyboardReaderUnitConfiguration);
+%shared_ptr(logicalaccess::KeyboardSharedStruct);
 %shared_ptr(logicalaccess::LCDDisplay);
 %shared_ptr(logicalaccess::LEDBuzzerDisplay);
 %shared_ptr(logicalaccess::LegicPrimeChip);
@@ -273,11 +277,9 @@
 %shared_ptr(logicalaccess::MifareCL1356Commands);
 %shared_ptr(logicalaccess::MifareCherryCommands);
 %shared_ptr(logicalaccess::MifareChip);
-%shared_ptr(logicalaccess::MifareClassicUIDChangerCardService);
 %shared_ptr(logicalaccess::MifareCommands);
 %shared_ptr(logicalaccess::MifareKey);
 %shared_ptr(logicalaccess::MifareLocation);
-%shared_ptr(logicalaccess::MifareNFCCommands);
 %shared_ptr(logicalaccess::MifareNFCTagCardService);
 %shared_ptr(logicalaccess::MifareOK5553Commands);
 %shared_ptr(logicalaccess::MifareOmnikeyXX21Commands);
@@ -333,12 +335,6 @@
 %shared_ptr(logicalaccess::MifareUltralightStorageCardService);
 %shared_ptr(logicalaccess::MifareUltralightUIDChangerCardService);
 %shared_ptr(logicalaccess::MyDivInfo);
-%shared_ptr(logicalaccess::NFCDataTransport);
-%shared_ptr(logicalaccess::NFCReaderCardAdapter);
-%shared_ptr(logicalaccess::NFCReaderProvider);
-%shared_ptr(logicalaccess::NFCReaderUnit);
-%shared_ptr(logicalaccess::NFCReaderUnit::WriteUIDConfigGuard);
-%shared_ptr(logicalaccess::NFCReaderUnitConfiguration);
 %shared_ptr(logicalaccess::NFCTag1CardService);
 %shared_ptr(logicalaccess::NFCTag2CardService);
 %shared_ptr(logicalaccess::NFCTag3CardService);
@@ -476,6 +472,7 @@
 %shared_ptr(logicalaccess::Wiegand37WithFacilityFormat);
 %shared_ptr(logicalaccess::Wiegand37WithFacilityRightParity2Format);
 %shared_ptr(logicalaccess::WiegandFormat);
+%shared_ptr(logicalaccess::WindowsRegistry);
 %shared_ptr(logicalaccess::X509Certificate);
 %shared_ptr(logicalaccess::XmlSerializable);
 %shared_ptr(logicalaccess::Yubikey5Chip);
@@ -681,6 +678,10 @@
 %shared_ptr(Key);
 %shared_ptr(KeyDiversification);
 %shared_ptr(KeyStorage);
+%shared_ptr(KeyboardReaderProvider);
+%shared_ptr(KeyboardReaderUnit);
+%shared_ptr(KeyboardReaderUnitConfiguration);
+%shared_ptr(KeyboardSharedStruct);
 %shared_ptr(LCDDisplay);
 %shared_ptr(LEDBuzzerDisplay);
 %shared_ptr(LegicPrimeChip);
@@ -705,11 +706,9 @@
 %shared_ptr(MifareCL1356Commands);
 %shared_ptr(MifareCherryCommands);
 %shared_ptr(MifareChip);
-%shared_ptr(MifareClassicUIDChangerCardService);
 %shared_ptr(MifareCommands);
 %shared_ptr(MifareKey);
 %shared_ptr(MifareLocation);
-%shared_ptr(MifareNFCCommands);
 %shared_ptr(MifareNFCTagCardService);
 %shared_ptr(MifareOK5553Commands);
 %shared_ptr(MifareOmnikeyXX21Commands);
@@ -765,12 +764,6 @@
 %shared_ptr(MifareUltralightStorageCardService);
 %shared_ptr(MifareUltralightUIDChangerCardService);
 %shared_ptr(MyDivInfo);
-%shared_ptr(NFCDataTransport);
-%shared_ptr(NFCReaderCardAdapter);
-%shared_ptr(NFCReaderProvider);
-%shared_ptr(NFCReaderUnit);
-%shared_ptr(NFCReaderUnit::WriteUIDConfigGuard);
-%shared_ptr(NFCReaderUnitConfiguration);
 %shared_ptr(NFCTag1CardService);
 %shared_ptr(NFCTag2CardService);
 %shared_ptr(NFCTag3CardService);
@@ -908,6 +901,7 @@
 %shared_ptr(Wiegand37WithFacilityFormat);
 %shared_ptr(Wiegand37WithFacilityRightParity2Format);
 %shared_ptr(WiegandFormat);
+%shared_ptr(WindowsRegistry);
 %shared_ptr(X509Certificate);
 %shared_ptr(XmlSerializable);
 %shared_ptr(Yubikey5Chip);

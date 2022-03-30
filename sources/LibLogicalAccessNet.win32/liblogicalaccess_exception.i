@@ -4,7 +4,8 @@
 %include "liblogicalaccess.i"
 
 %{
-#include <memory> 
+#include <memory>
+#include <stdexcept>
 #include <logicalaccess/myexception.hpp>
 #include <logicalaccess/plugins/crypto/openssl_exception.hpp>
 %}
