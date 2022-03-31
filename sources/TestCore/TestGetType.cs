@@ -192,9 +192,11 @@ namespace TestCore
                 Assert.IsTrue(readerUnit.getDataTransport() is IDPDataTransport);
             }
 #endif
+#if BUILD_NFC
             dt = new NFCDataTransport();
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is NFCDataTransport);
+#endif
             dt = new PCSCDataTransport();
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is PCSCDataTransport);
@@ -243,8 +245,10 @@ namespace TestCore
             readerProvider = libManager.getReaderProvider("Keyboard");
             Assert.IsTrue(readerProvider is KeyboardReaderProvider);
 #endif
+#if BUILD_NFC
             readerProvider = libManager.getReaderProvider("NFC");
             Assert.IsTrue(readerProvider is NFCReaderProvider);
+#endif
             readerProvider = libManager.getReaderProvider("OK5553");
             Assert.IsTrue(readerProvider is OK5553ReaderProvider);
             readerProvider = libManager.getReaderProvider("OSDP");

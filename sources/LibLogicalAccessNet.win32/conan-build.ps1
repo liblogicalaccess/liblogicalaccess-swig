@@ -2,8 +2,16 @@
 param( 
   [Parameter(Mandatory=$false)]
   [switch]$publish,
+  [Parameter(Mandatory)]
+  [string]$arch,
+  [Parameter(Mandatory)]
+  [string]$build_type,
   [Parameter(Mandatory=$false)]
-  [switch]$ce
+  [bool]$build_private,
+  [Parameter(Mandatory=$false)]
+  [bool]$build_nfc,
+  [Parameter(Mandatory=$false)]
+  [bool]$build_rfideas
 )
 
 function ExecExternal {
@@ -18,35 +26,29 @@ function ExecExternal {
 
 Write-Output "Welcome, ISLOG SWIG Win32 Build"
 
-'build','bin/x86/Release','bin/x86/Debug','bin/x86_64/Release','bin/x86_64/Debug' | % {New-Item -Name "$_" -Force -ItemType 'Directory' | Out-Null }
+New-Item -name build -Force -ItemType Directory | Out-Null
+New-Item -Name bin/$arch/$build_type -Force -ItemType Directory | Out-Null
 
-cd build
+Set-Location build
 
 $PackageName = "LogicalAccessSwig/2.4.0@islog/develop"
-$Profiles = @(("compilers/x64_msvc_release", "Release", "x86_64"),
-			  ("compilers/x86_msvc_release", "Release", "x86"),
-			  ("compilers/x86_msvc_debug", "Debug", "x86"),
-			  ("compilers/x64_msvc_debug", "Debug", "x86_64"))
-$buildPrivate = $True
-if ($ce) {
-	$buildPrivate = $False
+
+if ($build_private) {
 	$env:ASSEMBLYAPPENDER = 'CE'
 }
 
-foreach ($Profile in $Profiles){
+ExecExternal { conan install -s arch=$arch -s build_type=$build_type -o LLA_BUILD_PRIVATE=$build_private -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_RFIDEAS=$build_rfideas --build=missing .. }
+ExecExternal { conan build .. }
 
-    ExecExternal { conan install --profile $Profile[0] -o LLA_BUILD_PRIVATE=$buildPrivate -u .. }
-    ExecExternal { conan build .. }
-    $config = $Profile[1];
-    $arch = $Profile[2];
-    cp bin/LibLogicalAccessNet.win32.* ../bin/$arch/$config/
-    if ($publish) {
-        ExecExternal { conan export-pkg .. $PackageName }
-        ExecExternal { conan upload $PackageName -r islog-test --all --confirm --check }
-    }
-    Remove-Item * -Recurse -Force
+Copy-Item bin/LibLogicalAccessNet.win32.* ../bin/$arch/$build_type/
+
+if ($publish) {
+    ExecExternal { conan export-pkg .. $PackageName }
+    ExecExternal { conan upload $PackageName -r islog-test --all --confirm --check }
 }
 
-cd ..
+Remove-Item * -Recurse -Force
+
+Set-Location ..
 
 Write-Output "ISLOG SWIG Win32 done."
