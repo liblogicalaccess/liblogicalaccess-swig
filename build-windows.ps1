@@ -24,6 +24,7 @@ Set-Location sources/LibLogicalAccessNet.win32
 
 Set-Location ..
 
+msbuild -t:restore
 if ($build_private) {
     msbuild LibLogicalAccessNet.sln /p:Configuration="Release"
 } else {
