@@ -1,4 +1,4 @@
-name: Build
+name: Build Windows
 on:
   pull_request:
     branches:
@@ -9,14 +9,15 @@ on:
       - master
       - develop
 jobs:
-  build-gcc:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: windows-2019
+    strategy:
+      matrix:
+        arch: [x86, x86_64]
     steps:
       - name: "Setup"
         run: |
-          sudo apt-get update
-          sudo apt-get upgrade
-          sudo apt-get install -y libclang-6.0-dev
+          choco install llvm --version=6.0.0
           pip3 install conan
 
       - name: "Checkout LLA-SWIG"
@@ -31,13 +32,6 @@ jobs:
           ref: develop
           path: lla 
 
-      - name: "Checkout LLA-NFC"
-        uses: actions/checkout@v2
-        with:
-          repository: aberod/liblogicalaccess-libnfc
-          ref: develop
-          path: lla-nfc
-
       - name: "Checkout cppkcs11"
         uses: actions/checkout@v2
         with:
@@ -46,19 +40,8 @@ jobs:
 
       - name: "Setup LLA"
         run : |
-          sudo apt-get update
-          sudo apt-get install -y libpcsclite-dev
           conan export .
         working-directory: lla
-
-      - name: "Setup LLA-NFC"
-        run : |
-          sudo apt-get update
-          sudo apt-get install -y libusb-dev
-          conan export .
-          cd vendor/libnfc
-          conan export .
-        working-directory: lla-nfc
 
       - name: "Setup cppkcs11"
         run : |
@@ -68,7 +51,5 @@ jobs:
 
       - name: "Build LLA-SWIG"
         run: |
-          ./build-linux.sh
-          cd sources
-          dotnet build LibLogicalAccessNet.sln /p:Configuration=ReleaseCE
+          ./build-windows.ps1 -arch ${{matrix.arch}} -build_type Release
         working-directory: lla-swig
