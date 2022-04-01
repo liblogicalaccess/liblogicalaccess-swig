@@ -19,6 +19,8 @@ jobs:
         run: |
           choco install llvm --version=6.0.0 --allow-downgrade
           pip3 install conan
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
 
       - name: "Checkout LLA-SWIG"
         uses: actions/checkout@v2
