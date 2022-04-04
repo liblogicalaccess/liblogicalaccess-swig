@@ -170,8 +170,10 @@
 #include <logicalaccess/plugins/cards/twic/twicchip.hpp>
 #include <logicalaccess/plugins/cards/twic/twicaccesscontrolcardservice.hpp>
 #include <logicalaccess/plugins/cards/twic/twicstoragecardservice.hpp>
-#include <logicalaccess/plugins/cards/yubikey5/lla_cards_yubikey5_api.hpp>
-#include <logicalaccess/plugins/cards/yubikey5/yubikey5chip.hpp>
+#include <logicalaccess/plugins/cards/yubikey/lla_cards_yubikey_api.hpp>
+#include <logicalaccess/plugins/cards/yubikey/yubikeycommands.hpp>
+#include <logicalaccess/plugins/cards/yubikey/yubikeychip.hpp>
+#include <logicalaccess/plugins/cards/yubikey/yubikeychallengecardservice.hpp>
 
 /* END_Additional_include */
 
@@ -248,6 +250,20 @@ using LibLogicalAccess.Reader;
 %typemap(cstype) logicalaccess::DESFireKeySettings & "out DESFireKeySettings"
 %typemap(csin) logicalaccess::DESFireKeySettings & %{out $csinput%}  
 %typemap(imtype) logicalaccess::DESFireKeySettings & "out LibLogicalAccess.Card.DESFireKeySettings"
+
+%typemap(cstype) std::vector<logicalaccess::YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector"
+%typemap(csin) std::vector<logicalaccess::YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector.getCPtr($csinput)"
+%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::YubikeyListItem> {
+	LibLogicalAccess.Card.YubikeyListItemVector ret = new LibLogicalAccess.Card.YubikeyListItemVector($imcall, true);$excode
+	return ret;
+}
+
+%typemap(cstype) std::vector<logicalaccess::YubikeyCalculateResponse> "LibLogicalAccess.Card.YubikeyCalculateResponseVector"
+%typemap(csin) std::vector<logicalaccess::YubikeyCalculateResponse> "LibLogicalAccess.Card.YubikeyCalculateResponseVector.getCPtr($csinput)"
+%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::YubikeyCalculateResponse> {
+	LibLogicalAccess.Card.YubikeyCalculateResponseVector ret = new LibLogicalAccess.Card.YubikeyCalculateResponseVector($imcall, true);$excode
+	return ret;
+}
 
 %apply unsigned char MBINOUT[] { unsigned char recordSize[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char maxNumberRecords[ANY] }
@@ -437,11 +453,15 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/twic/twicchip.hpp>
 %include <logicalaccess/plugins/cards/twic/twicaccesscontrolcardservice.hpp>
 %include <logicalaccess/plugins/cards/twic/twicstoragecardservice.hpp>
-%include <logicalaccess/plugins/cards/yubikey5/lla_cards_yubikey5_api.hpp>
-%include <logicalaccess/plugins/cards/yubikey5/yubikey5chip.hpp>
+%include <logicalaccess/plugins/cards/yubikey/lla_cards_yubikey_api.hpp>
+%include <logicalaccess/plugins/cards/yubikey/yubikeycommands.hpp>
+%include <logicalaccess/plugins/cards/yubikey/yubikeychip.hpp>
+%include <logicalaccess/plugins/cards/yubikey/yubikeychallengecardservice.hpp>
 
 /* END_Include_section */
 
 %template(BioInfosVector) std::vector<logicalaccess::EPassDG2::BioInfo>;
 %template(DFNameVector) std::vector<logicalaccess::DFName>;
 %template(DESFireAccessRightsVector) std::vector<logicalaccess::DESFireAccessRights>;
+%template(YubikeyListItemVector) std::vector<YubikeyListItem>;
+%template(YubikeyCalculateResponseVector) std::vector<YubikeyCalculateResponse>;

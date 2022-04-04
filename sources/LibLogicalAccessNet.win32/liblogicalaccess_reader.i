@@ -117,6 +117,9 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/plugins/cards/twic/twiclocation.hpp>
 #include <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
+#include <logicalaccess/plugins/cards/yubikey/lla_cards_yubikey_api.hpp>
+#include <logicalaccess/plugins/cards/yubikey/yubikeycommands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/yubikeyiso7816commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
 #include <logicalaccess/plugins/readers/keyboard/lla_readers_private_keyboard_api.hpp>
 #include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>
@@ -400,6 +403,21 @@ using LibLogicalAccess.Crypto;
 	return ret;
 }
 
+%typemap(cstype) std::vector<logicalaccess::YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector"
+%typemap(csin) std::vector<logicalaccess::YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector.getCPtr($csinput)"
+%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::YubikeyListItem> {
+	LibLogicalAccess.Card.YubikeyListItemVector ret = new LibLogicalAccess.Card.YubikeyListItemVector($imcall, true);$excode
+	return ret;
+}
+%typemap(cstype) std::vector<logicalaccess::YubikeyCalculateResponse> "LibLogicalAccess.Card.YubikeyCalculateResponseVector"
+%typemap(csin) std::vector<logicalaccess::YubikeyCalculateResponse> "LibLogicalAccess.Card.YubikeyCalculateResponseVector.getCPtr($csinput)"
+%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::YubikeyCalculateResponse> {
+	LibLogicalAccess.Card.YubikeyCalculateResponseVector ret = new LibLogicalAccess.Card.YubikeyCalculateResponseVector($imcall, true);$excode
+	return ret;
+}
+
+%template() std::vector<logicalaccess::YubikeyCalculateResponse>;
+%template() std::vector<logicalaccess::YubikeyListItem>;
 %template() std::vector<logicalaccess::DESFireAccessRights>;
 %template() std::vector<logicalaccess::DFName>;
 
@@ -502,6 +520,9 @@ typedef enum : uint16_t
 %import <logicalaccess/plugins/cards/twic/twiclocation.hpp>
 %import <logicalaccess/plugins/cards/twic/twiccommands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/twiciso7816commands.hpp>
+%import <logicalaccess/plugins/cards/yubikey/lla_cards_yubikey_api.hpp>
+%import <logicalaccess/plugins/cards/yubikey/yubikeycommands.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/yubikeyiso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/iso7816readerprovider.hpp>
 %include <logicalaccess/plugins/readers/keyboard/lla_readers_private_keyboard_api.hpp>
 %include <logicalaccess/plugins/readers/keyboard/keyboardreaderunitconfiguration.hpp>

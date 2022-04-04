@@ -124,6 +124,7 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityrightparity2format.hpp>
 #include <logicalaccess/services/accesscontrol/readerformatcomposite.hpp>
 #include <logicalaccess/services/aes_crypto_service.hpp>
+#include <logicalaccess/services/challenge/challengecardservice.hpp>
 #include <logicalaccess/services/identity/identity_service.hpp>
 #include <logicalaccess/services/json/json_dump_card_service.hpp>
 #include <logicalaccess/services/licensechecker/license_checker_service.hpp>
@@ -548,6 +549,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityrightparity2format.hpp>
 %include <logicalaccess/services/accesscontrol/readerformatcomposite.hpp>
 %include <logicalaccess/services/aes_crypto_service.hpp>
+%include <logicalaccess/services/challenge/challengecardservice.hpp>
 %include <logicalaccess/services/identity/identity_service.hpp>
 %include <logicalaccess/services/json/json_dump_card_service.hpp>
 %include <logicalaccess/services/licensechecker/license_checker_service.hpp>

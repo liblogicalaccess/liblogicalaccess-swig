@@ -23,7 +23,7 @@
 #define LLA_CRYPTO_API
 #define LLA_CORE_API
 #define LLA_COMMON_API
-#define LLA_CARDS_YUBIKEY5_API
+#define LLA_CARDS_YUBIKEY_API
 #define LLA_CARDS_TWIC_API
 #define LLA_CARDS_TOPAZ_API
 #define LLA_CARDS_TAGIT_API
@@ -115,6 +115,7 @@
 %shared_ptr(logicalaccess::CardProbe);
 %shared_ptr(logicalaccess::CardService);
 %shared_ptr(logicalaccess::CardsFormatComposite);
+%shared_ptr(logicalaccess::ChallengeCardService);
 %shared_ptr(logicalaccess::ChecksumDataField);
 %shared_ptr(logicalaccess::CherryReaderUnit);
 %shared_ptr(logicalaccess::Chip);
@@ -453,7 +454,6 @@
 %shared_ptr(logicalaccess::TopazStorageCardService);
 %shared_ptr(logicalaccess::TripleDESKey);
 %shared_ptr(logicalaccess::TwicAccessControlCardService);
-%shared_ptr(logicalaccess::TwicCardProvider);
 %shared_ptr(logicalaccess::TwicChip);
 %shared_ptr(logicalaccess::TwicCommands);
 %shared_ptr(logicalaccess::TwicISO7816Commands);
@@ -475,7 +475,10 @@
 %shared_ptr(logicalaccess::WindowsRegistry);
 %shared_ptr(logicalaccess::X509Certificate);
 %shared_ptr(logicalaccess::XmlSerializable);
-%shared_ptr(logicalaccess::Yubikey5Chip);
+%shared_ptr(logicalaccess::YubikeyChallengeCardService);
+%shared_ptr(logicalaccess::YubikeyChip);
+%shared_ptr(logicalaccess::YubikeyCommands);
+%shared_ptr(logicalaccess::YubikeyISO7816Commands);
 %shared_ptr(logicalaccess::iks::IslogKeyServer);
 %shared_ptr(logicalaccess::iks::IslogKeyServer::IKSConfig);
 %shared_ptr(logicalaccess::openssl::AESCipher);
@@ -504,6 +507,9 @@
 %shared_ptr(logicalaccess::s_SAMVersionInformation);
 %shared_ptr(logicalaccess::s_SETAV1);
 %shared_ptr(logicalaccess::s_SETAV2);
+%shared_ptr(logicalaccess::s_YubikeyCalculateResponse);
+%shared_ptr(logicalaccess::s_YubikeyListItem);
+%shared_ptr(logicalaccess::s_YubikeySelectResponse);
 %shared_ptr(logicalaccess::s_changeKeyDiversification);
 %shared_ptr(logicalaccess::s_changeKeyInfo);
 %shared_ptr(logicalaccess::t_buz_cmd);
@@ -544,6 +550,7 @@
 %shared_ptr(CardProbe);
 %shared_ptr(CardService);
 %shared_ptr(CardsFormatComposite);
+%shared_ptr(ChallengeCardService);
 %shared_ptr(ChecksumDataField);
 %shared_ptr(CherryReaderUnit);
 %shared_ptr(Chip);
@@ -882,7 +889,6 @@
 %shared_ptr(TopazStorageCardService);
 %shared_ptr(TripleDESKey);
 %shared_ptr(TwicAccessControlCardService);
-%shared_ptr(TwicCardProvider);
 %shared_ptr(TwicChip);
 %shared_ptr(TwicCommands);
 %shared_ptr(TwicISO7816Commands);
@@ -904,7 +910,10 @@
 %shared_ptr(WindowsRegistry);
 %shared_ptr(X509Certificate);
 %shared_ptr(XmlSerializable);
-%shared_ptr(Yubikey5Chip);
+%shared_ptr(YubikeyChallengeCardService);
+%shared_ptr(YubikeyChip);
+%shared_ptr(YubikeyCommands);
+%shared_ptr(YubikeyISO7816Commands);
 %shared_ptr(iks::IslogKeyServer);
 %shared_ptr(iks::IslogKeyServer::IKSConfig);
 %shared_ptr(openssl::AESCipher);
@@ -933,6 +942,9 @@
 %shared_ptr(s_SAMVersionInformation);
 %shared_ptr(s_SETAV1);
 %shared_ptr(s_SETAV2);
+%shared_ptr(s_YubikeyCalculateResponse);
+%shared_ptr(s_YubikeyListItem);
+%shared_ptr(s_YubikeySelectResponse);
 %shared_ptr(s_changeKeyDiversification);
 %shared_ptr(s_changeKeyInfo);
 %shared_ptr(t_buz_cmd);
