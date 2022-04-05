@@ -402,7 +402,7 @@ using LibLogicalAccess.Crypto;
 	LibLogicalAccess.Card.DESFireAccessRights ret = new LibLogicalAccess.Card.DESFireAccessRights($imcall, true);$excode
 	return ret;
 }
-
+/*
 %typemap(cstype) std::vector<logicalaccess::YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector"
 %typemap(csin) std::vector<logicalaccess::YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector.getCPtr($csinput)"
 %typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::YubikeyListItem> {
@@ -416,8 +416,11 @@ using LibLogicalAccess.Crypto;
 	return ret;
 }
 
-%template() std::vector<logicalaccess::YubikeyCalculateResponse>;
-%template() std::vector<logicalaccess::YubikeyListItem>;
+%template() std::vector<logicalaccess::s_YubikeyListItem>;
+%template() std::vector<logicalaccess::s_YubikeyCalculateResponse>;
+*/
+%template(YubikeyListItemVector) std::vector<logicalaccess::s_YubikeyListItem>;
+%template(YubikeyCalculateResponseVector) std::vector<logicalaccess::s_YubikeyCalculateResponse>;
 %template() std::vector<logicalaccess::DESFireAccessRights>;
 %template() std::vector<logicalaccess::DFName>;
 

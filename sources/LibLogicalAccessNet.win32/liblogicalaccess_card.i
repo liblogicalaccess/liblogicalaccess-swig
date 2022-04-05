@@ -251,6 +251,7 @@ using LibLogicalAccess.Reader;
 %typemap(csin) logicalaccess::DESFireKeySettings & %{out $csinput%}  
 %typemap(imtype) logicalaccess::DESFireKeySettings & "out LibLogicalAccess.Card.DESFireKeySettings"
 
+/*
 %typemap(cstype) std::vector<logicalaccess::YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector"
 %typemap(csin) std::vector<logicalaccess::YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector.getCPtr($csinput)"
 %typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::YubikeyListItem> {
@@ -264,6 +265,8 @@ using LibLogicalAccess.Reader;
 	LibLogicalAccess.Card.YubikeyCalculateResponseVector ret = new LibLogicalAccess.Card.YubikeyCalculateResponseVector($imcall, true);$excode
 	return ret;
 }
+*/
+
 
 %apply unsigned char MBINOUT[] { unsigned char recordSize[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char maxNumberRecords[ANY] }
@@ -463,5 +466,5 @@ using LibLogicalAccess.Reader;
 %template(BioInfosVector) std::vector<logicalaccess::EPassDG2::BioInfo>;
 %template(DFNameVector) std::vector<logicalaccess::DFName>;
 %template(DESFireAccessRightsVector) std::vector<logicalaccess::DESFireAccessRights>;
-%template(YubikeyListItemVector) std::vector<YubikeyListItem>;
-%template(YubikeyCalculateResponseVector) std::vector<YubikeyCalculateResponse>;
+%template(YubikeyListItemVector) std::vector<logicalaccess::s_YubikeyListItem>;
+%template(YubikeyCalculateResponseVector) std::vector<logicalaccess::s_YubikeyCalculateResponse>;
