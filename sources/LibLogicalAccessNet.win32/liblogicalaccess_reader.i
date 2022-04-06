@@ -402,27 +402,25 @@ using LibLogicalAccess.Crypto;
 	LibLogicalAccess.Card.DESFireAccessRights ret = new LibLogicalAccess.Card.DESFireAccessRights($imcall, true);$excode
 	return ret;
 }
-/*
-%typemap(cstype) std::vector<logicalaccess::YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector"
-%typemap(csin) std::vector<logicalaccess::YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector.getCPtr($csinput)"
-%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::YubikeyListItem> {
-	LibLogicalAccess.Card.YubikeyListItemVector ret = new LibLogicalAccess.Card.YubikeyListItemVector($imcall, true);$excode
-	return ret;
+
+%typemap(cstype) std::vector<logicalaccess::s_YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector"
+%typemap(csin) std::vector<logicalaccess::s_YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector.getCPtr($csinput)"
+%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::s_YubikeyListItem>, std::vector<logicalaccess::s_YubikeyListItem> & {
+LibLogicalAccess.Card.YubikeyListItemVector ret = new LibLogicalAccess.Card.YubikeyListItemVector($imcall, true);$excode
+return ret;
 }
-%typemap(cstype) std::vector<logicalaccess::YubikeyCalculateResponse> "LibLogicalAccess.Card.YubikeyCalculateResponseVector"
-%typemap(csin) std::vector<logicalaccess::YubikeyCalculateResponse> "LibLogicalAccess.Card.YubikeyCalculateResponseVector.getCPtr($csinput)"
-%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::YubikeyCalculateResponse> {
+
+%typemap(cstype) std::vector<logicalaccess::s_YubikeyCalculateResponse> "LibLogicalAccess.Card.YubikeyCalculateResponseVector"
+%typemap(csin) std::vector<logicalaccess::s_YubikeyCalculateResponse> "LibLogicalAccess.Card.YubikeyCalculateResponseVector.getCPtr($csinput)"
+%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::s_YubikeyCalculateResponse> {
 	LibLogicalAccess.Card.YubikeyCalculateResponseVector ret = new LibLogicalAccess.Card.YubikeyCalculateResponseVector($imcall, true);$excode
 	return ret;
 }
 
-%template() std::vector<logicalaccess::s_YubikeyListItem>;
-%template() std::vector<logicalaccess::s_YubikeyCalculateResponse>;
-*/
-%template(YubikeyListItemVector) std::vector<logicalaccess::s_YubikeyListItem>;
-%template(YubikeyCalculateResponseVector) std::vector<logicalaccess::s_YubikeyCalculateResponse>;
 %template() std::vector<logicalaccess::DESFireAccessRights>;
 %template() std::vector<logicalaccess::DFName>;
+%template() std::vector<logicalaccess::s_YubikeyListItem>;
+%template() std::vector<logicalaccess::s_YubikeyCalculateResponse>;
 
 /**** FORWARD Card Type Vector END ****/
 

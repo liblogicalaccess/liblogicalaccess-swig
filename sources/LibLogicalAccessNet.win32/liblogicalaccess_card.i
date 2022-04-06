@@ -251,23 +251,6 @@ using LibLogicalAccess.Reader;
 %typemap(csin) logicalaccess::DESFireKeySettings & %{out $csinput%}  
 %typemap(imtype) logicalaccess::DESFireKeySettings & "out LibLogicalAccess.Card.DESFireKeySettings"
 
-/*
-%typemap(cstype) std::vector<logicalaccess::YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector"
-%typemap(csin) std::vector<logicalaccess::YubikeyListItem> "LibLogicalAccess.Card.YubikeyListItemVector.getCPtr($csinput)"
-%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::YubikeyListItem> {
-	LibLogicalAccess.Card.YubikeyListItemVector ret = new LibLogicalAccess.Card.YubikeyListItemVector($imcall, true);$excode
-	return ret;
-}
-
-%typemap(cstype) std::vector<logicalaccess::YubikeyCalculateResponse> "LibLogicalAccess.Card.YubikeyCalculateResponseVector"
-%typemap(csin) std::vector<logicalaccess::YubikeyCalculateResponse> "LibLogicalAccess.Card.YubikeyCalculateResponseVector.getCPtr($csinput)"
-%typemap(csout, excode=SWIGEXCODE) std::vector<logicalaccess::YubikeyCalculateResponse> {
-	LibLogicalAccess.Card.YubikeyCalculateResponseVector ret = new LibLogicalAccess.Card.YubikeyCalculateResponseVector($imcall, true);$excode
-	return ret;
-}
-*/
-
-
 %apply unsigned char MBINOUT[] { unsigned char recordSize[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char maxNumberRecords[ANY] }
 %apply unsigned char MBINOUT[] { unsigned char currentNumberRecords[ANY] }
