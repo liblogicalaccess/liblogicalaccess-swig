@@ -175,10 +175,7 @@ namespace TestCore
         {
             var readerUnit = PCSCReaderProvider.createInstance().createReaderUnit();
 
-            DataTransport dt = new RplethDataTransport();
-            readerUnit.setDataTransport(dt);
-            Assert.IsTrue(readerUnit.getDataTransport() is RplethDataTransport);
-            dt = new SerialPortDataTransport();
+            DataTransport dt = new SerialPortDataTransport();
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is SerialPortDataTransport);
             dt = new TCPDataTransport();
@@ -195,39 +192,26 @@ namespace TestCore
                 Assert.IsTrue(readerUnit.getDataTransport() is IDPDataTransport);
             }
 #endif
+#if BUILD_NFC
             dt = new NFCDataTransport();
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is NFCDataTransport);
+#endif
             dt = new PCSCDataTransport();
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is PCSCDataTransport);
-            dt = new AdmittoSerialPortDataTransport();
-            readerUnit.setDataTransport(dt);
-            Assert.IsTrue(readerUnit.getDataTransport() is AdmittoSerialPortDataTransport);
-            dt = new AxessTMC13SerialPortDataTransport();
-            readerUnit.setDataTransport(dt);
-            Assert.IsTrue(readerUnit.getDataTransport() is AxessTMC13SerialPortDataTransport);
-            dt = new AxessTMCLegicSerialPortDataTransport();
-            readerUnit.setDataTransport(dt);
-            Assert.IsTrue(readerUnit.getDataTransport() is AxessTMCLegicSerialPortDataTransport);
             dt = new DeisterSerialPortDataTransport();
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is DeisterSerialPortDataTransport);
             dt = new ElatecSerialPortDataTransport();
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is ElatecSerialPortDataTransport);
-            dt = new GigaTMSSerialPortDataTransport();
-            readerUnit.setDataTransport(dt);
-            Assert.IsTrue(readerUnit.getDataTransport() is GigaTMSSerialPortDataTransport);
             dt = new GunneboSerialPortDataTransport();
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is GunneboSerialPortDataTransport);
             dt = new OSDPSerialPortDataTransport();
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is OSDPSerialPortDataTransport);
-            dt = new STidPRGSerialPortDataTransport();
-            readerUnit.setDataTransport(dt);
-            Assert.IsTrue(readerUnit.getDataTransport() is STidPRGSerialPortDataTransport);
             dt = new STidSTRSerialPortDataTransport();
             readerUnit.setDataTransport(dt);
             Assert.IsTrue(readerUnit.getDataTransport() is STidSTRSerialPortDataTransport);
@@ -243,24 +227,12 @@ namespace TestCore
         public void TestGetReaderProvider()
         {
             var libManager = LibraryManager.getInstance();
-            var readerProvider = libManager.getReaderProvider("A3MLGM5600");
-            Assert.IsTrue(readerProvider is A3MLGM5600ReaderProvider);
-            readerProvider = libManager.getReaderProvider("Admitto");
-            Assert.IsTrue(readerProvider is AdmittoReaderProvider);
-            readerProvider = libManager.getReaderProvider("AxessTMC13");
-            Assert.IsTrue(readerProvider is AxessTMC13ReaderProvider);
-            readerProvider = libManager.getReaderProvider("AxessTMCLegic");
-            Assert.IsTrue(readerProvider is AxessTMCLegicReaderProvider);
-            readerProvider = libManager.getReaderProvider("Deister");
+            var readerProvider = libManager.getReaderProvider("Deister");
             Assert.IsTrue(readerProvider is DeisterReaderProvider);
             readerProvider = libManager.getReaderProvider("Elatec");
             Assert.IsTrue(readerProvider is ElatecReaderProvider);
-            readerProvider = libManager.getReaderProvider("GigaTMS");
-            Assert.IsTrue(readerProvider is GigaTMSReaderProvider);
             readerProvider = libManager.getReaderProvider("Gunnebo");
             Assert.IsTrue(readerProvider is GunneboReaderProvider);
-            readerProvider = libManager.getReaderProvider("IdOnDemand");
-            Assert.IsTrue(readerProvider is IdOnDemandReaderProvider);
 #if ENABLE_WINDOWS_SPECIFIC_TESTS
             if (!Environment.Is64BitProcess)
             {
@@ -273,28 +245,22 @@ namespace TestCore
             readerProvider = libManager.getReaderProvider("Keyboard");
             Assert.IsTrue(readerProvider is KeyboardReaderProvider);
 #endif
+#if BUILD_NFC
             readerProvider = libManager.getReaderProvider("NFC");
             Assert.IsTrue(readerProvider is NFCReaderProvider);
+#endif
             readerProvider = libManager.getReaderProvider("OK5553");
             Assert.IsTrue(readerProvider is OK5553ReaderProvider);
             readerProvider = libManager.getReaderProvider("OSDP");
             Assert.IsTrue(readerProvider is OSDPReaderProvider);
             readerProvider = libManager.getReaderProvider("PCSC");
             Assert.IsTrue(readerProvider is PCSCReaderProvider);
-            readerProvider = libManager.getReaderProvider("Promag");
-            Assert.IsTrue(readerProvider is PromagReaderProvider);
             readerProvider = libManager.getReaderProvider("RFIDeas");
 #if ENABLE_WINDOWS_SPECIFIC_TESTS
             Assert.IsTrue(readerProvider is RFIDeasReaderProvider);
             readerProvider = libManager.getReaderProvider("Rpleth");
             Assert.IsTrue(readerProvider is RplethReaderProvider);
 #endif
-            readerProvider = libManager.getReaderProvider("SCIEL");
-            Assert.IsTrue(readerProvider is SCIELReaderProvider);
-            readerProvider = libManager.getReaderProvider("SmartID");
-            Assert.IsTrue(readerProvider is SmartIDReaderProvider);
-            readerProvider = libManager.getReaderProvider("STidPRG");
-            Assert.IsTrue(readerProvider is STidPRGReaderProvider);
             readerProvider = libManager.getReaderProvider("STidSTR");
             Assert.IsTrue(readerProvider is STidSTRReaderProvider);
 

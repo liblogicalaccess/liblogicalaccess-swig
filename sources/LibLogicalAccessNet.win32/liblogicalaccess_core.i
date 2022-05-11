@@ -64,6 +64,7 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/cards/tripledeskey.hpp>
 #include <logicalaccess/colorize.hpp>
 #include <logicalaccess/readerproviders/circularbufferparser.hpp>
+#include <logicalaccess/readerproviders/dummydatatransport.hpp>
 #include <logicalaccess/readerproviders/dummyreaderunit.hpp>
 #include <logicalaccess/readerproviders/readercommunication.hpp>
 #include <logicalaccess/readerproviders/iso14443areadercommunication.hpp>
@@ -106,6 +107,7 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/services/accesscontrol/formats/customformat/numberdatafield.hpp>
 #include <logicalaccess/services/accesscontrol/formats/customformat/paritydatafield.hpp>
 #include <logicalaccess/services/accesscontrol/formats/customformat/stringdatafield.hpp>
+#include <logicalaccess/services/accesscontrol/formats/customformat/tlvdatafield.hpp>
 #include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/fascn200bitformat.hpp>
 #include <logicalaccess/services/accesscontrol/formats/getronik40bitformat.hpp>
@@ -122,6 +124,7 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityrightparity2format.hpp>
 #include <logicalaccess/services/accesscontrol/readerformatcomposite.hpp>
 #include <logicalaccess/services/aes_crypto_service.hpp>
+#include <logicalaccess/services/challenge/challengecardservice.hpp>
 #include <logicalaccess/services/identity/identity_service.hpp>
 #include <logicalaccess/services/json/json_dump_card_service.hpp>
 #include <logicalaccess/services/licensechecker/license_checker_service.hpp>
@@ -485,6 +488,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/cards/tripledeskey.hpp>
 %include <logicalaccess/colorize.hpp>
 %include <logicalaccess/readerproviders/circularbufferparser.hpp>
+%include <logicalaccess/readerproviders/dummydatatransport.hpp>
 %include <logicalaccess/readerproviders/dummyreaderunit.hpp>
 %include <logicalaccess/readerproviders/readercommunication.hpp>
 %import <logicalaccess/plugins/llacommon/lla_common_api.hpp>
@@ -528,6 +532,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/services/accesscontrol/formats/customformat/numberdatafield.hpp>
 %include <logicalaccess/services/accesscontrol/formats/customformat/paritydatafield.hpp>
 %include <logicalaccess/services/accesscontrol/formats/customformat/stringdatafield.hpp>
+%include <logicalaccess/services/accesscontrol/formats/customformat/tlvdatafield.hpp>
 %include <logicalaccess/services/accesscontrol/formats/dataclockformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/fascn200bitformat.hpp>
 %include <logicalaccess/services/accesscontrol/formats/getronik40bitformat.hpp>
@@ -544,6 +549,7 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 %include <logicalaccess/services/accesscontrol/formats/wiegand37withfacilityrightparity2format.hpp>
 %include <logicalaccess/services/accesscontrol/readerformatcomposite.hpp>
 %include <logicalaccess/services/aes_crypto_service.hpp>
+%include <logicalaccess/services/challenge/challengecardservice.hpp>
 %include <logicalaccess/services/identity/identity_service.hpp>
 %include <logicalaccess/services/json/json_dump_card_service.hpp>
 %include <logicalaccess/services/licensechecker/license_checker_service.hpp>

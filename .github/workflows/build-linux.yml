@@ -1,0 +1,75 @@
+name: Build Linux
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+  push:
+    branches:
+      - master
+      - develop
+jobs:
+  build-gcc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Setup"
+        run: |
+          sudo apt-get update
+          sudo apt-get upgrade
+          sudo apt-get install -y libclang-6.0-dev
+          pip3 install conan
+
+      - name: "Checkout LLA-SWIG"
+        uses: actions/checkout@v2
+        with:
+          path: lla-swig
+
+      - name: "Checkout LLA"
+        uses: actions/checkout@v2
+        with:
+          repository: islog/liblogicalaccess
+          ref: develop
+          path: lla 
+
+      - name: "Checkout LLA-NFC"
+        uses: actions/checkout@v2
+        with:
+          repository: aberod/liblogicalaccess-libnfc
+          ref: develop
+          path: lla-nfc
+
+      - name: "Checkout cppkcs11"
+        uses: actions/checkout@v2
+        with:
+          repository: islog/cppkcs11
+          path: cppkcs
+
+      - name: "Setup LLA"
+        run : |
+          sudo apt-get update
+          sudo apt-get install -y libpcsclite-dev
+          conan export .
+        working-directory: lla
+
+      - name: "Setup LLA-NFC"
+        run : |
+          sudo apt-get update
+          sudo apt-get install -y libusb-dev
+          conan export .
+          cd vendor/libnfc
+          conan export .
+        working-directory: lla-nfc
+
+      - name: "Setup cppkcs11"
+        run : |
+          conan export .
+        working-directory: cppkcs
+
+
+      - name: "Build LLA-SWIG"
+        run: |
+          ./build-linux.sh
+          ./build-linux_native.sh
+          cd sources
+          dotnet build LibLogicalAccessNet.sln /p:Configuration=ReleaseCE
+        working-directory: lla-swig
