@@ -1,7 +1,9 @@
 Param(
-    [Parameter(Mandatory)]
+    [Parameter(ParameterSetName="WithProfile", Mandatory)]
+    [switch]$with_profile,
+    [Parameter(ParameterSetName="WithoutProfile", Mandatory)]
     [string]$arch,
-    [Parameter(Mandatory)]
+    [Parameter(ParameterSetName="WithoutProfile", Mandatory)]
     [string]$build_type,
     [Parameter(Mandatory=$false)]
     [bool]$build_private,
@@ -11,4 +13,11 @@ Param(
     [bool]$build_rfideas
 )
 
-conan install -s arch=$arch -s build_type=$build_type -o LLA_BUILD_PRIVATE=$build_private -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_RFIDEAS=$build_rfideas --build=missing -u .
+if($with_profile) {
+    conan install -pr compilers/x64_msvc_debug -o LLA_BUILD_PRIVATE=$build_private -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_RFIDEAS=$build_rfideas -u .
+    conan install -pr compilers/x64_msvc_release -o LLA_BUILD_PRIVATE=$build_private -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_RFIDEAS=$build_rfideas -u .
+    conan install -pr compilers/x86_msvc_debug -o LLA_BUILD_PRIVATE=$build_private -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_RFIDEAS=$build_rfideas -u .
+    conan install -pr compilers/x86_msvc_release -o LLA_BUILD_PRIVATE=$build_private -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_RFIDEAS=$build_rfideas -u .
+} else {
+    conan install -s arch=$arch -s build_type=$build_type -o LLA_BUILD_PRIVATE=$build_private -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_RFIDEAS=$build_rfideas --build=missing -u .
+}
