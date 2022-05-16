@@ -29,6 +29,7 @@ pipeline {
     stages {
         stage('Full Swig') {
             parallel {
+				/*
                 stage("Linux Swig") {
                     stages {
                         stage('Linux Swig Support Container') {
@@ -64,6 +65,7 @@ pipeline {
                         }
                     }
                 }
+				*/
 
                 stage('Window Swig') {
                     stages {
