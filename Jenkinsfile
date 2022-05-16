@@ -102,7 +102,7 @@ pipeline {
                                 dir('sources/LibLogicalAccessNet.win32') {
                                     script {
                                         conan.withFreshWindowsConanCache {
-                                            powershell './conan-build.ps1 -publish'
+                                            powershell './conan-build.ps1 -with_profile -build_private $True -build_nfc $True -build_rfidea $True -publish'
                                         }
                                     }
                                 }
