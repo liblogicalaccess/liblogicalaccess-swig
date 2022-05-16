@@ -23,7 +23,7 @@ class LLASwig(ConanFile):
             if self.options.LLA_BUILD_PRIVATE:
                 self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + self.channel)
             if self.options.LLA_BUILD_NFC:
-                self.requires('LogicalAccessNFC/' + self.version)
+                self.requires('LogicalAccessNFC/' + self.version + '@islog/' + self.channel)
             else:
                 self.requires('LogicalAccess/'+ self.version)
         except ConanException:
