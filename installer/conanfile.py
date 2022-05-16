@@ -9,9 +9,7 @@ class LogicalAccessSwigConan(ConanFile):
     options = { 'LLA_BUILD_PRIVATE': [True, False],
                 'LLA_BUILD_NFC': [True, False],
                 'LLA_BUILD_RFIDEAS': [True, False]}
-    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
-                        'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True', 'LLA_BUILD_PRIVATE=True', \
-                        'LLA_BUILD_NFC=True', 'LLA_BUILD_RFIDEAS=True'
+    default_options = 'LLA_BUILD_PRIVATE=True', 'LLA_BUILD_NFC=True', 'LLA_BUILD_RFIDEAS=True'
     revision_mode = "scm"
     
     def configure(self):
@@ -23,7 +21,7 @@ class LogicalAccessSwigConan(ConanFile):
             if self.options.LLA_BUILD_PRIVATE:
                 self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + self.channel)
             if self.options.LLA_BUILD_NFC:
-                self.requires('LogicalAccessNFC/' + self.version)
+                self.requires('LogicalAccessNFC/' + self.version + '@islog/' + self.channel)
             else:
                 self.requires('LogicalAccess/' + self.version)
         except ConanException:
