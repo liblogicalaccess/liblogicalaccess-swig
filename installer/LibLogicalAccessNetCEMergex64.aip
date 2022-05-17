@@ -39,9 +39,10 @@
     <ROW Component="iso7816readers.dll" ComponentId="{6BEEA1E8-DF1C-452B-BED3-58BB8770BC0D}" Directory_="APPDIR" Attributes="256" KeyPath="iso7816readers.dll"/>
     <ROW Component="keyboardreaders.dll" ComponentId="{50408F5B-14D9-477C-96B4-FDAC3A6A5490}" Directory_="APPDIR" Attributes="256" KeyPath="keyboardreaders.dll"/>
     <ROW Component="legicprimecards.dll" ComponentId="{9904DB3A-E7CC-4F6E-9F47-52B6E7C8E1F9}" Directory_="APPDIR" Attributes="256" KeyPath="legicprimecards.dll"/>
-    <ROW Component="libeay32.dll" ComponentId="{A0641F9E-438F-4A53-8EA5-414881EB00EC}" Directory_="APPDIR" Attributes="256" KeyPath="libeay32.dll"/>
+    <ROW Component="libcrypto1_1x64.dll" ComponentId="{F9638124-B021-4962-BA67-FF9E68746610}" Directory_="APPDIR" Attributes="256" KeyPath="libcrypto1_1x64.dll"/>
     <ROW Component="libnfc.dll" ComponentId="{0BA504E0-C4ED-4B48-AEC2-A829602BE68A}" Directory_="APPDIR" Attributes="256" KeyPath="libnfc.dll"/>
     <ROW Component="libnfcnfcreaders.dll" ComponentId="{94867DC3-698C-4D2C-AF1E-9F9CB11CD1D7}" Directory_="APPDIR" Attributes="256" KeyPath="libnfcnfcreaders.dll"/>
+    <ROW Component="libssl1_1x64.dll" ComponentId="{3D13AE37-2DAC-457F-98EE-D8CC3A0DE141}" Directory_="APPDIR" Attributes="256" KeyPath="libssl1_1x64.dll"/>
     <ROW Component="libusb0.dll" ComponentId="{3CA2F430-8B43-4A2F-82D1-5C4981FBC78B}" Directory_="APPDIR" Attributes="256" KeyPath="libusb0.dll"/>
     <ROW Component="llacommon.dll" ComponentId="{F3D96219-A4A5-4AE5-9268-A6A134F8BFD7}" Directory_="APPDIR" Attributes="256" KeyPath="llacommon.dll"/>
     <ROW Component="logicalaccess.dll" ComponentId="{4AEA3C08-D1BD-4B27-84CB-FD1C5EC8E861}" Directory_="APPDIR" Attributes="256" KeyPath="logicalaccess.dll"/>
@@ -61,7 +62,6 @@
     <ROW Component="samav2cards.dll" ComponentId="{20807CD8-C4E0-4220-A0CD-669A28D2E204}" Directory_="APPDIR" Attributes="256" KeyPath="samav2cards.dll"/>
     <ROW Component="seoscards.dll" ComponentId="{924B5DFB-A918-4921-B2A8-9ACABB12E7C5}" Directory_="APPDIR" Attributes="256" KeyPath="seoscards.dll"/>
     <ROW Component="smartframecards.dll" ComponentId="{94514003-DCAD-4CA5-A386-1ECCDD1B981E}" Directory_="APPDIR" Attributes="256" KeyPath="smartframecards.dll"/>
-    <ROW Component="ssleay32.dll" ComponentId="{8E9E32E9-6F5A-467D-AB99-67744789D97D}" Directory_="APPDIR" Attributes="256" KeyPath="ssleay32.dll"/>
     <ROW Component="stidstrreaders.dll" ComponentId="{AB852EA0-D7B4-4F3C-9757-1F66241B7701}" Directory_="APPDIR" Attributes="256" KeyPath="stidstrreaders.dll"/>
     <ROW Component="stmlri512cards.dll" ComponentId="{C6DF1146-3CD1-4B08-9D36-F7C2610442C3}" Directory_="APPDIR" Attributes="256" KeyPath="stmlri512cards.dll"/>
     <ROW Component="tagitcards.dll" ComponentId="{59558262-321C-4EAD-9036-F450BE479497}" Directory_="APPDIR" Attributes="256" KeyPath="tagitcards.dll"/>
@@ -69,7 +69,7 @@
     <ROW Component="twiccards.dll" ComponentId="{2C7E9050-C2B4-416C-8C76-F8C77C2E2119}" Directory_="APPDIR" Attributes="256" KeyPath="twiccards.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="TargetFeature" Title="TargetFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="LibLogicalAccessNet.win32.dll cppkcs11.dll cps3cards.dll deisterreaders.dll desfirecards.dll elatecreaders.dll em4102cards.dll em4135cards.dll epasscards.dll felicacards.dll generictagcards.dll gunneboreaders.dll icode1cards.dll icode2cards.dll indalacards.dll infineonmydcards.dll islogkbdhook64.exe islogkbdhooklib64.dll iso15693cards.dll iso7816cards.dll iso7816readers.dll keyboardreaders.dll legicprimecards.dll libeay32.dll libnfc.dll libnfcnfcreaders.dll libusb0.dll llacommon.dll logicalaccess.dll logicalaccesscryptolib.dll mifarecards.dll mifarepluscards.dll mifareultralightcards.dll ok5553readers.dll osdpreaders.dll pcProxAPI.dll pcscreaders.dll pkcscryptounified.dll proxcards.dll proxlitecards.dll reg2vbs.vbs rfideasreaders.dll samav2cards.dll seoscards.dll smartframecards.dll ssleay32.dll stidstrreaders.dll stmlri512cards.dll tagitcards.dll topazcards.dll twiccards.dll"/>
+    <ROW Feature="TargetFeature" Title="TargetFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="LibLogicalAccessNet.win32.dll cppkcs11.dll cps3cards.dll deisterreaders.dll desfirecards.dll elatecreaders.dll em4102cards.dll em4135cards.dll epasscards.dll felicacards.dll generictagcards.dll gunneboreaders.dll icode1cards.dll icode2cards.dll indalacards.dll infineonmydcards.dll islogkbdhook64.exe islogkbdhooklib64.dll iso15693cards.dll iso7816cards.dll iso7816readers.dll keyboardreaders.dll legicprimecards.dll libcrypto1_1x64.dll libnfc.dll libnfcnfcreaders.dll libssl1_1x64.dll libusb0.dll llacommon.dll logicalaccess.dll logicalaccesscryptolib.dll mifarecards.dll mifarepluscards.dll mifareultralightcards.dll ok5553readers.dll osdpreaders.dll pcProxAPI.dll pcscreaders.dll pkcscryptounified.dll proxcards.dll proxlitecards.dll reg2vbs.vbs rfideasreaders.dll samav2cards.dll seoscards.dll smartframecards.dll stidstrreaders.dll stmlri512cards.dll tagitcards.dll topazcards.dll twiccards.dll"/>
     <ATTRIBUTE name="CurrentFeature" value="TargetFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
@@ -101,13 +101,14 @@
     <ROW File="iso7816readers.dll" Component_="iso7816readers.dll" FileName="ISO781~2.DLL|iso7816readers.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\iso7816readers.dll" SelfReg="false" NextFile="iso15693cards.dll"/>
     <ROW File="keyboardreaders.dll" Component_="keyboardreaders.dll" FileName="KEYBOA~1.DLL|keyboardreaders.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\keyboardreaders.dll" SelfReg="false" NextFile="legicprimecards.dll"/>
     <ROW File="legicprimecards.dll" Component_="legicprimecards.dll" FileName="LEGICP~1.DLL|legicprimecards.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\legicprimecards.dll" SelfReg="false" NextFile="libnfc.dll"/>
-    <ROW File="libeay32.dll" Component_="libeay32.dll" FileName="libeay32.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\libeay32.dll" SelfReg="false" NextFile="ssleay32.dll"/>
+    <ROW File="libcrypto1_1x64.dll" Component_="libcrypto1_1x64.dll" FileName="LIBCRY~1.DLL|libcrypto-1_1-x64.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\libcrypto-1_1-x64.dll" SelfReg="false" NextFile="libssl1_1x64.dll"/>
     <ROW File="libnfc.dll" Component_="libnfc.dll" FileName="libnfc.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\libnfc.dll" SelfReg="false" NextFile="libnfcnfcreaders.dll"/>
     <ROW File="libnfcnfcreaders.dll" Component_="libnfcnfcreaders.dll" FileName="LIBNFC~1.DLL|libnfc-nfcreaders.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\libnfc-nfcreaders.dll" SelfReg="false" NextFile="mifarecards.dll"/>
+    <ROW File="libssl1_1x64.dll" Component_="libssl1_1x64.dll" FileName="LIBSSL~1.DLL|libssl-1_1-x64.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\libssl-1_1-x64.dll" SelfReg="false"/>
     <ROW File="libusb0.dll" Component_="libusb0.dll" FileName="libusb0.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\libusb0.dll" SelfReg="false" NextFile="pcProxAPI.dll"/>
-    <ROW File="llacommon.dll" Component_="llacommon.dll" FileName="LLACOM~1.DLL|llacommon.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\llacommon.dll" SelfReg="false"/>
+    <ROW File="llacommon.dll" Component_="llacommon.dll" FileName="LLACOM~1.DLL|llacommon.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\llacommon.dll" SelfReg="false" NextFile="libcrypto1_1x64.dll"/>
     <ROW File="logicalaccess.dll" Component_="logicalaccess.dll" FileName="LOGICA~1.DLL|logicalaccess.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\logicalaccess.dll" SelfReg="false" NextFile="logicalaccesscryptolib.dll"/>
-    <ROW File="logicalaccesscryptolib.dll" Component_="logicalaccesscryptolib.dll" FileName="LOGICA~2.DLL|logicalaccess-cryptolib.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\logicalaccess-cryptolib.dll" SelfReg="false" NextFile="libeay32.dll"/>
+    <ROW File="logicalaccesscryptolib.dll" Component_="logicalaccesscryptolib.dll" FileName="LOGICA~2.DLL|logicalaccess-cryptolib.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\logicalaccess-cryptolib.dll" SelfReg="false" NextFile="llacommon.dll"/>
     <ROW File="mifarecards.dll" Component_="mifarecards.dll" FileName="MIFARE~1.DLL|mifarecards.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\mifarecards.dll" SelfReg="false" NextFile="mifarepluscards.dll"/>
     <ROW File="mifarepluscards.dll" Component_="mifarepluscards.dll" FileName="MIFARE~2.DLL|mifarepluscards.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\mifarepluscards.dll" SelfReg="false" NextFile="mifareultralightcards.dll"/>
     <ROW File="mifareultralightcards.dll" Component_="mifareultralightcards.dll" FileName="MIFARE~3.DLL|mifareultralightcards.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\mifareultralightcards.dll" SelfReg="false" NextFile="ok5553readers.dll"/>
@@ -123,7 +124,6 @@
     <ROW File="samav2cards.dll" Component_="samav2cards.dll" FileName="SAMAV2~1.DLL|samav2cards.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\samav2cards.dll" SelfReg="false" NextFile="seoscards.dll"/>
     <ROW File="seoscards.dll" Component_="seoscards.dll" FileName="SEOSCA~1.DLL|seoscards.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\seoscards.dll" SelfReg="false" NextFile="smartframecards.dll"/>
     <ROW File="smartframecards.dll" Component_="smartframecards.dll" FileName="SMARTF~1.DLL|smartframecards.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\smartframecards.dll" SelfReg="false" NextFile="stidstrreaders.dll"/>
-    <ROW File="ssleay32.dll" Component_="ssleay32.dll" FileName="ssleay32.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\ssleay32.dll" SelfReg="false" NextFile="llacommon.dll"/>
     <ROW File="stidstrreaders.dll" Component_="stidstrreaders.dll" FileName="STIDST~1.DLL|stidstrreaders.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\stidstrreaders.dll" SelfReg="false" NextFile="stmlri512cards.dll"/>
     <ROW File="stmlri512cards.dll" Component_="stmlri512cards.dll" FileName="STMLRI~1.DLL|stmlri512cards.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\stmlri512cards.dll" SelfReg="false" NextFile="tagitcards.dll"/>
     <ROW File="tagitcards.dll" Component_="tagitcards.dll" FileName="TAGITC~1.DLL|tagitcards.dll" Attributes="0" SourcePath="packages\dll\x86_64\Release\tagitcards.dll" SelfReg="false" NextFile="topazcards.dll"/>
