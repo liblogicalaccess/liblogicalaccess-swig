@@ -29,6 +29,7 @@ class LogicalAccessSwigConan(ConanFile):
         except ConanException:
             if self.options.LLA_BUILD_PRIVATE:
                 self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + tools.Git().get_branch())
+            self.requires('LogicalAccessNFC/' + self.version + '@islog/' + tools.Git().get_branch())
     
     def imports(self):
         self.copy("bin/*.dll", keep_path=False, dst="./packages/dll/" + str(self.settings.arch) + "/" + str(self.settings.build_type))
