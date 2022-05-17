@@ -49,8 +49,8 @@ if (!$build_private) {
 
 if($with_profile) {
   foreach ($Profile in $Profiles) {
-    ExecExternal { conan install -pr $Profile[0] -o LLA_BUILD_PRIVATE=$build_private -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_RFIDEAS=$build_rfideas --build=missing .. }
-    ExecExternal { conan build .. }
+    conan install -pr $Profile[0] -o LLA_BUILD_PRIVATE=$build_private -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_RFIDEAS=$build_rfideas --build=missing ..
+    conan build ..
     $config = $Profile[1]
     $arch = $Profile[2]
     Copy-Item bin/LibLogicalAccessNet.win32.* ../bin/$arch/$config/
