@@ -39,11 +39,12 @@ pipeline {
                                 sh "docker push docker-registry.islog.com:5000/swig-support:latest"
                             }
                         }
+						*/
 
                         // Only x64 release
                         stage('Linux Swig') {
                             agent {
-                                docker 'docker-registry.islog.com:5000/swig-support:latest'
+                                docker 'artifacts.linq.hidglobal.com:5000/debian_build_swig:latest'
                             }
                             steps {
                                 script {
@@ -65,7 +66,6 @@ pipeline {
                         }
                     }
                 }
-				*/
 
                 stage('Window Swig') {
                     stages {
