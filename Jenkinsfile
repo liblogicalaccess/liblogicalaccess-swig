@@ -29,9 +29,9 @@ pipeline {
     stages {
         stage('Full Swig') {
             parallel {
-				/*
                 stage("Linux Swig") {
                     stages {
+						/*
                         stage('Linux Swig Support Container') {
                             agent { label 'linux' }
                             steps {
@@ -44,7 +44,10 @@ pipeline {
                         // Only x64 release
                         stage('Linux Swig') {
                             agent {
-                                docker 'artifacts.linq.hidglobal.com:5000/debian_build_swig:latest'
+                                docker {
+									alwaysPull true
+									image 'artifacts.linq.hidglobal.com:5000/debian_build_swig:latest'
+								}
                             }
                             steps {
                                 script {
