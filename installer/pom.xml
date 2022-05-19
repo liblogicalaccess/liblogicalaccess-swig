@@ -31,11 +31,11 @@
 	<distributionManagement>
 		<repository>
 		  <id>nexus-releases-internal</id>
-		  <url>http://nexus-repository/repository/maven-releases/</url>
+		  <url>https://artifacts.linq.hidglobal.com/repository/maven-releases/</url>
 		</repository>
 		<snapshotRepository>
 		  <id>nexus-snapshots-internal</id>
-		  <url>http://nexus-repository/repository/maven-snapshots/</url>
+		  <url>https://artifacts.linq.hidglobal.com/repository/maven-snapshots/</url>
 		</snapshotRepository>
   	</distributionManagement>
 	
