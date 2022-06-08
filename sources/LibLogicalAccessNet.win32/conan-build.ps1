@@ -66,7 +66,7 @@ if($with_profile) {
   Copy-Item bin/LibLogicalAccessNet.win32.* ../bin/$arch/$build_type/
   if ($publish) {
     ExecExternal { conan export-pkg .. $PackageName }
-    ExecExternal { conan upload $PackageName -r islog-test --all --confirm --check }
+    ExecExternal { conan upload $PackageName -r islog-test --all --confirm --check --force}
   }
   Remove-Item * -Recurse -Force
 }
