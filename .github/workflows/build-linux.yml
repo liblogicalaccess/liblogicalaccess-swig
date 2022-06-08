@@ -16,7 +16,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get upgrade
-          sudo apt-get install -y libclang-6.0-dev
+          sudo apt-get install -y libclang-9-dev
           pip3 install conan
 
       - name: "Checkout LLA-SWIG"

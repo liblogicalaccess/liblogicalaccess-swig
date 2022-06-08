@@ -10,14 +10,14 @@ on:
       - develop
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-latest
     strategy:
       matrix:
         arch: [x86, x86_64]
     steps:
       - name: "Setup"
         run: |
-          choco install llvm --version=6.0.0 --allow-downgrade
+          choco install llvm --version=9.0.0 --allow-downgrade
           pip3 install conan
       
       - name: Setup dotnet
