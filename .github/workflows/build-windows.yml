@@ -50,7 +50,7 @@ jobs:
 
       - name: "Setup LLA"
         run : |
-          conan export . islog/${{ github.ref_name }}
+          conan export .
         working-directory: lla
 
       - name: "Setup cppkcs11"

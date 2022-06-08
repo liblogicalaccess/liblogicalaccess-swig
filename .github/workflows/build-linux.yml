@@ -48,7 +48,7 @@ jobs:
         run : |
           sudo apt-get update
           sudo apt-get install -y libpcsclite-dev
-          conan export . islog/${{ github.ref_name }}
+          conan export .
         working-directory: lla
 
       - name: "Setup LLA-NFC"
