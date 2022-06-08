@@ -12,31 +12,18 @@
 /* Define_section */
 
 #define LLA_READERS_STIDSTR_API
-#define LLA_READERS_STIDPRG_API
-#define LLA_READERS_SMARTID_API
-#define LLA_READERS_SCIEL_API
-#define LLA_READERS_RPLETH_API
-#define LLA_READERS_PROMAG_API
-#define LLA_READERS_PRIVATE_PCSC_API
-#define LLA_READERS_PRIVATE_ISO7816_API
+#define LLA_READERS_PRIVATE_KEYBOARD_API
 #define LLA_READERS_PCSC_API
 #define LLA_READERS_OSDP_API
 #define LLA_READERS_OK5553_API
-#define LLA_READERS_NFC_NFC_API
 #define LLA_READERS_ISO7816_API
-#define LLA_READERS_IDONDEMAND_API
 #define LLA_READERS_GUNNEBO_API
-#define LLA_READERS_GIGATMS_API
 #define LLA_READERS_ELATEC_API
 #define LLA_READERS_DEISTER_API
-#define LLA_READERS_AXESSTMCLEGIC_API
-#define LLA_READERS_AXESSTMC13_API
-#define LLA_READERS_ADMITTO_API
-#define LLA_READERS_A3MLGM5600_API
-#define LLA_IKS_API
 #define LLA_CRYPTO_API
 #define LLA_CORE_API
 #define LLA_COMMON_API
+#define LLA_CARDS_YUBIKEY_API
 #define LLA_CARDS_TWIC_API
 #define LLA_CARDS_TOPAZ_API
 #define LLA_CARDS_TAGIT_API
@@ -46,9 +33,6 @@
 #define LLA_CARDS_SAMAV2_API
 #define LLA_CARDS_PROX_API
 #define LLA_CARDS_PROXLITE_API
-#define LLA_CARDS_PRIVATE_SEPROCESSOR_API
-#define LLA_CARDS_PRIVATE_ICLASS_API
-#define LLA_CARDS_PRIVATE_DESFIRE2_API
 #define LLA_CARDS_MIFARE_API
 #define LLA_CARDS_MIFAREULTRALIGHT_API
 #define LLA_CARDS_MIFAREPLUS_API
@@ -95,12 +79,6 @@
 
 /*****SHARED PTR SECTION*****/
 
-%shared_ptr(logicalaccess::A3MLGM5600LCDDisplay);
-%shared_ptr(logicalaccess::A3MLGM5600LEDBuzzerDisplay);
-%shared_ptr(logicalaccess::A3MLGM5600ReaderCardAdapter);
-%shared_ptr(logicalaccess::A3MLGM5600ReaderProvider);
-%shared_ptr(logicalaccess::A3MLGM5600ReaderUnit);
-%shared_ptr(logicalaccess::A3MLGM5600ReaderUnitConfiguration);
 %shared_ptr(logicalaccess::ACSACR1222LLCDDisplay);
 %shared_ptr(logicalaccess::ACSACR1222LLEDBuzzerDisplay);
 %shared_ptr(logicalaccess::ACSACR1222LReaderUnit);
@@ -116,24 +94,6 @@
 %shared_ptr(logicalaccess::ATRParser::ATRInfo);
 %shared_ptr(logicalaccess::AccessControlCardService);
 %shared_ptr(logicalaccess::AccessInfo);
-%shared_ptr(logicalaccess::AdmittoBufferParser);
-%shared_ptr(logicalaccess::AdmittoReaderCardAdapter);
-%shared_ptr(logicalaccess::AdmittoReaderProvider);
-%shared_ptr(logicalaccess::AdmittoReaderUnit);
-%shared_ptr(logicalaccess::AdmittoReaderUnitConfiguration);
-%shared_ptr(logicalaccess::AdmittoSerialPortDataTransport);
-%shared_ptr(logicalaccess::AxessTMC13BufferParser);
-%shared_ptr(logicalaccess::AxessTMC13ReaderCardAdapter);
-%shared_ptr(logicalaccess::AxessTMC13ReaderProvider);
-%shared_ptr(logicalaccess::AxessTMC13ReaderUnit);
-%shared_ptr(logicalaccess::AxessTMC13ReaderUnitConfiguration);
-%shared_ptr(logicalaccess::AxessTMC13SerialPortDataTransport);
-%shared_ptr(logicalaccess::AxessTMCLegicBufferParser);
-%shared_ptr(logicalaccess::AxessTMCLegicReaderCardAdapter);
-%shared_ptr(logicalaccess::AxessTMCLegicReaderProvider);
-%shared_ptr(logicalaccess::AxessTMCLegicReaderUnit);
-%shared_ptr(logicalaccess::AxessTMCLegicReaderUnitConfiguration);
-%shared_ptr(logicalaccess::AxessTMCLegicSerialPortDataTransport);
 %shared_ptr(logicalaccess::BCDByteDataType);
 %shared_ptr(logicalaccess::BCDNibbleDataType);
 %shared_ptr(logicalaccess::BariumFerritePCSCFormat);
@@ -155,6 +115,7 @@
 %shared_ptr(logicalaccess::CardProbe);
 %shared_ptr(logicalaccess::CardService);
 %shared_ptr(logicalaccess::CardsFormatComposite);
+%shared_ptr(logicalaccess::ChallengeCardService);
 %shared_ptr(logicalaccess::ChecksumDataField);
 %shared_ptr(logicalaccess::CherryReaderUnit);
 %shared_ptr(logicalaccess::Chip);
@@ -178,10 +139,6 @@
 %shared_ptr(logicalaccess::DESFireEV1Location);
 %shared_ptr(logicalaccess::DESFireEV1NFCTag4CardService);
 %shared_ptr(logicalaccess::DESFireEV1STidSTRCommands);
-%shared_ptr(logicalaccess::DESFireEV2Chip);
-%shared_ptr(logicalaccess::DESFireEV2Commands);
-%shared_ptr(logicalaccess::DESFireEV2Crypto);
-%shared_ptr(logicalaccess::DESFireEV2ISO7816Commands);
 %shared_ptr(logicalaccess::DESFireISO7816Commands);
 %shared_ptr(logicalaccess::DESFireISO7816ResultChecker);
 %shared_ptr(logicalaccess::DESFireJsonDumpCardService);
@@ -202,6 +159,7 @@
 %shared_ptr(logicalaccess::DeisterReaderUnitConfiguration);
 %shared_ptr(logicalaccess::DeisterSerialPortDataTransport);
 %shared_ptr(logicalaccess::DummyCommands);
+%shared_ptr(logicalaccess::DummyDataTransport);
 %shared_ptr(logicalaccess::DummyReaderUnit);
 %shared_ptr(logicalaccess::EM4102Chip);
 %shared_ptr(logicalaccess::EM4135Chip);
@@ -238,42 +196,14 @@
 %shared_ptr(logicalaccess::GenericTagAccessControlCardService);
 %shared_ptr(logicalaccess::GenericTagCardProvider);
 %shared_ptr(logicalaccess::GenericTagChip);
-%shared_ptr(logicalaccess::GenericTagIdOnDemandAccessControlCardService);
-%shared_ptr(logicalaccess::GenericTagIdOnDemandChip);
-%shared_ptr(logicalaccess::GenericTagIdOnDemandCommands);
 %shared_ptr(logicalaccess::Getronik40BitFormat);
-%shared_ptr(logicalaccess::GigaTMSBufferParser);
-%shared_ptr(logicalaccess::GigaTMSReaderCardAdapter);
-%shared_ptr(logicalaccess::GigaTMSReaderProvider);
-%shared_ptr(logicalaccess::GigaTMSReaderUnit);
-%shared_ptr(logicalaccess::GigaTMSReaderUnitConfiguration);
-%shared_ptr(logicalaccess::GigaTMSSerialPortDataTransport);
 %shared_ptr(logicalaccess::GunneboBufferParser);
 %shared_ptr(logicalaccess::GunneboReaderCardAdapter);
 %shared_ptr(logicalaccess::GunneboReaderProvider);
 %shared_ptr(logicalaccess::GunneboReaderUnit);
 %shared_ptr(logicalaccess::GunneboReaderUnitConfiguration);
 %shared_ptr(logicalaccess::GunneboSerialPortDataTransport);
-%shared_ptr(logicalaccess::HIDConstant);
-%shared_ptr(logicalaccess::HIDConstant::KeyNumber);
 %shared_ptr(logicalaccess::HIDHoneywell40BitFormat);
-%shared_ptr(logicalaccess::HIDiClass16KSChip);
-%shared_ptr(logicalaccess::HIDiClass2KSChip);
-%shared_ptr(logicalaccess::HIDiClass32KS_16_16Chip);
-%shared_ptr(logicalaccess::HIDiClass32KS_16_8x2Chip);
-%shared_ptr(logicalaccess::HIDiClass32KS_8x2_16Chip);
-%shared_ptr(logicalaccess::HIDiClass32KS_8x2_8x2Chip);
-%shared_ptr(logicalaccess::HIDiClass8x2KSChip);
-%shared_ptr(logicalaccess::HIDiClassAccessControlCardService);
-%shared_ptr(logicalaccess::HIDiClassAccessInfo);
-%shared_ptr(logicalaccess::HIDiClassCardProvider);
-%shared_ptr(logicalaccess::HIDiClassChip);
-%shared_ptr(logicalaccess::HIDiClassKey);
-%shared_ptr(logicalaccess::HIDiClassLocation);
-%shared_ptr(logicalaccess::HIDiClassOmnikeyXX27Commands);
-%shared_ptr(logicalaccess::HIDiClassPCSCCommands);
-%shared_ptr(logicalaccess::HIDiClassPCSCCommands::SecureModeGuard);
-%shared_ptr(logicalaccess::HIDiClassStorageCardService);
 %shared_ptr(logicalaccess::HMAC1Key);
 %shared_ptr(logicalaccess::IAESCryptoService);
 %shared_ptr(logicalaccess::IChip);
@@ -312,19 +242,18 @@
 %shared_ptr(logicalaccess::ISO7816Response);
 %shared_ptr(logicalaccess::ISO7816ResultChecker);
 %shared_ptr(logicalaccess::ISO7816StorageCardService);
-%shared_ptr(logicalaccess::IdOnDemandReaderCardAdapter);
-%shared_ptr(logicalaccess::IdOnDemandReaderProvider);
-%shared_ptr(logicalaccess::IdOnDemandReaderUnit);
-%shared_ptr(logicalaccess::IdOnDemandReaderUnitConfiguration);
 %shared_ptr(logicalaccess::IdentityCardService);
 %shared_ptr(logicalaccess::IndalaChip);
 %shared_ptr(logicalaccess::InfineonMYDChip);
 %shared_ptr(logicalaccess::InitializationVector);
-%shared_ptr(logicalaccess::InvalidTLVException);
 %shared_ptr(logicalaccess::JsonDumpCardService);
 %shared_ptr(logicalaccess::Key);
 %shared_ptr(logicalaccess::KeyDiversification);
 %shared_ptr(logicalaccess::KeyStorage);
+%shared_ptr(logicalaccess::KeyboardReaderProvider);
+%shared_ptr(logicalaccess::KeyboardReaderUnit);
+%shared_ptr(logicalaccess::KeyboardReaderUnitConfiguration);
+%shared_ptr(logicalaccess::KeyboardSharedStruct);
 %shared_ptr(logicalaccess::LCDDisplay);
 %shared_ptr(logicalaccess::LEDBuzzerDisplay);
 %shared_ptr(logicalaccess::LegicPrimeChip);
@@ -349,11 +278,9 @@
 %shared_ptr(logicalaccess::MifareCL1356Commands);
 %shared_ptr(logicalaccess::MifareCherryCommands);
 %shared_ptr(logicalaccess::MifareChip);
-%shared_ptr(logicalaccess::MifareClassicUIDChangerCardService);
 %shared_ptr(logicalaccess::MifareCommands);
 %shared_ptr(logicalaccess::MifareKey);
 %shared_ptr(logicalaccess::MifareLocation);
-%shared_ptr(logicalaccess::MifareNFCCommands);
 %shared_ptr(logicalaccess::MifareNFCTagCardService);
 %shared_ptr(logicalaccess::MifareOK5553Commands);
 %shared_ptr(logicalaccess::MifareOmnikeyXX21Commands);
@@ -389,9 +316,6 @@
 %shared_ptr(logicalaccess::MifarePlusXChip);
 %shared_ptr(logicalaccess::MifareSCMCommands);
 %shared_ptr(logicalaccess::MifareSTidSTRCommands);
-%shared_ptr(logicalaccess::MifareSmartIDCardProvider);
-%shared_ptr(logicalaccess::MifareSmartIDCommands);
-%shared_ptr(logicalaccess::MifareSmartIDReaderCardAdapter);
 %shared_ptr(logicalaccess::MifareSpringCardCommands);
 %shared_ptr(logicalaccess::MifareStorageCardService);
 %shared_ptr(logicalaccess::MifareUltralightAccessInfo);
@@ -412,12 +336,6 @@
 %shared_ptr(logicalaccess::MifareUltralightStorageCardService);
 %shared_ptr(logicalaccess::MifareUltralightUIDChangerCardService);
 %shared_ptr(logicalaccess::MyDivInfo);
-%shared_ptr(logicalaccess::NFCDataTransport);
-%shared_ptr(logicalaccess::NFCReaderCardAdapter);
-%shared_ptr(logicalaccess::NFCReaderProvider);
-%shared_ptr(logicalaccess::NFCReaderUnit);
-%shared_ptr(logicalaccess::NFCReaderUnit::WriteUIDConfigGuard);
-%shared_ptr(logicalaccess::NFCReaderUnitConfiguration);
 %shared_ptr(logicalaccess::NFCTag1CardService);
 %shared_ptr(logicalaccess::NFCTag2CardService);
 %shared_ptr(logicalaccess::NFCTag3CardService);
@@ -444,40 +362,26 @@
 %shared_ptr(logicalaccess::OSDPReaderUnitConfiguration);
 %shared_ptr(logicalaccess::OSDPSecureChannel);
 %shared_ptr(logicalaccess::OSDPSerialPortDataTransport);
-%shared_ptr(logicalaccess::Omnikey5023AccessControlCardService);
 %shared_ptr(logicalaccess::Omnikey5427ReaderUnitConfiguration);
-%shared_ptr(logicalaccess::OmnikeyHIDiClassDataTransport);
 %shared_ptr(logicalaccess::OmnikeyLANXX21ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX21ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX21ReaderUnit::SecureModeStatus);
 %shared_ptr(logicalaccess::OmnikeyXX21ReaderUnitConfiguration);
 %shared_ptr(logicalaccess::OmnikeyXX22ReaderUnit);
-%shared_ptr(logicalaccess::OmnikeyXX23ReaderUnit);
 %shared_ptr(logicalaccess::OmnikeyXX25ReaderUnit);
-%shared_ptr(logicalaccess::OmnikeyXX27AccessControlCardService);
-%shared_ptr(logicalaccess::OmnikeyXX27ReaderUnit);
 %shared_ptr(logicalaccess::OmnitechKeyDiversification);
 %shared_ptr(logicalaccess::PCSCConnection);
 %shared_ptr(logicalaccess::PCSCControlDataTransport);
 %shared_ptr(logicalaccess::PCSCDataTransport);
-%shared_ptr(logicalaccess::PCSCHIDiClassDataTransport);
 %shared_ptr(logicalaccess::PCSCReaderCardAdapter);
 %shared_ptr(logicalaccess::PCSCReaderProvider);
 %shared_ptr(logicalaccess::PCSCReaderUnit);
 %shared_ptr(logicalaccess::PCSCReaderUnitConfiguration);
 %shared_ptr(logicalaccess::PKCSKeyStorage);
 %shared_ptr(logicalaccess::ParityDataField);
-%shared_ptr(logicalaccess::PicoPassCommands);
-%shared_ptr(logicalaccess::PicoPassSimpleCommands);
 %shared_ptr(logicalaccess::Pkcs7Certificate);
 %shared_ptr(logicalaccess::Profile);
-%shared_ptr(logicalaccess::PromagBufferParser);
-%shared_ptr(logicalaccess::PromagReaderCardAdapter);
-%shared_ptr(logicalaccess::PromagReaderProvider);
-%shared_ptr(logicalaccess::PromagReaderUnit);
-%shared_ptr(logicalaccess::PromagReaderUnitConfiguration);
-%shared_ptr(logicalaccess::PromagSerialPortDataTransport);
 %shared_ptr(logicalaccess::ProxAccessControlCardService);
 %shared_ptr(logicalaccess::ProxChip);
 %shared_ptr(logicalaccess::ProxLiteChip);
@@ -496,13 +400,6 @@
 %shared_ptr(logicalaccess::ReaderUnitConfiguration);
 %shared_ptr(logicalaccess::RemoteCrypto);
 %shared_ptr(logicalaccess::ResultChecker);
-%shared_ptr(logicalaccess::RplethDataTransport);
-%shared_ptr(logicalaccess::RplethLCDDisplay);
-%shared_ptr(logicalaccess::RplethLEDBuzzerDisplay);
-%shared_ptr(logicalaccess::RplethReaderCardAdapter);
-%shared_ptr(logicalaccess::RplethReaderProvider);
-%shared_ptr(logicalaccess::RplethReaderUnit);
-%shared_ptr(logicalaccess::RplethReaderUnitConfiguration);
 %shared_ptr(logicalaccess::SAMAV1Chip);
 %shared_ptr(logicalaccess::SAMAV1ISO7816Commands);
 %shared_ptr(logicalaccess::SAMAV2Chip);
@@ -513,34 +410,7 @@
 %shared_ptr(logicalaccess::SAMISO7816ResultChecker);
 %shared_ptr(logicalaccess::SAMKeyStorage);
 %shared_ptr(logicalaccess::SAMKucEntry);
-%shared_ptr(logicalaccess::SCIELReaderCardAdapter);
-%shared_ptr(logicalaccess::SCIELReaderProvider);
-%shared_ptr(logicalaccess::SCIELReaderUnit);
-%shared_ptr(logicalaccess::SCIELReaderUnit::Finder);
-%shared_ptr(logicalaccess::SCIELReaderUnitConfiguration);
 %shared_ptr(logicalaccess::SCMReaderUnit);
-%shared_ptr(logicalaccess::SEProcessorChip);
-%shared_ptr(logicalaccess::SEProcessorCommands);
-%shared_ptr(logicalaccess::SEProcessorCrypto);
-%shared_ptr(logicalaccess::SEProcessorISO7816Commands);
-%shared_ptr(logicalaccess::SEProcessorMessageHeader);
-%shared_ptr(logicalaccess::SEProcessorOmnikeyXX27Commands);
-%shared_ptr(logicalaccess::SIO::AsymmetricAlgoId);
-%shared_ptr(logicalaccess::SIO::CryptoContext);
-%shared_ptr(logicalaccess::SIO::Identifier);
-%shared_ptr(logicalaccess::SIO::License);
-%shared_ptr(logicalaccess::SIO::SecureObject);
-%shared_ptr(logicalaccess::SIO::SymmetricAlgoId);
-%shared_ptr(logicalaccess::STidPRGBufferParser);
-%shared_ptr(logicalaccess::STidPRGProxAccessControlCardService);
-%shared_ptr(logicalaccess::STidPRGReaderCardAdapter);
-%shared_ptr(logicalaccess::STidPRGReaderProvider);
-%shared_ptr(logicalaccess::STidPRGReaderUnit);
-%shared_ptr(logicalaccess::STidPRGReaderUnit::BuzzerModeGuard);
-%shared_ptr(logicalaccess::STidPRGReaderUnitConfiguration);
-%shared_ptr(logicalaccess::STidPRGResultChecker);
-%shared_ptr(logicalaccess::STidPRGSerialPortDataTransport);
-%shared_ptr(logicalaccess::STidPRGUtils);
 %shared_ptr(logicalaccess::STidSTRBufferParser);
 %shared_ptr(logicalaccess::STidSTRLEDBuzzerDisplay);
 %shared_ptr(logicalaccess::STidSTRReaderCardAdapter);
@@ -550,18 +420,10 @@
 %shared_ptr(logicalaccess::STidSTRReaderUnitConfiguration);
 %shared_ptr(logicalaccess::STidSTRSerialPortDataTransport);
 %shared_ptr(logicalaccess::SagemKeyDiversification);
-%shared_ptr(logicalaccess::ScielBufferParser);
-%shared_ptr(logicalaccess::ScielSerialPortDataTransport);
-%shared_ptr(logicalaccess::SeosAccessInfo);
 %shared_ptr(logicalaccess::SeosChip);
 %shared_ptr(logicalaccess::SeosCommands);
-%shared_ptr(logicalaccess::SeosCrypto);
 %shared_ptr(logicalaccess::SeosFormat);
-%shared_ptr(logicalaccess::SeosISO7816Commands);
 %shared_ptr(logicalaccess::SeosKey);
-%shared_ptr(logicalaccess::SeosLocation);
-%shared_ptr(logicalaccess::SeosSEAccessControlCardService);
-%shared_ptr(logicalaccess::SeosValueAccessInfo);
 %shared_ptr(logicalaccess::SerialPort);
 %shared_ptr(logicalaccess::SerialPortDataTransport);
 %shared_ptr(logicalaccess::SerialPortXml);
@@ -569,11 +431,6 @@
 %shared_ptr(logicalaccess::SignatureResult);
 %shared_ptr(logicalaccess::SignatureResult::Description);
 %shared_ptr(logicalaccess::SmartFrameChip);
-%shared_ptr(logicalaccess::SmartIDLEDBuzzerDisplay);
-%shared_ptr(logicalaccess::SmartIDReaderCardAdapter);
-%shared_ptr(logicalaccess::SmartIDReaderProvider);
-%shared_ptr(logicalaccess::SmartIDReaderUnit);
-%shared_ptr(logicalaccess::SmartIDReaderUnitConfiguration);
 %shared_ptr(logicalaccess::SpringCardReaderUnit);
 %shared_ptr(logicalaccess::SpringCardResultChecker);
 %shared_ptr(logicalaccess::StaticFormat);
@@ -582,6 +439,7 @@
 %shared_ptr(logicalaccess::StringDataField);
 %shared_ptr(logicalaccess::TCPDataTransport);
 %shared_ptr(logicalaccess::TLV);
+%shared_ptr(logicalaccess::TLVDataField);
 %shared_ptr(logicalaccess::TagItChip);
 %shared_ptr(logicalaccess::TagItCommands);
 %shared_ptr(logicalaccess::TextRecord);
@@ -596,7 +454,6 @@
 %shared_ptr(logicalaccess::TopazStorageCardService);
 %shared_ptr(logicalaccess::TripleDESKey);
 %shared_ptr(logicalaccess::TwicAccessControlCardService);
-%shared_ptr(logicalaccess::TwicCardProvider);
 %shared_ptr(logicalaccess::TwicChip);
 %shared_ptr(logicalaccess::TwicCommands);
 %shared_ptr(logicalaccess::TwicISO7816Commands);
@@ -615,8 +472,13 @@
 %shared_ptr(logicalaccess::Wiegand37WithFacilityFormat);
 %shared_ptr(logicalaccess::Wiegand37WithFacilityRightParity2Format);
 %shared_ptr(logicalaccess::WiegandFormat);
+%shared_ptr(logicalaccess::WindowsRegistry);
 %shared_ptr(logicalaccess::X509Certificate);
 %shared_ptr(logicalaccess::XmlSerializable);
+%shared_ptr(logicalaccess::YubikeyChallengeCardService);
+%shared_ptr(logicalaccess::YubikeyChip);
+%shared_ptr(logicalaccess::YubikeyCommands);
+%shared_ptr(logicalaccess::YubikeyISO7816Commands);
 %shared_ptr(logicalaccess::iks::IslogKeyServer);
 %shared_ptr(logicalaccess::iks::IslogKeyServer::IKSConfig);
 %shared_ptr(logicalaccess::openssl::AESCipher);
@@ -645,17 +507,13 @@
 %shared_ptr(logicalaccess::s_SAMVersionInformation);
 %shared_ptr(logicalaccess::s_SETAV1);
 %shared_ptr(logicalaccess::s_SETAV2);
+%shared_ptr(logicalaccess::s_YubikeyCalculateResponse);
+%shared_ptr(logicalaccess::s_YubikeyListItem);
+%shared_ptr(logicalaccess::s_YubikeySelectResponse);
 %shared_ptr(logicalaccess::s_changeKeyDiversification);
 %shared_ptr(logicalaccess::s_changeKeyInfo);
-%shared_ptr(logicalaccess::se::AlgoInfo);
 %shared_ptr(logicalaccess::t_buz_cmd);
 %shared_ptr(logicalaccess::t_led_cmd);
-%shared_ptr(A3MLGM5600LCDDisplay);
-%shared_ptr(A3MLGM5600LEDBuzzerDisplay);
-%shared_ptr(A3MLGM5600ReaderCardAdapter);
-%shared_ptr(A3MLGM5600ReaderProvider);
-%shared_ptr(A3MLGM5600ReaderUnit);
-%shared_ptr(A3MLGM5600ReaderUnitConfiguration);
 %shared_ptr(ACSACR1222LLCDDisplay);
 %shared_ptr(ACSACR1222LLEDBuzzerDisplay);
 %shared_ptr(ACSACR1222LReaderUnit);
@@ -671,24 +529,6 @@
 %shared_ptr(ATRParser::ATRInfo);
 %shared_ptr(AccessControlCardService);
 %shared_ptr(AccessInfo);
-%shared_ptr(AdmittoBufferParser);
-%shared_ptr(AdmittoReaderCardAdapter);
-%shared_ptr(AdmittoReaderProvider);
-%shared_ptr(AdmittoReaderUnit);
-%shared_ptr(AdmittoReaderUnitConfiguration);
-%shared_ptr(AdmittoSerialPortDataTransport);
-%shared_ptr(AxessTMC13BufferParser);
-%shared_ptr(AxessTMC13ReaderCardAdapter);
-%shared_ptr(AxessTMC13ReaderProvider);
-%shared_ptr(AxessTMC13ReaderUnit);
-%shared_ptr(AxessTMC13ReaderUnitConfiguration);
-%shared_ptr(AxessTMC13SerialPortDataTransport);
-%shared_ptr(AxessTMCLegicBufferParser);
-%shared_ptr(AxessTMCLegicReaderCardAdapter);
-%shared_ptr(AxessTMCLegicReaderProvider);
-%shared_ptr(AxessTMCLegicReaderUnit);
-%shared_ptr(AxessTMCLegicReaderUnitConfiguration);
-%shared_ptr(AxessTMCLegicSerialPortDataTransport);
 %shared_ptr(BCDByteDataType);
 %shared_ptr(BCDNibbleDataType);
 %shared_ptr(BariumFerritePCSCFormat);
@@ -710,6 +550,7 @@
 %shared_ptr(CardProbe);
 %shared_ptr(CardService);
 %shared_ptr(CardsFormatComposite);
+%shared_ptr(ChallengeCardService);
 %shared_ptr(ChecksumDataField);
 %shared_ptr(CherryReaderUnit);
 %shared_ptr(Chip);
@@ -733,10 +574,6 @@
 %shared_ptr(DESFireEV1Location);
 %shared_ptr(DESFireEV1NFCTag4CardService);
 %shared_ptr(DESFireEV1STidSTRCommands);
-%shared_ptr(DESFireEV2Chip);
-%shared_ptr(DESFireEV2Commands);
-%shared_ptr(DESFireEV2Crypto);
-%shared_ptr(DESFireEV2ISO7816Commands);
 %shared_ptr(DESFireISO7816Commands);
 %shared_ptr(DESFireISO7816ResultChecker);
 %shared_ptr(DESFireJsonDumpCardService);
@@ -757,6 +594,7 @@
 %shared_ptr(DeisterReaderUnitConfiguration);
 %shared_ptr(DeisterSerialPortDataTransport);
 %shared_ptr(DummyCommands);
+%shared_ptr(DummyDataTransport);
 %shared_ptr(DummyReaderUnit);
 %shared_ptr(EM4102Chip);
 %shared_ptr(EM4135Chip);
@@ -793,42 +631,14 @@
 %shared_ptr(GenericTagAccessControlCardService);
 %shared_ptr(GenericTagCardProvider);
 %shared_ptr(GenericTagChip);
-%shared_ptr(GenericTagIdOnDemandAccessControlCardService);
-%shared_ptr(GenericTagIdOnDemandChip);
-%shared_ptr(GenericTagIdOnDemandCommands);
 %shared_ptr(Getronik40BitFormat);
-%shared_ptr(GigaTMSBufferParser);
-%shared_ptr(GigaTMSReaderCardAdapter);
-%shared_ptr(GigaTMSReaderProvider);
-%shared_ptr(GigaTMSReaderUnit);
-%shared_ptr(GigaTMSReaderUnitConfiguration);
-%shared_ptr(GigaTMSSerialPortDataTransport);
 %shared_ptr(GunneboBufferParser);
 %shared_ptr(GunneboReaderCardAdapter);
 %shared_ptr(GunneboReaderProvider);
 %shared_ptr(GunneboReaderUnit);
 %shared_ptr(GunneboReaderUnitConfiguration);
 %shared_ptr(GunneboSerialPortDataTransport);
-%shared_ptr(HIDConstant);
-%shared_ptr(HIDConstant::KeyNumber);
 %shared_ptr(HIDHoneywell40BitFormat);
-%shared_ptr(HIDiClass16KSChip);
-%shared_ptr(HIDiClass2KSChip);
-%shared_ptr(HIDiClass32KS_16_16Chip);
-%shared_ptr(HIDiClass32KS_16_8x2Chip);
-%shared_ptr(HIDiClass32KS_8x2_16Chip);
-%shared_ptr(HIDiClass32KS_8x2_8x2Chip);
-%shared_ptr(HIDiClass8x2KSChip);
-%shared_ptr(HIDiClassAccessControlCardService);
-%shared_ptr(HIDiClassAccessInfo);
-%shared_ptr(HIDiClassCardProvider);
-%shared_ptr(HIDiClassChip);
-%shared_ptr(HIDiClassKey);
-%shared_ptr(HIDiClassLocation);
-%shared_ptr(HIDiClassOmnikeyXX27Commands);
-%shared_ptr(HIDiClassPCSCCommands);
-%shared_ptr(HIDiClassPCSCCommands::SecureModeGuard);
-%shared_ptr(HIDiClassStorageCardService);
 %shared_ptr(HMAC1Key);
 %shared_ptr(IAESCryptoService);
 %shared_ptr(IChip);
@@ -867,19 +677,18 @@
 %shared_ptr(ISO7816Response);
 %shared_ptr(ISO7816ResultChecker);
 %shared_ptr(ISO7816StorageCardService);
-%shared_ptr(IdOnDemandReaderCardAdapter);
-%shared_ptr(IdOnDemandReaderProvider);
-%shared_ptr(IdOnDemandReaderUnit);
-%shared_ptr(IdOnDemandReaderUnitConfiguration);
 %shared_ptr(IdentityCardService);
 %shared_ptr(IndalaChip);
 %shared_ptr(InfineonMYDChip);
 %shared_ptr(InitializationVector);
-%shared_ptr(InvalidTLVException);
 %shared_ptr(JsonDumpCardService);
 %shared_ptr(Key);
 %shared_ptr(KeyDiversification);
 %shared_ptr(KeyStorage);
+%shared_ptr(KeyboardReaderProvider);
+%shared_ptr(KeyboardReaderUnit);
+%shared_ptr(KeyboardReaderUnitConfiguration);
+%shared_ptr(KeyboardSharedStruct);
 %shared_ptr(LCDDisplay);
 %shared_ptr(LEDBuzzerDisplay);
 %shared_ptr(LegicPrimeChip);
@@ -904,11 +713,9 @@
 %shared_ptr(MifareCL1356Commands);
 %shared_ptr(MifareCherryCommands);
 %shared_ptr(MifareChip);
-%shared_ptr(MifareClassicUIDChangerCardService);
 %shared_ptr(MifareCommands);
 %shared_ptr(MifareKey);
 %shared_ptr(MifareLocation);
-%shared_ptr(MifareNFCCommands);
 %shared_ptr(MifareNFCTagCardService);
 %shared_ptr(MifareOK5553Commands);
 %shared_ptr(MifareOmnikeyXX21Commands);
@@ -944,9 +751,6 @@
 %shared_ptr(MifarePlusXChip);
 %shared_ptr(MifareSCMCommands);
 %shared_ptr(MifareSTidSTRCommands);
-%shared_ptr(MifareSmartIDCardProvider);
-%shared_ptr(MifareSmartIDCommands);
-%shared_ptr(MifareSmartIDReaderCardAdapter);
 %shared_ptr(MifareSpringCardCommands);
 %shared_ptr(MifareStorageCardService);
 %shared_ptr(MifareUltralightAccessInfo);
@@ -967,12 +771,6 @@
 %shared_ptr(MifareUltralightStorageCardService);
 %shared_ptr(MifareUltralightUIDChangerCardService);
 %shared_ptr(MyDivInfo);
-%shared_ptr(NFCDataTransport);
-%shared_ptr(NFCReaderCardAdapter);
-%shared_ptr(NFCReaderProvider);
-%shared_ptr(NFCReaderUnit);
-%shared_ptr(NFCReaderUnit::WriteUIDConfigGuard);
-%shared_ptr(NFCReaderUnitConfiguration);
 %shared_ptr(NFCTag1CardService);
 %shared_ptr(NFCTag2CardService);
 %shared_ptr(NFCTag3CardService);
@@ -999,40 +797,26 @@
 %shared_ptr(OSDPReaderUnitConfiguration);
 %shared_ptr(OSDPSecureChannel);
 %shared_ptr(OSDPSerialPortDataTransport);
-%shared_ptr(Omnikey5023AccessControlCardService);
 %shared_ptr(Omnikey5427ReaderUnitConfiguration);
-%shared_ptr(OmnikeyHIDiClassDataTransport);
 %shared_ptr(OmnikeyLANXX21ReaderUnit);
 %shared_ptr(OmnikeyReaderUnit);
 %shared_ptr(OmnikeyXX21ReaderUnit);
 %shared_ptr(OmnikeyXX21ReaderUnit::SecureModeStatus);
 %shared_ptr(OmnikeyXX21ReaderUnitConfiguration);
 %shared_ptr(OmnikeyXX22ReaderUnit);
-%shared_ptr(OmnikeyXX23ReaderUnit);
 %shared_ptr(OmnikeyXX25ReaderUnit);
-%shared_ptr(OmnikeyXX27AccessControlCardService);
-%shared_ptr(OmnikeyXX27ReaderUnit);
 %shared_ptr(OmnitechKeyDiversification);
 %shared_ptr(PCSCConnection);
 %shared_ptr(PCSCControlDataTransport);
 %shared_ptr(PCSCDataTransport);
-%shared_ptr(PCSCHIDiClassDataTransport);
 %shared_ptr(PCSCReaderCardAdapter);
 %shared_ptr(PCSCReaderProvider);
 %shared_ptr(PCSCReaderUnit);
 %shared_ptr(PCSCReaderUnitConfiguration);
 %shared_ptr(PKCSKeyStorage);
 %shared_ptr(ParityDataField);
-%shared_ptr(PicoPassCommands);
-%shared_ptr(PicoPassSimpleCommands);
 %shared_ptr(Pkcs7Certificate);
 %shared_ptr(Profile);
-%shared_ptr(PromagBufferParser);
-%shared_ptr(PromagReaderCardAdapter);
-%shared_ptr(PromagReaderProvider);
-%shared_ptr(PromagReaderUnit);
-%shared_ptr(PromagReaderUnitConfiguration);
-%shared_ptr(PromagSerialPortDataTransport);
 %shared_ptr(ProxAccessControlCardService);
 %shared_ptr(ProxChip);
 %shared_ptr(ProxLiteChip);
@@ -1051,13 +835,6 @@
 %shared_ptr(ReaderUnitConfiguration);
 %shared_ptr(RemoteCrypto);
 %shared_ptr(ResultChecker);
-%shared_ptr(RplethDataTransport);
-%shared_ptr(RplethLCDDisplay);
-%shared_ptr(RplethLEDBuzzerDisplay);
-%shared_ptr(RplethReaderCardAdapter);
-%shared_ptr(RplethReaderProvider);
-%shared_ptr(RplethReaderUnit);
-%shared_ptr(RplethReaderUnitConfiguration);
 %shared_ptr(SAMAV1Chip);
 %shared_ptr(SAMAV1ISO7816Commands);
 %shared_ptr(SAMAV2Chip);
@@ -1068,34 +845,7 @@
 %shared_ptr(SAMISO7816ResultChecker);
 %shared_ptr(SAMKeyStorage);
 %shared_ptr(SAMKucEntry);
-%shared_ptr(SCIELReaderCardAdapter);
-%shared_ptr(SCIELReaderProvider);
-%shared_ptr(SCIELReaderUnit);
-%shared_ptr(SCIELReaderUnit::Finder);
-%shared_ptr(SCIELReaderUnitConfiguration);
 %shared_ptr(SCMReaderUnit);
-%shared_ptr(SEProcessorChip);
-%shared_ptr(SEProcessorCommands);
-%shared_ptr(SEProcessorCrypto);
-%shared_ptr(SEProcessorISO7816Commands);
-%shared_ptr(SEProcessorMessageHeader);
-%shared_ptr(SEProcessorOmnikeyXX27Commands);
-%shared_ptr(SIO::AsymmetricAlgoId);
-%shared_ptr(SIO::CryptoContext);
-%shared_ptr(SIO::Identifier);
-%shared_ptr(SIO::License);
-%shared_ptr(SIO::SecureObject);
-%shared_ptr(SIO::SymmetricAlgoId);
-%shared_ptr(STidPRGBufferParser);
-%shared_ptr(STidPRGProxAccessControlCardService);
-%shared_ptr(STidPRGReaderCardAdapter);
-%shared_ptr(STidPRGReaderProvider);
-%shared_ptr(STidPRGReaderUnit);
-%shared_ptr(STidPRGReaderUnit::BuzzerModeGuard);
-%shared_ptr(STidPRGReaderUnitConfiguration);
-%shared_ptr(STidPRGResultChecker);
-%shared_ptr(STidPRGSerialPortDataTransport);
-%shared_ptr(STidPRGUtils);
 %shared_ptr(STidSTRBufferParser);
 %shared_ptr(STidSTRLEDBuzzerDisplay);
 %shared_ptr(STidSTRReaderCardAdapter);
@@ -1105,18 +855,10 @@
 %shared_ptr(STidSTRReaderUnitConfiguration);
 %shared_ptr(STidSTRSerialPortDataTransport);
 %shared_ptr(SagemKeyDiversification);
-%shared_ptr(ScielBufferParser);
-%shared_ptr(ScielSerialPortDataTransport);
-%shared_ptr(SeosAccessInfo);
 %shared_ptr(SeosChip);
 %shared_ptr(SeosCommands);
-%shared_ptr(SeosCrypto);
 %shared_ptr(SeosFormat);
-%shared_ptr(SeosISO7816Commands);
 %shared_ptr(SeosKey);
-%shared_ptr(SeosLocation);
-%shared_ptr(SeosSEAccessControlCardService);
-%shared_ptr(SeosValueAccessInfo);
 %shared_ptr(SerialPort);
 %shared_ptr(SerialPortDataTransport);
 %shared_ptr(SerialPortXml);
@@ -1124,11 +866,6 @@
 %shared_ptr(SignatureResult);
 %shared_ptr(SignatureResult::Description);
 %shared_ptr(SmartFrameChip);
-%shared_ptr(SmartIDLEDBuzzerDisplay);
-%shared_ptr(SmartIDReaderCardAdapter);
-%shared_ptr(SmartIDReaderProvider);
-%shared_ptr(SmartIDReaderUnit);
-%shared_ptr(SmartIDReaderUnitConfiguration);
 %shared_ptr(SpringCardReaderUnit);
 %shared_ptr(SpringCardResultChecker);
 %shared_ptr(StaticFormat);
@@ -1137,6 +874,7 @@
 %shared_ptr(StringDataField);
 %shared_ptr(TCPDataTransport);
 %shared_ptr(TLV);
+%shared_ptr(TLVDataField);
 %shared_ptr(TagItChip);
 %shared_ptr(TagItCommands);
 %shared_ptr(TextRecord);
@@ -1151,7 +889,6 @@
 %shared_ptr(TopazStorageCardService);
 %shared_ptr(TripleDESKey);
 %shared_ptr(TwicAccessControlCardService);
-%shared_ptr(TwicCardProvider);
 %shared_ptr(TwicChip);
 %shared_ptr(TwicCommands);
 %shared_ptr(TwicISO7816Commands);
@@ -1170,8 +907,13 @@
 %shared_ptr(Wiegand37WithFacilityFormat);
 %shared_ptr(Wiegand37WithFacilityRightParity2Format);
 %shared_ptr(WiegandFormat);
+%shared_ptr(WindowsRegistry);
 %shared_ptr(X509Certificate);
 %shared_ptr(XmlSerializable);
+%shared_ptr(YubikeyChallengeCardService);
+%shared_ptr(YubikeyChip);
+%shared_ptr(YubikeyCommands);
+%shared_ptr(YubikeyISO7816Commands);
 %shared_ptr(iks::IslogKeyServer);
 %shared_ptr(iks::IslogKeyServer::IKSConfig);
 %shared_ptr(openssl::AESCipher);
@@ -1200,9 +942,11 @@
 %shared_ptr(s_SAMVersionInformation);
 %shared_ptr(s_SETAV1);
 %shared_ptr(s_SETAV2);
+%shared_ptr(s_YubikeyCalculateResponse);
+%shared_ptr(s_YubikeyListItem);
+%shared_ptr(s_YubikeySelectResponse);
 %shared_ptr(s_changeKeyDiversification);
 %shared_ptr(s_changeKeyInfo);
-%shared_ptr(se::AlgoInfo);
 %shared_ptr(t_buz_cmd);
 %shared_ptr(t_led_cmd);
 

@@ -1,7 +1,8 @@
 project(LibLogicalAccessNetWin32)
 
 set(CMAKE_SUPPRESS_REGENERATION true)
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+MESSAGE(STATUS "DIR: ${CMAKE_BINARY_DIR}")
+include(${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
 
 set(LLA_SWIG_SOURCES liblogicalaccess_reader_wrap.cxx
@@ -31,6 +32,14 @@ else()
   target_include_directories(${TARGET_NAME} PUBLIC /usr/include/PCSC)
 endif()
 
+set(LLA_LINK)
+if(LLA_BUILD_NFC)
+  add_compile_definitions(BUILD_NFC)
+  list(APPEND LLA_LINK CONAN_PKG::LogicalAccessNFC)
+else()
+  list(APPEND LLA_LINK CONAN_PKG::LogicalAccess)
+endif()
+
 set(LLA_ADDITIONAL_LINK)
 if (LLA_BUILD_PRIVATE)
 	add_compile_definitions(BUILD_PRIVATE)
@@ -38,6 +47,6 @@ if (LLA_BUILD_PRIVATE)
 endif()
 
 target_link_libraries(${TARGET_NAME} PUBLIC
-  CONAN_PKG::LogicalAccessNFC
+  ${LLA_LINK}
   ${LLA_ADDITIONAL_LINK})
 install(TARGETS ${TARGET_NAME} RUNTIME DESTINATION bin LIBRARY DESTINATION lib)

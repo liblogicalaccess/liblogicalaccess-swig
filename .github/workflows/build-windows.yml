@@ -1,0 +1,65 @@
+name: Build Windows
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+  push:
+    branches:
+      - master
+      - develop
+jobs:
+  build:
+    runs-on: windows-2019
+    strategy:
+      matrix:
+        arch: [x86, x86_64]
+    steps:
+      - name: "Setup"
+        run: |
+          choco install llvm --version=6.0.0 --allow-downgrade
+          pip3 install conan
+      
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: | 
+            6.0.x
+      
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: "Checkout LLA-SWIG"
+        uses: actions/checkout@v2
+        with:
+          path: lla-swig
+          fetch-depth: 0
+
+      - name: "Checkout LLA"
+        uses: actions/checkout@v2
+        with:
+          repository: islog/liblogicalaccess
+          ref: develop
+          path: lla 
+
+      - name: "Checkout cppkcs11"
+        uses: actions/checkout@v2
+        with:
+          repository: islog/cppkcs11
+          path: cppkcs
+
+      - name: "Setup LLA"
+        run : |
+          conan export .
+        working-directory: lla
+
+      - name: "Setup cppkcs11"
+        run : |
+          conan export .
+        working-directory: cppkcs
+
+
+      - name: "Build LLA-SWIG"
+        run: |
+          ./build-windows.ps1 -arch ${{matrix.arch}} -build_type Release
+        working-directory: lla-swig

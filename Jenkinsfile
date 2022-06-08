@@ -31,6 +31,7 @@ pipeline {
             parallel {
                 stage("Linux Swig") {
                     stages {
+						/*
                         stage('Linux Swig Support Container') {
                             agent { label 'linux' }
                             steps {
@@ -38,11 +39,15 @@ pipeline {
                                 sh "docker push docker-registry.islog.com:5000/swig-support:latest"
                             }
                         }
+						*/
 
                         // Only x64 release
                         stage('Linux Swig') {
                             agent {
-                                docker 'docker-registry.islog.com:5000/swig-support:latest'
+                                docker {
+									alwaysPull true
+									image 'artifacts.linq.hidglobal.com:5000/debian_build_swig:latest'
+								}
                             }
                             steps {
                                 script {
@@ -51,10 +56,10 @@ pipeline {
                                         dir('sources/LibLogicalAccessNet.win32') {
                                             sh "mkdir build"
                                             dir('build') {
-                                                sh 'conan install --profile compilers/x64_gcc6_release -o LLA_BUILD_PRIVATE=True -u ..'
+                                                sh 'conan install --profile compilers/x64_gcc10_release -o LLA_BUILD_PRIVATE=True -u ..'
                                                 sh 'conan build ..'
                                                 sh 'conan package ..'
-                                                sh "conan export-pkg --profile compilers/x64_gcc6_release -o LLA_BUILD_PRIVATE=True .. ${PACKAGE_NAME}"
+                                                sh "conan export-pkg --profile compilers/x64_gcc10_release -o LLA_BUILD_PRIVATE=True .. ${PACKAGE_NAME}"
                                                 sh "conan upload ${PACKAGE_NAME} -r islog-test --all --confirm --check --force"
                                             }
                                         }
@@ -100,11 +105,11 @@ pipeline {
                                 dir('sources/LibLogicalAccessNet.win32') {
                                     script {
                                         conan.withFreshWindowsConanCache {
-                                            powershell './conan-build.ps1 -publish'
+                                            powershell './conan-build.ps1 -with_profile -build_private $True -build_nfc $True -build_rfidea $True -publish'
                                         }
                                     }
                                 }
-                                warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', consoleParsers: [[parserName: 'MSBuild']], defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', unHealthy: ''
+                                //warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', consoleParsers: [[parserName: 'MSBuild']], defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', unHealthy: ''
                             }
                         }
 
