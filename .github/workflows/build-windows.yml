@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: islog/liblogicalaccess
-          ref: develop
+          ref: ${{ github.ref_name }}
           path: lla 
 
       - name: "Checkout cppkcs11"
@@ -50,7 +50,7 @@ jobs:
 
       - name: "Setup LLA"
         run : |
-          conan export .
+          conan export . islog/${{ github.ref_name }}
         working-directory: lla
 
       - name: "Setup cppkcs11"
