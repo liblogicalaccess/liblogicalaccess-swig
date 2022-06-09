@@ -34,7 +34,7 @@ jobs:
       - name: "Checkout LLA-NFC"
         uses: actions/checkout@v2
         with:
-          repository: aberod/liblogicalaccess-libnfc
+          repository: islog/liblogicalaccess-libnfc
           ref: ${{ github.ref_name }}
           path: lla-nfc
 
