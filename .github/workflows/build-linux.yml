@@ -16,7 +16,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get upgrade
-          sudo apt-get install -y libclang-6.0-dev
+          sudo apt-get install -y libclang-9-dev
           pip3 install conan
 
       - name: "Checkout LLA-SWIG"
@@ -28,14 +28,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: islog/liblogicalaccess
-          ref: develop
+          ref: ${{ github.ref_name }}
           path: lla 
 
       - name: "Checkout LLA-NFC"
         uses: actions/checkout@v2
         with:
           repository: aberod/liblogicalaccess-libnfc
-          ref: develop
+          ref: ${{ github.ref_name }}
           path: lla-nfc
 
       - name: "Checkout cppkcs11"
@@ -55,9 +55,9 @@ jobs:
         run : |
           sudo apt-get update
           sudo apt-get install -y libusb-dev
-          conan export .
+          conan export . islog/${{ github.ref_name }}
           cd vendor/libnfc
-          conan export .
+          conan export . 
         working-directory: lla-nfc
 
       - name: "Setup cppkcs11"

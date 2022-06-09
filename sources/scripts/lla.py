@@ -19,7 +19,7 @@ import enum
 
 
 if os.name == 'posix':
-    clang.cindex.Config.set_library_file('/usr/lib/llvm-6.0/lib/libclang.so')
+    clang.cindex.Config.set_library_file('/usr/lib/llvm-9/lib/libclang.so')
 else:
     clang.cindex.Config.set_library_file('C:\\Program Files\\LLVM\\bin\\libclang.dll')
     logging.basicConfig(level=logging.INFO)
