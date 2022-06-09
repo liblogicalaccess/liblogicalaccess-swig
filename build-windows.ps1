@@ -21,7 +21,7 @@ if($with_profile) {
     .\conan-imports.ps1 -arch $arch -build_type $build_type -build_private $build_private -build_nfc $build_nfc -build_rfideas $build_rfideas
 }
 Set-Location ../sources/scripts
-pip install -r requirements.txt
+#pip install -r requirements.txt
 Set-Location ../../
 .\sources/scripts/update-gitversion-vs2017proj.ps1 sources/LibLogicalAccessNet/LibLogicalAccessNet.csproj
 .\sources/scripts/generate-swig.ps1
