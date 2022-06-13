@@ -25,11 +25,14 @@ class LogicalAccessSwigConan(ConanFile):
             if self.options.LLA_BUILD_NFC:
                 self.requires('LogicalAccessNFC/' + self.version + '@islog/' + self.channel)
             else:
-                self.requires('LogicalAccess/' + self.version)
+                self.requires('LogicalAccess/' + self.version + '@islog/' + self.channel)
         except ConanException:
             if self.options.LLA_BUILD_PRIVATE:
                 self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + tools.Git().get_branch())
-            self.requires('LogicalAccessNFC/' + self.version + '@islog/' + tools.Git().get_branch())
+            if self.options.LLA_BUILD_NFC:
+                self.requires('LogicalAccessNFC/' + self.version + '@islog/' + tools.Git().get_branch())
+            else:
+                self.requires('LogicalAccess/' + self.version + '@islog/' + tools.Git().get_branch())
     
     def imports(self):
         self.copy("bin/*.dll", keep_path=False, dst="./packages/dll/" + str(self.settings.arch) + "/" + str(self.settings.build_type))
