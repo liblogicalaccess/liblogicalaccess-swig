@@ -10,6 +10,7 @@
 #include <logicalaccess/services/identity/identity_service.hpp>
 #include <logicalaccess/services/nfctag/nfctagcardservice.hpp>
 #include <logicalaccess/services/uidchanger/uidchangerservice.hpp>
+#include <logicalaccess/services/challenge/challengecardservice.hpp>
 
 using namespace logicalaccess;
 %}
@@ -34,5 +35,6 @@ using namespace logicalaccess;
 %include <logicalaccess/services/nfctag/nfctagcardservice.hpp>
 
 %include <logicalaccess/services/uidchanger/uidchangerservice.hpp>
+%include <logicalaccess/services/challenge/challengecardservice.hpp>
 
 %template(NdefRecordCollection) std::vector<std::shared_ptr<logicalaccess::NdefRecord> >;
