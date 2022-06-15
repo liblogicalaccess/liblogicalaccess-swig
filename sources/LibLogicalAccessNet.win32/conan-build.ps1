@@ -57,8 +57,8 @@ if($with_profile) {
     if ($publish) {
       ExecExternal { conan export-pkg .. $PackageName }
       ExecExternal { conan upload $PackageName -r islog-test --all --confirm --check }
-      Remove-Item * -Recurse -Force
     }
+	Remove-Item * -Recurse -Force
   }
 } else {
   ExecExternal { conan install -s arch=$arch -s build_type=$build_type -o LLA_BUILD_PRIVATE=$build_private -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_RFIDEAS=$build_rfideas --build=missing .. }
