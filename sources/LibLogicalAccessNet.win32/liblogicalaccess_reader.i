@@ -494,6 +494,11 @@ typedef enum : uint16_t
 } SCardProtocol;
 %}
 
+%ignore logicalaccess::PCSCReaderUnit::getT_CL_ISOType;
+%ignore logicalaccess::PCSCReaderUnit::reconnect;
+%feature("director") ISO7816ReaderUnit;
+%feature("director") PCSCReaderUnit;
+
 /* Include_section */
 
 %include <logicalaccess/plugins/readers/deister/lla_readers_deister_api.hpp>
@@ -757,5 +762,3 @@ typedef enum : uint16_t
 #ifdef BUILD_PRIVATE
 %template(SIOCryptoContextVector) std::vector<logicalaccess::SIO::CryptoContext>;
 #endif
-
-%feature("director") PCSCReaderUnit;

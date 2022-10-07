@@ -63,11 +63,11 @@ namespace TestCore
             r2.setConfiguration(ru.getConfiguration());
             r2.setDataTransport(ru.getDataTransport());
             r2.setDefaultReaderCardAdapter(ru.getDefaultReaderCardAdapter());
-            bool typeA = true;
+            /*bool typeA = true;
             bool typeB = false;
             Console.WriteLine("Cool: " + typeA + ". B: " + typeB);
             r2simple.getT_CL_ISOType(ref typeA, ref typeB);
-            Console.WriteLine("Cool: " + typeA + ". B: " + typeB);
+            Console.WriteLine("Cool: " + typeA + ". B: " + typeB);*/
             r2.connectToReader();
             r2.waitInsertion(1000);
 
@@ -75,8 +75,8 @@ namespace TestCore
             // Yes, this test relies on LLA implementation details, but well...
             r2.connect();
             r2.connect();
-            r2simple.getT_CL_ISOType(ref typeA, ref typeB);
-            Console.WriteLine("Cool: " + typeA + ". B: " + typeB);
+            /*r2simple.getT_CL_ISOType(ref typeA, ref typeB);
+            Console.WriteLine("Cool: " + typeA + ". B: " + typeB);*/
             r2.disconnectFromReader();
             Assert.IsTrue(r2simple.hasBeenCalled);
         }

@@ -4,10 +4,10 @@
     <AssemblyName>LibLogicalAccessNet$(ASSEMBLYAPPENDER)</AssemblyName>
     <RootNamespace>LibLogicalAccess</RootNamespace>
     <Description>ISLOG RFID library layer for C#</Description>
-    <Copyright>Copyright (C) 2021</Copyright>
-    <Version>2.4.0-develop0001</Version>
-    <AssemblyVersion>2.4.0.0</AssemblyVersion>
-    <FileVersion>2.4.0.0</FileVersion>
+    <Copyright>Copyright (C) HID Global 2022</Copyright>
+    <Version>2.4.2</Version>
+    <AssemblyVersion>2.4.2.0</AssemblyVersion>
+    <FileVersion>2.4.2.0</FileVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Company>HID Global</Company>
     <Authors>HID Global</Authors>
