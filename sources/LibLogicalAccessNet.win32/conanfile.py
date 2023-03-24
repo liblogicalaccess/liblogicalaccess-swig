@@ -11,10 +11,9 @@ class LLASwig(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = { 'LLA_BUILD_PRIVATE': [True, False],
                 'LLA_BUILD_NFC': [True, False],
-                'LLA_BUILD_RFIDEAS': [True, False]}
-    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=False', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
-                        'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True', 'LLA_BUILD_PRIVATE=False', 'LLA_BUILD_NFC=True', \
-                        'LLA_BUILD_RFIDEAS=True'
+                'LLA_BUILD_RFIDEAS': [True, False],
+                'LLA_BUILD_UNITTEST': [True, False]}
+    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=False', 'LLA_BUILD_PRIVATE=False', 'LLA_BUILD_NFC=True', 'LLA_BUILD_RFIDEAS=True'
     generators = "cmake"
     revision_mode = "scm"
 
@@ -38,6 +37,9 @@ class LLASwig(ConanFile):
     def configure(self):
         if self.settings.os == 'Windows' and self.options.LLA_BUILD_RFIDEAS:
             self.options['LogicalAccess'].LLA_BUILD_RFIDEAS = True
+
+        self.options['LogicalAccess'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST
+        self.options['LogicalAccessPrivate'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST
     
     def configure_cmake(self):
         cmake = CMake(self, build_type=self.settings.build_type)

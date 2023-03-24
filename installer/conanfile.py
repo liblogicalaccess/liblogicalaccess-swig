@@ -8,15 +8,17 @@ class LogicalAccessSwigConan(ConanFile):
     settings = "build_type", "arch", "os"
     options = { 'LLA_BUILD_PRIVATE': [True, False],
                 'LLA_BUILD_NFC': [True, False],
-                'LLA_BUILD_RFIDEAS': [True, False]}
-    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True', 'LogicalAccess:LLA_BUILD_UNITTEST=True', \
-                        'LogicalAccessPrivate:LLA_BUILD_UNITTEST=True', 'LLA_BUILD_PRIVATE=True', \
-                        'LLA_BUILD_NFC=True', 'LLA_BUILD_RFIDEAS=True'
+                'LLA_BUILD_RFIDEAS': [True, False],
+                'LLA_BUILD_UNITTEST': [True, False]}
+    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True', 'LLA_BUILD_PRIVATE=True', 'LLA_BUILD_NFC=True', 'LLA_BUILD_RFIDEAS=True'
     revision_mode = "scm"
     
     def configure(self):
         if self.settings.os == 'Windows' and self.options.LLA_BUILD_RFIDEAS:
             self.options['LogicalAccess'].LLA_BUILD_RFIDEAS = True
+
+        self.options['LogicalAccess'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST
+        self.options['LogicalAccessPrivate'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST
 
     def requirements(self):
         try:

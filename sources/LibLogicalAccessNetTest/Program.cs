@@ -54,12 +54,15 @@ namespace LibLogicalAccessTest
                             Console.WriteLine("\tChip Name: {0}", chip.getCardType());
 
                             var cmd = (chip.getCommands() as DESFireEV1ISO7816Commands);
-                            DESFireEV1ISO7816Commands cmdev1 = chip.getCommands() as DESFireEV1ISO7816Commands;
-                            DESFireKey key = new DESFireKey();
-                            key.setKeyType(DESFireKeyType.DF_KEY_DES);
-                            //key.setKeyStorage(new IKSStorage("imported-zero-des"));
-                            cmd.selectApplication(0x00);
-                            cmd.authenticate(0, key);
+                            if (cmd != null)
+                            {
+                                DESFireEV1ISO7816Commands cmdev1 = chip.getCommands() as DESFireEV1ISO7816Commands;
+                                DESFireKey key = new DESFireKey();
+                                key.setKeyType(DESFireKeyType.DF_KEY_DES);
+                                //key.setKeyStorage(new IKSStorage("imported-zero-des"));
+                                cmd.selectApplication(0x00);
+                                cmd.authenticate(0, key);
+                            }
 
                             readerUnit.disconnect();
                         }
