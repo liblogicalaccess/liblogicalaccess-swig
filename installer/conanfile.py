@@ -4,7 +4,7 @@ import os
 
 class LogicalAccessSwigConan(ConanFile):
     name = "LogicalAccessSwig"
-    version = "2.4.2"
+    version = "2.5.0"
     settings = "build_type", "arch", "os"
     options = { 'LLA_BUILD_PRIVATE': [True, False],
                 'LLA_BUILD_NFC': [True, False],

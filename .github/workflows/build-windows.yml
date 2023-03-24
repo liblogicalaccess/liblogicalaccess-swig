@@ -19,7 +19,7 @@ jobs:
         run: |
           choco install llvm --version=9.0.0 --allow-downgrade
           choco install gitversion.portable
-          pip3 install conan
+          pip3 install conan==1.59.0
       
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1

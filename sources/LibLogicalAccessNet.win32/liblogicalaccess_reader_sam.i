@@ -4,7 +4,7 @@
 %{
 #include <logicalaccess/plugins/readers/iso7816/commands/samiso7816commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
-#include <logicalaccess/plugins/cards/samav2/samav2commands.hpp>
+#include <logicalaccess/plugins/cards/samav/samav2commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
 %}
 

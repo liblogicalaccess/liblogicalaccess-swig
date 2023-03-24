@@ -35,7 +35,7 @@
 #define LLA_CARDS_STMLRI_API
 #define LLA_CARDS_SMARTFRAME_API
 #define LLA_CARDS_SEOS_API
-#define LLA_CARDS_SAMAV2_API
+#define LLA_CARDS_SAMAV_API
 #define LLA_CARDS_PROX_API
 #define LLA_CARDS_PROXLITE_API
 #define LLA_CARDS_PRIVATE_SEPROCESSOR_API
@@ -471,6 +471,7 @@
 %shared_ptr(logicalaccess::SAMAV1ISO7816Commands);
 %shared_ptr(logicalaccess::SAMAV2Chip);
 %shared_ptr(logicalaccess::SAMAV2ISO7816Commands);
+%shared_ptr(logicalaccess::SAMAV3Chip);
 %shared_ptr(logicalaccess::SAMBasicKeyEntry);
 %shared_ptr(logicalaccess::SAMChip);
 %shared_ptr(logicalaccess::SAMDESfireCrypto);
@@ -995,6 +996,7 @@
 %shared_ptr(SAMAV1ISO7816Commands);
 %shared_ptr(SAMAV2Chip);
 %shared_ptr(SAMAV2ISO7816Commands);
+%shared_ptr(SAMAV3Chip);
 %shared_ptr(SAMBasicKeyEntry);
 %shared_ptr(SAMChip);
 %shared_ptr(SAMDESfireCrypto);

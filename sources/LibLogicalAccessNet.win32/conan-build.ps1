@@ -37,7 +37,7 @@ if($with_profile) {
 
 Set-Location build
 
-$PackageName = "LogicalAccessSwig/2.4.2@islog/master"
+$PackageName = "LogicalAccessSwig/2.5.0@islog/master"
 $Profiles = @(("compilers/x64_msvc_release", "Release", "x86_64"),
 			  ("compilers/x86_msvc_release", "Release", "x86"),
 			  ("compilers/x86_msvc_debug", "Debug", "x86"),

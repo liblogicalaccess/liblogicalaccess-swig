@@ -4,7 +4,7 @@ import os
 
 class LLASwig(ConanFile):
     name = "LogicalAccessSwig"
-    version = "2.4.2"
+    version = "2.5.0"
     license = "LGPL"
     url = "https://github.com/islog/liblogicalaccess-swig"
     description = "SWIG wrapper for LibLogicalAccess"
