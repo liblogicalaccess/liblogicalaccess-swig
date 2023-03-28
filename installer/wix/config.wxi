@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <Include>
+    <?define Manufacturer = "Leosac" ?>
+    <?define ProductName = "LibLogicalAccess" ?>
+    <?define AboutURL = "https://www.leosac.com" ?>
+    <?define SupportURL = "https://www.leosac.com" ?>
+    <?define UpdatesURL = "https://www.leosac.com" ?>
+
+    <?define LLAMSMX64 = "../output/build.LibLogicalAccessNetCEMergex64.msm" ?>
+    <?define LLAMSMX86 = "../output/build.LibLogicalAccessNetCEMergex86.msm" ?>
+
+    <?if $(var.Platform) = "x64" ?>
+      <?define Win64 = "yes" ?>
+      <?define PlatformString = "64-bit"?>
+      <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+      <?define LLAMSM = "$(var.LLAMSMX64)" ?>
+    <?else ?>
+      <?define Win64 = "no" ?>
+      <?define PlatformString = "32-bit"?>
+      <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+      <?define LLAMSM = "$(var.LLAMSMX86)" ?>
+    <?endif ?>
+    
+    <?define BaseGuid = "4d4035eb-69cf-4d65-b0e1-26e1ab9e0b" ?>
+    <?define CompInstallRegDir = "$(var.BaseGuid)10" ?>
+    <?define CompSetPath = "$(var.BaseGuid)20" ?>
+
+  </Include>

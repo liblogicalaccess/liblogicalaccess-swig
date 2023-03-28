@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?include config.wxi ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="$(var.ProductName)" Language="1033" Version="2.5.0.0" Manufacturer="$(var.Manufacturer)" UpgradeCode="9b055bc0-f36a-4bfc-a711-73b405cceac3">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="ProductFeature" Title="$(var.ProductName)" Level="1">
+			<MergeRef Id="LLAMSM" />
+		</Feature>
+		<Feature Id="EnvironmentFeature" Title="Add to system environment" Level="1">
+      <ComponentGroupRef Id="EnvironmentComponents"/>
+		</Feature>
+    
+    <UIRef Id="WixUI_InstallDir" />
+  
+		<!-- The about link that appears in Add & Remove Programs. -->
+    <Property Id="ARPURLINFOABOUT" Value="$(var.AboutURL)" />
+    <!-- The help link that appears in Add & Remove Programs. -->
+    <Property Id="ARPHELPLINK" Value="$(var.SupportURL)" />
+    <!-- The update link that appears in Add & Remove Programs. -->
+    <Property Id="ARPURLUPDATEINFO" Value="$(var.UpdatesURL)" />
+  
+    <Property Id="ApplicationFolderName" Value="$(var.Manufacturer)\$(var.ProductName)" />
+    <Property Id="Platform" Value="$(var.Platform)" />
+    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+		<Property Id="APPLICATIONFOLDER">
+      <RegistrySearch Id="FindInstallRegDir" Type="raw" Root="HKLM" Win64="$(var.Win64)" Key="Software\$(var.Manufacturer)\$(var.ProductName)" Name="InstallDir" />
+    </Property>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="$(var.PlatformProgramFilesFolder)">
+        <Directory Id="ManufacturerFolder" Name="$(var.Manufacturer)">
+					<Directory Id="APPLICATIONFOLDER" Name="$(var.ProductName)">
+            <Merge Id="LLAMSM" Language="1033" DiskId="1" SourceFile="$(var.LLAMSM)" />
+          </Directory>
+				</Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="EnvironmentComponents" Directory="APPLICATIONFOLDER">
+      <Component Id="InstallRegDir" Guid="$(var.CompInstallRegDir)" DiskId="1" Win64="$(var.Win64)">
+        <RegistryKey Id="RegInstallDir" Root="HKLM" Key="Software\$(var.Manufacturer)\$(var.ProductName)" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes" >
+          <RegistryValue Name="InstallDir" Type="string" Value="[APPLICATIONFOLDER]" />
+        </RegistryKey>
+      </Component>
+      <Component Id="SetPath" Guid="$(var.CompSetPath)" DiskId="1" Win64="$(var.Win64)">
+        <CreateFolder />
+        <Environment Id="PATH" Name="PATH" Value="[APPLICATIONFOLDER]" Permanent="no" Part="last" Action="set" System="yes" />
+      </Component>
+    </ComponentGroup>
+	</Fragment>
+</Wix>
