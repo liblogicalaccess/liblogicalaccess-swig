@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?include config.wxi ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="LibLogicalAccess.Msm" Language="1033" Version="1.0.0.0">
+		<Package Id="e75b8ac8-6ed3-4601-bfc3-30c46564c0c7" Manufacturer="$(var.Manufacturer)" InstallerVersion="200" />
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="MergeRedirectFolder">
+				<Component Id="LLAComponent" Win64="$(var.Win64)">
+          <File Id="___var.cps3cards.dll_" Source="$(var.lladir)\cps3cards.dll" />
+          <File Id="___var.deisterreaders.dll_" Source="$(var.lladir)\deisterreaders.dll" />
+          <File Id="___var.desfirecards.dll_" Source="$(var.lladir)\desfirecards.dll" />
+          <File Id="___var.elatecreaders.dll_" Source="$(var.lladir)\elatecreaders.dll" />
+          <File Id="___var.em4102cards.dll_" Source="$(var.lladir)\em4102cards.dll" />
+          <File Id="___var.em4135cards.dll_" Source="$(var.lladir)\em4135cards.dll" />
+          <File Id="___var.epasscards.dll_" Source="$(var.lladir)\epasscards.dll" />
+          <File Id="___var.felicacards.dll_" Source="$(var.lladir)\felicacards.dll" />
+          <File Id="___var.generictagcards.dll_" Source="$(var.lladir)\generictagcards.dll" />
+          <File Id="___var.gunneboreaders.dll_" Source="$(var.lladir)\gunneboreaders.dll" />
+          <File Id="___var.icode1cards.dll_" Source="$(var.lladir)\icode1cards.dll" />
+          <File Id="___var.icode2cards.dll_" Source="$(var.lladir)\icode2cards.dll" />
+          <File Id="___var.indalacards.dll_" Source="$(var.lladir)\indalacards.dll" />
+          <File Id="___var.infineonmydcards.dll_" Source="$(var.lladir)\infineonmydcards.dll" />
+          <File Id="___var.iso7816cards.dll_" Source="$(var.lladir)\iso7816cards.dll" />
+          <File Id="___var.iso7816readers.dll_" Source="$(var.lladir)\iso7816readers.dll" />
+          <File Id="___var.iso15693cards.dll_" Source="$(var.lladir)\iso15693cards.dll" />
+          <File Id="___var.keyboardreaders.dll_" Source="$(var.lladir)\keyboardreaders.dll" />
+          <File Id="___var.legicprimecards.dll_" Source="$(var.lladir)\legicprimecards.dll" />
+          <File Id="___var.mifarecards.dll_" Source="$(var.lladir)\mifarecards.dll" />
+          <File Id="___var.mifarepluscards.dll_" Source="$(var.lladir)\mifarepluscards.dll" />
+          <File Id="___var.mifareultralightcards.dll_" Source="$(var.lladir)\mifareultralightcards.dll" />
+          <File Id="___var.ok5553readers.dll_" Source="$(var.lladir)\ok5553readers.dll" />
+          <File Id="___var.osdpreaders.dll_" Source="$(var.lladir)\osdpreaders.dll" />
+          <File Id="___var.pcscreaders.dll_" Source="$(var.lladir)\pcscreaders.dll" />
+          <File Id="___var.proxcards.dll_" Source="$(var.lladir)\proxcards.dll" />
+          <File Id="___var.proxlitecards.dll_" Source="$(var.lladir)\proxlitecards.dll" />
+          <File Id="___var.samavcards.dll_" Source="$(var.lladir)\samavcards.dll" />
+          <File Id="___var.seoscards.dll_" Source="$(var.lladir)\seoscards.dll" />
+          <File Id="___var.smartframecards.dll_" Source="$(var.lladir)\smartframecards.dll" />
+          <File Id="___var.stidstrreaders.dll_" Source="$(var.lladir)\stidstrreaders.dll" />
+          <File Id="___var.stmlri512cards.dll_" Source="$(var.lladir)\stmlri512cards.dll" />
+          <File Id="___var.tagitcards.dll_" Source="$(var.lladir)\tagitcards.dll" />
+          <File Id="___var.topazcards.dll_" Source="$(var.lladir)\topazcards.dll" />
+          <File Id="___var.twiccards.dll_" Source="$(var.lladir)\twiccards.dll" />
+          <File Id="___var.yubikeycards.dll_" Source="$(var.lladir)\yubikeycards.dll" />
+          <File Id="___var.logicalaccess.dll_" Source="$(var.lladir)\logicalaccess.dll" />
+          <File Id="___var.logicalaccess_cryptolib.dll_" Source="$(var.lladir)\logicalaccess-cryptolib.dll" />
+          <File Id="___var.llacommon.dll_" Source="$(var.lladir)\llacommon.dll" />
+          <File Id="___var.LibLogicalAccessNet.win32.dll_" Source="$(var.llaw32dir)\LibLogicalAccessNet.win32.dll" />
+				</Component>
+        <Component Id="LLAX64Component" Win64="$(var.Win64)">
+          <Condition><![CDATA[PLATFORM=x64]]></Condition>
+          <File Id="___var.islogkbdhook64.exe_" Source="$(var.lladir)\islogkbdhook64.exe" />
+          <File Id="___var.islogkbdhooklib64.dll_" Source="$(var.lladir)\islogkbdhooklib64.dll" />
+        </Component>
+        <Component Id="LLAX86Component" Win64="$(var.Win64)">
+          <Condition><![CDATA[PLATFORM=x86]]></Condition>
+          <File Id="___var.islogkbdhook32.exe_" Source="$(var.lladir)\islogkbdhook32.exe" />
+          <File Id="___var.islogkbdhooklib32.dll_" Source="$(var.lladir)\islogkbdhooklib32.dll" />
+        </Component>
+        <Component Id="DependenciesComponent" Win64="$(var.Win64)">
+          <File Id="___var.pkcscryptounified.dll_" Source="$(var.lladir)\pkcscryptounified.dll" />
+          <File Id="___var.cppkcs11.dll_" Source="$(var.lladir)\cppkcs11.dll" />
+        </Component>
+        <Component Id="DependenciesX64Component" Win64="$(var.Win64)">
+          <Condition><![CDATA[PLATFORM=x64]]></Condition>
+          <File Id="___var.libcrypto_x64.dll_" Source="$(var.lladir)\libcrypto-1_1-x64.dll" />
+          <File Id="___var.libssl_x64.dll_" Source="$(var.lladir)\libssl-1_1-x64.dll" />
+        </Component>
+        <Component Id="DependenciesX86Component" Win64="$(var.Win64)">
+          <Condition><![CDATA[PLATFORM=x86]]></Condition>
+          <File Id="___var.libcrypto.dll_" Source="$(var.lladir)\libcrypto-1_1.dll" />
+          <File Id="___var.libssl.dll_" Source="$(var.lladir)\libssl-1_1.dll" />
+        </Component>
+			</Directory>
+		</Directory>
+	</Module>
+</Wix>

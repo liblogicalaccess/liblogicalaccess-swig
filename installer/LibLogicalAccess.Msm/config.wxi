@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <Include>
+    <?define Manufacturer = "Leosac" ?>
+
+    <?if $(var.Platform) = "x64" ?>
+      <?define Win64 = "yes" ?>
+      <?define PlatformString = "64-bit"?>
+      <?define lladir = "packages\dll\x86_64\Release"?>
+      <?define llaw32dir = "..\sources\LibLogicalAccessNet.win32\bin\x86_64\Release"?>
+    <?else ?>
+      <?define Win64 = "no" ?>
+      <?define PlatformString = "32-bit"?>
+      <?define lladir = "packages\dll\x86\Release"?>
+      <?define llaw32dir = "..\sources\LibLogicalAccessNet.win32\bin\x86\Release"?>
+    <?endif ?>
+
+  </Include>
