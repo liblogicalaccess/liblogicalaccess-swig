@@ -25,10 +25,14 @@
   
     <Property Id="ApplicationFolderName" Value="$(var.Manufacturer)\$(var.ProductName)" />
     <Property Id="Platform" Value="$(var.Platform)" />
-    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
 		<Property Id="APPLICATIONFOLDER">
       <RegistrySearch Id="FindInstallRegDir" Type="raw" Root="HKLM" Win64="$(var.Win64)" Key="Software\$(var.Manufacturer)\$(var.ProductName)" Name="InstallDir" />
     </Property>
+    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+    <Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONFOLDER" />
+
+    <WixVariable Id="WixUILicenseRtf" Value="LICENSE.rtf" />
+    <WixVariable Id="WixUIInfoIco" Value="lla.ico" />
 	</Product>
 
 	<Fragment>
@@ -36,7 +40,7 @@
 			<Directory Id="$(var.PlatformProgramFilesFolder)">
         <Directory Id="ManufacturerFolder" Name="$(var.Manufacturer)">
 					<Directory Id="APPLICATIONFOLDER" Name="$(var.ProductName)">
-            <Merge Id="LLAMSM" Language="1033" DiskId="1" SourceFile="$(var.LLAMSM)" />
+            <Merge Id="LLAMSM" Language="1033" DiskId="1" SourceFile="$(var.LibLogicalAccess.Msm.TargetPath)" />
           </Directory>
 				</Directory>
 			</Directory>
