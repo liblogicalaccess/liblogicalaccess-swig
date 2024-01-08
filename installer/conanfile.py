@@ -4,33 +4,23 @@ import os
 
 class LogicalAccessSwigConan(ConanFile):
     name = "LogicalAccessSwig"
-    version = "2.5.0"
+    version = "3.0.0"
     settings = "build_type", "arch", "os"
-    options = { 'LLA_BUILD_PRIVATE': [True, False],
-                'LLA_BUILD_NFC': [True, False],
-                'LLA_BUILD_RFIDEAS': [True, False],
+    options = { 'LLA_BUILD_NFC': [True, False],
                 'LLA_BUILD_UNITTEST': [True, False]}
-    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True', 'LLA_BUILD_PRIVATE=True', 'LLA_BUILD_NFC=True', 'LLA_BUILD_RFIDEAS=True'
+    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True', 'LLA_BUILD_NFC=True'
     revision_mode = "scm"
     
     def configure(self):
-        if self.settings.os == 'Windows' and self.options.LLA_BUILD_RFIDEAS:
-            self.options['LogicalAccess'].LLA_BUILD_RFIDEAS = True
-
         self.options['LogicalAccess'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST
-        self.options['LogicalAccessPrivate'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST
 
     def requirements(self):
         try:
-            if self.options.LLA_BUILD_PRIVATE:
-                self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + self.channel)
             if self.options.LLA_BUILD_NFC:
                 self.requires('LogicalAccessNFC/' + self.version + '@islog/' + self.channel)
             else:
                 self.requires('LogicalAccess/' + self.version + '@islog/' + self.channel)
         except ConanException:
-            if self.options.LLA_BUILD_PRIVATE:
-                self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + tools.Git().get_branch())
             if self.options.LLA_BUILD_NFC:
                 self.requires('LogicalAccessNFC/' + self.version + '@islog/' + tools.Git().get_branch())
             else:

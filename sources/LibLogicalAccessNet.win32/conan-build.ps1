@@ -7,11 +7,7 @@ Param(
     [Parameter(ParameterSetName="WithoutProfile", Mandatory)]
     [string]$build_type,
     [Parameter(Mandatory=$false)]
-    [bool]$build_private,
-    [Parameter(Mandatory=$false)]
     [bool]$build_nfc,
-    [Parameter(Mandatory=$false)]
-    [bool]$build_rfideas,
 	[Parameter(Mandatory=$false)]
     [bool]$build_unittest,
     [Parameter(Mandatory=$false)]
@@ -28,7 +24,7 @@ function ExecExternal {
   }
 }
 
-Write-Output "Welcome, ISLOG SWIG Win32 Build"
+Write-Output "Welcome, LLA SWIG Win32 Build"
 
 New-Item -name build -Force -ItemType Directory | Out-Null
 if($with_profile) {
@@ -39,19 +35,17 @@ if($with_profile) {
 
 Set-Location build
 
-$PackageName = "LogicalAccessSwig/2.5.0@islog/master"
+$PackageName = "LogicalAccessSwig/3.0.0@lla/master"
 $Profiles = @(("compilers/x64_msvc_release", "Release", "x86_64"),
 			  ("compilers/x86_msvc_release", "Release", "x86"),
 			  ("compilers/x86_msvc_debug", "Debug", "x86"),
 			  ("compilers/x64_msvc_debug", "Debug", "x86_64"))  
 
-if (!$build_private) {
-	$env:ASSEMBLYAPPENDER = 'CE'
-}
+$env:ASSEMBLYAPPENDER = 'CE'
 
 if($with_profile) {
   foreach ($Profile in $Profiles) {
-    ExecExternal { conan install -pr $Profile[0] -o LLA_BUILD_PRIVATE=$build_private -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_RFIDEAS=$build_rfideas -o LLA_BUILD_UNITTEST=$build_unittest --build=missing .. }
+    ExecExternal { conan install -pr $Profile[0] -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_UNITTEST=$build_unittest --build=missing .. }
     ExecExternal { conan build .. }
     $config = $Profile[1]
     $arch = $Profile[2]
@@ -63,7 +57,7 @@ if($with_profile) {
 	Remove-Item * -Recurse -Force
   }
 } else {
-  ExecExternal { conan install -s arch=$arch -s build_type=$build_type -o LLA_BUILD_PRIVATE=$build_private -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_RFIDEAS=$build_rfideas -o LLA_BUILD_UNITTEST=$build_unittest --build=missing .. }
+  ExecExternal { conan install -s arch=$arch -s build_type=$build_type -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_UNITTEST=$build_unittest --build=missing .. }
   ExecExternal { conan build .. }
   Copy-Item bin/LibLogicalAccessNet.win32.* ../bin/$arch/$build_type/
   if ($publish) {
@@ -75,4 +69,4 @@ if($with_profile) {
 
 Set-Location ..
 
-Write-Output "ISLOG SWIG Win32 done."
+Write-Output "LLA SWIG Win32 done."

@@ -3,14 +3,7 @@
 set -x
 set -e
 
-buildprivate=False
-# Full Edition build?
-if [[($1 -eq 1) || ($1 = 'true') || ($1 = 'yes')]]
-then
-	buildprivate=True
-fi
-
-(cd installer && conan install -o LLA_BUILD_PRIVATE=$buildprivate -u . --build=missing)
+(cd installer && conan install -u . --build=missing)
 (cd sources/scripts/ && pip3 install -r requirements.txt)
 (cd sources/scripts/ && python3 lla.py)
 

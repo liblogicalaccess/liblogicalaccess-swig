@@ -10,7 +10,6 @@ liblogicalaccess_card_wrap.cxx
 liblogicalaccess_data_wrap.cxx
 liblogicalaccess_library_wrap.cxx
 liblogicalaccess_core_wrap.cxx
-liblogicalaccess_iks_wrap.cxx
 liblogicalaccess_exception_wrap.cxx
 liblogicalaccess_crypto_wrap.cxx
 lla_std_types_wrap.cxx)
@@ -40,13 +39,6 @@ else()
   list(APPEND LLA_LINK CONAN_PKG::LogicalAccess)
 endif()
 
-set(LLA_ADDITIONAL_LINK)
-if (LLA_BUILD_PRIVATE)
-	add_compile_definitions(BUILD_PRIVATE)
-	list(APPEND LLA_ADDITIONAL_LINK CONAN_PKG::LogicalAccessPrivate)
-endif()
-
 target_link_libraries(${TARGET_NAME} PUBLIC
-  ${LLA_LINK}
-  ${LLA_ADDITIONAL_LINK})
+  ${LLA_LINK})
 install(TARGETS ${TARGET_NAME} RUNTIME DESTINATION bin LIBRARY DESTINATION lib)

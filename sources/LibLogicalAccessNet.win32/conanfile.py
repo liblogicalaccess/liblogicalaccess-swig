@@ -4,14 +4,12 @@ import os
 
 class LLASwig(ConanFile):
     name = "LogicalAccessSwig"
-    version = "2.5.0"
+    version = "3.0.0"
     license = "LGPL"
-    url = "https://github.com/islog/liblogicalaccess-swig"
+    url = "https://github.com/liblogicalaccess/liblogicalaccess-swig"
     description = "SWIG wrapper for LibLogicalAccess"
     settings = "os", "compiler", "build_type", "arch"
-    options = { 'LLA_BUILD_PRIVATE': [True, False],
-                'LLA_BUILD_NFC': [True, False],
-                'LLA_BUILD_RFIDEAS': [True, False],
+    options = { 'LLA_BUILD_NFC': [True, False],
                 'LLA_BUILD_UNITTEST': [True, False]}
     default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=False', 'LLA_BUILD_PRIVATE=False', 'LLA_BUILD_NFC=True', 'LLA_BUILD_RFIDEAS=True'
     generators = "cmake"
@@ -19,35 +17,23 @@ class LLASwig(ConanFile):
 
     def requirements(self):
         try:
-            if self.options.LLA_BUILD_PRIVATE:
-                self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + self.channel)
             if self.options.LLA_BUILD_NFC:
-                self.requires('LogicalAccessNFC/' + self.version + '@islog/' + self.channel)
+                self.requires('LogicalAccessNFC/' + self.version + '@lla/' + self.channel)
             else:
-                self.requires('LogicalAccess/'+ self.version + '@islog/' + self.channel)
+                self.requires('LogicalAccess/'+ self.version + '@lla/' + self.channel)
         except ConanException:
-            if self.options.LLA_BUILD_PRIVATE:
-                self.requires('LogicalAccessPrivate/' + self.version + '@islog/' + tools.Git().get_branch())
             if self.options.LLA_BUILD_NFC:
-                self.requires('LogicalAccessNFC/' + self.version + '@islog/' + tools.Git().get_branch())
+                self.requires('LogicalAccessNFC/' + self.version + '@lla/' + tools.Git().get_branch())
             else:
-                self.requires('LogicalAccess/'+ self.version + '@islog/' + tools.Git().get_branch())
+                self.requires('LogicalAccess/'+ self.version + '@lla/' + tools.Git().get_branch())
 
     
     def configure(self):
-        if self.settings.os == 'Windows' and self.options.LLA_BUILD_RFIDEAS:
-            self.options['LogicalAccess'].LLA_BUILD_RFIDEAS = True
-
         self.options['LogicalAccess'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST
         self.options['LogicalAccessPrivate'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST
     
     def configure_cmake(self):
         cmake = CMake(self, build_type=self.settings.build_type)
-        if self.options.LLA_BUILD_PRIVATE:
-            cmake.definitions['LLA_BUILD_PRIVATE'] = True
-        else:
-            cmake.definitions['LLA_BUILD_PRIVATE'] = False
-
         if self.options.LLA_BUILD_NFC:
             cmake.definitions['LLA_BUILD_NFC'] = True
         else:

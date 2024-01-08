@@ -6,21 +6,17 @@ Param(
     [Parameter(ParameterSetName="WithoutProfile", Mandatory)]
     [string]$build_type,
     [Parameter(Mandatory=$false)]
-    [bool]$build_private,
-    [Parameter(Mandatory=$false)]
     [bool]$build_nfc,
-    [Parameter(Mandatory=$false)]
-    [bool]$build_rfideas,
 	[Parameter(Mandatory=$false)]
     [bool]$build_unittest
 )
 
-Write-Host $arch $build_type $build_private $build_nfc
+Write-Host $arch $build_type $build_nfc
 Set-Location installer
 if($with_profile) {
-    .\conan-imports.ps1 -with_profile -build_private $build_private -build_nfc $build_nfc -build_rfideas $build_rfideas -build_unittest $build_unittest
+    .\conan-imports.ps1 -with_profile -build_nfc $build_nfc -build_unittest $build_unittest
 } else {
-    .\conan-imports.ps1 -arch $arch -build_type $build_type -build_private $build_private -build_nfc $build_nfc -build_rfideas $build_rfideas -build_unittest $build_unittest
+    .\conan-imports.ps1 -arch $arch -build_type $build_type -build_nfc $build_nfc -build_unittest $build_unittest
 }
 Set-Location ../sources/scripts
 #pip install -r requirements.txt
@@ -29,9 +25,9 @@ Set-Location ../../
 .\sources/scripts/generate-swig.ps1
 Set-Location sources/LibLogicalAccessNet.win32
 if($with_profile) {
-    .\conan-build.ps1 -with_profile -build_private $build_private -build_nfc $build_nfc -build_rfideas $build_rfideas -build_unittest $build_unittest
+    .\conan-build.ps1 -with_profile -build_private -build_nfc $build_nfc -build_unittest $build_unittest
 } else {
-    ./conan-build.ps1 -arch $arch -build_type $build_type -build_private $build_private -build_nfc $build_nfc -build_rfideas $build_rfideas -build_unittest $build_unittest
+    ./conan-build.ps1 -arch $arch -build_type $build_type -build_nfc $build_nfc -build_unittest $build_unittest
 }
 Set-Location ..
 
