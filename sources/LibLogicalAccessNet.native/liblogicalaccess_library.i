@@ -5,7 +5,6 @@
 
 %import "liblogicalaccess_exception.i"
 %import "liblogicalaccess_data.i"
-%import "liblogicalaccess_iks.i"
 %import "liblogicalaccess_core.i"
 %import "liblogicalaccess_reader.i"
 %import "liblogicalaccess_card.i"

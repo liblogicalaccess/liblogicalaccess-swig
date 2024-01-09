@@ -27,14 +27,14 @@ sources/!LibLogicalAccessNet/Exception/CustomException.cs
 *.sdf
 *opensdf
 .vs
-sources/LibLogicalAccessNet.win32/*.filters
+sources/LibLogicalAccessNet.native/*.filters
 installer/LibLogicalAccessNet-cache
 installer/LibLogicalAccessNet-SetupFiles
 /installer/output
 /installer/VERSION
 /installer/build.*
-sources/LibLogicalAccessNet.win32/build/
-sources/LibLogicalAccessNet.win32/bin/
+sources/LibLogicalAccessNet.native/build/
+sources/LibLogicalAccessNet.native/bin/
 /installer/conanbuildinfo.txt
 /installer/conaninfo.txt
 /installer/conan_imports_manifest.txt
