@@ -45,7 +45,7 @@
           <File Id="___var.logicalaccess.dll_" Source="$(var.lladir)\logicalaccess.dll" />
           <File Id="___var.logicalaccess_cryptolib.dll_" Source="$(var.lladir)\logicalaccess-cryptolib.dll" />
           <File Id="___var.llacommon.dll_" Source="$(var.lladir)\llacommon.dll" />
-          <File Id="___var.LibLogicalAccessNet.win32.dll_" Source="$(var.llaw32dir)\LibLogicalAccessNet.win32.dll" />
+          <File Id="___var.LibLogicalAccessNet.native.dll_" Source="$(var.llaw32dir)\LibLogicalAccessNet.native.dll" />
           <File Id="___var.islogkbdhook.exe_" Source="$(var.lladir)\$(var.islogkbdhook)" />
           <File Id="___var.islogkbdhooklib.dll_" Source="$(var.lladir)\$(var.islogkbdhooklib)" />
         </Component>

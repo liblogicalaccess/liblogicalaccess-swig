@@ -13,24 +13,30 @@ class LogicalAccessSwigConan(ConanFile):
     
     def configure(self):
         self.options['LogicalAccess'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST
-
+    
     def requirements(self):
         try:
             if self.options.LLA_BUILD_NFC:
-                self.requires('LogicalAccessNFC/' + self.version + '@islog/' + self.channel)
+                self.requires('LogicalAccessNFC/' + self.version + '@lla/' + self.channel)
             else:
-                self.requires('LogicalAccess/' + self.version + '@islog/' + self.channel)
+                self.requires('LogicalAccess/' + self.version + '@lla/' + self.channel)
         except ConanException:
-            if self.options.LLA_BUILD_NFC:
-                self.requires('LogicalAccessNFC/' + self.version + '@islog/' + tools.Git().get_branch())
-            else:
-                self.requires('LogicalAccess/' + self.version + '@islog/' + tools.Git().get_branch())
+            try:
+                if self.options.LLA_BUILD_NFC:
+                    self.requires('LogicalAccessNFC/' + self.version + '@lla/' + tools.Git().get_branch())
+                else:
+                    self.requires('LogicalAccess/' + self.version + '@lla/' + tools.Git().get_branch())
+            except ConanException:
+                if self.options.LLA_BUILD_NFC:
+                    self.requires('LogicalAccessNFC/' + self.version)
+                else:
+                    self.requires('LogicalAccess/' + self.version)
     
     def imports(self):
         self.copy("bin/*.dll", keep_path=False, dst="./packages/dll/" + str(self.settings.arch) + "/" + str(self.settings.build_type))
         self.copy("bin/*.exe", keep_path=False, dst="./packages/dll/" + str(self.settings.arch) + "/" + str(self.settings.build_type))
         self.copy("lib/*.lib", keep_path=False, dst="./packages/lib/" + str(self.settings.arch) + "/" + str(self.settings.build_type))
-
+        
         self.copy("lib/*.so*", keep_path=False, dst="./packages/dll/")
         
         if not os.path.exists("./packages/include"):

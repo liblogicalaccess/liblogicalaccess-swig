@@ -11,7 +11,7 @@ class LLASwig(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = { 'LLA_BUILD_NFC': [True, False],
                 'LLA_BUILD_UNITTEST': [True, False]}
-    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=False', 'LLA_BUILD_PRIVATE=False', 'LLA_BUILD_NFC=True', 'LLA_BUILD_RFIDEAS=True'
+    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True','LogicalAccess:LLA_BUILD_IKS=False', 'LLA_BUILD_NFC=True'
     generators = "cmake"
     revision_mode = "scm"
 
@@ -22,11 +22,16 @@ class LLASwig(ConanFile):
             else:
                 self.requires('LogicalAccess/'+ self.version + '@lla/' + self.channel)
         except ConanException:
-            if self.options.LLA_BUILD_NFC:
-                self.requires('LogicalAccessNFC/' + self.version + '@lla/' + tools.Git().get_branch())
-            else:
-                self.requires('LogicalAccess/'+ self.version + '@lla/' + tools.Git().get_branch())
-
+            try:
+                if self.options.LLA_BUILD_NFC:
+                    self.requires('LogicalAccessNFC/' + self.version + '@lla/' + tools.Git().get_branch())
+                else:
+                    self.requires('LogicalAccess/'+ self.version + '@lla/' + tools.Git().get_branch())
+            except ConanException:
+                if self.options.LLA_BUILD_NFC:
+                    self.requires('LogicalAccessNFC/' + self.version)
+                else:
+                    self.requires('LogicalAccess/'+ self.version)
     
     def configure(self):
         self.options['LogicalAccess'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST

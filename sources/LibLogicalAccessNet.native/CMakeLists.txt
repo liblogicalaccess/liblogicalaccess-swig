@@ -1,4 +1,4 @@
-project(LibLogicalAccessNetWin32)
+project(LibLogicalAccessNetNative)
 
 set(CMAKE_SUPPRESS_REGENERATION true)
 MESSAGE(STATUS "DIR: ${CMAKE_BINARY_DIR}")
@@ -14,11 +14,7 @@ liblogicalaccess_exception_wrap.cxx
 liblogicalaccess_crypto_wrap.cxx
 lla_std_types_wrap.cxx)
 
-if (MSVC)
-  set(TARGET_NAME LibLogicalAccessNet.win32)
-else()
-  set(TARGET_NAME LogicalAccessNetNative)
-endif()
+set(TARGET_NAME LogicalAccessNet.native)
 
 add_library(${TARGET_NAME} SHARED ${LLA_SWIG_SOURCES})
 if (MSVC)

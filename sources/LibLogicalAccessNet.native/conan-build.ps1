@@ -24,7 +24,7 @@ function ExecExternal {
   }
 }
 
-Write-Output "Welcome, LLA SWIG Win32 Build"
+Write-Output "Welcome, LLA SWIG Native Build"
 
 New-Item -name build -Force -ItemType Directory | Out-Null
 if($with_profile) {
@@ -49,7 +49,7 @@ if($with_profile) {
     ExecExternal { conan build .. }
     $config = $Profile[1]
     $arch = $Profile[2]
-    Copy-Item bin/LibLogicalAccessNet.win32.* ../bin/$arch/$config/
+    Copy-Item bin/LibLogicalAccessNet.native.* ../bin/$arch/$config/
     if ($publish) {
       ExecExternal { conan export-pkg .. $PackageName }
       ExecExternal { conan upload $PackageName -r islog-test --all --confirm --check }
@@ -59,7 +59,7 @@ if($with_profile) {
 } else {
   ExecExternal { conan install -s arch=$arch -s build_type=$build_type -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_UNITTEST=$build_unittest --build=missing .. }
   ExecExternal { conan build .. }
-  Copy-Item bin/LibLogicalAccessNet.win32.* ../bin/$arch/$build_type/
+  Copy-Item bin/LibLogicalAccessNet.native.* ../bin/$arch/$build_type/
   if ($publish) {
     ExecExternal { conan export-pkg .. $PackageName }
     ExecExternal { conan upload $PackageName -r islog-test --all --confirm --check --force}
@@ -69,4 +69,4 @@ if($with_profile) {
 
 Set-Location ..
 
-Write-Output "LLA SWIG Win32 done."
+Write-Output "LLA SWIG Native done."

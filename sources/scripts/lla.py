@@ -337,7 +337,7 @@ def write_for_module(module_name, search_result):
     """
     Write includes and import into the "module" file, liblogicalaccess_module_name.i.
     """
-    filename = '../LibLogicalAccessNet.win32/liblogicalaccess_{}.i'.format(module_name)
+    filename = '../LibLogicalAccessNet.native/liblogicalaccess_{}.i'.format(module_name)
 
     with open(filename, "r") as f:
         lines = f.readlines()
@@ -372,7 +372,7 @@ def write_shared_ptr(all_types):
     :param all_types:
     :return:
     """
-    path = "../LibLogicalAccessNet.win32/liblogicalaccess.i"
+    path = "../LibLogicalAccessNet.native/liblogicalaccess.i"
     with open(path, "r") as f:
         lines = f.readlines()
         i = lines.index("/*****SHARED PTR SECTION*****/\n") + 1
@@ -416,7 +416,7 @@ def write_lla_api_define(lla_api_defines):
     Write the lla api define in swig interface
     :return:
     """
-    path = "../LibLogicalAccessNet.win32/liblogicalaccess.i"
+    path = "../LibLogicalAccessNet.native/liblogicalaccess.i"
     with open(path, "r") as f:
         lines = f.readlines()
 
@@ -429,7 +429,7 @@ def write_lla_api_define(lla_api_defines):
         f.write(''.join(lines))
 
 def main():
-    clean_files('../LibLogicalAccessNet.win32/')
+    clean_files('../LibLogicalAccessNet.native/')
 
     lla_api_defines = find_lla_api_define('{}logicalaccess/**/lla_*_api.hpp'.format(LLA_INCLUDE_PATH))
     write_lla_api_define(lla_api_defines)

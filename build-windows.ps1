@@ -19,11 +19,11 @@ if($with_profile) {
     .\conan-imports.ps1 -arch $arch -build_type $build_type -build_nfc $build_nfc -build_unittest $build_unittest
 }
 Set-Location ../sources/scripts
-#pip install -r requirements.txt
+pip install -r requirements.txt
 Set-Location ../../
 .\sources/scripts/update-gitversion-vs2017proj.ps1 sources/LibLogicalAccessNet/LibLogicalAccessNet.csproj
 .\sources/scripts/generate-swig.ps1
-Set-Location sources/LibLogicalAccessNet.win32
+Set-Location sources/LibLogicalAccessNet.native
 if($with_profile) {
     .\conan-build.ps1 -with_profile -build_private -build_nfc $build_nfc -build_unittest $build_unittest
 } else {

@@ -6,15 +6,15 @@ rm .\LibLogicalAccessNet\Generated\Card\*.cs
 rm .\LibLogicalAccessNet\Generated\Core\*.cs
 rm .\LibLogicalAccessNet\Generated\Crypto\*.cs
 
-$Commands = @((".\LibLogicalAccessNet\Generated\Card", "LibLogicalAccess.Card", ".\LibLogicalAccessNet.win32\liblogicalaccess_card.i"),
-            (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_data.i"),
-            (".\LibLogicalAccessNet\Exception", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_exception.i"),
-            (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_library.i"),
-            (".\LibLogicalAccessNet\Generated\Reader", "LibLogicalAccess.Reader", ".\LibLogicalAccessNet.win32\liblogicalaccess_reader.i"),
-            (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_iks.i"),
-            (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\lla_std_types.i"),
-            (".\LibLogicalAccessNet\Generated\Crypto", "LibLogicalAccess.Crypto", ".\LibLogicalAccessNet.win32\liblogicalaccess_crypto.i"),
-            (".\LibLogicalAccessNet\Generated\Core", "LibLogicalAccess", ".\LibLogicalAccessNet.win32\liblogicalaccess_core.i"))
+$Commands = @((".\LibLogicalAccessNet\Generated\Card", "LibLogicalAccess.Card", ".\LibLogicalAccessNet.native\liblogicalaccess_card.i"),
+            (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.native\liblogicalaccess_data.i"),
+            (".\LibLogicalAccessNet\Exception", "LibLogicalAccess", ".\LibLogicalAccessNet.native\liblogicalaccess_exception.i"),
+            (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.native\liblogicalaccess_library.i"),
+            (".\LibLogicalAccessNet\Generated\Reader", "LibLogicalAccess.Reader", ".\LibLogicalAccessNet.native\liblogicalaccess_reader.i"),
+            (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.native\liblogicalaccess_iks.i"),
+            (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.native\lla_std_types.i"),
+            (".\LibLogicalAccessNet\Generated\Crypto", "LibLogicalAccess.Crypto", ".\LibLogicalAccessNet.native\liblogicalaccess_crypto.i"),
+            (".\LibLogicalAccessNet\Generated\Core", "LibLogicalAccess", ".\LibLogicalAccessNet.native\liblogicalaccess_core.i"))
 
 $currentFolder = (Get-Item -Path ".\" -Verbose).FullName
 
@@ -40,10 +40,10 @@ $ScriptBlock = {
 		}
 		$currentPath = (Get-Item -Path ".\" -Verbose).FullName + "\..\installer\packages\include"
 	
-		$output = & $cmd -csharp -c++ -I"$currentPath" -outdir $outdir -namespace $namespace -dllimport LibLogicalAccessNet.win32.dll $interface 2>&1
+		$output = & $cmd -csharp -c++ -I"$currentPath" -outdir $outdir -namespace $namespace -dllimport LibLogicalAccessNet.native $interface 2>&1
 		
 		if ($LASTEXITCODE -ne 0) {
-			throw ("Command returned non-zero error-code ${LASTEXITCODE}: $cmd -csharp -c++ -I$currentPath -outdir $outdir -namespace $namespace -dllimport LibLogicalAccessNet.win32.dll $interface`n$output")
+			throw ("Command returned non-zero error-code ${LASTEXITCODE}: $cmd -csharp -c++ -I$currentPath -outdir $outdir -namespace $namespace -dllimport LibLogicalAccessNet.native $interface`n$output")
 		}
 
 		return $output;
