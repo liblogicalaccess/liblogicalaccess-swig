@@ -64,6 +64,8 @@
 #include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
 #include <logicalaccess/plugins/cards/samav/samav2commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
+#include <logicalaccess/plugins/cards/samav/samav3commands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/samav3iso7816commands.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev2crypto.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev3commands.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev3chip.hpp>
@@ -159,7 +161,6 @@
 #include <logicalaccess/plugins/cards/samav/samav1chip.hpp>
 #include <logicalaccess/plugins/cards/samav/samav2chip.hpp>
 #include <logicalaccess/plugins/cards/samav/samav3chip.hpp>
-#include <logicalaccess/plugins/cards/samav/samav3commands.hpp>
 #include <logicalaccess/plugins/cards/seos/lla_cards_seos_api.hpp>
 #include <logicalaccess/plugins/cards/seos/seoscommands.hpp>
 #include <logicalaccess/plugins/cards/seos/seoschip.hpp>
@@ -348,6 +349,8 @@ using LibLogicalAccess.Reader;
 %import <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
 %include <logicalaccess/plugins/cards/samav/samav2commands.hpp>
 %import <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
+%include <logicalaccess/plugins/cards/samav/samav3commands.hpp>
+%import <logicalaccess/plugins/readers/iso7816/commands/samav3iso7816commands.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev2crypto.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev3commands.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev3chip.hpp>
@@ -443,7 +446,6 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/samav/samav1chip.hpp>
 %include <logicalaccess/plugins/cards/samav/samav2chip.hpp>
 %include <logicalaccess/plugins/cards/samav/samav3chip.hpp>
-%include <logicalaccess/plugins/cards/samav/samav3commands.hpp>
 %include <logicalaccess/plugins/cards/seos/lla_cards_seos_api.hpp>
 %include <logicalaccess/plugins/cards/seos/seoscommands.hpp>
 %include <logicalaccess/plugins/cards/seos/seoschip.hpp>
