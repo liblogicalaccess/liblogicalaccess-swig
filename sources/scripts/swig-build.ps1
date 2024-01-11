@@ -11,7 +11,6 @@ $Commands = @((".\LibLogicalAccessNet\Generated\Card", "LibLogicalAccess.Card", 
             (".\LibLogicalAccessNet\Exception", "LibLogicalAccess", ".\LibLogicalAccessNet.native\liblogicalaccess_exception.i"),
             (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.native\liblogicalaccess_library.i"),
             (".\LibLogicalAccessNet\Generated\Reader", "LibLogicalAccess.Reader", ".\LibLogicalAccessNet.native\liblogicalaccess_reader.i"),
-            (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.native\liblogicalaccess_iks.i"),
             (".\LibLogicalAccessNet\Generated", "LibLogicalAccess", ".\LibLogicalAccessNet.native\lla_std_types.i"),
             (".\LibLogicalAccessNet\Generated\Crypto", "LibLogicalAccess.Crypto", ".\LibLogicalAccessNet.native\liblogicalaccess_crypto.i"),
             (".\LibLogicalAccessNet\Generated\Core", "LibLogicalAccess", ".\LibLogicalAccessNet.native\liblogicalaccess_core.i"))

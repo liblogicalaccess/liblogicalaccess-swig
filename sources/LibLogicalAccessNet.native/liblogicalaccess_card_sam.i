@@ -10,8 +10,10 @@
 #include <logicalaccess/plugins/cards/samav/samkucentry.hpp>
 #include <logicalaccess/plugins/cards/samav/samcommands.hpp>
 #include <logicalaccess/plugins/cards/samav/samav2commands.hpp>
+#include <logicalaccess/plugins/cards/samav/samav3commands.hpp>
 %}
 
+%shared_ptr(logicalaccess::SAMAV3Commands);
 %shared_ptr(logicalaccess::SAMAV2Commands<KeyEntryAV2Information, SETAV2>);
 %shared_ptr(logicalaccess::SAMKeyEntry<KeyEntryAV1Information, SETAV1>);
 %shared_ptr(logicalaccess::SAMKeyEntry<KeyEntryAV2Information, SETAV2>);
@@ -34,6 +36,7 @@
 %include <logicalaccess/plugins/cards/samav/samkucentry.hpp>
 %include <logicalaccess/plugins/cards/samav/samcommands.hpp>
 %include <logicalaccess/plugins/cards/samav/samav2commands.hpp>
+%include <logicalaccess/plugins/cards/samav/samav3commands.hpp>
 
 /* END_Include_section */
 

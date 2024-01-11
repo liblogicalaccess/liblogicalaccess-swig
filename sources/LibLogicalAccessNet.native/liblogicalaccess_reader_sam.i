@@ -6,6 +6,8 @@
 #include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
 #include <logicalaccess/plugins/cards/samav/samav2commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
+#include <logicalaccess/plugins/cards/samav/samav3commands.hpp>
+#include <logicalaccess/plugins/readers/iso7816/commands/samav3iso7816commands.hpp>
 %}
 
 %shared_ptr(logicalaccess::SAMISO7816Commands<KeyEntryAV1Information, SETAV1>);
@@ -18,5 +20,6 @@
 %include <logicalaccess/plugins/readers/iso7816/commands/samiso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
+%include <logicalaccess/plugins/readers/iso7816/commands/samav3iso7816commands.hpp>
 
 /* END_Include_section */

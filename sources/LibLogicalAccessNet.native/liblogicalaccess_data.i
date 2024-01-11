@@ -221,9 +221,6 @@ CSHARP_MEMBER_STRUCT_ARRAYS(logicalaccess::MifareAccessInfo::DataBlockAccessBits
 	   case KeyStorageType.KST_SAM:
 	     ret = new SAMKeyStorage(cPtr, owner);
 		 break;
-	   case KeyStorageType.KST_SERVER:
-	     ret = new IKSStorage(cPtr, owner);
-		 break;
 	   default:
          throw new LibLogicalAccessNetException($"Unknown KeyStorage type: {ks}");
       }

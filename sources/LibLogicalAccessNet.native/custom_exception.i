@@ -56,11 +56,6 @@ try
 {
 	$action
 }
-catch (logicalaccess::IKSException &e) \
-{
-	SWIG_CSharpSetPendingExceptionCustom("IKSException", e.what());
-	return $null;
-}
 catch (logicalaccess::CardException &e)
 {
 	SWIG_CSharpSetPendingExceptionCustom("CardException", e.what());

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
   <Include>
-    <?define Manufacturer = "Leosac" ?>
+    <?define Manufacturer = "LibLogicalAccess" ?>
     <?define ProductName = "LibLogicalAccess" ?>
-    <?define AboutURL = "https://www.leosac.com" ?>
-    <?define SupportURL = "https://www.leosac.com" ?>
-    <?define UpdatesURL = "https://www.leosac.com" ?>
+    <?define AboutURL = "https://www.liblogicalaccess.com" ?>
+    <?define SupportURL = "https://www.liblogicalaccess.com" ?>
+    <?define UpdatesURL = "https://www.liblogicalaccess.com" ?>
 
     <?if $(var.Platform) = "x64" ?>
       <?define Win64 = "yes" ?>

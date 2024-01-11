@@ -25,17 +25,13 @@ Set-Location ../../
 .\sources/scripts/generate-swig.ps1
 Set-Location sources/LibLogicalAccessNet.native
 if($with_profile) {
-    .\conan-build.ps1 -with_profile -build_private -build_nfc $build_nfc -build_unittest $build_unittest
+    .\conan-build.ps1 -with_profile -build_nfc $build_nfc -build_unittest $build_unittest
 } else {
     ./conan-build.ps1 -arch $arch -build_type $build_type -build_nfc $build_nfc -build_unittest $build_unittest
 }
 Set-Location ..
 
 msbuild -t:restore
-if ($build_private) {
-    msbuild LibLogicalAccessNet.sln /p:Configuration="Release"
-} else {
-    msbuild LibLogicalAccessNet.sln /p:Configuration="ReleaseCE"
-}
+msbuild LibLogicalAccessNet.sln /p:Configuration="Release"
 
 Set-Location ..
