@@ -14,7 +14,7 @@ liblogicalaccess_exception_wrap.cxx
 liblogicalaccess_crypto_wrap.cxx
 lla_std_types_wrap.cxx)
 
-set(TARGET_NAME LogicalAccessNet.native)
+set(TARGET_NAME LibLogicalAccessNet.native)
 
 add_library(${TARGET_NAME} SHARED ${LLA_SWIG_SOURCES})
 if (MSVC)

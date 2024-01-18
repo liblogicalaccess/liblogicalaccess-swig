@@ -6,7 +6,7 @@
       <?define Win64 = "yes" ?>
       <?define PlatformString = "64-bit" ?>
       <?define lladir = "..\packages\dll\x86_64\Release" ?>
-      <?define llaw32dir = "..\..\sources\LibLogicalAccessNet.win32\bin\x86_64\Release" ?>
+      <?define llaw32dir = "..\..\sources\LibLogicalAccessNet.native\bin\x86_64\Release" ?>
       <?define islogkbdhook = "islogkbdhook64.exe" ?>
       <?define islogkbdhooklib = "islogkbdhooklib64.dll" ?>
       <?define libcrypto = "libcrypto-1_1-x64.dll" ?>
@@ -15,7 +15,7 @@
       <?define Win64 = "no" ?>
       <?define PlatformString = "32-bit" ?>
       <?define lladir = "..\packages\dll\x86\Release" ?>
-      <?define llaw32dir = "..\..\sources\LibLogicalAccessNet.win32\bin\x86\Release" ?>
+      <?define llaw32dir = "..\..\sources\LibLogicalAccessNet.native\bin\x86\Release" ?>
       <?define islogkbdhook = "islogkbdhook32.exe" ?>
       <?define islogkbdhooklib = "islogkbdhooklib32.dll" ?>
       <?define libcrypto = "libcrypto-1_1.dll" ?>

@@ -23,7 +23,6 @@ class LLASwig(ConanFile):
     
     def configure(self):
         self.options['LogicalAccess'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST
-        self.options['LogicalAccessPrivate'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST
     
     def configure_cmake(self):
         cmake = CMake(self, build_type=self.settings.build_type)
