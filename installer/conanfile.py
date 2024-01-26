@@ -8,7 +8,7 @@ class LogicalAccessSwigConan(ConanFile):
     settings = "build_type", "arch", "os"
     options = { 'LLA_BUILD_NFC': [True, False],
                 'LLA_BUILD_UNITTEST': [True, False]}
-    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True', 'LLA_BUILD_NFC=True'
+    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True', 'LLA_BUILD_NFC=False', 'LLA_BUILD_UNITTEST=False'
     revision_mode = "scm"
     
     def configure(self):
