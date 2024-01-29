@@ -35,7 +35,11 @@ static void SWIG_CSharpSetPendingExceptionCustom(const char *name, const char *m
     public static extern void CustomExceptionRegisterCallback_$module(CustomExceptionDelegate customDelegate);
 
     static void SetPendingCustomException(string exceptionName, string message) {
-	  System.Type type = System.Type.GetType("LibLogicalAccess." + exceptionName.Split(new string[] { "::" }, System.StringSplitOptions.None)[exceptionName.Split(new string[] { "::" }, System.StringSplitOptions.None).Length - 1] + ", LibLogicalAccessNet");
+	  string typestr = "LibLogicalAccess." + exceptionName.Split(new string[] { "::" }, System.StringSplitOptions.None)[exceptionName.Split(new string[] { "::" }, System.StringSplitOptions.None).Length - 1];
+	  System.Type type = System.Type.GetType(typestr + ", LibLogicalAccessNetCE");
+	  if (type == null) {
+		type = System.Type.GetType(typestr + ", LibLogicalAccessNet");
+	  }
       var exception = (LibLogicalAccess.CustomException)System.Activator.CreateInstance(type, new object[] { message });
 	  SWIGPendingException.Set(exception);
     }
