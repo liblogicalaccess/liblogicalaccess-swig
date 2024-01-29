@@ -385,12 +385,16 @@ def write_shared_ptr(all_types):
     all_types = list(all_types)
     all_types.sort()
     for t in all_types:
-        lines.insert(i, "%shared_ptr(" + t + ");" + "\n")
-        i += 1
+        # Temporary workaround for latest clang versions, we should better call libclang instead
+        if "(unnamed struct at" not in t:
+            lines.insert(i, "%shared_ptr(" + t + ");" + "\n")
+            i += 1
     for t in all_types:
         print('SPTR: {}'.format(t))
-        lines.insert(i, "%shared_ptr(" + t.replace('logicalaccess::', '') + ");" + "\n")
-        i += 1
+        # Temporary workaround for latest clang versions, we should better call libclang instead
+        if "(unnamed struct at" not in t:
+            lines.insert(i, "%shared_ptr(" + t.replace('logicalaccess::', '') + ");" + "\n")
+            i += 1
     with open(path, "w") as f:
         f.write(''.join(lines))
 
