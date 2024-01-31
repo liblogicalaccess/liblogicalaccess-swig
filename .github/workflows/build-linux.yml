@@ -27,35 +27,35 @@ jobs:
       - name: "Checkout LLA"
         uses: actions/checkout@v2
         with:
-          repository: islog/liblogicalaccess
+          repository: liblogicalaccess/liblogicalaccess
           ref: ${{ github.ref_name }}
           path: lla 
 
       - name: "Checkout LLA-NFC"
         uses: actions/checkout@v2
         with:
-          repository: islog/liblogicalaccess-libnfc
+          repository: liblogicalaccess/liblogicalaccess-libnfc
           ref: ${{ github.ref_name }}
           path: lla-nfc
 
       - name: "Checkout cppkcs11"
         uses: actions/checkout@v2
         with:
-          repository: islog/cppkcs11
+          repository: liblogicalaccess/cppkcs11
           path: cppkcs
 
       - name: "Setup LLA"
         run : |
           sudo apt-get update
           sudo apt-get install -y libpcsclite-dev
-          conan export . islog/${{ github.ref_name }}
+          conan export . liblogicalaccess/${{ github.ref_name }}
         working-directory: lla
 
       - name: "Setup LLA-NFC"
         run : |
           sudo apt-get update
           sudo apt-get install -y libusb-dev
-          conan export . islog/${{ github.ref_name }}
+          conan export . liblogicalaccess/${{ github.ref_name }}
           cd vendor/libnfc
           conan export . cis/stable
         working-directory: lla-nfc
