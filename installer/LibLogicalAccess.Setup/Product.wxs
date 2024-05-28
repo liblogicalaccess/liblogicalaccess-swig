@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?include config.wxi ?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="$(var.ProductName)" Language="1033" Version="3.1.0.0" Manufacturer="$(var.Manufacturer)" UpgradeCode="9b055bc0-f36a-4bfc-a711-73b405cceac3">
+	<Product Id="*" Name="$(var.ProductName)" Language="1033" Version="3.2.0.0" Manufacturer="$(var.Manufacturer)" UpgradeCode="9b055bc0-f36a-4bfc-a711-73b405cceac3">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />

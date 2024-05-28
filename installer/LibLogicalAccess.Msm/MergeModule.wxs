@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?include config.wxi ?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="LibLogicalAccess.Msm" Language="1033" Version="3.1.0.0">
+  <Module Id="LibLogicalAccess.Msm" Language="1033" Version="3.2.0.0">
     <Package Id="e75b8ac8-6ed3-4601-bfc3-30c46564c0c7" Manufacturer="$(var.Manufacturer)" InstallerVersion="200" />
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="MergeRedirectFolder">
