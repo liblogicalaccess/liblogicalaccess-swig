@@ -7,12 +7,12 @@ param(
 function GetGitVersion {
 	param()
 	
-    $Branch=GitVersion.exe /output json /showvariable BranchName
+    $Branch=dotnet-gitversion.exe /output json /showvariable BranchName
     $masterBranch = "master", "v1", "v2"
-	$version=GitVersion.exe /output json /showvariable NuGetVersionV2
+	$version=dotnet-gitversion.exe /output json /showvariable SemVer
     if (!($Branch -in $masterBranch) -and (Test-Path env:BUILD_NUMBER))
     {
-        $version = GitVersion.exe /output json /showvariable MajorMinorPatch
+        $version = dotnet-gitversion.exe /output json /showvariable MajorMinorPatch
         $buildNumber = $Env:BUILD_NUMBER
         $buildNumber = $buildNumber.padLeft(4, '0')
         $version += "-" + $Branch + "-" + $buildNumber
@@ -28,8 +28,8 @@ if ($s.Project.Sdk -eq $null -or !($s.Project.Sdk -eq "Microsoft.NET.Sdk")) {
 }
 
 $NuGetVersionV2=GetGitVersion
-$AssemblySemVer=Gitversion /output json /showvariable AssemblySemVer
-$AssemblySemFileVer=Gitversion /output json /showvariable AssemblySemFileVer
+$AssemblySemVer=dotnet-gitversion /output json /showvariable AssemblySemVer
+$AssemblySemFileVer=dotnet-gitversion /output json /showvariable AssemblySemFileVer
 
 if (!($s.Project.PropertyGroup -eq $null) -and !($s.Project.PropertyGroup[0] -eq $null))
 {
