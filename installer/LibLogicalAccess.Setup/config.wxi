@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-  <Include>
+﻿<Include xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <?define Manufacturer = "LibLogicalAccess" ?>
     <?define ProductName = "LibLogicalAccess" ?>
     <?define AboutURL = "https://www.liblogicalaccess.com" ?>
@@ -7,14 +6,10 @@
     <?define UpdatesURL = "https://www.liblogicalaccess.com" ?>
 
     <?if $(var.Platform) = "x64" ?>
-      <?define Win64 = "yes" ?>
-      <?define PlatformString = "64-bit"?>
       <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
-    <?else ?>
-      <?define Win64 = "no" ?>
-      <?define PlatformString = "32-bit"?>
+    <?else?>
       <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
-    <?endif ?>
+    <?endif?>
     
     <?define BaseGuid = "4d4035eb-69cf-4d65-b0e1-26e1ab9e0b" ?>
     <?define CompInstallRegDir = "$(var.BaseGuid)10" ?>

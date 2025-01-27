@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?include config.wxi ?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="LibLogicalAccess.Msm" Language="1033" Version="3.2.0.0">
-    <Package Id="e75b8ac8-6ed3-4601-bfc3-30c46564c0c7" Manufacturer="$(var.Manufacturer)" InstallerVersion="200" />
-    <Directory Id="TARGETDIR" Name="SourceDir">
+﻿<?include config.wxi ?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="LibLogicalAccess.Msm" Language="1033" Version="3.2.0.0" Guid="e75b8ac8-6ed3-4601-bfc3-30c46564c0c7" InstallerVersion="200"><SummaryInformation Manufacturer="$(var.Manufacturer)" />
       <Directory Id="MergeRedirectFolder">
-        <Component Guid="BA21F8CD-1FBD-4D8E-9F15-C57DBD508636" Id="LLAComponent" Win64="$(var.Win64)">
+        <Component Guid="BA21F8CD-1FBD-4D8E-9F15-C57DBD508636" Id="LLAComponent">
           <File Id="___var.cps3cards.dll_" Source="$(var.lladir)\cps3cards.dll" />
           <File Id="___var.deisterreaders.dll_" Source="$(var.lladir)\deisterreaders.dll" />
           <File Id="___var.desfirecards.dll_" Source="$(var.lladir)\desfirecards.dll" />
@@ -49,13 +46,12 @@
           <File Id="___var.islogkbdhook.exe_" Source="$(var.lladir)\$(var.islogkbdhook)" />
           <File Id="___var.islogkbdhooklib.dll_" Source="$(var.lladir)\$(var.islogkbdhooklib)" />
         </Component>
-        <Component Guid="7C9B9A17-9E71-4142-A136-2F43E2D5F131" Id="DependenciesComponent" Win64="$(var.Win64)">
+        <Component Guid="7C9B9A17-9E71-4142-A136-2F43E2D5F131" Id="DependenciesComponent">
           <File Id="___var.pkcscryptounified.dll_" Source="$(var.lladir)\pkcscryptounified.dll" />
           <File Id="___var.cppkcs11.dll_" Source="$(var.lladir)\cppkcs11.dll" />
           <File Id="___var.libcrypto.dll_" Source="$(var.lladir)\$(var.libcrypto)" />
           <File Id="___var.libssl.dll_" Source="$(var.lladir)\$(var.libssl)" />
         </Component>
       </Directory>
-    </Directory>
-  </Module>
+    </Module>
 </Wix>
