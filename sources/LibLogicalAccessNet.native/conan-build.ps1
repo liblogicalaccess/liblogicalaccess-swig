@@ -8,8 +8,6 @@ Param(
     [string]$build_type,
     [Parameter(Mandatory=$false)]
     [bool]$build_nfc,
-	[Parameter(Mandatory=$false)]
-    [bool]$build_unittest,
     [Parameter(Mandatory=$false)]
     [switch]$publish
 )
@@ -35,7 +33,7 @@ if($with_profile) {
 
 Set-Location build
 
-$PackageName = "LogicalAccessSwig/3.2.0@lla/master"
+$PackageName = "logicalaccess-swig/3.2.0@lla/master"
 $Profiles = @(("compilers/x64_msvc_release", "Release", "x86_64"),
 			  ("compilers/x86_msvc_release", "Release", "x86"),
 			  ("compilers/x86_msvc_debug", "Debug", "x86"),
@@ -45,7 +43,7 @@ $env:ASSEMBLYAPPENDER = 'CE'
 
 if($with_profile) {
   foreach ($Profile in $Profiles) {
-    ExecExternal { conan install -pr $Profile[0] -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_UNITTEST=$build_unittest --build=missing .. }
+    ExecExternal { conan install -pr $Profile[0] -o LLA_BUILD_NFC=$build_nfc --build=missing .. }
     ExecExternal { conan build .. }
     $config = $Profile[1]
     $arch = $Profile[2]
@@ -57,7 +55,7 @@ if($with_profile) {
 	Remove-Item * -Recurse -Force
   }
 } else {
-  ExecExternal { conan install -s arch=$arch -s build_type=$build_type -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_UNITTEST=$build_unittest --build=missing .. }
+  ExecExternal { conan install -s arch=$arch -s build_type=$build_type -o LLA_BUILD_NFC=$build_nfc --build=missing .. }
   ExecExternal { conan build .. }
   Copy-Item bin/LibLogicalAccessNet.native.* ../bin/$arch/$build_type/
   if ($publish) {

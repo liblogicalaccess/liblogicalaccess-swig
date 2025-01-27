@@ -2,8 +2,12 @@ project(LibLogicalAccessNetNative)
 
 set(CMAKE_SUPPRESS_REGENERATION true)
 MESSAGE(STATUS "DIR: ${CMAKE_BINARY_DIR}")
-include(${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup(TARGETS)
+
+if(LLA_BUILD_NFC)
+  find_package(logicalaccess-nfc)
+endif()
+find_package(logicalaccess)
+find_package(nlohmann_json)
 
 set(LLA_SWIG_SOURCES liblogicalaccess_reader_wrap.cxx
 liblogicalaccess_card_wrap.cxx
@@ -30,9 +34,9 @@ endif()
 set(LLA_LINK)
 if(LLA_BUILD_NFC)
   add_compile_definitions(BUILD_NFC)
-  list(APPEND LLA_LINK CONAN_PKG::LogicalAccessNFC)
+  list(APPEND LLA_LINK logicalaccess-nfc::logicalaccess-nfc)
 else()
-  list(APPEND LLA_LINK CONAN_PKG::LogicalAccess)
+  list(APPEND LLA_LINK logicalaccess::logicalaccess)
 endif()
 
 target_link_libraries(${TARGET_NAME} PUBLIC

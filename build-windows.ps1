@@ -6,17 +6,15 @@ Param(
     [Parameter(ParameterSetName="WithoutProfile", Mandatory)]
     [string]$build_type,
     [Parameter(Mandatory=$false)]
-    [bool]$build_nfc,
-	[Parameter(Mandatory=$false)]
-    [bool]$build_unittest
+    [bool]$build_nfc
 )
 
 Write-Host $arch $build_type $build_nfc
 Set-Location installer
 if($with_profile) {
-    .\conan-imports.ps1 -with_profile -build_nfc $build_nfc -build_unittest $build_unittest
+    .\conan-imports.ps1 -with_profile -build_nfc $build_nfc
 } else {
-    .\conan-imports.ps1 -arch $arch -build_type $build_type -build_nfc $build_nfc -build_unittest $build_unittest
+    .\conan-imports.ps1 -arch $arch -build_type $build_type -build_nfc $build_nfc
 }
 Set-Location ../sources/scripts
 pip install -r requirements.txt
@@ -25,9 +23,9 @@ Set-Location ../../
 .\sources/scripts/generate-swig.ps1
 Set-Location sources/LibLogicalAccessNet.native
 if($with_profile) {
-    .\conan-build.ps1 -with_profile -build_nfc $build_nfc -build_unittest $build_unittest
+    .\conan-build.ps1 -with_profile -build_nfc $build_nfc
 } else {
-    ./conan-build.ps1 -arch $arch -build_type $build_type -build_nfc $build_nfc -build_unittest $build_unittest
+    ./conan-build.ps1 -arch $arch -build_type $build_type -build_nfc $build_nfc
 }
 Set-Location ..
 

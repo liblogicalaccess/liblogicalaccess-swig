@@ -6,16 +6,14 @@ Param(
     [Parameter(ParameterSetName="WithoutProfile", Mandatory)]
     [string]$build_type,
     [Parameter(Mandatory=$false)]
-    [bool]$build_nfc,
-	[Parameter(Mandatory=$false)]
-    [bool]$build_unittest
+    [bool]$build_nfc
 )
 
 if($with_profile) {
-    conan install -pr compilers/x64_msvc_debug -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_UNITTEST=$build_unittest -u .
-    conan install -pr compilers/x64_msvc_release -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_UNITTEST=$build_unittest -u .
-    conan install -pr compilers/x86_msvc_debug -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_UNITTEST=$build_unittest -u .
-    conan install -pr compilers/x86_msvc_release -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_UNITTEST=$build_unittest -u .
+    conan install -pr compilers/x64_msvc_debug -u -o LLA_BUILD_NFC=$build_nfc .
+    conan install -pr compilers/x64_msvc_release -u -o LLA_BUILD_NFC=$build_nfc .
+    conan install -pr compilers/x86_msvc_debug -u -o LLA_BUILD_NFC=$build_nfc .
+    conan install -pr compilers/x86_msvc_release -u -o LLA_BUILD_NFC=$build_nfc .
 } else {
-    conan install -s arch=$arch -s build_type=$build_type -o LLA_BUILD_NFC=$build_nfc -o LLA_BUILD_UNITTEST=$build_unittest --build=missing -u .
+    conan install -s arch=$arch -s build_type=$build_type -u -o LLA_BUILD_NFC=$build_nfc --build=missing .
 }

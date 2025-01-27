@@ -1,31 +1,27 @@
-from conans import ConanFile, tools
-from conans.errors import ConanException
+from conan import ConanFile
+from conan.errors import ConanException
+from conan.tools.files import copy
 import os
 
 class LogicalAccessSwigConan(ConanFile):
-    name = "LogicalAccessSwig"
+    name = "logicalaccess-swig"
     version = "3.2.0"
     settings = "build_type", "arch", "os"
-    options = { 'LLA_BUILD_NFC': [True, False],
-                'LLA_BUILD_UNITTEST': [True, False]}
-    default_options = 'LogicalAccess:LLA_BUILD_PKCS=True', 'LLA_BUILD_NFC=False', 'LLA_BUILD_UNITTEST=False'
+    options = { 'LLA_BUILD_NFC': [True, False] }
+    default_options = { 'logicalaccess/*:LLA_BUILD_PKCS': True, 'LLA_BUILD_NFC': False }
     revision_mode = "scm"
-    
-    def configure(self):
-        self.options['LogicalAccess'].LLA_BUILD_UNITTEST = self.options.LLA_BUILD_UNITTEST
     
     def requirements(self):
         if self.options.LLA_BUILD_NFC:
-            self.requires('LogicalAccessNFC/' + self.version)
+            self.requires('logicalaccess-nfc/' + self.version)
         else:
-            self.requires('LogicalAccess/' + self.version)
+            self.requires('logicalaccess/' + self.version)
     
-    def imports(self):
-        self.copy("bin/*.dll", keep_path=False, dst="./packages/dll/" + str(self.settings.arch) + "/" + str(self.settings.build_type))
-        self.copy("bin/*.exe", keep_path=False, dst="./packages/dll/" + str(self.settings.arch) + "/" + str(self.settings.build_type))
-        self.copy("lib/*.lib", keep_path=False, dst="./packages/lib/" + str(self.settings.arch) + "/" + str(self.settings.build_type))
-        
-        self.copy("lib/*.so*", keep_path=False, dst="./packages/dll/")
-        
-        if not os.path.exists("./packages/include"):
-            self.copy("include/*.*", dst="./packages")
+    def generate(self):
+        for dep in self.dependencies.values():
+            copy(self, "*.dll", dep.cpp_info.bindirs[0], "./packages/dll/" + str(self.settings.arch) + "/" + str(self.settings.build_type))
+            copy(self, "*.exe", dep.cpp_info.bindirs[0], "./packages/dll/" + str(self.settings.arch) + "/" + str(self.settings.build_type))
+            copy(self, "*.lib", dep.cpp_info.libdirs[0], "./packages/lib/" + str(self.settings.arch) + "/" + str(self.settings.build_type))
+            copy(self, "*.so", dep.cpp_info.bindirs[0], "./packages/dll/")
+            if not os.path.exists("./packages/include"):
+                copy(self, "*.*", dep.cpp_info.includedirs[0], "./packages/include")
