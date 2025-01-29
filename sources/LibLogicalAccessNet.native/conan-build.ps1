@@ -47,7 +47,7 @@ if($with_profile) {
     ExecExternal { conan build .. }
     $config = $Profile[1]
     $arch = $Profile[2]
-    Copy-Item bin/LibLogicalAccessNet.native.* ../bin/$arch/$config/
+    Copy-Item $config/LibLogicalAccessNet.native.* ../bin/$arch/$config/
     if ($publish) {
       ExecExternal { conan export-pkg .. $PackageName }
       ExecExternal { conan upload $PackageName -r islog-test --all --confirm --check }
