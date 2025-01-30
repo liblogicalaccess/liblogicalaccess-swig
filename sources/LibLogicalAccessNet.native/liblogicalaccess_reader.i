@@ -450,7 +450,6 @@ typedef enum : uint16_t
 %}
 
 %ignore logicalaccess::PCSCReaderUnit::getT_CL_ISOType;
-%ignore logicalaccess::PCSCReaderUnit::reconnect;
 %feature("director") ISO7816ReaderUnit;
 %feature("director") PCSCReaderUnit;
 
