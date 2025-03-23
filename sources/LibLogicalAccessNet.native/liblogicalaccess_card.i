@@ -67,6 +67,7 @@
 #include <logicalaccess/plugins/cards/desfire/desfireev2crypto.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev3commands.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev3chip.hpp>
+#include <logicalaccess/plugins/cards/desfire/desfireev3nfctag4cardservice.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirestoragecardservice.hpp>
 #include <logicalaccess/plugins/cards/desfire/nxpkeydiversification.hpp>
 #include <logicalaccess/plugins/cards/desfire/nxpav1keydiversification.hpp>
@@ -351,6 +352,7 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/desfire/desfireev2crypto.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev3commands.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev3chip.hpp>
+%include <logicalaccess/plugins/cards/desfire/desfireev3nfctag4cardservice.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfirestoragecardservice.hpp>
 %include <logicalaccess/plugins/cards/desfire/nxpkeydiversification.hpp>
 %include <logicalaccess/plugins/cards/desfire/nxpav1keydiversification.hpp>

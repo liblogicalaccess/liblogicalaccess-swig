@@ -146,6 +146,7 @@
 %shared_ptr(logicalaccess::DESFireEV3Chip);
 %shared_ptr(logicalaccess::DESFireEV3Commands);
 %shared_ptr(logicalaccess::DESFireEV3ISO7816Commands);
+%shared_ptr(logicalaccess::DESFireEV3NFCTag4CardService);
 %shared_ptr(logicalaccess::DESFireISO7816Commands);
 %shared_ptr(logicalaccess::DESFireISO7816ResultChecker);
 %shared_ptr(logicalaccess::DESFireJsonDumpCardService);
@@ -598,6 +599,7 @@
 %shared_ptr(DESFireEV3Chip);
 %shared_ptr(DESFireEV3Commands);
 %shared_ptr(DESFireEV3ISO7816Commands);
+%shared_ptr(DESFireEV3NFCTag4CardService);
 %shared_ptr(DESFireISO7816Commands);
 %shared_ptr(DESFireISO7816ResultChecker);
 %shared_ptr(DESFireJsonDumpCardService);

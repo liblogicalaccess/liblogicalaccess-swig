@@ -6,15 +6,15 @@
       <?define llaw32dir = "..\..\sources\LibLogicalAccessNet.native\bin\x86_64\Release" ?>
       <?define islogkbdhook = "islogkbdhook64.exe" ?>
       <?define islogkbdhooklib = "islogkbdhooklib64.dll" ?>
-      <?define libcrypto = "libcrypto-1_1-x64.dll" ?>
-      <?define libssl = "libssl-1_1-x64.dll" ?>
+      <?define libcrypto = "libcrypto-3-x64.dll" ?>
+      <?define libssl = "libssl-3-x64.dll" ?>
     <?else?>
       <?define lladir = "..\packages\dll\x86\Release" ?>
       <?define llaw32dir = "..\..\sources\LibLogicalAccessNet.native\bin\x86\Release" ?>
       <?define islogkbdhook = "islogkbdhook32.exe" ?>
       <?define islogkbdhooklib = "islogkbdhooklib32.dll" ?>
-      <?define libcrypto = "libcrypto-1_1.dll" ?>
-      <?define libssl = "libssl-1_1.dll" ?>
+      <?define libcrypto = "libcrypto-3.dll" ?>
+      <?define libssl = "libssl-3.dll" ?>
     <?endif?>
 
   </Include>
