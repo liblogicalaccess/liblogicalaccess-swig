@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 3.10)
 project(LibLogicalAccessNetNative)
 
 set(CMAKE_SUPPRESS_REGENERATION true)

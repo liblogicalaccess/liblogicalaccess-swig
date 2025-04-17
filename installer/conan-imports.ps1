@@ -10,10 +10,10 @@ Param(
 )
 
 if($with_profile) {
-    conan install -pr compilers/x64_msvc_debug -u -o LLA_BUILD_NFC=$build_nfc .
-    conan install -pr compilers/x64_msvc_release -u -o LLA_BUILD_NFC=$build_nfc .
-    conan install -pr compilers/x86_msvc_debug -u -o LLA_BUILD_NFC=$build_nfc .
-    conan install -pr compilers/x86_msvc_release -u -o LLA_BUILD_NFC=$build_nfc .
+    conan install -pr compilers/x64_msvc_debug -u -o LLA_BUILD_NFC=$build_nfc --build=missing .
+    conan install -pr compilers/x64_msvc_release -u -o LLA_BUILD_NFC=$build_nfc --build=missing .
+    conan install -pr compilers/x86_msvc_debug -u -o LLA_BUILD_NFC=$build_nfc --build=missing .
+    conan install -pr compilers/x86_msvc_release -u -o LLA_BUILD_NFC=$build_nfc --build=missing .
 } else {
     conan install -s arch=$arch -s build_type=$build_type -u -o LLA_BUILD_NFC=$build_nfc --build=missing .
 }
