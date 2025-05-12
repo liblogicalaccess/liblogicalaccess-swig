@@ -176,6 +176,8 @@ typedef std::shared_ptr<logicalaccess::Key> KeyPtr;
 
 %ignore logicalaccess::TcpDataTransport::connect();
 %ignore *::getTime;
+%ignore logicalaccess::PKCSKeyStorage::get_pkcs_properties;
+%ignore logicalaccess::PKCSKeyStorage::set_pkcs_properties;
 
 %shared_ptr(std::enable_shared_from_this<logicalaccess::Chip>);
 %shared_ptr(std::enable_shared_from_this<logicalaccess::ReaderProvider>);
