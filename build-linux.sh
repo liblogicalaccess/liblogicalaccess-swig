@@ -3,8 +3,8 @@
 set -x
 set -e
 
-(cd installer && conan install -u . --build=missing)
-(cd sources/scripts/ && pip3 install -r requirements.txt)
+(cd installer && conan install . --update  --build=missing)
+#(cd sources/scripts/ && pip3 install -r requirements.txt --break-system-packages)
 (cd sources/scripts/ && python3 lla.py)
 
 # Build
