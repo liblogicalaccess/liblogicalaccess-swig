@@ -1,6 +1,6 @@
 ﻿<?include config.wxi ?>
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-  <Module Id="LibLogicalAccess.Msm" Language="1033" Version="3.5.0.0" Guid="e75b8ac8-6ed3-4601-bfc3-30c46564c0c7" InstallerVersion="200"><SummaryInformation Manufacturer="$(var.Manufacturer)" />
+  <Module Id="LibLogicalAccess.Msm" Language="1033" Version="3.5.1.0" Guid="e75b8ac8-6ed3-4601-bfc3-30c46564c0c7" InstallerVersion="200"><SummaryInformation Manufacturer="$(var.Manufacturer)" />
       <Directory Id="MergeRedirectFolder">
         <Component Guid="BA21F8CD-1FBD-4D8E-9F15-C57DBD508636" Id="LLAComponent">
           <File Id="___var.cps3cards.dll_" Source="$(var.lladir)\cps3cards.dll" />

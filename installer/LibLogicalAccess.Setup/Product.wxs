@@ -1,6 +1,6 @@
 ﻿<?include config.wxi ?>
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
-	<Package Name="$(var.ProductName)" Language="1033" Version="3.5.0.0" Manufacturer="$(var.Manufacturer)" UpgradeCode="9b055bc0-f36a-4bfc-a711-73b405cceac3" InstallerVersion="200">
+	<Package Name="$(var.ProductName)" Language="1033" Version="3.5.1.0" Manufacturer="$(var.Manufacturer)" UpgradeCode="9b055bc0-f36a-4bfc-a711-73b405cceac3" InstallerVersion="200">
 		
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
