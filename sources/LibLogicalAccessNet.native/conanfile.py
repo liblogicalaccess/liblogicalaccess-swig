@@ -6,7 +6,7 @@ import os
 
 class LLASwig(ConanFile):
     name = "logicalaccess-swig"
-    version = "3.5.1"
+    version = "3.5.2"
     license = "LGPL"
     url = "https://github.com/liblogicalaccess/liblogicalaccess-swig"
     description = "SWIG wrapper for LibLogicalAccess"
