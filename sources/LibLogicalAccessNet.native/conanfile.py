@@ -6,7 +6,7 @@ import os
 
 class LLASwig(ConanFile):
     name = "logicalaccess-swig"
-    version = "3.5.2"
+    version = "3.6.0"
     license = "LGPL"
     url = "https://github.com/liblogicalaccess/liblogicalaccess-swig"
     description = "SWIG wrapper for LibLogicalAccess"
@@ -20,7 +20,7 @@ class LLASwig(ConanFile):
             self.requires('logicalaccess-nfc/' + self.version)
         else:
             self.requires('logicalaccess/'+ self.version)
-        self.requires('nlohmann_json/3.11.3') # shoulnd't be required
+        self.requires('nlohmann_json/3.12.0') # shoulnd't be required
 
     def layout(self):
         cmake_layout(self)
