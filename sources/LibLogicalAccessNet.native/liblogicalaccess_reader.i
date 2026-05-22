@@ -233,6 +233,10 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx25readerunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/scmreaderunit.hpp>
 #include <logicalaccess/plugins/readers/pcsc/readers/springcardreaderunit.hpp>
+#include <logicalaccess/plugins/readers/rfideas/lla_readers_rfideas_api.hpp>
+#include <logicalaccess/plugins/readers/rfideas/rfideasreaderunitconfiguration.hpp>
+#include <logicalaccess/plugins/readers/rfideas/rfideasreaderunit.hpp>
+#include <logicalaccess/plugins/readers/rfideas/rfideasreaderprovider.hpp>
 #include <logicalaccess/plugins/readers/stidstr/lla_readers_stidstr_api.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>
@@ -650,6 +654,10 @@ typedef enum : uint16_t
 %include <logicalaccess/plugins/readers/pcsc/readers/omnikeyxx25readerunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/scmreaderunit.hpp>
 %include <logicalaccess/plugins/readers/pcsc/readers/springcardreaderunit.hpp>
+%include <logicalaccess/plugins/readers/rfideas/lla_readers_rfideas_api.hpp>
+%include <logicalaccess/plugins/readers/rfideas/rfideasreaderunitconfiguration.hpp>
+%include <logicalaccess/plugins/readers/rfideas/rfideasreaderunit.hpp>
+%include <logicalaccess/plugins/readers/rfideas/rfideasreaderprovider.hpp>
 %include <logicalaccess/plugins/readers/stidstr/lla_readers_stidstr_api.hpp>
 %import <logicalaccess/plugins/cards/desfire/desfirechip.hpp>
 %import <logicalaccess/plugins/cards/desfire/desfireev1chip.hpp>

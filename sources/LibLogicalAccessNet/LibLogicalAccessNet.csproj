@@ -4,10 +4,10 @@
     <AssemblyName>LibLogicalAccessNetCE</AssemblyName>
     <RootNamespace>LibLogicalAccess</RootNamespace>
     <Description>LibLogicalAccess RFID library layer for C#</Description>
-    <Copyright>Copyright (C) LibLogicalAccess 2025</Copyright>
-    <Version>3.6.0</Version>
-    <AssemblyVersion>3.6.0.0</AssemblyVersion>
-    <FileVersion>3.6.0.0</FileVersion>
+    <Copyright>Copyright (C) LibLogicalAccess 2026</Copyright>
+    <Version>3.7.0</Version>
+    <AssemblyVersion>3.7.0.0</AssemblyVersion>
+    <FileVersion>3.7.0.0</FileVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Company>LibLogicalAccess</Company>
     <Authors>LibLogicalAccess</Authors>

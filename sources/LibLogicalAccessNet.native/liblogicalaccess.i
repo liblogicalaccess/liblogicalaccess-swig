@@ -12,6 +12,7 @@
 /* Define_section */
 
 #define LLA_READERS_STIDSTR_API
+#define LLA_READERS_RFIDEAS_API
 #define LLA_READERS_PRIVATE_KEYBOARD_API
 #define LLA_READERS_PCSC_API
 #define LLA_READERS_OSDP_API
@@ -393,6 +394,10 @@
 %shared_ptr(logicalaccess::ProxLiteChip);
 %shared_ptr(logicalaccess::ProxLocation);
 %shared_ptr(logicalaccess::PublicKey);
+%shared_ptr(logicalaccess::RFIDeasReaderCardAdapter);
+%shared_ptr(logicalaccess::RFIDeasReaderProvider);
+%shared_ptr(logicalaccess::RFIDeasReaderUnit);
+%shared_ptr(logicalaccess::RFIDeasReaderUnitConfiguration);
 %shared_ptr(logicalaccess::RandomHelper);
 %shared_ptr(logicalaccess::RawFormat);
 %shared_ptr(logicalaccess::ReaderCardAdapter);
@@ -846,6 +851,10 @@
 %shared_ptr(ProxLiteChip);
 %shared_ptr(ProxLocation);
 %shared_ptr(PublicKey);
+%shared_ptr(RFIDeasReaderCardAdapter);
+%shared_ptr(RFIDeasReaderProvider);
+%shared_ptr(RFIDeasReaderUnit);
+%shared_ptr(RFIDeasReaderUnitConfiguration);
 %shared_ptr(RandomHelper);
 %shared_ptr(RawFormat);
 %shared_ptr(ReaderCardAdapter);
