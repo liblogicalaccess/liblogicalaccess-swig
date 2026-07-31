@@ -30,6 +30,6 @@ if($with_profile) {
 Set-Location ..
 
 msbuild -t:restore
-msbuild LibLogicalAccessNet.sln /p:Configuration="Release"
+msbuild LibLogicalAccessNet.sln /p:Configuration="Release" /p:Platform="Any CPU"
 
 Set-Location ..
