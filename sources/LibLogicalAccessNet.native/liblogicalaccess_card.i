@@ -43,6 +43,7 @@
 #include <logicalaccess/plugins/cards/desfire/desfireev1nfctag4cardservice.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev2commands.hpp>
 #include <logicalaccess/plugins/cards/desfire/desfireev2chip.hpp>
+#include <logicalaccess/plugins/cards/samav/samtypes.hpp>
 #include <logicalaccess/plugins/cards/samav/lla_cards_samav_api.hpp>
 #include <logicalaccess/plugins/cards/samav/sambasickeyentry.hpp>
 #include <logicalaccess/plugins/cards/samav/samkeyentry.hpp>
@@ -327,6 +328,7 @@ using LibLogicalAccess.Reader;
 %include <logicalaccess/plugins/cards/desfire/desfireev1nfctag4cardservice.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev2commands.hpp>
 %include <logicalaccess/plugins/cards/desfire/desfireev2chip.hpp>
+%include <logicalaccess/plugins/cards/samav/samtypes.hpp>
 %include <logicalaccess/plugins/cards/samav/lla_cards_samav_api.hpp>
 %include <logicalaccess/plugins/cards/samav/sambasickeyentry.hpp>
 %include <logicalaccess/plugins/cards/samav/samkeyentry.hpp>

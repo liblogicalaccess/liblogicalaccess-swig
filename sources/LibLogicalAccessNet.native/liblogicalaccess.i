@@ -416,6 +416,7 @@
 %shared_ptr(logicalaccess::SAMAV1ISO7816Commands);
 %shared_ptr(logicalaccess::SAMAV2Chip);
 %shared_ptr(logicalaccess::SAMAV2ISO7816Commands);
+%shared_ptr(logicalaccess::SAMAV2ISO7816Commands::TransmissionOptions);
 %shared_ptr(logicalaccess::SAMAV3Chip);
 %shared_ptr(logicalaccess::SAMAV3ISO7816Commands);
 %shared_ptr(logicalaccess::SAMBasicKeyEntry);
@@ -523,6 +524,10 @@
 %shared_ptr(logicalaccess::s_YubikeySelectResponse);
 %shared_ptr(logicalaccess::s_changeKeyDiversification);
 %shared_ptr(logicalaccess::s_changeKeyInfo);
+%shared_ptr(logicalaccess::sam::AEKVAEK);
+%shared_ptr(logicalaccess::sam::ApduInfo);
+%shared_ptr(logicalaccess::sam::ChainingLayout);
+%shared_ptr(logicalaccess::sam::ProtectedApdu);
 %shared_ptr(logicalaccess::t_biomatchr);
 %shared_ptr(logicalaccess::t_bioreadr);
 %shared_ptr(logicalaccess::t_buz_cmd);
@@ -873,6 +878,7 @@
 %shared_ptr(SAMAV1ISO7816Commands);
 %shared_ptr(SAMAV2Chip);
 %shared_ptr(SAMAV2ISO7816Commands);
+%shared_ptr(SAMAV2ISO7816Commands::TransmissionOptions);
 %shared_ptr(SAMAV3Chip);
 %shared_ptr(SAMAV3ISO7816Commands);
 %shared_ptr(SAMBasicKeyEntry);
@@ -980,6 +986,10 @@
 %shared_ptr(s_YubikeySelectResponse);
 %shared_ptr(s_changeKeyDiversification);
 %shared_ptr(s_changeKeyInfo);
+%shared_ptr(sam::AEKVAEK);
+%shared_ptr(sam::ApduInfo);
+%shared_ptr(sam::ChainingLayout);
+%shared_ptr(sam::ProtectedApdu);
 %shared_ptr(t_biomatchr);
 %shared_ptr(t_bioreadr);
 %shared_ptr(t_buz_cmd);

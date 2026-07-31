@@ -39,7 +39,6 @@ namespace LibLogicalAccessTest
                 }
                 Console.WriteLine("{0} readers on this system.", readerList.Count);
 
-
                 if (readerUnit.connectToReader())
                 {
                     Console.WriteLine("Waiting 15 seconds for a card insertion...");
@@ -53,18 +52,15 @@ namespace LibLogicalAccessTest
                             Console.WriteLine("\tCSN: {0}", UCharCollectionToHexString(chip.getChipIdentifier()));
                             Console.WriteLine("\tChip Name: {0}", chip.getCardType());
 
-                            var cmd = (chip.getCommands() as DESFireEV1ISO7816Commands);
-                            if (cmd != null)
+                            var cmd = chip.getCommands();
+                            if (cmd is DESFireEV1ISO7816Commands cmdev1)
                             {
-                                DESFireEV1ISO7816Commands cmdev1 = chip.getCommands() as DESFireEV1ISO7816Commands;
                                 DESFireKey key = new DESFireKey();
                                 key.setKeyType(DESFireKeyType.DF_KEY_DES);
                                 //key.setKeyStorage(new IKSStorage("imported-zero-des"));
-                                cmd.selectApplication(0x00);
-                                cmd.authenticate(0, key);
+                                cmdev1.selectApplication(0x00);
+                                cmdev1.authenticate(0, key);
                             }
-
-                            readerUnit.disconnect();
                         }
 
                         Console.WriteLine("Logical automatic card removal in 15 seconds...");

@@ -113,6 +113,7 @@ using LibLogicalAccess.Crypto;
 #include <logicalaccess/plugins/crypto/cmac.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/samiso7816commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
+#include <logicalaccess/plugins/cards/samav/samtypes.hpp>
 #include <logicalaccess/plugins/cards/samav/samav2commands.hpp>
 #include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
 #include <logicalaccess/plugins/cards/samav/samav3commands.hpp>
@@ -534,6 +535,7 @@ typedef enum : uint16_t
 %import <logicalaccess/plugins/crypto/cmac.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samiso7816commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samav1iso7816commands.hpp>
+%import <logicalaccess/plugins/cards/samav/samtypes.hpp>
 %import <logicalaccess/plugins/cards/samav/samav2commands.hpp>
 %include <logicalaccess/plugins/readers/iso7816/commands/samav2iso7816commands.hpp>
 %import <logicalaccess/plugins/cards/samav/samav3commands.hpp>
