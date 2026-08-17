@@ -509,8 +509,10 @@
 %shared_ptr(logicalaccess::openssl::SymmetricCipher);
 %shared_ptr(logicalaccess::openssl::SymmetricKey);
 %shared_ptr(logicalaccess::s_EXTSET);
+%shared_ptr(logicalaccess::s_EXTSETAV3);
 %shared_ptr(logicalaccess::s_KeyEntryAV1Information);
 %shared_ptr(logicalaccess::s_KeyEntryAV2Information);
+%shared_ptr(logicalaccess::s_KeyEntryAV3Information);
 %shared_ptr(logicalaccess::s_KeyEntryUpdateSettings);
 %shared_ptr(logicalaccess::s_KucEntryUpdateSettings);
 %shared_ptr(logicalaccess::s_SAMKUCEntry);
@@ -519,6 +521,7 @@
 %shared_ptr(logicalaccess::s_SAMVersionInformation);
 %shared_ptr(logicalaccess::s_SETAV1);
 %shared_ptr(logicalaccess::s_SETAV2);
+%shared_ptr(logicalaccess::s_SETAV3);
 %shared_ptr(logicalaccess::s_YubikeyCalculateResponse);
 %shared_ptr(logicalaccess::s_YubikeyListItem);
 %shared_ptr(logicalaccess::s_YubikeySelectResponse);
@@ -528,6 +531,8 @@
 %shared_ptr(logicalaccess::sam::ApduInfo);
 %shared_ptr(logicalaccess::sam::ChainingLayout);
 %shared_ptr(logicalaccess::sam::ProtectedApdu);
+%shared_ptr(logicalaccess::sam::SAMKeyEntryUpdate);
+%shared_ptr(logicalaccess::security::SecureZeroGuard);
 %shared_ptr(logicalaccess::t_biomatchr);
 %shared_ptr(logicalaccess::t_bioreadr);
 %shared_ptr(logicalaccess::t_buz_cmd);
@@ -971,8 +976,10 @@
 %shared_ptr(openssl::SymmetricCipher);
 %shared_ptr(openssl::SymmetricKey);
 %shared_ptr(s_EXTSET);
+%shared_ptr(s_EXTSETAV3);
 %shared_ptr(s_KeyEntryAV1Information);
 %shared_ptr(s_KeyEntryAV2Information);
+%shared_ptr(s_KeyEntryAV3Information);
 %shared_ptr(s_KeyEntryUpdateSettings);
 %shared_ptr(s_KucEntryUpdateSettings);
 %shared_ptr(s_SAMKUCEntry);
@@ -981,6 +988,7 @@
 %shared_ptr(s_SAMVersionInformation);
 %shared_ptr(s_SETAV1);
 %shared_ptr(s_SETAV2);
+%shared_ptr(s_SETAV3);
 %shared_ptr(s_YubikeyCalculateResponse);
 %shared_ptr(s_YubikeyListItem);
 %shared_ptr(s_YubikeySelectResponse);
@@ -990,6 +998,8 @@
 %shared_ptr(sam::ApduInfo);
 %shared_ptr(sam::ChainingLayout);
 %shared_ptr(sam::ProtectedApdu);
+%shared_ptr(sam::SAMKeyEntryUpdate);
+%shared_ptr(security::SecureZeroGuard);
 %shared_ptr(t_biomatchr);
 %shared_ptr(t_bioreadr);
 %shared_ptr(t_buz_cmd);

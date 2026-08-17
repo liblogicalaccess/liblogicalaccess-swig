@@ -5,6 +5,8 @@
 %import "liblogicalaccess_exception.i"
 %import "liblogicalaccess_data.i"
 
+%ignore logicalaccess::security::SecureZeroGuard;
+
 %{
 /* Additional_include */
 
@@ -31,6 +33,7 @@
 #include <logicalaccess/plugins/crypto/pem.hpp>
 #include <logicalaccess/plugins/crypto/public_key.hpp>
 #include <logicalaccess/plugins/crypto/pkcs7Certificate.hpp>
+#include <logicalaccess/plugins/crypto/secure_memory.hpp>
 #include <logicalaccess/plugins/crypto/signature_helper.hpp>
 #include <logicalaccess/plugins/crypto/x509Certificate.hpp>
 
@@ -63,6 +66,7 @@
 %include <logicalaccess/plugins/crypto/pem.hpp>
 %include <logicalaccess/plugins/crypto/public_key.hpp>
 %include <logicalaccess/plugins/crypto/pkcs7Certificate.hpp>
+%include <logicalaccess/plugins/crypto/secure_memory.hpp>
 %include <logicalaccess/plugins/crypto/signature_helper.hpp>
 %include <logicalaccess/plugins/crypto/x509Certificate.hpp>
 
