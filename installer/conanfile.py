@@ -5,7 +5,7 @@ import os
 
 class LogicalAccessSwigConan(ConanFile):
     name = "logicalaccess-swig"
-    version = "3.8.0"
+    version = "3.8.1"
     settings = "build_type", "arch", "os"
     options = { 'LLA_BUILD_NFC': [True, False] }
     default_options = { 'logicalaccess/*:LLA_BUILD_PKCS': True, 'LLA_BUILD_NFC': False }
