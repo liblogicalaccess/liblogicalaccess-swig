@@ -45,7 +45,12 @@ $ScriptBlock = {
 			throw ("Command returned non-zero error-code ${LASTEXITCODE}: $cmd -csharp -c++ -I$currentPath -outdir $outdir -namespace $namespace -dllimport LibLogicalAccessNet.native $interface`n$output")
 		}
 
-		return $output;
+		# swig.exe prints warnings on stdout/stderr even on success (exit code 0); only surface them, don't fail the build.
+		if (![string]::IsNullOrEmpty($output)) {
+			Write-Warning ($output | Out-String)
+		}
+
+		return $null;
 	}
 	Catch
 	{
